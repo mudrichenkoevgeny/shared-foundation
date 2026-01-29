@@ -12,7 +12,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.1"
+    version = "0.0.2"
 }
 
 subprojects {
@@ -22,6 +22,22 @@ subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
 
     extensions.configure<MavenPublishBaseExtension> {
+        val projectPathName = project.path
+            .removePrefix(":")
+            .replace(":", "-")
+
+        val newArtifactId = if (projectPathName.startsWith(rootProject.name)) {
+            projectPathName
+        } else {
+            "${rootProject.name}-$projectPathName"
+        }
+
+        coordinates(
+            project.group.toString(),
+            newArtifactId,
+            project.version.toString()
+        )
+
         publishToMavenCentral()
         signAllPublications()
 
