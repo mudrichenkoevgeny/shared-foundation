@@ -5,6 +5,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for linking a phone number identifier to a user account.
+ *
+ * @property phoneNumber The phone number to be associated with the account.
+ * @property confirmationCode The verification code sent to the phone number to confirm ownership.
+ */
 @Serializable
 data class AddUserIdentifierPhoneRequest(
     @NotBlankStringField

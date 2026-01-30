@@ -2,6 +2,19 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.securit
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.security.SecurityRoutes
 
+/**
+ * Object containing constant route definitions for managing user authentication identifiers.
+ *
+ * @property BASE_SECURITY_USER_IDENTIFIERS_ROUTE The base path for user identifier management.
+ * @property GET_USER_IDENTIFIERS_ROUTE The endpoint to retrieve all identifiers linked to the current account.
+ * @property DELETE_USER_IDENTIFIER The endpoint to remove a specific identifier by its unique identifier.
+ * @property ADD_USER_IDENTIFIER_EMAIL The endpoint to link email identifier to an existing account.
+ * @property ADD_USER_IDENTIFIER_PHONE The endpoint to link phone identifier to an existing account.
+ * @property ADD_USER_IDENTIFIER_EXTERNAL_AUTH_PROVIDER The endpoint to link an external auth provider (e.g., Google) to the account.
+ * @property BASE_SECURITY_USER_IDENTIFIERS_CONFIRMATION_ROUTE The base path for identifier verification operations.
+ * @property SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION The endpoint to request a verification code for email identifier.
+ * @property SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION The endpoint to request a verification code for phone identifier.
+ */
 object SecurityUserIdentifiersRoutes {
     const val BASE_SECURITY_USER_IDENTIFIERS_ROUTE = "${SecurityRoutes.BASE_SECURITY_ROUTE}/user-identifier"
     const val GET_USER_IDENTIFIERS_ROUTE = BASE_SECURITY_USER_IDENTIFIERS_ROUTE

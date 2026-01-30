@@ -5,6 +5,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for new user registration using email and a verification code.
+ *
+ * @property email The email address to be associated with the new account.
+ * @property password The password chosen by the user for the new account.
+ * @property confirmationCode The verification code sent to the email to confirm ownership.
+ */
 @Serializable
 data class RegisterByEmailRequest(
     @NotBlankStringField

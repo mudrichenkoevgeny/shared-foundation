@@ -5,6 +5,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for requesting a new access token using a valid refresh token.
+ *
+ * @property refreshToken The token used to obtain a new session without re-authenticating.
+ */
 @Serializable
 data class RefreshTokenRequest(
     @NotBlankStringField

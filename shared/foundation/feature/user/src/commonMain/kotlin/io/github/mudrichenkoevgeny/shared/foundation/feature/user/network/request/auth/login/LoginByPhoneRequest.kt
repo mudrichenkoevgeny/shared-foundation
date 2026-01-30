@@ -5,6 +5,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for user authentication using a phone number and a confirmation code.
+ *
+ * @property phoneNumber The user's phone number.
+ * @property confirmationCode The one-time code for verification.
+ */
 @Serializable
 data class LoginByPhoneRequest(
     @NotBlankStringField

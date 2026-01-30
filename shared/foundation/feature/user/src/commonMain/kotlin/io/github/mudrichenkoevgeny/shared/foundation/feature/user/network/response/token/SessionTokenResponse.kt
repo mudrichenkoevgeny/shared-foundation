@@ -4,6 +4,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO containing authentication tokens and session metadata.
+ *
+ * @property accessToken The token used to authorize requests to protected resources.
+ * @property refreshToken The token used to obtain a new access token when the current one expires.
+ * @property expiresAt The timestamp when the access token expires, in milliseconds.
+ * @property tokenType The type of the issued token (e.g. "Bearer").
+ */
 @Serializable
 data class SessionTokenResponse(
     @SerialName(UserApiFields.ACCESS_TOKEN)

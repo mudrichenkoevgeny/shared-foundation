@@ -1,5 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.enums
 
+/**
+ * Reasons for password validation failure based on security policy requirements.
+ */
 enum class PasswordPolicyFailReason {
     TOO_SHORT,
     NO_LETTER,

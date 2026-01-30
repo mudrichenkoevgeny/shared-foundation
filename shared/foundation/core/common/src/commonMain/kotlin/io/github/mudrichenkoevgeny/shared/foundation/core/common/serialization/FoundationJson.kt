@@ -2,7 +2,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.serialization
 
 import kotlinx.serialization.json.Json
 
-val DefaultJson = Json {
+/**
+ * Default [Json] settings for cross-platform data serialization.
+ */
+val FoundationJson = Json {
     ignoreUnknownKeys = true
     isLenient = true
     encodeDefaults = true

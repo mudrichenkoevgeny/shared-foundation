@@ -1,5 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.constants
 
+/**
+ * Common keys for error arguments used in API responses and backend logging.
+ */
 object CommonErrorArgs {
     const val MESSAGE = "message"
     const val PARAMETER_NAME = "parameterName"

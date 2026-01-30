@@ -1,5 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.constants
 
+/**
+ * User-specific error codes for API responses and backend logging, used to categorize failures.
+ */
 object UserErrorCodes {
     // token
     const val INVALID_ACCESS_TOKEN = "INVALID_ACCESS_TOKEN"
@@ -13,10 +16,10 @@ object UserErrorCodes {
     const val USER_NOT_FOUND = "USER_NOT_FOUND"
     // all identifiers
     const val INVALID_CREDENTIALS = "INVALID_CREDENTIALS"
-    const val CAN_NOT_DELETE_USER_IDENTIFIER = "can_not_delete_user_identifier"
-    const val CAN_NOT_CREATE_USER_IDENTIFIER = "can_not_create_user_identifier"
-    const val ALREADY_HAS_USER_IDENTIFIER_WITH_THAT_TYPE = "already_has_user_identifier_with_that_type"
-    const val AUTHENTICATION_CONFIRMATION_REQUIRED = "authentication_confirmation_required"
+    const val CAN_NOT_DELETE_USER_IDENTIFIER = "CAN_NOT_DELETE_USER_IDENTIFIER"
+    const val CAN_NOT_CREATE_USER_IDENTIFIER = "CAN_NOT_CREATE_USER_IDENTIFIER"
+    const val ALREADY_HAS_USER_IDENTIFIER_WITH_THAT_TYPE = "ALREADY_HAS_USER_IDENTIFIER_WITH_THAT_TYPE"
+    const val AUTHENTICATION_CONFIRMATION_REQUIRED = "AUTHENTICATION_CONFIRMATION_REQUIRED"
     // internal identifiers
     const val WRONG_PASSWORD = "WRONG_PASSWORD"
     const val PASSWORD_TOO_WEAK = "PASSWORD_TOO_WEAK"

@@ -5,6 +5,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for user authentication using email and password.
+ *
+ * @property email The user's registered email address.
+ * @property password The user's account password.
+ */
 @Serializable
 data class LoginByEmailRequest(
     @NotBlankStringField

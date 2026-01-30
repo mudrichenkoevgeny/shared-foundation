@@ -4,6 +4,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolic
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model.PasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.result.PasswordPolicyCheckResult
 
+/**
+ * Default implementation of [PasswordPolicyChecker] that uses [PasswordPolicy] for validation.
+ */
 class PasswordPolicyCheckerImpl(
     private val passwordPolicy: PasswordPolicy
 ): PasswordPolicyChecker {

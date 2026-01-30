@@ -1,5 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants
 
+/**
+ * User-specific naming conventions for API request parameters and response fields.
+ */
 object UserApiFields {
     const val SESSION_TOKEN = "session_token"
     const val ACCESS_TOKEN = "access_token"

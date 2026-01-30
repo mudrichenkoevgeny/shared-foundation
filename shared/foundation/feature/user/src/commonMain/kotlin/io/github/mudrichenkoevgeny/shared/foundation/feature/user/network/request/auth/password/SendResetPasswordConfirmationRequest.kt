@@ -5,6 +5,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for requesting a password reset confirmation code to be sent to the user's email.
+ *
+ * @property email The email address where the confirmation code will be delivered.
+ */
 @Serializable
 data class SendResetPasswordConfirmationRequest(
     @NotBlankStringField

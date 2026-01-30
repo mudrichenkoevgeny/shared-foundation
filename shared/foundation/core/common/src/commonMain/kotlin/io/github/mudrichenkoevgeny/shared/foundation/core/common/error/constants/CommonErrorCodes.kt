@@ -1,11 +1,11 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.constants
 
+/**
+ * Common error codes for API responses and backend logging, used to categorize failures.
+ */
 object CommonErrorCodes {
-    const val SYSTEM = "SYSTEM"
     const val UNKNOWN = "UNKNOWN"
-    const val THROWABLE = "THROWABLE"
-    const val DATABASE = "DATABASE"
-    const val REDIS = "REDIS"
+    const val INTERNAL = "INTERNAL"
     const val SERVICE_UNAVAILABLE = "SERVICE_UNAVAILABLE"
     const val TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
     const val MISSING_REQUIRED_PARAMETER = "MISSING_REQUIRED_PARAMETER"

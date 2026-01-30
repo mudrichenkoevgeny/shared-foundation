@@ -5,6 +5,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.consta
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO for the password reset process after identity verification.
+ *
+ * @property email The email address associated with the account.
+ * @property confirmationCode The verification code sent to the user's email.
+ * @property newPassword The new password to be set for the account.
+ */
 @Serializable
 data class ResetPasswordRequest(
     @NotBlankStringField

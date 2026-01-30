@@ -1,10 +1,24 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.session
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.constants.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.enums.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * DTO representing metadata about an active or past user session.
+ *
+ * @property id The unique identifier of the session.
+ * @property identifierId The ID of the specific identifier used to create this session.
+ * @property identifierAuthProvider The authentication method used for this session (e.g [UserAuthProvider]).
+ * @property expiresAt The timestamp when the session is scheduled to expire, in milliseconds.
+ * @property userAgent The raw User-Agent string of the client used for this session.
+ * @property ipAddress The IP address from which the session was initiated or last accessed.
+ * @property deviceName The human-readable name of the device used for the session, if available.
+ * @property createdAt The timestamp when the session was created, in milliseconds.
+ * @property lastAccessedAt The timestamp of the last recorded activity for this session, in milliseconds.
+ */
 @Serializable
 data class UserSessionResponse(
     @SerialName(CommonApiFields.ID)
