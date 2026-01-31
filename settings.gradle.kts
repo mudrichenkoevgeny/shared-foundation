@@ -14,6 +14,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
     repositories {
         google {
             content {
@@ -31,10 +32,10 @@ rootProject.name = "shared-foundation"
 
 fun registerModules(group: String, modules: List<String>) {
     modules.forEach { name ->
-        val gradleName = ":${group.replace(".", ":")}:$name"
+        val gradlePath = ":${group.replace(".", ":")}:$name"
         val folderPath = group.replace(".", "/") + "/$name"
-        include(gradleName)
-        project(gradleName).projectDir = file(folderPath)
+        include(gradlePath)
+        project(gradlePath).projectDir = file(folderPath)
     }
 }
 
@@ -50,3 +51,5 @@ val featureModules = listOf(
     "user"
 )
 registerModules("$groupBase.feature", featureModules)
+
+registerModules(groupBase, listOf("bom"))

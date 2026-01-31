@@ -12,12 +12,14 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.3"
+    version = "0.0.4"
 }
 
 subprojects {
-    val isModule = file("src").exists()
-    if (!isModule) return@subprojects
+    val isModule = file("src").exists() || project.name == "bom"
+    if (!isModule) {
+        return@subprojects
+    }
 
     apply(plugin = "com.vanniktech.maven.publish")
 
