@@ -30,9 +30,9 @@ configure<KotlinMultiplatformExtension> {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":shared:foundation:core:common"))
+            api(project(":shared:foundation:core:common"))
 
-            implementation(libs.kotlinx.serialization.json)
+            api(libs.kotlinx.serialization.json)
         }
     }
 }
