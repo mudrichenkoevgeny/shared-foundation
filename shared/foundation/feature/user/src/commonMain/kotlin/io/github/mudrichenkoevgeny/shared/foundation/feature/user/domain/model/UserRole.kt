@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.user.enums
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

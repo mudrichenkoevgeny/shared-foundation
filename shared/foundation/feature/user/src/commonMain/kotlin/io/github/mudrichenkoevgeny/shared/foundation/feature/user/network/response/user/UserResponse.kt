@@ -2,8 +2,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.respo
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.constants.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.enums.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.enums.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.useridentifier.UserIdentifierResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
