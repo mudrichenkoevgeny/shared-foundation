@@ -2,20 +2,20 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.respo
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.token.SessionTokenResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.UserResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.CurrentUserResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
  * DTO containing comprehensive authentication data, including user profile and session tokens.
  *
- * @property userResponse The [UserResponse] profile information of the authenticated user.
+ * @property currentUserResponse The [CurrentUserResponse] profile information of the authenticated user.
  * @property sessionTokenResponse The [SessionTokenResponse] set of tokens issued for the current session.
  */
 @Serializable
 data class AuthDataResponse(
     @SerialName(UserApiFields.USER)
-    val userResponse: UserResponse,
+    val currentUserResponse: CurrentUserResponse,
 
     @SerialName(UserApiFields.SESSION_TOKEN)
     val sessionTokenResponse: SessionTokenResponse
