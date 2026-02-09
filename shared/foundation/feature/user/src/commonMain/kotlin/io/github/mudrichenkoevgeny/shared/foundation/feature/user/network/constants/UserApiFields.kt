@@ -16,6 +16,7 @@ object UserApiFields {
     const val AUTH_PROVIDER = "auth_provider"
     const val TOKEN = "token"
     const val SESSION_ID = "session_id"
+    const val CLIENT_TYPE = "client_type"
     const val USER_AGENT = "user_agent"
     const val IP_ADDRESS = "ip_address"
     const val DEVICE_NAME = "device_name"

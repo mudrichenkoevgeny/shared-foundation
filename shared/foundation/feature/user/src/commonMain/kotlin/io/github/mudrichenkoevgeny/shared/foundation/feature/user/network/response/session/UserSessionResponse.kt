@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.respo
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.constants.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserClientType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,6 +14,7 @@ import kotlinx.serialization.Serializable
  * @property identifierId The ID of the specific identifier used to create this session.
  * @property identifierAuthProvider The authentication method used for this session (e.g [UserAuthProvider]).
  * @property expiresAt The timestamp when the session is scheduled to expire, in milliseconds.
+ * @property clientType The type of client application associated with this session (e.g. [UserClientType]).
  * @property userAgent The raw User-Agent string of the client used for this session.
  * @property ipAddress The IP address from which the session was initiated or last accessed.
  * @property deviceName The human-readable name of the device used for the session, if available.
@@ -32,6 +34,9 @@ data class UserSessionResponse(
 
     @SerialName(UserApiFields.EXPIRES_AT)
     val expiresAt: Long? = null,
+
+    @SerialName(UserApiFields.CLIENT_TYPE)
+    val clientType: String? = null,
 
     @SerialName(UserApiFields.USER_AGENT)
     val userAgent: String? = null,
