@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.model
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.constants.CommonErrorArgs
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.constants.CommonErrorCodes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.constants.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

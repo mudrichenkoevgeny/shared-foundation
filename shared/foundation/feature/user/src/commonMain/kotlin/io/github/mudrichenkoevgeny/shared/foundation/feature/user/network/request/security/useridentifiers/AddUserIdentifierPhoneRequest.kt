@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

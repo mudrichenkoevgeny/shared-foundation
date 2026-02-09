@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.securit
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.security.SecurityRoutes
 
 /**
- * Object containing constant route definitions for managing user authentication identifiers.
+ * Object containing route definitions for managing user authentication identifiers.
  *
  * @property BASE_SECURITY_USER_IDENTIFIERS_ROUTE The base path for user identifier management.
  * @property GET_USER_IDENTIFIERS The endpoint to retrieve all identifiers linked to the current account.

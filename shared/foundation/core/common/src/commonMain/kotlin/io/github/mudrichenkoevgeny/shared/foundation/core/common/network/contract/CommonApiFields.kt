@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.constants
+package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract
 
 /**
  * Common naming conventions for API request parameters and response fields.

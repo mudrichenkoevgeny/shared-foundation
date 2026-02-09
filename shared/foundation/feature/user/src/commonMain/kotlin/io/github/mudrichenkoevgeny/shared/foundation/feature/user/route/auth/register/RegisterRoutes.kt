@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.re
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.AuthRoutes
 
 /**
- * Object containing constant route definitions for user registration operations.
+ * Object containing route definitions for user registration operations.
  *
  * @property BASE_REGISTER_ROUTE The base path for all account registration endpoints.
  * @property REGISTER_BY_EMAIL The endpoint to create a new user account using an email and password.

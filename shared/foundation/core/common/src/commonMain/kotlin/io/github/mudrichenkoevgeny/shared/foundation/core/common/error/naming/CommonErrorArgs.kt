@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.constants
+package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming
 
 /**
  * Common keys for error arguments used in API responses and backend logging.

@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.lo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.AuthRoutes
 
 /**
- * Object containing constant route definitions for login operations.
+ * Object containing route definitions for login operations.
  *
  * @property BASE_LOGIN_ROUTE The base path for all login-related endpoints.
  * @property LOGIN_BY_EMAIL The endpoint for authenticating using an email and password.

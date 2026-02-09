@@ -1,9 +1,9 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.common.constants
+package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract
 
 /**
  * Common HTTP header names used for network communication and request tracing.
  */
-object CommonNetworkFoundationConstants {
+object CommonHttpHeaders {
     const val TRACE_HEADER_NAME = "X-Trace-Id"
     const val CLIENT_TYPE_HEADER_NAME = "X-Client-Type"
     const val DEVICE_ID_HEADER_NAME = "X-Device-Id"

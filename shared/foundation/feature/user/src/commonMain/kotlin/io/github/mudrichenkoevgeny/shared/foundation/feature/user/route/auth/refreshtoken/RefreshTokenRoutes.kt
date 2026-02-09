@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.re
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.auth.AuthRoutes
 
 /**
- * Object containing constant route definitions for token management.
+ * Object containing route definitions for token management.
  *
  * @property REFRESH The endpoint used to rotate or renew an expired access token using a valid refresh token.
  */

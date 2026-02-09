@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.constants
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming
 
 /**
  * User-specific error codes for API responses and backend logging, used to categorize failures.

@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.securit
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.security.SecurityRoutes
 
 /**
- * Object containing constant route definitions for password management.
+ * Object containing route definitions for password management.
  *
  * @property BASE_PASSWORD_ROUTE The base path for password-related security operations.
  * @property PASSWORD_CHANGE The endpoint to update the account password using current credentials.

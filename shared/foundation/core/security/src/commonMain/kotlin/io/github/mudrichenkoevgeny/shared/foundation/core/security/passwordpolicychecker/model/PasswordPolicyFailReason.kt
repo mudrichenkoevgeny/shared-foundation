@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.enums
+package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model
 
 /**
  * Reasons for password validation failure based on security policy requirements.

@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reque
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.constants.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

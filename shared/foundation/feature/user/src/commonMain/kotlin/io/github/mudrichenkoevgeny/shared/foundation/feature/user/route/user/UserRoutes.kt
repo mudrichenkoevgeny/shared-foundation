@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.user
 
 /**
- * Object containing constant route definitions for user-related API endpoints.
+ * Object containing route definitions for user-related API endpoints.
  *
  * @property BASE_USER_ROUTE The base path for all user operations.
  * @property GET_USER The endpoint to retrieve the current user data.

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.route.session
 
 /**
- * Object containing constant route definitions for session management endpoints.
+ * Object containing route definitions for session management endpoints.
  *
  * @property BASE_SESSION_ROUTE The base path for session-related operations.
  * @property LOGOUT The endpoint to terminate the current active session.
