@@ -43,7 +43,8 @@ val groupBase = "shared.foundation"
 
 val coreModules = listOf(
     "common",
-    "security"
+    "security",
+    "settings"
 )
 registerModules("$groupBase.core", coreModules)
 

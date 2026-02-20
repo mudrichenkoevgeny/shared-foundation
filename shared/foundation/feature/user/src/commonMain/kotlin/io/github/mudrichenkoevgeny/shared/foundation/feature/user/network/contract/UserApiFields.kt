@@ -46,4 +46,12 @@ object UserApiFields {
     const val IDENTIFIER_AUTH_PROVIDER = "identifier_auth_provider"
     const val USER_AUTH_PROVIDER = "user_auth_provider"
     const val USER_IDENTIFIERS = "user_identifiers"
+
+    // Settings
+    const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"
+    const val PRIMARY = "primary"
+    const val SECONDARY = "secondary"
+    const val GLOBAL_SETTINGS = "global_settings"
+    const val SECURITY_SETTINGS = "security_settings"
+    const val AUTH_SETTINGS = "auth_settings"
 }

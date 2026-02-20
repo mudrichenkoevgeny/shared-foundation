@@ -12,11 +12,13 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.11"
+    version = "0.0.13"
 }
 
 subprojects {
-    val isModule = file("src").exists() || project.name == "bom"
+    val isBom = project.name == "bom"
+    val isModule = project.projectDir.resolve("src").exists() || isBom
+
     if (!isModule) {
         return@subprojects
     }

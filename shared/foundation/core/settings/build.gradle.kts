@@ -12,7 +12,7 @@ plugins {
 
 configure<KotlinMultiplatformExtension> {
     extensions.configure<KotlinMultiplatformAndroidLibraryExtension>("androidLibrary") {
-        namespace = "io.github.mudrichenkoevgeny.shared.foundation.feature.user"
+        namespace = "io.github.mudrichenkoevgeny.shared.foundation.core.settings"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
@@ -30,11 +30,11 @@ configure<KotlinMultiplatformExtension> {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":shared:foundation:core:common"))
-            api(project(":shared:foundation:core:security"))
-            api(project(":shared:foundation:core:settings"))
-
             api(libs.kotlinx.serialization.json)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

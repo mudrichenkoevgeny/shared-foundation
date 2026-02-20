@@ -1,0 +1,10 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.security
+
+/**
+ * Object containing route definitions for security-related operations.
+ *
+ * @property BASE_SECURITY_ROUTE The root path for all security and account protection endpoints.
+ */
+object SecurityRoutes {
+    const val BASE_SECURITY_ROUTE = "/security"
+}
