@@ -7,10 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolic
 /**
  * Default implementation of [PasswordPolicyValidator] that uses [PasswordPolicy] for validation.
  */
-class PasswordPolicyValidatorImpl(
-    private val passwordPolicy: PasswordPolicy
-): PasswordPolicyValidator {
-    override fun validate(password: String): PasswordPolicyValidatorResult {
+class PasswordPolicyValidatorImpl: PasswordPolicyValidator {
+    override fun validate(passwordPolicy: PasswordPolicy, password: String): PasswordPolicyValidatorResult {
         val reasons = mutableListOf<PasswordPolicyFailReason>()
 
         with(passwordPolicy) {
