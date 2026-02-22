@@ -1,16 +1,16 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker
+package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.validator
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model.PasswordPolicyFailReason
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model.PasswordPolicy
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.result.PasswordPolicyCheckResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model.PasswordPolicyFailReason
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model.PasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model.PasswordPolicyValidatorResult
 
 /**
- * Default implementation of [PasswordPolicyChecker] that uses [PasswordPolicy] for validation.
+ * Default implementation of [PasswordPolicyValidator] that uses [PasswordPolicy] for validation.
  */
-class PasswordPolicyCheckerImpl(
+class PasswordPolicyValidatorImpl(
     private val passwordPolicy: PasswordPolicy
-): PasswordPolicyChecker {
-    override fun check(password: String): PasswordPolicyCheckResult {
+): PasswordPolicyValidator {
+    override fun validate(password: String): PasswordPolicyValidatorResult {
         val reasons = mutableListOf<PasswordPolicyFailReason>()
 
         with(passwordPolicy) {
@@ -38,9 +38,9 @@ class PasswordPolicyCheckerImpl(
         }
 
         return if (reasons.isEmpty()) {
-            PasswordPolicyCheckResult.Success
+            PasswordPolicyValidatorResult.Success
         } else {
-            PasswordPolicyCheckResult.Fail(reasons, passwordPolicy)
+            PasswordPolicyValidatorResult.Fail(reasons, passwordPolicy)
         }
     }
 }

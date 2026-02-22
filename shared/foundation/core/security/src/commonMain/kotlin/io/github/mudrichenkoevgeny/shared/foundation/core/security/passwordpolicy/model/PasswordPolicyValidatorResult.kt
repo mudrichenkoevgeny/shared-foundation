@@ -1,16 +1,13 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.result
-
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model.PasswordPolicyFailReason
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model.PasswordPolicy
+package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model
 
 /**
  * Represents the outcome of a password validation check.
  */
-sealed class PasswordPolicyCheckResult {
+sealed class PasswordPolicyValidatorResult {
     /**
      * Indicates the password meets all security requirements.
      */
-    object Success : PasswordPolicyCheckResult()
+    object Success : PasswordPolicyValidatorResult()
 
     /**
      * Indicates validation failure, providing specific reasons and the policy used.
@@ -21,5 +18,5 @@ sealed class PasswordPolicyCheckResult {
     data class Fail(
         val reasons: List<PasswordPolicyFailReason>,
         val passwordPolicy: PasswordPolicy
-    ) : PasswordPolicyCheckResult()
+    ) : PasswordPolicyValidatorResult()
 }

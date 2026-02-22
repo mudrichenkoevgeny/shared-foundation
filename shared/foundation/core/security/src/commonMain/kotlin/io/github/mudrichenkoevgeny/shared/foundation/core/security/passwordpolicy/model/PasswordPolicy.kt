@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicychecker.model
+package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model
 
 /**
  * Configuration of rules used to validate password strength and security compliance.

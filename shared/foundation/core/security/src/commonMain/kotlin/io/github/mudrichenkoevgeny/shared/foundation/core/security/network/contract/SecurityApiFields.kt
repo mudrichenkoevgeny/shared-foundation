@@ -11,4 +11,5 @@ object SecurityApiFields {
     const val REQUIRE_LOWER_CASE = "require_lower_case"
     const val REQUIRE_DIGIT = "require_digit"
     const val REQUIRE_SPECIAL_CHAR = "require_special_char"
+    const val COMMON_PASSWORDS = "common_passwords"
 }

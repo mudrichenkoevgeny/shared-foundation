@@ -13,6 +13,7 @@ import kotlinx.serialization.Serializable
  * @property requireLowerCase Indicates if at least one lowercase letter is required.
  * @property requireDigit Indicates if at least one numerical digit is required.
  * @property requireSpecialChar Indicates if at least one special character is required.
+ * @property commonPasswords A set of forbidden passwords that are considered too easy to guess.
  */
 @Serializable
 data class PasswordPolicyResponse(
@@ -32,5 +33,8 @@ data class PasswordPolicyResponse(
     val requireDigit: Boolean,
 
     @SerialName(SecurityApiFields.REQUIRE_SPECIAL_CHAR)
-    val requireSpecialChar: Boolean
+    val requireSpecialChar: Boolean,
+
+    @SerialName(SecurityApiFields.COMMON_PASSWORDS)
+    val commonPasswords: Set<String>
 )

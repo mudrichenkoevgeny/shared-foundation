@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.settings.auth
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.settings
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
