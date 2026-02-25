@@ -17,7 +17,10 @@ import kotlinx.serialization.Serializable
  * @property clientType The type of client application associated with this session (e.g. [UserClientType]).
  * @property userAgent The raw User-Agent string of the client used for this session.
  * @property ipAddress The IP address from which the session was initiated or last accessed.
+ * @property language The preferred language of the user during the session (e.g., from Accept-Language header).
  * @property deviceName The human-readable name of the device used for the session, if available.
+ * @property appVersion The version of the client application used for this session.
+ * @property operationSystemVersion The version of the operating system running on the client device.
  * @property createdAt The timestamp when the session was created, in milliseconds.
  * @property lastAccessedAt The timestamp of the last recorded activity for this session, in milliseconds.
  */
@@ -35,17 +38,26 @@ data class UserSessionResponse(
     @SerialName(UserApiFields.EXPIRES_AT)
     val expiresAt: Long? = null,
 
-    @SerialName(UserApiFields.CLIENT_TYPE)
+    @SerialName(CommonApiFields.CLIENT_TYPE)
     val clientType: String? = null,
 
-    @SerialName(UserApiFields.USER_AGENT)
+    @SerialName(CommonApiFields.USER_AGENT)
     val userAgent: String? = null,
 
-    @SerialName(UserApiFields.IP_ADDRESS)
+    @SerialName(CommonApiFields.IP_ADDRESS)
     val ipAddress: String? = null,
 
-    @SerialName(UserApiFields.DEVICE_NAME)
+    @SerialName(CommonApiFields.LANGUAGE)
+    val language: String? = null,
+
+    @SerialName(CommonApiFields.DEVICE_NAME)
     val deviceName: String? = null,
+
+    @SerialName(CommonApiFields.APP_VERSION)
+    val appVersion: String? = null,
+
+    @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
+    val operationSystemVersion: String? = null,
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long? = null,
