@@ -14,4 +14,8 @@ object CommonApiFields {
     const val PAYLOAD = "payload"
     const val METADATA = "metadata"
     const val TIMESTAMP = "timestamp"
+    const val CLIENT_TYPE = "client_type"
+    const val DEVICE_ID = "device_id"
+    const val DEVICE_NAME = "device_name"
+    const val APP_VERSION = "app_version"
 }

@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model
+package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
