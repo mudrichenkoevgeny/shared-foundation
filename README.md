@@ -8,7 +8,7 @@ Add the library to your projects using one of the following methods:
 _1. In your gradle/libs.versions.toml file:_
 ```
 [versions]
-shared-foundation = "0.0.18"
+shared-foundation = "0.0.19"
 
 [libraries]
 shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "shared-foundation" }
@@ -41,17 +41,17 @@ dependencies {
 ```
 ### Option 2: Direct Dependency
 ```
-implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.18))
+implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.19))
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
 
 // Or if you don`t wan`t to use bom:
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.18")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.18")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.18")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.18")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.19")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.19")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.19")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.19")
 ```
 
 ## Samples & Usage

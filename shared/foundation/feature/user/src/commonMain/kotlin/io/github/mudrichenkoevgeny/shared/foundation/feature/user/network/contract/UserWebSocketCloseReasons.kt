@@ -7,9 +7,6 @@ object UserWebSocketCloseReasons {
     /** Failed to authenticate the provided token or token is missing. */
     const val AUTH_FAILED = "Auth failed"
 
-    /** The session or access token has reached its expiration time. */
-    const val SESSION_EXPIRED = "Session expired"
-
     /** The session was manually revoked. */
     const val SESSION_REVOKED = "Session revoked"
 
