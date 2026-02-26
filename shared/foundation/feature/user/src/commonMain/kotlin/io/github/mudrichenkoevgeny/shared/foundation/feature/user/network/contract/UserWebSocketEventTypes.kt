@@ -9,6 +9,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.respon
  */
 object UserWebSocketEventTypes {
     /**
+     * Sent when the current access token expires or becomes invalid.
+     * The client should refresh the token and reconnect.
+     */
+    const val UNAUTHORIZED = "UNAUTHORIZED"
+
+    /**
      * Triggered when auth settings are updated.
      * Payload: [AuthSettingsResponse]
      */

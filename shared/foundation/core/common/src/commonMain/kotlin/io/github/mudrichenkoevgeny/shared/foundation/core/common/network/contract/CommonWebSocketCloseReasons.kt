@@ -12,7 +12,4 @@ object CommonWebSocketCloseReasons {
 
     /** An unexpected internal server error occurred during the session. */
     const val INTERNAL_SERVER_ERROR = "Internal server error"
-
-    /** The session or access token has reached its expiration time. */
-    const val SESSION_EXPIRED = "Session expired"
 }

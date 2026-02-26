@@ -26,10 +26,4 @@ object CommonWebSocketEventTypes {
      * Confirmation sent by the server after successfully processing [INITIALIZE] metadata.
      */
     const val INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
-
-    /**
-     * Sent when the current access token expires or becomes invalid.
-     * The client should refresh the token and reconnect.
-     */
-    const val UNAUTHORIZED = "UNAUTHORIZED"
 }

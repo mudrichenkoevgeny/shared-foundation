@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * Configuration of rules used to validate password strength and security compliance.
  *
@@ -11,6 +13,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpoli
  * @property requireSpecialChar If true, password must contain at least one special character (e.g. {!, @, #}).
  * @property commonPasswords A set of forbidden passwords that are considered too easy to guess.
  */
+@Serializable
 data class PasswordPolicy(
     val minLength: Int = DEFAULT_MIN_LENGTH,
     val requireLetter: Boolean = true,
