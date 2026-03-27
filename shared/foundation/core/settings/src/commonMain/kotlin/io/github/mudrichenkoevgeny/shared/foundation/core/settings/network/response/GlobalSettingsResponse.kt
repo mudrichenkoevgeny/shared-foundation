@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property contactSupportEmail The official email address for user support inquiries.
  */
 @Serializable
-data class  GlobalSettingsResponse(
+data class GlobalSettingsResponse(
     @SerialName(GlobalSettingsApiFields.PRIVACY_POLICY_URL)
     val privacyPolicyUrl: String?,
 

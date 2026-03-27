@@ -30,10 +30,14 @@ configure<KotlinMultiplatformExtension> {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":shared:foundation:core:common"))
+
             api(libs.kotlinx.serialization.json)
         }
 
         commonTest.dependencies {
+            implementation(project(":shared:foundation:core:common"))
+
             implementation(libs.kotlin.test)
         }
     }

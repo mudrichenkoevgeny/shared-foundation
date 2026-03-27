@@ -24,7 +24,13 @@ enum class UserClientType {
      * iOS mobile application.
      */
     @SerialName(CLIENT_IOS)
-    IOS;
+    IOS,
+
+    /**
+     * Desktop application.
+     */
+    @SerialName(CLIENT_DESKTOP)
+    DESKTOP;
 
     /**
      * String representation of the [UserClientType].
@@ -34,15 +40,26 @@ enum class UserClientType {
             WEB -> CLIENT_WEB
             ANDROID -> CLIENT_ANDROID
             IOS -> CLIENT_IOS
+            DESKTOP -> CLIENT_DESKTOP
         }
 
     companion object {
+        /** Wire value for [WEB] in JSON and headers. */
         const val CLIENT_WEB = "web"
+
+        /** Wire value for [ANDROID] in JSON and headers. */
         const val CLIENT_ANDROID = "android"
+
+        /** Wire value for [IOS] in JSON and headers. */
         const val CLIENT_IOS = "ios"
+
+        /** Wire value for [DESKTOP] in JSON and headers. */
+        const val CLIENT_DESKTOP = "desktop"
 
         /**
          * Returns [UserClientType] based on the provided string value, or null if the value is invalid.
+         *
+         * @param value Case-insensitive enum name (e.g. `WEB`) or a wire string such as [CLIENT_WEB].
          */
         fun fromValue(value: String): UserClientType? =
             runCatching { valueOf(value.uppercase()) }.getOrNull()

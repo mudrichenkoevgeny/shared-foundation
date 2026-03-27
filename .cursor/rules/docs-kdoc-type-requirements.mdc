@@ -1,0 +1,40 @@
+---
+description: Mandatory KDoc by type (public API, sealed types, value classes, error codes, ApiErrorResponse)
+globs: **/*.kt
+alwaysApply: false
+---
+
+# Documentation requirements by type — mandatory
+
+## Public API (interfaces / public classes)
+- Interface KDoc:
+  - class-level KDoc: role/purpose
+  - **every** public member (`fun` / property accessor): its own KDoc — purpose, `@param` for each parameter, `@return` when the return type is not `Unit` (for `Unit`, the summary or a short `@return` should still make success vs failure clear when relevant).
+- **Implicit scope:** “document this package/path/module” **includes** all public members on interfaces unless the user narrows scope.
+- For public classes, class-level KDoc plus member-level where members are part of the public surface.
+
+## Component / wiring classes (`*Component`, `*Module`)
+- Rare here. If added: document dependencies, what is exposed, and initialization contracts.
+
+## Sealed hierarchies (validation results, domain discriminated models)
+- Root type: purpose and how variants are used.
+- Each variant: when it applies; `@param`; for payloads/maps, document meaning of keys/values when non-obvious (e.g. `ApiErrorResponse.args` keys align with `*ErrorArgs` constants).
+
+## Value classes (`@JvmInline value class`)
+- If the codebase adds UUID-style wrappers: follow existing patterns (`asHexDashString`, `generate`, `String.toXxxOrNull` / `toXxxOrThrow` as applicable). Opaque tokens: document invariants only.
+
+## `ApiErrorResponse` and `*ErrorCodes` / `*ErrorArgs`
+- **`ApiErrorResponse`:** document each property — especially that **`code`** is machine-readable and must match **`CommonErrorCodes` / domain `*ErrorCodes`**; **`message`** is the server-provided human-readable text in the JSON payload (not a string resource id in this library).
+- **`*ErrorCodes` objects:** class-level KDoc stating they align with API error `code` values; each new `const val` should be understandable from name + short comment if the string alone is ambiguous.
+- **`*ErrorArgs` objects:** document each key’s meaning for `args` maps.
+
+## `PasswordPolicyValidator` and policy models
+- Interface: document contract of `validate` and meaning of `PasswordPolicyValidatorResult` variants.
+- Policy/result types: document fields and fail reasons relative to server settings DTOs.
+
+## HTTP route constants (`*Routes`, `Admin*Routes`, …)
+- For each `const val` that identifies an HTTP endpoint, KDoc must include:
+  - **`HTTP method:`** one of `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, `DELETE` (in backticks), or another registered verb if the contract requires it.
+  - **`Request body:`** linked `[RequestType]` **only** when this module provides that request DTO. If there is no request body in the contract, omit the line (do not write “none”).
+  - **`Response body:`** linked `[ResponseType]` **only** when this module provides that response DTO. If there is no response DTO here, omit the line (do not write “none”).
+- Use **[Type]** links only for types importable in the same file (see `docs-kdoc-basics.mdc`). Example: `AdminSecuritySettingsRoutes.UPDATE_SECURITY_SETTINGS` — `PUT` + `Request body: [UpdateSecuritySettingsRequest]` when applicable.

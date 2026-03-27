@@ -1,0 +1,50 @@
+---
+description: Contracts, serialization, routes, API errors, WebSocket, validation — shared foundation
+globs: **/*.kt
+alwaysApply: false
+---
+
+# Architecture and patterns
+
+## Role of this library
+- **shared-foundation** is the **contract layer**: `@Serializable` DTOs, `const val` route segments, header/field names, WebSocket frame and payload types, **error code strings**, and small **pure** APIs (e.g. password validation) shared by server and clients.
+- **Runtime wiring** (Ktor server/client, repositories, DI) lives in **consumer projects** ([README.md](README.md)). Do not embed framework-specific setup here beyond Kotlin + kotlinx.serialization.
+
+## Serialization
+- Use **`@Serializable`** for wire types; **`@SerialName(...)`** with constants from `CommonApiFields` / module `*ApiFields` where the project already does so.
+- Use **`FoundationJson`** as the single shared `Json` configuration for this codebase; avoid ad-hoc conflicting `Json {}` blocks.
+- **`SocketFrame.payload`** is **`JsonElement?`** — polymorphic or loosely typed payloads stay in JSON; typed payloads get their own `@Serializable` classes (e.g. `WebSocketInitializePayload`).
+
+## HTTP routes
+- **`object *Routes` / `Admin*Routes`:** `const val` path templates; reuse path parameter names from `*ApiPaths` / `UserApiPaths` inside `{...}` segments.
+- **KDoc on each route constant (endpoints):** document the HTTP contract explicitly so server and client implement the same API. Follow the pattern used in `AdminSecuritySettingsRoutes` and similar route objects:
+  - **`HTTP method:`** the verb in backticks, using one of: `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, `DELETE`. If the API uses another registered method, document that verb in backticks the same way.
+  - **`Request body:`** only when this module defines a request DTO: `Request body: [SomeRequest].` If there is no request body, **do not** add a “request body: none” line — omit the line entirely.
+  - **`Response body:`** only when this module defines a response DTO: `Response body: [SomeResponse].` If there is no response type here, **do not** add a “response body: none” line — omit the line entirely.
+  - **Path parameters:** when the template includes `{name}`, mention them in the same KDoc block (plain text is fine).
+- Prefer **per-route KDoc** on each `const val` that denotes a callable endpoint; object-level KDoc alone is not enough for new endpoints unless the user narrows scope.
+- **Admin vs public API:** follow existing `Admin*` vs non-admin route object split.
+
+## WebSocket
+- **Envelope:** `SocketFrame` in `core/common` (`type`, `payload`, `metadata`, `timestamp`, …).
+- **Paths:** `WebSocketContract.WS_REALTIME_PATH` for the realtime endpoint string.
+- **Event / close reason strings:** `*WebSocketEventTypes`, `*WebSocketCloseReasons` objects per module — add new values there, keep server and clients aligned.
+
+## API errors (wire contract — not exceptions)
+- **`ApiErrorResponse`** (`core/common/error/model`): standard JSON error body with `id`, **`code`** (string), **`message`** (human-readable from server), **`args`** (`Map<String, String>`).
+- **Error code constants:** `object *ErrorCodes` (`CommonErrorCodes`, `SecurityErrorCodes`, `UserErrorCodes`, …) — **machine-readable** strings; add new codes in the module that owns the domain.
+- **Args keys:** `object *ErrorArgs` (`CommonErrorArgs`, …) — stable map keys for `ApiErrorResponse.args`.
+- New failures: extend the right `*ErrorCodes` / `*ErrorArgs`, document in KDoc, and ensure server responses use the same strings. This library does **not** define UI copy or localization — only **contract** strings.
+
+## Request validation annotations
+- **`RequiredField`, `NotBlankStringField`, `NotEmptyCollectionField`** (`core/common/validation`) — document semantics on the annotations; actual enforcement is outside this library unless you add validators here.
+
+## Password policy (`core/security`)
+- **`PasswordPolicyValidator`** + **`PasswordPolicyValidatorResult`** — sealed success/fail with **`PasswordPolicyFailReason`**; keep validation logic in `PasswordPolicyValidatorImpl` consistent with API **`PasswordPolicyResponse`** / settings contracts.
+
+## Configuration
+- No **base URLs**, secrets, or environment-specific values in library sources.
+
+## Layering and Gradle
+- Packages mirror responsibility: `error/naming`, `error/model`, `network/route`, `network/contract`, `domain/model`, `passwordpolicy`, etc.
+- Respect **module dependencies** as declared in each `build.gradle.kts` (do not use `core/common` types from `core/security` unless a project dependency is added).

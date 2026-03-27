@@ -30,16 +30,22 @@ object UserApiFields {
     const val USER_ID = "user_id"
     const val ROLE = "role"
     const val ACCOUNT_STATUS = "account_status"
+    const val ACCOUNT_STATUS_BEFORE_DELETION = "account_status_before_deletion"
+    const val PERMISSIONS = "permissions"
     const val LAST_LOGIN_AT = "last_login_at"
     const val LAST_ACTIVE_AT = "last_active_at"
-    const val LAST_ACCESSED_AT = "last_accessed_at"
+    const val SCHEDULED_PERMANENT_DELETION_AT = "scheduled_permanent_deletion_at"
 
     // Identifiers, Providers
     const val IDENTIFIER = "identifier"
-    const val IDENTIFIER_ID = "identifier_id"
-    const val IDENTIFIER_AUTH_PROVIDER = "identifier_auth_provider"
+    const val MASKED_IDENTIFIER = "masked_identifier"
     const val USER_AUTH_PROVIDER = "user_auth_provider"
     const val USER_IDENTIFIERS = "user_identifiers"
+
+    // Session
+    const val IDENTIFIER_ID = "identifier_id"
+    const val IDENTIFIER_AUTH_PROVIDER = "identifier_auth_provider"
+    const val LAST_ACCESSED_AT = "last_accessed_at"
 
     // Settings
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"

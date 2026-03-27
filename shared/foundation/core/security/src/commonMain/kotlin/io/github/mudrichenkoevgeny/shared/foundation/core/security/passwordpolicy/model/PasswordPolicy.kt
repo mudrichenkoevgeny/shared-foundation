@@ -24,8 +24,10 @@ data class PasswordPolicy(
     val commonPasswords: Set<String> = DEFAULT_COMMON_PASSWORDS
 ) {
     companion object {
+        /** Default [minLength] when constructing [PasswordPolicy] without an explicit value. */
         const val DEFAULT_MIN_LENGTH = 8
 
+        /** Default banned-password list used when [commonPasswords] is not overridden. */
         val DEFAULT_COMMON_PASSWORDS = setOf(
             "12345678",
             "password",

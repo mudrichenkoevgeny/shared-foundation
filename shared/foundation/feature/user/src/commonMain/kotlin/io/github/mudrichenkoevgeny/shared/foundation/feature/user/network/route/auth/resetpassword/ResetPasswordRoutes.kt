@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.auth.resetpassword
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.auth.AuthRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Object containing route definitions for password recovery operations.
@@ -9,6 +9,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * @property SEND_RESET_PASSWORD_CONFIRMATION The endpoint to request a password reset verification code.
  */
 object ResetPasswordRoutes {
-    const val RESET_PASSWORD = "${AuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+    const val RESET_PASSWORD = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
     const val SEND_RESET_PASSWORD_CONFIRMATION = "$RESET_PASSWORD/send-confirmation"
 }

@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contr
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.settings.AuthSettingsResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.CurrentUserResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.UserDetailsResponse
 
 /**
  * WebSocket event types related to user functionality.
@@ -22,7 +22,7 @@ object UserWebSocketEventTypes {
 
     /**
      * Sent when the account status of the current user changes. See [UserAccountStatus].
-     * Payload: [CurrentUserResponse]
+     * Payload: [UserDetailsResponse]
      */
     const val ACCOUNT_STATUS_CHANGED = "ACCOUNT_STATUS_CHANGED"
 

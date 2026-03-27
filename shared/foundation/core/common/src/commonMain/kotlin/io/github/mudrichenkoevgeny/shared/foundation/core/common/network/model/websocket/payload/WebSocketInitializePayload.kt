@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
  * @property deviceName A human-readable name for the device (e.g., "Chrome on Windows", "iPhone 15").
  * @property appVersion The current version of the client application.
  * @property operationSystemVersion The version of the operating system running on the client device (e.g., "iOS 17.4", "Android 14", "Windows 11").
+ * @property apiVersion Negotiated client API version so the server can align response and WebSocket message formats with this SDK build.
  */
 @Serializable
 data class WebSocketInitializePayload(
@@ -33,5 +34,8 @@ data class WebSocketInitializePayload(
     val appVersion: String? = null,
 
     @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
-    val operationSystemVersion: String? = null
+    val operationSystemVersion: String? = null,
+
+    @SerialName(CommonApiFields.API_VERSION)
+    val apiVersion: String? = null
 )

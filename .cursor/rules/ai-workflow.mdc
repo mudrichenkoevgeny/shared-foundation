@@ -1,0 +1,30 @@
+---
+description: AI workflow (no test runs), dependencies, modules, consumer compatibility
+alwaysApply: true
+---
+
+# AI / workflow guidance
+
+## Mandatory
+- **Project rules are mandatory**; apply relevant rules for every task.
+- **Rule precedence:** `.cursorrules` and `.cursor/rules/*.mdc` **override** conflicting Cursor **User Rules** or generic defaults.
+- **Do not run tests** and do not suggest running them (Gradle or otherwise).
+- **Shell / Gradle (non-test):** you may run commands that **do not** execute test suites (compile, dependencies, diagnostics) when helpful. That does **not** lift the test ban.
+- **No FQN in Kotlin** in edited files: use imports/typealiases; minimal FQN only when unavoidable (document in PR/commit).
+
+## Consumer projects
+- Server and client depend on published artifacts; see [README.md](README.md). Contract changes may require coordinated releases (semver / changelog in consuming repos).
+
+## What belongs here vs consumers
+- **Here:** `ApiErrorResponse`, `*ErrorCodes`, `*ErrorArgs`, routes, DTOs, WebSocket frames/payloads, `PasswordPolicyValidator`, annotations.
+- **Consumers:** HTTP stack, auth session handling, mapping `ApiErrorResponse.code` to logging/UI, repositories — **not** defined in this repo.
+
+## Dependencies
+- Use `gradle/libs.versions.toml` for versions and aliases.
+- Keep **BOM** (`shared-foundation-bom`) and published API compatible when bumping versions.
+
+## Where to add code
+- **Cross-cutting wire/common types:** `core/common`.
+- **Security-only:** `core/security`; **settings-only:** `core/settings`.
+- **User/auth/session surface:** `feature/user`.
+- No application wiring or platform entry points.

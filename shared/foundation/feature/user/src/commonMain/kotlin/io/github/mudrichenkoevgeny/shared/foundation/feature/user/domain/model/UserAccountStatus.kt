@@ -24,7 +24,19 @@ enum class UserAccountStatus {
      * Account is strictly prohibited from accessing the system.
      */
     @SerialName(STATUS_BANNED)
-    BANNED;
+    BANNED,
+
+    /**
+     * Account is under a security hold (e.g. suspected compromise): access is restricted until resolved.
+     */
+    @SerialName(STATUS_SECURITY_HOLD)
+    SECURITY_HOLD,
+
+    /**
+     * Account deletion was requested; the account may be restored until the grace period expires.
+     */
+    @SerialName(STATUS_PENDING_DELETION)
+    PENDING_DELETION;
 
     /**
      * String representation of the [UserAccountStatus].
@@ -34,12 +46,16 @@ enum class UserAccountStatus {
             ACTIVE -> STATUS_ACTIVE
             READ_ONLY -> STATUS_READ_ONLY
             BANNED -> STATUS_BANNED
+            SECURITY_HOLD -> STATUS_SECURITY_HOLD
+            PENDING_DELETION -> STATUS_PENDING_DELETION
         }
 
     companion object {
         const val STATUS_ACTIVE = "active"
         const val STATUS_READ_ONLY = "read_only"
         const val STATUS_BANNED = "banned"
+        const val STATUS_SECURITY_HOLD = "security_hold"
+        const val STATUS_PENDING_DELETION = "pending_deletion"
 
         /**
          * Returns [UserAccountStatus] based on the provided string value, or null if the value is invalid.

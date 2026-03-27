@@ -1,0 +1,51 @@
+---
+description: Project identity, stack, repo layout, module boundaries, consumer SDKs
+alwaysApply: true
+---
+
+# shared-foundation — Overview
+
+## Project identity
+- **Type:** Kotlin Multiplatform **library** of **shared API contracts** consumed by **backend** and **client** (same serialized JSON shapes, path strings, and machine-readable error **code** strings).
+- **Publishing:** Maven Central via `com.vanniktech.maven.publish`; version in root `build.gradle.kts`.
+- **Coordinates:** group `io.github.mudrichenkoevgeny`; artifact ids follow `shared-foundation-*` (see `settings.gradle.kts` / published module paths).
+- **Consumers:** not in this repo — [README.md](README.md): **[Backend Platform SDK](https://github.com/mudrichenkoevgeny/backend-platform-sdk)** (server), **[KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk)** (client). This repo is the **lowest shared layer** of types both sides compile against.
+
+## Tech stack
+- **Kotlin** 2.x, **kotlinx.serialization** (`kotlinx-serialization-json`).
+- **JSON defaults:** `FoundationJson` in `core/common` (`serialization/FoundationJson.kt`).
+- **Targets:** per module `build.gradle.kts` (e.g. JVM, Android library, iOS, Wasm JS).
+- **No UI layer** in this repository.
+
+## Modules (`shared/foundation/`)
+
+### `core/common`
+- **Error wire shape:** `error/model/ApiErrorResponse` (`id`, `code`, `message`, `args` map); **not** a sealed exception hierarchy — `code` values align with `CommonErrorCodes` and feature-specific `*ErrorCodes` in other modules.
+- **Error naming:** `error/naming/CommonErrorCodes`, `CommonErrorArgs` — string constants for JSON/logging parity.
+- **Network:** `network/contract` (`CommonApiFields`, `CommonHttpHeaders`, `WebSocketContract`, …); `network/model/websocket` (`SocketFrame`, payloads such as `WebSocketInitializePayload`).
+- **Domain:** e.g. `domain/model/UserClientType`.
+- **Validation:** `validation/NetworkFieldAnnotations.kt` — JVM retention annotations for marking required/non-blank fields (interpretation lives in validators outside or alongside this lib).
+- **Depends only on** kotlinx.serialization (see `build.gradle.kts`); **does not** depend on `feature/*`.
+
+### `core/security`
+- **Error naming:** `SecurityErrorCodes`, `SecurityErrorArgs`.
+- **Password policy:** `passwordpolicy/` — `PasswordPolicy`, `PasswordPolicyValidator` (interface + `PasswordPolicyValidatorImpl`), `PasswordPolicyValidatorResult`, mappers, API responses.
+- **Network:** security settings routes/requests/responses, `SecurityApiFields`, WebSocket event types for security.
+- Gradle: **no** `api(project(":shared:foundation:core:common"))` today — self-contained module + serialization; `feature/user` pulls `core/common` separately.
+
+### `core/settings`
+- Global settings: routes, requests/responses, `GlobalSettingsApiFields`, settings WebSocket event types.
+
+### `feature/user`
+- **Error naming:** `UserErrorCodes`, `UserErrorArgs`.
+- **Domain:** `domain/model` — roles, account status, auth providers, etc.
+- **Network:** `network/route`, `request`, `response`, `contract` (paths, query params, user-specific API fields).
+- **Depends on:** `api` `core/common`, `core/security`, `core/settings` (see `feature/user/build.gradle.kts`).
+
+### `bom`
+- Aligns versions of published `shared-foundation-*` artifacts for consumers.
+
+## Boundaries
+- **`core/common` must not** depend on `feature/*`.
+- **`feature/*`** may aggregate multiple `core/*` modules; keep feature-only types out of `core/*` unless truly cross-cutting.
+- **No** Ktor route implementations, HTTP client setup, or app entry points — only **types and constants** (and pure interfaces like `PasswordPolicyValidator` + default impl).

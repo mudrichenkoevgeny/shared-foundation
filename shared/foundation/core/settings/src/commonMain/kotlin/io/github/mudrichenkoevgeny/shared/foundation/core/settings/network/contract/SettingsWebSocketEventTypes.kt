@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.contract
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.response.GlobalSettingsResponse
+
 /**
  * WebSocket event types related to system-wide settings functionality.
  */

@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.auth.login
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.auth.AuthRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Object containing route definitions for login operations.
@@ -13,7 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * @property SEND_LOGIN_CONFIRMATION_TO_PHONE The endpoint to request a verification code for login.
  */
 object LoginRoutes {
-    const val BASE_LOGIN_ROUTE = "${AuthRoutes.BASE_AUTH_ROUTE}/login"
+    const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
     const val LOGIN_BY_EMAIL = "$BASE_LOGIN_ROUTE/email"
     const val LOGIN_BY_PHONE = "$BASE_LOGIN_ROUTE/phone"
     const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "$BASE_LOGIN_ROUTE/external-auth-provider"

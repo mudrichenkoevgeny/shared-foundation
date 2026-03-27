@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model
 
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserRoleDefaultPermissionCodes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,10 +17,11 @@ enum class UserRole {
     USER,
 
     /**
-     * Privileged user with permissions to manage content and moderate other users.
+     * Staff member role for operational work (support, moderation, domain-specific workflows)
+     * with permissions granted by templates and explicit capabilities.
      */
-    @SerialName(ROLE_MODERATOR)
-    MODERATOR,
+    @SerialName(ROLE_STAFF)
+    STAFF,
 
     /**
      * Superuser with full access to system settings, infrastructure, and user management.
@@ -32,13 +35,19 @@ enum class UserRole {
     val serialName: String
         get() = when (this) {
             USER -> ROLE_USER
-            MODERATOR -> ROLE_MODERATOR
+            STAFF -> ROLE_STAFF
             ADMIN -> ROLE_ADMIN
         }
 
+    /**
+     * Baseline permissions associated with this role.
+     */
+    val defaultPermissionCodes: Set<UserPermissionCode>
+        get() = UserRoleDefaultPermissionCodes.forRole(this)
+
     companion object {
         const val ROLE_USER = "user"
-        const val ROLE_MODERATOR = "moderator"
+        const val ROLE_STAFF = "staff"
         const val ROLE_ADMIN = "admin"
 
         /**
