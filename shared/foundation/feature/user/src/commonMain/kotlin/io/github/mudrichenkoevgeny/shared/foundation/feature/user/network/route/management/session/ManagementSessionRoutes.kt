@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.UserClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
@@ -45,7 +46,7 @@ object ManagementSessionRoutes {
      *   [UserApiQueryParams.UserSessionQueryParams.APP_VERSION],
      *   [UserApiQueryParams.UserSessionQueryParams.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
      *
-     * Response body: JSON array of [UserSessionMaskedResponse].
+     * Response body: [PagedResponse] of [UserSessionMaskedResponse].
      */
     const val GET_USER_SESSIONS_MASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_MASKED
 
@@ -81,7 +82,7 @@ object ManagementSessionRoutes {
      *   [UserApiQueryParams.UserSessionQueryParams.APP_VERSION],
      *   [UserApiQueryParams.UserSessionQueryParams.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
      *
-     * Response body: JSON array of [UserSessionUnmaskedResponse].
+     * Response body: [PagedResponse] of [UserSessionUnmaskedResponse].
      */
     const val GET_USER_SESSIONS_UNMASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_UNMASKED
 

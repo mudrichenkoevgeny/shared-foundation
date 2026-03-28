@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParamValues
@@ -39,7 +40,7 @@ object OpenIdentifierRoutes {
      *
      * - [UserApiQueryParams.UserIdentifierQueryParams.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserIdentifierUnmaskedResponse.userAuthProvider]).
      *
-     * Response body: JSON array of [UserIdentifierUnmaskedResponse].
+     * Response body: [PagedResponse] of [UserIdentifierUnmaskedResponse].
      */
     const val GET_IDENTIFIERS = BaseIdentifiersRoutes.GET_IDENTIFIERS
 

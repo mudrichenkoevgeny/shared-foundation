@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
@@ -44,7 +45,7 @@ object OpenSessionRoutes {
      * - [UserApiQueryParams.UserSessionQueryParams.REVOKED] — `true` or `false`.
      * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
      *
-     * Response body: JSON array of [UserSessionUnmaskedResponse].
+     * Response body: [PagedResponse] of [UserSessionUnmaskedResponse].
      */
     const val GET_SESSIONS = BaseSessionRoutes.GET_SESSIONS
 

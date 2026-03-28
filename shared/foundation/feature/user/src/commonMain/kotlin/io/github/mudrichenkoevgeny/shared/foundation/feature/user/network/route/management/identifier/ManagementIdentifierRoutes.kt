@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
@@ -36,7 +37,7 @@ object ManagementIdentifierRoutes {
      *
      * - [UserApiQueryParams.UserIdentifierQueryParams.USER_ID]
      *
-     * Response body: JSON array of [UserIdentifierMaskedResponse].
+     * Response body: [PagedResponse] of [UserIdentifierMaskedResponse].
      */
     const val GET_IDENTIFIERS_MASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIERS_MASKED
 
@@ -59,7 +60,7 @@ object ManagementIdentifierRoutes {
      * - [UserApiQueryParams.UserIdentifierQueryParams.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserIdentifierUnmaskedResponse.userAuthProvider]).
      * - [UserApiQueryParams.UserIdentifierQueryParams.IDENTIFIER] — free-text; server-defined matching; repeat key for multiple values if supported.
      *
-     * Response body: JSON array of [UserIdentifierUnmaskedResponse].
+     * Response body: [PagedResponse] of [UserIdentifierUnmaskedResponse].
      */
     const val GET_IDENTIFIERS_UNMASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIERS_UNMASKED
 

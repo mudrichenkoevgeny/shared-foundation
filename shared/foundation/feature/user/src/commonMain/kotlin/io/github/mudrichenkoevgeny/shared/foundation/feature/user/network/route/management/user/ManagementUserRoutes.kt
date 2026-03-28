@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
@@ -37,7 +38,7 @@ object ManagementUserRoutes {
      * - [UserApiQueryParams.UserQueryParams.ACCOUNT_STATUS] — [UserAccountStatus] serial name ([UserDetailsResponse.accountStatus]).
      * - [UserApiQueryParams.UserQueryParams.ACCOUNT_STATUS_BEFORE_DELETION] — [UserAccountStatus] serial name ([UserDetailsResponse.accountStatusBeforeDeletion]).
      *
-     * Response body: JSON array of [UserDetailsResponse].
+     * Response body: [PagedResponse] of [UserDetailsResponse].
      */
     const val GET_USERS = BaseManagementUserRoutes.GET_USERS
 

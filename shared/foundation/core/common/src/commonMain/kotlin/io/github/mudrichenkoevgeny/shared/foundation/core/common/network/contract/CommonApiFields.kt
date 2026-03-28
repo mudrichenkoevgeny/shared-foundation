@@ -6,6 +6,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.Co
  * Common naming conventions for API request parameters and response fields.
  */
 object CommonApiFields {
+    /** JSON field name for the `items` array in a paginated list response body. */
+    const val ITEMS = "items"
+
+    /** JSON field name for total number of items across all pages in a paged listing. */
+    const val TOTAL_COUNT = "total_count"
+
+    /** JSON field name for total number of pages in a paged listing (server-computed). */
+    const val TOTAL_PAGES = "total_pages"
+
     /** JSON field name for a unique resource or message identifier. */
     const val ID = "id"
 
