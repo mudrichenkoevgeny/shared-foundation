@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.Us
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.session.UserSessionUnmaskedResponse
 
 /**
  * User-specific naming conventions for API query string parameters.
@@ -27,6 +28,9 @@ object UserApiQueryParams {
 
         /** Filter by [UserAccountStatus]. */
         const val ACCOUNT_STATUS = "account_status"
+
+        /** Filter by stored pre-deletion [UserAccountStatus] ([UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION]). */
+        const val ACCOUNT_STATUS_BEFORE_DELETION = UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION
     }
 
     /**
@@ -50,11 +54,14 @@ object UserApiQueryParams {
         /** User id filter. */
         const val USER_ID = UserApiFields.USER_ID
 
+        /** Filter by identifier id. */
+        const val IDENTIFIER_ID = UserApiFields.IDENTIFIER_ID
+
         /** Filter by [UserAuthProvider]. */
         const val USER_AUTH_PROVIDER = UserApiFields.USER_AUTH_PROVIDER
 
-        /** Raw user identifier filter value. */
-        const val IDENTIFIER = UserApiFields.IDENTIFIER
+        /** Filter by session revoked flag; wire values `true` or `false`. */
+        const val REVOKED = UserApiFields.REVOKED
 
         /** Filter by [UserClientType]. */
         const val CLIENT_TYPE = CommonApiFields.CLIENT_TYPE
@@ -68,6 +75,9 @@ object UserApiQueryParams {
         /** Filter by language tag. */
         const val LANGUAGE = CommonApiFields.LANGUAGE
 
+        /** Filter by stable device id ([CommonApiFields.DEVICE_ID]); repeat key for OR if supported. */
+        const val DEVICE_ID = CommonApiFields.DEVICE_ID
+
         /** Filter by device name. */
         const val DEVICE_NAME = CommonApiFields.DEVICE_NAME
 
@@ -76,5 +86,10 @@ object UserApiQueryParams {
 
         /** Filter by operating system version. */
         const val OPERATION_SYSTEM_VERSION = CommonApiFields.OPERATION_SYSTEM_VERSION
+
+        /**
+         * Raw login / identifier value filter; not a field on [UserSessionUnmaskedResponse]; server-defined matching; repeat key for OR if supported.
+         */
+        const val IDENTIFIER = UserApiFields.IDENTIFIER
     }
 }

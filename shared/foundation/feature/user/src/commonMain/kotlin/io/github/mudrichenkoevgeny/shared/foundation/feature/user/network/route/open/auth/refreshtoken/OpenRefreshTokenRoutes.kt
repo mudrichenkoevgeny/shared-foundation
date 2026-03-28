@@ -15,5 +15,5 @@ object OpenRefreshTokenRoutes {
      *
      * Response body: [AuthDataResponse].
      */
-    const val REFRESH = BaseRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
+    const val REFRESH_TOKEN = BaseRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
 }

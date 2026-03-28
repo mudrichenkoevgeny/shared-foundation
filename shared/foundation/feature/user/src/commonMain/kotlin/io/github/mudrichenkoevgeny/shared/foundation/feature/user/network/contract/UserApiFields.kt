@@ -25,6 +25,9 @@ object UserApiFields {
     // Rate Limiting
     const val RETRY_AFTER_SECONDS = "retry_after_seconds"
 
+    // OTP
+    const val NUMBER_OF_SYMBOLS = "number_of_symbols"
+
     // User
     const val USER = "user"
     const val USER_ID = "user_id"
@@ -46,6 +49,16 @@ object UserApiFields {
     const val IDENTIFIER_ID = "identifier_id"
     const val IDENTIFIER_AUTH_PROVIDER = "identifier_auth_provider"
     const val LAST_ACCESSED_AT = "last_accessed_at"
+
+    /**
+     * When `true`, the session is no longer valid for authentication (e.g. soft-revoked but row retained).
+     */
+    const val REVOKED = "revoked"
+
+    /**
+     * Timestamp of the last step-up / re-authentication for the session, in milliseconds.
+     */
+    const val LAST_REAUTHENTICATED_AT = "last_reauthenticated_at"
 
     // Settings
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"

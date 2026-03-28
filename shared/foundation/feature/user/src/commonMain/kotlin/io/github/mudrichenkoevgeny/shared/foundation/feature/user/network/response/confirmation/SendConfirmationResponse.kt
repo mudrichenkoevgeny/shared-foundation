@@ -5,12 +5,16 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO representing the response after requesting a confirmation code.
+ * DTO representing the response after requesting a confirmation (OTP) code.
  *
  * @property retryAfterSeconds The duration in seconds that the user must wait before requesting a new code.
+ * @property numberOfSymbols The number of characters the user must enter for the confirmation code.
  */
 @Serializable
 data class SendConfirmationResponse(
     @SerialName(UserApiFields.RETRY_AFTER_SECONDS)
-    val retryAfterSeconds: Int
+    val retryAfterSeconds: Int,
+
+    @SerialName(UserApiFields.NUMBER_OF_SYMBOLS)
+    val numberOfSymbols: Int
 )

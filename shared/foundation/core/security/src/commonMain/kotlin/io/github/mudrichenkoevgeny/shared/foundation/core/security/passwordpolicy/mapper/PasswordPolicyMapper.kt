@@ -1,12 +1,12 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.mapper
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.response.settings.PasswordPolicyResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.PasswordPolicyPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model.PasswordPolicy
 
 /**
- * Maps [PasswordPolicyResponse] DTO to domain model [PasswordPolicy].
+ * Maps [PasswordPolicyPayload] DTO to domain model [PasswordPolicy].
  */
-fun PasswordPolicyResponse.toPasswordPolicy() = PasswordPolicy(
+fun PasswordPolicyPayload.toPasswordPolicy() = PasswordPolicy(
     minLength = this.minLength,
     requireLetter = this.requireLetter,
     requireUpperCase = this.requireUpperCase,
@@ -17,9 +17,9 @@ fun PasswordPolicyResponse.toPasswordPolicy() = PasswordPolicy(
 )
 
 /**
- * Maps domain model [PasswordPolicy] to [PasswordPolicyResponse] DTO.
+ * Maps domain model [PasswordPolicy] to [PasswordPolicyPayload] DTO.
  */
-fun PasswordPolicy.toPasswordPolicyResponse() = PasswordPolicyResponse(
+fun PasswordPolicy.toPasswordPolicyResponse() = PasswordPolicyPayload(
     minLength = this.minLength,
     requireLetter = this.requireLetter,
     requireUpperCase = this.requireUpperCase,

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.request
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.response.settings.PasswordPolicyResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.PasswordPolicyPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,5 +13,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UpdateSecuritySettingsRequest(
     @SerialName(SecurityApiFields.PASSWORD_POLICY)
-    val passwordPolicy: PasswordPolicyResponse
+    val passwordPolicy: PasswordPolicyPayload
 )

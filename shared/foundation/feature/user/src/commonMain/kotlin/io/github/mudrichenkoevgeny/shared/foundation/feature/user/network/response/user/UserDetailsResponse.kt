@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  * @property id The unique identifier of the user.
  * @property role The access level assigned to the user (e.g. [UserRole]).
  * @property accountStatus The current state of the account (e.g. [UserAccountStatus]).
- * @property accountStatusBeforeDeletion Account status before deletion was requested; only meaningful when the account is pending deletion.
+ * @property accountStatusBeforeDeletion Account status before deletion was requested; only meaningful when the account is pending deletion (e.g. [UserAccountStatus]).
  * @property permissions Explicit permissions assigned to the user (see [UserPermissionCode]).
  * @property lastLoginAt The timestamp of the most recent successful authentication, in milliseconds.
  * @property lastActiveAt The timestamp of the last recorded user activity, in milliseconds.

@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.settings
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.settings
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.AvailableAuthProvidersPayload
@@ -6,12 +6,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO representing the authentication configuration, including supported login methods.
+ * DTO representing the request to update authentication settings (management).
  *
- * @property availableAuthProviders The collection of primary and secondary authentication methods available for the user.
+ * @property availableAuthProviders Provider lists to apply.
  */
 @Serializable
-data class AuthSettingsResponse(
+data class UpdateAuthSettingsRequest(
     @SerialName(UserApiFields.AVAILABLE_AUTH_PROVIDERS)
     val availableAuthProviders: AvailableAuthProvidersPayload
 )
