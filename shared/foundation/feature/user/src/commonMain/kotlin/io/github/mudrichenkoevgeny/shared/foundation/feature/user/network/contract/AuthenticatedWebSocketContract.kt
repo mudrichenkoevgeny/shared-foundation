@@ -15,6 +15,6 @@ object AuthenticatedWebSocketContract {
      * @return A string representing the path with the injected token (e.g., "/ws/realtime?token=abc").
      */
     fun getFullAuthPath(token: String): String {
-        return "${WebSocketContract.WS_REALTIME_PATH}?$${UserApiQueryParams.TOKEN}=$token"
+        return "${WebSocketContract.WS_REALTIME_PATH}?$${UserApiQueryParams.TokenQueryParams.TOKEN}=$token"
     }
 }
