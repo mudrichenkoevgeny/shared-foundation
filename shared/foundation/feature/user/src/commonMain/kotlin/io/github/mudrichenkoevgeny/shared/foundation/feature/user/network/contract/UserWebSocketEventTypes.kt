@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.settings.AuthSettingsResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.UserDetailsResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.PublicAuthSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 
 /**
  * WebSocket event types related to user functionality.
@@ -16,13 +16,13 @@ object UserWebSocketEventTypes {
 
     /**
      * Triggered when auth settings are updated.
-     * Payload: [AuthSettingsResponse]
+     * Payload: [PublicAuthSettingsPayload]
      */
     const val AUTH_SETTINGS_UPDATED = "AUTH_SETTINGS_UPDATED"
 
     /**
      * Sent when the account status of the current user changes. See [UserAccountStatus].
-     * Payload: [UserDetailsResponse]
+     * Payload: [UserDetailsPayload]
      */
     const val ACCOUNT_STATUS_CHANGED = "ACCOUNT_STATUS_CHANGED"
 

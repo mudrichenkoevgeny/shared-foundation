@@ -3,7 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contra
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorCodes
 
 /**
- * Common naming conventions for API request parameters and response fields.
+ * Common naming conventions for API request parameters, response fields, and shared listing wire values (for example
+ * `asc` / `desc` via the nested [SortOrder] object).
  */
 object CommonApiFields {
     /** JSON field name for the `items` array in a paginated list response body. */
@@ -74,4 +75,15 @@ object CommonApiFields {
 
     /** JSON field name for the negotiated client API version. */
     const val API_VERSION = "api_version"
+
+    /**
+     * Wire values for list `sort_order` parameters (and any matching internal representation).
+     */
+    object SortOrder {
+        /** Ascending order (`asc`). */
+        const val ASC = "asc"
+
+        /** Descending order (`desc`). */
+        const val DESC = "desc"
+    }
 }

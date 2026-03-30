@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
 /**
@@ -13,7 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 object BaseManagementSessionRoutes {
     /**
      * Path prefix for session **list** endpoints under management. Target user is supplied via query
-     * [UserApiQueryParams.UserSessionQueryParams.USER_ID], not the path.
+     * [UserFilterValues.UserSessionFilterValues.USER_ID], not the path.
      */
     const val BASE_MANAGEMENT_SESSIONS_LIST_ROUTE =
         "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/sessions"

@@ -8,7 +8,7 @@ Add the library to your projects using one of the following methods:
 _1. In your gradle/libs.versions.toml file:_
 ```
 [versions]
-shared-foundation = "0.0.21"
+shared-foundation = "0.0.22"
 
 [libraries]
 shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "shared-foundation" }
@@ -45,7 +45,7 @@ dependencies {
 ```
 ### Option 2: Direct Dependency
 ```
-implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.21))
+implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.22))
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings")
@@ -53,11 +53,11 @@ implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
 
 // Or if you don`t wan`t to use bom:
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.21")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.21")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.21")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit:0.0.21")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.21")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.22")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.22")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.22")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit:0.0.22")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.22")
 ```
 
 ## Modules
@@ -67,7 +67,7 @@ Published artifacts (versions aligned via the BOM):
 - **shared-foundation-core-common** — shared errors, network contracts, WebSocket envelopes, common DTOs.
 - **shared-foundation-core-security** — password policy, security settings API contracts.
 - **shared-foundation-core-settings** — global settings API contracts.
-- **shared-foundation-core-audit** — audit log API contracts (management routes, `AuditEventResponse`, query params and field names).
+- **shared-foundation-core-audit** — audit log contracts (management routes, `AuditEvent`, filters, field names).
 - **shared-foundation-feature-user** — user, auth, and session API contracts.
 - **shared-foundation-bom** — dependency constraints for the modules above.
 

@@ -62,6 +62,17 @@ object UserApiFields {
 
     // Settings
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"
+
+    /**
+     * Whole-hour validity for newly issued access tokens (e.g. JWT), management auth-settings contract.
+     */
+    const val ACCESS_TOKEN_VALIDITY_HOURS = "access_token_validity_hours"
+
+    /**
+     * Whole-day validity for newly issued refresh tokens, management auth-settings contract.
+     */
+    const val REFRESH_TOKEN_VALIDITY_DAYS = "refresh_token_validity_days"
+
     const val PRIMARY = "primary"
     const val SECONDARY = "secondary"
     const val GLOBAL_SETTINGS = "global_settings"

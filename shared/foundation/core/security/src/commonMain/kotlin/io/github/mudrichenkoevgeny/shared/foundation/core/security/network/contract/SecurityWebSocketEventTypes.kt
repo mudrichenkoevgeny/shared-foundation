@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.response.settings.SecuritySettingsResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
 
 /**
  * WebSocket event types related to security functionality.
@@ -8,7 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.respo
 object SecurityWebSocketEventTypes {
     /**
      * Triggered when security settings are updated.
-     * Payload: [SecuritySettingsResponse]
+     * Payload: [SecuritySettingsPayload]
      */
     const val SECURITY_SETTINGS_UPDATED = "SECURITY_SETTINGS_UPDATED"
 }

@@ -4,8 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.AuthDataResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.confirmation.SendConfirmationResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.confirmation.SendConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.login.BaseLoginRoutes
 
 /**
@@ -17,7 +17,7 @@ object OpenLoginRoutes {
      *
      * Request body: [LoginByEmailRequest].
      *
-     * Response body: [AuthDataResponse].
+     * Response body: [AuthDataPayload].
      */
     const val LOGIN_BY_EMAIL = BaseLoginRoutes.LOGIN_BY_EMAIL
 
@@ -26,7 +26,7 @@ object OpenLoginRoutes {
      *
      * Request body: [LoginByPhoneRequest].
      *
-     * Response body: [AuthDataResponse].
+     * Response body: [AuthDataPayload].
      */
     const val LOGIN_BY_PHONE = BaseLoginRoutes.LOGIN_BY_PHONE
 
@@ -35,7 +35,7 @@ object OpenLoginRoutes {
      *
      * Request body: [LoginByExternalAuthProviderRequest].
      *
-     * Response body: [AuthDataResponse].
+     * Response body: [AuthDataPayload].
      */
     const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = BaseLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER
 
@@ -44,7 +44,7 @@ object OpenLoginRoutes {
      *
      * Request body: [SendConfirmationToPhoneRequest].
      *
-     * Response body: [SendConfirmationResponse].
+     * Response body: [SendConfirmationPayload].
      */
     const val SEND_LOGIN_CONFIRMATION_TO_PHONE = BaseLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE
 }

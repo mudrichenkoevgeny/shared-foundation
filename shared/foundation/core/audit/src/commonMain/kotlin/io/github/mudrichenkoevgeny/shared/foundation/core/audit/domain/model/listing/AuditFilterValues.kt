@@ -1,0 +1,51 @@
+package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+
+/**
+ * Stable **keys** for filtering audit event listings.
+ *
+ * Use these constants when building HTTP query strings, parsing list requests, or mapping filters in services and
+ * persistence so clients, servers, and documentation stay aligned.
+ */
+object AuditFilterValues {
+
+    /**
+     * Optional filters when listing audit events.
+     *
+     * If a parameter is **absent**, there is **no** filtering on that axis (within the caller’s access scope), before
+     * pagination and sort.
+     *
+     * **Multiple values** for the same filter: repeat the same query key (standard query string, e.g. `k=a&k=b`),
+     * joined with `&` alongside other parameters; repeats of the same key mean **OR**. **Different** keys combine as **AND**.
+     *
+     * Allowed **values** for filters are resource-specific (for example [AuditStatus] serial names for [STATUS]).
+     */
+    object AuditEventFilterValues {
+        /** Filter by actor id ([AuditEventPayload.actorId]); UUID string, hex with dashes. */
+        const val ACTOR_ID = AuditEventFields.ACTOR_ID
+
+        /** Filter by action name ([AuditEventPayload.action]); exact match per repeated value unless the server documents otherwise. */
+        const val ACTION = AuditEventFields.ACTION
+
+        /** Filter by resource type ([AuditEventPayload.resource]); exact match per repeated value unless the server documents otherwise. */
+        const val RESOURCE = AuditEventFields.RESOURCE
+
+        /** Filter by resource instance id ([AuditEventPayload.resourceId]); exact match per repeated value unless the server documents otherwise. */
+        const val RESOURCE_ID = AuditEventFields.RESOURCE_ID
+
+        /** Filter by outcome; wire values are [AuditStatus] JSON names (`SUCCESS`, `FAILED`, `DENIED`). */
+        const val STATUS = AuditEventFields.STATUS
+
+        /**
+         * Optional text match against [AuditEventPayload.message] (e.g. error or diagnostic text).
+         *
+         * Typical server semantics: **case-insensitive substring** match; events with a `null` or blank message do not match.
+         * Exact-match or other behavior must be documented by the server if it differs.
+         */
+        const val MESSAGE = CommonApiFields.MESSAGE
+    }
+}

@@ -23,7 +23,7 @@ alwaysApply: true
 - **Error wire shape:** `error/model/ApiErrorResponse` (`id`, `code`, `message`, `args` map); **not** a sealed exception hierarchy — `code` values align with `CommonErrorCodes` and feature-specific `*ErrorCodes` in other modules.
 - **Error naming:** `error/naming/CommonErrorCodes`, `CommonErrorArgs` — string constants for JSON/logging parity.
 - **Network:** `network/contract` (`CommonApiFields`, `CommonHttpHeaders`, `WebSocketContract`, …); `network/model/websocket` (`SocketFrame`, payloads such as `WebSocketInitializePayload`).
-- **Domain:** e.g. `domain/model/UserClientType`.
+- **Domain:** e.g. `domain/model/UserClientType`; **listings:** `domain/model/listing` (`PagedResult`, `ListingParamNames` — **`page`/`PAGE` is one-based**, `1` = first page, `ListingSortValues`).
 - **Validation:** `validation/NetworkFieldAnnotations.kt` — JVM retention annotations for marking required/non-blank fields (interpretation lives in validators outside or alongside this lib).
 - **Depends only on** kotlinx.serialization (see `build.gradle.kts`); **does not** depend on `feature/*`.
 
@@ -36,10 +36,13 @@ alwaysApply: true
 ### `core/settings`
 - Global settings: routes, requests/responses, `GlobalSettingsApiFields`, settings WebSocket event types.
 
+### `core/audit`
+- **Domain:** `AuditEvent`, `AuditStatus`; **contract:** `AuditEventFields`; list **filter keys:** `domain/model/listing/AuditFilterValues`; **routes** under `network/route`. Depends on `core/common`.
+
 ### `feature/user`
 - **Error naming:** `UserErrorCodes`, `UserErrorArgs`.
 - **Domain:** `domain/model` — roles, account status, auth providers, etc.
-- **Network:** `network/route`, `request`, `response`, `contract` (paths, query params, user-specific API fields).
+- **Network:** `network/route`, `request`, `response`, `contract` (paths, user-specific API fields); list **filter keys** for users / identifiers / sessions: `domain/model/listing/UserFilterValues`.
 - **Depends on:** `api` `core/common`, `core/security`, `core/settings` (see `feature/user/build.gradle.kts`).
 
 ### `bom`

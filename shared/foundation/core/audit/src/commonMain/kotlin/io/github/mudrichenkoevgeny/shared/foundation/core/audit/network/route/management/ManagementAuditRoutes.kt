@@ -1,12 +1,14 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.AuditStatus
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.response.AuditEventResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.base.BaseAuditRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 
 /**
  * Route paths for audit in the management API.
@@ -15,27 +17,38 @@ object ManagementAuditRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * **Pagination** (names from [CommonApiQueryParams.PaginationQueryParams]):
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE] — zero-based page index.
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE_SIZE] — page size.
+     * **Pagination** (names from [ListingParamNames.Pagination]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
      *
-     * **Sort** (names from [CommonApiQueryParams.SortQueryParams]):
-     * - [CommonApiQueryParams.SortQueryParams.SORT_BY] — [CommonApiQueryParamValues.TimestampSortBy.CREATED_AT]
-     *   ([AuditEventResponse.createdAt]).
-     * - [CommonApiQueryParams.SortQueryParams.SORT_ORDER] — [CommonApiQueryParamValues.SortOrder.ASC] or
-     *   [CommonApiQueryParamValues.SortOrder.DESC].
+     * **Sort** (names from [ListingParamNames.Sort]):
+     * - [ListingParamNames.Sort.SORT_BY] — [CommonSortValues.TimestampSortBy.CREATED_AT]
+     *   ([AuditEventPayload.createdAt]).
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([AuditApiQueryParams.AuditEventQueryParams], optional). If omitted, no filtering on that axis (all
+     * **Filters** ([AuditFilterValues.AuditEventFilterValues], optional). If omitted, no filtering on that axis (all
      * events matching caller access, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [AuditApiQueryParams.AuditEventQueryParams.ACTOR_ID] — [AuditEventResponse.actorId] (UUID string).
-     * - [AuditApiQueryParams.AuditEventQueryParams.ACTION] — [AuditEventResponse.action].
-     * - [AuditApiQueryParams.AuditEventQueryParams.RESOURCE] — [AuditEventResponse.resource].
-     * - [AuditApiQueryParams.AuditEventQueryParams.RESOURCE_ID] — [AuditEventResponse.resourceId].
-     * - [AuditApiQueryParams.AuditEventQueryParams.STATUS] — [AuditStatus] serial name ([AuditEventResponse.status]).
-     * - [AuditApiQueryParams.AuditEventQueryParams.MESSAGE] — optional substring match on [AuditEventResponse.message].
+     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — [AuditEventPayload.actorId] (UUID string).
+     * - [AuditFilterValues.AuditEventFilterValues.ACTION] — [AuditEventPayload.action].
+     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE] — [AuditEventPayload.resource].
+     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID] — [AuditEventPayload.resourceId].
+     * - [AuditFilterValues.AuditEventFilterValues.STATUS] — [AuditStatus] serial name ([AuditEventPayload.status]).
+     * - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — optional substring match on [AuditEventPayload.message].
      *
-     * Response body: [PagedResponse] of [AuditEventResponse].
+     * Response body: [PagedResult] of [AuditEventPayload].
      */
     const val GET_AUDIT_EVENTS = BaseAuditRoutes.GET_AUDIT_EVENTS
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a single persisted audit event.
+     *
+     * Path parameter: [AuditApiPaths.EVENT_ID].
+     *
+     * Response body: [AuditEventPayload].
+     */
+    const val GET_AUDIT_EVENT = BaseAuditRoutes.GET_AUDIT_EVENT
 }

@@ -1,15 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.UserClientType
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.session.UserSessionMaskedResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.session.UserSessionUnmaskedResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionMaskedPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionUnmaskedPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseManagementSessionRoutes
 
 /**
@@ -19,70 +19,70 @@ object ManagementSessionRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * **Pagination & sort** (names from [CommonApiQueryParams]):
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE] — zero-based page index.
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE_SIZE] — page size.
-     * - [CommonApiQueryParams.SortQueryParams.SORT_BY] — exactly one of
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.CREATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.UPDATED_AT].
-     * - [CommonApiQueryParams.SortQueryParams.SORT_ORDER] — [CommonApiQueryParamValues.SortOrder.ASC] or
-     *   [CommonApiQueryParamValues.SortOrder.DESC].
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
+     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserApiQueryParams.UserSessionQueryParams]): [UserApiQueryParams.UserSessionQueryParams.USER_ID] required;
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID] required;
      * others optional. Same key repeated — **OR**; different keys — **AND**.
      *
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_ID]
-     * - [UserApiQueryParams.UserSessionQueryParams.IDENTIFIER_ID] — credential record id ([UserSessionMaskedResponse.identifierId]).
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionMaskedResponse.identifierAuthProvider]).
-     * - [UserApiQueryParams.UserSessionQueryParams.REVOKED] — `true` or `false`.
-     * - [UserApiQueryParams.UserSessionQueryParams.CLIENT_TYPE] — [UserClientType] serial name.
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_NAME],
-     *   [UserApiQueryParams.UserSessionQueryParams.APP_VERSION],
-     *   [UserApiQueryParams.UserSessionQueryParams.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.USER_ID]
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionMaskedPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionMaskedPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — [ClientType] serial name.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME],
+     *   [UserFilterValues.UserSessionFilterValues.APP_VERSION],
+     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
      *
-     * Response body: [PagedResponse] of [UserSessionMaskedResponse].
+     * Response body: [PagedResult] of [UserSessionMaskedPayload].
      */
     const val GET_USER_SESSIONS_MASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_MASKED
 
     /**
      * **HTTP method:** `GET`
      *
-     * **Pagination & sort** (names from [CommonApiQueryParams]):
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE] — zero-based page index.
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE_SIZE] — page size.
-     * - [CommonApiQueryParams.SortQueryParams.SORT_BY] — exactly one of
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.CREATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.UPDATED_AT].
-     * - [CommonApiQueryParams.SortQueryParams.SORT_ORDER] — [CommonApiQueryParamValues.SortOrder.ASC] or
-     *   [CommonApiQueryParamValues.SortOrder.DESC].
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
+     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserApiQueryParams.UserSessionQueryParams]): [UserApiQueryParams.UserSessionQueryParams.USER_ID] required;
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID] required;
      * others optional. Same key repeated — **OR**; different keys — **AND**.
      *
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_ID]
-     * - [UserApiQueryParams.UserSessionQueryParams.IDENTIFIER] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.IDENTIFIER_ID] — credential record id ([UserSessionUnmaskedResponse.identifierId]).
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionUnmaskedResponse.identifierAuthProvider]).
-     * - [UserApiQueryParams.UserSessionQueryParams.REVOKED] — `true` or `false`.
-     * - [UserApiQueryParams.UserSessionQueryParams.CLIENT_TYPE] — [UserClientType] serial name.
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.IP_ADDRESS] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
-     * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_NAME],
-     *   [UserApiQueryParams.UserSessionQueryParams.APP_VERSION],
-     *   [UserApiQueryParams.UserSessionQueryParams.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.USER_ID]
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionUnmaskedPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionUnmaskedPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — [ClientType] serial name.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME],
+     *   [UserFilterValues.UserSessionFilterValues.APP_VERSION],
+     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
      *
-     * Response body: [PagedResponse] of [UserSessionUnmaskedResponse].
+     * Response body: [PagedResult] of [UserSessionUnmaskedPayload].
      */
     const val GET_USER_SESSIONS_UNMASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_UNMASKED
 
@@ -91,7 +91,7 @@ object ManagementSessionRoutes {
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
      *
-     * Response body: single JSON object [UserSessionMaskedResponse].
+     * Response body: single JSON object [UserSessionMaskedPayload].
      */
     const val GET_USER_SESSION_MASKED_BY_ID = BaseManagementSessionRoutes.GET_USER_SESSION_MASKED_BY_ID
 
@@ -100,7 +100,7 @@ object ManagementSessionRoutes {
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
      *
-     * Response body: single JSON object [UserSessionUnmaskedResponse].
+     * Response body: single JSON object [UserSessionUnmaskedPayload].
      */
     const val GET_USER_SESSION_UNMASKED_BY_ID = BaseManagementSessionRoutes.GET_USER_SESSION_UNMASKED_BY_ID
 

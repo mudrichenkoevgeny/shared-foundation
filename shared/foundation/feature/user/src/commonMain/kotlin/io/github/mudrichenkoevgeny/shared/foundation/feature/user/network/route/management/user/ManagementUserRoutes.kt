@@ -1,15 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParamValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.UserDetailsResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
 /**
@@ -19,26 +19,26 @@ object ManagementUserRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * **Pagination & sort** (names from [CommonApiQueryParams]):
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE] — zero-based page index.
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE_SIZE] — page size.
-     * - [CommonApiQueryParams.SortQueryParams.SORT_BY] — exactly one of
-     *   [UserApiQueryParamValues.UserSortBy.LAST_LOGIN_AT],
-     *   [UserApiQueryParamValues.UserSortBy.LAST_ACTIVE_AT],
-     *   [UserApiQueryParamValues.UserSortBy.CREATED_AT],
-     *   [UserApiQueryParamValues.UserSortBy.UPDATED_AT],
-     *   [UserApiQueryParamValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT].
-     * - [CommonApiQueryParams.SortQueryParams.SORT_ORDER] — [CommonApiQueryParamValues.SortOrder.ASC] or
-     *   [CommonApiQueryParamValues.SortOrder.DESC].
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSortBy.LAST_LOGIN_AT],
+     *   [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
+     *   [UserSortValues.UserSortBy.CREATED_AT],
+     *   [UserSortValues.UserSortBy.UPDATED_AT],
+     *   [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserApiQueryParams.UserQueryParams], optional). If omitted, no filtering (all users matching caller
+     * **Filters** ([UserFilterValues.UserFilterValues], optional). If omitted, no filtering (all users matching caller
      * access, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [UserApiQueryParams.UserQueryParams.ROLE] — [UserRole] serial name ([UserDetailsResponse.role]).
-     * - [UserApiQueryParams.UserQueryParams.ACCOUNT_STATUS] — [UserAccountStatus] serial name ([UserDetailsResponse.accountStatus]).
-     * - [UserApiQueryParams.UserQueryParams.ACCOUNT_STATUS_BEFORE_DELETION] — [UserAccountStatus] serial name ([UserDetailsResponse.accountStatusBeforeDeletion]).
+     * - [UserFilterValues.UserFilterValues.ROLE] — [UserRole] serial name ([UserDetailsPayload.role]).
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — [UserAccountStatus] serial name ([UserDetailsPayload.accountStatus]).
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_BEFORE_DELETION] — [UserAccountStatus] serial name ([UserDetailsPayload.accountStatusBeforeDeletion]).
      *
-     * Response body: [PagedResponse] of [UserDetailsResponse].
+     * Response body: [PagedResult] of [UserDetailsPayload].
      */
     const val GET_USERS = BaseManagementUserRoutes.GET_USERS
 
@@ -49,7 +49,7 @@ object ManagementUserRoutes {
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
-     * Response body: [UserDetailsResponse].
+     * Response body: [UserDetailsPayload].
      */
     const val GET_USER = BaseManagementUserRoutes.GET_USER
 
@@ -67,7 +67,7 @@ object ManagementUserRoutes {
      *
      * Request body: [CreateByEmailRequest].
      *
-     * Response body: [UserDetailsResponse].
+     * Response body: [UserDetailsPayload].
      */
     const val CREATE_USER = BaseManagementUserRoutes.CREATE_USER
 }

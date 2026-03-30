@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.confirmation.SendConfirmationResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.confirmation.SendConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.resetpassword.BaseResetPasswordRoutes
 
 /**
@@ -21,7 +21,7 @@ object OpenResetPasswordRoutes {
      *
      * Request body: [SendResetPasswordConfirmationRequest].
      *
-     * Response body: [SendConfirmationResponse].
+     * Response body: [SendConfirmationPayload].
      */
     const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = BaseResetPasswordRoutes.SEND_RESET_PASSWORD_CONFIRMATION
 }

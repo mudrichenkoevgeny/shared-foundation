@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.UserClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 /**
  * DTO for the initial WebSocket handshake message to provide client-specific metadata.
  *
- * @property clientType The type of client application associated with this session (e.g. [UserClientType]).
+ * @property clientType The type of client application associated with this session (e.g. [ClientType]).
  * @property language The preferred language of the user, which may override the initial HTTP header value.
  * @property deviceId A unique identifier for the specific device or browser instance.
  * @property deviceName A human-readable name for the device (e.g., "Chrome on Windows", "iPhone 15").

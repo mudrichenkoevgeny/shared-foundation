@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.user.UserDetailsResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseUserRoutes
 
 /**
@@ -11,7 +11,7 @@ object OpenUserRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Response body: [UserDetailsResponse].
+     * Response body: [UserDetailsPayload].
      */
     const val GET_USER = BaseUserRoutes.GET_USER
 

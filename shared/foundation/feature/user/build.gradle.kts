@@ -36,5 +36,9 @@ configure<KotlinMultiplatformExtension> {
 
             api(libs.kotlinx.serialization.json)
         }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+        }
     }
 }

@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 
 /**
  * Default permission templates assigned by [UserRole].

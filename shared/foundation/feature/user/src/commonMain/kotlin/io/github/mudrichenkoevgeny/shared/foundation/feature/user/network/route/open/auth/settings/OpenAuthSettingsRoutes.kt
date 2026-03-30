@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.settings
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.auth.settings.AuthSettingsResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.PublicAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.settings.BaseAuthSettingsRoutes.BASE_AUTH_SETTINGS_ROUTE
 
 /**
@@ -10,7 +10,7 @@ object OpenAuthSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Response body: [AuthSettingsResponse].
+     * Response body: [PublicAuthSettingsPayload].
      */
     const val GET_AUTH_SETTINGS = BASE_AUTH_SETTINGS_ROUTE
 }

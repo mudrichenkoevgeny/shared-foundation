@@ -1,13 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.listing.PagedResponse
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParamValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.response.session.UserSessionUnmaskedResponse
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionUnmaskedPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseSessionRoutes
 
 /**
@@ -26,26 +26,26 @@ object OpenSessionRoutes {
      *
      * Returns active sessions for the **current** authenticated user (self-service).
      *
-     * **Pagination & sort** (names from [CommonApiQueryParams]):
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE] — zero-based page index.
-     * - [CommonApiQueryParams.PaginationQueryParams.PAGE_SIZE] — page size.
-     * - [CommonApiQueryParams.SortQueryParams.SORT_BY] — exactly one of
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.CREATED_AT],
-     *   [UserApiQueryParamValues.UserSessionSortBy.UPDATED_AT].
-     * - [CommonApiQueryParams.SortQueryParams.SORT_ORDER] — [CommonApiQueryParamValues.SortOrder.ASC] or
-     *   [CommonApiQueryParamValues.SortOrder.DESC].
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
+     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserApiQueryParams.UserSessionQueryParams], optional). If omitted, no filtering (all sessions for
+     * **Filters** ([UserFilterValues.UserSessionFilterValues], optional). If omitted, no filtering (all sessions for
      * the current user, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [UserApiQueryParams.UserSessionQueryParams.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionUnmaskedResponse.identifierAuthProvider]).
-     * - [UserApiQueryParams.UserSessionQueryParams.REVOKED] — `true` or `false`.
-     * - [UserApiQueryParams.UserSessionQueryParams.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionUnmaskedPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
      *
-     * Response body: [PagedResponse] of [UserSessionUnmaskedResponse].
+     * Response body: [PagedResult] of [UserSessionUnmaskedPayload].
      */
     const val GET_SESSIONS = BaseSessionRoutes.GET_SESSIONS
 
@@ -54,7 +54,7 @@ object OpenSessionRoutes {
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
-     * Response body: single JSON object [UserSessionUnmaskedResponse].
+     * Response body: single JSON object [UserSessionUnmaskedPayload].
      */
     const val GET_SESSION_BY_ID = BaseSessionRoutes.GET_SESSION_BY_ID
 

@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.management.security.settings
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.request.UpdateSecuritySettingsRequest
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.base.security.settings.BaseSecuritySettingsRoutes
 
@@ -11,7 +11,7 @@ object ManagementSecuritySettingsRoutes {
     /**
      * **HTTP method:** `PUT`
      *
-     * Request body: [UpdateSecuritySettingsRequest].
+     * Request body: [SecuritySettingsPayload].
      */
     const val UPDATE_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE}"
 }

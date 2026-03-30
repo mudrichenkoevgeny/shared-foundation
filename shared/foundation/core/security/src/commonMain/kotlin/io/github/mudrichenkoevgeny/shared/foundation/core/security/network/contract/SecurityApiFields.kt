@@ -4,6 +4,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.cont
  * Security settings specific naming conventions for API request parameters and response fields.
  */
 object SecurityApiFields {
+
+    /**
+     * JSON field name for how long, in whole minutes, a recent step-up or re-authentication remains valid
+     * for sensitive operations.
+     */
+    const val RECENT_AUTHENTICATION_VALIDITY_IN_MINUTES = "recent_authentication_validity_in_minutes"
+
     /** JSON field name for the nested password policy object. */
     const val PASSWORD_POLICY = "password_policy"
 

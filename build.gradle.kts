@@ -1,6 +1,9 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
@@ -12,7 +15,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.21"
+    version = "0.0.22"
 }
 
 subprojects {
@@ -24,6 +27,28 @@ subprojects {
     }
 
     apply(plugin = "com.vanniktech.maven.publish")
+
+    val uuidExperimentalOptIn = "-opt-in=kotlin.uuid.ExperimentalUuidApi"
+    val uuidExperimentalOptInFqcn = uuidExperimentalOptIn.substringAfter("=")
+
+    plugins.withId("org.jetbrains.kotlin.multiplatform") {
+        extensions.configure<KotlinMultiplatformExtension>("kotlin") {
+            compilerOptions {
+                optIn.add(uuidExperimentalOptInFqcn)
+            }
+        }
+        tasks.withType<KotlinCompilationTask<*>>().configureEach {
+            compilerOptions {
+                freeCompilerArgs.add(uuidExperimentalOptIn)
+            }
+        }
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.add(uuidExperimentalOptIn)
+        }
+    }
 
     extensions.configure<MavenPublishBaseExtension> {
         val projectPathName = project.path

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 
 /**
  * Baseline permission codes for user and staff management.

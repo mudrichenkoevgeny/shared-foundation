@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.UserClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
 
 /**
  * Common HTTP header names used for network communication and request tracing.
@@ -9,7 +9,7 @@ object CommonHttpHeaders {
     /** Request or response header carrying a distributed trace identifier. */
     const val TRACE_HEADER_NAME = "X-Trace-Id"
 
-    /** Header for the client type (aligned with [UserClientType] wire values). */
+    /** Header for the client type (aligned with [ClientType] wire values). */
     const val CLIENT_TYPE_HEADER_NAME = "X-Client-Type"
 
     /** Header for a stable device identifier. */

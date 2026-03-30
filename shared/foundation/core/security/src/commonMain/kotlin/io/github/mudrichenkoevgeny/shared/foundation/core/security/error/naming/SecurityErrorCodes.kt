@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.model.PasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicy
 
 /**
  * Security-specific error codes for API responses and backend logging, used to categorize failures.

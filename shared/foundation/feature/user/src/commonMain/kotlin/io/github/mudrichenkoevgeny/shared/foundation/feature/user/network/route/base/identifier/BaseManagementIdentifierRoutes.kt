@@ -2,13 +2,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
 /**
  * Shared base path segments for user identifiers in the management API.
  *
- * Lists use query [UserApiQueryParams.UserIdentifierQueryParams.USER_ID]. Delete-by-id uses [UserApiPaths.USER_ID] in the
+ * Lists use query [UserFilterValues.UserIdentifierFilterValues.USER_ID]. Delete-by-id uses [UserApiPaths.USER_ID] in the
  * path. Masked vs unmasked lists use different DTOs; authorization aligns with [IdentifierPermissionCodes].
  */
 object BaseManagementIdentifierRoutes {
