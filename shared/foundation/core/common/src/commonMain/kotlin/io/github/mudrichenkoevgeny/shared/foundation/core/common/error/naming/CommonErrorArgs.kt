@@ -28,4 +28,7 @@ object CommonErrorArgs {
 
     /** Key for an identifier related to the error (resource id, token id, etc.). */
     const val IDENTIFIER = "identifier"
+
+    /** Key for the logical resource type related to the error. */
+    const val RESOURCE = "resource"
 }

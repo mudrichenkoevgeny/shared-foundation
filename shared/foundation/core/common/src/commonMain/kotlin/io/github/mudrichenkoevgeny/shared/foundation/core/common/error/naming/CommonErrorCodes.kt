@@ -10,6 +10,9 @@ object CommonErrorCodes {
     /** Unexpected server-side failure. */
     const val INTERNAL = "INTERNAL"
 
+    /** Requested object was not found. */
+    const val NOT_FOUND = "NOT_FOUND"
+
     /** Service temporarily unavailable (e.g. overload or dependency down). */
     const val SERVICE_UNAVAILABLE = "SERVICE_UNAVAILABLE"
 
