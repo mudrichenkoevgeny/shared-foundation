@@ -23,20 +23,20 @@ object BaseSessionRoutes {
 
     /**
      * Path template for a single session by id under [BASE_SESSION_ROUTE]; includes [UserApiPaths.SESSION_ID].
-     * Use with `GET` ([GET_SESSION_BY_ID]) or `DELETE` ([DELETE_SESSION]) as appropriate.
+     * Use with `GET` ([GET_SESSION]) or `DELETE` ([DELETE_SESSION]) as appropriate.
      */
-    const val SESSION_BY_ID = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val SESSION = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * Path template for retrieving a specific session owned by the current user; includes [UserApiPaths.SESSION_ID].
      * Same path as [DELETE_SESSION]; HTTP method distinguishes operations.
      */
-    const val GET_SESSION_BY_ID = SESSION_BY_ID
+    const val GET_SESSION = SESSION
 
     /**
      * Path template for terminating a specific session; includes the [UserApiPaths.SESSION_ID] path parameter.
      */
-    const val DELETE_SESSION = SESSION_BY_ID
+    const val DELETE_SESSION = SESSION
 
     /**
      * Path for terminating all sessions except the current one.

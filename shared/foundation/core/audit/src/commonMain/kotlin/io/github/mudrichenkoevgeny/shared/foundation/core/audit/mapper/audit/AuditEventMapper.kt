@@ -1,11 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.mapper.audit
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.CompositeAuditActionTypeParser
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.CompositeAuditResourceTypeParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.toAuditEventIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
 import kotlin.time.Instant
-import kotlin.uuid.Uuid
 
 /**
  * Extension functions mapping audit event models between domain and network representations.
@@ -14,22 +18,25 @@ import kotlin.uuid.Uuid
 /**
  * Builds a domain [AuditEvent] from [AuditEventPayload].
  *
- * @return domain model with strongly typed [AuditEvent.id] and parsed [Uuid] for [AuditEvent.actorId].
+ * @param compositeActionTypeParser Resolves payload `action` strings to [AuditActionType].
+ * @param compositeResourceTypeParser Resolves payload `resource` strings to [AuditResourceType].
+ * @return domain model with strongly typed [AuditEvent.id], [AuditEvent.action], and [AuditEvent.resource].
  *
  * Parses [AuditEventPayload.status] wire value into [AuditStatus]. Throws if the wire value is invalid.
  * Converts [AuditEventPayload.createdAt] epoch millis into [AuditEvent.createdAt] ([Instant]).
  */
-fun AuditEventPayload.toAuditEvent(): AuditEvent = AuditEvent(
+fun AuditEventPayload.toAuditEvent(
+    compositeActionTypeParser: CompositeAuditActionTypeParser,
+    compositeResourceTypeParser: CompositeAuditResourceTypeParser
+): AuditEvent = AuditEvent(
     id = id.toAuditEventIdOrThrow(),
-    actorId = actorId?.let { Uuid.parseOrNull(it) },
-    action = action,
-    resource = resource,
+    actorId = actorId,
+    actorType = AuditActorType.fromValueOrThrow(actorType),
+    actorUserRole = actorUserRole,
+    action = compositeActionTypeParser.fromValueOrThrow(action),
+    resource = compositeResourceTypeParser.fromValueOrThrow(resource),
     resourceId = resourceId,
-    status = run {
-        val wireStatus = status
-        AuditStatus.fromValueOrNull(wireStatus)
-            ?: error("Unknown audit status wire value: '$wireStatus'")
-    },
+    status = AuditStatus.fromValueOrThrow(status),
     metadata = metadata,
     message = message,
     createdAt = Instant.fromEpochMilliseconds(createdAt)
@@ -45,9 +52,11 @@ fun AuditEventPayload.toAuditEvent(): AuditEvent = AuditEvent(
  */
 fun AuditEvent.toPayload(): AuditEventPayload = AuditEventPayload(
     id = id.asHexDashString(),
-    actorId = actorId?.toHexDashString(),
-    action = action,
-    resource = resource,
+    actorId = actorId,
+    actorType = actorType.serialName,
+    actorUserRole = actorUserRole,
+    action = action.serialName,
+    resource = resource.serialName,
     resourceId = resourceId,
     status = status.serialName,
     metadata = metadata,

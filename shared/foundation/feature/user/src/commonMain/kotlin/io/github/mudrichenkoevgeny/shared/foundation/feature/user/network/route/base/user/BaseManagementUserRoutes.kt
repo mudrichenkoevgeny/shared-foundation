@@ -31,4 +31,9 @@ object BaseManagementUserRoutes {
      * Path template for updating a user's account status; includes the [UserApiPaths.USER_ID] path parameter.
      */
     const val UPDATE_USER_ACCOUNT_STATUS = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}/status"
+
+    /**
+     * Path template for deleting a user; includes the [UserApiPaths.USER_ID] path parameter.
+     */
+    const val DELETE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 }

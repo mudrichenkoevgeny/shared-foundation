@@ -13,9 +13,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseManagementIdentifierRoutes
 
 /**
- * Route paths for user identifiers in the management API (lists and deletion).
+ * Route paths for user identifiers in the management API (lists, single-identifier reads, and deletion).
  *
- * Read: [IdentifierPermissionCodes] for masked vs unmasked lists.
+ * Read: [IdentifierPermissionCodes] for masked vs unmasked lists and single-record reads.
  * Delete: [IdentifierPermissionCodes.IDENTIFIER_DELETE_FOR_USER] or
  * [IdentifierPermissionCodes.IDENTIFIER_DELETE_FOR_STAFF] by target account role.
  */
@@ -63,6 +63,24 @@ object ManagementIdentifierRoutes {
      * Response body: [PagedResult] of [UserIdentifierUnmaskedPayload].
      */
     const val GET_IDENTIFIERS_UNMASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIERS_UNMASKED
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Response body: single JSON object [UserIdentifierMaskedPayload].
+     */
+    const val GET_IDENTIFIER_MASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIER_MASKED
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Response body: single JSON object [UserIdentifierUnmaskedPayload].
+     */
+    const val GET_IDENTIFIER_UNMASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIER_UNMASKED
 
     /**
      * **HTTP method:** `DELETE`

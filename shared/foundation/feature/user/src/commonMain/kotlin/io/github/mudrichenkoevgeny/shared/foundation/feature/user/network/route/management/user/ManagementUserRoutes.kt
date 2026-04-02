@@ -63,6 +63,15 @@ object ManagementUserRoutes {
     const val UPDATE_USER_ACCOUNT_STATUS = BaseManagementUserRoutes.UPDATE_USER_ACCOUNT_STATUS
 
     /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes the user account for the given [UserApiPaths.USER_ID].
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     */
+    const val DELETE_USER = BaseManagementUserRoutes.DELETE_USER
+
+    /**
      * **HTTP method:** `POST`
      *
      * Request body: [CreateByEmailRequest].

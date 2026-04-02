@@ -56,7 +56,7 @@ object OpenSessionRoutes {
      *
      * Response body: single JSON object [UserSessionUnmaskedPayload].
      */
-    const val GET_SESSION_BY_ID = BaseSessionRoutes.GET_SESSION_BY_ID
+    const val GET_SESSION = BaseSessionRoutes.GET_SESSION
 
     /**
      * **HTTP method:** `DELETE`

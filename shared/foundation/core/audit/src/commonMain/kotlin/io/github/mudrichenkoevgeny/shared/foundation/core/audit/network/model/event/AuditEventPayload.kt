@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
@@ -15,6 +16,8 @@ import kotlinx.serialization.json.JsonElement
  *
  * @property id Unique event id (UUID string, hex with dashes).
  * @property actorId Optional id of the user or system that performed the action.
+ * @property actorType Actor type; values follow [AuditActorType].
+ * @property actorUserRole Optional role snapshot for user actor (`actorType = user`).
  * @property action Action name (e.g. `login`, `create_order`).
  * @property resource Resource type (e.g. `order`, `user`).
  * @property resourceId Optional id of the specific resource instance.
@@ -30,6 +33,12 @@ data class AuditEventPayload(
 
     @SerialName(AuditEventFields.ACTOR_ID)
     val actorId: String? = null,
+
+    @SerialName(AuditEventFields.ACTOR_TYPE)
+    val actorType: String,
+
+    @SerialName(AuditEventFields.ACTOR_USER_ROLE)
+    val actorUserRole: String? = null,
 
     @SerialName(AuditEventFields.ACTION)
     val action: String,

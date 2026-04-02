@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.li
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 
@@ -27,6 +28,12 @@ object AuditFilterValues {
     object AuditEventFilterValues {
         /** Filter by actor id ([AuditEventPayload.actorId]); UUID string, hex with dashes. */
         const val ACTOR_ID = AuditEventFields.ACTOR_ID
+
+        /** Filter by actor type ([AuditEventPayload.actorType]); wire values are [AuditActorType] serial names. */
+        const val ACTOR_TYPE = AuditEventFields.ACTOR_TYPE
+
+        /** Filter by user actor role snapshot ([AuditEventPayload.actorUserRole]); exact match per repeated value unless the server documents otherwise. */
+        const val ACTOR_USER_ROLE = AuditEventFields.ACTOR_USER_ROLE
 
         /** Filter by action name ([AuditEventPayload.action]); exact match per repeated value unless the server documents otherwise. */
         const val ACTION = AuditEventFields.ACTION

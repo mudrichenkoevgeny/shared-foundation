@@ -93,7 +93,7 @@ object ManagementSessionRoutes {
      *
      * Response body: single JSON object [UserSessionMaskedPayload].
      */
-    const val GET_USER_SESSION_MASKED_BY_ID = BaseManagementSessionRoutes.GET_USER_SESSION_MASKED_BY_ID
+    const val GET_USER_SESSION_MASKED = BaseManagementSessionRoutes.GET_USER_SESSION_MASKED
 
     /**
      * **HTTP method:** `GET`
@@ -102,7 +102,7 @@ object ManagementSessionRoutes {
      *
      * Response body: single JSON object [UserSessionUnmaskedPayload].
      */
-    const val GET_USER_SESSION_UNMASKED_BY_ID = BaseManagementSessionRoutes.GET_USER_SESSION_UNMASKED_BY_ID
+    const val GET_USER_SESSION_UNMASKED = BaseManagementSessionRoutes.GET_USER_SESSION_UNMASKED
 
     /**
      * **HTTP method:** `DELETE`

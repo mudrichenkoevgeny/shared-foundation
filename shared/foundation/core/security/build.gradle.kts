@@ -31,6 +31,7 @@ configure<KotlinMultiplatformExtension> {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":shared:foundation:core:common"))
+            implementation(project(":shared:foundation:core:audit"))
 
             api(libs.kotlinx.serialization.json)
         }

@@ -39,14 +39,14 @@ object BaseManagementSessionRoutes {
      * Path template for one session with **masked** IP; path parameters [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
      * Caller must hold a masked-list permission (see [SessionPermissionCodes]).
      */
-    const val GET_USER_SESSION_MASKED_BY_ID =
+    const val GET_USER_SESSION_MASKED =
         "$BASE_MANAGEMENT_USER_SESSIONS_ROUTE/masked/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * Path template for one session with **unmasked** IP; path parameters [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
      * Caller must hold an unmasked-list permission (see [SessionPermissionCodes]).
      */
-    const val GET_USER_SESSION_UNMASKED_BY_ID =
+    const val GET_USER_SESSION_UNMASKED =
         "$BASE_MANAGEMENT_USER_SESSIONS_ROUTE/unmasked/{${UserApiPaths.SESSION_ID}}"
 
     /**
