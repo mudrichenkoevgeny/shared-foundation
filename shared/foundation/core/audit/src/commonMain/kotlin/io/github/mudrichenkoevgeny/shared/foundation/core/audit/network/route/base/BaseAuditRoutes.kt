@@ -19,16 +19,28 @@ object BaseAuditRoutes {
     const val BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE = "$BASE_MANAGEMENT_AUDIT_ROUTE/events"
 
     /**
-     * Path for listing audit events (pagination, sort, and filters via query parameters).
+     * Path for listing audit events with **masked** sensitive fields (caller must hold a masked-read permission).
      *
-     * The callable HTTP contract for this path is documented on [ManagementAuditRoutes.GET_AUDIT_EVENTS].
+     * The callable HTTP contract for this path is documented on [ManagementAuditRoutes.GET_AUDIT_EVENTS_MASKED].
      */
-    const val GET_AUDIT_EVENTS = BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE
+    const val GET_AUDIT_EVENTS_MASKED = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/masked"
 
     /**
-     * Path template for retrieving a single audit event.
+     * Path for listing audit events with **unmasked** sensitive fields (caller must hold an unmasked-read permission).
      *
-     * Includes the [AuditApiPaths.EVENT_ID] path parameter.
+     * The callable HTTP contract for this path is documented on [ManagementAuditRoutes.GET_AUDIT_EVENTS_UNMASKED].
      */
-    const val GET_AUDIT_EVENT = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/{${AuditApiPaths.EVENT_ID}}"
+    const val GET_AUDIT_EVENTS_UNMASKED = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/unmasked"
+
+    /**
+     * Path template for one audit event with **masked** sensitive fields ([AuditApiPaths.EVENT_ID]).
+     */
+    const val GET_AUDIT_EVENT_MASKED =
+        "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/masked/{${AuditApiPaths.EVENT_ID}}"
+
+    /**
+     * Path template for one audit event with **unmasked** sensitive fields ([AuditApiPaths.EVENT_ID]).
+     */
+    const val GET_AUDIT_EVENT_UNMASKED =
+        "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/unmasked/{${AuditApiPaths.EVENT_ID}}"
 }

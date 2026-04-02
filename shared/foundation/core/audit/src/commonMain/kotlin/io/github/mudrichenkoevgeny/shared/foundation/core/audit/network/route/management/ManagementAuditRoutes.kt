@@ -17,6 +17,8 @@ object ManagementAuditRoutes {
     /**
      * **HTTP method:** `GET`
      *
+     * Returns a paginated list of audit events with **masked** sensitive fields ([AuditEventPayload]) per server policy.
+     *
      * **Pagination** (names from [ListingParamNames.Pagination]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
@@ -39,16 +41,37 @@ object ManagementAuditRoutes {
      *
      * Response body: [PagedResult] of [AuditEventPayload].
      */
-    const val GET_AUDIT_EVENTS = BaseAuditRoutes.GET_AUDIT_EVENTS
+    const val GET_AUDIT_EVENTS_MASKED = BaseAuditRoutes.GET_AUDIT_EVENTS_MASKED
 
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a single persisted audit event.
+     * Same query contract as [GET_AUDIT_EVENTS_MASKED], but each item is the **unmasked** [AuditEventPayload] shape
+     * (caller must hold an unmasked-list permission).
+     *
+     * Response body: [PagedResult] of [AuditEventPayload].
+     */
+    const val GET_AUDIT_EVENTS_UNMASKED = BaseAuditRoutes.GET_AUDIT_EVENTS_UNMASKED
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a single persisted audit event with **masked** sensitive fields.
      *
      * Path parameter: [AuditApiPaths.EVENT_ID].
      *
      * Response body: [AuditEventPayload].
      */
-    const val GET_AUDIT_EVENT = BaseAuditRoutes.GET_AUDIT_EVENT
+    const val GET_AUDIT_EVENT_MASKED = BaseAuditRoutes.GET_AUDIT_EVENT_MASKED
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a single persisted audit event with **unmasked** sensitive fields.
+     *
+     * Path parameter: [AuditApiPaths.EVENT_ID].
+     *
+     * Response body: [AuditEventPayload].
+     */
+    const val GET_AUDIT_EVENT_UNMASKED = BaseAuditRoutes.GET_AUDIT_EVENT_UNMASKED
 }
