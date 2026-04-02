@@ -1,6 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Shared **wire values** for list sorting (for example `sort_by` and `sort_order` query parameters or internal
@@ -10,22 +12,38 @@ object CommonSortValues {
     /**
      * Supported `sort_by` values for timestamp-based fields.
      */
-    object TimestampSortBy {
+    @Serializable
+    enum class TimestampSortBy {
         /** Sort by [CommonApiFields.CREATED_AT]. */
-        const val CREATED_AT = CommonApiFields.CREATED_AT
+        @SerialName(CommonApiFields.CREATED_AT)
+        CREATED_AT,
 
         /** Sort by [CommonApiFields.UPDATED_AT]. */
-        const val UPDATED_AT = CommonApiFields.UPDATED_AT
-    }
+        @SerialName(CommonApiFields.UPDATED_AT)
+        UPDATED_AT;
 
-    /**
-     * Supported ordering direction values for list endpoints (same strings as [CommonApiFields.SortOrder]).
-     */
-    object SortOrder {
-        /** Ascending order ([CommonApiFields.SortOrder.ASC]). */
-        const val ASC = CommonApiFields.SortOrder.ASC
+        /**
+         * Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
+         */
+        val serialName: String
+            get() = when (this) {
+                CREATED_AT -> CommonApiFields.CREATED_AT
+                UPDATED_AT -> CommonApiFields.UPDATED_AT
+            }
 
-        /** Descending order ([CommonApiFields.SortOrder.DESC]). */
-        const val DESC = CommonApiFields.SortOrder.DESC
+        companion object {
+            /**
+             * Returns [TimestampSortBy] for the given wire value or case-insensitive enum name.
+             */
+            fun fromValueOrNull(value: String): TimestampSortBy? =
+                runCatching { valueOf(value.uppercase()) }.getOrNull()
+
+            /**
+             * Returns [TimestampSortBy] for the given wire or enum-style string.
+             *
+             * @throws IllegalArgumentException if [value] does not match any [TimestampSortBy].
+             */
+            fun fromValueOrThrow(value: String): TimestampSortBy = valueOf(value.uppercase())
+        }
     }
 }

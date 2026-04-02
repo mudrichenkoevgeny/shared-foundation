@@ -50,7 +50,7 @@ fun AuditEventPayload.toAuditEvent(
  * Writes [AuditEvent.status] as a wire string matching [AuditStatus] serial names.
  * Converts [AuditEvent.createdAt] ([Instant]) into epoch millis for [AuditEventPayload.createdAt].
  */
-fun AuditEvent.toPayload(): AuditEventPayload = AuditEventPayload(
+fun AuditEvent.toAuditEventPayload(): AuditEventPayload = AuditEventPayload(
     id = id.asHexDashString(),
     actorId = actorId,
     actorType = actorType.serialName,

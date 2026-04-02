@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-
 /**
  * Stable **keys** for paginated and sorted listings shared by backend, clients, and JSON field names where applicable.
  *
@@ -10,7 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
  * any other contract surface that must stay aligned across processes.
  *
  * Allowed **values** for [Sort.SORT_BY] and [Sort.SORT_ORDER] are resource-specific; common baselines live in
- * [CommonSortValues] (for example [CommonSortValues.TimestampSortBy] and [CommonApiFields.SortOrder]).
+ * [CommonSortValues] (for example [CommonSortValues.TimestampSortBy]) and [SortOrder].
  */
 object ListingParamNames {
     /**
@@ -33,15 +31,12 @@ object ListingParamNames {
      */
     object Sort {
         /**
-         * Field to sort by (`sort_by`). Wire value is usually a stable field key such as
-         * [CommonSortValues.TimestampSortBy.CREATED_AT] or [CommonSortValues.TimestampSortBy.UPDATED_AT];
-         * feature modules may define additional allowed values (for example session fields).
+         * Field to sort by (`sort_by`).
          */
         const val SORT_BY = "sort_by"
 
         /**
-         * Sort direction (`sort_order`). Allowed wire values: [CommonApiFields.SortOrder.ASC] or
-         * [CommonApiFields.SortOrder.DESC].
+         * Sort direction (`sort_order`). Allowed wire values match [SortOrder]: [SortOrder.ASC] or [SortOrder.DESC].
          */
         const val SORT_ORDER = "sort_order"
     }
