@@ -1,30 +1,34 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonElement
+import kotlin.time.Instant
 
 /**
  * A persisted audit event: who did what, to which resource, with what outcome, and optional diagnostics.
  *
  * Shared by HTTP APIs ([Serializable] JSON body and list entries), services, repositories, and clients. Wire keys use
- * snake_case via [CommonApiFields] and [AuditEventFields].
+ * snake_case via [CommonApiFields] and [AuditEventFields]. Aligns with domain [AuditEvent].
  *
- * @property id Unique event id (UUID string, hex with dashes).
- * @property actorId Optional id of the user or system that performed the action.
- * @property actorType Actor type; values follow [AuditActorType].
- * @property actorUserRole Optional role snapshot for user actor (`actorType = user`).
- * @property action Action name (e.g. `login`, `create_order`).
- * @property resource Resource type (e.g. `order`, `user`).
- * @property resourceId Optional id of the specific resource instance.
- * @property status Outcome of the action as a wire string matching [AuditStatus] serial names.
- * @property metadata Optional structured data for filtering or analytics.
- * @property message Optional human-readable message (e.g. error description).
- * @property createdAt Event creation time, Unix epoch milliseconds.
+ * @property id [AuditEvent.id] on the wire: [AuditEventId] as hex-dash string.
+ * @property actorId [AuditEvent.actorId].
+ * @property actorType [AuditEvent.actorType]; wire values match [AuditActorType.serialName].
+ * @property actorUserRole [AuditEvent.actorUserRole].
+ * @property action [AuditEvent.action]; wire values match [AuditActionType.serialName].
+ * @property resource [AuditEvent.resource]; wire values match [AuditResourceType.serialName].
+ * @property resourceId [AuditEvent.resourceId].
+ * @property status [AuditEvent.status]; wire values match [AuditStatus.serialName].
+ * @property metadata [AuditEvent.metadata] as a JSON array of [AuditEventMetadataPayload] objects under [CommonApiFields.METADATA].
+ * @property message [AuditEvent.message].
+ * @property createdAt [AuditEvent.createdAt] as Unix epoch milliseconds ([Instant]).
  */
 @Serializable
 data class AuditEventPayload(
@@ -53,7 +57,7 @@ data class AuditEventPayload(
     val status: String,
 
     @SerialName(CommonApiFields.METADATA)
-    val metadata: Map<String, JsonElement> = emptyMap(),
+    val metadata: List<AuditEventMetadataPayload> = emptyList(),
 
     @SerialName(CommonApiFields.MESSAGE)
     val message: String? = null,

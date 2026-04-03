@@ -8,7 +8,7 @@ This module does **not** define Ktor routes, repositories, or persistence — on
 
 - **Domain:** [AuditStatus] — serializable outcome enum (`SUCCESS`, `FAILED`, `DENIED`) for events; [AuditEvent] — one persisted audit event (`@Serializable`, shared for APIs, services, and clients).
 - **Field names:** [AuditEventFields] — audit-specific snake_case keys; shared keys (e.g. `id`, `created_at`, `metadata`, `message`) use [CommonApiFields] on [AuditEvent].
-- **List filters:** [AuditFilterValues.AuditEventFilterValues] — query parameter names for listing audit events (`actor_id`, `action`, `resource`, `resource_id`, `status`, `message`, …).
+- **List filters:** [AuditFilterValues.AuditEventFilterValues] — query parameter names for listing audit events (`actor_id`, `actor_type`, `actor_user_role`, `action`, `resource`, `resource_id`, `status`, `message`, …).
 - **Routes:** [BaseAuditRoutes] — path segments under the management API; [ManagementAuditRoutes] documents the callable contract (e.g. paginated `GET` for events as [PagedResult] of [AuditEvent], with sort/filter semantics).
 
 ## Usage

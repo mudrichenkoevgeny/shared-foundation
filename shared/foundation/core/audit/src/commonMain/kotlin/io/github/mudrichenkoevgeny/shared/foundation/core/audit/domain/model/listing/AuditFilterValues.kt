@@ -23,7 +23,8 @@ object AuditFilterValues {
      * **Multiple values** for the same filter: repeat the same query key (standard query string, e.g. `k=a&k=b`),
      * joined with `&` alongside other parameters; repeats of the same key mean **OR**. **Different** keys combine as **AND**.
      *
-     * Allowed **values** for filters are resource-specific (for example [AuditStatus] serial names for [STATUS]).
+     * Allowed **values** for filters are resource-specific (for example [AuditActorType] serial names for [ACTOR_TYPE],
+     * [AuditStatus] serial names for [STATUS]).
      */
     object AuditEventFilterValues {
         /** Filter by actor id ([AuditEventPayload.actorId]); UUID string, hex with dashes. */
@@ -32,27 +33,22 @@ object AuditFilterValues {
         /** Filter by actor type ([AuditEventPayload.actorType]); wire values are [AuditActorType] serial names. */
         const val ACTOR_TYPE = AuditEventFields.ACTOR_TYPE
 
-        /** Filter by user actor role snapshot ([AuditEventPayload.actorUserRole]); exact match per repeated value unless the server documents otherwise. */
+        /** Filter by user actor role snapshot ([AuditEventPayload.actorUserRole]). */
         const val ACTOR_USER_ROLE = AuditEventFields.ACTOR_USER_ROLE
 
-        /** Filter by action name ([AuditEventPayload.action]); exact match per repeated value unless the server documents otherwise. */
+        /** Filter by action name ([AuditEventPayload.action]). */
         const val ACTION = AuditEventFields.ACTION
 
-        /** Filter by resource type ([AuditEventPayload.resource]); exact match per repeated value unless the server documents otherwise. */
+        /** Filter by resource type ([AuditEventPayload.resource]). */
         const val RESOURCE = AuditEventFields.RESOURCE
 
-        /** Filter by resource instance id ([AuditEventPayload.resourceId]); exact match per repeated value unless the server documents otherwise. */
+        /** Filter by resource instance id ([AuditEventPayload.resourceId]). */
         const val RESOURCE_ID = AuditEventFields.RESOURCE_ID
 
         /** Filter by outcome; wire values are [AuditStatus] JSON names (`SUCCESS`, `FAILED`, `DENIED`). */
         const val STATUS = AuditEventFields.STATUS
 
-        /**
-         * Optional text match against [AuditEventPayload.message] (e.g. error or diagnostic text).
-         *
-         * Typical server semantics: **case-insensitive substring** match; events with a `null` or blank message do not match.
-         * Exact-match or other behavior must be documented by the server if it differs.
-         */
+        /** Filter by [AuditEventPayload.message] (typically case-insensitive substring). */
         const val MESSAGE = CommonApiFields.MESSAGE
     }
 }

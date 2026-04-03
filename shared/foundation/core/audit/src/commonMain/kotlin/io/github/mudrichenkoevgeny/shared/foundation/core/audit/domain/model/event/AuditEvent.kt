@@ -34,7 +34,7 @@ data class AuditEvent(
     val resource: AuditResourceType,
     val resourceId: String? = null,
     val status: AuditStatus,
-    val metadata: Map<String, JsonElement> = emptyMap(),
+    val metadata: Set<AuditEventMetadata> = emptySet(),
     val message: String? = null,
     val createdAt: Instant
 )
