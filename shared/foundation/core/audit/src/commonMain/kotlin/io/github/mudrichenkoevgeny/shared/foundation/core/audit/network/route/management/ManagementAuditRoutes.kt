@@ -3,10 +3,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.m
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.base.BaseAuditRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 
@@ -24,7 +24,7 @@ object ManagementAuditRoutes {
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
      *
      * **Sort** (names from [ListingParamNames.Sort]):
-     * - [ListingParamNames.Sort.SORT_BY] — [CommonSortValues.TimestampSortBy.CREATED_AT]
+     * - [ListingParamNames.Sort.SORT_BY] — [AuditSortValues.AuditEventSortBy.CREATED_AT]
      *   ([AuditEventPayload.createdAt]).
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
      *   [CommonApiFields.SortOrder.DESC].
