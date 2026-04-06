@@ -8,7 +8,7 @@ Add the library to your projects using one of the following methods:
 _1. In your gradle/libs.versions.toml file:_
 ```
 [versions]
-shared-foundation = "0.0.28"
+shared-foundation = "0.0.29"
 
 [libraries]
 shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "shared-foundation" }
@@ -16,6 +16,9 @@ shared-foundation-core-common = { group = "io.github.mudrichenkoevgeny", name = 
 shared-foundation-core-security = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-security" }
 shared-foundation-core-settings = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-settings" }
 shared-foundation-core-audit = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-audit" }
+shared-foundation-feature-security-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-securityApi" }
+shared-foundation-feature-settings-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-settingsApi" }
+shared-foundation-feature-audit-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-auditApi" }
 shared-foundation-feature-user = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-user" }
 
 # Or if you don`t wan`t to use bom:
@@ -23,6 +26,9 @@ shared-foundation-core-common = { group = "io.github.mudrichenkoevgeny", name = 
 shared-foundation-core-security = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-security", version.ref = "shared-foundation" }
 shared-foundation-core-settings = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-settings", version.ref = "shared-foundation" }
 shared-foundation-core-audit = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-audit", version.ref = "shared-foundation" }
+shared-foundation-feature-security-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-securityApi", version.ref = "shared-foundation" }
+shared-foundation-feature-settings-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-settingsApi", version.ref = "shared-foundation" }
+shared-foundation-feature-audit-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-auditApi", version.ref = "shared-foundation" }
 shared-foundation-feature-user = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-user", version.ref = "shared-foundation" }
 ```
 In your build.gradle.kts:
@@ -33,6 +39,9 @@ dependencies {
     implementation(libs.shared.foundation.core.security)
     implementation(libs.shared.foundation.core.settings)
     implementation(libs.shared.foundation.core.audit)
+    implementation(libs.shared.foundation.feature.security.api)
+    implementation(libs.shared.foundation.feature.settings.api)
+    implementation(libs.shared.foundation.feature.audit.api)
     implementation(libs.shared.foundation.feature.user)
     
     // Or if you don`t wan`t to use bom:
@@ -40,24 +49,33 @@ dependencies {
     implementation(libs.shared.foundation.core.security)
     implementation(libs.shared.foundation.core.settings)
     implementation(libs.shared.foundation.core.audit)
+    implementation(libs.shared.foundation.feature.security.api)
+    implementation(libs.shared.foundation.feature.settings.api)
+    implementation(libs.shared.foundation.feature.audit.api)
     implementation(libs.shared.foundation.feature.user)
 }
 ```
 ### Option 2: Direct Dependency
 ```
-implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.28))
+implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.29))
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-securityApi")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-settingsApi")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-auditApi")
 implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
 
 // Or if you don`t wan`t to use bom:
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.28")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.28")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.28")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit:0.0.28")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.28")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-securityApi:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-settingsApi:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-auditApi:0.0.29")
+implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.29")
 ```
 
 ## Modules
@@ -65,9 +83,12 @@ implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.2
 Published artifacts (versions aligned via the BOM):
 
 - **shared-foundation-core-common** — shared errors, network contracts, WebSocket envelopes, common DTOs.
-- **shared-foundation-core-security** — password policy, security settings API contracts.
-- **shared-foundation-core-settings** — global settings API contracts.
-- **shared-foundation-core-audit** — audit log contracts (management routes, `AuditEvent`, filters, field names).
+- **shared-foundation-core-security** — password policy, security settings payloads/domain, validation, mappers, WebSocket type strings ([module README](shared/foundation/core/security/README.md)).
+- **shared-foundation-core-settings** — global settings payloads/domain, field names, WebSocket type strings ([module README](shared/foundation/core/settings/README.md)).
+- **shared-foundation-core-audit** — audit events, filters, sort keys, payloads, mappers ([module README](shared/foundation/core/audit/README.md)).
+- **shared-foundation-feature-securityApi** — security settings HTTP routes + permission code ([module README](shared/foundation/feature/securityApi/README.md)).
+- **shared-foundation-feature-settingsApi** — global settings HTTP routes + permission code ([module README](shared/foundation/feature/settingsApi/README.md)).
+- **shared-foundation-feature-auditApi** — management audit HTTP routes + permission codes ([module README](shared/foundation/feature/auditApi/README.md)).
 - **shared-foundation-feature-user** — user, auth, and session API contracts.
 - **shared-foundation-bom** — dependency constraints for the modules above.
 

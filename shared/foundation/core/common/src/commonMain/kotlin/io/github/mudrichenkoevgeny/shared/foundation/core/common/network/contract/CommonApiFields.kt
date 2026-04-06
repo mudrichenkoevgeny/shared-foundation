@@ -76,6 +76,9 @@ object CommonApiFields {
     /** JSON field name for the negotiated client API version. */
     const val API_VERSION = "api_version"
 
+    /** `true` if sensitive fields in the same body are masked/redacted; `false` if the server returned raw values allowed for the caller. */
+    const val IS_SENSITIVE_VALUES_MASKED = "is_sensitive_values_masked"
+
     /**
      * Wire values for list `sort_order` parameters (and any matching internal representation).
      */

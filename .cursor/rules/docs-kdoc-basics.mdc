@@ -14,6 +14,7 @@ alwaysApply: false
 - **Required:** use only simple names that resolve via imports: `[Foo]`, `[SomeType.member]`.
 - Every referenced type/member in KDoc links must be importable and imported in the same file.
 - If a target is in another module and cannot be imported, use **plain text** (no link).
+- **Forbidden — deferred prose:** do not substitute a full explanation with a pointer to another declaration’s KDoc (e.g. “same as [OtherRoutes.FOO]”, “see [OtherRoutes]”). For HTTP route constants, repeat the full contract text per `docs-kdoc-type-requirements.mdc` (HTTP route constants).
 
 ## Scope rules
 - In `object` / class-level KDoc, do **not** link to function parameters by name (out of scope). Use plain text and move parameter links to function-level KDoc.

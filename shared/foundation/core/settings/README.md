@@ -1,26 +1,28 @@
 # core/settings
 
-**Global (system-wide) settings** contracts for shared-foundation: HTTP routes for public and admin APIs, **request/response DTOs**, JSON field name constants, and **WebSocket event type** strings. Intended for use by backend and client SDKs together with [core/common](../common/README.md) (`FoundationJson`, shared header/field conventions where applicable). This module does **not** implement persistence, Ktor routes, or authorization — only **types and path constants**.
+**Global (system-wide) settings** contracts: **domain model**, **HTTP/WebSocket payloads**, JSON **field name** constants, **mappers**, and **WebSocket event type** strings. Depends on **core/common** and **core/audit** (Gradle) so generated artifacts stay aligned with the rest of the monorepo; source in this module focuses on settings shapes only.
+
+**Open and management HTTP paths** are defined in **feature/settingsApi** ([README](../../feature/settingsApi/README.md)). This module does **not** ship `const val` full URLs for those APIs.
+
+This module does **not** implement persistence, Ktor plugins, or authorization.
 
 ## What it provides
 
-- **Field names:** [GlobalSettingsApiFields] — snake_case JSON keys for privacy policy URL, terms of service URL, and support email.
-- **Responses:** [GlobalSettingsResponse] — nullable URL and email fields for public reads.
-- **Requests:** [UpdateGlobalSettingsRequest] — same shape for admin updates (all properties nullable).
-- **HTTP routes — public API:** [GlobalSettingsRoutes] — `GET` for current global settings ([GlobalSettingsResponse]).
-- **HTTP routes — admin API:** [AdminGlobalSettingsRoutes] — `PUT` with [UpdateGlobalSettingsRequest].
-- **WebSocket:** [SettingsWebSocketEventTypes] — e.g. `GLOBAL_SETTINGS_UPDATED` with payload described as [GlobalSettingsResponse] in KDoc.
+- **Field names:** [GlobalSettingsApiFields] — snake_case JSON keys (URLs, support email, etc.).
+- **Domain:** [GlobalSettings] — non-wire model paired with the mapper.
+- **Wire payload:** [GlobalSettingsPayload] — `@Serializable` body for reads and writes.
+- **Mapper:** [GlobalSettingsMapper] — domain ↔ payload.
+- **WebSocket:** [SettingsWebSocketEventTypes] — e.g. broadcast when global settings change (payload described in KDoc).
 
 ## Usage
 
-- Depend on the published artifact `shared-foundation-core-settings` (or use [shared-foundation-bom](../../bom) / version catalog — see repository [README.md](../../../../README.md)).
-- Serialize with the same `Json` settings as the rest of the stack (typically [FoundationJson] from `core/common`).
-- Wire server and client HTTP paths using the `const val` routes; keep JSON keys aligned with [GlobalSettingsApiFields].
+- Depend on `shared-foundation-core-settings` (or [shared-foundation-bom](../../bom) — see repository [README.md](../../../../README.md)).
+- Serialize with the same `Json` as the rest of the stack ([FoundationJson] from `core/common`).
+- To compile against **route strings** and **management permission** constants, add `shared-foundation-feature-settingsApi`.
 
 [GlobalSettingsApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/GlobalSettingsApiFields.kt
-[GlobalSettingsResponse]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/response/GlobalSettingsResponse.kt
-[UpdateGlobalSettingsRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/request/UpdateGlobalSettingsRequest.kt
-[GlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/GlobalSettingsRoutes.kt
-[AdminGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/AdminGlobalSettingsRoutes.kt
+[GlobalSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/GlobalSettings.kt
+[GlobalSettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/GlobalSettingsPayload.kt
+[GlobalSettingsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/mapper/globalsettings/GlobalSettingsMapper.kt
 [SettingsWebSocketEventTypes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/SettingsWebSocketEventTypes.kt
 [FoundationJson]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJson.kt

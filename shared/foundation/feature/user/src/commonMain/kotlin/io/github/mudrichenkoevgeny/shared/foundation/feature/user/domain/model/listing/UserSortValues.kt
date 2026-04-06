@@ -3,8 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierMaskedPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierUnmaskedPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -62,8 +61,7 @@ object UserSortValues {
 
     /**
      * Supported `sort_by` values for user identifier list endpoints, aligned with timestamp fields on
-     * [UserIdentifierUnmaskedPayload] (`created_at`, `updated_at` only). [UserIdentifierMaskedPayload] uses the same
-     * wire names for those fields.
+     * [UserIdentifierPayload] (`created_at`, `updated_at` only).
      */
     @Serializable
     enum class UserIdentifierSortBy {

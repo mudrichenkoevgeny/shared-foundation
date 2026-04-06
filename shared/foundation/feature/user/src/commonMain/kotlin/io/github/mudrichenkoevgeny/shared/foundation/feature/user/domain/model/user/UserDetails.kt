@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 import kotlin.time.Instant
 
@@ -20,7 +20,7 @@ data class UserDetails(
     val role: UserRole,
     val accountStatus: UserAccountStatus,
     val accountStatusBeforeDeletion: UserAccountStatus,
-    val permissions: Set<UserPermissionCode>,
+    val permissions: Set<PermissionCode>,
     val lastLoginAt: Instant? = null,
     val lastActiveAt: Instant? = null,
     val createdAt: Instant,

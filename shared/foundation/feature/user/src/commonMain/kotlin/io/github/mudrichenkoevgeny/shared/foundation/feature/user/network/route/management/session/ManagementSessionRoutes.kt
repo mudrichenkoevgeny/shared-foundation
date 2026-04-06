@@ -1,19 +1,24 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionMaskedPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionUnmaskedPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseManagementSessionRoutes
 
 /**
- * Route paths for user sessions in the management API (lists, single-session reads, and administrative revocation).
+ * Route paths for user sessions in the management API (list, single read, revocation).
  */
 object ManagementSessionRoutes {
     /**
@@ -31,85 +36,66 @@ object ManagementSessionRoutes {
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
      *   [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID] required;
-     * others optional. Same key repeated — **OR**; different keys — **AND**.
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID]
+     * required; others optional. Same key repeated — **OR**; different keys — **AND**.
      *
      * - [UserFilterValues.UserSessionFilterValues.USER_ID]
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionMaskedPayload.identifierId]).
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionMaskedPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — free-text; server-defined; repeat key for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name
+     *   ([UserSessionPayload.identifierAuthProvider]).
      * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
      * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — [ClientType] serial name.
-     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined; repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — free-text; server-defined; repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined; repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; repeat for OR if supported.
      * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME],
      *   [UserFilterValues.UserSessionFilterValues.APP_VERSION],
-     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
+     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined; repeat key for OR if supported.
      *
-     * Response body: [PagedResult] of [UserSessionMaskedPayload].
+     * **Authorization** ([SessionPermissionCode]): for sessions of an account with [UserRole.USER], caller needs
+     * [SessionPermissionCode.SESSION_GET_OF_USER_MASKED] and/or [SessionPermissionCode.SESSION_GET_OF_USER_UNMASKED];
+     * for [UserRole.STAFF], [SessionPermissionCode.SESSION_GET_OF_STAFF_MASKED] and/or
+     * [SessionPermissionCode.SESSION_GET_OF_STAFF_UNMASKED]. Per-row [UserSessionPayload.isSensitiveValuesMasked]
+     * reflects the caller's effective access. No constant in [SessionPermissionCode] grants reading sessions whose owner
+     * has [UserRole.ADMIN].
+     *
+     * Response body: [PagedResult] of [UserSessionPayload].
      */
-    const val GET_USER_SESSIONS_MASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_MASKED
-
-    /**
-     * **HTTP method:** `GET`
-     *
-     * **Pagination & sort** (names from [ListingParamNames]):
-     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
-     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
-     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
-     *   [CommonApiFields.SortOrder.DESC].
-     *
-     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID] required;
-     * others optional. Same key repeated — **OR**; different keys — **AND**.
-     *
-     * - [UserFilterValues.UserSessionFilterValues.USER_ID]
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionUnmaskedPayload.identifierId]).
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionUnmaskedPayload.identifierAuthProvider]).
-     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
-     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — [ClientType] serial name.
-     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined matching; repeat key for multiple values if supported.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME],
-     *   [UserFilterValues.UserSessionFilterValues.APP_VERSION],
-     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined matching; repeat key for multiple values if supported.
-     *
-     * Response body: [PagedResult] of [UserSessionUnmaskedPayload].
-     */
-    const val GET_USER_SESSIONS_UNMASKED = BaseManagementSessionRoutes.GET_USER_SESSIONS_UNMASKED
+    const val GET_USER_SESSIONS = BaseManagementSessionRoutes.GET_USER_SESSIONS
 
     /**
      * **HTTP method:** `GET`
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
      *
-     * Response body: single JSON object [UserSessionMaskedPayload].
-     */
-    const val GET_USER_SESSION_MASKED = BaseManagementSessionRoutes.GET_USER_SESSION_MASKED
-
-    /**
-     * **HTTP method:** `GET`
+     * **Authorization** ([SessionPermissionCode]): for sessions of an account with [UserRole.USER], caller needs
+     * [SessionPermissionCode.SESSION_GET_OF_USER_MASKED] and/or [SessionPermissionCode.SESSION_GET_OF_USER_UNMASKED];
+     * for [UserRole.STAFF], [SessionPermissionCode.SESSION_GET_OF_STAFF_MASKED] and/or
+     * [SessionPermissionCode.SESSION_GET_OF_STAFF_UNMASKED]. [UserSessionPayload.isSensitiveValuesMasked] matches the
+     * caller's effective access for that session's owner. No constant in [SessionPermissionCode] grants reading sessions
+     * whose owner has [UserRole.ADMIN].
      *
-     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
-     *
-     * Response body: single JSON object [UserSessionUnmaskedPayload].
+     * Response body: [UserSessionPayload].
      */
-    const val GET_USER_SESSION_UNMASKED = BaseManagementSessionRoutes.GET_USER_SESSION_UNMASKED
+    const val GET_USER_SESSION = BaseManagementSessionRoutes.GET_USER_SESSION
 
     /**
      * **HTTP method:** `DELETE`
      *
-     * Force-terminates the session identified by [UserApiPaths.SESSION_ID] for the user [UserApiPaths.USER_ID].
+     * Force-terminates the session [UserApiPaths.SESSION_ID] for the user [UserApiPaths.USER_ID].
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
+     *
+     * **Authorization:** [SessionPermissionCode.SESSION_DELETE_FOR_USER] when the session owner has [UserRole.USER];
+     * [SessionPermissionCode.SESSION_DELETE_FOR_STAFF] when the owner has [UserRole.STAFF] (server aligns [UserRole.ADMIN]
+     * accounts with the staff-scoped delete grant if applicable).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful termination and for security-relevant denials. Use action
+     * [UserAuditActionType.MANAGEMENT_DELETE_USER_SESSION] and resource [UserAuditResourceType.USER_SESSION]. Set
+     * `resourceId` to the path [UserApiPaths.SESSION_ID]. Add metadata [UserAuditMetadataKey.USER_ID] with the path
+     * [UserApiPaths.USER_ID] (account whose session was terminated).
      */
     const val DELETE_USER_SESSION = BaseManagementSessionRoutes.DELETE_USER_SESSION
 
@@ -119,6 +105,14 @@ object ManagementSessionRoutes {
      * Force-terminates **all** sessions for the user [UserApiPaths.USER_ID].
      *
      * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * **Authorization:** [SessionPermissionCode.SESSION_DELETE_FOR_USER] when the user identified by [UserApiPaths.USER_ID]
+     * has [UserRole.USER]; [SessionPermissionCode.SESSION_DELETE_FOR_STAFF] when that user has [UserRole.STAFF] (server
+     * aligns [UserRole.ADMIN] accounts with the staff-scoped delete grant if applicable).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful termination and for security-relevant denials. Use action
+     * [UserAuditActionType.MANAGEMENT_DELETE_ALL_USER_SESSIONS] and resource [UserAuditResourceType.USER_SESSION]. Leave
+     * `resourceId` unset (bulk operation). Add metadata [UserAuditMetadataKey.USER_ID] with the path [UserApiPaths.USER_ID].
      */
     const val DELETE_ALL_USER_SESSIONS = BaseManagementSessionRoutes.DELETE_ALL_USER_SESSIONS
 }

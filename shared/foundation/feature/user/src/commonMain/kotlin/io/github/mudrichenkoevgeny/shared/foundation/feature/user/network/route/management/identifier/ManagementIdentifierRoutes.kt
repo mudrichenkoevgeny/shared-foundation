@@ -1,23 +1,23 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCodes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierMaskedPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierUnmaskedPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseManagementIdentifierRoutes
 
 /**
- * Route paths for user identifiers in the management API (lists, single-identifier reads, and deletion).
- *
- * Read: [IdentifierPermissionCodes] for masked vs unmasked lists and single-record reads.
- * Delete: [IdentifierPermissionCodes.IDENTIFIER_DELETE_FOR_USER] or
- * [IdentifierPermissionCodes.IDENTIFIER_DELETE_FOR_STAFF] by target account role.
+ * Route paths for user identifiers in the management API (list, single read, delete).
  */
 object ManagementIdentifierRoutes {
     /**
@@ -29,58 +29,46 @@ object ManagementIdentifierRoutes {
      * - [ListingParamNames.Sort.SORT_BY] — exactly one of
      *   [UserSortValues.UserIdentifierSortBy.CREATED_AT],
      *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     * - [ListingParamNames.Sort.SORT_ORDER] — order [CommonApiFields.SortOrder.ASC] or
      *   [CommonApiFields.SortOrder.DESC].
      *
      * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): [UserFilterValues.UserIdentifierFilterValues.USER_ID]
      * required. Same key repeated means **OR**; different keys combine as **AND**.
      *
      * - [UserFilterValues.UserIdentifierFilterValues.USER_ID]
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name
+     *   ([UserIdentifierPayload.userAuthProvider]).
+     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — free-text; server-defined matching; repeat key for
+     *   multiple values if supported.
      *
-     * Response body: [PagedResult] of [UserIdentifierMaskedPayload].
+     * **Authorization** ([IdentifierPermissionCode]): for identifiers owned by [UserRole.USER], caller needs
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_MASKED] and/or
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_UNMASKED]; for [UserRole.STAFF],
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED] and/or
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED]. Each element includes
+     * [UserIdentifierPayload.isSensitiveValuesMasked] accordingly. No constant in [IdentifierPermissionCode] grants read
+     * access to identifiers of users with [UserRole.ADMIN].
+     *
+     * Response body: [PagedResult] of [UserIdentifierPayload].
      */
-    const val GET_IDENTIFIERS_MASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIERS_MASKED
-
-    /**
-     * **HTTP method:** `GET`
-     *
-     * **Pagination & sort** (names from [ListingParamNames]):
-     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
-     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserIdentifierSortBy.CREATED_AT],
-     *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
-     *   [CommonApiFields.SortOrder.DESC].
-     *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): [UserFilterValues.UserIdentifierFilterValues.USER_ID]
-     * required; other parameters optional. Same key repeated means **OR**; different keys combine as **AND**.
-     *
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_ID]
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserIdentifierUnmaskedPayload.userAuthProvider]).
-     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — free-text; server-defined matching; repeat key for multiple values if supported.
-     *
-     * Response body: [PagedResult] of [UserIdentifierUnmaskedPayload].
-     */
-    const val GET_IDENTIFIERS_UNMASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIERS_UNMASKED
+    const val GET_IDENTIFIERS = BaseManagementIdentifierRoutes.GET_IDENTIFIERS
 
     /**
      * **HTTP method:** `GET`
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
      *
-     * Response body: single JSON object [UserIdentifierMaskedPayload].
-     */
-    const val GET_IDENTIFIER_MASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIER_MASKED
-
-    /**
-     * **HTTP method:** `GET`
+     * **Authorization** ([IdentifierPermissionCode]): for identifiers owned by [UserRole.USER], caller needs
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_MASKED] and/or
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_UNMASKED]; for [UserRole.STAFF],
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED] and/or
+     * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED]. The response [UserIdentifierPayload] includes
+     * [UserIdentifierPayload.isSensitiveValuesMasked] accordingly. No constant in [IdentifierPermissionCode] grants read
+     * access to identifiers of users with [UserRole.ADMIN].
      *
-     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
-     *
-     * Response body: single JSON object [UserIdentifierUnmaskedPayload].
+     * Response body: [UserIdentifierPayload].
      */
-    const val GET_IDENTIFIER_UNMASKED = BaseManagementIdentifierRoutes.GET_IDENTIFIER_UNMASKED
+    const val GET_IDENTIFIER = BaseManagementIdentifierRoutes.GET_IDENTIFIER
 
     /**
      * **HTTP method:** `DELETE`
@@ -88,6 +76,15 @@ object ManagementIdentifierRoutes {
      * Removes the identifier record [UserApiPaths.USER_IDENTIFIER_ID] for the user [UserApiPaths.USER_ID].
      *
      * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * **Authorization:** [IdentifierPermissionCode.IDENTIFIER_DELETE_FOR_USER] when the identifier owner has
+     * [UserRole.USER]; [IdentifierPermissionCode.IDENTIFIER_DELETE_FOR_STAFF] when the owner has [UserRole.STAFF]
+     * (server aligns [UserRole.ADMIN] with the staff-scoped delete grant if applicable).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful removal and for security-relevant denials. Use action
+     * [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER] and resource [UserAuditResourceType.USER_IDENTIFIER]. Set
+     * `resourceId` to the path [UserApiPaths.USER_IDENTIFIER_ID]. Add metadata [UserAuditMetadataKey.USER_ID] with the
+     * path [UserApiPaths.USER_ID].
      */
     const val DELETE_IDENTIFIER = BaseManagementIdentifierRoutes.DELETE_IDENTIFIER
 }

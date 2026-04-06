@@ -2,9 +2,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property role The access level assigned to the user (e.g. [UserRole]).
  * @property accountStatus The current state of the account (e.g. [UserAccountStatus]).
  * @property accountStatusBeforeDeletion Account status before deletion was requested; only meaningful when the account is pending deletion (e.g. [UserAccountStatus]).
- * @property permissions Explicit permissions assigned to the user (see [UserPermissionCode]).
+ * @property permissions Explicit permissions assigned to the user (see [PermissionCode]).
  * @property lastLoginAt The timestamp of the most recent successful authentication, in milliseconds.
  * @property lastActiveAt The timestamp of the last recorded user activity, in milliseconds.
  * @property createdAt The timestamp of the account creation, in milliseconds.
@@ -40,7 +39,7 @@ data class UserDetailsPayload(
     val accountStatusBeforeDeletion: String,
 
     @SerialName(UserApiFields.PERMISSIONS)
-    val permissions: Set<UserPermissionCode>,
+    val permissions: Set<PermissionCode>,
 
     @SerialName(UserApiFields.LAST_LOGIN_AT)
     val lastLoginAt: Long? = null,

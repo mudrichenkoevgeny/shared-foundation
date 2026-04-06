@@ -34,8 +34,19 @@ configure<KotlinMultiplatformExtension> {
             api(project(":shared:foundation:core:audit"))
             api(project(":shared:foundation:core:security"))
             api(project(":shared:foundation:core:settings"))
+            api(project(":shared:foundation:feature:auditApi"))
+            api(project(":shared:foundation:feature:securityApi"))
+            api(project(":shared:foundation:feature:settingsApi"))
 
             api(libs.kotlinx.serialization.json)
+            api(libs.kotlinx.serialization.core) // Transitive for kotlinx-serialization
+        }
+
+        jvmMain.dependencies {
+            api(project(":shared:foundation:core:common")) // Transitive for core.common
+            api(project(":shared:foundation:core:security")) // Transitive for core.security
+            api(project(":shared:foundation:core:settings")) // Transitive for core.settings
+            api(project(":shared:foundation:core:audit")) // Transitive for core.audit
         }
 
         commonTest.dependencies {

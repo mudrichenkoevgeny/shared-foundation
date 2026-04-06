@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPublic
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 import kotlin.time.Instant
@@ -49,4 +50,13 @@ fun UserDetails.toUserDetailsPayload() = UserDetailsPayload(
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds(),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds()
+)
+
+/**
+ * Builds [UserPublic] from this [UserDetails] (id, role, and account status only).
+ */
+fun UserDetails.toUserPublic() = UserPublic(
+    id = id,
+    role = role,
+    accountStatus = accountStatus
 )

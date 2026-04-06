@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

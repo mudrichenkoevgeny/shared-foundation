@@ -2,9 +2,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.ev
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
-import kotlinx.serialization.json.JsonElement
 import kotlin.time.Instant
 
 /**
@@ -20,6 +20,8 @@ import kotlin.time.Instant
  * @param action Action type of the event.
  * @param resource Resource type of the event.
  * @param resourceId Optional id of the specific resource instance.
+ * @param resourceValueSensitivity How [resourceId] should be treated when shown or exported (redaction policy);
+ *   defaults to [AuditValueSensitivity.NON_SENSITIVE].
  * @param status Outcome of the action ([AuditStatus]).
  * @param metadata Optional key-value data for filtering or analytics.
  * @param message Optional human-readable message (e.g. error description).
@@ -33,6 +35,7 @@ data class AuditEvent(
     val action: AuditActionType,
     val resource: AuditResourceType,
     val resourceId: String? = null,
+    val resourceValueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE,
     val status: AuditStatus,
     val metadata: Set<AuditEventMetadata> = emptySet(),
     val message: String? = null,

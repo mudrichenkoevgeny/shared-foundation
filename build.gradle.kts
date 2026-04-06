@@ -11,11 +11,12 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.maven.publish) apply false
+    alias(libs.plugins.dependency.analysis)
 }
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.28"
+    version = "0.0.29"
 }
 
 subprojects {
@@ -27,6 +28,7 @@ subprojects {
     }
 
     apply(plugin = "com.vanniktech.maven.publish")
+    apply(plugin = "com.autonomousapps.dependency-analysis")
 
     val uuidExperimentalOptIn = "-opt-in=kotlin.uuid.ExperimentalUuidApi"
     val uuidExperimentalOptInFqcn = uuidExperimentalOptIn.substringAfter("=")

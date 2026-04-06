@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventMetadataValueSensitivity
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 
@@ -36,6 +36,6 @@ object AuditEventFields {
     /** Value inside each metadata array object. */
     const val METADATA_VALUE = "value"
 
-    /** Sensitivity hint for [METADATA_VALUE]; wire values are [AuditEventMetadataValueSensitivity] serial names. */
+    /** Sensitivity hint for [METADATA_VALUE]; wire values are [AuditValueSensitivity] serial names. */
     const val METADATA_VALUE_SENSITIVITY = "value_sensitivity"
 }

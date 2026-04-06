@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 
 /**
  * Common HTTP header names used for network communication and request tracing.

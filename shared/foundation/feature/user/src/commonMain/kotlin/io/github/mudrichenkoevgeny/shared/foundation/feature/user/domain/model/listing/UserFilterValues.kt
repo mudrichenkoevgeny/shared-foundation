@@ -1,12 +1,12 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionUnmaskedPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
 
 /**
  * Stable **keys** for filtering user-related listings (users, identifiers, sessions).
@@ -85,7 +85,7 @@ object UserFilterValues {
         const val OPERATION_SYSTEM_VERSION = CommonApiFields.OPERATION_SYSTEM_VERSION
 
         /**
-         * Raw login / identifier value filter; not a field on [UserSessionUnmaskedPayload]; server-defined matching; repeat key for OR if supported.
+         * Raw login / identifier value filter; not a DTO field on [UserSessionPayload]; server-defined matching; repeat key for OR if supported.
          */
         const val IDENTIFIER = UserApiFields.IDENTIFIER
     }

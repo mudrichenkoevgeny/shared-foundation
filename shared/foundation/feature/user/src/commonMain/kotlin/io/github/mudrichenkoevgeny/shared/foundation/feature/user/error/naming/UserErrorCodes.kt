@@ -12,6 +12,8 @@ object UserErrorCodes {
     const val INVALID_SESSION = "INVALID_SESSION"
     const val USER_BLOCKED = "USER_BLOCKED"
     const val USER_READ_ONLY = "USER_READ_ONLY"
+    const val USER_SECURITY_HOLD = "USER_SECURITY_HOLD"
+    const val USER_PENDING_DELETION = "USER_PENDING_DELETION"
     const val USER_FORBIDDEN = "USER_FORBIDDEN"
     const val USER_NOT_FOUND = "USER_NOT_FOUND"
     // all identifiers

@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.clienttype.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

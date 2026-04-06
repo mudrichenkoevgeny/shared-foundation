@@ -8,11 +8,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  * for that enum). Order matters only if the same wire value could match more than one delegate.
  *
  * **Initialization** — build a [Set] of representatives, typically `entries.first()` from each enum that implements
- * [AuditResourceType] (for example [CommonAuditResourceType]):
+ * [AuditResourceType] (for example `UserAuditResourceType` in `feature/user`, `CommonAuditResourceType` in
+ * `feature/auditApi`):
  *
  * ```
  * CompositeAuditResourceTypeParser(
  *     setOf(
+ *         UserAuditResourceType.entries.first(),
  *         CommonAuditResourceType.entries.first(),
  *         ...
  *     )

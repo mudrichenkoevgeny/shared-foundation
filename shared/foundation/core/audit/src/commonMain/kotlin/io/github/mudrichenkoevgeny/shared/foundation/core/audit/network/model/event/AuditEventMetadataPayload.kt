@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventMetadata
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventMetadataValueSensitivity
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
  *
  * @property key Logical key for filtering or analytics.
  * @property value Raw value as stored for the audit record.
- * @property valueSensitivity Wire string matching [AuditEventMetadataValueSensitivity.serialName]; defaults to non-sensitive.
+ * @property valueSensitivity Wire string matching [AuditValueSensitivity.serialName]; defaults to non-sensitive.
  */
 @Serializable
 data class AuditEventMetadataPayload(
@@ -22,5 +22,5 @@ data class AuditEventMetadataPayload(
     val value: String,
 
     @SerialName(AuditEventFields.METADATA_VALUE_SENSITIVITY)
-    val valueSensitivity: String = AuditEventMetadataValueSensitivity.SENSITIVITY_NON_SENSITIVE,
+    val valueSensitivity: String = AuditValueSensitivity.SENSITIVITY_NON_SENSITIVE
 )
