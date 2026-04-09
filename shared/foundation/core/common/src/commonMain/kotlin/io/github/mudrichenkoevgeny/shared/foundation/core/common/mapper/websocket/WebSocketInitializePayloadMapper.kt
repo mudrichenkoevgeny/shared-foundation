@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.websocket
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.toClientDeviceIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 
 /**
@@ -17,7 +17,7 @@ fun WebSocketInitializePayload.mergeClientDeviceInfo(
 ): ClientDeviceInfo = ClientDeviceInfo(
     clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: existingClientDeviceInfo.clientType,
     language = language ?: existingClientDeviceInfo.language,
-    deviceId = ClientDeviceId(deviceId),
+    deviceId = deviceId?.toClientDeviceIdOrNull(),
     deviceName = deviceName ?: existingClientDeviceInfo.deviceName,
     appVersion = appVersion ?: existingClientDeviceInfo.appVersion,
     operationSystemVersion = operationSystemVersion ?: existingClientDeviceInfo.operationSystemVersion
@@ -38,9 +38,9 @@ fun WebSocketInitializePayload.mergeClientInfo(
 )
 
 fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?) = WebSocketInitializePayload(
-    clientType = clientType.serialName,
+    clientType = clientType?.serialName,
     language = language,
-    deviceId = deviceId.asHexDashString(),
+    deviceId = deviceId?.asHexDashString(),
     deviceName = deviceName,
     appVersion = appVersion,
     operationSystemVersion = operationSystemVersion,

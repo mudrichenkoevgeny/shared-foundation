@@ -25,7 +25,7 @@ data class WebSocketInitializePayload(
     val language: String? = null,
 
     @SerialName(CommonApiFields.DEVICE_ID)
-    val deviceId: String,
+    val deviceId: String?,
 
     @SerialName(CommonApiFields.DEVICE_NAME)
     val deviceName: String? = null,

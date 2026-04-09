@@ -6,5 +6,5 @@ data class ClientInfo(
     val ipAddress: String?,
     val host: String?,
     val origin: String?,
-    val apiVersion: String? = null
+    val apiVersion: String?
 )

@@ -15,18 +15,12 @@ enum class SecurityAuditActionType : AuditActionType {
      */
     override val serialName: String
         get() = when (this) {
-            MANAGEMENT_UPDATE_SECURITY_SETTINGS -> SecurityAuditActionType.ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
+            MANAGEMENT_UPDATE_SECURITY_SETTINGS -> ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
         }
 
-    override fun parseOrNull(value: String): AuditActionType? =
-        SecurityAuditActionType.fromValueOrNull(
-            value
-        )
+    override fun parseOrNull(value: String): AuditActionType? = fromValueOrNull(value)
 
-    override fun parseOrThrow(value: String): AuditActionType =
-        SecurityAuditActionType.fromValueOrThrow(
-            value
-        )
+    override fun parseOrThrow(value: String): AuditActionType = fromValueOrThrow(value)
 
     companion object {
         const val ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS = "management_update_security_settings"

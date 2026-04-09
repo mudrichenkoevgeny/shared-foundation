@@ -1,7 +1,7 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.settingsApi.domain.audit.action
+package io.github.mudrichenkoevgeny.shared.foundation.feature.settings.api.domain.audit.action
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsApi.network.route.management.globalsettings.ManagementGlobalSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.settings.api.network.route.management.globalsettings.ManagementGlobalSettingsRoutes
 
 /**
  * Settings-module audit actions (global settings, not security settings).
