@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
-import io.github.mudrichenkoevgeny.shared.foundation.feature.auditApi.domain.permissions.AuditPermissionCode
-import io.github.mudrichenkoevgeny.shared.foundation.feature.securityApi.domain.permission.SecurityPermissionCode
-import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsApi.domain.permission.SettingsPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.audit.api.domain.permissions.AuditPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.security.api.domain.permission.SecurityPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.settings.api.domain.permission.SettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 
 /**

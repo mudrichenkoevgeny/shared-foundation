@@ -8,7 +8,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.ac
  * that enum). Order matters only if the same wire value could match more than one delegate.
  *
  * **Initialization** — build a [Set] of representatives, typically `entries.first()` from each enum that implements
- * [AuditActionType] (for example `UserAuditActionType` in `feature/user`, `SecurityAuditActionType` in `feature/securityApi`):
+ * [AuditActionType] (for example `UserAuditActionType` in `feature/user`, `SecurityAuditActionType` in `feature/security/api`):
  *
  * ```
  * CompositeAuditActionTypeParser(

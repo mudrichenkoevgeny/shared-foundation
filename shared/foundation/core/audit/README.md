@@ -2,7 +2,7 @@
 
 **Audit log wire and domain contracts** shared by backend and client: serialized **event models**, JSON **field names**, list **filters/sort** keys, path **parameter** names, and **mappers** between domain and API payloads. Depends on **core/common** ([CommonApiFields], [PagedResult], [ListingParamNames]) so listings stay consistent across the platform.
 
-HTTP **URL constants** and **feature permission codes** live in **feature/auditApi** ([README](../../feature/auditApi/README.md)); this module stays free of those so server and client can depend only on payloads and parsing logic if needed.
+HTTP **URL constants** and **feature permission codes** live in **feature/audit/api** ([README](../../feature/audit/api/README.md)); this module stays free of those so server and client can depend only on payloads and parsing logic if needed.
 
 This module does **not** define Ktor routes, repositories, or persistence — only types, parsers, and `const val` names for the wire contract.
 
@@ -20,7 +20,7 @@ This module does **not** define Ktor routes, repositories, or persistence — on
 
 - Add `shared-foundation-core-audit` (versions via [shared-foundation-bom](../../bom) — see repository [README.md](../../../../README.md)).
 - Use the same `Json` as the rest of the stack ([FoundationJson] from core/common).
-- For management **routes** and **permissions**, also depend on `shared-foundation-feature-auditApi`.
+- For management **routes** and **permissions**, also depend on `shared-foundation-feature-audit-api`.
 
 [FoundationJson]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJson.kt
 [CommonApiFields]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields.kt

@@ -2,7 +2,7 @@
 
 **Global (system-wide) settings** contracts: **domain model**, **HTTP/WebSocket payloads**, JSON **field name** constants, **mappers**, and **WebSocket event type** strings. Depends on **core/common** and **core/audit** (Gradle) so generated artifacts stay aligned with the rest of the monorepo; source in this module focuses on settings shapes only.
 
-**Open and management HTTP paths** are defined in **feature/settingsApi** ([README](../../feature/settingsApi/README.md)). This module does **not** ship `const val` full URLs for those APIs.
+**Open and management HTTP paths** are defined in **feature/settings/api** ([README](../../feature/settings/api/README.md)). This module does **not** ship `const val` full URLs for those APIs.
 
 This module does **not** implement persistence, Ktor plugins, or authorization.
 
@@ -18,7 +18,7 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 
 - Depend on `shared-foundation-core-settings` (or [shared-foundation-bom](../../bom) — see repository [README.md](../../../../README.md)).
 - Serialize with the same `Json` as the rest of the stack ([FoundationJson] from `core/common`).
-- To compile against **route strings** and **management permission** constants, add `shared-foundation-feature-settingsApi`.
+- To compile against **route strings** and **management permission** constants, add `shared-foundation-feature-settings-api`.
 
 [GlobalSettingsApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/GlobalSettingsApiFields.kt
 [GlobalSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/GlobalSettings.kt

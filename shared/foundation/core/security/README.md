@@ -2,7 +2,7 @@
 
 **Security-related shared contracts:** password policy **domain** and **payloads**, **validator** (interface + default implementation), **mappers**, **error code/args** strings, **security settings** wire types, optional **audit metadata** value constants, and **WebSocket event** type for security settings updates. Depends on **core/common** and **core/audit** for shared listing/audit alignment.
 
-**Open and management HTTP paths** for reading/updating security settings are in **feature/securityApi** ([README](../../feature/securityApi/README.md)). This module keeps policy, validation, and payload types only.
+**Open and management HTTP paths** for reading/updating security settings are in **feature/security/api** ([README](../../feature/security/api/README.md)). This module keeps policy, validation, and payload types only.
 
 Does **not** implement authentication, Ktor wiring, or storage.
 
@@ -21,7 +21,7 @@ Does **not** implement authentication, Ktor wiring, or storage.
 
 - Depend on `shared-foundation-core-security` (or [shared-foundation-bom](../../bom) — see repository [README.md](../../../../README.md)).
 - Serialize with [FoundationJson] from `core/common`.
-- For **HTTP route constants** and **management permission** codes, add `shared-foundation-feature-securityApi`.
+- For **HTTP route constants** and **management permission** codes, add `shared-foundation-feature-security-api`.
 
 [SecurityErrorCodes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorCodes.kt
 [SecurityErrorArgs]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorArgs.kt

@@ -9,7 +9,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  *
  * **Initialization** — build a [Set] of representatives, typically `entries.first()` from each enum that implements
  * [AuditResourceType] (for example `UserAuditResourceType` in `feature/user`, `CommonAuditResourceType` in
- * `feature/auditApi`):
+ * `feature/audit-api`):
  *
  * ```
  * CompositeAuditResourceTypeParser(

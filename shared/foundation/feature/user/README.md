@@ -1,6 +1,6 @@
 # feature/user
 
-**User, auth, session, and identifier HTTP contracts** (open/self-service and management), **permission codes**, **error code strings**, **WebSocket event names**, DTOs, domain models, and mappers shared by backend and clients. Depends on [core/common](../../core/common/README.md), [core/audit](../../core/audit/README.md), [core/security](../../core/security/README.md), [core/settings](../../core/settings/README.md), and the feature API modules [auditApi](../auditApi/README.md), [securityApi](../securityApi/README.md), and [settingsApi](../settingsApi/README.md).
+**User, auth, session, and identifier HTTP contracts** (open/self-service and management), **permission codes**, **error code strings**, **WebSocket event names**, DTOs, domain models, and mappers shared by backend and clients. Depends on [core/common](../../core/common/README.md), [core/audit](../../core/audit/README.md), [core/security](../../core/security/README.md), [core/settings](../../core/settings/README.md), and the feature API modules [audit-api](../audit/api/README.md), [security-api](../security/api/README.md), and [settings-api](../settings-api/README.md).
 
 Publishable artifact: **`shared-foundation-feature-user`** (version aligned via [shared-foundation-bom](../../bom)).
 

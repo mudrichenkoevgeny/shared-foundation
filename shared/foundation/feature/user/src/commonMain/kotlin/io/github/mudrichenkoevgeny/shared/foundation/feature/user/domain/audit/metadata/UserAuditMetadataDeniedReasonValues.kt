@@ -22,4 +22,13 @@ object UserAuditMetadataDeniedReasonValues {
 
     /** Operation rejected because no user exists for the referenced id. */
     const val USER_NOT_FOUND = "user_not_found"
+
+    /** Operation rejected because the user role is not allowed to perform this action. */
+    const val USER_ROLE_NOT_ALLOWED = "user_role_not_allowed"
+
+    /** Operation rejected because the user is missing specific required permissions. */
+    const val USER_MISSING_PERMISSIONS = "user_missing_permissions"
+
+    /** Operation rejected because access is forbidden for the user. */
+    const val USER_FORBIDDEN = "user_forbidden"
 }
