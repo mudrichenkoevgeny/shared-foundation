@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+import kotlin.uuid.Uuid
 
 /**
  * DTO representing a single message frame exchanged over a WebSocket connection.
@@ -17,7 +18,7 @@ import kotlinx.serialization.json.JsonElement
 @Serializable
 data class SocketFrame(
     @SerialName(CommonApiFields.ID)
-    val id: String,
+    val id: String = Uuid.random().toHexDashString(),
 
     @SerialName(CommonApiFields.TYPE)
     val type: String,

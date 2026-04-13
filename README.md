@@ -3,80 +3,20 @@ A Kotlin Multiplatform (KMP) library providing shared business logic and API con
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mudrichenkoevgeny/shared-foundation-bom)](https://central.sonatype.com/artifact/io.github.mudrichenkoevgeny/shared-foundation-bom)
 ## Installation
-Add the library to your projects using one of the following methods:
-### Option 1: Version Catalog
-_1. In your gradle/libs.versions.toml file:_
-```
-[versions]
-shared-foundation = "0.0.30"
+Use the BOM and add only the modules you need:
 
-[libraries]
-shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "shared-foundation" }
-shared-foundation-core-common = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-common" }
-shared-foundation-core-security = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-security" }
-shared-foundation-core-settings = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-settings" }
-shared-foundation-core-audit = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-audit" }
-shared-foundation-feature-security-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-security-api" }
-shared-foundation-feature-settings-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-settings-api" }
-shared-foundation-feature-audit-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-audit-api" }
-shared-foundation-feature-user = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-user" }
-
-# Or if you don`t wan`t to use bom:
-shared-foundation-core-common = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-common", version.ref = "shared-foundation" }
-shared-foundation-core-security = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-security", version.ref = "shared-foundation" }
-shared-foundation-core-settings = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-settings", version.ref = "shared-foundation" }
-shared-foundation-core-audit = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-audit", version.ref = "shared-foundation" }
-shared-foundation-feature-security-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-security-api", version.ref = "shared-foundation" }
-shared-foundation-feature-settings-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-settings-api", version.ref = "shared-foundation" }
-shared-foundation-feature-audit-api = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-audit-api", version.ref = "shared-foundation" }
-shared-foundation-feature-user = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-feature-user", version.ref = "shared-foundation" }
-```
-In your build.gradle.kts:
-```
+```kotlin
+// build.gradle.kts
 dependencies {
-    implementation(platform(libs.shared.foundation.bom))
-    implementation(libs.shared.foundation.core.common)
-    implementation(libs.shared.foundation.core.security)
-    implementation(libs.shared.foundation.core.settings)
-    implementation(libs.shared.foundation.core.audit)
-    implementation(libs.shared.foundation.feature.security.api)
-    implementation(libs.shared.foundation.feature.settings.api)
-    implementation(libs.shared.foundation.feature.audit.api)
-    implementation(libs.shared.foundation.feature.user)
-    
-    // Or if you don`t wan`t to use bom:
-    implementation(libs.shared.foundation.core.common)
-    implementation(libs.shared.foundation.core.security)
-    implementation(libs.shared.foundation.core.settings)
-    implementation(libs.shared.foundation.core.audit)
-    implementation(libs.shared.foundation.feature.security.api)
-    implementation(libs.shared.foundation.feature.settings.api)
-    implementation(libs.shared.foundation.feature.audit.api)
-    implementation(libs.shared.foundation.feature.user)
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.31"))
+    implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
+    implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
+    implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
+    // ... add other shared-foundation modules as required
 }
 ```
-### Option 2: Direct Dependency
-```
-implementation(platform(io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.30))
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-security-api")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-settings-api")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-audit-api")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
 
-// Or if you don`t wan`t to use bom:
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-settings:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-core-audit:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-security-api:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-settings-api:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-audit-api:0.0.30")
-implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user:0.0.30")
-```
+With a version catalog: declare BOM and module aliases in `gradle/libs.versions.toml`, then use `implementation(platform(libs.shared.foundation.bom))` and `implementation(libs.shared.foundation.core.common)` (and other aliases as needed).
 
 ## Modules
 

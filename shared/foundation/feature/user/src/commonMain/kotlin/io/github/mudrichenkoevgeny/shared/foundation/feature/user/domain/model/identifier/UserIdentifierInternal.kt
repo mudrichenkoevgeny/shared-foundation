@@ -6,15 +6,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * User credential row; wire counterpart [UserIdentifierPayload]. [identifier] is raw or masked per
- * [isSensitiveValuesMasked].
- * Use [UserIdentifierInternal] for server-side storage fields that must not be exposed via API payloads.
+ * Internal identifier row for server-side storage and business logic.
+ *
+ * Adds [passwordHash] to [UserIdentifier]-equivalent fields. [passwordHash] is used for password-based providers
+ * and must be `null` for external providers; this value must not be exposed via API payloads.
+ * Public wire representation is [UserIdentifierPayload].
  */
-data class UserIdentifier(
+data class UserIdentifierInternal(
     val id: UserIdentifierId = UserIdentifierId.generate(),
     val userId: UserId,
     val userAuthProvider: UserAuthProvider,
     val identifier: String,
+    val passwordHash: String? = null,
     val isSensitiveValuesMasked: Boolean,
     val createdAt: Instant,
     val updatedAt: Instant?

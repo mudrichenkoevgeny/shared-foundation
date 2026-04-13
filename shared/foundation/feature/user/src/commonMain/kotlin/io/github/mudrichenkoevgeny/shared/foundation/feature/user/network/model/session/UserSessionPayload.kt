@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
@@ -31,29 +32,14 @@ data class UserSessionPayload(
     @SerialName(UserApiFields.REVOKED)
     val revoked: Boolean = false,
 
-    @SerialName(CommonApiFields.CLIENT_TYPE)
-    val clientType: String? = null,
+    @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
+    val clientDeviceInfo: ClientDeviceInfoPayload = ClientDeviceInfoPayload(),
 
     @SerialName(CommonApiFields.USER_AGENT)
     val userAgent: String? = null,
 
     @SerialName(CommonApiFields.IP_ADDRESS)
     val ipAddress: String? = null,
-
-    @SerialName(CommonApiFields.LANGUAGE)
-    val language: String? = null,
-
-    @SerialName(CommonApiFields.DEVICE_ID)
-    val deviceId: String? = null,
-
-    @SerialName(CommonApiFields.DEVICE_NAME)
-    val deviceName: String? = null,
-
-    @SerialName(CommonApiFields.APP_VERSION)
-    val appVersion: String? = null,
-
-    @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
-    val operationSystemVersion: String? = null,
 
     @SerialName(UserApiFields.EXPIRES_AT)
     val expiresAt: Long? = null,

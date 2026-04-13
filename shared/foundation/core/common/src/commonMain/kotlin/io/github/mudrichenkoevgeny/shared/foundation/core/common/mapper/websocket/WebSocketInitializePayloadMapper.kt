@@ -7,35 +7,37 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 
 /**
+ * Merges this payload into [existingClientInfo] [ClientInfo] (device fields and [ClientInfo.apiVersion] only).
+ */
+fun WebSocketInitializePayload.mergeClientInfo(
+    existingClientInfo: ClientInfo? = null
+): ClientInfo {
+    val currentClientInfo = existingClientInfo ?: ClientInfo()
+    return currentClientInfo.copy(
+        deviceInfo = mergeClientDeviceInfo(currentClientInfo.deviceInfo),
+        apiVersion = apiVersion ?: currentClientInfo.apiVersion
+    )
+}
+
+/**
  * Merges this payload into [existingClientDeviceInfo] [ClientDeviceInfo].
  *
  * Non-null fields from the payload override; [WebSocketInitializePayload.clientType] is applied only when
  * [ClientType.fromValueOrNull] returns non-null, otherwise [existingClientDeviceInfo]'s type is kept.
  */
 fun WebSocketInitializePayload.mergeClientDeviceInfo(
-    existingClientDeviceInfo: ClientDeviceInfo
-): ClientDeviceInfo = ClientDeviceInfo(
-    clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: existingClientDeviceInfo.clientType,
-    language = language ?: existingClientDeviceInfo.language,
-    deviceId = deviceId?.toClientDeviceIdOrNull(),
-    deviceName = deviceName ?: existingClientDeviceInfo.deviceName,
-    appVersion = appVersion ?: existingClientDeviceInfo.appVersion,
-    operationSystemVersion = operationSystemVersion ?: existingClientDeviceInfo.operationSystemVersion
-)
-
-/**
- * Merges this payload into [existingClientInfo] [ClientInfo] (device fields and [ClientInfo.apiVersion] only).
- */
-fun WebSocketInitializePayload.mergeClientInfo(
-    existingClientInfo: ClientInfo
-): ClientInfo = ClientInfo(
-    deviceInfo = mergeClientDeviceInfo(existingClientInfo.deviceInfo),
-    userAgent = existingClientInfo.userAgent,
-    ipAddress = existingClientInfo.ipAddress,
-    host = existingClientInfo.host,
-    origin = existingClientInfo.origin,
-    apiVersion = apiVersion ?: existingClientInfo.apiVersion
-)
+    existingClientDeviceInfo: ClientDeviceInfo? = null
+): ClientDeviceInfo {
+    val currentClientDeviceInfo = existingClientDeviceInfo ?: ClientDeviceInfo()
+    return currentClientDeviceInfo.copy(
+        clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: currentClientDeviceInfo.clientType,
+        language = language ?: currentClientDeviceInfo.language,
+        deviceId = deviceId?.toClientDeviceIdOrNull() ?: currentClientDeviceInfo.deviceId,
+        deviceName = deviceName ?: currentClientDeviceInfo.deviceName,
+        appVersion = appVersion ?: currentClientDeviceInfo.appVersion,
+        operationSystemVersion = operationSystemVersion ?: currentClientDeviceInfo.operationSystemVersion
+    )
+}
 
 fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?) = WebSocketInitializePayload(
     clientType = clientType?.serialName,

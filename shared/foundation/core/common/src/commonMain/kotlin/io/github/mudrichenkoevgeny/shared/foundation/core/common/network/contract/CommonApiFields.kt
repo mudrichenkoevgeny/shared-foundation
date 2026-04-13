@@ -49,6 +49,12 @@ object CommonApiFields {
     /** JSON field name for the client category (e.g. web, android). */
     const val CLIENT_TYPE = "client_type"
 
+    /** JSON field name for nested client device info payload. */
+    const val CLIENT_DEVICE_INFO = "client_device_info"
+
+    /** JSON field name for nested client info payload. */
+    const val CLIENT_INFO = "client_info"
+
     /** JSON field name for the HTTP User-Agent or equivalent. */
     const val USER_AGENT = "user_agent"
 
