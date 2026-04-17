@@ -26,12 +26,15 @@ object ManagementAuditRoutes {
      * [AuditEventPayload.createdAt]); [ListingParamNames.Sort.SORT_ORDER] ([CommonApiFields.SortOrder.ASC] /
      * [CommonApiFields.SortOrder.DESC]).
      *
-     * **Filters** ([AuditFilterValues.AuditEventFilterValues], optional; same key repeated = **OR**; different keys =
-     * **AND**): [AuditFilterValues.AuditEventFilterValues.ACTOR_ID], [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE]
-     * ([AuditActorType]), [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE],
-     * [AuditFilterValues.AuditEventFilterValues.ACTION], [AuditFilterValues.AuditEventFilterValues.RESOURCE],
-     * [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID], [AuditFilterValues.AuditEventFilterValues.STATUS]
-     * ([AuditStatus]), [AuditFilterValues.AuditEventFilterValues.MESSAGE].
+     * **Filters** ([AuditFilterValues.AuditEventFilterValues], optional; same key repeated = **OR**;  different keys combine as **AND**.
+     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — list of actor IDs.
+     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE] — list of [AuditActorType] serial names.
+     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE] — list of user roles.
+     * - [AuditFilterValues.AuditEventFilterValues.ACTION] — list of audit actions.
+     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE] — list of audit resources.
+     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID] — list of resource IDs.
+     * - [AuditFilterValues.AuditEventFilterValues.STATUS] — list of [AuditStatus] serial names.
+     * - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — list of free-text messages; server-defined.
      *
      * Response body: [PagedResult] of [AuditEventPayload].
      */

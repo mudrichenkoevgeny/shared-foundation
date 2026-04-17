@@ -17,8 +17,7 @@ data class UserIdentifierInternal(
     val userId: UserId,
     val userAuthProvider: UserAuthProvider,
     val identifier: String,
-    val passwordHash: String? = null,
-    val isSensitiveValuesMasked: Boolean,
+    val passwordHash: PasswordHash? = null,
     val createdAt: Instant,
     val updatedAt: Instant?
 )

@@ -28,11 +28,8 @@ enum class UserAuditActionType : AuditActionType {
     /** [ManagementSessionRoutes.DELETE_ALL_USER_SESSIONS]. */
     MANAGEMENT_DELETE_ALL_USER_SESSIONS,
 
-    /** [ManagementUserRoutes.UPDATE_USER_ACCOUNT_STATUS]. */
-    MANAGEMENT_UPDATE_USER_ACCOUNT_STATUS,
-
-    /** [ManagementUserRoutes.UPDATE_USER_PERMISSIONS]. */
-    MANAGEMENT_UPDATE_USER_PERMISSIONS,
+    /** [ManagementUserRoutes.UPDATE_USER]. */
+    MANAGEMENT_UPDATE_USER,
 
     /** [ManagementUserRoutes.DELETE_USER]. */
     MANAGEMENT_DELETE_USER,
@@ -91,8 +88,7 @@ enum class UserAuditActionType : AuditActionType {
             MANAGEMENT_DELETE_IDENTIFIER -> ACTION_MANAGEMENT_DELETE_IDENTIFIER
             MANAGEMENT_DELETE_USER_SESSION -> ACTION_MANAGEMENT_DELETE_USER_SESSION
             MANAGEMENT_DELETE_ALL_USER_SESSIONS -> ACTION_MANAGEMENT_DELETE_ALL_USER_SESSIONS
-            MANAGEMENT_UPDATE_USER_ACCOUNT_STATUS -> ACTION_MANAGEMENT_UPDATE_USER_ACCOUNT_STATUS
-            MANAGEMENT_UPDATE_USER_PERMISSIONS -> ACTION_MANAGEMENT_UPDATE_USER_PERMISSIONS
+            MANAGEMENT_UPDATE_USER -> ACTION_MANAGEMENT_UPDATE_USER
             MANAGEMENT_DELETE_USER -> ACTION_MANAGEMENT_DELETE_USER
             MANAGEMENT_CREATE_USER -> ACTION_MANAGEMENT_CREATE_USER
             LOGIN_BY_EMAIL -> ACTION_LOGIN_BY_EMAIL
@@ -120,8 +116,7 @@ enum class UserAuditActionType : AuditActionType {
         const val ACTION_MANAGEMENT_DELETE_IDENTIFIER = "management_delete_identifier"
         const val ACTION_MANAGEMENT_DELETE_USER_SESSION = "management_delete_user_session"
         const val ACTION_MANAGEMENT_DELETE_ALL_USER_SESSIONS = "management_delete_all_user_sessions"
-        const val ACTION_MANAGEMENT_UPDATE_USER_ACCOUNT_STATUS = "management_update_user_account_status"
-        const val ACTION_MANAGEMENT_UPDATE_USER_PERMISSIONS = "management_update_user_permissions"
+        const val ACTION_MANAGEMENT_UPDATE_USER = "management_update_user"
         const val ACTION_MANAGEMENT_DELETE_USER = "management_delete_user"
         const val ACTION_MANAGEMENT_CREATE_USER = "management_create_user"
         const val ACTION_LOGIN_BY_EMAIL = "login_by_email"

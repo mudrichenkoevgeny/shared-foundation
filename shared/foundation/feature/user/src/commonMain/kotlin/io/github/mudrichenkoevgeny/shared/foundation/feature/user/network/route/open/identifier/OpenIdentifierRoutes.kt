@@ -42,8 +42,7 @@ object OpenIdentifierRoutes {
      * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional). If omitted, no filtering (all identifiers
      * for the current user, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name
-     *   ([UserIdentifierPayload.userAuthProvider]).
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserIdentifierPayload.userAuthProvider]).
      *
      * Response body: [PagedResult] of [UserIdentifierPayload] with [UserIdentifierPayload.isSensitiveValuesMasked]
      * `false` (self-service raw values).

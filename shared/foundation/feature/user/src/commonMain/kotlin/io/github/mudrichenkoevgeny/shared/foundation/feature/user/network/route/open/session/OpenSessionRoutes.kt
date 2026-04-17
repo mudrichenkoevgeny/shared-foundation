@@ -45,9 +45,9 @@ object OpenSessionRoutes {
      * **Filters** ([UserFilterValues.UserSessionFilterValues], optional). If omitted, no filtering (all sessions for
      * the current user, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name ([UserSessionPayload.identifierAuthProvider]).
-     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-text / repeat for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — true or false.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; free-tex.
      *
      * Response body: [PagedResult] of [UserSessionPayload] with [UserSessionPayload.isSensitiveValuesMasked] `false`.
      */

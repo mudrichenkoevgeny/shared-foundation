@@ -28,14 +28,9 @@ object BaseManagementUserRoutes {
     const val GET_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
     /**
-     * Path template for updating a user's account status; includes the [UserApiPaths.USER_ID] path parameter.
+     * Path template for updating a user's account; includes the [UserApiPaths.USER_ID] path parameter.
      */
-    const val UPDATE_USER_ACCOUNT_STATUS = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}/status"
-
-    /**
-     * Path template for replacing a user's explicit permission grants; includes the [UserApiPaths.USER_ID] path parameter.
-     */
-    const val UPDATE_USER_PERMISSIONS = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}/permissions"
+    const val UPDATE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
     /**
      * Path template for deleting a user; includes the [UserApiPaths.USER_ID] path parameter.

@@ -11,6 +11,8 @@ import kotlinx.serialization.Serializable
  *
  * @property email The email address for the new account.
  * @property password The initial password for the new account.
+ * @property role The role to assign to the new account.
+ * @property status The initial account status.
  * @property permissions Explicit [PermissionCode] values to assign.
  */
 @Serializable
@@ -22,6 +24,14 @@ data class CreateByEmailRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.PASSWORD)
     val password: String,
+
+    @NotBlankStringField
+    @SerialName(UserApiFields.ROLE)
+    val role: String,
+
+    @NotBlankStringField
+    @SerialName(UserApiFields.ACCOUNT_STATUS)
+    val status: String,
 
     @SerialName(UserApiFields.PERMISSIONS)
     val permissions: Set<PermissionCode>

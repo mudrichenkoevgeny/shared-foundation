@@ -72,7 +72,7 @@ object UserFilterValues {
         /** Filter by language tag. */
         const val LANGUAGE = CommonApiFields.LANGUAGE
 
-        /** Filter by stable device id ([CommonApiFields.DEVICE_ID]); repeat key for OR if supported. */
+        /** Filter by stable device id ([CommonApiFields.DEVICE_ID]). */
         const val DEVICE_ID = CommonApiFields.DEVICE_ID
 
         /** Filter by device name. */
@@ -85,7 +85,7 @@ object UserFilterValues {
         const val OPERATION_SYSTEM_VERSION = CommonApiFields.OPERATION_SYSTEM_VERSION
 
         /**
-         * Raw login / identifier value filter; not a DTO field on [UserSessionPayload]; server-defined matching; repeat key for OR if supported.
+         * Raw login / identifier value filter; not a DTO field on [UserSessionPayload]; server-defined matching.
          */
         const val IDENTIFIER = UserApiFields.IDENTIFIER
     }

@@ -39,20 +39,19 @@ object ManagementSessionRoutes {
      * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID]
      * required; others optional. Same key repeated — **OR**; different keys — **AND**.
      *
-     * - [UserFilterValues.UserSessionFilterValues.USER_ID]
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — free-text; server-defined; repeat key for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — credential record id ([UserSessionPayload.identifierId]).
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name
-     *   ([UserSessionPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_ID] — list of user IDs.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
      * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
-     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — [ClientType] serial name.
-     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — free-text; server-defined; repeat for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — free-text; server-defined; repeat for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — free-text; server-defined; repeat for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — opaque device id; repeat for OR if supported.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME],
-     *   [UserFilterValues.UserSessionFilterValues.APP_VERSION],
-     *   [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — free-text; server-defined; repeat key for OR if supported.
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of free-text IP addresses; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — list of free-text languages; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — list of opaque device IDs.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — list of free-text device names; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
+     * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
      *
      * **Authorization** ([SessionPermissionCode]): for sessions of an account with [UserRole.USER], caller needs
      * [SessionPermissionCode.SESSION_GET_OF_USER_MASKED] and/or [SessionPermissionCode.SESSION_GET_OF_USER_UNMASKED];

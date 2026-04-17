@@ -35,11 +35,9 @@ object ManagementIdentifierRoutes {
      * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): [UserFilterValues.UserIdentifierFilterValues.USER_ID]
      * required. Same key repeated means **OR**; different keys combine as **AND**.
      *
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_ID]
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — [UserAuthProvider] serial name
-     *   ([UserIdentifierPayload.userAuthProvider]).
-     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — free-text; server-defined matching; repeat key for
-     *   multiple values if supported.
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_ID] — list of user IDs.
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserIdentifierPayload.userAuthProvider]).
+     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined matching.
      *
      * **Authorization** ([IdentifierPermissionCode]): for identifiers owned by [UserRole.USER], caller needs
      * [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_MASKED] and/or
