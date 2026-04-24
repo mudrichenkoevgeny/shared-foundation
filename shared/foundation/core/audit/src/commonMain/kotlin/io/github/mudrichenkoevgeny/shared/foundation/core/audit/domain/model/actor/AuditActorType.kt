@@ -24,9 +24,9 @@ enum class AuditActorType {
         }
 
     companion object {
-        const val TYPE_USER = "user"
-        const val TYPE_SYSTEM = "system"
-        const val TYPE_SERVICE = "service"
+        private const val TYPE_USER = "user"
+        private const val TYPE_SYSTEM = "system"
+        private const val TYPE_SERVICE = "service"
 
         /**
          * Returns [AuditActorType] based on the provided string value, or null if the value is invalid.

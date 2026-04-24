@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reque
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.RequiredField
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,7 +14,7 @@ import kotlinx.serialization.Serializable
  * @property password The initial password for the new account.
  * @property role The role to assign to the new account.
  * @property status The initial account status.
- * @property permissions Explicit [PermissionCode] values to assign.
+ * @property permissionCodes Explicit [PermissionCode] values to assign.
  */
 @Serializable
 data class CreateByEmailRequest(
@@ -33,6 +34,11 @@ data class CreateByEmailRequest(
     @SerialName(UserApiFields.ACCOUNT_STATUS)
     val status: String,
 
-    @SerialName(UserApiFields.PERMISSIONS)
-    val permissions: Set<PermissionCode>
+    @RequiredField
+    @SerialName(UserApiFields.AUTHORITY_LEVEL)
+    val authorityLevel: Int,
+
+    @RequiredField
+    @SerialName(UserApiFields.PERMISSION_CODES)
+    val permissionCodes: Set<String>
 )

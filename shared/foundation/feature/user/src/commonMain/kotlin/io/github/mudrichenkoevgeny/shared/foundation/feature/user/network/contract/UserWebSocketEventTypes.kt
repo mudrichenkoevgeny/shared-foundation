@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.PublicAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 
@@ -21,13 +20,14 @@ object UserWebSocketEventTypes {
     const val AUTH_SETTINGS_UPDATED = "AUTH_SETTINGS_UPDATED"
 
     /**
-     * Sent when the account status of the current user changes. See [UserAccountStatus].
+     * Sent when the user's data (profile, role, account status, or permissions) is updated.
+     * Use this to synchronize the local state of the current user.
      * Payload: [UserDetailsPayload]
      */
-    const val ACCOUNT_STATUS_CHANGED = "ACCOUNT_STATUS_CHANGED"
+    const val USER_UPDATED = "USER_UPDATED"
 
     /**
-     * Forced termination of the current session. The client must clear local data and logout.
+     * Forced deletion of the current session. The client must clear local data and logout.
      */
-    const val SESSION_TERMINATED = "SESSION_TERMINATED"
+    const val SESSION_DELETED = "SESSION_DELETED"
 }

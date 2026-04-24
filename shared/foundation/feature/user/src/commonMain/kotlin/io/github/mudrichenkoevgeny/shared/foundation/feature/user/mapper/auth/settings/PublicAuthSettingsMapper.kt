@@ -14,7 +14,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  */
 fun PublicAuthSettingsPayload.toAuthSettings(): PublicAuthSettings =
     PublicAuthSettings(
-        availableAuthProviders = availableAuthProviders.toAvailableAuthProviders()
+        availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
+        maxTotalIdentifiers = maxTotalIdentifiers,
+        maxEmailIdentifiers = maxEmailIdentifiers,
+        maxPhoneIdentifiers = maxPhoneIdentifiers,
+        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider
     )
 
 /**
@@ -22,5 +26,9 @@ fun PublicAuthSettingsPayload.toAuthSettings(): PublicAuthSettings =
  */
 fun PublicAuthSettings.toAuthSettingsPayload(): PublicAuthSettingsPayload =
     PublicAuthSettingsPayload(
-        availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload()
+        availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
+        maxTotalIdentifiers = maxTotalIdentifiers,
+        maxEmailIdentifiers = maxEmailIdentifiers,
+        maxPhoneIdentifiers = maxPhoneIdentifiers,
+        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider
     )

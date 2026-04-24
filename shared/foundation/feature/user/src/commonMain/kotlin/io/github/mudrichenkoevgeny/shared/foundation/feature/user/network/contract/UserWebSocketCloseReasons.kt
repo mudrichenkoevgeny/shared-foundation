@@ -10,8 +10,8 @@ object UserWebSocketCloseReasons {
     /** The session or access token has reached its expiration time. */
     const val SESSION_EXPIRED = "Session expired"
 
-    /** The session was manually revoked. */
-    const val SESSION_REVOKED = "Session revoked"
+    /** The session was manually deleted. */
+    const val SESSION_DELETED = "Session deleted"
 
     /** The user account has been banned or deactivated. */
     const val USER_BLOCKED = "User blocked"

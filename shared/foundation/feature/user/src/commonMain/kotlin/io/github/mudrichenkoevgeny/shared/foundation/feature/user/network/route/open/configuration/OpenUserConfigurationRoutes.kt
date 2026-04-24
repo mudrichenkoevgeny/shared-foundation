@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.UserConfigurationPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseUserConfigurationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseOpenUserConfigurationRoutes
 
 /**
  * Route paths for user configuration in the public API.
@@ -12,5 +12,5 @@ object OpenUserConfigurationRoutes {
      *
      * Response body: [UserConfigurationPayload].
      */
-    const val GET_CONFIGURATION = BaseUserConfigurationRoutes.BASE_USER_CONFIGURATION_ROUTE
+    const val GET_CONFIGURATION = BaseOpenUserConfigurationRoutes.BASE_USER_CONFIGURATION_ROUTE
 }

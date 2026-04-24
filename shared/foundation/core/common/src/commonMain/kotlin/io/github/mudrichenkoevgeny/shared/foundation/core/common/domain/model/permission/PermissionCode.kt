@@ -19,3 +19,23 @@ value class PermissionCode(val value: String) {
 
     override fun toString(): String = value
 }
+
+/**
+ * Attempts to create a [PermissionCode] from this string.
+ *
+ * Returns `null` if the string is blank.
+ */
+fun String.toPermissionCodeOrNull(): PermissionCode? {
+    return if (this.isNotBlank()) {
+        PermissionCode(this)
+    } else {
+        null
+    }
+}
+
+/**
+ * Creates a [PermissionCode] from this string or throws an exception if the string is blank.
+ */
+fun String.toPermissionCodeOrThrow(): PermissionCode {
+    return PermissionCode(this)
+}

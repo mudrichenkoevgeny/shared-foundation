@@ -38,17 +38,10 @@ enum class ClientType {
     fun isMobileClient(): Boolean = this == ClientType.ANDROID || this == ClientType.IOS
 
     companion object {
-        /** Wire value for [WEB] in JSON and headers. */
-        const val CLIENT_WEB = "web"
-
-        /** Wire value for [ANDROID] in JSON and headers. */
-        const val CLIENT_ANDROID = "android"
-
-        /** Wire value for [IOS] in JSON and headers. */
-        const val CLIENT_IOS = "ios"
-
-        /** Wire value for [DESKTOP] in JSON and headers. */
-        const val CLIENT_DESKTOP = "desktop"
+        private const val CLIENT_WEB = "web"
+        private const val CLIENT_ANDROID = "android"
+        private const val CLIENT_IOS = "ios"
+        private const val CLIENT_DESKTOP = "desktop"
 
         /**
          * Returns [ClientType] based on the provided string value, or null if the value is invalid.

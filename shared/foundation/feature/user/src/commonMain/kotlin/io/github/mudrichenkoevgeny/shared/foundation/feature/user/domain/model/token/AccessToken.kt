@@ -5,10 +5,25 @@ import kotlin.jvm.JvmInline
 /**
  * Opaque JWT or bearer token string issued for API access.
  *
- * Used to carry the access token in [SessionToken] and in auth responses without
- * exposing raw strings at call sites.
- *
- * @param value Raw token string (e.g. JWT); must not be logged or serialized to clients in full.
+ * @property value Raw token string; must not be blank.
  */
 @JvmInline
-value class AccessToken(val value: String)
+value class AccessToken(val value: String) {
+    init {
+        require(value.isNotBlank()) { "AccessToken value must not be blank." }
+    }
+
+    override fun toString(): String = value
+}
+
+/**
+ * Attempts to create an [AccessToken] from this string.
+ * Returns `null` if the string is blank.
+ */
+fun String.toAccessTokenOrNull(): AccessToken? =
+    if (this.isNotBlank()) AccessToken(this) else null
+
+/**
+ * Creates an [AccessToken] from this string or throws an exception if the string is blank.
+ */
+fun String.toAccessTokenOrThrow(): AccessToken = AccessToken(this)

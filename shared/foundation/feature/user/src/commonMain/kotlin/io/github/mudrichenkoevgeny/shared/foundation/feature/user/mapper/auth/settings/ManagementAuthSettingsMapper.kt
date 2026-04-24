@@ -15,6 +15,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSettings =
     ManagementAuthSettings(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
+        maxTotalIdentifiers = maxTotalIdentifiers,
+        maxEmailIdentifiers = maxEmailIdentifiers,
+        maxPhoneIdentifiers = maxPhoneIdentifiers,
+        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+        maxActiveSessions = maxActiveSessions,
         accessTokenValidityHours = accessTokenValidityHours,
         refreshTokenValidityDays = refreshTokenValidityDays
     )
@@ -25,6 +30,11 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
 fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSettingsPayload =
     ManagementAuthSettingsPayload(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
+        maxTotalIdentifiers = maxTotalIdentifiers,
+        maxEmailIdentifiers = maxEmailIdentifiers,
+        maxPhoneIdentifiers = maxPhoneIdentifiers,
+        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+        maxActiveSessions = maxActiveSessions,
         accessTokenValidityHours = accessTokenValidityHours,
         refreshTokenValidityDays = refreshTokenValidityDays
     )

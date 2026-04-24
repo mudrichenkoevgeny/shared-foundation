@@ -23,7 +23,7 @@ enum class SettingsAuditResourceType : AuditResourceType {
     override fun parseOrThrow(value: String): AuditResourceType = fromValueOrThrow(value)
 
     companion object {
-        const val RESOURCE_GLOBAL_SETTINGS = "global_settings"
+        private const val RESOURCE_GLOBAL_SETTINGS = "global_settings"
 
         /**
          * Returns [SettingsAuditResourceType] based on the provided string value, or null if the value is invalid.

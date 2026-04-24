@@ -3,7 +3,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
@@ -15,36 +14,28 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object BaseManagementSessionRoutes {
     /**
-     * Path prefix for session **list** under management. Target user: query
-     * [UserFilterValues.UserSessionFilterValues.USER_ID].
+     * Base path for managing user sessions
      */
-    const val BASE_MANAGEMENT_SESSIONS_LIST_ROUTE =
+    const val BASE_MANAGEMENT_SESSIONS_ROUTE =
         "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/sessions"
 
     /**
-     * Paginated session list; masking is per item.
+     * Paginated session list.
      */
-    const val GET_USER_SESSIONS = BASE_MANAGEMENT_SESSIONS_LIST_ROUTE
+    const val GET_SESSIONS = BASE_MANAGEMENT_SESSIONS_ROUTE
 
     /**
-     * Path template for session ops for a user: [UserApiPaths.USER_ID] in path.
+     * One session row; path parameter [UserApiPaths.SESSION_ID].
      */
-    const val BASE_MANAGEMENT_USER_SESSIONS_ROUTE =
-        "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/sessions"
+    const val GET_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
-     * One session row; path parameters [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
+     * Delete one session; path parameter [UserApiPaths.SESSION_ID].
      */
-    const val GET_USER_SESSION =
-        "$BASE_MANAGEMENT_USER_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val DELETE_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
-     * Terminate one session; path parameters [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
+     * Delete all sessions for a user; path parameter [UserApiPaths.USER_ID].
      */
-    const val DELETE_USER_SESSION = GET_USER_SESSION
-
-    /**
-     * Terminate all sessions for a user; path parameter [UserApiPaths.USER_ID].
-     */
-    const val DELETE_ALL_USER_SESSIONS = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
+    const val DELETE_ALL_USER_SESSIONS = "$BASE_MANAGEMENT_SESSIONS_ROUTE/delete-all-for-user/{${UserApiPaths.USER_ID}}"
 }

@@ -11,36 +11,29 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Shared base path segments for user identifiers in the management API.
  *
  * List uses query [UserFilterValues.UserIdentifierFilterValues.USER_ID]. Single-identifier read and delete use
- * [UserApiPaths.USER_ID] and [UserApiPaths.USER_IDENTIFIER_ID]. Response shape is always [UserIdentifierPayload]; wire
+ * only [UserApiPaths.USER_IDENTIFIER_ID] in path. Response shape is always [UserIdentifierPayload]; wire
  * field [CommonApiFields.IS_SENSITIVE_VALUES_MASKED] reflects masking for the caller ([IdentifierPermissionCode]).
  */
 object BaseManagementIdentifierRoutes {
     /**
-     * Path prefix for identifier list under management.
+     * Base path for managing user identifiers
      */
-    const val BASE_MANAGEMENT_IDENTIFIERS_LIST_ROUTE =
+    const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE =
         "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/identifiers"
 
     /**
-     * Paginated identifier list for a user (same path for all callers); masking is expressed in each item.
+     * Paginated identifier list.
      */
-    const val GET_IDENTIFIERS = BASE_MANAGEMENT_IDENTIFIERS_LIST_ROUTE
+    const val GET_IDENTIFIERS = BASE_MANAGEMENT_IDENTIFIERS_ROUTE
 
     /**
-     * Path template for identifier operations scoped to one user; path parameter [UserApiPaths.USER_ID].
-     */
-    const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE =
-        "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/identifiers"
-
-    /**
-     * Path template for one identifier row; path parameters [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
+     * Path template for one identifier row; path parameter [UserApiPaths.USER_IDENTIFIER_ID].
      */
     const val GET_IDENTIFIER =
         "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
-     * Path template for deleting one identifier record; path parameters [UserApiPaths.USER_ID],
-     * [UserApiPaths.USER_IDENTIFIER_ID].
+     * Path template for deleting one identifier record; path parameter [UserApiPaths.USER_IDENTIFIER_ID].
      */
     const val DELETE_IDENTIFIER =
         "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"

@@ -27,8 +27,8 @@ enum class CommonAuditResourceType : AuditResourceType {
     override fun parseOrThrow(value: String): AuditResourceType = fromValueOrThrow(value)
 
     companion object {
-        const val RESOURCE_AUDIT_EVENT = "audit_event"
-        const val RESOURCE_AUDIT_EVENTS = "audit_events"
+        private const val RESOURCE_AUDIT_EVENT = "audit_event"
+        private const val RESOURCE_AUDIT_EVENTS = "audit_events"
 
         /**
          * Returns [CommonAuditResourceType] based on the provided string value, or null if the value is invalid.

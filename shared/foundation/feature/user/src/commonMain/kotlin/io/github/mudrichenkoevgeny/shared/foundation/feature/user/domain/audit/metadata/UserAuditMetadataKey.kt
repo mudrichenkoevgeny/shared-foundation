@@ -29,6 +29,34 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
      * User identifier record; [AuditEventMetadata.value] is a UUID hex-with-dashes string aligned with [UserIdentifierId.asHexDashString].
      */
     IDENTIFIER_ID {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
+    },
+
+    /**
+     * Email address used in authentication or profile operations.
+     */
+    EMAIL_ADDRESS {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.EMAIL
+    },
+
+    /**
+     * Phone number used in authentication or profile operations.
+     */
+    PHONE_NUMBER {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.PHONE_NUMBER
+    },
+
+    /**
+     * External provider subject identifier.
+     */
+    EXTERNAL_ID {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.PARTIAL_VALUE_MASK
+    },
+
+    /**
+     * Temporary MFA challenge token.
+     */
+    MFA_TOKEN {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.FULL_VALUE_MASK
     };
 
@@ -37,6 +65,10 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
             USER_ID -> KEY_USER_ID
             SESSION_ID -> KEY_SESSION_ID
             IDENTIFIER_ID -> KEY_IDENTIFIER_ID
+            EMAIL_ADDRESS -> KEY_EMAIL_ADDRESS
+            PHONE_NUMBER -> KEY_PHONE_NUMBER
+            EXTERNAL_ID -> KEY_EXTERNAL_ID
+            MFA_TOKEN -> KEY_MFA_TOKEN
         }
 
     override fun parseOrNull(value: String): AuditMetadataKey? = fromValueOrNull(value)
@@ -44,9 +76,13 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
     override fun parseOrThrow(value: String): AuditMetadataKey = fromValueOrThrow(value)
 
     companion object {
-        const val KEY_USER_ID = "user_id"
-        const val KEY_SESSION_ID = "session_id"
-        const val KEY_IDENTIFIER_ID = "identifier_id"
+        private const val KEY_USER_ID = "user_id"
+        private const val KEY_SESSION_ID = "session_id"
+        private const val KEY_IDENTIFIER_ID = "identifier_id"
+        private const val KEY_EMAIL_ADDRESS = "email_address"
+        private const val KEY_PHONE_NUMBER = "phone_number"
+        private const val KEY_EXTERNAL_ID = "external_id"
+        private const val KEY_MFA_TOKEN = "mfa_token"
 
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,

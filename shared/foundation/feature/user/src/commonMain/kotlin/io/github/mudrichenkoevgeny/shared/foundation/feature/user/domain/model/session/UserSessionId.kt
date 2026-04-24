@@ -7,7 +7,7 @@ import kotlin.uuid.Uuid
  * Identifier of an authenticated user session.
  *
  * Each login typically receives a dedicated [UserSessionId] so that sessions
- * can be revoked, audited and correlated in logs independently.
+ * can be deleted, audited and correlated in logs independently.
  */
 @JvmInline
 value class UserSessionId(val value: Uuid) {

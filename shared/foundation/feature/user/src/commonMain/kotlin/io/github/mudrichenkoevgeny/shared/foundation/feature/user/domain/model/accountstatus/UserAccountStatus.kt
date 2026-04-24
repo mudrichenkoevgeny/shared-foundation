@@ -42,11 +42,11 @@ enum class UserAccountStatus {
         }
 
     companion object {
-        const val STATUS_ACTIVE = "active"
-        const val STATUS_READ_ONLY = "read_only"
-        const val STATUS_BANNED = "banned"
-        const val STATUS_SECURITY_HOLD = "security_hold"
-        const val STATUS_PENDING_DELETION = "pending_deletion"
+        private const val STATUS_ACTIVE = "active"
+        private const val STATUS_READ_ONLY = "read_only"
+        private const val STATUS_BANNED = "banned"
+        private const val STATUS_SECURITY_HOLD = "security_hold"
+        private const val STATUS_PENDING_DELETION = "pending_deletion"
 
         /**
          * Returns [UserAccountStatus] based on the provided string value, or null if the value is invalid.

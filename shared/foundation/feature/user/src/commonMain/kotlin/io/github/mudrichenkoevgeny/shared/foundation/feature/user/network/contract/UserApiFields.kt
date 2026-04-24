@@ -56,17 +56,6 @@ object UserApiFields {
     /** JSON field name for an external authentication provider id; wire value follows [UserAuthProvider.serialName]. */
     const val AUTH_PROVIDER = "auth_provider"
 
-    /**
-     * JSON field name for the suggested client retry delay after rate limiting, in whole seconds (confirmation /
-     * send-code responses).
-     */
-    const val RETRY_AFTER_SECONDS = "retry_after_seconds"
-
-    /**
-     * JSON field name for the OTP length or number of symbols to display (confirmation responses; server-defined).
-     */
-    const val NUMBER_OF_SYMBOLS = "number_of_symbols"
-
     /** JSON field name for the nested user profile object on authentication responses. */
     const val USER = "user"
 
@@ -85,8 +74,19 @@ object UserApiFields {
      */
     const val ACCOUNT_STATUS_BEFORE_DELETION = "account_status_before_deletion"
 
-    /** JSON field name for explicit permission grants as a JSON array of permission code strings. */
-    const val PERMISSIONS = "permissions"
+    /**
+     * JSON field name for the hierarchical weight of the user; used for access control logic and
+     * prevention of privilege escalation.
+     */
+    const val AUTHORITY_LEVEL = "authority_level"
+
+    /** JSON field name for the list of explicit permission codes represented as strings. */
+    const val PERMISSION_CODES = "permission_codes"
+
+    /**
+     * JSON field name indicating whether Time-based One-Time Password (TOTP) 2FA is enabled for the account.
+     */
+    const val IS_TOTP_ENABLED = "is_totp_enabled"
 
     /** JSON field name for last login timestamp (epoch milliseconds; user listings and sort keys). */
     const val LAST_LOGIN_AT = "last_login_at"
@@ -104,6 +104,11 @@ object UserApiFields {
      * filters).
      */
     const val IDENTIFIER = "identifier"
+
+    /**
+     * JSON field name for the email address linked to an external authentication provider.
+     */
+    const val EXTERNAL_PROVIDER_EMAIL = "external_provider_email"
 
     /**
      * JSON field name for the authentication provider dimension on identifiers or sessions; wire value follows
@@ -124,15 +129,30 @@ object UserApiFields {
     const val LAST_ACCESSED_AT = "last_accessed_at"
 
     /**
-     * JSON field name for the revoked flag (`true` if the session is no longer valid for authentication, for example
-     * soft-revoked but the row is retained).
-     */
-    const val REVOKED = "revoked"
-
-    /**
      * JSON field name for the last step-up or re-authentication timestamp on a session, in epoch milliseconds.
      */
     const val LAST_REAUTHENTICATED_AT = "last_reauthenticated_at"
+
+    /** JSON field name for the list of deleted session ids. */
+    const val DELETED_SESSION_IDS = "deleted_session_ids"
+
+    /** JSON field name for the list of deleted credential identifiers. */
+    const val DELETED_IDENTIFIER_IDS = "deleted_identifier_ids"
+
+    /** JSON field name for the maximum total identifiers allowed per account. */
+    const val MAX_TOTAL_IDENTIFIERS = "max_total_identifiers"
+
+    /** JSON field name for the maximum email identifiers allowed per account. */
+    const val MAX_EMAIL_IDENTIFIERS = "max_email_identifiers"
+
+    /** JSON field name for the maximum phone identifiers allowed per account. */
+    const val MAX_PHONE_IDENTIFIERS = "max_phone_identifiers"
+
+    /** JSON field name for the maximum identifiers allowed per specific external provider. */
+    const val MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER = "max_identifiers_per_external_provider"
+
+    /** JSON field name for the maximum concurrent active sessions allowed per account. */
+    const val MAX_ACTIVE_SESSIONS = "max_active_sessions"
 
     /**
      * JSON field name for provider availability lists (primary and secondary); entries use [UserAuthProvider.serialName]

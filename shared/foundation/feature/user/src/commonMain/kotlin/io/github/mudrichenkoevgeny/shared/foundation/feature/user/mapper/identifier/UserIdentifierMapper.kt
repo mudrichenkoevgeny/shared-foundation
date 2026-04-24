@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.identi
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifier
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierInternal
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
@@ -22,6 +23,7 @@ fun UserIdentifierPayload.toUserIdentifier(): UserIdentifier = UserIdentifier(
     userId = userId.toUserIdOrThrow(),
     userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
     identifier = identifier,
+    externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
     createdAt = Instant.fromEpochMilliseconds(createdAt),
     updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
@@ -35,7 +37,21 @@ fun UserIdentifier.toUserIdentifierPayload(): UserIdentifierPayload = UserIdenti
     userId = userId.asHexDashString(),
     userAuthProvider = userAuthProvider.serialName,
     identifier = identifier,
+    externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds()
+)
+
+fun UserIdentifierInternal.toUserIdentifier(
+    isSensitiveValuesMasked: Boolean = false
+) = UserIdentifier(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    externalProviderEmail = externalProviderEmail,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
 )

@@ -144,21 +144,21 @@ enum class CommonAuditMetadataKey : AuditMetadataKey {
     override fun parseOrThrow(value: String): AuditMetadataKey = fromValueOrThrow(value)
 
     companion object {
-        const val KEY_DEVICE_ID = "device_id"
-        const val KEY_DEVICE_NAME = "device_name"
-        const val KEY_CLIENT_TYPE = "client_type"
-        const val KEY_LANGUAGE = "language"
-        const val KEY_APP_VERSION = "app_version"
-        const val KEY_OS_VERSION = "os_version"
-        const val KEY_USER_AGENT = "user_agent"
-        const val KEY_IP_ADDRESS = "key_ip_address"
-        const val KEY_HOST = "host"
-        const val KEY_ORIGIN = "origin"
-        const val KEY_API_VERSION = "api_version"
-        const val KEY_TRACE_ID = "trace_id"
-        const val KEY_DENIED_REASON = "denied_reason"
-        const val KEY_ERROR_ID = "error_id"
-        const val KEY_ERROR_CODE = "error_code"
+        private const val KEY_DEVICE_ID = "device_id"
+        private const val KEY_DEVICE_NAME = "device_name"
+        private const val KEY_CLIENT_TYPE = "client_type"
+        private const val KEY_LANGUAGE = "language"
+        private const val KEY_APP_VERSION = "app_version"
+        private const val KEY_OS_VERSION = "os_version"
+        private const val KEY_USER_AGENT = "user_agent"
+        private const val KEY_IP_ADDRESS = "key_ip_address"
+        private const val KEY_HOST = "host"
+        private const val KEY_ORIGIN = "origin"
+        private const val KEY_API_VERSION = "api_version"
+        private const val KEY_TRACE_ID = "trace_id"
+        private const val KEY_DENIED_REASON = "denied_reason"
+        private const val KEY_ERROR_ID = "error_id"
+        private const val KEY_ERROR_CODE = "error_code"
 
         /**
          * Returns [CommonAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,

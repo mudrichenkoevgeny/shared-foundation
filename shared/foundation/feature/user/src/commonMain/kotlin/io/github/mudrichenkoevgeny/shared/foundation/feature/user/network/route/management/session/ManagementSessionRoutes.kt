@@ -1,6 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
@@ -9,11 +12,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseManagementSessionRoutes
 
@@ -28,13 +32,13 @@ object ManagementSessionRoutes {
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
      * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
-     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     * [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     * [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     * [UserSortValues.UserSessionSortBy.CREATED_AT],
+     * [UserSortValues.UserSessionSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
-     *   [CommonApiFields.SortOrder.DESC].
+     * [CommonApiFields.SortOrder.DESC].
      *
      * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID]
      * required; others optional. Same key repeated — **OR**; different keys — **AND**.
@@ -43,7 +47,6 @@ object ManagementSessionRoutes {
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
      * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
-     * - [UserFilterValues.UserSessionFilterValues.REVOKED] — `true` or `false`.
      * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
      * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
      * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of free-text IP addresses; server-defined.
@@ -62,12 +65,12 @@ object ManagementSessionRoutes {
      *
      * Response body: [PagedResult] of [UserSessionPayload].
      */
-    const val GET_USER_SESSIONS = BaseManagementSessionRoutes.GET_USER_SESSIONS
+    const val GET_SESSIONS = BaseManagementSessionRoutes.GET_SESSIONS
 
     /**
      * **HTTP method:** `GET`
      *
-     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
+     * Path parameter: [UserApiPaths.SESSION_ID].
      *
      * **Authorization** ([SessionPermissionCode]): for sessions of an account with [UserRole.USER], caller needs
      * [SessionPermissionCode.SESSION_GET_OF_USER_MASKED] and/or [SessionPermissionCode.SESSION_GET_OF_USER_UNMASKED];
@@ -78,30 +81,33 @@ object ManagementSessionRoutes {
      *
      * Response body: [UserSessionPayload].
      */
-    const val GET_USER_SESSION = BaseManagementSessionRoutes.GET_USER_SESSION
+    const val GET_SESSION = BaseManagementSessionRoutes.GET_SESSION
 
     /**
      * **HTTP method:** `DELETE`
      *
-     * Force-terminates the session [UserApiPaths.SESSION_ID] for the user [UserApiPaths.USER_ID].
+     * Deletes the session [UserApiPaths.SESSION_ID] for the user [UserApiPaths.USER_ID].
      *
-     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.SESSION_ID].
+     * Path parameter: [UserApiPaths.SESSION_ID].
      *
      * **Authorization:** [SessionPermissionCode.SESSION_DELETE_FOR_USER] when the session owner has [UserRole.USER];
      * [SessionPermissionCode.SESSION_DELETE_FOR_STAFF] when the owner has [UserRole.STAFF] (server aligns [UserRole.ADMIN]
      * accounts with the staff-scoped delete grant if applicable).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful termination and for security-relevant denials. Use action
-     * [UserAuditActionType.MANAGEMENT_DELETE_USER_SESSION] and resource [UserAuditResourceType.USER_SESSION]. Set
-     * `resourceId` to the path [UserApiPaths.SESSION_ID]. Add metadata [UserAuditMetadataKey.USER_ID] with the path
-     * [UserApiPaths.USER_ID] (account whose session was terminated).
+     * **Audit logging:** Persist an [AuditEvent] for successful deletion and security-relevant denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_SESSION].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator [UserId] performing the revocation.
+     * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserApiPaths.SESSION_ID].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.USER_ID] — the account whose session was deleted from [UserApiPaths.USER_ID].
      */
-    const val DELETE_USER_SESSION = BaseManagementSessionRoutes.DELETE_USER_SESSION
+    const val DELETE_SESSION = BaseManagementSessionRoutes.DELETE_SESSION
 
     /**
      * **HTTP method:** `DELETE`
      *
-     * Force-terminates **all** sessions for the user [UserApiPaths.USER_ID].
+     * Deletes **all** sessions for the user [UserApiPaths.USER_ID].
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
@@ -109,9 +115,13 @@ object ManagementSessionRoutes {
      * has [UserRole.USER]; [SessionPermissionCode.SESSION_DELETE_FOR_STAFF] when that user has [UserRole.STAFF] (server
      * aligns [UserRole.ADMIN] accounts with the staff-scoped delete grant if applicable).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful termination and for security-relevant denials. Use action
-     * [UserAuditActionType.MANAGEMENT_DELETE_ALL_USER_SESSIONS] and resource [UserAuditResourceType.USER_SESSION]. Leave
-     * `resourceId` unset (bulk operation). Add metadata [UserAuditMetadataKey.USER_ID] with the path [UserApiPaths.USER_ID].
+     * **Audit logging:** Persist an [AuditEvent] for successful deletion and security-relevant denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_ALL_USER_SESSIONS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator [UserId] performing the revocation.
+     * * **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions were deleted from [UserApiPaths.USER_ID].
      */
     const val DELETE_ALL_USER_SESSIONS = BaseManagementSessionRoutes.DELETE_ALL_USER_SESSIONS
 }

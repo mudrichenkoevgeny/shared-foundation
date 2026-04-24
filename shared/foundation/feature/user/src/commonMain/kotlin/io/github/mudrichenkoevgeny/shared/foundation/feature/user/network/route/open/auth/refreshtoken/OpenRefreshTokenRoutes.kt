@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.refreshtoken
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.RefreshTokenPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.refreshtoken.BaseRefreshTokenRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.SessionTokenPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.refreshtoken.BaseOpenRefreshTokenRoutes
 
 /**
  * Route paths for refresh-token operations in the authentication API.
@@ -13,7 +13,7 @@ object OpenRefreshTokenRoutes {
      *
      * Request body: [RefreshTokenPayload].
      *
-     * Response body: [AuthDataPayload].
+     * Response body: [SessionTokenPayload].
      */
-    const val REFRESH_TOKEN = BaseRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
+    const val REFRESH_TOKEN = BaseOpenRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
 }

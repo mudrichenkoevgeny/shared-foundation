@@ -9,11 +9,12 @@ import kotlinx.serialization.Serializable
 /**
  * DTO for a user identifier record (management and open list/detail responses).
  *
- * @property identifier Login value or server-defined masked form; meaning depends on [isSensitiveValuesMasked].
- * @property isSensitiveValuesMasked `true` when [identifier] must be treated as non-raw for the caller.
  * @property id Identifier row id.
  * @property userId Owning user id.
  * @property userAuthProvider [UserAuthProvider] serial name.
+ * @property identifier Login value or server-defined masked form; meaning depends on [isSensitiveValuesMasked].
+ * @property externalProviderEmail Verified email address associated with the external identity provider
+ * @property isSensitiveValuesMasked `true` when [identifier] must be treated as non-raw for the caller.
  * @property createdAt Epoch millis when linked.
  * @property updatedAt Epoch millis of last change, if any.
  */
@@ -30,6 +31,9 @@ data class UserIdentifierPayload(
 
     @SerialName(UserApiFields.IDENTIFIER)
     val identifier: String,
+
+    @SerialName(UserApiFields.EXTERNAL_PROVIDER_EMAIL)
+    val externalProviderEmail: String?,
 
     @SerialName(CommonApiFields.IS_SENSITIVE_VALUES_MASKED)
     val isSensitiveValuesMasked: Boolean,

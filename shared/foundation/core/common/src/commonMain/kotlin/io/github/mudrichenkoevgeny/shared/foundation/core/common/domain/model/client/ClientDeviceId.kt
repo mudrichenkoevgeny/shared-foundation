@@ -5,41 +5,33 @@ import kotlin.uuid.Uuid
 
 /**
  * Opaque identifier of a physical or logical client device.
- *
- * The format is intentionally unconstrained so that callers can plug in
- * platform-specific identifiers, push tokens or installation ids as needed.
- *
- * @param value Raw string backing the id; use [asHexDashString] for serialization.
  */
 @JvmInline
-value class ClientDeviceId(val value: String) {
+value class ClientDeviceId(val value: Uuid) {
 
     /**
-     * Returns the underlying value as a canonical string (e.g. for logging or API).
+     * Returns the underlying [Uuid] as a canonical hex string with dashes.
      */
-    fun asHexDashString(): String = value
+    fun asHexDashString(): String = value.toHexDashString()
 
     companion object {
 
         /**
-         * Generates a new random [ClientDeviceId] (UUID hex-with-dashes form).
+         * Generates a new random [ClientDeviceId].
          */
-        fun generate() = ClientDeviceId(Uuid.random().toHexDashString())
+        fun generate() = ClientDeviceId(Uuid.random())
     }
 }
 
 /**
  * Attempts to parse this string as a [ClientDeviceId].
  *
- * Returns `null` if the string is blank.
+ * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
 fun String.toClientDeviceIdOrNull(): ClientDeviceId? =
-    takeIf { it.isNotBlank() }?.let { ClientDeviceId(it) }
+    Uuid.parseOrNull(this)?.let { ClientDeviceId(it) }
 
 /**
- * Parses this string into a [ClientDeviceId] or throws if the string is blank.
+ * Parses this string into a [ClientDeviceId] or throws if the value is not a valid UUID.
  */
-fun String.toClientDeviceIdOrThrow(): ClientDeviceId {
-    require(isNotBlank()) { "ClientDeviceId cannot be blank" }
-    return ClientDeviceId(this)
-}
+fun String.toClientDeviceIdOrThrow(): ClientDeviceId = ClientDeviceId(Uuid.parse(this))

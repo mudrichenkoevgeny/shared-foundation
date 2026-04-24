@@ -24,9 +24,9 @@ enum class AuditStatus {
         }
 
     companion object {
-        const val STATUS_SUCCESS = "success"
-        const val STATUS_FAILED = "failed"
-        const val STATUS_DENIED = "denied"
+        private const val STATUS_SUCCESS = "success"
+        private const val STATUS_FAILED = "failed"
+        private const val STATUS_DENIED = "denied"
 
         /**
          * Returns [AuditStatus] based on the provided wire value, or null if the value is invalid.

@@ -2,9 +2,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.ManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.ManagementSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.ManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
@@ -28,24 +31,24 @@ enum class UserAuditResourceType : AuditResourceType {
     USER,
 
     /**
-     * Email channel for OTP/confirmations ([OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes] send-email flows).
+     * Email address ([ManagementResetPasswordRoutes], [OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
      */
-    USER_EMAIL,
+    EMAIL_ADDRESS,
 
     /**
-     * Phone channel for OTP/confirmations ([OpenLoginRoutes], [OpenIdentifierRoutes]).
+     * Phone number ([OpenLoginRoutes], [OpenIdentifierRoutes]).
      */
-    USER_PHONE,
+    PHONE_NUMBER,
 
     /**
-     * User identifier credential record ([ManagementIdentifierRoutes], [OpenIdentifierRoutes]).
+     * User identifier credential record ([ManagementIdentifierRoutes], [SelfManagementIdentifierRoutes], [OpenIdentifierRoutes]).
      */
-    USER_IDENTIFIER,
+    IDENTIFIER,
 
     /**
-     * User session ([ManagementSessionRoutes], [OpenSessionRoutes]).
+     * User session ([ManagementSessionRoutes], [SelfManagementSessionRoutes], [OpenSessionRoutes]).
      */
-    USER_SESSION;
+    SESSION;
 
     /**
      * String representation of the [UserAuditResourceType].
@@ -54,10 +57,10 @@ enum class UserAuditResourceType : AuditResourceType {
         get() = when (this) {
             AUTH_SETTINGS -> RESOURCE_AUTH_SETTINGS
             USER -> RESOURCE_USER
-            USER_EMAIL -> RESOURCE_USER_EMAIL
-            USER_PHONE -> RESOURCE_USER_PHONE
-            USER_IDENTIFIER -> RESOURCE_USER_IDENTIFIER
-            USER_SESSION -> RESOURCE_USER_SESSION
+            EMAIL_ADDRESS -> RESOURCE_EMAIL_ADDRESS
+            PHONE_NUMBER -> RESOURCE_PHONE_NUMBER
+            IDENTIFIER -> RESOURCE_IDENTIFIER
+            SESSION -> RESOURCE_SESSION
         }
 
     override fun parseOrNull(value: String): AuditResourceType? = fromValueOrNull(value)
@@ -65,12 +68,12 @@ enum class UserAuditResourceType : AuditResourceType {
     override fun parseOrThrow(value: String): AuditResourceType = fromValueOrThrow(value)
 
     companion object {
-        const val RESOURCE_AUTH_SETTINGS = "auth_settings"
-        const val RESOURCE_USER = "user"
-        const val RESOURCE_USER_EMAIL = "user_email"
-        const val RESOURCE_USER_PHONE = "user_phone"
-        const val RESOURCE_USER_IDENTIFIER = "user_identifier"
-        const val RESOURCE_USER_SESSION = "user_session"
+        private const val RESOURCE_AUTH_SETTINGS = "auth_settings"
+        private const val RESOURCE_USER = "user"
+        private const val RESOURCE_EMAIL_ADDRESS = "email_address"
+        private const val RESOURCE_PHONE_NUMBER = "phone_number"
+        private const val RESOURCE_IDENTIFIER = "identifier"
+        private const val RESOURCE_SESSION = "session"
 
         /**
          * Returns [UserAuditResourceType] based on the provided string value, or null if the value is invalid.

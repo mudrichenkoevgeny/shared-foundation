@@ -23,7 +23,7 @@ enum class SecurityAuditActionType : AuditActionType {
     override fun parseOrThrow(value: String): AuditActionType = fromValueOrThrow(value)
 
     companion object {
-        const val ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS = "management_update_security_settings"
+        private const val ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS = "management_update_security_settings"
 
         /**
          * Returns [SecurityAuditActionType] based on the provided string value, or null if the value is invalid.

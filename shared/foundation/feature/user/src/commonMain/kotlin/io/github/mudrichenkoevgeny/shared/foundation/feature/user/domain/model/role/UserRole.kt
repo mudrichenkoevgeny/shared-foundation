@@ -40,9 +40,9 @@ enum class UserRole {
         get() = UserRoleDefaultPermissionCode.forRole(this)
 
     companion object {
-        const val ROLE_USER = "user"
-        const val ROLE_STAFF = "staff"
-        const val ROLE_ADMIN = "admin"
+        private const val ROLE_USER = "user"
+        private const val ROLE_STAFF = "staff"
+        private const val ROLE_ADMIN = "admin"
 
         /**
          * Returns [UserRole] based on the provided string value, or null if the value is invalid.

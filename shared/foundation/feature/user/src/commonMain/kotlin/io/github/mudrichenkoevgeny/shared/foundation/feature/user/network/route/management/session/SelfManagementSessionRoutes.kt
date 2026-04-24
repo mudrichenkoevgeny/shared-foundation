@@ -1,0 +1,126 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseSelfManagementSessionRoutes
+
+/**
+ * Route paths for the current authenticated principal's sessions in the management API (self-service).
+ */
+object SelfManagementSessionRoutes {
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Deletes the current active management session.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for every logout attempt.
+     * * **Action:** [UserAuditActionType.LOGOUT].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current session identifier.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     */
+    const val LOGOUT = BaseSelfManagementSessionRoutes.LOGOUT
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns active sessions for the **current** authenticated management account.
+     *
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index.
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     * [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     * [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     * [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     * [UserSortValues.UserSessionSortBy.CREATED_AT],
+     * [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     *
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): optional filters like [ClientType], [UserAuthProvider], etc.
+     *
+     * Response body: [PagedResult] of [UserSessionPayload].
+     */
+    const val GET_SESSIONS = BaseSelfManagementSessionRoutes.GET_SESSIONS
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns details of a specific session owned by the current management account.
+     *
+     * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * Response body: [UserSessionPayload].
+     */
+    const val GET_SESSION = BaseSelfManagementSessionRoutes.GET_SESSION
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes a specific session for the current management account.
+     *
+     * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful revocation and security-relevant denials.
+     * * **Action:** [UserAuditActionType.SELF_DELETE_SESSION].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserSessionId] from [UserApiPaths.SESSION_ID].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
+     */
+    const val DELETE_SESSION = BaseSelfManagementSessionRoutes.DELETE_SESSION
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes all sessions for the current management account except the one used for this request.
+     *
+     * Response body: [DeletedSessionsPayload].
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful bulk revocation and security-relevant denials.
+     * * **Action:** [UserAuditActionType.SELF_DELETE_OTHER_SESSIONS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions are being deleted.
+     */
+    const val DELETE_ALL_OTHER_SESSIONS = BaseSelfManagementSessionRoutes.DELETE_ALL_OTHER_SESSIONS
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Performs re-authentication via TOTP for the current management session to update its trust level.
+     *
+     * Request body: [VerifyTotpPayload].
+     *
+     * **Audit logging:** Persist an [AuditEvent] for every re-authentication attempt.
+     * * **Action:** [UserAuditActionType.REAUTHENTICATE_SESSION].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current [UserSessionId].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.MFA_TOKEN] — the challenge token.
+     */
+    const val REAUTHENTICATE_SESSION = BaseSelfManagementSessionRoutes.REAUTHENTICATE_SESSION
+}

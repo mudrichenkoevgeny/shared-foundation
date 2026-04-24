@@ -15,6 +15,7 @@ data class UserIdentifier(
     val userId: UserId,
     val userAuthProvider: UserAuthProvider,
     val identifier: String,
+    val externalProviderEmail: String?,
     val isSensitiveValuesMasked: Boolean,
     val createdAt: Instant,
     val updatedAt: Instant?

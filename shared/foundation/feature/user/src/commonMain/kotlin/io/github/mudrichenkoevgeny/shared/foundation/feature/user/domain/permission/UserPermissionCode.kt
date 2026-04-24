@@ -40,4 +40,10 @@ object UserPermissionCode {
 
     /** Read user data for accounts with [UserRole.STAFF]. */
     val USER_GET_OF_STAFF = PermissionCode("user.get.of.staff")
+
+    /** Update security settings (e.g., TOTP reset, recovery codes) for accounts with [UserRole.USER]. */
+    val USER_UPDATE_SECURITY_FOR_USER = PermissionCode("user.update.security.for.user")
+
+    /** Update security settings (e.g., TOTP reset, recovery codes) for accounts with [UserRole.STAFF]. */
+    val USER_UPDATE_SECURITY_FOR_STAFF = PermissionCode("user.update.security.for.staff")
 }

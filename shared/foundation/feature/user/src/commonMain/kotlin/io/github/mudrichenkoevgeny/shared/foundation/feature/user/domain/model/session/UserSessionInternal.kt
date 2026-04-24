@@ -22,7 +22,6 @@ data class UserSessionInternal(
     val identifierId: UserIdentifierId,
     val identifierAuthProvider: UserAuthProvider,
     val refreshTokenHash: RefreshTokenHash,
-    val revoked: Boolean,
     val deviceInfo: ClientDeviceInfo,
     val userAgent: String?,
     val ipAddress: String?,
@@ -33,15 +32,13 @@ data class UserSessionInternal(
     val updatedAt: Instant?
 ) {
     /**
-     * Returns `true` when the session is not revoked, not expired and matches the caller device.
+     * Returns `true` when the session is not expired and matches the caller device.
      *
      * Device matching is permissive: if either the session or the client does not provide a device id,
      * the session is considered valid for device checks.
      */
     fun isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean {
-        return !revoked
-                && !isExpired(now)
-                && isCorrectDevice(clientDeviceId)
+        return !isExpired(now) && isCorrectDevice(clientDeviceId)
     }
 
     private fun isExpired(now: Instant): Boolean = expiresAt?.let { it <= now } == true

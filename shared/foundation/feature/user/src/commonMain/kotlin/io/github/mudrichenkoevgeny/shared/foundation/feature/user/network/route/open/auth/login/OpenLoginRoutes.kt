@@ -1,15 +1,21 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.confirmation.SendConfirmationPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.login.BaseLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.login.BaseOpenLoginRoutes
 
 /**
  * Route paths for login in the open API.
@@ -22,11 +28,15 @@ object OpenLoginRoutes {
      *
      * Response body: [AuthDataPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful authentication and for failed attempts when your policy
-     * records login abuse. Use action [UserAuditActionType.LOGIN_BY_EMAIL] and resource [UserAuditResourceType.USER_EMAIL].
-     * Set `resourceId` to the authenticated user id when known; omit or leave unset before the user is resolved.
+     * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
+     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val LOGIN_BY_EMAIL = BaseLoginRoutes.LOGIN_BY_EMAIL
+    const val LOGIN_BY_EMAIL = BaseOpenLoginRoutes.LOGIN_BY_EMAIL
 
     /**
      * **HTTP method:** `POST`
@@ -35,11 +45,15 @@ object OpenLoginRoutes {
      *
      * Response body: [AuthDataPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful authentication and for failed attempts when your policy
-     * records login abuse. Use action [UserAuditActionType.LOGIN_BY_PHONE] and resource [UserAuditResourceType.USER_PHONE].
-     * Set `resourceId` to the authenticated user id when known; omit or leave unset before the user is resolved.
+     * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
+     * * **Action:** [UserAuditActionType.LOGIN_BY_PHONE].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
      */
-    const val LOGIN_BY_PHONE = BaseLoginRoutes.LOGIN_BY_PHONE
+    const val LOGIN_BY_PHONE = BaseOpenLoginRoutes.LOGIN_BY_PHONE
 
     /**
      * **HTTP method:** `POST`
@@ -48,18 +62,55 @@ object OpenLoginRoutes {
      *
      * Response body: [AuthDataPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful authentication and for failed attempts when your policy
-     * records login abuse. Use action [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER] and resource
-     * [UserAuditResourceType.USER_IDENTIFIER]. Set `resourceId` to the authenticated user id when known.
+     * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
+     * * **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.EXTERNAL_ID] — external subject identifier (token subject).
+     * 3. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address if provided by the external provider.
      */
-    const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = BaseLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER
+    const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = BaseOpenLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Request body: [VerifyTotpPayload].
+     *
+     * Response body: [AuthDataPayload].
+     *
+     * **Audit logging:** Persist an [AuditEvent] for the second-factor verification.
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` upon success.
+     * * **Resource:** [UserAuditResourceType.USER].
+     * * **Metadata:** Include [ClientInfo] and the [UserAuditMetadataKey.MFA_TOKEN].
+     */
+    const val LOGIN_BY_TOTP = BaseOpenLoginRoutes.LOGIN_BY_TOTP
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Request body: [VerifyTotpPayload].
+     *
+     * Response body: [AuthDataPayload].
+     *
+     * **Audit logging:** Persist an [AuditEvent] for the backup-factor verification.
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.MFA_TOKEN] — the challenge token being resolved.
+     */
+    const val LOGIN_BY_TOTP_RECOVERY_CODE = BaseOpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE
 
     /**
      * **HTTP method:** `POST`
      *
      * Request body: [SendConfirmationToPhoneRequest].
      *
-     * Response body: [SendConfirmationPayload].
+     * Response body: [OtpConfirmationPayload].
      */
-    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = BaseLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE
+    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = BaseOpenLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE
 }

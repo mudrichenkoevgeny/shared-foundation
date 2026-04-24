@@ -9,10 +9,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
  * No permission in this object grants read access to admin sessions.
  */
 object SessionPermissionCode {
-    /** Delete/revoke sessions of accounts with [UserRole.USER]. */
+    /** Delete sessions of accounts with [UserRole.USER]. */
     val SESSION_DELETE_FOR_USER = PermissionCode("session.delete.for.user")
 
-    /** Delete/revoke sessions of accounts with [UserRole.STAFF]. */
+    /** Delete sessions of accounts with [UserRole.STAFF]. */
     val SESSION_DELETE_FOR_STAFF = PermissionCode("session.delete.for.staff")
 
     /** Read session list of [UserRole.USER] accounts with masked sensitive data. */

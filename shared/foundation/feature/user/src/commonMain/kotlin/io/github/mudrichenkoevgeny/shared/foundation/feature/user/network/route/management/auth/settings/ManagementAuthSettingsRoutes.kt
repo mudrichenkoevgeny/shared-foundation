@@ -1,11 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.settings.BaseAuthSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.settings.BaseManagementAuthSettingsRoutes
 
 /**
  * Route paths for authentication settings in the management API.
@@ -23,7 +27,7 @@ object ManagementAuthSettingsRoutes {
      *
      * Response body: [ManagementAuthSettingsPayload].
      */
-    const val GET_AUTH_SETTINGS_MANAGEMENT = BaseAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val GET_AUTH_SETTINGS_MANAGEMENT = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
 
     /**
      * **HTTP method:** `PUT`
@@ -33,9 +37,12 @@ object ManagementAuthSettingsRoutes {
      *
      * Request body: [ManagementAuthSettingsPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful updates and for security-relevant denials. Use action
-     * [UserAuditActionType.MANAGEMENT_UPDATE_AUTH_SETTINGS] and resource [UserAuditResourceType.AUTH_SETTINGS]. Leave
-     * `resourceId` unset when settings are a singleton; avoid embedding full policy payloads in metadata.
+     * **Audit logging:** Persist an [AuditEvent] for successful updates and security-relevant denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_AUTH_SETTINGS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] of the administrator performing the update.
+     * * **Resource:** [UserAuditResourceType.AUTH_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
      */
-    const val UPDATE_AUTH_SETTINGS = BaseAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val UPDATE_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
 }

@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.session
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
@@ -19,8 +18,7 @@ import kotlin.time.Instant
  * Builds domain [UserSession] from [UserSessionPayload].
  *
  * @throws IllegalArgumentException when the session `id`, `userId`, or `identifierId` is not a valid UUID string, when
- * `identifierAuthProvider` is unknown to [UserAuthProvider.fromValueOrNull], or when a present
- * `clientDeviceInfo.clientType` wire value is unknown to [ClientType.fromValueOrNull].
+ * `identifierAuthProvider` is unknown to [UserAuthProvider.fromValueOrNull].
  */
 fun UserSessionPayload.toUserSession(): UserSession = UserSession(
     id = id.toUserSessionIdOrThrow(),
@@ -28,7 +26,6 @@ fun UserSessionPayload.toUserSession(): UserSession = UserSession(
     identifier = identifier,
     identifierId = identifierId.toUserIdentifierIdOrThrow(),
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
-    revoked = revoked,
     deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
@@ -49,7 +46,6 @@ fun UserSession.toUserSessionPayload(): UserSessionPayload = UserSessionPayload(
     identifier = identifier,
     identifierId = identifierId.asHexDashString(),
     identifierAuthProvider = identifierAuthProvider.serialName,
-    revoked = revoked,
     clientDeviceInfo = deviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,
     ipAddress = ipAddress,

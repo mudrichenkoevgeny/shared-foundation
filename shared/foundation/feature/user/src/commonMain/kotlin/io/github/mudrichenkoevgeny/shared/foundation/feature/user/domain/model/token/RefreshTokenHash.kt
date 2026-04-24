@@ -3,11 +3,27 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import kotlin.jvm.JvmInline
 
 /**
- * Hash of a [RefreshToken] for secure storage and comparison.
+ * Hash of a RefreshToken for secure storage and comparison.
  *
- * Used when persisting sessions server-side and in revocation checks; the original token is never stored.
- *
- * @param value Hash value (e.g. from a one-way function); must match the algorithm used when issuing tokens.
+ * @property value Hash value; must not be blank.
  */
 @JvmInline
-value class RefreshTokenHash(val value: String)
+value class RefreshTokenHash(val value: String) {
+    init {
+        require(value.isNotBlank()) { "RefreshTokenHash value must not be blank." }
+    }
+
+    override fun toString(): String = value
+}
+
+/**
+ * Attempts to create a [RefreshTokenHash] from this string.
+ * Returns `null` if the string is blank.
+ */
+fun String.toRefreshTokenHashOrNull(): RefreshTokenHash? =
+    if (this.isNotBlank()) RefreshTokenHash(this) else null
+
+/**
+ * Creates a [RefreshTokenHash] from this string or throws an exception if the string is blank.
+ */
+fun String.toRefreshTokenHashOrThrow(): RefreshTokenHash = RefreshTokenHash(this)

@@ -2,7 +2,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
@@ -28,9 +27,6 @@ data class UserSessionPayload(
 
     @SerialName(UserApiFields.IDENTIFIER_AUTH_PROVIDER)
     val identifierAuthProvider: String,
-
-    @SerialName(UserApiFields.REVOKED)
-    val revoked: Boolean = false,
 
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
     val clientDeviceInfo: ClientDeviceInfoPayload = ClientDeviceInfoPayload(),

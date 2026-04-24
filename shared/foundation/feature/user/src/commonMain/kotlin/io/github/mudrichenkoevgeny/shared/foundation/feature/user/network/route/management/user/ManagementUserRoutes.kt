@@ -1,13 +1,18 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
@@ -31,9 +36,13 @@ object ManagementUserRoutes {
      *
      * Response body: [UserDetailsPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful creation and for security-relevant denials. Use action
-     * [UserAuditActionType.MANAGEMENT_CREATE_USER] and resource [UserAuditResourceType.USER]. After success, set
-     * `resourceId` to the new account id from [UserDetailsPayload].
+     * **Audit logging:** Persist an [AuditEvent] for successful creation and for security-relevant denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_CREATE_USER].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator [UserId] performing the operation.
+     * * **Resource:** [UserAuditResourceType.USER]. After success, set `resourceId` to the new account id from [UserDetailsPayload].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — from [CreateByEmailRequest].
      */
     const val CREATE_USER = BaseManagementUserRoutes.CREATE_USER
 
@@ -44,13 +53,13 @@ object ManagementUserRoutes {
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
      * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserSortBy.LAST_LOGIN_AT],
-     *   [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
-     *   [UserSortValues.UserSortBy.CREATED_AT],
-     *   [UserSortValues.UserSortBy.UPDATED_AT],
-     *   [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT].
+     * [UserSortValues.UserSortBy.LAST_LOGIN_AT],
+     * [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
+     * [UserSortValues.UserSortBy.CREATED_AT],
+     * [UserSortValues.UserSortBy.UPDATED_AT],
+     * [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
-     *   [CommonApiFields.SortOrder.DESC].
+     * [CommonApiFields.SortOrder.DESC].
      *
      * **Filters** ([UserFilterValues.UserFilterValues], optional). If omitted, no filtering (all users matching caller
      * access, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
@@ -98,9 +107,12 @@ object ManagementUserRoutes {
      * - For permission updates: [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER] (target is [UserRole.USER]) or
      * [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF] (target is [UserRole.STAFF]/[UserRole.ADMIN]).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful updates and security denials. Use action
-     * [UserAuditActionType.MANAGEMENT_UPDATE_USER] and resource [UserAuditResourceType.USER].
-     * Set `resourceId` to the path [UserApiPaths.USER_ID].
+     * **Audit logging:** Persist an [AuditEvent] for successful updates and security denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator [UserId] performing the update.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the path [UserApiPaths.USER_ID].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
      */
     const val UPDATE_USER = BaseManagementUserRoutes.UPDATE_USER
 
@@ -115,9 +127,12 @@ object ManagementUserRoutes {
      * [UserRole.USER]; [UserPermissionCode.USER_DELETE_FOR_STAFF] when the target has [UserRole.STAFF] or
      * [UserRole.ADMIN] (server aligns admin account deletion with the staff-scoped grant if applicable).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful deletion and for security-relevant denials. Use action
-     * [UserAuditActionType.MANAGEMENT_DELETE_USER] and resource [UserAuditResourceType.USER]. Set `resourceId` to the
-     * path [UserApiPaths.USER_ID] before the account is removed.
+     * **Audit logging:** Persist an [AuditEvent] for successful deletion and for security-relevant denials.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_USER].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator [UserId] performing the deletion.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the path [UserApiPaths.USER_ID] before the account is removed.
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
      */
     const val DELETE_USER = BaseManagementUserRoutes.DELETE_USER
 }

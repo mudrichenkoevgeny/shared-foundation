@@ -57,9 +57,6 @@ object UserFilterValues {
         /** Filter by [UserAuthProvider]. */
         const val USER_AUTH_PROVIDER = UserApiFields.USER_AUTH_PROVIDER
 
-        /** Filter by session revoked flag; wire values `true` or `false`. */
-        const val REVOKED = UserApiFields.REVOKED
-
         /** Filter by [ClientType]. */
         const val CLIENT_TYPE = CommonApiFields.CLIENT_TYPE
 

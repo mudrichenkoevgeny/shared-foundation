@@ -30,7 +30,7 @@ enum class SecurityAuditResourceType : AuditResourceType {
         )
 
     companion object {
-        const val RESOURCE_SECURITY_SETTINGS = "security_settings"
+        private const val RESOURCE_SECURITY_SETTINGS = "security_settings"
 
         /**
          * Returns [SecurityAuditResourceType] based on the provided string value, or null if the value is invalid.

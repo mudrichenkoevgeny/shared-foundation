@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash.PasswordHash
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
@@ -17,6 +18,7 @@ data class UserIdentifierInternal(
     val userId: UserId,
     val userAuthProvider: UserAuthProvider,
     val identifier: String,
+    val externalProviderEmail: String?,
     val passwordHash: PasswordHash? = null,
     val createdAt: Instant,
     val updatedAt: Instant?

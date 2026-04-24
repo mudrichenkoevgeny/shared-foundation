@@ -36,10 +36,10 @@ enum class UserAuthProvider {
         }
 
     companion object {
-        const val PROVIDER_EMAIL = "email"
-        const val PROVIDER_PHONE = "phone"
-        const val PROVIDER_GOOGLE = "google"
-        const val PROVIDER_APPLE = "apple"
+        private const val PROVIDER_EMAIL = "email"
+        private const val PROVIDER_PHONE = "phone"
+        private const val PROVIDER_GOOGLE = "google"
+        private const val PROVIDER_APPLE = "apple"
 
         /**
          * Returns [UserAuthProvider] based on the provided string value, or null if the value is invalid.

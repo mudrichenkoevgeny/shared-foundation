@@ -53,12 +53,12 @@ enum class AuditValueSensitivity {
         }
 
     companion object {
-        const val SENSITIVITY_NON_SENSITIVE = "non_sensitive"
-        const val SENSITIVITY_EMAIL = "email"
-        const val SENSITIVITY_PHONE_NUMBER = "phone_number"
-        const val SENSITIVITY_IP_ADDRESS = "ip_address"
-        const val SENSITIVITY_PARTIAL_VALUE_MASK = "partial_value_mask"
-        const val SENSITIVITY_FULL_VALUE_MASK = "full_value_mask"
+        private const val SENSITIVITY_NON_SENSITIVE = "non_sensitive"
+        private const val SENSITIVITY_EMAIL = "email"
+        private const val SENSITIVITY_PHONE_NUMBER = "phone_number"
+        private const val SENSITIVITY_IP_ADDRESS = "ip_address"
+        private const val SENSITIVITY_PARTIAL_VALUE_MASK = "partial_value_mask"
+        private const val SENSITIVITY_FULL_VALUE_MASK = "full_value_mask"
 
         /**
          * Returns [AuditValueSensitivity] based on the provided string value, or null if the value is invalid.

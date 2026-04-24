@@ -22,5 +22,5 @@ data class AuditEventMetadataPayload(
     val value: String,
 
     @SerialName(AuditEventFields.METADATA_VALUE_SENSITIVITY)
-    val valueSensitivity: String = AuditValueSensitivity.SENSITIVITY_NON_SENSITIVE
+    val valueSensitivity: String = AuditValueSensitivity.NON_SENSITIVE.serialName
 )
