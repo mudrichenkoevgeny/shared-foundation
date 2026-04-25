@@ -161,14 +161,19 @@ object UserApiFields {
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"
 
     /**
-     * JSON field name for whole-hour validity applied to **newly issued** access tokens (management auth-settings body).
+     * JSON field name for the validity window (in seconds) applied to **newly issued** access tokens.
      */
-    const val ACCESS_TOKEN_VALIDITY_HOURS = "access_token_validity_hours"
+    const val ACCESS_TOKEN_VALIDITY_SECONDS = "access_token_validity_seconds"
 
     /**
-     * JSON field name for whole-day validity applied to **newly issued** refresh tokens (management auth-settings body).
+     * JSON field name for the validity window (in seconds) applied to **newly issued** refresh tokens.
      */
-    const val REFRESH_TOKEN_VALIDITY_DAYS = "refresh_token_validity_days"
+    const val REFRESH_TOKEN_VALIDITY_SECONDS = "refresh_token_validity_seconds"
+
+    /**
+     * JSON field name for the delay (in seconds) between scheduling account deletion and its execution.
+     */
+    const val ACCOUNT_DELETION_DELAY_SECONDS = "account_deletion_delay_seconds"
 
     /**
      * JSON field name for the list of primary (main) authentication methods under [AVAILABLE_AUTH_PROVIDERS]; values use

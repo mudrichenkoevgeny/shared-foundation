@@ -20,8 +20,9 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
         maxActiveSessions = maxActiveSessions,
-        accessTokenValidityHours = accessTokenValidityHours,
-        refreshTokenValidityDays = refreshTokenValidityDays
+        accessTokenExpirationSeconds = accessTokenExpirationSeconds,
+        refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
+        accountDeletionDelaySeconds = accountDeletionDelaySeconds
     )
 
 /**
@@ -35,6 +36,7 @@ fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSett
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
         maxActiveSessions = maxActiveSessions,
-        accessTokenValidityHours = accessTokenValidityHours,
-        refreshTokenValidityDays = refreshTokenValidityDays
+        accessTokenExpirationSeconds = accessTokenExpirationSeconds,
+        refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
+        accountDeletionDelaySeconds = accountDeletionDelaySeconds
     )

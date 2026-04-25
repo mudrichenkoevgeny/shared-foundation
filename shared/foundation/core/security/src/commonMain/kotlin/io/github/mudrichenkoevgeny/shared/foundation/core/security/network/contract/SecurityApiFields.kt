@@ -6,10 +6,16 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.cont
 object SecurityApiFields {
 
     /**
-     * JSON field name for how long, in whole minutes, a recent step-up or re-authentication remains valid
-     * for sensitive operations.
+     * JSON field name for how long a recent step-up or re-authentication remains valid
+     * for sensitive operations, in seconds.
      */
-    const val RECENT_AUTHENTICATION_VALIDITY_IN_MINUTES = "recent_authentication_validity_in_minutes"
+    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS = "recent_authentication_validity_seconds"
+
+    /**
+     * JSON field name for how long a recent re-authentication remains valid
+     * for management actions, in seconds.
+     */
+    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT = "recent_authentication_validity_seconds_for_management"
 
     /** JSON field name for the temporary MFA challenge token used during multifactor authentication flows. */
     const val MFA_TOKEN = "mfa_token"

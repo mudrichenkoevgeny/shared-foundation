@@ -15,8 +15,10 @@ import kotlinx.serialization.Serializable
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account.
  * @property maxActiveSessions Maximum number of active sessions allowed per account.
- * @property accessTokenValidityHours Whole hours for **new** access token validity.
- * @property refreshTokenValidityDays Whole days for **new** refresh token validity.
+ * @property accessTokenExpirationSeconds Validity window for **newly issued** access tokens, in seconds.
+ * @property refreshTokenExpirationSeconds Validity window for **newly issued** refresh tokens, in seconds.
+ * @property accountDeletionDelaySeconds The delay in seconds before an account scheduled for
+ * deletion is permanently removed.
  */
 @Serializable
 data class ManagementAuthSettingsPayload(
@@ -38,9 +40,12 @@ data class ManagementAuthSettingsPayload(
     @SerialName(UserApiFields.MAX_ACTIVE_SESSIONS)
     val maxActiveSessions: Int,
 
-    @SerialName(UserApiFields.ACCESS_TOKEN_VALIDITY_HOURS)
-    val accessTokenValidityHours: Long,
+    @SerialName(UserApiFields.ACCESS_TOKEN_VALIDITY_SECONDS)
+    val accessTokenExpirationSeconds: Int,
 
-    @SerialName(UserApiFields.REFRESH_TOKEN_VALIDITY_DAYS)
-    val refreshTokenValidityDays: Long
+    @SerialName(UserApiFields.REFRESH_TOKEN_VALIDITY_SECONDS)
+    val refreshTokenExpirationSeconds: Int,
+
+    @SerialName(UserApiFields.ACCOUNT_DELETION_DELAY_SECONDS)
+    val accountDeletionDelaySeconds: Int
 )

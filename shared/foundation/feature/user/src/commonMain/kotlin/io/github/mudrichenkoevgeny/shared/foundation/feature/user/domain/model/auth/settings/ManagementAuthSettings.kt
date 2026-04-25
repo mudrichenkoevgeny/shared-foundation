@@ -18,8 +18,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account; see [ExternalAuthProvider].
  * @property maxActiveSessions Maximum number of active sessions allowed per account.
- * @property accessTokenValidityHours Validity window for **new** access tokens, in whole hours.
- * @property refreshTokenValidityDays Validity window for **new** refresh tokens, in whole days.
+ * @property accessTokenExpirationSeconds Validity window for **new** access tokens, in seconds.
+ * @property refreshTokenExpirationSeconds Validity window for **new** refresh tokens, in seconds.
+ * @property accountDeletionDelaySeconds The delay in seconds between scheduling an account
+ * for deletion and its permanent removal from the system.
  */
 data class ManagementAuthSettings(
     val availableAuthProviders: AvailableAuthProviders,
@@ -28,6 +30,7 @@ data class ManagementAuthSettings(
     val maxPhoneIdentifiers: Int,
     val maxIdentifiersPerExternalProvider: Int,
     val maxActiveSessions: Int,
-    val accessTokenValidityHours: Long,
-    val refreshTokenValidityDays: Long
+    val accessTokenExpirationSeconds: Int,
+    val refreshTokenExpirationSeconds: Int,
+    val accountDeletionDelaySeconds: Int
 )

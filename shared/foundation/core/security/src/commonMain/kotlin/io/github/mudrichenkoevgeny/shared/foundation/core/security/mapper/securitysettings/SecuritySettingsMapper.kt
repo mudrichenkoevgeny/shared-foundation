@@ -8,8 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
 
 /**
- * Maps between [SecuritySettingsPayload] and domain [SecuritySettings].
- * [SecuritySettings.recentAuthenticationValidityInMinutes] is copied as-is;
+ * Maps between [SecuritySettingsPayload] and domain [SecuritySettings];
  * [SecuritySettings.passwordPolicy] uses [toPasswordPolicy] and [toPasswordPolicyPayload];
  * [SecuritySettings.otpConfirmation] uses [toOtpConfirmation] and [toOtpConfirmationPayload].
  */
@@ -18,16 +17,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  * Builds domain [SecuritySettings] from [SecuritySettingsPayload].
  */
 fun SecuritySettingsPayload.toSecuritySettings() = SecuritySettings(
-    recentAuthenticationValidityInMinutes = recentAuthenticationValidityInMinutes,
+    recentAuthenticationValiditySeconds = recentAuthenticationValiditySeconds,
+    recentAuthenticationValiditySecondsForManagement = recentAuthenticationValiditySecondsForManagement,
     passwordPolicy = passwordPolicy.toPasswordPolicy(),
-    otpConfirmation = otpConfirmation.toOtpConfirmation()
+    otpConfirmation = otpConfirmation.toOtpConfirmation(),
+    mfaTokenExpirationSeconds = mfaTokenExpirationSeconds
 )
 
 /**
  * Builds network [SecuritySettingsPayload] from domain [SecuritySettings].
  */
 fun SecuritySettings.toSecuritySettingsPayload() = SecuritySettingsPayload(
-    recentAuthenticationValidityInMinutes = recentAuthenticationValidityInMinutes,
+    recentAuthenticationValiditySeconds = recentAuthenticationValiditySeconds,
+    recentAuthenticationValiditySecondsForManagement = recentAuthenticationValiditySecondsForManagement,
     passwordPolicy = passwordPolicy.toPasswordPolicyPayload(),
-    otpConfirmation = otpConfirmation.toOtpConfirmationPayload()
+    otpConfirmation = otpConfirmation.toOtpConfirmationPayload(),
+    mfaTokenExpirationSeconds = mfaTokenExpirationSeconds
 )
