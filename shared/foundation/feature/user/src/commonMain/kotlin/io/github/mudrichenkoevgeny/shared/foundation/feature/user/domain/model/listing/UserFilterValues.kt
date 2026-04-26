@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
@@ -21,13 +22,25 @@ object UserFilterValues {
      */
     object UserFilterValues {
         /** Filter by [UserRole]. */
-        const val ROLE = "role"
+        const val ROLE = UserApiFields.ROLE
 
         /** Filter by [UserAccountStatus]. */
-        const val ACCOUNT_STATUS = "account_status"
+        const val ACCOUNT_STATUS = UserApiFields.ACCOUNT_STATUS
 
-        /** Filter by stored pre-deletion [UserAccountStatus] ([UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION]). */
+        /** Filter by stored pre-deletion [UserAccountStatus]. */
         const val ACCOUNT_STATUS_BEFORE_DELETION = UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION
+
+        /** Filter by inclusive lower bound for authority level. */
+        const val AUTHORITY_LEVEL_FROM = "authority_level_from"
+
+        /** Filter by inclusive upper bound for authority level. */
+        const val AUTHORITY_LEVEL_TO = "authority_level_to"
+
+        /** Filter by TOTP status. */
+        const val IS_TOTP_ENABLED = UserApiFields.IS_TOTP_ENABLED
+
+        /** Filter by one or more [PermissionCode] strings. */
+        const val PERMISSION_CODES = UserApiFields.PERMISSION_CODES
     }
 
     /**

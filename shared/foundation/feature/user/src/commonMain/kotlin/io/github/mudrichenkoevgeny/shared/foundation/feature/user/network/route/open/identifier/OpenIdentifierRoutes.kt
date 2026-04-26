@@ -11,6 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -42,7 +43,11 @@ object OpenIdentifierRoutes {
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
      * [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional).
+     * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional). Same key repeated means **OR**;
+     * different keys combine as **AND**.
+     *
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserIdentifierPayload.userAuthProvider]).
+     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined matching.
      *
      * Response body: [PagedResult] of [UserIdentifierPayload] with [UserIdentifierPayload.isSensitiveValuesMasked] `false`.
      */

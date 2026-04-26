@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
@@ -61,12 +62,15 @@ object ManagementUserRoutes {
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
      * [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserFilterValues], optional). If omitted, no filtering (all users matching caller
-     * access, then pagination/sort). Same key repeated means **OR**; different keys combine as **AND**.
+     * **Filters** ([UserFilterValues.UserFilterValues], optional). If omitted, no filtering. Same key repeated means **OR**; different keys combine as **AND**.
      *
      * - [UserFilterValues.UserFilterValues.ROLE] — list of [UserRole] serial names ([UserDetailsPayload.role]).
      * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — list of [UserAccountStatus] serial names ([UserDetailsPayload.accountStatus]).
-     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_BEFORE_DELETION] — list of [UserAccountStatus] serial names
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_BEFORE_DELETION] — list of [UserAccountStatus] serial names.
+     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level (integer).
+     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level (integer).
+     * - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — filter by TOTP status (boolean).
+     * - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — list of [PermissionCode] strings. All specified permissions must be present (**AND** logic).
      *
      * **Authorization** ([UserPermissionCode]): result rows are limited to targets the caller may read —
      * [UserPermissionCode.USER_GET_OF_USER] for accounts with [UserRole.USER],
@@ -95,7 +99,7 @@ object ManagementUserRoutes {
     /**
      * **HTTP method:** `PATCH`
      *
-     * Partially updates the user's account status and/or explicit permission grants.
+     * Partially updates the user's account details, status, authority level, and permission grants.
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
@@ -104,8 +108,10 @@ object ManagementUserRoutes {
      * **Authorization** ([UserPermissionCode]):
      * - For status updates: [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target is [UserRole.USER]) or
      * [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target is [UserRole.STAFF]/[UserRole.ADMIN]).
+     * - For authority level updates: [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_USER] or [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_STAFF].
      * - For permission updates: [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER] (target is [UserRole.USER]) or
      * [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF] (target is [UserRole.STAFF]/[UserRole.ADMIN]).
+     * - For security settings (e.g., TOTP): [UserPermissionCode.USER_UPDATE_SECURITY_FOR_USER] or [UserPermissionCode.USER_UPDATE_SECURITY_FOR_STAFF].
      *
      * **Audit logging:** Persist an [AuditEvent] for successful updates and security denials.
      * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].

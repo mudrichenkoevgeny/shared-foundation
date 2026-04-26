@@ -29,6 +29,12 @@ object UserPermissionCode {
     /** Update effective permission grants for accounts with [UserRole.STAFF]. */
     val USER_UPDATE_PERMISSIONS_FOR_STAFF = PermissionCode("user.update.permissions.for.staff")
 
+    /** Update authority level for accounts with [UserRole.USER]. */
+    val USER_UPDATE_AUTHORITY_FOR_USER = PermissionCode("user.update.authority.for.user")
+
+    /** Update authority level for accounts with [UserRole.STAFF]. */
+    val USER_UPDATE_AUTHORITY_FOR_STAFF = PermissionCode("user.update.authority.for.staff")
+
     /** Delete accounts with [UserRole.USER]. */
     val USER_DELETE_FOR_USER = PermissionCode("user.delete.for.user")
 

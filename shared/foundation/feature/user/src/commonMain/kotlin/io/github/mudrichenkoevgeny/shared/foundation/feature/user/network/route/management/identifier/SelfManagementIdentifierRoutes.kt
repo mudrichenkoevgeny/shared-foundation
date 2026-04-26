@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -33,7 +34,10 @@ object SelfManagementIdentifierRoutes {
      * [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional).
+     * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional). Same key repeated means **OR**;
+     * different keys combine as **AND**.
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
+     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
      *
      * Response body: [PagedResult] of [UserIdentifierPayload].
      */

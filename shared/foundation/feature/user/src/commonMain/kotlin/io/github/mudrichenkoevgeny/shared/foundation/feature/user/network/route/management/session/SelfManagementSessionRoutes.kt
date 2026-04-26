@@ -56,7 +56,20 @@ object SelfManagementSessionRoutes {
      * [UserSortValues.UserSessionSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserSessionFilterValues]): optional filters like [ClientType], [UserAuthProvider], etc.
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID]
+     * required; others optional. Same key repeated — **OR**; different keys — **AND**.
+     *
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of free-text IP addresses; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — list of free-text languages; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — list of opaque device IDs.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — list of free-text device names; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
+     * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
      *
      * Response body: [PagedResult] of [UserSessionPayload].
      */

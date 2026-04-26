@@ -10,6 +10,8 @@ import kotlinx.serialization.Serializable
  *
  * @property accountStatus Optional target status as a [UserAccountStatus] serial name.
  * If null, the status remains unchanged.
+ * @property authorityLevel Optional target authority level.
+ * If null, the authority level remains unchanged.
  * @property permissionCodes Optional set of explicit permission codes to replace the current grants.
  * If null, permissions remain unchanged. An empty set will revoke all explicit permissions.
  */
@@ -17,6 +19,9 @@ import kotlinx.serialization.Serializable
 data class UpdateUserRequest(
     @SerialName(UserApiFields.ACCOUNT_STATUS)
     val accountStatus: String? = null,
+
+    @SerialName(UserApiFields.AUTHORITY_LEVEL)
+    val authorityLevel: Int? = null,
 
     @SerialName(UserApiFields.PERMISSION_CODES)
     val permissionCodes: Set<String>? = null

@@ -47,6 +47,8 @@ object UserRoleDefaultPermissionCode {
         UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF,
         UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER,
         UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF,
+        UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_USER,
+        UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_STAFF,
         UserPermissionCode.USER_DELETE_FOR_USER,
         UserPermissionCode.USER_DELETE_FOR_STAFF,
         UserPermissionCode.USER_GET_OF_USER,
