@@ -11,9 +11,17 @@ object OpenRefreshTokenRoutes {
     /**
      * **HTTP method:** `POST`
      *
+     * Exchanges a valid refresh token for a new set of session tokens.
+     *
      * Request body: [RefreshTokenPayload].
      *
      * Response body: [SessionTokenPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val REFRESH_TOKEN = BaseOpenRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
 }

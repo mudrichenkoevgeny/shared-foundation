@@ -1,56 +1,99 @@
 # feature/user
 
-**User, auth, session, and identifier HTTP contracts** (open/self-service and management), **permission codes**, **error code strings**, **WebSocket event names**, DTOs, domain models, and mappers shared by backend and clients. Depends on [core/common](../../core/common/README.md), [core/audit](../../core/audit/README.md), [core/security](../../core/security/README.md), [core/settings](../../core/settings/README.md), and the feature API modules [audit-api](../audit/api/README.md), [security-api](../security/api/README.md), and [settings-api](../settings-api/README.md).
+**Comprehensive IAM (Identity and Access Management) subsystem.** This module provides a complete set of HTTP and WebSocket contracts, domain models, and mappers for managing users, authentication flows, sessions, and identifiers across Backend and KMP clients.
 
-Publishable artifact: **`shared-foundation-feature-user`** (version aligned via [shared-foundation-bom](../../bom)).
+The module is built on a hierarchical routing system (Open, Self-Management, and Management) and is deeply integrated with [core/security](../../core/security/README.md) and [core/audit](../../core/audit/README.md).
 
-## What it provides
+## Core Capabilities
 
-- **Base route segments:** [BaseAuthRoutes], [BaseUserRoutes], [BaseSessionRoutes], [BaseIdentifiersRoutes], [BaseUserConfigurationRoutes], [BaseManagementUserRoutes], [BaseManagementSessionRoutes], [BaseManagementIdentifierRoutes], [BaseAuthSettingsRoutes] — path templates reused by open and management endpoints.
-- **Open API:** registration, login, refresh token, reset password ([OpenRegisterRoutes], [OpenLoginRoutes], [OpenRefreshTokenRoutes], [OpenResetPasswordRoutes]); self-service user and session flows ([OpenUserRoutes], [OpenSessionRoutes], [OpenIdentifierRoutes]); public configuration and auth settings ([OpenUserConfigurationRoutes], [OpenAuthSettingsRoutes]). Request/response shapes and KDoc live next to each route object.
-- **Management API:** user CRUD and profile updates ([ManagementUserRoutes], [BaseManagementUserRoutes]); sessions and identifiers ([ManagementSessionRoutes], [ManagementIdentifierRoutes]); full auth settings read/update ([ManagementAuthSettingsRoutes]). Each endpoint’s KDoc states HTTP method, query/body contracts where applicable, and required [PermissionCode] grants (see types under `domain/permission/`).
-- **Permissions:** [UserPermissionCode], [SessionPermissionCode], [IdentifierPermissionCode]; role defaults in [UserRoleDefaultPermissionCode]. Servers enforce these alongside optional grants from security/settings/audit API modules.
-- **Errors:** [UserErrorCodes], [UserErrorArgs] — machine-readable strings aligned with [ApiErrorResponse] `code` / `args` from core/common.
-- **Audit taxonomy:** [UserAuditActionType], [UserAuditResourceType] — action/resource enum segments for user-feature audit events.
-- **Real-time:** [UserWebSocketEventTypes] and related payloads where the user feature publishes WebSocket notifications.
-- **Mappers:** payload ↔ domain mapping under `mapper/` (e.g. user, session, identifier, auth settings).
+### 1. Multi-Channel Authentication
+Supports diverse authentication strategies across all lifecycle stages (registration, login, recovery):
+- **Email & Password:** Standard registration and login flows.
+- **Phone:** SMS-based or phone-linked authentication.
+- **External Auth Providers:** Integration with OAuth/Social providers (Google, Apple, etc.).
+- **Token Management:** Handling of Access, Refresh, and Session tokens, including secure hashing and refresh cycles.
 
-## Usage
+### 2. User & Profile Management
+- **Self-Service:** Profile retrieval, updates, and account deletion/restoration.
+- **Administrative CRUD:** Full management of user accounts, status ([UserAccountStatus]), and authority levels.
+- **User Configuration:** Managed key-value or structured user-specific settings ([UserConfiguration]).
 
-- Depend on this module when implementing or calling user/auth/session HTTP APIs and shared user configuration; pair with the `core/*` artifacts for listing primitives, audit/security/settings payloads, and shared HTTP headers.
-- Keep JSON field names aligned with `network/contract` objects such as [UserApiFields] and feature WebSocket contracts; use route KDoc as the authoritative per-endpoint contract (methods, bodies, authorization).
+### 3. Identity & Session Control
+- **Identifiers:** Linking and unlinking multiple identities (Email, Phone, External IDs) to a single account.
+- **Session Management:** Full visibility into active sessions ([UserSession]) with the ability to terminate individual or global sessions.
+- **Data Masking:** Permissions-based masking of sensitive data in identifiers and sessions (e.g., masked vs. unmasked emails).
 
-[ApiErrorResponse]: ../../core/common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse.kt
+### 4. Multifactor Security
+Built-in TOTP enrollment and verification lifecycle:
+- **MFA Step-up:** Enforces re-authentication for sensitive actions like security setting changes.
+- **Recovery Codes:** Generation and management of backup access secrets.
+
+## Permission System
+
+Permissions are strictly scoped by target roles ([UserRole]) and objects:
+
+| Object | Permission Codes |
+| :--- | :--- |
+| **Users** | [UserPermissionCode] — CRUD, status, authority, and security updates. |
+| **Sessions** | [SessionPermissionCode] — View (masked/unmasked) and terminate sessions. |
+| **Identifiers** | [IdentifierPermissionCode] — View (masked/unmasked) and manage linked IDs. |
+| **Auth Settings** | [AuthSettingsPermissionCode] — Manage global auth provider availability. |
+
+## Network & Data Contracts
+
+### Complete Payload Ecosystem
+The module provides DTOs for every domain entity to ensure type safety across the wire:
+- **Auth:** [AuthDataPayload], [AvailableAuthProvidersPayload], [PublicAuthSettingsPayload].
+- **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
+- **Sessions:** [UserSessionPayload], [DeletedSessionsPayload].
+- **User:** [UserDetailsPayload], [UserPublicPayload], [UserConfigurationPayload].
+- **Identifiers:** [UserIdentifierPayload].
+
+### Real-Time Communication
+Typed WebSocket contracts for live updates:
+- **Events:** [UserWebSocketEventTypes] for state changes.
+- **Protocol:** [AuthenticatedWebSocketContract] for secure connections.
+- **Reliability:** Defined [UserWebSocketCloseReasons] for robust error handling.
+
+## Error Handling
+Standardized error management using **[UserErrorCodes]** and dynamic **[UserErrorArgs]** for context-aware error reporting (e.g., specific validation failures or security blocks).
+
+---
+
+### Key Component Links
+
+| Category | Links |
+| :--- | :--- |
+| **Routes (Base)** | [BaseAuthRoutes], [BaseOpenUserRoutes], [BaseManagementUserRoutes], [BaseSelfManagementUserRoutes] |
+| **Routes (Open)** | [OpenLoginRoutes], [OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenUserSecurityRoutes] |
+| **Routes (Mgmt)** | [ManagementUserRoutes], [ManagementSessionRoutes], [ManagementIdentifierRoutes] |
+| **Mappers** | [AuthDataMapper], [UserSessionMapper], [UserIdentifierMapper], [UserDetailsMapper] |
+| **Domain** | [UserRole], [UserAccountStatus], [UserFilterValues], [UserSortValues] |
+
 [BaseAuthRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/auth/BaseAuthRoutes.kt
-[BaseUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/user/BaseUserRoutes.kt
-[BaseSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/session/BaseSessionRoutes.kt
-[BaseIdentifiersRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/identifier/BaseIdentifiersRoutes.kt
-[BaseUserConfigurationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/configuration/BaseUserConfigurationRoutes.kt
+[BaseOpenUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/user/BaseOpenUserRoutes.kt
 [BaseManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/user/BaseManagementUserRoutes.kt
-[BaseManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/session/BaseManagementSessionRoutes.kt
-[BaseManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/identifier/BaseManagementIdentifierRoutes.kt
-[BaseAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/auth/settings/BaseAuthSettingsRoutes.kt
-[OpenRegisterRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/register/OpenRegisterRoutes.kt
+[BaseSelfManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/base/user/BaseSelfManagementUserRoutes.kt
 [OpenLoginRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/login/OpenLoginRoutes.kt
-[OpenRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/refreshtoken/OpenRefreshTokenRoutes.kt
-[OpenResetPasswordRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/resetpassword/OpenResetPasswordRoutes.kt
-[OpenUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/OpenUserRoutes.kt
-[OpenSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/session/OpenSessionRoutes.kt
-[OpenIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/identifier/OpenIdentifierRoutes.kt
-[OpenUserConfigurationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/configuration/OpenUserConfigurationRoutes.kt
-[OpenAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/settings/OpenAuthSettingsRoutes.kt
+[OpenRegisterRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/register/OpenRegisterRoutes.kt
+[OpenUserSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/security/OpenUserSecurityRoutes.kt
 [ManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/ManagementUserRoutes.kt
 [ManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/session/ManagementSessionRoutes.kt
 [ManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/identifier/ManagementIdentifierRoutes.kt
-[ManagementAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/settings/ManagementAuthSettingsRoutes.kt
-[PermissionCode]: ../../core/common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode.kt
 [UserPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/UserPermissionCode.kt
 [SessionPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/SessionPermissionCode.kt
 [IdentifierPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/IdentifierPermissionCode.kt
-[UserRoleDefaultPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/UserRoleDefaultPermissionCode.kt
+[AuthSettingsPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/AuthSettingsPermissionCode.kt
 [UserErrorCodes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/error/naming/UserErrorCodes.kt
-[UserErrorArgs]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/error/naming/UserErrorArgs.kt
-[UserAuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/action/UserAuditActionType.kt
-[UserAuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/resource/UserAuditResourceType.kt
 [UserWebSocketEventTypes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserWebSocketEventTypes.kt
-[UserApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserApiFields.kt
+[UserRole]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/role/UserRole.kt
+[UserAccountStatus]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/accountstatus/UserAccountStatus.kt
+[UserConfiguration]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/configuration/UserConfiguration.kt
+[UserSession]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSession.kt
+[UserFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserFilterValues.kt
+[UserSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortValues.kt
+[AuthDataPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/data/AuthDataPayload.kt
+[UserIdentifierPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/identifier/UserIdentifierPayload.kt
+[UserWebSocketCloseReasons]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserWebSocketCloseReasons.kt
+[AuthenticatedWebSocketContract]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/AuthenticatedWebSocketContract.kt
+[UserErrorArgs]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/error/naming/UserErrorArgs.kt

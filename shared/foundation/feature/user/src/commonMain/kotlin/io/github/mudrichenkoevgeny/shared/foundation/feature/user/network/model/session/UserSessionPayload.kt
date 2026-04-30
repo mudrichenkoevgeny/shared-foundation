@@ -19,6 +19,9 @@ data class UserSessionPayload(
     @SerialName(UserApiFields.USER_ID)
     val userId: String,
 
+    @SerialName(UserApiFields.USER_ROLE)
+    val userRole: String,
+
     @SerialName(UserApiFields.IDENTIFIER)
     val identifier: String,
 
@@ -38,13 +41,13 @@ data class UserSessionPayload(
     val ipAddress: String? = null,
 
     @SerialName(UserApiFields.EXPIRES_AT)
-    val expiresAt: Long? = null,
+    val expiresAt: Long,
 
     @SerialName(UserApiFields.LAST_ACCESSED_AT)
-    val lastAccessedAt: Long? = null,
+    val lastAccessedAt: Long,
 
     @SerialName(UserApiFields.LAST_REAUTHENTICATED_AT)
-    val lastReauthenticatedAt: Long? = null,
+    val lastReauthenticatedAt: Long,
 
     @SerialName(CommonApiFields.IS_SENSITIVE_VALUES_MASKED)
     val isSensitiveValuesMasked: Boolean,

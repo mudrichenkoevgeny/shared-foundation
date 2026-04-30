@@ -4,13 +4,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totpsetup.TotpSetupPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totprecoverycodes.TotpRecoveryCodesPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totpsetup.TotpSetupPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.security.BaseOpenUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 
 /**
  * Open API route paths for the authenticated user's self-service security management.
@@ -27,12 +31,19 @@ object OpenUserSecurityRoutes {
      *
      * Response body: [TotpSetupPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for setup initiation and for security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_SETUP_TOTP_INITIATED].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val SETUP_TOTP = BaseOpenUserSecurityRoutes.TOTP_SETUP
 
@@ -46,12 +57,19 @@ object OpenUserSecurityRoutes {
      *
      * Response body: [TotpRecoveryCodesPayload] (initial set of backup codes).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful activation and for security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_ENABLE_TOTP].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val ENABLE_TOTP = BaseOpenUserSecurityRoutes.TOTP_ENABLE
 
@@ -59,14 +77,24 @@ object OpenUserSecurityRoutes {
      * **HTTP method:** `DELETE`
      *
      * Disables TOTP and invalidates all associated recovery codes for the authenticated account.
-     * Requires a recently verified session (step-up).
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful disabling and for security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
+     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val DISABLE_TOTP = BaseOpenUserSecurityRoutes.TOTP_DISABLE
 
@@ -74,16 +102,26 @@ object OpenUserSecurityRoutes {
      * **HTTP method:** `GET`
      *
      * Returns the current active recovery codes for the authenticated user.
-     * Requires a recently verified session (step-up).
      *
      * Response body: [TotpRecoveryCodesPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for code retrieval and for security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
+     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val GET_RECOVERY_CODES = BaseOpenUserSecurityRoutes.GET_RECOVERY_CODES
 
@@ -91,16 +129,26 @@ object OpenUserSecurityRoutes {
      * **HTTP method:** `POST`
      *
      * Invalidates all existing recovery codes and generates a new set for the account.
-     * Requires a recently verified session (step-up).
      *
      * Response body: [TotpRecoveryCodesPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful regeneration and for security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
+     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val REGENERATE_RECOVERY_CODES = BaseOpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES
 }

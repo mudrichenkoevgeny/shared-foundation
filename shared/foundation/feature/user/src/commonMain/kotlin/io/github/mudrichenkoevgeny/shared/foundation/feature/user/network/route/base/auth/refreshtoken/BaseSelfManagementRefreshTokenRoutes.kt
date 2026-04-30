@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Shared base routes for refresh-token endpoints in the management API.
  */
-object BaseManagementRefreshTokenRoutes {
+object BaseSelfManagementRefreshTokenRoutes {
     /**
      * Base path for management-specific refresh token operations.
      */

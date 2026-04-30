@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.t
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSession
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
@@ -23,15 +24,16 @@ import kotlin.time.Instant
 fun UserSessionPayload.toUserSession(): UserSession = UserSession(
     id = id.toUserSessionIdOrThrow(),
     userId = userId.toUserIdOrThrow(),
+    userRole = UserRole.fromValueOrThrow(userRole),
     identifier = identifier,
     identifierId = identifierId.toUserIdentifierIdOrThrow(),
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
     deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
-    expiresAt = expiresAt?.let(Instant::fromEpochMilliseconds),
-    lastAccessedAt = lastAccessedAt?.let(Instant::fromEpochMilliseconds),
-    lastReauthenticatedAt = lastReauthenticatedAt?.let(Instant::fromEpochMilliseconds),
+    expiresAt = Instant.fromEpochMilliseconds(expiresAt),
+    lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
+    lastReauthenticatedAt = Instant.fromEpochMilliseconds(lastReauthenticatedAt),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
     createdAt = Instant.fromEpochMilliseconds(createdAt),
     updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
@@ -43,15 +45,16 @@ fun UserSessionPayload.toUserSession(): UserSession = UserSession(
 fun UserSession.toUserSessionPayload(): UserSessionPayload = UserSessionPayload(
     id = id.asHexDashString(),
     userId = userId.asHexDashString(),
+    userRole = userRole.serialName,
     identifier = identifier,
     identifierId = identifierId.asHexDashString(),
     identifierAuthProvider = identifierAuthProvider.serialName,
     clientDeviceInfo = deviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,
     ipAddress = ipAddress,
-    expiresAt = expiresAt?.toEpochMilliseconds(),
-    lastAccessedAt = lastAccessedAt?.toEpochMilliseconds(),
-    lastReauthenticatedAt = lastReauthenticatedAt?.toEpochMilliseconds(),
+    expiresAt = expiresAt.toEpochMilliseconds(),
+    lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
+    lastReauthenticatedAt = lastReauthenticatedAt.toEpochMilliseconds(),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds()

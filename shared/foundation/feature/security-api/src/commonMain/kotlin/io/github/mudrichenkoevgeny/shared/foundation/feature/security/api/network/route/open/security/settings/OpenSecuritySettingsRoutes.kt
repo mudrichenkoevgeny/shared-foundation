@@ -10,7 +10,15 @@ object OpenSecuritySettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
+     * Retrieves public-facing security settings.
+     *
      * Response body: [SecuritySettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val GET_SECURITY_SETTINGS = BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE
 }

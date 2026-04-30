@@ -21,16 +21,24 @@ object OpenRegisterRoutes {
     /**
      * **HTTP method:** `POST`
      *
+     * Registers a new user account using an email address and a verification code.
+     *
      * Request body: [RegisterByEmailRequest].
      *
      * Response body: [AuthDataPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for every registration attempt.
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.REGISTER_BY_EMAIL].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the new [UserId] only upon successful registration.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
     const val REGISTER_BY_EMAIL = BaseOpenRegisterRoutes.REGISTER_BY_EMAIL
@@ -38,9 +46,17 @@ object OpenRegisterRoutes {
     /**
      * **HTTP method:** `POST`
      *
+     * Requests a confirmation code (OTP) to be sent to the specified email to initiate the registration process.
+     *
      * Request body: [SendConfirmationToEmailRequest].
      *
      * Response body: [OtpConfirmationPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val SEND_REGISTER_CONFIRMATION_TO_EMAIL = BaseOpenRegisterRoutes.SEND_REGISTER_CONFIRMATION_TO_EMAIL
 }

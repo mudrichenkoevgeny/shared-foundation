@@ -26,4 +26,16 @@ object IdentifierPermissionCode {
 
     /** Read identifier list of [UserRole.STAFF] accounts with unmasked sensitive data. */
     val IDENTIFIER_GET_OF_STAFF_UNMASKED = PermissionCode("identifier.get.of.staff.unmasked")
+
+    /**
+     * All identifier permissions.
+     */
+    val ALL: Set<PermissionCode> = setOf(
+        IDENTIFIER_DELETE_FOR_USER,
+        IDENTIFIER_DELETE_FOR_STAFF,
+        IDENTIFIER_GET_OF_USER_MASKED,
+        IDENTIFIER_GET_OF_USER_UNMASKED,
+        IDENTIFIER_GET_OF_STAFF_MASKED,
+        IDENTIFIER_GET_OF_STAFF_UNMASKED
+    )
 }

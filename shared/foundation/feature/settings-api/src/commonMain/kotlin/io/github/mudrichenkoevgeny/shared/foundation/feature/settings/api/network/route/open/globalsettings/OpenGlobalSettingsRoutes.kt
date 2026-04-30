@@ -10,7 +10,15 @@ object OpenGlobalSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
+     * Retrieves public-facing platform settings.
+     *
      * Response body: [GlobalSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val GET_GLOBAL_SETTINGS = BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE
 }

@@ -65,6 +65,9 @@ object UserApiFields {
     /** JSON field name for the account role; wire value follows the role type’s serial name. */
     const val ROLE = "role"
 
+    /** JSON field name for the account role; wire value follows the role type’s serial name. */
+    const val USER_ROLE = "user_role"
+
     /** JSON field name for the account status; wire value follows the status enum’s serial name. */
     const val ACCOUNT_STATUS = "account_status"
 

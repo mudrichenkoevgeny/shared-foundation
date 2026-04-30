@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.ManagementResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
@@ -31,7 +31,7 @@ enum class UserAuditResourceType : AuditResourceType {
     USER,
 
     /**
-     * Email address ([ManagementResetPasswordRoutes], [OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
+     * Email address ([SelfManagementResetPasswordRoutes], [OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
      */
     EMAIL_ADDRESS,
 

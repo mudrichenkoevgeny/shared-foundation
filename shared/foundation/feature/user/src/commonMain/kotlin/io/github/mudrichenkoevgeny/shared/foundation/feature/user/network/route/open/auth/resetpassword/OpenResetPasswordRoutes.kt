@@ -20,14 +20,22 @@ object OpenResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
+     * Resets the user's password using a previously sent confirmation code.
+     *
      * Request body: [ResetPasswordRequest].
      *
-     * **Audit logging:** Persist an [AuditEvent] for every password reset attempt.
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.RESET_PASSWORD].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
+     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
     const val RESET_EMAIL_PASSWORD = BaseOpenResetPasswordRoutes.RESET_PASSWORD
@@ -35,9 +43,17 @@ object OpenResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
+     * Requests a confirmation code (OTP) to be sent to the user's email to initiate password recovery.
+     *
      * Request body: [SendResetPasswordConfirmationRequest].
      *
      * Response body: [OtpConfirmationPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = BaseOpenResetPasswordRoutes.SEND_RESET_PASSWORD_CONFIRMATION
 }

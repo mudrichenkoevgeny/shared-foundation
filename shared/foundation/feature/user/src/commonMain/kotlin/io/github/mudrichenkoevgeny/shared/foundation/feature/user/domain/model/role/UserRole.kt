@@ -1,8 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserRoleDefaultPermissionCode
-
 /**
  * Defines the user's role within the system, used to control access to specific features and administrative tools.
  */
@@ -32,12 +29,6 @@ enum class UserRole {
             STAFF -> ROLE_STAFF
             ADMIN -> ROLE_ADMIN
         }
-
-    /**
-     * Baseline permissions associated with this role.
-     */
-    val defaultPermissionCodes: Set<PermissionCode>
-        get() = UserRoleDefaultPermissionCode.forRole(this)
 
     companion object {
         private const val ROLE_USER = "user"

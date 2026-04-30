@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Shared base path segments for login endpoints in the management API.
  */
-object BaseManagementLoginRoutes {
+object BaseSelfManagementLoginRoutes {
     /**
      * Base path for management login operations.
      */

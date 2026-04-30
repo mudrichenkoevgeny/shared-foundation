@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.ManagementLoginRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.ManagementResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.SelfManagementLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
@@ -44,13 +44,10 @@ enum class UserAuditActionType : AuditActionType {
     /** [ManagementUserRoutes.CREATE_USER]. */
     MANAGEMENT_CREATE_USER,
 
-    /** [ManagementUserSecurityRoutes.RESET_TOTP]. */
-    MANAGEMENT_RESET_USER_TOTP,
+    /** [ManagementUserSecurityRoutes.DISABLE_TOTP]. */
+    MANAGEMENT_DISABLE_USER_TOTP,
 
-    /** [ManagementUserSecurityRoutes.REGENERATE_RECOVERY_CODES]. */
-    MANAGEMENT_REGENERATE_USER_RECOVERY_CODES,
-
-    /** [ManagementLoginRoutes.LOGIN_BY_EMAIL], [OpenLoginRoutes.LOGIN_BY_EMAIL]. */
+    /** [SelfManagementLoginRoutes.LOGIN_BY_EMAIL], [OpenLoginRoutes.LOGIN_BY_EMAIL]. */
     LOGIN_BY_EMAIL,
 
     /** [OpenLoginRoutes.LOGIN_BY_PHONE]. */
@@ -59,16 +56,16 @@ enum class UserAuditActionType : AuditActionType {
     /** [OpenLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]. */
     LOGIN_BY_EXTERNAL_AUTH_PROVIDER,
 
-    /** [ManagementLoginRoutes.LOGIN_BY_TOTP], [OpenLoginRoutes.LOGIN_BY_TOTP]. */
+    /** [SelfManagementLoginRoutes.LOGIN_BY_TOTP], [OpenLoginRoutes.LOGIN_BY_TOTP]. */
     LOGIN_BY_TOTP,
 
-    /** [ManagementLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE], [OpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]. */
+    /** [SelfManagementLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE], [OpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]. */
     LOGIN_BY_TOTP_RECOVERY_CODE,
 
     /** [OpenRegisterRoutes.REGISTER_BY_EMAIL]. */
     REGISTER_BY_EMAIL,
 
-    /** [ManagementResetPasswordRoutes.RESET_PASSWORD], [OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD]. */
+    /** [SelfManagementResetPasswordRoutes.RESET_PASSWORD], [OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD]. */
     RESET_PASSWORD,
 
     /** [SelfManagementSessionRoutes.LOGOUT], [OpenSessionRoutes.LOGOUT]. */
@@ -131,8 +128,7 @@ enum class UserAuditActionType : AuditActionType {
             MANAGEMENT_UPDATE_USER -> ACTION_MANAGEMENT_UPDATE_USER
             MANAGEMENT_DELETE_USER -> ACTION_MANAGEMENT_DELETE_USER
             MANAGEMENT_CREATE_USER -> ACTION_MANAGEMENT_CREATE_USER
-            MANAGEMENT_RESET_USER_TOTP -> ACTION_MANAGEMENT_RESET_USER_TOTP
-            MANAGEMENT_REGENERATE_USER_RECOVERY_CODES -> ACTION_MANAGEMENT_REGENERATE_USER_RECOVERY_CODES
+            MANAGEMENT_DISABLE_USER_TOTP -> ACTION_MANAGEMENT_DISABLE_USER_TOTP
             LOGIN_BY_EMAIL -> ACTION_LOGIN_BY_EMAIL
             LOGIN_BY_PHONE -> ACTION_LOGIN_BY_PHONE
             LOGIN_BY_EXTERNAL_AUTH_PROVIDER -> ACTION_LOGIN_BY_EXTERNAL_AUTH_PROVIDER
@@ -170,8 +166,7 @@ enum class UserAuditActionType : AuditActionType {
         private const val ACTION_MANAGEMENT_UPDATE_USER = "management_update_user"
         private const val ACTION_MANAGEMENT_DELETE_USER = "management_delete_user"
         private const val ACTION_MANAGEMENT_CREATE_USER = "management_create_user"
-        private const val ACTION_MANAGEMENT_RESET_USER_TOTP = "management_reset_user_totp"
-        private const val ACTION_MANAGEMENT_REGENERATE_USER_RECOVERY_CODES = "management_regenerate_user_recovery_codes"
+        private const val ACTION_MANAGEMENT_DISABLE_USER_TOTP = "management_disable_user_totp"
         private const val ACTION_LOGIN_BY_EMAIL = "login_by_email"
         private const val ACTION_LOGIN_BY_PHONE = "login_by_phone"
         private const val ACTION_LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "login_by_external_auth_provider"

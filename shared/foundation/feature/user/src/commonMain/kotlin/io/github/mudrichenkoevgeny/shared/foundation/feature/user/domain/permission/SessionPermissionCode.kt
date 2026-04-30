@@ -26,4 +26,16 @@ object SessionPermissionCode {
 
     /** Read session list of [UserRole.STAFF] accounts with unmasked sensitive data. */
     val SESSION_GET_OF_STAFF_UNMASKED = PermissionCode("session.get.of.staff.unmasked")
+
+    /**
+     * All session permissions.
+     */
+    val ALL: Set<PermissionCode> = setOf(
+        SESSION_DELETE_FOR_USER,
+        SESSION_DELETE_FOR_STAFF,
+        SESSION_GET_OF_USER_MASKED,
+        SESSION_GET_OF_USER_UNMASKED,
+        SESSION_GET_OF_STAFF_MASKED,
+        SESSION_GET_OF_STAFF_UNMASKED
+    )
 }

@@ -8,11 +8,11 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 
 ## What it provides
 
-- **Field names:** [GlobalSettingsApiFields] — snake_case JSON keys (URLs, support email, etc.).
-- **Domain:** [GlobalSettings] — non-wire model paired with the mapper.
-- **Wire payload:** [GlobalSettingsPayload] — `@Serializable` body for reads and writes.
-- **Mapper:** [GlobalSettingsMapper] — domain ↔ payload.
-- **WebSocket:** [SettingsWebSocketEventTypes] — e.g. broadcast when global settings change (payload described in KDoc).
+- **Field names:** [GlobalSettingsApiFields] — snake_case JSON keys used in `SerialName` (privacy policy, TOS, support email).
+- **Domain:** [GlobalSettings] — clean data class for business logic and UI.
+- **Wire payload:** [GlobalSettingsPayload] — `@Serializable` model for network transport, using constants for field naming.
+- **Mapper:** [GlobalSettingsMapper] — extension functions for `toGlobalSettings()` and `toGlobalSettingsPayload()`.
+- **WebSocket:** [SettingsWebSocketEventTypes] — event string `GLOBAL_SETTINGS_UPDATED` (carries [GlobalSettingsPayload]).
 
 ## Usage
 

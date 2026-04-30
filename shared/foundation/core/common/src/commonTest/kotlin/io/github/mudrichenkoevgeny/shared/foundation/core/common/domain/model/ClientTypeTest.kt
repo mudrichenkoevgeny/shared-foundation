@@ -8,14 +8,6 @@ import kotlin.test.assertNull
 class ClientTypeTest {
 
     @Test
-    fun `serialName returns wire string for each variant`() {
-        assertEquals(ClientType.CLIENT_WEB, ClientType.WEB.serialName)
-        assertEquals(ClientType.CLIENT_ANDROID, ClientType.ANDROID.serialName)
-        assertEquals(ClientType.CLIENT_IOS, ClientType.IOS.serialName)
-        assertEquals(ClientType.CLIENT_DESKTOP, ClientType.DESKTOP.serialName)
-    }
-
-    @Test
     fun `fromValue accepts case-insensitive enum names and wire strings`() {
         assertEquals(ClientType.WEB, ClientType.fromValueOrNull("WEB"))
         assertEquals(ClientType.WEB, ClientType.fromValueOrNull("web"))

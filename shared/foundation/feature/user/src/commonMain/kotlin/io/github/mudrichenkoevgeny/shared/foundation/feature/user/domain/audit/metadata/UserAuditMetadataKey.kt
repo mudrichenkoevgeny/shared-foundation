@@ -51,13 +51,6 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
      */
     EXTERNAL_ID {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.PARTIAL_VALUE_MASK
-    },
-
-    /**
-     * Temporary MFA challenge token.
-     */
-    MFA_TOKEN {
-        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.FULL_VALUE_MASK
     };
 
     override val serialName: String
@@ -68,7 +61,6 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
             EMAIL_ADDRESS -> KEY_EMAIL_ADDRESS
             PHONE_NUMBER -> KEY_PHONE_NUMBER
             EXTERNAL_ID -> KEY_EXTERNAL_ID
-            MFA_TOKEN -> KEY_MFA_TOKEN
         }
 
     override fun parseOrNull(value: String): AuditMetadataKey? = fromValueOrNull(value)
@@ -82,7 +74,6 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
         private const val KEY_EMAIL_ADDRESS = "email_address"
         private const val KEY_PHONE_NUMBER = "phone_number"
         private const val KEY_EXTERNAL_ID = "external_id"
-        private const val KEY_MFA_TOKEN = "mfa_token"
 
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,

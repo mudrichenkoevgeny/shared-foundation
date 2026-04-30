@@ -33,6 +33,7 @@ configure<KotlinMultiplatformExtension> {
             api(project(":shared:foundation:core:common"))
             api(project(":shared:foundation:core:audit"))
             api(project(":shared:foundation:core:settings"))
+            api(project(":shared:foundation:feature:user"))
 
             api(libs.kotlinx.serialization.json)
             api(libs.kotlinx.serialization.core) // Transitive for kotlinx-serialization

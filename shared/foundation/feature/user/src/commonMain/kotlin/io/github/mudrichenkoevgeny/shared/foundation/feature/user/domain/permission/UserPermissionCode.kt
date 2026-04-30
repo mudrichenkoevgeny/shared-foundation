@@ -52,4 +52,24 @@ object UserPermissionCode {
 
     /** Update security settings (e.g., TOTP reset, recovery codes) for accounts with [UserRole.STAFF]. */
     val USER_UPDATE_SECURITY_FOR_STAFF = PermissionCode("user.update.security.for.staff")
+
+    /**
+     * All user permissions.
+     */
+    val ALL: Set<PermissionCode> = setOf(
+        USER_CREATE_AS_USER,
+        USER_CREATE_AS_STAFF,
+        USER_UPDATE_STATUS_FOR_USER,
+        USER_UPDATE_STATUS_FOR_STAFF,
+        USER_UPDATE_PERMISSIONS_FOR_USER,
+        USER_UPDATE_PERMISSIONS_FOR_STAFF,
+        USER_UPDATE_AUTHORITY_FOR_USER,
+        USER_UPDATE_AUTHORITY_FOR_STAFF,
+        USER_DELETE_FOR_USER,
+        USER_DELETE_FOR_STAFF,
+        USER_GET_OF_USER,
+        USER_GET_OF_STAFF,
+        USER_UPDATE_SECURITY_FOR_USER,
+        USER_UPDATE_SECURITY_FOR_STAFF
+    )
 }

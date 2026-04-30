@@ -12,9 +12,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
@@ -31,12 +33,18 @@ object OpenSessionRoutes {
      *
      * Deletes the current active session.
      *
-     * **Audit logging:** Persist an [AuditEvent] for every logout attempt.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGOUT].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current session identifier.
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val LOGOUT = BaseOpenSessionRoutes.LOGOUT
 
@@ -57,9 +65,8 @@ object OpenSessionRoutes {
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
      * [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserSessionFilterValues]): [UserFilterValues.UserSessionFilterValues.USER_ID]
-     * required; others optional. Same key repeated — **OR**; different keys — **AND**.
-     *
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys — **AND**.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
      * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
@@ -72,16 +79,30 @@ object OpenSessionRoutes {
      * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
      * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
      *
-     * Response body: [PagedResult] of [UserSessionPayload] .
+     * Response body: [PagedResult] of [UserSessionPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
      */
     const val GET_SESSIONS = BaseOpenSessionRoutes.GET_SESSIONS
 
     /**
      * **HTTP method:** `GET`
      *
+     * Retrieves specific session details by its identifier.
+     *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
      * Response body: [UserSessionPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
      */
     const val GET_SESSION = BaseOpenSessionRoutes.GET_SESSION
 
@@ -92,12 +113,19 @@ object OpenSessionRoutes {
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful revocation and security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DELETE_SESSION].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserSessionId] from [UserApiPaths.SESSION_ID].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
      */
     const val DELETE_SESSION = BaseOpenSessionRoutes.DELETE_SESSION
@@ -109,12 +137,19 @@ object OpenSessionRoutes {
      *
      * Response body: [DeletedSessionsPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful bulk revocation and security-relevant denials.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DELETE_OTHER_SESSIONS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions are being deleted.
      */
     const val DELETE_ALL_OTHER_SESSIONS = BaseOpenSessionRoutes.DELETE_ALL_OTHER_SESSIONS
@@ -126,13 +161,19 @@ object OpenSessionRoutes {
      *
      * Request body: [VerifyTotpPayload].
      *
-     * **Audit logging:** Persist an [AuditEvent] for every re-authentication attempt.
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.REAUTHENTICATE_SESSION].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current [UserSessionId].
      * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey])
-     * 2. [UserAuditMetadataKey.MFA_TOKEN] — the challenge token.
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val REAUTHENTICATE_SESSION = BaseOpenSessionRoutes.REAUTHENTICATE_SESSION
 }

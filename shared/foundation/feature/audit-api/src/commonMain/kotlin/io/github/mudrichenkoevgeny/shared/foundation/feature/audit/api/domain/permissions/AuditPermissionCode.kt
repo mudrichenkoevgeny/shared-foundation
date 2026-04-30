@@ -41,4 +41,20 @@ object AuditPermissionCode {
 
     /** Read audit events in the service actor scope ([AuditActorType.SERVICE]); unmasked sensitive fields. */
     val AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED = PermissionCode("audit.get.for.service.actor.unmasked")
+
+    /**
+     * All audit permissions.
+     */
+    val ALL: Set<PermissionCode> = setOf(
+        AUDIT_GET_FOR_USER_ACTOR_MASKED,
+        AUDIT_GET_FOR_USER_ACTOR_UNMASKED,
+        AUDIT_GET_FOR_STAFF_ACTOR_MASKED,
+        AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED,
+        AUDIT_GET_FOR_ADMIN_ACTOR_MASKED,
+        AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED,
+        AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED,
+        AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED,
+        AUDIT_GET_FOR_SERVICE_ACTOR_MASKED,
+        AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED
+    )
 }

@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Shared base path segments for password recovery endpoints in the management API.
  */
-object BaseManagementResetPasswordRoutes {
+object BaseSelfManagementResetPasswordRoutes {
     /**
      * Base path for management password reset operations.
      */

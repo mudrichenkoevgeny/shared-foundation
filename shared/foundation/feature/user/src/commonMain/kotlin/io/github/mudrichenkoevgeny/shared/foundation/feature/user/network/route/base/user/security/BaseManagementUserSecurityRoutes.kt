@@ -19,9 +19,9 @@ object BaseManagementUserSecurityRoutes {
     const val BASE_USER_TOTP_ROUTE = "$BASE_USER_SECURITY_ROUTE/totp"
 
     /**
-     * Path for administrative reset (disabling) of a user's TOTP.
+     * Path for administrative disabling of a user's TOTP.
      */
-    const val RESET_TOTP = "$BASE_USER_TOTP_ROUTE/reset"
+    const val DISABLE_TOTP = "$BASE_USER_TOTP_ROUTE/disable"
 
     /**
      * Path for administrative invalidation and regeneration of a user's recovery codes.

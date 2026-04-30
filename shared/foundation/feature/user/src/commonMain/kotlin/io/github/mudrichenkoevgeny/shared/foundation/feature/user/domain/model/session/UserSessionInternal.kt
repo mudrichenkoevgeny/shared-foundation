@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshTokenHash
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
@@ -18,6 +19,7 @@ import kotlin.time.Instant
 data class UserSessionInternal(
     val id: UserSessionId = UserSessionId.generate(),
     val userId: UserId,
+    val userRole: UserRole,
     val identifier: String,
     val identifierId: UserIdentifierId,
     val identifierAuthProvider: UserAuthProvider,
@@ -25,9 +27,9 @@ data class UserSessionInternal(
     val deviceInfo: ClientDeviceInfo,
     val userAgent: String?,
     val ipAddress: String?,
-    val expiresAt: Instant?,
-    val lastAccessedAt: Instant?,
-    val lastReauthenticatedAt: Instant?,
+    val expiresAt: Instant,
+    val lastAccessedAt: Instant,
+    val lastReauthenticatedAt: Instant,
     val createdAt: Instant,
     val updatedAt: Instant?
 ) {

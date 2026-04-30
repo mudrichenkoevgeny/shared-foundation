@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration
 
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.UserConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseOpenUserConfigurationRoutes
 
@@ -10,7 +12,15 @@ object OpenUserConfigurationRoutes {
     /**
      * **HTTP method:** `GET`
      *
+     * Retrieves the global or default user configuration settings.
+     *
      * Response body: [UserConfigurationPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val GET_CONFIGURATION = BaseOpenUserConfigurationRoutes.BASE_USER_CONFIGURATION_ROUTE
 }

@@ -10,7 +10,15 @@ object OpenAuthSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
+     * Retrieves public-facing authentication settings (e.g., enabled providers, password requirements).
+     *
      * Response body: [PublicAuthSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
      */
     const val GET_AUTH_SETTINGS = BASE_AUTH_SETTINGS_ROUTE
 }

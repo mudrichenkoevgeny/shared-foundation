@@ -11,22 +11,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.audit.api.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.audit.api.network.route.base.BaseAuditRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 
 /** Management API route constants for audit. */
 object ManagementAuditRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Paginated [AuditEventPayload] list. Output depends on the caller’s [AuditPermissionCode] grants.
+     * Returns a paged list of audit events.
      *
-     * **Pagination** ([ListingParamNames.Pagination]): [ListingParamNames.Pagination.PAGE_NUMBER],
-     * [ListingParamNames.Pagination.PAGE_SIZE].
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of [AuditSortValues.AuditEventSortBy.CREATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Sort** ([ListingParamNames.Sort]): [ListingParamNames.Sort.SORT_BY] ([AuditSortValues.AuditEventSortBy.CREATED_AT],
-     * [AuditEventPayload.createdAt]); [ListingParamNames.Sort.SORT_ORDER] ([CommonApiFields.SortOrder.ASC] /
-     * [CommonApiFields.SortOrder.DESC]).
-     *
-     * **Filters** ([AuditFilterValues.AuditEventFilterValues], optional; same key repeated = **OR**;  different keys combine as **AND**.
+     * **Filters** ([AuditFilterValues.AuditEventFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys — **AND**.
      * - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — list of actor IDs.
      * - [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE] — list of [AuditActorType] serial names.
      * - [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE] — list of user roles.
@@ -37,17 +39,51 @@ object ManagementAuditRoutes {
      * - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — list of free-text messages; server-defined.
      *
      * Response body: [PagedResult] of [AuditEventPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     * (**OR** semantics).
+     * - **Required Permissions:** Based on the event's actor type:
+     * - For [AuditActorType.USER]: [AuditPermissionCode.AUDIT_GET_FOR_USER_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_USER_ACTOR_UNMASKED].
+     * - For [AuditActorType.SYSTEM]: [AuditPermissionCode.AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED].
+     * - For [AuditActorType.SERVICE]: [AuditPermissionCode.AUDIT_GET_FOR_SERVICE_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED].
+     * - For Staff actors: [AuditPermissionCode.AUDIT_GET_FOR_STAFF_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED].
+     * - For Admin actors: [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED].
      */
     const val GET_AUDIT_EVENTS = BaseAuditRoutes.GET_AUDIT_EVENTS
 
     /**
      * **HTTP method:** `GET`
      *
-     * Single [AuditEventPayload]. Output depends on the caller’s [AuditPermissionCode] grants.
+     * Retrieves specific audit event details.
      *
      * Path parameter: [AuditApiPaths.EVENT_ID].
      *
      * Response body: [AuditEventPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     * (**OR** semantics).
+     * - **Required Permissions:** Based on the event's actor type:
+     * - For [AuditActorType.USER]: [AuditPermissionCode.AUDIT_GET_FOR_USER_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_USER_ACTOR_UNMASKED].
+     * - For [AuditActorType.SYSTEM]: [AuditPermissionCode.AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED].
+     * - For [AuditActorType.SERVICE]: [AuditPermissionCode.AUDIT_GET_FOR_SERVICE_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED].
+     * - For Staff actors: [AuditPermissionCode.AUDIT_GET_FOR_STAFF_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED].
+     * - For Admin actors: [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_MASKED]
+     * or [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED].
      */
     const val GET_AUDIT_EVENT = BaseAuditRoutes.GET_AUDIT_EVENT
 }
