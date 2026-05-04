@@ -29,10 +29,9 @@ object ManagementAuthSettingsRoutes {
      * Response body: [ManagementAuthSettingsPayload].
      *
      * **Authorization:**
-     * - **Public Access:** Denied.
-     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
-     * (**OR** semantics).
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
     const val GET_AUTH_SETTINGS_MANAGEMENT = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH

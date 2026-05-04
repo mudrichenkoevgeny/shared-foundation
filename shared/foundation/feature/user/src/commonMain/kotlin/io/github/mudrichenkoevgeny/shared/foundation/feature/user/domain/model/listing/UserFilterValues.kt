@@ -64,6 +64,9 @@ object UserFilterValues {
         /** User id filter. */
         const val USER_ID = UserApiFields.USER_ID
 
+        /** Filter by [UserRole]. */
+        const val USER_ROLE = UserApiFields.USER_ROLE
+
         /** Filter by identifier id. */
         const val IDENTIFIER_ID = UserApiFields.IDENTIFIER_ID
 

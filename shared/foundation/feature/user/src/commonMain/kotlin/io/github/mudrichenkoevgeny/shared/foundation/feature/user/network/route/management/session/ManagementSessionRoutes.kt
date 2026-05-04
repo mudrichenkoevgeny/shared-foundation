@@ -47,6 +47,7 @@ object ManagementSessionRoutes {
      * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
      * Same key repeated — **OR**; different keys — **AND**.
      * - [UserFilterValues.UserSessionFilterValues.USER_ID] — list of user IDs.
+     * - [UserFilterValues.UserSessionFilterValues.USER_ROLE] — list of [UserRole] serial names.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
      * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.

@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.UserConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseOpenUserConfigurationRoutes
 

@@ -19,6 +19,21 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
  */
 object ManagementGlobalSettingsRoutes {
     /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves public-facing platform settings.
+     *
+     * Response body: [GlobalSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     */
+    const val GET_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+
+    /**
      * **HTTP method:** `PUT`
      *
      * Updates platform-wide global settings.

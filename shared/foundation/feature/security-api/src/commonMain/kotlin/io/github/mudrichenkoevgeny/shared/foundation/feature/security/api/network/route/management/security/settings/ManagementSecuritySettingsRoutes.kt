@@ -19,6 +19,21 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
  */
 object ManagementSecuritySettingsRoutes {
     /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves public-facing security settings.
+     *
+     * Response body: [SecuritySettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     */
+    const val GET_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE}"
+
+    /**
      * **HTTP method:** `PUT`
      *
      * Updates global security settings and policies.
