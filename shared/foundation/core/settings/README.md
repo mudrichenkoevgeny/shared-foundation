@@ -18,7 +18,7 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 
 - Depend on `shared-foundation-core-settings` (or [shared-foundation-bom](../../bom) — see repository [README.md](../../../../README.md)).
 - Serialize with the same `Json` as the rest of the stack ([FoundationJson] from `core/common`).
-- To compile against **route strings** and **management permission** constants, add `shared-foundation-feature-settings-api`.
+- To compile against **route strings** and **management permission** constants, add `shared-foundation-feature-settingsapi`.
 
 [GlobalSettingsApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/GlobalSettingsApiFields.kt
 [GlobalSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/GlobalSettings.kt

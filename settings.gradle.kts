@@ -51,9 +51,9 @@ registerModules("$groupBase.core", coreModules)
 
 val featureModules = listOf(
     "user",
-    "security-api",
-    "settings-api",
-    "audit-api"
+    "securityapi",
+    "settingsapi",
+    "auditapi"
 )
 registerModules("$groupBase.feature", featureModules)
 

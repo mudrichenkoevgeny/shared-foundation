@@ -8,7 +8,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.37"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.38"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -26,9 +26,9 @@ Published artifacts (versions aligned via the BOM):
 - **shared-foundation-core-security** — password policy, security settings payloads/domain, validation, mappers, WebSocket type strings ([module README](shared/foundation/core/security/README.md)).
 - **shared-foundation-core-settings** — global settings payloads/domain, field names, WebSocket type strings ([module README](shared/foundation/core/settings/README.md)).
 - **shared-foundation-core-audit** — audit events, filters, sort keys, payloads, mappers ([module README](shared/foundation/core/audit/README.md)).
-- **shared-foundation-feature-security-api** — security settings HTTP routes + permission code ([module README](shared/foundation/feature/security/api/README.md)).
-- **shared-foundation-feature-settings-api** — global settings HTTP routes + permission code ([module README](shared/foundation/feature/settings/api/README.md)).
-- **shared-foundation-feature-audit-api** — management audit HTTP routes + permission codes ([module README](shared/foundation/feature/audit/api/README.md)).
+- **shared-foundation-feature-securityapi** — security settings HTTP routes + permission code ([module README](shared/foundation/feature/security/api/README.md)).
+- **shared-foundation-feature-settingsapi** — global settings HTTP routes + permission code ([module README](shared/foundation/feature/settings/api/README.md)).
+- **shared-foundation-feature-auditapi** — management audit HTTP routes + permission codes ([module README](shared/foundation/feature/audit/api/README.md)).
 - **shared-foundation-feature-user** — comprehensive contracts for authentication, multifactor security (TOTP), session management, and user identifiers (self-service & management) ([module README](shared/foundation/feature/user/README.md)).
 - **shared-foundation-bom** — dependency constraints for the modules above.
 

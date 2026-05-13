@@ -37,4 +37,14 @@ data class PagedResult<T>(
 
     @SerialName(CommonApiFields.TOTAL_PAGES)
     val totalPages: Long
-)
+) {
+    companion object {
+        fun <T> empty() = PagedResult<T>(
+            items = emptyList(),
+            totalCount = 0,
+            pageNumber = 1,
+            pageSize = 20,
+            totalPages = 0
+        )
+    }
+}

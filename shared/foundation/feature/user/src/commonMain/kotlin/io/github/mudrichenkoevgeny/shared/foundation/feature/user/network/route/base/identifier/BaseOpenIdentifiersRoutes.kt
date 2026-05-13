@@ -12,6 +12,11 @@ object BaseOpenIdentifiersRoutes {
     const val BASE_IDENTIFIER_ROUTE = "/identifier"
 
     /**
+     * Path template for one identifier row; path parameter [UserApiPaths.USER_IDENTIFIER_ID].
+     */
+    const val GET_IDENTIFIER = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+
+    /**
      * Path for listing identifiers linked to the current account.
      */
     const val GET_IDENTIFIERS = BASE_IDENTIFIER_ROUTE

@@ -30,9 +30,9 @@ Focus on domain logic, data models, and transport payloads.
 ### Feature API Modules (`feature/`)
 Focus on HTTP contracts, specific route constants, and access control.
 
-- **`feature/audit-api`:** Management endpoints for audit logs. Contains `ManagementAuditRoutes` and `AuditPermissionCode` (controlling masked vs unmasked data visibility).
-- **`feature/security-api`:** Security configuration routes. `OpenSecuritySettingsRoutes` (public) and `ManagementSecuritySettingsRoutes` (restricted).
-- **`feature/settings-api`:** System-wide settings routes. `OpenGlobalSettingsRoutes` and `ManagementGlobalSettingsRoutes`.
+- **`feature/auditapi`:** Management endpoints for audit logs. Contains `ManagementAuditRoutes` and `AuditPermissionCode` (controlling masked vs unmasked data visibility).
+- **`feature/securityapi`:** Security configuration routes. `OpenSecuritySettingsRoutes` (public) and `ManagementSecuritySettingsRoutes` (restricted).
+- **`feature/settingsapi`:** System-wide settings routes. `OpenGlobalSettingsRoutes` and `ManagementGlobalSettingsRoutes`.
 - **`feature/user`:** Comprehensive feature module for Auth, Sessions, and Identifiers. Aggregates `core/security` for MFA flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
 ### Utility
@@ -41,7 +41,7 @@ Focus on HTTP contracts, specific route constants, and access control.
 ## Boundaries & Dependencies
 - **`core/common`** is the leaf: It must not depend on any other internal modules.
 - **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`.
-- **Feature-to-Core:** Feature-API modules depend on their respective `core` modules (e.g., `feature/security-api` -> `core/security`).
+- **Feature-to-Core:** Feature-API modules depend on their respective `core` modules (e.g., `feature/securityapi` -> `core/security`).
 - **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, and `core/settings`.
 - **No Frameworks:** No Ktor Server/Client engines or database drivers. Only "pure" Kotlin logic and serialization.
 

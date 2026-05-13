@@ -24,9 +24,9 @@ This document is the entry point for architectural and coding standards. These r
 ### Feature API Modules (`feature/*-api`)
 *HTTP route definitions, permissions, and audit taxonomy.*
 
-- **`feature/audit-api`:** `ManagementAuditRoutes`, `AuditPermissionCode` (masked/unmasked access), `CommonAuditResourceType`.
-- **`feature/security-api`:** `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`.
-- **`feature/settings-api`:** `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`.
+- **`feature/auditapi`:** `ManagementAuditRoutes`, `AuditPermissionCode` (masked/unmasked access), `CommonAuditResourceType`.
+- **`feature/securityapi`:** `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`.
+- **`feature/settingsapi`:** `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`.
 - **`feature/user`:** Comprehensive auth/user/session/identifier contracts. Aggregates `core/security` for TOTP flows and `core/audit` for user-specific logging (`UserAuditActionType`).
 
 ## Detailed Standards (`.agent/`)

@@ -18,6 +18,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_MASKED
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_UNMASKED
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
@@ -33,6 +38,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Route paths for managing user authentication identifiers in the open API.
  */
 object OpenIdentifierRoutes {
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves specific identifier details.
+     *
+     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Response body: [UserIdentifierPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER].
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     */
+    const val GET_IDENTIFIER = BaseOpenIdentifiersRoutes.GET_IDENTIFIER
+
     /**
      * **HTTP method:** `GET`
      *

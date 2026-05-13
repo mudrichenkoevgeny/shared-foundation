@@ -17,6 +17,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths.USER_IDENTIFIER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseSelfManagementIdentifierRoutes
@@ -26,6 +28,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Route paths for managing the current authenticated principal's identifiers in the management API (self-service).
  */
 object SelfManagementIdentifierRoutes {
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves specific identifier details.
+     *
+     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Response body: [UserIdentifierPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     */
+    const val GET_IDENTIFIER = BaseSelfManagementIdentifierRoutes.GET_IDENTIFIER
+
     /**
      * **HTTP method:** `GET`
      *
