@@ -32,8 +32,11 @@ object SecurityApiFields {
     /** JSON field name for the list of backup recovery codes. */
     const val TOTP_RECOVERY_CODES = "totp_recovery_codes"
 
-    /** JSON field name for the nested password policy object. */
-    const val PASSWORD_POLICY = "password_policy"
+    /** JSON field name for the open password policy object. */
+    const val OPEN_PASSWORD_POLICY = "open_password_policy"
+
+    /** JSON field name for the management password policy object. */
+    const val MANAGEMENT_PASSWORD_POLICY = "management_password_policy"
 
     /** JSON field name for minimum password length. */
     const val MIN_LENGTH = "min_length"
@@ -67,4 +70,10 @@ object SecurityApiFields {
 
     /** JSON field name for the time-to-live (TTL) in seconds for the generated OTP. */
     const val EXPIRATION_SECONDS = "expiration_seconds"
+
+    /** JSON field name for the maximum number of requests allowed per time unit. */
+    const val MAX_REQUESTS_PER_PERIOD = "max_requests_per_period"
+
+    /** JSON field name for the rate limiting time window in seconds. */
+    const val RATE_LIMIT_PERIOD_SECONDS = "rate_limit_period_seconds"
 }

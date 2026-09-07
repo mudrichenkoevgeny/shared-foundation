@@ -40,7 +40,7 @@ data class UserSession(
         return !isExpired(now) && isCorrectDevice(clientDeviceId)
     }
 
-    private fun isExpired(now: Instant): Boolean = expiresAt?.let { it <= now } == true
+    private fun isExpired(now: Instant): Boolean = expiresAt <= now
 
     private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
         val sessionDeviceId = deviceInfo.deviceId

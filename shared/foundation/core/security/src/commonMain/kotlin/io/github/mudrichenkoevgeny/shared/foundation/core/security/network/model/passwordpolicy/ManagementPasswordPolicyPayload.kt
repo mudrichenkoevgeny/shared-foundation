@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO representing the password complexity and validation rules.
+ * Wire DTO representing management password complexity and validation rules including common passwords.
  *
  * @property minLength Minimum number of characters required.
  * @property requireLetter Indicates if at least one alphabetic character is required.
@@ -13,10 +13,10 @@ import kotlinx.serialization.Serializable
  * @property requireLowerCase Indicates if at least one lowercase letter is required.
  * @property requireDigit Indicates if at least one numerical digit is required.
  * @property requireSpecialChar Indicates if at least one special character is required.
- * @property commonPasswords A set of forbidden passwords that are considered too easy to guess.
+ * @property commonPasswords Set of forbidden common passwords.
  */
 @Serializable
-data class PasswordPolicyPayload(
+data class ManagementPasswordPolicyPayload(
     @SerialName(SecurityApiFields.MIN_LENGTH)
     val minLength: Int,
 

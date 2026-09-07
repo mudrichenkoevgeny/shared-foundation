@@ -7,6 +7,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 
+/**
+ * Extension functions mapping client information between domain and network models.
+ */
+
+/**
+ * Builds domain [ClientDeviceInfo] from [ClientDeviceInfoPayload] DTO.
+ *
+ * @return domain model aligned with [ClientDeviceInfo] semantics.
+ */
 fun ClientDeviceInfoPayload.toClientDeviceInfo(): ClientDeviceInfo = ClientDeviceInfo(
     clientType = clientType?.let(ClientType::fromValueOrNull),
     language = language,
@@ -16,6 +25,11 @@ fun ClientDeviceInfoPayload.toClientDeviceInfo(): ClientDeviceInfo = ClientDevic
     operationSystemVersion = operationSystemVersion
 )
 
+/**
+ * Builds network [ClientDeviceInfoPayload] DTO from domain [ClientDeviceInfo].
+ *
+ * @return payload DTO aligned with [ClientDeviceInfoPayload] contract.
+ */
 fun ClientDeviceInfo.toClientDeviceInfoPayload(): ClientDeviceInfoPayload = ClientDeviceInfoPayload(
     clientType = clientType?.serialName,
     language = language,
@@ -25,6 +39,11 @@ fun ClientDeviceInfo.toClientDeviceInfoPayload(): ClientDeviceInfoPayload = Clie
     operationSystemVersion = operationSystemVersion
 )
 
+/**
+ * Builds domain [ClientInfo] from [ClientInfoPayload] DTO.
+ *
+ * @return domain model aligned with [ClientInfo] semantics.
+ */
 fun ClientInfoPayload.toClientInfo(): ClientInfo = ClientInfo(
     deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
@@ -32,6 +51,11 @@ fun ClientInfoPayload.toClientInfo(): ClientInfo = ClientInfo(
     apiVersion = apiVersion
 )
 
+/**
+ * Builds network [ClientInfoPayload] DTO from domain [ClientInfo].
+ *
+ * @return payload DTO aligned with [ClientInfoPayload] contract.
+ */
 fun ClientInfo.toClientInfoPayload(): ClientInfoPayload = ClientInfoPayload(
     clientDeviceInfo = deviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,

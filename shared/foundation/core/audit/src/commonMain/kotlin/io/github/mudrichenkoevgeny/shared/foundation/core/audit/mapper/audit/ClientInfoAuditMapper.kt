@@ -4,6 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.met
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 
+/**
+ * Converts [ClientInfo] into a set of [AuditEventMetadata] entries for audit logging.
+ *
+ * @return set of populated audit metadata key-value pairs derived from client and device info.
+ */
 fun ClientInfo.toAuditMetadata(): Set<AuditEventMetadata> {
     val clientInfo = this
     val deviceInfo = clientInfo.deviceInfo

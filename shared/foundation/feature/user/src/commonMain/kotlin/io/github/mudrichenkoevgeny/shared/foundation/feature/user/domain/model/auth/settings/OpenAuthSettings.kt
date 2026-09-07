@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.ExternalAuthProvider
 
 /**
- * **Public** authentication settings: what sign-in methods the deployment exposes to clients.
+ * **Open** authentication settings: what sign-in methods the deployment exposes to clients.
  *
  * @property availableAuthProviders Enabled providers grouped for display and policy;
  * see [AvailableAuthProviders].
@@ -12,11 +12,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
  * @property maxPhoneIdentifiers Maximum number of phone-based identifiers allowed per account.
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account; see [ExternalAuthProvider].
+ * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
-data class PublicAuthSettings(
+data class OpenAuthSettings(
     val availableAuthProviders: AvailableAuthProviders,
     val maxTotalIdentifiers: Int,
     val maxEmailIdentifiers: Int,
     val maxPhoneIdentifiers: Int,
-    val maxIdentifiersPerExternalProvider: Int
+    val maxIdentifiersPerExternalProvider: Int,
+    val isRegistrationEnabled: Boolean
 )

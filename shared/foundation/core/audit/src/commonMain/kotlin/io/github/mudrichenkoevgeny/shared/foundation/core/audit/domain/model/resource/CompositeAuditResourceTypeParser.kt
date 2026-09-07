@@ -31,7 +31,7 @@ class CompositeAuditResourceTypeParser(
     /**
      * @param value Raw `resource` wire string (for example from an audit event payload).
      * @return The first non-null [AuditResourceType] returned by a delegate.
-     * @throws IllegalStateException if no delegate recognizes [value].
+     * @throws IllegalArgumentException if no delegate recognizes [value].
      */
     fun fromValueOrThrow(value: String): AuditResourceType {
         for (auditResourceType in auditResourceTypes) {
@@ -41,6 +41,6 @@ class CompositeAuditResourceTypeParser(
             }
         }
 
-        error("Unknown value of AuditResourceType: '$value'")
+        throw IllegalArgumentException("Unknown value of AuditResourceType: '$value'")
     }
 }

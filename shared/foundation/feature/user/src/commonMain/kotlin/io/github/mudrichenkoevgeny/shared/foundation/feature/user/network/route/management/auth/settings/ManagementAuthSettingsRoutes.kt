@@ -16,8 +16,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for authentication settings in the management API.
  *
- * `GET` and `PUT` share the same path; the management prefix distinguishes them from the open read-only auth-settings
- * route (no management prefix, public slice).
+ * `GET` and `PUT` share the same path; the management prefix distinguishes them from the open
+ * read-only auth-settings route (no management prefix, open slice).
  */
 object ManagementAuthSettingsRoutes {
 
@@ -34,7 +34,7 @@ object ManagementAuthSettingsRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val GET_AUTH_SETTINGS_MANAGEMENT = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val GET_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
 
     /**
      * **HTTP method:** `PUT`
@@ -56,5 +56,5 @@ object ManagementAuthSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
 }

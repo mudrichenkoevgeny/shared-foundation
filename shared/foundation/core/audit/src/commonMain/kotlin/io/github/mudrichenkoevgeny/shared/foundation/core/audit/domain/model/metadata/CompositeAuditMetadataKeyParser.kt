@@ -28,7 +28,7 @@ class CompositeAuditMetadataKeyParser(
     /**
      * @param value Raw metadata `key` wire string (for example from an audit event payload).
      * @return The first non-null [AuditMetadataKey] returned by a delegate.
-     * @throws IllegalStateException if no delegate recognizes [value].
+     * @throws IllegalArgumentException if no delegate recognizes [value].
      */
     fun fromValueOrThrow(value: String): AuditMetadataKey {
         for (metadataKey in metadataKeys) {
@@ -38,6 +38,6 @@ class CompositeAuditMetadataKeyParser(
             }
         }
 
-        error("Unknown value of AuditMetadataKey: '$value'")
+        throw IllegalArgumentException("Unknown value of AuditMetadataKey: '$value'")
     }
 }

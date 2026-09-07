@@ -22,7 +22,8 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
         maxActiveSessions = maxActiveSessions,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
-        accountDeletionDelaySeconds = accountDeletionDelaySeconds
+        accountDeletionDelaySeconds = accountDeletionDelaySeconds,
+        isRegistrationEnabled = isRegistrationEnabled
     )
 
 /**
@@ -38,5 +39,6 @@ fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSett
         maxActiveSessions = maxActiveSessions,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
-        accountDeletionDelaySeconds = accountDeletionDelaySeconds
+        accountDeletionDelaySeconds = accountDeletionDelaySeconds,
+        isRegistrationEnabled = isRegistrationEnabled
     )

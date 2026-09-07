@@ -31,8 +31,6 @@ fun AvailableAuthProviders.toAvailableAuthProvidersPayload(): AvailableAuthProvi
 
 private fun String.toUserAuthProviderOnWire(): UserAuthProvider {
     val parsed = UserAuthProvider.fromValueOrNull(this)
-    if (parsed == null) {
-        throw IllegalArgumentException("Unknown UserAuthProvider wire value: $this")
-    }
+        ?: throw IllegalArgumentException("Unknown UserAuthProvider wire value: $this")
     return parsed
 }

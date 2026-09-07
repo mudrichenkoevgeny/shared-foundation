@@ -1,26 +1,39 @@
 # feature/settingsapi
 
-**Global settings HTTP routes** (public read + management update) and **permission** code for updating global settings. Uses payloads and contracts from [core/settings](../../core/settings/README.md) and [core/common](../../core/common/README.md).
+**Global settings HTTP routes** (open read + management update) and **permission** code for updating global settings. Uses payloads and contracts from [core/settings](../../core/settings/README.md) and [core/common](../../core/common/README.md).
 
 Publishable artifact: **`shared-foundation-feature-settingsapi`** (version aligned via [shared-foundation-bom](../../bom)).
 
-## What it provides
+## Core Capabilities
 
-- **Base path segments:** [BaseGlobalSettingsRoutes] — shared `/global-settings` prefix.
-- **Open API:** [OpenGlobalSettingsRoutes] — public `GET` route to retrieve [GlobalSettingsPayload].
-- **Management API:** [ManagementGlobalSettingsRoutes] — `PUT` route for platform-wide updates; defines strict authorization (Staff/Admin roles) and audit requirements.
-- **Permission:** [SettingsPermissionCode] — contains `GLOBAL_SETTINGS_UPDATE` (`global.settings.update`) grant.
-- **Audit taxonomy:** [SettingsAuditActionType], [SettingsAuditResourceType] — enums for settings-related audit events (actions and resource kinds).
+- **Open Global Settings:** Open `GET` endpoint to retrieve [OpenGlobalSettingsPayload].
+- **Management Global Settings:** `PUT` route for platform-wide updates using [ManagementGlobalSettingsPayload].
+- **Permission Controls:** Admin update grant via [SettingsPermissionCode].
+- **Audit Logging:** Audit taxonomy mapped via [SettingsAuditActionType] and [SettingsAuditResourceType].
 
-## Usage
+## Component Index
 
-- Depend on this module when wiring HTTP clients or servers for global settings URLs and authorization checks.
-- Pair with `shared-foundation-core-settings` for mappers and WebSocket event strings.
+### HTTP Routes
 
-[BaseGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/network/route/base/globalsettings/BaseGlobalSettingsRoutes.kt
-[OpenGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/network/route/open/globalsettings/OpenGlobalSettingsRoutes.kt
-[ManagementGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/network/route/management/globalsettings/ManagementGlobalSettingsRoutes.kt
-[GlobalSettingsPayload]: ../../core/settings/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/GlobalSettingsPayload.kt
-[SettingsPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/domain/permission/SettingsPermissionCode.kt
-[SettingsAuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/domain/audit/action/SettingsAuditActionType.kt
-[SettingsAuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/api/domain/audit/resource/SettingsAuditResourceType.kt
+| Domain | Open Routes | Management Routes |
+| :--- | :--- | :--- |
+| **Global Settings** | [OpenGlobalSettingsRoutes] | [ManagementGlobalSettingsRoutes] |
+
+### Permissions & Audit Taxonomy
+
+| Category | Classes |
+| :--- | :--- |
+| **Permissions** | [SettingsPermissionCode] |
+| **Audit Taxonomy** | [SettingsAuditActionType]<br>[SettingsAuditResourceType] |
+
+---
+
+[OpenGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/network/route/open/globalsettings/OpenGlobalSettingsRoutes.kt
+[ManagementGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/network/route/management/globalsettings/ManagementGlobalSettingsRoutes.kt
+
+[OpenGlobalSettingsPayload]: ../../core/settings/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload.kt
+[ManagementGlobalSettingsPayload]: ../../core/settings/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload.kt
+
+[SettingsPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/domain/permission/SettingsPermissionCode.kt
+[SettingsAuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/domain/audit/action/SettingsAuditActionType.kt
+[SettingsAuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/settingsapi/domain/audit/resource/SettingsAuditResourceType.kt

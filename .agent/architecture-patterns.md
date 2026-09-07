@@ -36,8 +36,8 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
     - **Request body:** Link the DTO.
 4. **Response Contract:** Link the response DTO.
 5. **Access Control:**
-    - **Authorization:** List **Allowed Roles** (OR) and **Required Permissions** (AND).
-    - **Public Access:** State `None (Public API)` if applicable.
+   - **Authorization:** List **Allowed Roles** (OR) and **Required Permissions** (AND).
+   - **Public Access:** State `Allowed` or `Denied`.
 6. **Security:** Notes on **MFA Step-up** requirements (e.g., `REAUTHENTICATE_SESSION`) for sensitive actions.
 7. **Observability (Audit):** Define the `AuditActionType` and `AuditResourceType` triggered by this route.
 

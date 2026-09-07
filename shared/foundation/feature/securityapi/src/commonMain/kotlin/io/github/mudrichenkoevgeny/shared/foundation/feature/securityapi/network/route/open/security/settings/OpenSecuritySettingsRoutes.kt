@@ -1,17 +1,18 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.open.security.settings
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.OpenSecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.base.security.settings.BaseSecuritySettingsRoutes
 
 /**
- * Route paths for security settings in the public API.
+ * Route paths for security settings in the open API.
  */
 object OpenSecuritySettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves public-facing security settings.
+     * Retrieves open security settings.
      *
-     * Response body: [SecuritySettingsPayload].
+     * Response body: [OpenSecuritySettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -19,5 +20,5 @@ object OpenSecuritySettingsRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val GET_SECURITY_SETTINGS = _root_ide_package_.io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.base.security.settings.BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE
+    const val GET_OPEN_SECURITY_SETTINGS = BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE
 }

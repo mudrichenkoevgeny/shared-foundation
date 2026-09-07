@@ -30,7 +30,7 @@ class CompositeAuditActionTypeParser(
     /**
      * @param value Raw `action` wire string (for example from an audit event payload).
      * @return The first non-null [AuditActionType] returned by a delegate.
-     * @throws IllegalStateException if no delegate recognizes [value].
+     * @throws IllegalArgumentException if no delegate recognizes [value].
      */
     fun fromValueOrThrow(value: String): AuditActionType {
         for (auditActionType in auditActionTypes) {
@@ -40,6 +40,6 @@ class CompositeAuditActionTypeParser(
             }
         }
 
-        error("Unknown value of AuditActionType: '$value'")
+        throw IllegalArgumentException("Unknown value of AuditActionType: '$value'")
     }
 }

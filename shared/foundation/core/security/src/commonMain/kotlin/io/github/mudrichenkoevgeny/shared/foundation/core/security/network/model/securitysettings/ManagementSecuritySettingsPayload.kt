@@ -2,33 +2,41 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.mode
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.passwordpolicy.PasswordPolicyPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.passwordpolicy.ManagementPasswordPolicyPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Security settings as serialized in API and compatible storage (snake_case field names).
+ * Wire DTO representing management security settings and policies.
  *
  * @property recentAuthenticationValiditySeconds Validity window for self-service actions, in seconds.
  * @property recentAuthenticationValiditySecondsForManagement Validity window for management actions, in seconds.
- * @property passwordPolicy Rules for password strength and validation.
- * @property otpConfirmation Serialized OTP configuration settings.
+ * @property passwordPolicy Full password policy payload including common passwords; see [ManagementPasswordPolicyPayload].
+ * @property otpConfirmation OTP configuration payload; see [OtpConfirmationPayload].
  * @property mfaTokenExpirationSeconds Lifetime of the MFA challenge token, in seconds.
+ * @property maxRequestsPerPeriod Maximum number of requests per time unit.
+ * @property rateLimitPeriodSeconds Time window in seconds for request rate limiting.
  */
 @Serializable
-data class SecuritySettingsPayload(
+data class ManagementSecuritySettingsPayload(
     @SerialName(SecurityApiFields.RECENT_AUTHENTICATION_VALIDITY_SECONDS)
     val recentAuthenticationValiditySeconds: Int,
 
     @SerialName(SecurityApiFields.RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT)
     val recentAuthenticationValiditySecondsForManagement: Int,
 
-    @SerialName(SecurityApiFields.PASSWORD_POLICY)
-    val passwordPolicy: PasswordPolicyPayload,
+    @SerialName(SecurityApiFields.MANAGEMENT_PASSWORD_POLICY)
+    val passwordPolicy: ManagementPasswordPolicyPayload,
 
     @SerialName(SecurityApiFields.OTP_CONFIRMATION)
     val otpConfirmation: OtpConfirmationPayload,
 
     @SerialName(SecurityApiFields.EXPIRATION_SECONDS)
-    val mfaTokenExpirationSeconds: Int
+    val mfaTokenExpirationSeconds: Int,
+
+    @SerialName(SecurityApiFields.MAX_REQUESTS_PER_PERIOD)
+    val maxRequestsPerPeriod: Int,
+
+    @SerialName(SecurityApiFields.RATE_LIMIT_PERIOD_SECONDS)
+    val rateLimitPeriodSeconds: Int
 )

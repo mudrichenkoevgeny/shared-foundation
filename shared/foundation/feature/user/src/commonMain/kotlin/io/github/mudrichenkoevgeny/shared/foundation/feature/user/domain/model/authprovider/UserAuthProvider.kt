@@ -45,13 +45,19 @@ enum class UserAuthProvider {
          * Returns [UserAuthProvider] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): UserAuthProvider? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [UserAuthProvider] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuthProvider].
          */
-        fun fromValueOrThrow(value: String): UserAuthProvider = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): UserAuthProvider =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuthProvider: '$value'")
     }
 }

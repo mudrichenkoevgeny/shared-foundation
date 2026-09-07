@@ -19,6 +19,7 @@ import kotlinx.serialization.Serializable
  * @property refreshTokenExpirationSeconds Validity window for **newly issued** refresh tokens, in seconds.
  * @property accountDeletionDelaySeconds The delay in seconds before an account scheduled for
  * deletion is permanently removed.
+ * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
 @Serializable
 data class ManagementAuthSettingsPayload(
@@ -47,5 +48,8 @@ data class ManagementAuthSettingsPayload(
     val refreshTokenExpirationSeconds: Int,
 
     @SerialName(UserApiFields.ACCOUNT_DELETION_DELAY_SECONDS)
-    val accountDeletionDelaySeconds: Int
+    val accountDeletionDelaySeconds: Int,
+
+    @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
+    val isRegistrationEnabled: Boolean
 )

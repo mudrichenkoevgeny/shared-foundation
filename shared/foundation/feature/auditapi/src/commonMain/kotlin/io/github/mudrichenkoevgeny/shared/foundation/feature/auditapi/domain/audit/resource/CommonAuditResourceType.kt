@@ -34,13 +34,19 @@ enum class CommonAuditResourceType : AuditResourceType {
          * Returns [CommonAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): CommonAuditResourceType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [CommonAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [CommonAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): CommonAuditResourceType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): CommonAuditResourceType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for CommonAuditResourceType: '$value'")
     }
 }

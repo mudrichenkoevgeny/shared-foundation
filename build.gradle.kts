@@ -16,7 +16,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.38"
+    version = "0.0.39"
 }
 
 subprojects {
@@ -27,8 +27,8 @@ subprojects {
         return@subprojects
     }
 
-    apply(plugin = "com.vanniktech.maven.publish")
-    apply(plugin = "com.autonomousapps.dependency-analysis")
+    pluginManager.apply("com.vanniktech.maven.publish")
+    pluginManager.apply("com.autonomousapps.dependency-analysis")
 
     val uuidExperimentalOptIn = "-opt-in=kotlin.uuid.ExperimentalUuidApi"
     val uuidExperimentalOptInFqcn = uuidExperimentalOptIn.substringAfter("=")
@@ -73,9 +73,11 @@ subprojects {
         signAllPublications()
 
         plugins.withId("org.jetbrains.kotlin.multiplatform") {
-            configure(KotlinMultiplatform(
-                javadocJar = JavadocJar.Empty()
-            ))
+            configure(
+                KotlinMultiplatform(
+                    javadocJar = JavadocJar.Empty()
+                )
+            )
         }
 
         pom {

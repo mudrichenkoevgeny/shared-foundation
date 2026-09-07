@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
 
 /**
  * Security-specific error codes for API responses and backend logging, used to categorize failures.
@@ -16,7 +16,7 @@ object SecurityErrorCodes {
     const val TOTP_CONFIRMATION_REQUIRED = "TOTP_CONFIRMATION_REQUIRED"
 
     /**
-     * Password does not satisfy the configured [PasswordPolicy].
+     * Password does not satisfy the configured [ManagementPasswordPolicy].
      *
      * **Public arguments:**
      * - [SecurityErrorArgs.PASSWORD_MIN_LENGTH] (optional)

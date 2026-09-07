@@ -1,10 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.UserConfigurationPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.OpenUserConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseOpenUserConfigurationRoutes
 
 /**
- * Route paths for user configuration in the public API.
+ * Route paths for user configuration in the open API.
  */
 object OpenUserConfigurationRoutes {
     /**
@@ -12,7 +12,7 @@ object OpenUserConfigurationRoutes {
      *
      * Retrieves the global or default user configuration settings.
      *
-     * Response body: [UserConfigurationPayload].
+     * Response body: [OpenUserConfigurationPayload].
      *
      * **Authorization:**
      * - **Public Access:** Allowed.

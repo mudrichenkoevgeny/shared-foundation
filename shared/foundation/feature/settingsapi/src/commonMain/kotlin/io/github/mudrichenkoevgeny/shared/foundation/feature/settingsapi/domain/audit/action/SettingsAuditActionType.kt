@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsapi.network
  * Settings-module audit actions (global settings, not security settings).
  */
 enum class SettingsAuditActionType : AuditActionType {
-    /** [ManagementGlobalSettingsRoutes.UPDATE_GLOBAL_SETTINGS]. */
+    /** [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS]. */
     MANAGEMENT_UPDATE_GLOBAL_SETTINGS;
 
     /**
@@ -29,13 +29,19 @@ enum class SettingsAuditActionType : AuditActionType {
          * Returns [SettingsAuditActionType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): SettingsAuditActionType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [SettingsAuditActionType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [SettingsAuditActionType].
          */
-        fun fromValueOrThrow(value: String): SettingsAuditActionType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): SettingsAuditActionType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SettingsAuditActionType: '$value'")
     }
 }

@@ -7,7 +7,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 
 /**
+ * Mappers and merger functions for [WebSocketInitializePayload].
+ */
+
+/**
  * Merges this payload into [existingClientInfo] [ClientInfo] (device fields and [ClientInfo.apiVersion] only).
+ *
+ * @param existingClientInfo Optional baseline [ClientInfo] to merge fields into.
+ * @return merged [ClientInfo] instance.
  */
 fun WebSocketInitializePayload.mergeClientInfo(
     existingClientInfo: ClientInfo? = null
@@ -24,6 +31,9 @@ fun WebSocketInitializePayload.mergeClientInfo(
  *
  * Non-null fields from the payload override; [WebSocketInitializePayload.clientType] is applied only when
  * [ClientType.fromValueOrNull] returns non-null, otherwise [existingClientDeviceInfo]'s type is kept.
+ *
+ * @param existingClientDeviceInfo Optional baseline [ClientDeviceInfo] to merge fields into.
+ * @return merged [ClientDeviceInfo] instance.
  */
 fun WebSocketInitializePayload.mergeClientDeviceInfo(
     existingClientDeviceInfo: ClientDeviceInfo? = null
@@ -39,7 +49,13 @@ fun WebSocketInitializePayload.mergeClientDeviceInfo(
     )
 }
 
-fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?) = WebSocketInitializePayload(
+/**
+ * Builds [WebSocketInitializePayload] from domain [ClientDeviceInfo].
+ *
+ * @param apiVersion Optional API version string to include in payload.
+ * @return payload model aligned with [WebSocketInitializePayload] contract.
+ */
+fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?): WebSocketInitializePayload = WebSocketInitializePayload(
     clientType = clientType?.serialName,
     language = language,
     deviceId = deviceId?.asHexDashString(),

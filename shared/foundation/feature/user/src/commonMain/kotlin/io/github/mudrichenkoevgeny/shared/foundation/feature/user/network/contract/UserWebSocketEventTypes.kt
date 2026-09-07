@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.PublicAuthSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.OpenAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 
 /**
@@ -14,10 +15,16 @@ object UserWebSocketEventTypes {
     const val UNAUTHORIZED = "UNAUTHORIZED"
 
     /**
-     * Triggered when auth settings are updated.
-     * Payload: [PublicAuthSettingsPayload]
+     * Triggered when auth settings are updated in the open scope.
+     * Payload: [OpenAuthSettingsPayload]
      */
-    const val AUTH_SETTINGS_UPDATED = "AUTH_SETTINGS_UPDATED"
+    const val OPEN_AUTH_SETTINGS_UPDATED = "OPEN_AUTH_SETTINGS_UPDATED"
+
+    /**
+     * Triggered when auth settings are updated in the management scope.
+     * Payload: [ManagementAuthSettingsPayload]
+     */
+    const val MANAGEMENT_AUTH_SETTINGS_UPDATED = "MANAGEMENT_AUTH_SETTINGS_UPDATED"
 
     /**
      * Sent when the user's data (profile, role, account status, or permissions) is updated.

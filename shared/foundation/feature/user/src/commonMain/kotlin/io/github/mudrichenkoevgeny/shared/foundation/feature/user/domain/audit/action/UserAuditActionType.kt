@@ -23,7 +23,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * User-feature audit actions (management API and open/self-service flows worth auditing).
  */
 enum class UserAuditActionType : AuditActionType {
-    /** [ManagementAuthSettingsRoutes.UPDATE_AUTH_SETTINGS]. */
+    /** [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS]. */
     MANAGEMENT_UPDATE_AUTH_SETTINGS,
 
     /** [ManagementIdentifierRoutes.DELETE_IDENTIFIER]. */
@@ -195,13 +195,19 @@ enum class UserAuditActionType : AuditActionType {
          * Returns [UserAuditActionType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): UserAuditActionType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [UserAuditActionType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuditActionType].
          */
-        fun fromValueOrThrow(value: String): UserAuditActionType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): UserAuditActionType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuditActionType: '$value'")
     }
 }

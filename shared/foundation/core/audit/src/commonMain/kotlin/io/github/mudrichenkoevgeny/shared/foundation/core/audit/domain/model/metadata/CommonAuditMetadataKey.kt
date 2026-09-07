@@ -164,23 +164,20 @@ enum class CommonAuditMetadataKey : AuditMetadataKey {
          * Returns [CommonAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
          * then by case-insensitive [serialName] match.
          */
-        fun fromValueOrNull(value: String): AuditMetadataKey? {
-            val byConstantName = runCatching { valueOf(value.uppercase()) }.getOrNull()
-            if (byConstantName != null) {
-                return byConstantName
-            }
-
-            return entries.firstOrNull { entry ->
-                entry.serialName.equals(value, ignoreCase = true)
-            }
-        }
+        fun fromValueOrNull(value: String): AuditMetadataKey? =
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [CommonAuditMetadataKey] for the given wire or enum-style string.
          *
-         * @throws IllegalStateException if [value] does not match any [CommonAuditMetadataKey].
+         * @throws IllegalArgumentException if [value] does not match any [CommonAuditMetadataKey].
          */
         fun fromValueOrThrow(value: String): AuditMetadataKey =
-            fromValueOrNull(value) ?: error("Unknown value of CommonAuditMetadataKey: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for CommonAuditMetadataKey: '$value'")
     }
 }

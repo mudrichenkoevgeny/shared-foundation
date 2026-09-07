@@ -27,14 +27,20 @@ object AuditSortValues {
              * Returns [AuditEventSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): AuditEventSortBy? =
-                runCatching { valueOf(value.uppercase()) }.getOrNull()
+                entries.firstOrNull {
+                    it.serialName.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+                } ?: runCatching {
+                    valueOf(value.uppercase())
+                }.getOrNull()
 
             /**
              * Returns [AuditEventSortBy] for the given wire or enum-style string.
              *
              * @throws IllegalArgumentException if [value] does not match any [AuditEventSortBy].
              */
-            fun fromValueOrThrow(value: String): AuditEventSortBy = valueOf(value.uppercase())
+            fun fromValueOrThrow(value: String): AuditEventSortBy =
+                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AuditEventSortBy: '$value'")
         }
     }
 }

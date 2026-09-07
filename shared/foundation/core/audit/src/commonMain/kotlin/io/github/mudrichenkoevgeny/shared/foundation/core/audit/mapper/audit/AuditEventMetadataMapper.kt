@@ -15,7 +15,7 @@ fun AuditEventMetadataPayload.toAuditEventMetadata(
 ): AuditEventMetadata =
     AuditEventMetadata(
         key = compositeMetadataKeyParser.fromValueOrThrow(key),
-        value = value,
+        value = value
     )
 
 /**
@@ -27,5 +27,5 @@ fun AuditEventMetadata.toAuditEventMetadataPayload(): AuditEventMetadataPayload 
     AuditEventMetadataPayload(
         key = key.serialName,
         value = value,
-        valueSensitivity = key.valueSensitivity.serialName,
+        valueSensitivity = key.valueSensitivity.serialName
     )

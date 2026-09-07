@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Wire DTO for the **public** auth-settings slice.
+ * Wire DTO for the **open** auth-settings slice.
  *
  * @property availableAuthProviders Provider lists; wire values follow [UserAuthProvider.serialName].
  * @property maxTotalIdentifiers Maximum number of identifiers of any type allowed per account.
@@ -14,9 +14,10 @@ import kotlinx.serialization.Serializable
  * @property maxPhoneIdentifiers Maximum number of phone-based identifiers allowed per account.
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account.
+ * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
 @Serializable
-data class PublicAuthSettingsPayload(
+data class OpenAuthSettingsPayload(
     @SerialName(UserApiFields.AVAILABLE_AUTH_PROVIDERS)
     val availableAuthProviders: AvailableAuthProvidersPayload,
 
@@ -30,5 +31,8 @@ data class PublicAuthSettingsPayload(
     val maxPhoneIdentifiers: Int,
 
     @SerialName(UserApiFields.MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER)
-    val maxIdentifiersPerExternalProvider: Int
+    val maxIdentifiersPerExternalProvider: Int,
+
+    @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
+    val isRegistrationEnabled: Boolean
 )

@@ -32,13 +32,19 @@ enum class AuditActorType {
          * Returns [AuditActorType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): AuditActorType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [AuditActorType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditActorType].
          */
-        fun fromValueOrThrow(value: String): AuditActorType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): AuditActorType = fromValueOrNull(value)
+            ?: throw IllegalArgumentException("Unknown value for AuditActorType: '$value'")
     }
 }

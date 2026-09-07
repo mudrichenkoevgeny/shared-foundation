@@ -13,10 +13,10 @@ sealed class PasswordPolicyValidatorResult {
      * Indicates validation failure, providing specific reasons and the policy used.
      *
      * @property reasons List of specific criteria that the password failed to meet (e.g. [PasswordPolicyFailReason]).
-     * @property passwordPolicy The policy configuration (e.g. [PasswordPolicy]) against which the password was validated.
+     * @property passwordPolicy The policy configuration against which the password was validated.
      */
     data class Fail(
         val reasons: List<PasswordPolicyFailReason>,
-        val passwordPolicy: PasswordPolicy
+        val passwordPolicy: ManagementPasswordPolicy
     ) : PasswordPolicyValidatorResult()
 }

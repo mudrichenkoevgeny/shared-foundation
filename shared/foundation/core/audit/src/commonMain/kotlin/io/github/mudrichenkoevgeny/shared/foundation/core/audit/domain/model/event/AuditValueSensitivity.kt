@@ -64,7 +64,12 @@ enum class AuditValueSensitivity {
          * Returns [AuditValueSensitivity] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): AuditValueSensitivity? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [AuditValueSensitivity] for the given wire or enum-style string (case-insensitive enum name).
@@ -72,6 +77,6 @@ enum class AuditValueSensitivity {
          * @throws IllegalArgumentException if [value] does not match any [AuditValueSensitivity].
          */
         fun fromValueOrThrow(value: String): AuditValueSensitivity =
-            valueOf(value.uppercase())
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AuditValueSensitivity: '$value'")
     }
 }

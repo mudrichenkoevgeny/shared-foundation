@@ -1,14 +1,21 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.OpenSecuritySettingsPayload
 
 /**
  * WebSocket event types related to security functionality.
  */
 object SecurityWebSocketEventTypes {
     /**
-     * Triggered when security settings are updated.
-     * Payload: [SecuritySettingsPayload]
+     * Triggered when open security settings are updated.
+     * Payload: [OpenSecuritySettingsPayload]
      */
-    const val SECURITY_SETTINGS_UPDATED = "SECURITY_SETTINGS_UPDATED"
+    const val OPEN_SECURITY_SETTINGS_UPDATED = "OPEN_SECURITY_SETTINGS_UPDATED"
+
+    /**
+     * Triggered when management security settings are updated.
+     * Payload: [ManagementSecuritySettingsPayload]
+     */
+    const val MANAGEMENT_SECURITY_SETTINGS_UPDATED = "MANAGEMENT_SECURITY_SETTINGS_UPDATED"
 }

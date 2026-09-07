@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.validator
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyFailReason
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyValidatorResult
 import kotlin.test.Test
@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 
 class PasswordPolicyValidatorTest {
 
-    private val defaultPolicy = PasswordPolicy(
+    private val defaultPolicy = ManagementPasswordPolicy(
         requireLetter = true,
         requireUpperCase = false,
         requireLowerCase = false,
@@ -43,7 +43,7 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given policy with digits required when validate without digit then return no digit reason`() {
-        val policy = PasswordPolicy(requireDigit = true)
+        val policy = ManagementPasswordPolicy(requireDigit = true)
         val password = "NoDigitsHere"
         val result = validator.validate(policy, password)
         val fail = assertIs<PasswordPolicyValidatorResult.Fail>(result)
@@ -52,7 +52,7 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given policy with uppercase required when validate with lowercase only then return no uppercase reason`() {
-        val policy = PasswordPolicy(requireUpperCase = true)
+        val policy = ManagementPasswordPolicy(requireUpperCase = true)
         val password = "onlylowercase123"
         val result = validator.validate(policy, password)
         val fail = assertIs<PasswordPolicyValidatorResult.Fail>(result)
@@ -61,7 +61,7 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given policy with special char required when validate without special char then return no special char reason`() {
-        val policy = PasswordPolicy(requireSpecialChar = true)
+        val policy = ManagementPasswordPolicy(requireSpecialChar = true)
         val password = "NoSpecialChar123"
         val result = validator.validate(policy, password)
         val fail = assertIs<PasswordPolicyValidatorResult.Fail>(result)
@@ -70,7 +70,7 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given password missing everything when validate then return multiple reasons`() {
-        val strictPolicy = PasswordPolicy(
+        val strictPolicy = ManagementPasswordPolicy(
             minLength = 10,
             requireUpperCase = true,
             requireSpecialChar = true,

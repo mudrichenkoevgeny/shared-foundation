@@ -9,6 +9,7 @@ This document is the entry point for architectural and coding standards. These r
 - **Strict Boundary:** No UI, no Ktor `Application`/`HttpClient` engine wiring. Consumers handle implementation.
 - **FQN Forbidden:** Do not write fully qualified names (FQN) in expressions, types, or generics. Use imports/typealiases. Minimal FQN only if technically unavoidable (explain why in the commit).
 - **No Comments:** Do not write comments in the code. Logic must be self-documenting through naming and structure.
+- **No Trailing Commas:** Do not use trailing commas at the end of argument, parameter, or entry lists.
 - **Manual Test Execution:** Test runs must be triggered explicitly. Automated execution on file change is prohibited.
 
 ## Module Map
@@ -18,7 +19,7 @@ This document is the entry point for architectural and coding standards. These r
 
 - **`core/common`:** `FoundationJson` (serialization), `ApiErrorResponse`, base `PermissionCode`, `WebSocketContract` (frames/envelopes), `ClientInfo`, `PagedResult`.
 - **`core/audit`:** `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (redaction), `AuditEventMapper`, listing filters/sort keys.
-- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `PasswordPolicy` (rules + `PasswordPolicyValidator`), `EncryptedString`, `SecurityErrorCodes`.
+- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` (rules + `PasswordPolicyValidator`), `EncryptedString`, `SecurityErrorCodes`.
 - **`core/settings`:** `GlobalSettings` domain and payloads, `SettingsWebSocketEventTypes`.
 
 ### Feature API Modules (`feature/*-api`)
@@ -36,6 +37,6 @@ This document is the entry point for architectural and coding standards. These r
 - **`api-documentation-standard.md`** — Mandatory KDoc fields (Auth, Audit, Method) for API route constants.
 - **`docs-kdoc-basics.md`** — Language standards, link resolution rules, and KDoc Definition of Done.
 - **`docs-kdoc-type-requirements.md`** — Specific KDoc patterns for DTOs, Error Codes, Sealed types, and Routes.
-- **`kotlin-coding-style.md`** — Naming, `when` subject rules, brace requirements, and FQN/Comments ban.
+- **`kotlin-coding-style.md`** — Naming, `when` subject rules, brace requirements, FQN/Comments ban, and Trailing Commas ban.
 - **`testing-conventions.md`** — Unit and integration test standards, mocking policy, and manual execution rule.
 - **`ai-collaboration-workflow.md`** — AI constraints, dependency management (Version Catalog), and module responsibility mapping.

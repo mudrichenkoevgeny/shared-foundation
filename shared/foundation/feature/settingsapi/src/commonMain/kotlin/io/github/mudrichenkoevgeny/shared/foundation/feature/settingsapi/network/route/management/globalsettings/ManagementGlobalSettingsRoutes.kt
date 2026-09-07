@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.GlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsapi.domain.audit.action.SettingsAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsapi.domain.audit.resource.SettingsAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.settingsapi.domain.permission.SettingsPermissionCode
@@ -21,9 +21,9 @@ object ManagementGlobalSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves public-facing platform settings.
+     * Retrieves global platform settings.
      *
-     * Response body: [GlobalSettingsPayload].
+     * Response body: [ManagementGlobalSettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -31,14 +31,14 @@ object ManagementGlobalSettingsRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val GET_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+    const val GET_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
 
     /**
      * **HTTP method:** `PUT`
      *
      * Updates platform-wide global settings.
      *
-     * Request body: [GlobalSettingsPayload].
+     * Request body: [ManagementGlobalSettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -53,5 +53,5 @@ object ManagementGlobalSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+    const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
 }

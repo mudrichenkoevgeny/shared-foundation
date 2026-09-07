@@ -9,5 +9,5 @@ object BaseOpenAuthSettingsRoutes {
     /**
      * Path to the authentication settings resource.
      */
-    const val BASE_AUTH_SETTINGS_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
+    const val BASE_OPEN_AUTH_SETTINGS_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
 }

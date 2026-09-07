@@ -20,9 +20,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * User-feature audit resource kinds (management API, open/self-service flows).
  */
 enum class UserAuditResourceType : AuditResourceType {
-    /**
-     * Authentication settings ([ManagementAuthSettingsPayload], [ManagementAuthSettingsRoutes]).
-     */
+    /** [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS] request/response ([ManagementAuthSettingsPayload]). */
     AUTH_SETTINGS,
 
     /**
@@ -79,13 +77,19 @@ enum class UserAuditResourceType : AuditResourceType {
          * Returns [UserAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): UserAuditResourceType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [UserAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): UserAuditResourceType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): UserAuditResourceType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuditResourceType: '$value'")
     }
 }

@@ -1,12 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.management.security.settings.ManagementSecuritySettingsRoutes
 
 /**
  * Security-module audit actions.
  */
 enum class SecurityAuditActionType : AuditActionType {
-    /** [io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.management.security.settings.ManagementSecuritySettingsRoutes.UPDATE_SECURITY_SETTINGS]. */
+    /** [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS]. */
     MANAGEMENT_UPDATE_SECURITY_SETTINGS;
 
     /**
@@ -14,16 +15,16 @@ enum class SecurityAuditActionType : AuditActionType {
      */
     override val serialName: String
         get() = when (this) {
-            MANAGEMENT_UPDATE_SECURITY_SETTINGS -> _root_ide_package_.io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action.SecurityAuditActionType.Companion.ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
+            MANAGEMENT_UPDATE_SECURITY_SETTINGS -> SecurityAuditActionType.ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
         }
 
     override fun parseOrNull(value: String): AuditActionType? =
-        _root_ide_package_.io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action.SecurityAuditActionType.Companion.fromValueOrNull(
+        SecurityAuditActionType.fromValueOrNull(
             value
         )
 
     override fun parseOrThrow(value: String): AuditActionType =
-        _root_ide_package_.io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action.SecurityAuditActionType.Companion.fromValueOrThrow(
+        SecurityAuditActionType.fromValueOrThrow(
             value
         )
 
@@ -33,14 +34,20 @@ enum class SecurityAuditActionType : AuditActionType {
         /**
          * Returns [SecurityAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action.SecurityAuditActionType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+        fun fromValueOrNull(value: String): SecurityAuditActionType? =
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [SecurityAuditActionType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [SecurityAuditActionType].
          */
-        fun fromValueOrThrow(value: String): io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.action.SecurityAuditActionType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): SecurityAuditActionType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SecurityAuditActionType: '$value'")
     }
 }

@@ -31,13 +31,19 @@ enum class SortOrder {
          * Returns [SortOrder] for the given wire value (`asc` / `desc`) or case-insensitive enum name (`ASC` / `DESC`).
          */
         fun fromValueOrNull(value: String): SortOrder? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [SortOrder] for the given wire or enum-style string.
          *
          * @throws IllegalArgumentException if [value] does not match any [SortOrder].
          */
-        fun fromValueOrThrow(value: String): SortOrder = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): SortOrder =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SortOrder: '$value'")
     }
 }

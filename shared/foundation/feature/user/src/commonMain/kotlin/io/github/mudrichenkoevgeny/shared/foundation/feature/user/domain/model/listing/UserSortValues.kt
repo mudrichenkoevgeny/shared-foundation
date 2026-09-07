@@ -48,14 +48,20 @@ object UserSortValues {
              * Returns [UserSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserSortBy? =
-                runCatching { valueOf(value.uppercase()) }.getOrNull()
+                entries.firstOrNull {
+                    it.serialName.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+                } ?: runCatching {
+                    valueOf(value.uppercase())
+                }.getOrNull()
 
             /**
              * Returns [UserSortBy] for the given wire or enum-style string.
              *
              * @throws IllegalArgumentException if [value] does not match any [UserSortBy].
              */
-            fun fromValueOrThrow(value: String): UserSortBy = valueOf(value.uppercase())
+            fun fromValueOrThrow(value: String): UserSortBy =
+                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserSortBy: '$value'")
         }
     }
 
@@ -85,7 +91,12 @@ object UserSortValues {
              * Returns [UserIdentifierSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserIdentifierSortBy? =
-                runCatching { valueOf(value.uppercase()) }.getOrNull()
+                entries.firstOrNull {
+                    it.serialName.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+                } ?: runCatching {
+                    valueOf(value.uppercase())
+                }.getOrNull()
 
             /**
              * Returns [UserIdentifierSortBy] for the given wire or enum-style string.
@@ -93,7 +104,7 @@ object UserSortValues {
              * @throws IllegalArgumentException if [value] does not match any [UserIdentifierSortBy].
              */
             fun fromValueOrThrow(value: String): UserIdentifierSortBy =
-                valueOf(value.uppercase())
+                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserIdentifierSortBy: '$value'")
         }
     }
 
@@ -138,7 +149,12 @@ object UserSortValues {
              * Returns [UserSessionSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserSessionSortBy? =
-                runCatching { valueOf(value.uppercase()) }.getOrNull()
+                entries.firstOrNull {
+                    it.serialName.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+                } ?: runCatching {
+                    valueOf(value.uppercase())
+                }.getOrNull()
 
             /**
              * Returns [UserSessionSortBy] for the given wire or enum-style string.
@@ -146,7 +162,7 @@ object UserSortValues {
              * @throws IllegalArgumentException if [value] does not match any [UserSessionSortBy].
              */
             fun fromValueOrThrow(value: String): UserSessionSortBy =
-                valueOf(value.uppercase())
+                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserSessionSortBy: '$value'")
         }
     }
 }

@@ -159,7 +159,7 @@ object UserApiFields {
 
     /**
      * JSON field name for provider availability lists (primary and secondary); entries use [UserAuthProvider.serialName]
-     * on the wire (public and management auth settings).
+     * on the wire (open and management auth settings).
      */
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"
 
@@ -179,6 +179,11 @@ object UserApiFields {
     const val ACCOUNT_DELETION_DELAY_SECONDS = "account_deletion_delay_seconds"
 
     /**
+     * JSON field name for the global flag indicating whether new user registrations are permitted.
+     */
+    const val IS_REGISTRATION_ENABLED = "is_registration_enabled"
+
+    /**
      * JSON field name for the list of primary (main) authentication methods under [AVAILABLE_AUTH_PROVIDERS]; values use
      * [UserAuthProvider.serialName].
      */
@@ -190,12 +195,21 @@ object UserApiFields {
      */
     const val SECONDARY = "secondary"
 
-    /** JSON field name for the nested global settings object on user configuration responses. */
-    const val GLOBAL_SETTINGS = "global_settings"
+    /** JSON field name for the nested open global settings object on user configuration responses. */
+    const val OPEN_GLOBAL_SETTINGS = "open_global_settings"
 
-    /** JSON field name for the nested security settings object on user configuration responses. */
-    const val SECURITY_SETTINGS = "security_settings"
+    /** JSON field name for the nested management global settings object on user configuration responses. */
+    const val MANAGEMENT_GLOBAL_SETTINGS = "management_global_settings"
 
-    /** JSON field name for the nested public authentication settings object on user configuration responses. */
-    const val AUTH_SETTINGS = "auth_settings"
+    /** JSON field name for the nested open security settings object on user configuration responses. */
+    const val OPEN_SECURITY_SETTINGS = "open_security_settings"
+
+    /** JSON field name for the nested management security settings object on user configuration responses. */
+    const val MANAGEMENT_SECURITY_SETTINGS = "management_security_settings"
+
+    /** JSON field name for the nested open authentication settings object on user configuration responses. */
+    const val OPEN_AUTH_SETTINGS = "open_auth_settings"
+
+    /** JSON field name for the nested management authentication settings object on user configuration responses. */
+    const val MANAGEMENT_AUTH_SETTINGS = "management_auth_settings"
 }

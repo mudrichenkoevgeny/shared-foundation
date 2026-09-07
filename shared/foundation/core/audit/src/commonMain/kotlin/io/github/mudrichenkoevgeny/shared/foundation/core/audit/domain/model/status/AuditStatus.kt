@@ -32,13 +32,19 @@ enum class AuditStatus {
          * Returns [AuditStatus] based on the provided wire value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): AuditStatus? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [AuditStatus] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditStatus].
          */
-        fun fromValueOrThrow(value: String): AuditStatus = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): AuditStatus =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AuditStatus: '$value'")
     }
 }

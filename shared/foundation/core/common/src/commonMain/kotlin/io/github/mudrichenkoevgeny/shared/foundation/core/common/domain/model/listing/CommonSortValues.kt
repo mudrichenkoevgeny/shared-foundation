@@ -36,14 +36,20 @@ object CommonSortValues {
              * Returns [TimestampSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): TimestampSortBy? =
-                runCatching { valueOf(value.uppercase()) }.getOrNull()
+                entries.firstOrNull {
+                    it.serialName.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+                } ?: runCatching {
+                    valueOf(value.uppercase())
+                }.getOrNull()
 
             /**
              * Returns [TimestampSortBy] for the given wire or enum-style string.
              *
              * @throws IllegalArgumentException if [value] does not match any [TimestampSortBy].
              */
-            fun fromValueOrThrow(value: String): TimestampSortBy = valueOf(value.uppercase())
+            fun fromValueOrThrow(value: String): TimestampSortBy =
+                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for TimestampSortBy: '$value'")
         }
     }
 }

@@ -1,13 +1,14 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.resource
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.SecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.management.security.settings.ManagementSecuritySettingsRoutes
 
 /**
  * Security-module audit resource kinds.
  */
 enum class SecurityAuditResourceType : AuditResourceType {
-    /** [io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.network.route.management.security.settings.ManagementSecuritySettingsRoutes.UPDATE_SECURITY_SETTINGS] request/response ([SecuritySettingsPayload]). */
+    /** [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS] request/response ([ManagementSecuritySettingsPayload]). */
     SECURITY_SETTINGS;
 
     /**
@@ -34,14 +35,20 @@ enum class SecurityAuditResourceType : AuditResourceType {
         /**
          * Returns [SecurityAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.resource.SecurityAuditResourceType? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+        fun fromValueOrNull(value: String): SecurityAuditResourceType? =
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [SecurityAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [SecurityAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): io.github.mudrichenkoevgeny.shared.foundation.feature.securityapi.domain.audit.resource.SecurityAuditResourceType = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): SecurityAuditResourceType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SecurityAuditResourceType: '$value'")
     }
 }

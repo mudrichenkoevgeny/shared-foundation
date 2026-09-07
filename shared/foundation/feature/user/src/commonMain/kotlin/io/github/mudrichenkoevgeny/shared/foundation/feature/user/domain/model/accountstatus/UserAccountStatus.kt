@@ -52,13 +52,19 @@ enum class UserAccountStatus {
          * Returns [UserAccountStatus] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): UserAccountStatus? =
-            runCatching { valueOf(value.uppercase()) }.getOrNull()
+            entries.firstOrNull {
+                it.serialName.equals(value, ignoreCase = true) ||
+                    it.name.equals(value, ignoreCase = true)
+            } ?: runCatching {
+                valueOf(value.uppercase())
+            }.getOrNull()
 
         /**
          * Returns [UserAccountStatus] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAccountStatus].
          */
-        fun fromValueOrThrow(value: String): UserAccountStatus = valueOf(value.uppercase())
+        fun fromValueOrThrow(value: String): UserAccountStatus =
+            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAccountStatus: '$value'")
     }
 }

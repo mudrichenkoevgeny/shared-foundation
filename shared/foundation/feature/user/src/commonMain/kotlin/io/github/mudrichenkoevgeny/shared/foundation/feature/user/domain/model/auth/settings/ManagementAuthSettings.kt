@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 /**
  * Full authentication configuration edited through the **management** API.
  *
- * Superset of [PublicAuthSettings]: includes the same provider lists plus token lifetime policy
+ * Superset of [OpenAuthSettings]: includes the same provider lists plus token lifetime policy
  * for issued credentials. Server implementations apply updates without restart; **already issued**
  * tokens may retain semantics from the previous policy until they expire or are deleted, unless
  * the server documents otherwise.
@@ -22,6 +22,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
  * @property refreshTokenExpirationSeconds Validity window for **new** refresh tokens, in seconds.
  * @property accountDeletionDelaySeconds The delay in seconds between scheduling an account
  * for deletion and its permanent removal from the system.
+ * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
 data class ManagementAuthSettings(
     val availableAuthProviders: AvailableAuthProviders,
@@ -32,5 +33,6 @@ data class ManagementAuthSettings(
     val maxActiveSessions: Int,
     val accessTokenExpirationSeconds: Int,
     val refreshTokenExpirationSeconds: Int,
-    val accountDeletionDelaySeconds: Int
+    val accountDeletionDelaySeconds: Int,
+    val isRegistrationEnabled: Boolean
 )

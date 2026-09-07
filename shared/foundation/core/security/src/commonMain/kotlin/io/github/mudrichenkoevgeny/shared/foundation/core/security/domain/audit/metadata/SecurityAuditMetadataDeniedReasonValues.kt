@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 
 /**
@@ -15,7 +15,7 @@ object SecurityAuditMetadataDeniedReasonValues {
      */
     const val RATE_LIMIT = "rate_limit"
 
-    /** * Password does not satisfy the configured [PasswordPolicy].
+    /** * Password does not satisfy the configured [ManagementPasswordPolicy].
      * Associated with [SecurityErrorCodes.PASSWORD_TOO_WEAK].
      */
     const val PASSWORD_TOO_WEAK = "password_too_weak"

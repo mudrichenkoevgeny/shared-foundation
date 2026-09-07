@@ -31,7 +31,7 @@ Focus on domain logic, data models, and transport payloads.
 Focus on HTTP contracts, specific route constants, and access control.
 
 - **`feature/auditapi`:** Management endpoints for audit logs. Contains `ManagementAuditRoutes` and `AuditPermissionCode` (controlling masked vs unmasked data visibility).
-- **`feature/securityapi`:** Security configuration routes. `OpenSecuritySettingsRoutes` (public) and `ManagementSecuritySettingsRoutes` (restricted).
+- **`feature/securityapi`:** Security configuration routes. `OpenSecuritySettingsRoutes` (open) and `ManagementSecuritySettingsRoutes` (restricted).
 - **`feature/settingsapi`:** System-wide settings routes. `OpenGlobalSettingsRoutes` and `ManagementGlobalSettingsRoutes`.
 - **`feature/user`:** Comprehensive feature module for Auth, Sessions, and Identifiers. Aggregates `core/security` for MFA flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
