@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.mode
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.accountlockout.AccountLockoutPolicyPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.iprestriction.IpRestrictionPolicyPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.passwordpolicy.ManagementPasswordPolicyPayload
 import kotlinx.serialization.SerialName
@@ -15,6 +16,8 @@ import kotlinx.serialization.Serializable
  * @property passwordPolicy Full password policy payload including common passwords; see [ManagementPasswordPolicyPayload].
  * @property otpConfirmation OTP configuration payload; see [OtpConfirmationPayload].
  * @property accountLockoutPolicy Account lockout policy payload; see [AccountLockoutPolicyPayload].
+ * @property openIpRestrictionPolicy IP blacklist and whitelist restriction policy payload for open API endpoints; see [IpRestrictionPolicyPayload].
+ * @property managementIpRestrictionPolicy IP blacklist and whitelist restriction policy payload for management API endpoints; see [IpRestrictionPolicyPayload].
  * @property mfaTokenExpirationSeconds Lifetime of the MFA challenge token, in seconds.
  * @property maxRequestsPerPeriod Maximum number of requests per time unit.
  * @property rateLimitPeriodSeconds Time window in seconds for request rate limiting.
@@ -35,6 +38,12 @@ data class ManagementSecuritySettingsPayload(
 
     @SerialName(SecurityApiFields.ACCOUNT_LOCKOUT_POLICY)
     val accountLockoutPolicy: AccountLockoutPolicyPayload,
+
+    @SerialName(SecurityApiFields.OPEN_IP_RESTRICTION_POLICY)
+    val openIpRestrictionPolicy: IpRestrictionPolicyPayload,
+
+    @SerialName(SecurityApiFields.MANAGEMENT_IP_RESTRICTION_POLICY)
+    val managementIpRestrictionPolicy: IpRestrictionPolicyPayload,
 
     @SerialName(SecurityApiFields.EXPIRATION_SECONDS)
     val mfaTokenExpirationSeconds: Int,

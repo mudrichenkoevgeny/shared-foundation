@@ -12,20 +12,21 @@
     - **Recovery:** [TotpRecoveryCodes] and [TotpRecoveryCodesPayload] — management of one-time backup codes.
 - **Security Settings & Policies:**
     - [OpenSecuritySettings] & [OpenSecuritySettingsPayload]: Open configuration for password rules and OTP validation.
-    - [ManagementSecuritySettings] & [ManagementSecuritySettingsPayload]: Full configuration for session validity (standard and management), MFA token TTL, full password policy with common passwords, OTP config, rate limits, and [AccountLockoutPolicy].
+    - [ManagementSecuritySettings] & [ManagementSecuritySettingsPayload]: Full configuration for session validity (open and management), MFA token TTL, full password policy with common passwords, OTP config, rate limits, [AccountLockoutPolicy], and IP restriction policies ([IpRestrictionPolicy]).
     - [ManagementPasswordPolicy] & [ManagementPasswordPolicyPayload] / [OpenPasswordPolicy] & [OpenPasswordPolicyPayload]: Rules for strength validation.
     - [OtpConfirmation] & [OtpConfirmationPayload]: Configuration for OTP generation.
     - [AccountLockoutPolicy] & [AccountLockoutPolicyPayload]: Brute-force protection rules and lockout thresholds.
     - [AccountLockoutType]: Enum representing lockout states (`NONE`, `PERMANENT`, `TEMPORARY`).
+    - [IpRestrictionPolicy] & [IpRestrictionPolicyPayload]: Blacklist and whitelist IP filtering rules for open and management endpoints.
 - **Cryptographic Value Objects:**
     - [DecryptedString] & [EncryptedString]: `inline value` classes for type-safe handling of raw and encrypted data.
     - [PasswordHash]: Dedicated type for hashed password storage.
 - **Error Naming & Audit:**
-    - [SecurityErrorCodes] & [SecurityErrorArgs]: Specialized codes for MFA failures, password policy violations, and rate limits.
+    - [SecurityErrorCodes] & [SecurityErrorArgs]: Specialized codes for MFA failures, password policy violations, rate limits, and IP access restrictions ([SecurityErrorCodes.IP_NOT_ALLOWED]).
     - [SecurityAuditMetadataDeniedReasonValues]: Standardized string constants for [CommonAuditMetadataKey.DENIED_REASON] in audit logs.
 - **Validation & Mapping:**
     - [PasswordPolicyValidator]: Interface and default implementation for enforcing password rules.
-    - **Mappers:** Extensive set of mappers for Domain ↔ Payload conversion.
+    - **Mappers:** Extensive set of mappers for Domain ↔ Payload conversion (including [IpRestrictionPolicyMapper]).
 - **WebSocket:** [SecurityWebSocketEventTypes] — event strings `OPEN_SECURITY_SETTINGS_UPDATED` and `MANAGEMENT_SECURITY_SETTINGS_UPDATED`.
 
 ## Usage
@@ -52,6 +53,9 @@
 [AccountLockoutPolicy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy.kt
 [AccountLockoutPolicyPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload.kt
 [AccountLockoutType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
+[IpRestrictionPolicy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy.kt
+[IpRestrictionPolicyPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload.kt
+[IpRestrictionPolicyMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/iprestriction/IpRestrictionPolicyMapper.kt
 [TotpSetup]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup.kt
 [TotpSetupPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload.kt
 [VerifyTotp]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp.kt

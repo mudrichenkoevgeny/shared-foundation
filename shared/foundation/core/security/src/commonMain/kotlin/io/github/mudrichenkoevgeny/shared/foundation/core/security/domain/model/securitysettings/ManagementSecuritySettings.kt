@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.iprestriction.IpRestrictionPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.otpconfirmation.OtpConfirmation
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
 
@@ -12,6 +13,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
  * @property passwordPolicy Full rules for password strength and validation including [ManagementPasswordPolicy.commonPasswords].
  * @property otpConfirmation Configuration for One-Time Password generation and validation.
  * @property accountLockoutPolicy Policy defining account and identifier lockout rules for authentication brute-force protection.
+ * @property openIpRestrictionPolicy IP blacklist and whitelist restriction policy for open API endpoints; see [IpRestrictionPolicy].
+ * @property managementIpRestrictionPolicy IP blacklist and whitelist restriction policy for management API endpoints; see [IpRestrictionPolicy].
  * @property mfaTokenExpirationSeconds Lifetime of the temporary MFA challenge token, in seconds.
  * @property maxRequestsPerPeriod Maximum number of requests per time unit.
  * @property rateLimitPeriodSeconds Time window in seconds for request rate limiting.
@@ -22,6 +25,8 @@ data class ManagementSecuritySettings(
     val passwordPolicy: ManagementPasswordPolicy,
     val otpConfirmation: OtpConfirmation,
     val accountLockoutPolicy: AccountLockoutPolicy,
+    val openIpRestrictionPolicy: IpRestrictionPolicy,
+    val managementIpRestrictionPolicy: IpRestrictionPolicy,
     val mfaTokenExpirationSeconds: Int,
     val maxRequestsPerPeriod: Int,
     val rateLimitPeriodSeconds: Int

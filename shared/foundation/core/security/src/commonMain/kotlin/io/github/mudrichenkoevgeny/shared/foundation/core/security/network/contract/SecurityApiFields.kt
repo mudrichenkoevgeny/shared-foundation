@@ -100,4 +100,22 @@ object SecurityApiFields {
 
     /** JSON field name for the self-service unlock enablement flag. */
     const val IS_SELF_SERVICE_UNLOCK_ENABLED = "is_self_service_unlock_enabled"
+
+    /** JSON field name for open API IP restriction policy object. */
+    const val OPEN_IP_RESTRICTION_POLICY = "open_ip_restriction_policy"
+
+    /** JSON field name for management API IP restriction policy object. */
+    const val MANAGEMENT_IP_RESTRICTION_POLICY = "management_ip_restriction_policy"
+
+    /** JSON field name for the blacklist enablement flag. */
+    const val IS_BLACKLIST_ENABLED = "is_blacklist_enabled"
+
+    /** JSON field name for the blacklist items array. */
+    const val BLACKLIST = "blacklist"
+
+    /** JSON field name for the whitelist enablement flag. */
+    const val IS_WHITELIST_ENABLED = "is_whitelist_enabled"
+
+    /** JSON field name for the whitelist items array. */
+    const val WHITELIST = "whitelist"
 }

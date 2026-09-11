@@ -144,4 +144,7 @@ object UserErrorCodes {
 
     /** Self-service unlock is currently disabled by security policy. */
     const val SELF_SERVICE_UNLOCK_DISABLED = "SELF_SERVICE_UNLOCK_DISABLED"
+
+    /** The registration, login, or email linkage attempt was rejected because the email address or domain is not permitted by email restriction policy. */
+    const val EMAIL_NOT_ALLOWED = "EMAIL_NOT_ALLOWED"
 }

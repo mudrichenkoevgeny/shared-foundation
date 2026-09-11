@@ -55,4 +55,7 @@ object SecurityErrorCodes {
 
     /** The provided MFA challenge token is invalid, malformed, or belongs to another session. */
     const val INVALID_MFA_TOKEN = "INVALID_MFA_TOKEN"
+
+    /** Request was rejected because the client IP address is not permitted by IP restriction policy. */
+    const val IP_NOT_ALLOWED = "IP_NOT_ALLOWED"
 }

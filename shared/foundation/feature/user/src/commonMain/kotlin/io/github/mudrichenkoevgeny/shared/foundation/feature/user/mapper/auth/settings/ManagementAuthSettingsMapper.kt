@@ -1,12 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.auth.settings
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.emailrestriction.toEmailRestrictionPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.emailrestriction.toEmailRestrictionPolicyPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 
 /**
  * Maps between [ManagementAuthSettingsPayload] and domain [ManagementAuthSettings].
  *
  * Nested [ManagementAuthSettings.availableAuthProviders] uses [toAvailableAuthProviders] and [toAvailableAuthProvidersPayload].
+ * Nested [ManagementAuthSettings.emailRestrictionPolicy] uses [toEmailRestrictionPolicy] and [toEmailRestrictionPolicyPayload].
  */
 
 /**
@@ -19,11 +22,13 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
         maxEmailIdentifiers = maxEmailIdentifiers,
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        maxActiveSessions = maxActiveSessions,
+        maxActiveSessionsForOpenUser = maxActiveSessionsForOpenUser,
+        maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
         accountDeletionDelaySeconds = accountDeletionDelaySeconds,
-        isRegistrationEnabled = isRegistrationEnabled
+        isRegistrationEnabled = isRegistrationEnabled,
+        emailRestrictionPolicy = emailRestrictionPolicy.toEmailRestrictionPolicy()
     )
 
 /**
@@ -36,9 +41,11 @@ fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSett
         maxEmailIdentifiers = maxEmailIdentifiers,
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        maxActiveSessions = maxActiveSessions,
+        maxActiveSessionsForOpenUser = maxActiveSessionsForOpenUser,
+        maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
         accountDeletionDelaySeconds = accountDeletionDelaySeconds,
-        isRegistrationEnabled = isRegistrationEnabled
+        isRegistrationEnabled = isRegistrationEnabled,
+        emailRestrictionPolicy = emailRestrictionPolicy.toEmailRestrictionPolicyPayload()
     )

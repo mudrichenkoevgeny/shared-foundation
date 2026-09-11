@@ -8,7 +8,7 @@ The module is built on a hierarchical routing system (Open, Self-Management, and
 
 ### 1. Multi-Channel Authentication
 Supports diverse authentication strategies across all lifecycle stages (registration, login, recovery, unlock):
-- **Email & Password:** Standard registration and login flows.
+- **Email & Password:** Standard registration and login flows with email restriction policy enforcement ([EmailRestrictionPolicy]).
 - **Phone:** SMS-based or phone-linked authentication.
 - **External Auth Providers:** Integration with OAuth/Social providers (Google, Apple, etc.).
 - **Self-Service Account Unlock:** Email/SMS OTP and OAuth token-based unlock flows for temporarily locked accounts.
@@ -21,7 +21,7 @@ Supports diverse authentication strategies across all lifecycle stages (registra
 
 ### 3. Identity & Session Control
 - **Identifiers:** Linking and unlinking multiple identities (Email, Phone, External IDs) to a single account ([UserIdentifier]).
-- **Session Management:** Full visibility into active sessions ([UserSession]) with the ability to terminate individual or global sessions ([DeletedSessions]).
+- **Session Management:** Full visibility into active sessions ([UserSession]) with separate session limit policies for open users vs. management users, and ability to terminate individual or global sessions ([DeletedSessions]).
 - **Data Masking:** Permissions-based masking of sensitive data in identifiers and sessions (e.g., masked vs. unmasked emails).
 
 ### 4. Multifactor Security
@@ -38,14 +38,14 @@ Permissions are strictly scoped by target roles ([UserRole]) and objects:
 | **Users** | [UserPermissionCode] — CRUD, status, authority, and security updates. |
 | **Sessions** | [SessionPermissionCode] — View (masked/unmasked) and terminate sessions. |
 | **Identifiers** | [IdentifierPermissionCode] — View (masked/unmasked) and manage linked IDs. |
-| **Auth Settings** | [AuthSettingsPermissionCode] — Manage global auth provider availability. |
+| **Auth Settings** | [AuthSettingsPermissionCode] — Manage global auth provider availability and email restrictions. |
 
 ## Network & Data Contracts
 
 ### Complete Request & Payload Ecosystem
 The module provides DTOs and Request models for every domain entity to ensure type safety across the wire:
 
-- **Auth Data & Settings:** [AuthDataPayload], [AvailableAuthProvidersPayload], [OpenAuthSettingsPayload], [ManagementAuthSettingsPayload].
+- **Auth Data & Settings:** [AuthDataPayload], [AvailableAuthProvidersPayload], [OpenAuthSettingsPayload], [ManagementAuthSettingsPayload], [EmailRestrictionPolicyPayload].
 - **Configuration:** [OpenUserConfigurationPayload], [ManagementUserConfigurationPayload].
 - **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
 - **Sessions & Identifiers:** [UserSessionPayload], [DeletedSessionsPayload], [UserIdentifierPayload].
@@ -81,7 +81,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 
 | Category | Mapper Classes |
 | :--- | :--- |
-| **Auth & Settings** | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper] |
+| **Auth & Settings** | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper]<br>[EmailRestrictionPolicyMapper] |
 | **Configuration** | [OpenUserConfigurationMapper]<br>[ManagementUserConfigurationMapper] |
 | **User Profile** | [UserDetailsMapper]<br>[UserPublicMapper] |
 | **Identifiers & Sessions** | [UserIdentifierMapper]<br>[UserSessionMapper]<br>[DeletedSessionsMapper]<br>[SessionTokenMapper] |
@@ -90,7 +90,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 
 | Category | Domain Classes |
 | :--- | :--- |
-| **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
+| **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
 | **Configuration** | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
 | **User Profile** | [UserDetails]<br>[UserPublic]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
 | **Identifiers** | [UserIdentifier]<br>[UserIdentifierId]<br>[UserIdentifierInternal] |
@@ -132,6 +132,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [AvailableAuthProvidersMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/settings/AvailableAuthProvidersMapper.kt
 [OpenAuthSettingsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/settings/OpenAuthSettingsMapper.kt
 [ManagementAuthSettingsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/settings/ManagementAuthSettingsMapper.kt
+[EmailRestrictionPolicyMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/emailrestriction/EmailRestrictionPolicyMapper.kt
 [OpenUserConfigurationMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/configuration/OpenUserConfigurationMapper.kt
 [ManagementUserConfigurationMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/configuration/ManagementUserConfigurationMapper.kt
 [UserIdentifierMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/identifier/UserIdentifierMapper.kt
@@ -145,6 +146,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [AvailableAuthProviders]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/auth/settings/AvailableAuthProviders.kt
 [OpenAuthSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/auth/settings/OpenAuthSettings.kt
 [ManagementAuthSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/auth/settings/ManagementAuthSettings.kt
+[EmailRestrictionPolicy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/emailrestriction/EmailRestrictionPolicy.kt
 [ExternalAuthProvider]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/authprovider/ExternalAuthProvider.kt
 [UserAuthProvider]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/authprovider/UserAuthProvider.kt
 [OpenUserConfiguration]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/configuration/OpenUserConfiguration.kt
@@ -177,6 +179,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [AvailableAuthProvidersPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/settings/AvailableAuthProvidersPayload.kt
 [OpenAuthSettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/settings/OpenAuthSettingsPayload.kt
 [ManagementAuthSettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/settings/ManagementAuthSettingsPayload.kt
+[EmailRestrictionPolicyPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/emailrestriction/EmailRestrictionPolicyPayload.kt
 [OpenUserConfigurationPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/configuration/OpenUserConfigurationPayload.kt
 [ManagementUserConfigurationPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/configuration/ManagementUserConfigurationPayload.kt
 [UserIdentifierPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/identifier/UserIdentifierPayload.kt

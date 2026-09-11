@@ -162,8 +162,11 @@ object UserApiFields {
     /** JSON field name for the maximum identifiers allowed per specific external provider. */
     const val MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER = "max_identifiers_per_external_provider"
 
-    /** JSON field name for the maximum concurrent active sessions allowed per account. */
-    const val MAX_ACTIVE_SESSIONS = "max_active_sessions"
+    /** JSON field name for the maximum concurrent active sessions allowed per open user account. */
+    const val MAX_ACTIVE_SESSIONS_FOR_OPEN_USER = "max_active_sessions_for_open_user"
+
+    /** JSON field name for the maximum concurrent active sessions allowed per management user account. */
+    const val MAX_ACTIVE_SESSIONS_FOR_MANAGEMENT_USER = "max_active_sessions_for_management_user"
 
     /**
      * JSON field name for provider availability lists (primary and secondary); entries use [UserAuthProvider.serialName]
@@ -190,6 +193,9 @@ object UserApiFields {
      * JSON field name for the global flag indicating whether new user registrations are permitted.
      */
     const val IS_REGISTRATION_ENABLED = "is_registration_enabled"
+
+    /** JSON field name for the email restriction policy object. */
+    const val EMAIL_RESTRICTION_POLICY = "email_restriction_policy"
 
     /**
      * JSON field name for the list of primary (main) authentication methods under [AVAILABLE_AUTH_PROVIDERS]; values use

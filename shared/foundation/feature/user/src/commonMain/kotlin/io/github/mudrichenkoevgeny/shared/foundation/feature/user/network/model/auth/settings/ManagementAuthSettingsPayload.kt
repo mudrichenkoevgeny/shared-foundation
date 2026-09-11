@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.emailrestriction.EmailRestrictionPolicyPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,12 +15,14 @@ import kotlinx.serialization.Serializable
  * @property maxPhoneIdentifiers Maximum number of phone-based identifiers allowed per account.
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account.
- * @property maxActiveSessions Maximum number of active sessions allowed per account.
+ * @property maxActiveSessionsForOpenUser Maximum number of active sessions allowed per open user account.
+ * @property maxActiveSessionsForManagementUser Maximum number of active sessions allowed per management user account.
  * @property accessTokenExpirationSeconds Validity window for **newly issued** access tokens, in seconds.
  * @property refreshTokenExpirationSeconds Validity window for **newly issued** refresh tokens, in seconds.
  * @property accountDeletionDelaySeconds The delay in seconds before an account scheduled for
  * deletion is permanently removed.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
+ * @property emailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload; see [EmailRestrictionPolicyPayload].
  */
 @Serializable
 data class ManagementAuthSettingsPayload(
@@ -38,8 +41,11 @@ data class ManagementAuthSettingsPayload(
     @SerialName(UserApiFields.MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER)
     val maxIdentifiersPerExternalProvider: Int,
 
-    @SerialName(UserApiFields.MAX_ACTIVE_SESSIONS)
-    val maxActiveSessions: Int,
+    @SerialName(UserApiFields.MAX_ACTIVE_SESSIONS_FOR_OPEN_USER)
+    val maxActiveSessionsForOpenUser: Int,
+
+    @SerialName(UserApiFields.MAX_ACTIVE_SESSIONS_FOR_MANAGEMENT_USER)
+    val maxActiveSessionsForManagementUser: Int,
 
     @SerialName(UserApiFields.ACCESS_TOKEN_VALIDITY_SECONDS)
     val accessTokenExpirationSeconds: Int,
@@ -51,5 +57,8 @@ data class ManagementAuthSettingsPayload(
     val accountDeletionDelaySeconds: Int,
 
     @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
-    val isRegistrationEnabled: Boolean
+    val isRegistrationEnabled: Boolean,
+
+    @SerialName(UserApiFields.EMAIL_RESTRICTION_POLICY)
+    val emailRestrictionPolicy: EmailRestrictionPolicyPayload
 )
