@@ -25,7 +25,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
  * @property accountDeletionDelaySeconds The delay in seconds between scheduling an account
  * for deletion and its permanent removal from the system.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
- * @property emailRestrictionPolicy Email domain blacklist and whitelist restriction policy; see [EmailRestrictionPolicy].
+ * @property openEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for open API endpoints; see [EmailRestrictionPolicy].
+ * @property managementEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for management API endpoints; see [EmailRestrictionPolicy].
  */
 data class ManagementAuthSettings(
     val availableAuthProviders: AvailableAuthProviders,
@@ -39,5 +40,6 @@ data class ManagementAuthSettings(
     val refreshTokenExpirationSeconds: Int,
     val accountDeletionDelaySeconds: Int,
     val isRegistrationEnabled: Boolean,
-    val emailRestrictionPolicy: EmailRestrictionPolicy
+    val openEmailRestrictionPolicy: EmailRestrictionPolicy,
+    val managementEmailRestrictionPolicy: EmailRestrictionPolicy
 )

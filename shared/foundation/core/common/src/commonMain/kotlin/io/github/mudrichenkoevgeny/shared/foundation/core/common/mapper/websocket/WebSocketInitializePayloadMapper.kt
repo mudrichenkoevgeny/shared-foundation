@@ -19,7 +19,21 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.w
 fun WebSocketInitializePayload.mergeClientInfo(
     existingClientInfo: ClientInfo? = null
 ): ClientInfo {
-    val currentClientInfo = existingClientInfo ?: ClientInfo()
+    val currentClientInfo = existingClientInfo ?: ClientInfo(
+        deviceInfo = ClientDeviceInfo(
+            deviceId = null,
+            deviceName = null,
+            clientType = null,
+            language = null,
+            appVersion = null,
+            operationSystemVersion = null
+        ),
+        userAgent = null,
+        ipAddress = null,
+        host = null,
+        origin = null,
+        apiVersion = null
+    )
     return currentClientInfo.copy(
         deviceInfo = mergeClientDeviceInfo(currentClientInfo.deviceInfo),
         apiVersion = apiVersion ?: currentClientInfo.apiVersion
@@ -38,7 +52,14 @@ fun WebSocketInitializePayload.mergeClientInfo(
 fun WebSocketInitializePayload.mergeClientDeviceInfo(
     existingClientDeviceInfo: ClientDeviceInfo? = null
 ): ClientDeviceInfo {
-    val currentClientDeviceInfo = existingClientDeviceInfo ?: ClientDeviceInfo()
+    val currentClientDeviceInfo = existingClientDeviceInfo ?: ClientDeviceInfo(
+        deviceId = null,
+        deviceName = null,
+        clientType = null,
+        language = null,
+        appVersion = null,
+        operationSystemVersion = null
+    )
     return currentClientDeviceInfo.copy(
         clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: currentClientDeviceInfo.clientType,
         language = language ?: currentClientDeviceInfo.language,

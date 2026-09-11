@@ -18,11 +18,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UpdateUserRequest(
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val accountStatus: String? = null,
+    val accountStatus: String?,
 
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
-    val authorityLevel: Int? = null,
+    val authorityLevel: Int?,
 
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: Set<String>? = null
+    val permissionCodes: Set<String>?
 )

@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.met
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.CompositeAuditResourceTypeParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.toAuditEventIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventMetadataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
@@ -41,6 +42,7 @@ fun AuditEventPayload.toAuditEvent(
     action = compositeActionTypeParser.fromValueOrThrow(action),
     resource = compositeResourceTypeParser.fromValueOrThrow(resource),
     resourceId = resourceId,
+    resourceValueSensitivity = AuditValueSensitivity.NON_SENSITIVE,
     status = AuditStatus.fromValueOrThrow(status),
     metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
     message = message,

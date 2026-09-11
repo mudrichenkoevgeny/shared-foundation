@@ -22,7 +22,8 @@ import kotlinx.serialization.Serializable
  * @property accountDeletionDelaySeconds The delay in seconds before an account scheduled for
  * deletion is permanently removed.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
- * @property emailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload; see [EmailRestrictionPolicyPayload].
+ * @property openEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload for open API endpoints; see [EmailRestrictionPolicyPayload].
+ * @property managementEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload for management API endpoints; see [EmailRestrictionPolicyPayload].
  */
 @Serializable
 data class ManagementAuthSettingsPayload(
@@ -59,6 +60,9 @@ data class ManagementAuthSettingsPayload(
     @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
     val isRegistrationEnabled: Boolean,
 
-    @SerialName(UserApiFields.EMAIL_RESTRICTION_POLICY)
-    val emailRestrictionPolicy: EmailRestrictionPolicyPayload
+    @SerialName(UserApiFields.OPEN_EMAIL_RESTRICTION_POLICY)
+    val openEmailRestrictionPolicy: EmailRestrictionPolicyPayload,
+
+    @SerialName(UserApiFields.MANAGEMENT_EMAIL_RESTRICTION_POLICY)
+    val managementEmailRestrictionPolicy: EmailRestrictionPolicyPayload
 )

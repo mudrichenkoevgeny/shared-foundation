@@ -11,10 +11,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property requireSpecialChar If true, password must contain at least one special character.
  */
 data class OpenPasswordPolicy(
-    val minLength: Int = ManagementPasswordPolicy.DEFAULT_MIN_LENGTH,
-    val requireLetter: Boolean = true,
-    val requireUpperCase: Boolean = false,
-    val requireLowerCase: Boolean = false,
-    val requireDigit: Boolean = false,
-    val requireSpecialChar: Boolean = false
+    val minLength: Int,
+    val requireLetter: Boolean,
+    val requireUpperCase: Boolean,
+    val requireLowerCase: Boolean,
+    val requireDigit: Boolean,
+    val requireSpecialChar: Boolean
 )

@@ -52,23 +52,23 @@ data class UserDetailsPayload(
     val isTotpEnabled: Boolean,
 
     @SerialName(UserApiFields.LAST_LOGIN_AT)
-    val lastLoginAt: Long? = null,
+    val lastLoginAt: Long?,
 
     @SerialName(UserApiFields.LAST_ACTIVE_AT)
-    val lastActiveAt: Long? = null,
+    val lastActiveAt: Long?,
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long,
 
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null,
+    val updatedAt: Long?,
 
     @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
-    val scheduledPermanentDeletionAt: Long? = null,
+    val scheduledPermanentDeletionAt: Long?,
 
     @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
-    val lockoutType: String = "none",
+    val lockoutType: String,
 
     @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-    val temporaryLockoutUntil: Long? = null
+    val temporaryLockoutUntil: Long?
 )

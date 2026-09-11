@@ -36,13 +36,13 @@ data class AuditEventPayload(
     val id: String,
 
     @SerialName(AuditEventFields.ACTOR_ID)
-    val actorId: String? = null,
+    val actorId: String?,
 
     @SerialName(AuditEventFields.ACTOR_TYPE)
     val actorType: String,
 
     @SerialName(AuditEventFields.ACTOR_USER_ROLE)
-    val actorUserRole: String? = null,
+    val actorUserRole: String?,
 
     @SerialName(AuditEventFields.ACTION)
     val action: String,
@@ -51,16 +51,16 @@ data class AuditEventPayload(
     val resource: String,
 
     @SerialName(AuditEventFields.RESOURCE_ID)
-    val resourceId: String? = null,
+    val resourceId: String?,
 
     @SerialName(AuditEventFields.STATUS)
     val status: String,
 
     @SerialName(CommonApiFields.METADATA)
-    val metadata: List<AuditEventMetadataPayload> = emptyList(),
+    val metadata: List<AuditEventMetadataPayload>,
 
     @SerialName(CommonApiFields.MESSAGE)
-    val message: String? = null,
+    val message: String?,
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long

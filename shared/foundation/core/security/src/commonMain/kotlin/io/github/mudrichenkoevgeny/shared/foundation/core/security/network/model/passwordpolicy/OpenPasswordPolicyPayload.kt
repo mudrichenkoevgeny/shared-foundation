@@ -1,9 +1,20 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.passwordpolicy
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.OpenPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Wire DTO representing public password validation rules, aligned with [OpenPasswordPolicy].
+ *
+ * @property minLength Minimum number of characters required.
+ * @property requireLetter Indicates if at least one alphabetic character is required.
+ * @property requireUpperCase Indicates if at least one uppercase letter is required.
+ * @property requireLowerCase Indicates if at least one lowercase letter is required.
+ * @property requireDigit Indicates if at least one numerical digit is required.
+ * @property requireSpecialChar Indicates if at least one special character is required.
+ */
 @Serializable
 data class OpenPasswordPolicyPayload(
     @SerialName(SecurityApiFields.MIN_LENGTH)

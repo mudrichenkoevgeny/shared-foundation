@@ -42,5 +42,5 @@ data class UserIdentifierPayload(
     val createdAt: Long,
 
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null
+    val updatedAt: Long?
 )

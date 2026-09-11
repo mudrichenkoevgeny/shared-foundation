@@ -19,23 +19,23 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WebSocketInitializePayload(
     @SerialName(CommonApiFields.CLIENT_TYPE)
-    val clientType: String? = null,
+    val clientType: String?,
 
     @SerialName(CommonApiFields.LANGUAGE)
-    val language: String? = null,
+    val language: String?,
 
     @SerialName(CommonApiFields.DEVICE_ID)
     val deviceId: String?,
 
     @SerialName(CommonApiFields.DEVICE_NAME)
-    val deviceName: String? = null,
+    val deviceName: String?,
 
     @SerialName(CommonApiFields.APP_VERSION)
-    val appVersion: String? = null,
+    val appVersion: String?,
 
     @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
-    val operationSystemVersion: String? = null,
+    val operationSystemVersion: String?,
 
     @SerialName(CommonApiFields.API_VERSION)
-    val apiVersion: String? = null
+    val apiVersion: String?
 )

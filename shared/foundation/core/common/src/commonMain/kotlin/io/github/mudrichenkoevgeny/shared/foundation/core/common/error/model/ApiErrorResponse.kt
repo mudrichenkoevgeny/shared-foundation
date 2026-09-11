@@ -26,5 +26,5 @@ data class ApiErrorResponse(
     val message: String,
 
     @SerialName(CommonApiFields.ARGS)
-    val args: Map<String, String> = emptyMap()
+    val args: Map<String, String>
 )

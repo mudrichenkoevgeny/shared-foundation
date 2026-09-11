@@ -9,7 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * Maps between [ManagementAuthSettingsPayload] and domain [ManagementAuthSettings].
  *
  * Nested [ManagementAuthSettings.availableAuthProviders] uses [toAvailableAuthProviders] and [toAvailableAuthProvidersPayload].
- * Nested [ManagementAuthSettings.emailRestrictionPolicy] uses [toEmailRestrictionPolicy] and [toEmailRestrictionPolicyPayload].
+ * Nested [ManagementAuthSettings.openEmailRestrictionPolicy] and [ManagementAuthSettings.managementEmailRestrictionPolicy]
+ * use [toEmailRestrictionPolicy] and [toEmailRestrictionPolicyPayload].
  */
 
 /**
@@ -28,7 +29,8 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
         accountDeletionDelaySeconds = accountDeletionDelaySeconds,
         isRegistrationEnabled = isRegistrationEnabled,
-        emailRestrictionPolicy = emailRestrictionPolicy.toEmailRestrictionPolicy()
+        openEmailRestrictionPolicy = openEmailRestrictionPolicy.toEmailRestrictionPolicy(),
+        managementEmailRestrictionPolicy = managementEmailRestrictionPolicy.toEmailRestrictionPolicy()
     )
 
 /**
@@ -47,5 +49,6 @@ fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSett
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
         accountDeletionDelaySeconds = accountDeletionDelaySeconds,
         isRegistrationEnabled = isRegistrationEnabled,
-        emailRestrictionPolicy = emailRestrictionPolicy.toEmailRestrictionPolicyPayload()
+        openEmailRestrictionPolicy = openEmailRestrictionPolicy.toEmailRestrictionPolicyPayload(),
+        managementEmailRestrictionPolicy = managementEmailRestrictionPolicy.toEmailRestrictionPolicyPayload()
     )

@@ -48,6 +48,8 @@ fun ClientInfoPayload.toClientInfo(): ClientInfo = ClientInfo(
     deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
+    host = null,
+    origin = null,
     apiVersion = apiVersion
 )
 

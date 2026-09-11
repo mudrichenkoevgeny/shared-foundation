@@ -35,7 +35,7 @@ enum class ClientType {
             DESKTOP -> CLIENT_DESKTOP
         }
 
-    fun isMobileClient(): Boolean = this == ClientType.ANDROID || this == ClientType.IOS
+    fun isMobileClient(): Boolean = this == ANDROID || this == IOS
 
     companion object {
         private const val CLIENT_WEB = "web"

@@ -197,6 +197,12 @@ object UserApiFields {
     /** JSON field name for the email restriction policy object. */
     const val EMAIL_RESTRICTION_POLICY = "email_restriction_policy"
 
+    /** JSON field name for open API email restriction policy object. */
+    const val OPEN_EMAIL_RESTRICTION_POLICY = "open_email_restriction_policy"
+
+    /** JSON field name for management API email restriction policy object. */
+    const val MANAGEMENT_EMAIL_RESTRICTION_POLICY = "management_email_restriction_policy"
+
     /**
      * JSON field name for the list of primary (main) authentication methods under [AVAILABLE_AUTH_PROVIDERS]; values use
      * [UserAuthProvider.serialName].

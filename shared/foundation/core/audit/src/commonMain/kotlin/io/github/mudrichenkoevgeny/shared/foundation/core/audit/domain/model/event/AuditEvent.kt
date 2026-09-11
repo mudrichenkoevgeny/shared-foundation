@@ -13,31 +13,30 @@ import kotlin.time.Instant
  * Captures who ([actorId], [actorType], [actorUserRole]) performed which [action] on which [resource]
  * (and optional [resourceId]), with [status] and optional [message] and [metadata] for diagnostics.
  *
- * @param id Unique event id; defaults to [AuditEventId.generate] when creating new events.
- * @param actorId Optional identifier of the user or system that performed the action.
- * @param actorType Actor category for filtering and access decisions.
- * @param actorUserRole Optional role snapshot when [actorType] is [AuditActorType.USER].
- * @param action Action type of the event.
- * @param resource Resource type of the event.
- * @param resourceId Optional id of the specific resource instance.
- * @param resourceValueSensitivity How [resourceId] should be treated when shown or exported (redaction policy);
- *   defaults to [AuditValueSensitivity.NON_SENSITIVE].
- * @param status Outcome of the action ([AuditStatus]).
- * @param metadata Optional key-value data for filtering or analytics.
- * @param message Optional human-readable message (e.g. error description).
- * @param createdAt Event creation time as a multiplatform [Instant].
+ * @property id Unique event id; defaults to [AuditEventId.generate] when creating new events.
+ * @property actorId Optional identifier of the user or system that performed the action.
+ * @property actorType Actor category for filtering and access decisions.
+ * @property actorUserRole Optional role snapshot when [actorType] is [AuditActorType.USER].
+ * @property action Action type of the event.
+ * @property resource Resource type of the event.
+ * @property resourceId Optional id of the specific resource instance.
+ * @property resourceValueSensitivity How [resourceId] should be treated when shown or exported (redaction policy).
+ * @property status Outcome of the action ([AuditStatus]).
+ * @property metadata Optional key-value data for filtering or analytics.
+ * @property message Optional human-readable message (e.g. error description).
+ * @property createdAt Event creation time as a multiplatform [Instant].
  */
 data class AuditEvent(
     val id: AuditEventId = AuditEventId.generate(),
-    val actorId: String? = null,
+    val actorId: String?,
     val actorType: AuditActorType,
-    val actorUserRole: String? = null,
+    val actorUserRole: String?,
     val action: AuditActionType,
     val resource: AuditResourceType,
-    val resourceId: String? = null,
-    val resourceValueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE,
+    val resourceId: String?,
+    val resourceValueSensitivity: AuditValueSensitivity,
     val status: AuditStatus,
-    val metadata: Set<AuditEventMetadata> = emptySet(),
-    val message: String? = null,
+    val metadata: Set<AuditEventMetadata>,
+    val message: String?,
     val createdAt: Instant
 )

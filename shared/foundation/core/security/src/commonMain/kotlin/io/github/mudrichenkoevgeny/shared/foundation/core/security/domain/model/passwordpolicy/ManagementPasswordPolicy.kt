@@ -12,19 +12,19 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property commonPasswords A set of forbidden passwords that are considered too easy to guess.
  */
 data class ManagementPasswordPolicy(
-    val minLength: Int = DEFAULT_MIN_LENGTH,
-    val requireLetter: Boolean = true,
-    val requireUpperCase: Boolean = false,
-    val requireLowerCase: Boolean = false,
-    val requireDigit: Boolean = false,
-    val requireSpecialChar: Boolean = false,
-    val commonPasswords: Set<String> = DEFAULT_COMMON_PASSWORDS
+    val minLength: Int,
+    val requireLetter: Boolean,
+    val requireUpperCase: Boolean,
+    val requireLowerCase: Boolean,
+    val requireDigit: Boolean,
+    val requireSpecialChar: Boolean,
+    val commonPasswords: Set<String>
 ) {
     companion object {
-        /** Default [minLength] when constructing [ManagementPasswordPolicy] without an explicit value. */
+        /** Default [minLength] value for password policies. */
         const val DEFAULT_MIN_LENGTH = 8
 
-        /** Default banned-password list used when [commonPasswords] is not overridden. */
+        /** Default banned-password list. */
         val DEFAULT_COMMON_PASSWORDS = setOf(
             "12345678",
             "password",

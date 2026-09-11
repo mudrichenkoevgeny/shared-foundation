@@ -24,10 +24,10 @@ data class SocketFrame(
     val type: String,
 
     @SerialName(CommonApiFields.PAYLOAD)
-    val payload: JsonElement? = null,
+    val payload: JsonElement?,
 
     @SerialName(CommonApiFields.METADATA)
-    val metadata: Map<String, String> = emptyMap(),
+    val metadata: Map<String, String>,
 
     @SerialName(CommonApiFields.TIMESTAMP)
     val timestamp: Long

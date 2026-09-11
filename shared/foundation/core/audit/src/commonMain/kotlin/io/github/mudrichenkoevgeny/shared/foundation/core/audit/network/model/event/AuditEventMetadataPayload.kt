@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
  *
  * @property key Logical key for filtering or analytics.
  * @property value Raw value as stored for the audit record.
- * @property valueSensitivity Wire string matching [AuditValueSensitivity.serialName]; defaults to non-sensitive.
+ * @property valueSensitivity Wire string matching [AuditValueSensitivity.serialName].
  */
 @Serializable
 data class AuditEventMetadataPayload(
@@ -22,5 +22,5 @@ data class AuditEventMetadataPayload(
     val value: String,
 
     @SerialName(AuditEventFields.METADATA_VALUE_SENSITIVITY)
-    val valueSensitivity: String = AuditValueSensitivity.NON_SENSITIVE.serialName
+    val valueSensitivity: String
 )
