@@ -25,6 +25,8 @@ import kotlinx.serialization.Serializable
  * @property createdAt The timestamp of the account creation, in milliseconds.
  * @property updatedAt The timestamp of the last account profile modification, in milliseconds.
  * @property scheduledPermanentDeletionAt The timestamp when the account will be permanently removed if not restored, in milliseconds; `null` if not pending deletion.
+ * @property lockoutType The wire string representing the account lockout type.
+ * @property temporaryLockoutUntil The timestamp when temporary account lockout expires, in milliseconds; `null` if not temporarily locked.
  */
 @Serializable
 data class UserDetailsPayload(
@@ -62,5 +64,11 @@ data class UserDetailsPayload(
     val updatedAt: Long? = null,
 
     @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
-    val scheduledPermanentDeletionAt: Long? = null
+    val scheduledPermanentDeletionAt: Long? = null,
+
+    @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
+    val lockoutType: String = "none",
+
+    @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
+    val temporaryLockoutUntil: Long? = null
 )

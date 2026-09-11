@@ -1,19 +1,18 @@
-package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO for user authentication via external providers (e.g. Google or Apple).
+ * DTO for unlocking a temporarily locked account via an external authentication provider.
  *
- * @property authProvider The identifier of the external service (e.g. [UserAuthProvider]).
- * @property externalProviderToken The authentication token provided by the external service.
+ * @property authProvider The identifier of the external provider (e.g., `google`, `apple`).
+ * @property externalProviderToken The opaque token provided by the external identity provider.
  */
 @Serializable
-data class LoginByExternalAuthProviderRequest(
+data class UnlockByExternalAuthProviderRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.AUTH_PROVIDER)
     val authProvider: String,

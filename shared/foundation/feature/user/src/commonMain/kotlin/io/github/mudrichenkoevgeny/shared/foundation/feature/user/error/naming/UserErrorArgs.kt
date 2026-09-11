@@ -30,4 +30,13 @@ object UserErrorArgs {
      * Associated with [UserErrorCodes.USER_IDENTIFIER_LIMIT_REACHED].
      */
     const val USER_AUTH_PROVIDER = "userAuthProvider"
+
+    /**
+     * Key for the temporary account lockout expiration timestamp (epoch milliseconds).
+     * Used as a **public argument** for client-side localization and countdown timers.
+     *
+     * Associated with [UserErrorCodes.USER_BLOCKED].
+     * Present only during temporary lockouts with the expiration timestamp; absent for permanent blocks.
+     */
+    const val BLOCKED_UNTIL = "blockedUntil"
 }

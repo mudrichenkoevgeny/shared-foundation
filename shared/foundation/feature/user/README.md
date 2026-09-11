@@ -7,15 +7,16 @@ The module is built on a hierarchical routing system (Open, Self-Management, and
 ## Core Capabilities
 
 ### 1. Multi-Channel Authentication
-Supports diverse authentication strategies across all lifecycle stages (registration, login, recovery):
+Supports diverse authentication strategies across all lifecycle stages (registration, login, recovery, unlock):
 - **Email & Password:** Standard registration and login flows.
 - **Phone:** SMS-based or phone-linked authentication.
 - **External Auth Providers:** Integration with OAuth/Social providers (Google, Apple, etc.).
+- **Self-Service Account Unlock:** Email/SMS OTP and OAuth token-based unlock flows for temporarily locked accounts.
 - **Token Management:** Handling of Access, Refresh, and Session tokens, including secure hashing and refresh cycles.
 
 ### 2. User & Profile Management
 - **Self-Service:** Profile retrieval, updates, and account deletion/restoration.
-- **Administrative CRUD:** Full management of user accounts, status ([UserAccountStatus]), and authority levels ([UserRoleDefaultAuthorityLevel]).
+- **Administrative CRUD:** Full management of user accounts, status ([UserAccountStatus]), authority levels ([UserRoleDefaultAuthorityLevel]), and account lockout states ([AccountLockoutType]).
 - **User Configuration:** Open ([OpenUserConfiguration]) and Management ([ManagementUserConfiguration]) aggregated configuration slices.
 
 ### 3. Identity & Session Control
@@ -49,7 +50,7 @@ The module provides DTOs and Request models for every domain entity to ensure ty
 - **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
 - **Sessions & Identifiers:** [UserSessionPayload], [DeletedSessionsPayload], [UserIdentifierPayload].
 - **User Profile:** [UserDetailsPayload], [UserPublicPayload].
-- **Requests:** [RegisterByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
+- **Requests:** [RegisterByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
 
 ### Real-Time Communication
 Typed WebSocket contracts for live updates:
@@ -69,7 +70,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 
 | Domain | Open Routes | Self-Management Routes | Management Routes |
 | :--- | :--- | :--- | :--- |
-| **Auth** | [OpenLoginRoutes]<br>[OpenRegisterRoutes]<br>[OpenResetPasswordRoutes]<br>[OpenRefreshTokenRoutes]<br>[OpenAuthSettingsRoutes] | [SelfManagementLoginRoutes]<br>[SelfManagementRefreshTokenRoutes]<br>[SelfManagementResetPasswordRoutes] | [ManagementAuthSettingsRoutes] |
+| **Auth** | [OpenLoginRoutes]<br>[OpenRegisterRoutes]<br>[OpenResetPasswordRoutes]<br>[OpenUnlockRoutes]<br>[OpenRefreshTokenRoutes]<br>[OpenAuthSettingsRoutes] | [SelfManagementLoginRoutes]<br>[SelfManagementRefreshTokenRoutes]<br>[SelfManagementResetPasswordRoutes]<br>[SelfManagementUnlockRoutes] | [ManagementAuthSettingsRoutes] |
 | **User Profile** | [OpenUserRoutes] | [SelfManagementUserRoutes] | [ManagementUserRoutes] |
 | **User Security** | [OpenUserSecurityRoutes] | [SelfManagementUserSecurityRoutes] | [ManagementUserSecurityRoutes] |
 | **Identifiers** | [OpenIdentifierRoutes] | [SelfManagementIdentifierRoutes] | [ManagementIdentifierRoutes] |
@@ -91,7 +92,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 | :--- | :--- |
 | **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
 | **Configuration** | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
-| **User Profile** | [UserDetails]<br>[UserPublic]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel] |
+| **User Profile** | [UserDetails]<br>[UserPublic]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
 | **Identifiers** | [UserIdentifier]<br>[UserIdentifierId]<br>[UserIdentifierInternal] |
 | **Sessions** | [UserSession]<br>[UserSessionId]<br>[UserSessionInternal]<br>[DeletedSessions] |
 | **Tokens** | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
@@ -102,6 +103,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [OpenLoginRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/login/OpenLoginRoutes.kt
 [OpenRegisterRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/register/OpenRegisterRoutes.kt
 [OpenResetPasswordRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/resetpassword/OpenResetPasswordRoutes.kt
+[OpenUnlockRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/unlock/OpenUnlockRoutes.kt
 [OpenRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/refreshtoken/OpenRefreshTokenRoutes.kt
 [OpenAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/settings/OpenAuthSettingsRoutes.kt
 [OpenUserConfigurationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/configuration/OpenUserConfigurationRoutes.kt
@@ -113,6 +115,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [SelfManagementLoginRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/login/SelfManagementLoginRoutes.kt
 [SelfManagementRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/refreshtoken/SelfManagementRefreshTokenRoutes.kt
 [SelfManagementResetPasswordRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/resetpassword/SelfManagementResetPasswordRoutes.kt
+[SelfManagementUnlockRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/unlock/SelfManagementUnlockRoutes.kt
 [SelfManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/identifier/SelfManagementIdentifierRoutes.kt
 [SelfManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/session/SelfManagementSessionRoutes.kt
 [SelfManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/SelfManagementUserRoutes.kt
@@ -152,6 +155,7 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [UserRole]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/role/UserRole.kt
 [UserAccountStatus]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/accountstatus/UserAccountStatus.kt
 [UserRoleDefaultAuthorityLevel]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/authoritylevel/UserRoleDefaultAuthorityLevel.kt
+[AccountLockoutType]: ../core/security/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
 [UserIdentifier]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifier.kt
 [UserIdentifierId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierId.kt
 [UserIdentifierInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierInternal.kt
@@ -192,6 +196,9 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [SendResetPasswordConfirmationRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/password/SendResetPasswordConfirmationRequest.kt
 [SendConfirmationToEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/confirmation/SendConfirmationToEmailRequest.kt
 [SendConfirmationToPhoneRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/confirmation/SendConfirmationToPhoneRequest.kt
+[UnlockByEmailConfirmationRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/unlock/UnlockByEmailConfirmationRequest.kt
+[UnlockByPhoneConfirmationRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/unlock/UnlockByPhoneConfirmationRequest.kt
+[UnlockByExternalAuthProviderRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/unlock/UnlockByExternalAuthProviderRequest.kt
 [EmailPasswordChangeRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/password/EmailPasswordChangeRequest.kt
 [AddUserIdentifierEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/useridentifiers/AddUserIdentifierEmailRequest.kt
 [AddUserIdentifierPhoneRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/useridentifiers/AddUserIdentifierPhoneRequest.kt

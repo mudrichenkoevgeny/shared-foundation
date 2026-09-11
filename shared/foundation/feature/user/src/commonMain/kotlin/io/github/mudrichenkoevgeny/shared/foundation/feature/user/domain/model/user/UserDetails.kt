@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
 import kotlin.time.Instant
 
@@ -14,6 +15,8 @@ import kotlin.time.Instant
  *
  * @property accountStatusBeforeDeletion Status before a deletion was requested; meaningful when
  *   [accountStatus] is [UserAccountStatus.PENDING_DELETION] (semantics are server-defined).
+ * @property lockoutType The type of account lockout (e.g. [AccountLockoutType]).
+ * @property temporaryLockoutUntil Timestamp until which the account is temporarily locked out, in epoch milliseconds; `null` if not temporarily locked.
  */
 data class UserDetails(
     val id: UserId = UserId.generate(),
@@ -27,5 +30,7 @@ data class UserDetails(
     val lastActiveAt: Instant? = null,
     val createdAt: Instant,
     val updatedAt: Instant? = null,
-    val scheduledPermanentDeletionAt: Instant? = null
+    val scheduledPermanentDeletionAt: Instant? = null,
+    val lockoutType: AccountLockoutType = AccountLockoutType.NONE,
+    val temporaryLockoutUntil: Instant? = null
 )

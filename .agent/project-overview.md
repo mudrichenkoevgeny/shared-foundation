@@ -24,8 +24,8 @@ Focus on domain logic, data models, and transport payloads.
 
 - **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `ClientInfo`, and `PagedResult`. Defines base `PermissionCode`.
 - **`core/audit`:** Audit domain logic. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), and mappers for converting domain events to wire payloads.
-- **`core/security`:** Security primitives. MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `PasswordPolicy` with `PasswordPolicyValidator`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
-- **`core/settings`:** Global system settings shapes. `GlobalSettings` domain models and `SettingsWebSocketEventTypes`.
+- **`core/security`:** Security primitives. MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
+- **`core/settings`:** Global system settings shapes. `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
 
 ### Feature API Modules (`feature/`)
 Focus on HTTP contracts, specific route constants, and access control.
@@ -33,7 +33,7 @@ Focus on HTTP contracts, specific route constants, and access control.
 - **`feature/auditapi`:** Management endpoints for audit logs. Contains `ManagementAuditRoutes` and `AuditPermissionCode` (controlling masked vs unmasked data visibility).
 - **`feature/securityapi`:** Security configuration routes. `OpenSecuritySettingsRoutes` (open) and `ManagementSecuritySettingsRoutes` (restricted).
 - **`feature/settingsapi`:** System-wide settings routes. `OpenGlobalSettingsRoutes` and `ManagementGlobalSettingsRoutes`.
-- **`feature/user`:** Comprehensive feature module for Auth, Sessions, and Identifiers. Aggregates `core/security` for MFA flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
+- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`) and aggregates `core/security` for MFA/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
 ### Utility
 - **`bom`:** Bill of Materials to align versions across all `shared-foundation-*` artifacts.

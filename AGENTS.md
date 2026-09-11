@@ -19,8 +19,8 @@ This document is the entry point for architectural and coding standards. These r
 
 - **`core/common`:** `FoundationJson` (serialization), `ApiErrorResponse`, base `PermissionCode`, `WebSocketContract` (frames/envelopes), `ClientInfo`, `PagedResult`.
 - **`core/audit`:** `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (redaction), `AuditEventMapper`, listing filters/sort keys.
-- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` (rules + `PasswordPolicyValidator`), `EncryptedString`, `SecurityErrorCodes`.
-- **`core/settings`:** `GlobalSettings` domain and payloads, `SettingsWebSocketEventTypes`.
+- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` (rules + `PasswordPolicyValidator`), `AccountLockoutPolicy`, `AccountLockoutType`, `EncryptedString`, `SecurityErrorCodes`.
+- **`core/settings`:** `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version limits, and `SettingsWebSocketEventTypes`.
 
 ### Feature API Modules (`feature/*-api`)
 *HTTP route definitions, permissions, and audit taxonomy.*
@@ -28,7 +28,7 @@ This document is the entry point for architectural and coding standards. These r
 - **`feature/auditapi`:** `ManagementAuditRoutes`, `AuditPermissionCode` (masked/unmasked access), `CommonAuditResourceType`.
 - **`feature/securityapi`:** `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`.
 - **`feature/settingsapi`:** `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`.
-- **`feature/user`:** Comprehensive auth/user/session/identifier contracts. Aggregates `core/security` for TOTP flows and `core/audit` for user-specific logging (`UserAuditActionType`).
+- **`feature/user`:** Comprehensive auth/user/session/identifier/configuration contracts. Includes Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`) and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific logging (`UserAuditActionType`).
 
 ## Detailed Standards (`.agent/`)
 

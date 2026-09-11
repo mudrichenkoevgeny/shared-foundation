@@ -51,14 +51,17 @@ object UserErrorCodes {
      */
     const val USER_ILLEGAL_ACCOUNT_STATUS = "USER_ILLEGAL_ACCOUNT_STATUS"
 
-    /** * The user account has been explicitly blocked by an administrator.
+    /** * The user account has been explicitly blocked by an administrator or temporary lockout.
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.BLOCKED_UNTIL]: Temporary lockout expiration timestamp in epoch milliseconds (absent for permanent blocks).
      *
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the blocked user.
      */
     const val USER_BLOCKED = "USER_BLOCKED"
 
-    /** * The account is in read-only mode (e.g. during maintenance or billing issues).
+    /** * The account is in read-only mode.
      *
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the affected user.
@@ -135,4 +138,10 @@ object UserErrorCodes {
      * - [CommonErrorArgs.MESSAGE]: Cause of the linkage failure.
      */
     const val EXTERNAL_IDENTIFIER_LINKAGE_FAILED = "EXTERNAL_IDENTIFIER_LINKAGE_FAILED"
+
+    /** Registration is currently disabled by system configuration. */
+    const val REGISTRATION_DISABLED = "REGISTRATION_DISABLED"
+
+    /** Self-service unlock is currently disabled by security policy. */
+    const val SELF_SERVICE_UNLOCK_DISABLED = "SELF_SERVICE_UNLOCK_DISABLED"
 }

@@ -23,13 +23,13 @@ With a version catalog: declare BOM and module aliases in `gradle/libs.versions.
 Published artifacts (versions aligned via the BOM):
 
 - **shared-foundation-core-common** — shared errors, network contracts, WebSocket envelopes, common DTOs.
-- **shared-foundation-core-security** — password policy, security settings payloads/domain, validation, mappers, WebSocket type strings ([module README](shared/foundation/core/security/README.md)).
-- **shared-foundation-core-settings** — global settings payloads/domain, field names, WebSocket type strings ([module README](shared/foundation/core/settings/README.md)).
+- **shared-foundation-core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies ([AccountLockoutPolicy]), validation, and mappers ([module README](shared/foundation/core/security/README.md)).
+- **shared-foundation-core-settings** — Open/Management global settings, client app version requirements, and mappers ([module README](shared/foundation/core/settings/README.md)).
 - **shared-foundation-core-audit** — audit events, filters, sort keys, payloads, mappers ([module README](shared/foundation/core/audit/README.md)).
-- **shared-foundation-feature-securityapi** — security settings HTTP routes + permission code ([module README](shared/foundation/feature/security/api/README.md)).
-- **shared-foundation-feature-settingsapi** — global settings HTTP routes + permission code ([module README](shared/foundation/feature/settings/api/README.md)).
-- **shared-foundation-feature-auditapi** — management audit HTTP routes + permission codes ([module README](shared/foundation/feature/audit/api/README.md)).
-- **shared-foundation-feature-user** — comprehensive contracts for authentication, multifactor security (TOTP), session management, and user identifiers (self-service & management) ([module README](shared/foundation/feature/user/README.md)).
+- **shared-foundation-feature-securityapi** — Open/Management security settings HTTP routes + permission codes ([module README](shared/foundation/feature/securityapi/README.md)).
+- **shared-foundation-feature-settingsapi** — Open/Management global settings HTTP routes + permission codes ([module README](shared/foundation/feature/settingsapi/README.md)).
+- **shared-foundation-feature-auditapi** — management audit HTTP routes + permission codes ([module README](shared/foundation/feature/auditapi/README.md)).
+- **shared-foundation-feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers (self-service & management), open/management user configurations, and self-service account unlocking ([module README](shared/foundation/feature/user/README.md)).
 - **shared-foundation-bom** — dependency constraints for the modules above.
 
 ## Samples & Usage

@@ -1,6 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.securitysettings
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings.ManagementSecuritySettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.accountlockout.toAccountLockoutPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.accountlockout.toAccountLockoutPolicyPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.otpconfirmation.toOtpConfirmation
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.otpconfirmation.toOtpConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwordpolicy.toManagementPasswordPolicy
@@ -17,10 +19,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  * @return domain model aligned with [ManagementSecuritySettings] semantics.
  */
 fun ManagementSecuritySettingsPayload.toManagementSecuritySettings(): ManagementSecuritySettings = ManagementSecuritySettings(
-    recentAuthenticationValiditySeconds = recentAuthenticationValiditySeconds,
-    recentAuthenticationValiditySecondsForManagement = recentAuthenticationValiditySecondsForManagement,
+    recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
+    recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
     passwordPolicy = passwordPolicy.toManagementPasswordPolicy(),
     otpConfirmation = otpConfirmation.toOtpConfirmation(),
+    accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicy(),
     mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
     maxRequestsPerPeriod = maxRequestsPerPeriod,
     rateLimitPeriodSeconds = rateLimitPeriodSeconds
@@ -32,10 +35,11 @@ fun ManagementSecuritySettingsPayload.toManagementSecuritySettings(): Management
  * @return payload model aligned with [ManagementSecuritySettingsPayload] contract.
  */
 fun ManagementSecuritySettings.toManagementSecuritySettingsPayload(): ManagementSecuritySettingsPayload = ManagementSecuritySettingsPayload(
-    recentAuthenticationValiditySeconds = recentAuthenticationValiditySeconds,
-    recentAuthenticationValiditySecondsForManagement = recentAuthenticationValiditySecondsForManagement,
+    recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
+    recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
     passwordPolicy = passwordPolicy.toManagementPasswordPolicyPayload(),
     otpConfirmation = otpConfirmation.toOtpConfirmationPayload(),
+    accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicyPayload(),
     mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
     maxRequestsPerPeriod = maxRequestsPerPeriod,
     rateLimitPeriodSeconds = rateLimitPeriodSeconds

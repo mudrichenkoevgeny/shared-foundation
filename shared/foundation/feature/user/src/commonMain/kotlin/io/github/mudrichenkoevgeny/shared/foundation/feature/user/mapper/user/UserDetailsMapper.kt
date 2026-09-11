@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
@@ -21,8 +22,7 @@ import kotlin.time.Instant
  * Builds domain [UserDetails] from [UserDetailsPayload].
  *
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value
- * for `role`, `accountStatus`, or `accountStatusBeforeDeletion` is not recognized by
- * [UserRole.fromValueOrNull] or [UserAccountStatus.fromValueOrNull].
+ * for `role`, `accountStatus`, `accountStatusBeforeDeletion`, or `lockoutType` is not recognized.
  */
 fun UserDetailsPayload.toUserDetails() = UserDetails(
     id = id.toUserIdOrThrow(),
@@ -40,7 +40,9 @@ fun UserDetailsPayload.toUserDetails() = UserDetails(
     lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
     createdAt = Instant.fromEpochMilliseconds(createdAt),
     updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
-    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds)
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
+    lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
+    temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
@@ -60,7 +62,9 @@ fun UserDetails.toUserDetailsPayload() = UserDetailsPayload(
     lastActiveAt = lastActiveAt?.toEpochMilliseconds(),
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds(),
-    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds()
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
+    lockoutType = lockoutType.serialName,
+    temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds()
 )
 
 /**

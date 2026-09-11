@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * DTO for linking an external authentication provider to a user account.
  *
  * @property authProvider The identifier of the external service (e.g. [UserAuthProvider]).
- * @property token The authentication token provided by the external service to verify the identity.
+ * @property externalProviderToken The authentication token provided by the external service to verify the identity.
  */
 @Serializable
 data class AddUserIdentifierExternalAuthProviderRequest(
@@ -19,6 +19,6 @@ data class AddUserIdentifierExternalAuthProviderRequest(
     val authProvider: String,
 
     @NotBlankStringField
-    @SerialName(UserApiFields.TOKEN)
-    val token: String
+    @SerialName(UserApiFields.EXTERNAL_PROVIDER_TOKEN)
+    val externalProviderToken: String
 )

@@ -7,15 +7,15 @@ object SecurityApiFields {
 
     /**
      * JSON field name for how long a recent step-up or re-authentication remains valid
-     * for sensitive operations, in seconds.
+     * for open user actions, in seconds.
      */
-    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS = "recent_authentication_validity_seconds"
+    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER = "recent_authentication_validity_seconds_for_open_user"
 
     /**
      * JSON field name for how long a recent re-authentication remains valid
-     * for management actions, in seconds.
+     * for management user actions, in seconds.
      */
-    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT = "recent_authentication_validity_seconds_for_management"
+    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT_USER = "recent_authentication_validity_seconds_for_management_user"
 
     /** JSON field name for the temporary MFA challenge token used during multifactor authentication flows. */
     const val MFA_TOKEN = "mfa_token"
@@ -76,4 +76,28 @@ object SecurityApiFields {
 
     /** JSON field name for the rate limiting time window in seconds. */
     const val RATE_LIMIT_PERIOD_SECONDS = "rate_limit_period_seconds"
+
+    /** JSON field name for the nested account lockout policy object. */
+    const val ACCOUNT_LOCKOUT_POLICY = "account_lockout_policy"
+
+    /** JSON field name for maximum consecutive wrong password attempts. */
+    const val MAX_FAILED_PASSWORD_ATTEMPTS = "max_failed_password_attempts"
+
+    /** JSON field name for maximum consecutive wrong OTP code attempts. */
+    const val MAX_FAILED_OTP_ATTEMPTS = "max_failed_otp_attempts"
+
+    /** JSON field name for maximum consecutive wrong TOTP attempts. */
+    const val MAX_FAILED_TOTP_ATTEMPTS = "max_failed_totp_attempts"
+
+    /** JSON field name for the failed attempts accumulation time window in seconds. */
+    const val FAILED_ATTEMPTS_WINDOW_SECONDS = "failed_attempts_window_seconds"
+
+    /** JSON field name for temporary lockout duration in seconds. */
+    const val LOCKOUT_DURATION_SECONDS = "lockout_duration_seconds"
+
+    /** JSON field name for the permanent lockout threshold count. */
+    const val PERMANENT_LOCKOUT_THRESHOLD = "permanent_lockout_threshold"
+
+    /** JSON field name for the self-service unlock enablement flag. */
+    const val IS_SELF_SERVICE_UNLOCK_ENABLED = "is_self_service_unlock_enabled"
 }

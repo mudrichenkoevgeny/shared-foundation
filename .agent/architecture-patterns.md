@@ -19,7 +19,7 @@ To maintain a clean dependency graph, the library follows a strict separation:
 
 - **Implementation:** Strictly `kotlinx.serialization`.
 - **Global Config:** Always use `FoundationJson` (from `core/common`) for encoding/decoding to ensure `snake_case` naming, `ignoreUnknownKeys`, and `encodeDefaults` are consistent.
-- **Naming:** Use `@SerialName` for all properties. Values must come from `CommonApiFields`, `SecurityApiFields`, or other module-specific contract objects.
+- **Naming:** Use `@SerialName` for all properties. Values must come from `CommonApiFields`, `SecurityApiFields`, `UserApiFields`, or other module-specific contract objects.
 - **Validation Hints:** Use JVM-retention annotations from `core/common` (`@RequiredField`, `@NotBlankStringField`) to mark DTO requirements for consumers.
 
 ## 3. HTTP Route Documentation (The "Gold Standard")
@@ -45,12 +45,12 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
 
 - **Sensitivity:** When defining metadata or resource IDs, always consider `AuditValueSensitivity` (Full mask, Partial mask, or IP-address) to ensure PII compliance.
 - **Composite Parsers:** For extensible domain types (Actions, Resources), use `CompositeAuditActionTypeParser` and similar tools to resolve types from wire strings.
-- **Metadata:** Use `CommonAuditMetadataKey` for technical context (IP, OS, Trace ID) to ensure logs are searchable across the platform.
+- **Metadata:** Use `CommonAuditMetadataKey` or domain-specific keys like `UserAuditMetadataKey` for technical context (IP, OS, Trace ID) to ensure logs are searchable across the platform.
 
 ## 5. Error Handling & Machine-Readable Codes
 
 - **Wire Shape:** All errors must use `ApiErrorResponse`.
-- **Contract Only:** This library defines **only the code strings** (e.g., `SecurityErrorCodes.INVALID_MFA_CODE`) and **argument keys**.
+- **Contract Only:** This library defines **only the code strings** (e.g., `SecurityErrorCodes.INVALID_MFA_CODE`, `UserErrorCodes.USER_BLOCKED`) and **argument keys** (e.g., `UserErrorArgs.BLOCKED_UNTIL`).
 - **No Localization:** Do not include human-readable text. Consumers map `code` to localized strings in the UI.
 
 ## 6. WebSocket Communication
@@ -65,4 +65,4 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
 - **No Environment Data:** Base URLs and secrets are forbidden. Use relative path segments only.
 
 ---
-*Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*```
+*Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

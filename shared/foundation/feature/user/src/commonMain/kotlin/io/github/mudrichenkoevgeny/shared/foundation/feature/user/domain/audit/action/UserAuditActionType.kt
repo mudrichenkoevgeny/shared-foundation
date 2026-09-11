@@ -14,6 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
@@ -67,6 +68,9 @@ enum class UserAuditActionType : AuditActionType {
 
     /** [SelfManagementResetPasswordRoutes.RESET_PASSWORD], [OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD]. */
     RESET_PASSWORD,
+
+    /** [OpenUnlockRoutes.UNLOCK_BY_EMAIL], [OpenUnlockRoutes.UNLOCK_BY_PHONE], [OpenUnlockRoutes.UNLOCK_BY_EXTERNAL_PROVIDER]. */
+    SELF_UNLOCK_ACCOUNT,
 
     /** [SelfManagementSessionRoutes.LOGOUT], [OpenSessionRoutes.LOGOUT]. */
     LOGOUT,
@@ -136,6 +140,7 @@ enum class UserAuditActionType : AuditActionType {
             LOGIN_BY_TOTP_RECOVERY_CODE -> ACTION_LOGIN_BY_TOTP_RECOVERY_CODE
             REGISTER_BY_EMAIL -> ACTION_REGISTER_BY_EMAIL
             RESET_PASSWORD -> ACTION_RESET_PASSWORD
+            SELF_UNLOCK_ACCOUNT -> ACTION_SELF_UNLOCK_ACCOUNT
             LOGOUT -> ACTION_LOGOUT
             SELF_DELETE_SESSION -> ACTION_SELF_DELETE_SESSION
             SELF_DELETE_OTHER_SESSIONS -> ACTION_SELF_DELETE_OTHER_SESSIONS
@@ -174,6 +179,7 @@ enum class UserAuditActionType : AuditActionType {
         private const val ACTION_LOGIN_BY_TOTP_RECOVERY_CODE = "login_by_totp_recovery_code"
         private const val ACTION_REGISTER_BY_EMAIL = "register_by_email"
         private const val ACTION_RESET_PASSWORD = "reset_password"
+        private const val ACTION_SELF_UNLOCK_ACCOUNT = "self_unlock_account"
         private const val ACTION_LOGOUT = "logout"
         private const val ACTION_SELF_DELETE_SESSION = "self_delete_session"
         private const val ACTION_SELF_DELETE_OTHER_SESSIONS = "self_delete_other_sessions"

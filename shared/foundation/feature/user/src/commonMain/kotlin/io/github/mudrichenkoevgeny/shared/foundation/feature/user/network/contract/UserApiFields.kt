@@ -12,7 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 object UserApiFields {
 
     /** JSON field name for an opaque token from an external identity provider (link/login-by-provider requests). */
-    const val TOKEN = "token"
+    const val EXTERNAL_PROVIDER_TOKEN = "external_provider_token"
 
     /** JSON field name for the token type of the issued access token (for example `Bearer`). */
     const val TOKEN_TYPE = "token_type"
@@ -101,6 +101,14 @@ object UserApiFields {
      * JSON field name for scheduled permanent-deletion timestamp (epoch milliseconds; user listings and sort keys).
      */
     const val SCHEDULED_PERMANENT_DELETION_AT = "scheduled_permanent_deletion_at"
+
+    /** JSON field name for the account lockout state type. */
+    const val ACCOUNT_LOCKOUT_TYPE = "account_lockout_type"
+
+    /**
+     * JSON field name for temporary lockout expiration timestamp (epoch milliseconds).
+     */
+    const val TEMPORARY_LOCKOUT_UNTIL = "temporary_lockout_until"
 
     /**
      * JSON field name for the credential value or free-text identifier match (identifier payloads, session/identifier

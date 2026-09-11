@@ -47,6 +47,13 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
     },
 
     /**
+     * External provider or identity context subject identifier.
+     */
+    USER_AUTH_PROVIDER {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
+    },
+
+    /**
      * External provider subject identifier.
      */
     EXTERNAL_ID {
@@ -60,6 +67,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
             IDENTIFIER_ID -> KEY_IDENTIFIER_ID
             EMAIL_ADDRESS -> KEY_EMAIL_ADDRESS
             PHONE_NUMBER -> KEY_PHONE_NUMBER
+            USER_AUTH_PROVIDER -> KEY_USER_AUTH_PROVIDER
             EXTERNAL_ID -> KEY_EXTERNAL_ID
         }
 
@@ -73,6 +81,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
         private const val KEY_IDENTIFIER_ID = "identifier_id"
         private const val KEY_EMAIL_ADDRESS = "email_address"
         private const val KEY_PHONE_NUMBER = "phone_number"
+        private const val KEY_USER_AUTH_PROVIDER = "user_auth_provider"
         private const val KEY_EXTERNAL_ID = "external_id"
 
         /**

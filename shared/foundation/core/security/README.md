@@ -2,7 +2,7 @@
 
 **Security-related shared contracts:** password policy **domain** and **payloads**, **MFA (TOTP)** setup and verification, **cryptographic value objects**, **mappers**, **error code/args** strings, and **security settings** (open and management). Depends on **core/common** and **core/audit** for shared listing and audit alignment.
 
-**Open and management HTTP paths** for security operations are in **feature/security/api** ([README](../../feature/security/api/README.md)). This module keeps policy, validation, and payload types only.
+**Open and management HTTP paths** for security operations are in **feature/securityapi** ([README](../../feature/securityapi/README.md)). This module keeps policy, validation, and payload types only.
 
 ## What it provides
 
@@ -12,9 +12,11 @@
     - **Recovery:** [TotpRecoveryCodes] and [TotpRecoveryCodesPayload] — management of one-time backup codes.
 - **Security Settings & Policies:**
     - [OpenSecuritySettings] & [OpenSecuritySettingsPayload]: Open configuration for password rules and OTP validation.
-    - [ManagementSecuritySettings] & [ManagementSecuritySettingsPayload]: Full configuration for session validity (standard and management), MFA token TTL, full password policy with common passwords, and OTP config.
+    - [ManagementSecuritySettings] & [ManagementSecuritySettingsPayload]: Full configuration for session validity (standard and management), MFA token TTL, full password policy with common passwords, OTP config, rate limits, and [AccountLockoutPolicy].
     - [ManagementPasswordPolicy] & [ManagementPasswordPolicyPayload] / [OpenPasswordPolicy] & [OpenPasswordPolicyPayload]: Rules for strength validation.
     - [OtpConfirmation] & [OtpConfirmationPayload]: Configuration for OTP generation.
+    - [AccountLockoutPolicy] & [AccountLockoutPolicyPayload]: Brute-force protection rules and lockout thresholds.
+    - [AccountLockoutType]: Enum representing lockout states (`NONE`, `PERMANENT`, `TEMPORARY`).
 - **Cryptographic Value Objects:**
     - [DecryptedString] & [EncryptedString]: `inline value` classes for type-safe handling of raw and encrypted data.
     - [PasswordHash]: Dedicated type for hashed password storage.
@@ -47,6 +49,9 @@
 [OpenSecuritySettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload.kt
 [ManagementSecuritySettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings.kt
 [ManagementSecuritySettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload.kt
+[AccountLockoutPolicy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy.kt
+[AccountLockoutPolicyPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload.kt
+[AccountLockoutType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
 [TotpSetup]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup.kt
 [TotpSetupPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload.kt
 [VerifyTotp]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp.kt
