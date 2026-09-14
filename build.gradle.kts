@@ -1,5 +1,4 @@
 import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.SourcesJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -76,7 +75,7 @@ subprojects {
         plugins.withId("org.jetbrains.kotlin.multiplatform") {
             configure(
                 KotlinMultiplatform(
-                    javadocJar = JavadocJar.None()
+                    javadocJar = JavadocJar.Empty()
                 )
             )
         }
