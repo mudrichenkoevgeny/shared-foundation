@@ -77,8 +77,14 @@ object SecurityApiFields {
     /** JSON field name for the rate limiting time window in seconds. */
     const val RATE_LIMIT_PERIOD_SECONDS = "rate_limit_period_seconds"
 
+    /** JSON field name for the refresh token rotation grace period in seconds (used for replay attack detection). */
+    const val REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS = "refresh_token_rotation_grace_period_seconds"
+
     /** JSON field name for the nested account lockout policy object. */
     const val ACCOUNT_LOCKOUT_POLICY = "account_lockout_policy"
+
+    /** JSON field name for the background worker check interval (in seconds) for expiring account lockouts. */
+    const val ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS = "account_lockout_check_interval_seconds"
 
     /** JSON field name for maximum consecutive wrong password attempts. */
     const val MAX_FAILED_PASSWORD_ATTEMPTS = "max_failed_password_attempts"
@@ -95,8 +101,8 @@ object SecurityApiFields {
     /** JSON field name for temporary lockout duration in seconds. */
     const val LOCKOUT_DURATION_SECONDS = "lockout_duration_seconds"
 
-    /** JSON field name for the permanent lockout threshold count. */
-    const val PERMANENT_LOCKOUT_THRESHOLD = "permanent_lockout_threshold"
+    /** JSON field name for the indefinite lockout threshold count. */
+    const val INDEFINITE_LOCKOUT_THRESHOLD = "indefinite_lockout_threshold"
 
     /** JSON field name for the self-service unlock enablement flag. */
     const val IS_SELF_SERVICE_UNLOCK_ENABLED = "is_self_service_unlock_enabled"

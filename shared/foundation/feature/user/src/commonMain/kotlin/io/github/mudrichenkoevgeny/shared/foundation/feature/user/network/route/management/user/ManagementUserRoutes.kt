@@ -71,6 +71,8 @@ object ManagementUserRoutes {
      * [UserSortValues.UserSortBy.LAST_LOGIN_AT],
      * [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
      * [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT],
+     * [UserSortValues.UserSortBy.ACCOUNT_LOCKOUT_TYPE],
+     * [UserSortValues.UserSortBy.TEMPORARY_LOCKOUT_UNTIL],
      * [UserSortValues.UserSortBy.CREATED_AT],
      * [UserSortValues.UserSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
@@ -132,6 +134,9 @@ object ManagementUserRoutes {
      * - If [UpdateUserRequest.permissionCodes] is set:
      * - [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER] (target: [UserRole.USER])
      * - [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF] (target: [UserRole.STAFF])
+     * - If [UpdateUserRequest.lockoutType] or [UpdateUserRequest.temporaryLockoutUntil] is set:
+     * - [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target: [UserRole.USER])
+     * - [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target: [UserRole.STAFF])
      * - **Authority Level:** Actor's level must be strictly greater than the target's level.
      * Actor cannot target own account.
      *

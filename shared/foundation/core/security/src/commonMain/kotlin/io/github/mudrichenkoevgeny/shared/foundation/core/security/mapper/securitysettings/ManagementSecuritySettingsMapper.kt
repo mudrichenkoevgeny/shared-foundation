@@ -26,11 +26,13 @@ fun ManagementSecuritySettingsPayload.toManagementSecuritySettings(): Management
     passwordPolicy = passwordPolicy.toManagementPasswordPolicy(),
     otpConfirmation = otpConfirmation.toOtpConfirmation(),
     accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicy(),
+    accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
     openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicy(),
     managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicy(),
     mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
     maxRequestsPerPeriod = maxRequestsPerPeriod,
-    rateLimitPeriodSeconds = rateLimitPeriodSeconds
+    rateLimitPeriodSeconds = rateLimitPeriodSeconds,
+    refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
 )
 
 /**
@@ -44,9 +46,11 @@ fun ManagementSecuritySettings.toManagementSecuritySettingsPayload(): Management
     passwordPolicy = passwordPolicy.toManagementPasswordPolicyPayload(),
     otpConfirmation = otpConfirmation.toOtpConfirmationPayload(),
     accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicyPayload(),
+    accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
     openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
     managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
     mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
     maxRequestsPerPeriod = maxRequestsPerPeriod,
-    rateLimitPeriodSeconds = rateLimitPeriodSeconds
+    rateLimitPeriodSeconds = rateLimitPeriodSeconds,
+    refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
 )

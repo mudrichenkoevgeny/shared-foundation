@@ -58,6 +58,13 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
      */
     EXTERNAL_ID {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.PARTIAL_VALUE_MASK
+    },
+
+    /**
+     * Expiration timestamp for temporary account lockouts, represented in Unix epoch milliseconds.
+     */
+    BLOCKED_UNTIL {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
     };
 
     override val serialName: String
@@ -69,6 +76,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
             PHONE_NUMBER -> KEY_PHONE_NUMBER
             USER_AUTH_PROVIDER -> KEY_USER_AUTH_PROVIDER
             EXTERNAL_ID -> KEY_EXTERNAL_ID
+            BLOCKED_UNTIL -> KEY_BLOCKED_UNTIL
         }
 
     override fun parseOrNull(value: String): AuditMetadataKey? = fromValueOrNull(value)
@@ -83,6 +91,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
         private const val KEY_PHONE_NUMBER = "phone_number"
         private const val KEY_USER_AUTH_PROVIDER = "user_auth_provider"
         private const val KEY_EXTERNAL_ID = "external_id"
+        private const val KEY_BLOCKED_UNTIL = "blocked_until"
 
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,

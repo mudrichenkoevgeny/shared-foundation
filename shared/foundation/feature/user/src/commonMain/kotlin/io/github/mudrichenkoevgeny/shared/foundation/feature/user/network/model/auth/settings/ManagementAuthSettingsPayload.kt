@@ -19,8 +19,10 @@ import kotlinx.serialization.Serializable
  * @property maxActiveSessionsForManagementUser Maximum number of active sessions allowed per management user account.
  * @property accessTokenExpirationSeconds Validity window for **newly issued** access tokens, in seconds.
  * @property refreshTokenExpirationSeconds Validity window for **newly issued** refresh tokens, in seconds.
- * @property accountDeletionDelaySeconds The delay in seconds before an account scheduled for
+ * @property accountDeletionGracePeriodSeconds The grace period in seconds before an account scheduled for
  * deletion is permanently removed.
+ * @property accountDeletionCheckIntervalSeconds The background worker check interval in seconds for processing
+ * accounts pending permanent deletion.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  * @property openEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload for open API endpoints; see [EmailRestrictionPolicyPayload].
  * @property managementEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy payload for management API endpoints; see [EmailRestrictionPolicyPayload].
@@ -54,8 +56,11 @@ data class ManagementAuthSettingsPayload(
     @SerialName(UserApiFields.REFRESH_TOKEN_VALIDITY_SECONDS)
     val refreshTokenExpirationSeconds: Int,
 
-    @SerialName(UserApiFields.ACCOUNT_DELETION_DELAY_SECONDS)
-    val accountDeletionDelaySeconds: Int,
+    @SerialName(UserApiFields.ACCOUNT_DELETION_GRACE_PERIOD_SECONDS)
+    val accountDeletionGracePeriodSeconds: Int,
+
+    @SerialName(UserApiFields.ACCOUNT_DELETION_CHECK_INTERVAL_SECONDS)
+    val accountDeletionCheckIntervalSeconds: Int,
 
     @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
     val isRegistrationEnabled: Boolean,

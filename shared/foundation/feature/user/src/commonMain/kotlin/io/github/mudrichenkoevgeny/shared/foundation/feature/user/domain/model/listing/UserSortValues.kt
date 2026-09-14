@@ -25,6 +25,14 @@ object UserSortValues {
         @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
         SCHEDULED_PERMANENT_DELETION_AT,
 
+        /** Sort by [UserApiFields.ACCOUNT_LOCKOUT_TYPE]. */
+        @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
+        ACCOUNT_LOCKOUT_TYPE,
+
+        /** Sort by [UserApiFields.TEMPORARY_LOCKOUT_UNTIL]. */
+        @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
+        TEMPORARY_LOCKOUT_UNTIL,
+
         /** Sort by creation timestamp. */
         @SerialName(CommonApiFields.CREATED_AT)
         CREATED_AT,
@@ -39,6 +47,8 @@ object UserSortValues {
                 LAST_LOGIN_AT -> UserApiFields.LAST_LOGIN_AT
                 LAST_ACTIVE_AT -> UserApiFields.LAST_ACTIVE_AT
                 SCHEDULED_PERMANENT_DELETION_AT -> UserApiFields.SCHEDULED_PERMANENT_DELETION_AT
+                ACCOUNT_LOCKOUT_TYPE -> UserApiFields.ACCOUNT_LOCKOUT_TYPE
+                TEMPORARY_LOCKOUT_UNTIL -> UserApiFields.TEMPORARY_LOCKOUT_UNTIL
                 CREATED_AT -> CommonApiFields.CREATED_AT
                 UPDATED_AT -> CommonApiFields.UPDATED_AT
             }

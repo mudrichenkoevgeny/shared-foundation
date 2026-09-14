@@ -185,9 +185,14 @@ object UserApiFields {
     const val REFRESH_TOKEN_VALIDITY_SECONDS = "refresh_token_validity_seconds"
 
     /**
-     * JSON field name for the delay (in seconds) between scheduling account deletion and its execution.
+     * JSON field name for the grace period (in seconds) between scheduling account deletion and its execution.
      */
-    const val ACCOUNT_DELETION_DELAY_SECONDS = "account_deletion_delay_seconds"
+    const val ACCOUNT_DELETION_GRACE_PERIOD_SECONDS = "account_deletion_grace_period_seconds"
+
+    /**
+     * JSON field name for the background worker check interval (in seconds) for accounts eligible for permanent deletion.
+     */
+    const val ACCOUNT_DELETION_CHECK_INTERVAL_SECONDS = "account_deletion_check_interval_seconds"
 
     /**
      * JSON field name for the global flag indicating whether new user registrations are permitted.

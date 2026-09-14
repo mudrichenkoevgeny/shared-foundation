@@ -10,9 +10,9 @@ enum class AccountLockoutType {
     NONE,
 
     /**
-     * Account is permanently locked out (banned).
+     * Account is indefinitely locked out.
      */
-    PERMANENT,
+    INDEFINITE,
 
     /**
      * Account is temporarily locked out until a specific timestamp.
@@ -25,13 +25,13 @@ enum class AccountLockoutType {
     val serialName: String
         get() = when (this) {
             NONE -> TYPE_NONE
-            PERMANENT -> TYPE_PERMANENT
+            INDEFINITE -> TYPE_INDEFINITE
             TEMPORARY -> TYPE_TEMPORARY
         }
 
     companion object {
         private const val TYPE_NONE = "none"
-        private const val TYPE_PERMANENT = "permanent"
+        private const val TYPE_INDEFINITE = "indefinite"
         private const val TYPE_TEMPORARY = "temporary"
 
         /**

@@ -63,6 +63,9 @@ enum class UserAuditActionType : AuditActionType {
     /** [SelfManagementLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE], [OpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]. */
     LOGIN_BY_TOTP_RECOVERY_CODE,
 
+    /** Sign-in attempt detected from a new, unrecognized device. */
+    NEW_DEVICE_DETECTED,
+
     /** [OpenRegisterRoutes.REGISTER_BY_EMAIL]. */
     REGISTER_BY_EMAIL,
 
@@ -138,6 +141,7 @@ enum class UserAuditActionType : AuditActionType {
             LOGIN_BY_EXTERNAL_AUTH_PROVIDER -> ACTION_LOGIN_BY_EXTERNAL_AUTH_PROVIDER
             LOGIN_BY_TOTP -> ACTION_LOGIN_BY_TOTP
             LOGIN_BY_TOTP_RECOVERY_CODE -> ACTION_LOGIN_BY_TOTP_RECOVERY_CODE
+            NEW_DEVICE_DETECTED -> ACTION_NEW_DEVICE_DETECTED
             REGISTER_BY_EMAIL -> ACTION_REGISTER_BY_EMAIL
             RESET_PASSWORD -> ACTION_RESET_PASSWORD
             SELF_UNLOCK_ACCOUNT -> ACTION_SELF_UNLOCK_ACCOUNT
@@ -177,6 +181,7 @@ enum class UserAuditActionType : AuditActionType {
         private const val ACTION_LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "login_by_external_auth_provider"
         private const val ACTION_LOGIN_BY_TOTP = "login_by_totp"
         private const val ACTION_LOGIN_BY_TOTP_RECOVERY_CODE = "login_by_totp_recovery_code"
+        private const val ACTION_NEW_DEVICE_DETECTED = "new_device_detected"
         private const val ACTION_REGISTER_BY_EMAIL = "register_by_email"
         private const val ACTION_RESET_PASSWORD = "reset_password"
         private const val ACTION_SELF_UNLOCK_ACCOUNT = "self_unlock_account"

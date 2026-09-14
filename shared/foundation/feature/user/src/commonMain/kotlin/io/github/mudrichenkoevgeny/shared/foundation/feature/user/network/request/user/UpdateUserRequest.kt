@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName
@@ -14,6 +15,10 @@ import kotlinx.serialization.Serializable
  * If null, the authority level remains unchanged.
  * @property permissionCodes Optional set of explicit permission codes to replace the current grants.
  * If null, permissions remain unchanged. An empty set will revoke all explicit permissions.
+ * @property lockoutType Optional target account lockout type as an [AccountLockoutType] serial name.
+ * If null, the lockout type remains unchanged.
+ * @property temporaryLockoutUntil Optional target temporary lockout expiration timestamp in epoch milliseconds.
+ * If null, the temporary lockout expiration timestamp remains unchanged.
  */
 @Serializable
 data class UpdateUserRequest(
@@ -24,5 +29,11 @@ data class UpdateUserRequest(
     val authorityLevel: Int?,
 
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: Set<String>?
+    val permissionCodes: Set<String>?,
+
+    @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
+    val lockoutType: String?,
+
+    @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
+    val temporaryLockoutUntil: Long?
 )

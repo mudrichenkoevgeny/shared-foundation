@@ -18,7 +18,7 @@ fun AccountLockoutPolicyPayload.toAccountLockoutPolicy(): AccountLockoutPolicy =
     maxFailedTotpAttempts = maxFailedTotpAttempts,
     failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
     lockoutDurationSeconds = lockoutDurationSeconds,
-    permanentLockoutThreshold = permanentLockoutThreshold,
+    indefiniteLockoutThreshold = indefiniteLockoutThreshold,
     isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
 )
 
@@ -33,6 +33,6 @@ fun AccountLockoutPolicy.toAccountLockoutPolicyPayload(): AccountLockoutPolicyPa
     maxFailedTotpAttempts = maxFailedTotpAttempts,
     failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
     lockoutDurationSeconds = lockoutDurationSeconds,
-    permanentLockoutThreshold = permanentLockoutThreshold,
+    indefiniteLockoutThreshold = indefiniteLockoutThreshold,
     isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
 )

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property maxFailedTotpAttempts Maximum consecutive wrong TOTP attempts before locking the user account.
  * @property failedAttemptsWindowSeconds Time window during which failed attempts accumulate, in seconds.
  * @property lockoutDurationSeconds Duration of the temporary lockout, in seconds.
- * @property permanentLockoutThreshold Number of consecutive temporary lockouts before shifting account status to security hold.
+ * @property indefiniteLockoutThreshold Number of consecutive temporary lockouts before shifting account status to security hold.
  * @property isSelfServiceUnlockEnabled Whether users are allowed to self-unlock before the lockout timer expires.
  */
 @Serializable
@@ -32,8 +32,8 @@ data class AccountLockoutPolicyPayload(
     @SerialName(SecurityApiFields.LOCKOUT_DURATION_SECONDS)
     val lockoutDurationSeconds: Int,
 
-    @SerialName(SecurityApiFields.PERMANENT_LOCKOUT_THRESHOLD)
-    val permanentLockoutThreshold: Int,
+    @SerialName(SecurityApiFields.INDEFINITE_LOCKOUT_THRESHOLD)
+    val indefiniteLockoutThreshold: Int,
 
     @SerialName(SecurityApiFields.IS_SELF_SERVICE_UNLOCK_ENABLED)
     val isSelfServiceUnlockEnabled: Boolean

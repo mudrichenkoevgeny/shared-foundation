@@ -16,11 +16,13 @@ import kotlinx.serialization.Serializable
  * @property passwordPolicy Full password policy payload including common passwords; see [ManagementPasswordPolicyPayload].
  * @property otpConfirmation OTP configuration payload; see [OtpConfirmationPayload].
  * @property accountLockoutPolicy Account lockout policy payload; see [AccountLockoutPolicyPayload].
+ * @property accountLockoutCheckIntervalSeconds Background worker check interval in seconds for processing expired account lockouts.
  * @property openIpRestrictionPolicy IP blacklist and whitelist restriction policy payload for open API endpoints; see [IpRestrictionPolicyPayload].
  * @property managementIpRestrictionPolicy IP blacklist and whitelist restriction policy payload for management API endpoints; see [IpRestrictionPolicyPayload].
  * @property mfaTokenExpirationSeconds Lifetime of the MFA challenge token, in seconds.
  * @property maxRequestsPerPeriod Maximum number of requests per time unit.
  * @property rateLimitPeriodSeconds Time window in seconds for request rate limiting.
+ * @property refreshTokenRotationGracePeriodSeconds Grace period in seconds during refresh token rotation before triggering replay attack protection.
  */
 @Serializable
 data class ManagementSecuritySettingsPayload(
@@ -39,6 +41,9 @@ data class ManagementSecuritySettingsPayload(
     @SerialName(SecurityApiFields.ACCOUNT_LOCKOUT_POLICY)
     val accountLockoutPolicy: AccountLockoutPolicyPayload,
 
+    @SerialName(SecurityApiFields.ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS)
+    val accountLockoutCheckIntervalSeconds: Int,
+
     @SerialName(SecurityApiFields.OPEN_IP_RESTRICTION_POLICY)
     val openIpRestrictionPolicy: IpRestrictionPolicyPayload,
 
@@ -52,5 +57,8 @@ data class ManagementSecuritySettingsPayload(
     val maxRequestsPerPeriod: Int,
 
     @SerialName(SecurityApiFields.RATE_LIMIT_PERIOD_SECONDS)
-    val rateLimitPeriodSeconds: Int
+    val rateLimitPeriodSeconds: Int,
+
+    @SerialName(SecurityApiFields.REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS)
+    val refreshTokenRotationGracePeriodSeconds: Int
 )

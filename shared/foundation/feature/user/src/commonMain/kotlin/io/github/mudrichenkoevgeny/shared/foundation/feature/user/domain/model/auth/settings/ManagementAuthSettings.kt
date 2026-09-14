@@ -22,8 +22,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
  * @property maxActiveSessionsForManagementUser Maximum number of active sessions allowed per management user account.
  * @property accessTokenExpirationSeconds Validity window for **new** access tokens, in seconds.
  * @property refreshTokenExpirationSeconds Validity window for **new** refresh tokens, in seconds.
- * @property accountDeletionDelaySeconds The delay in seconds between scheduling an account
+ * @property accountDeletionGracePeriodSeconds The grace period in seconds between scheduling an account
  * for deletion and its permanent removal from the system.
+ * @property accountDeletionCheckIntervalSeconds The background worker check interval in seconds for processing
+ * accounts pending permanent deletion.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  * @property openEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for open API endpoints; see [EmailRestrictionPolicy].
  * @property managementEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for management API endpoints; see [EmailRestrictionPolicy].
@@ -38,7 +40,8 @@ data class ManagementAuthSettings(
     val maxActiveSessionsForManagementUser: Int,
     val accessTokenExpirationSeconds: Int,
     val refreshTokenExpirationSeconds: Int,
-    val accountDeletionDelaySeconds: Int,
+    val accountDeletionGracePeriodSeconds: Int,
+    val accountDeletionCheckIntervalSeconds: Int,
     val isRegistrationEnabled: Boolean,
     val openEmailRestrictionPolicy: EmailRestrictionPolicy,
     val managementEmailRestrictionPolicy: EmailRestrictionPolicy

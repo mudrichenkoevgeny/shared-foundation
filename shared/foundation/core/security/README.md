@@ -16,7 +16,7 @@
     - [ManagementPasswordPolicy] & [ManagementPasswordPolicyPayload] / [OpenPasswordPolicy] & [OpenPasswordPolicyPayload]: Rules for strength validation.
     - [OtpConfirmation] & [OtpConfirmationPayload]: Configuration for OTP generation.
     - [AccountLockoutPolicy] & [AccountLockoutPolicyPayload]: Brute-force protection rules and lockout thresholds.
-    - [AccountLockoutType]: Enum representing lockout states (`NONE`, `PERMANENT`, `TEMPORARY`).
+    - [AccountLockoutType]: Enum representing lockout states (`NONE`, `INDEFINITE`, `TEMPORARY`).
     - [IpRestrictionPolicy] & [IpRestrictionPolicyPayload]: Blacklist and whitelist IP filtering rules for open and management endpoints.
 - **Cryptographic Value Objects:**
     - [DecryptedString] & [EncryptedString]: `inline value` classes for type-safe handling of raw and encrypted data.

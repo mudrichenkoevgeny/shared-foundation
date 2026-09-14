@@ -27,7 +27,8 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
         maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
-        accountDeletionDelaySeconds = accountDeletionDelaySeconds,
+        accountDeletionGracePeriodSeconds = accountDeletionGracePeriodSeconds,
+        accountDeletionCheckIntervalSeconds = accountDeletionCheckIntervalSeconds,
         isRegistrationEnabled = isRegistrationEnabled,
         openEmailRestrictionPolicy = openEmailRestrictionPolicy.toEmailRestrictionPolicy(),
         managementEmailRestrictionPolicy = managementEmailRestrictionPolicy.toEmailRestrictionPolicy()
@@ -47,7 +48,8 @@ fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSett
         maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
         accessTokenExpirationSeconds = accessTokenExpirationSeconds,
         refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
-        accountDeletionDelaySeconds = accountDeletionDelaySeconds,
+        accountDeletionGracePeriodSeconds = accountDeletionGracePeriodSeconds,
+        accountDeletionCheckIntervalSeconds = accountDeletionCheckIntervalSeconds,
         isRegistrationEnabled = isRegistrationEnabled,
         openEmailRestrictionPolicy = openEmailRestrictionPolicy.toEmailRestrictionPolicyPayload(),
         managementEmailRestrictionPolicy = managementEmailRestrictionPolicy.toEmailRestrictionPolicyPayload()

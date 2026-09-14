@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
@@ -29,6 +30,9 @@ object UserFilterValues {
 
         /** Filter by stored pre-deletion [UserAccountStatus]. */
         const val ACCOUNT_STATUS_BEFORE_DELETION = UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION
+
+        /** Filter by [AccountLockoutType]. */
+        const val ACCOUNT_LOCKOUT_TYPE = UserApiFields.ACCOUNT_LOCKOUT_TYPE
 
         /** Filter by inclusive lower bound for authority level. */
         const val AUTHORITY_LEVEL_FROM = "authority_level_from"

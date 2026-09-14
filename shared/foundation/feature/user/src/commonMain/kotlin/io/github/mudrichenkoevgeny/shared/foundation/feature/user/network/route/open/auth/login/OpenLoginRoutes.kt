@@ -41,7 +41,9 @@ object OpenLoginRoutes {
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
+     * unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
      * * **Metadata:** Include:
@@ -69,7 +71,9 @@ object OpenLoginRoutes {
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_PHONE].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_PHONE]. (If the sign-in is from a new,
+     * unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
      * * **Metadata:** Include:
@@ -97,7 +101,9 @@ object OpenLoginRoutes {
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]. (If the sign-in is
+     * from a new, unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
      * * **Metadata:** Include:
@@ -123,7 +129,9 @@ object OpenLoginRoutes {
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
+     * unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
      * * **Metadata:** Include:
@@ -147,7 +155,9 @@ object OpenLoginRoutes {
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from a
+     * new, unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
      * * **Metadata:** Include:

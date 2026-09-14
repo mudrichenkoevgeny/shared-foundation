@@ -42,7 +42,9 @@ object SelfManagementLoginRoutes {
      * The process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
+     * unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success;
      * leave as `null` for failed attempts.
@@ -71,7 +73,9 @@ object SelfManagementLoginRoutes {
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
      * **Audit logging:** Persist an [AuditEvent] for the second-factor verification.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
+     * unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
      * * **Metadata:** Include:
@@ -98,7 +102,9 @@ object SelfManagementLoginRoutes {
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
      * **Audit logging:** Persist an [AuditEvent] for the backup-factor verification.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE].
+     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from
+     * a new, unrecognized device, an additional audit event with action
+     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
      * * **Metadata:** Include:
