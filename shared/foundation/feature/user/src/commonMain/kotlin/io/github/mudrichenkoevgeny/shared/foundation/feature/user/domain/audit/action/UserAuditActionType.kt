@@ -121,7 +121,10 @@ enum class UserAuditActionType : AuditActionType {
     SELF_GET_RECOVERY_CODES,
 
     /** [SelfManagementUserSecurityRoutes.REGENERATE_RECOVERY_CODES], [OpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES]. */
-    SELF_REGENERATE_RECOVERY_CODES;
+    SELF_REGENERATE_RECOVERY_CODES,
+
+    /** Reused rotated refresh token after grace period. */
+    REFRESH_TOKEN_REUSE_DETECTED;
 
     /**
      * String representation of the [UserAuditActionType].
@@ -161,6 +164,7 @@ enum class UserAuditActionType : AuditActionType {
             SELF_DISABLE_TOTP -> ACTION_SELF_DISABLE_TOTP
             SELF_GET_RECOVERY_CODES -> ACTION_SELF_GET_RECOVERY_CODES
             SELF_REGENERATE_RECOVERY_CODES -> ACTION_SELF_REGENERATE_RECOVERY_CODES
+            REFRESH_TOKEN_REUSE_DETECTED -> ACTION_REFRESH_TOKEN_REUSE_DETECTED
         }
 
     override fun parseOrNull(value: String): AuditActionType? = fromValueOrNull(value)
@@ -201,6 +205,7 @@ enum class UserAuditActionType : AuditActionType {
         private const val ACTION_SELF_DISABLE_TOTP = "self_disable_totp"
         private const val ACTION_SELF_GET_RECOVERY_CODES = "self_get_recovery_codes"
         private const val ACTION_SELF_REGENERATE_RECOVERY_CODES = "self_regenerate_recovery_codes"
+        private const val ACTION_REFRESH_TOKEN_REUSE_DETECTED = "refresh_token_reuse_detected"
 
         /**
          * Returns [UserAuditActionType] based on the provided string value, or null if the value is invalid.
