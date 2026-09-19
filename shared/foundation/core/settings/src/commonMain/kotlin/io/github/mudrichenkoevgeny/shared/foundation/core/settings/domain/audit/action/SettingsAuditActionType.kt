@@ -8,7 +8,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route
  */
 enum class SettingsAuditActionType : AuditActionType {
     /** [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS]. */
-    MANAGEMENT_UPDATE_GLOBAL_SETTINGS;
+    MANAGEMENT_UPDATE_GLOBAL_SETTINGS,
+
+    /** [ManagementGlobalSettingsRoutes.RESET_MANAGEMENT_GLOBAL_SETTINGS]. */
+    MANAGEMENT_RESET_GLOBAL_SETTINGS;
 
     /**
      * String representation of the [SettingsAuditActionType].
@@ -16,6 +19,7 @@ enum class SettingsAuditActionType : AuditActionType {
     override val serialName: String
         get() = when (this) {
             MANAGEMENT_UPDATE_GLOBAL_SETTINGS -> ACTION_MANAGEMENT_UPDATE_GLOBAL_SETTINGS
+            MANAGEMENT_RESET_GLOBAL_SETTINGS -> ACTION_MANAGEMENT_RESET_GLOBAL_SETTINGS
         }
 
     override fun parseOrNull(value: String): AuditActionType? = fromValueOrNull(value)
@@ -24,6 +28,7 @@ enum class SettingsAuditActionType : AuditActionType {
 
     companion object {
         private const val ACTION_MANAGEMENT_UPDATE_GLOBAL_SETTINGS = "management_update_global_settings"
+        private const val ACTION_MANAGEMENT_RESET_GLOBAL_SETTINGS = "management_reset_global_settings"
 
         /**
          * Returns [SettingsAuditActionType] based on the provided string value, or null if the value is invalid.

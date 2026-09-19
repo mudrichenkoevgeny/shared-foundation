@@ -8,7 +8,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
  * Security-module audit resource kinds.
  */
 enum class SecurityAuditResourceType : AuditResourceType {
-    /** [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS] request/response ([ManagementSecuritySettingsPayload]). */
+    /**
+     * [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS],
+     * [ManagementSecuritySettingsRoutes.RESET_MANAGEMENT_SECURITY_SETTINGS]
+     * request/response ([ManagementSecuritySettingsPayload]).
+     */
     SECURITY_SETTINGS;
 
     /**

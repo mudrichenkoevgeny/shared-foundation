@@ -8,7 +8,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
  */
 enum class SecurityAuditActionType : AuditActionType {
     /** [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS]. */
-    MANAGEMENT_UPDATE_SECURITY_SETTINGS;
+    MANAGEMENT_UPDATE_SECURITY_SETTINGS,
+
+    /** [ManagementSecuritySettingsRoutes.RESET_MANAGEMENT_SECURITY_SETTINGS]. */
+    MANAGEMENT_RESET_SECURITY_SETTINGS;
 
     /**
      * String representation of the [SecurityAuditActionType].
@@ -16,6 +19,7 @@ enum class SecurityAuditActionType : AuditActionType {
     override val serialName: String
         get() = when (this) {
             MANAGEMENT_UPDATE_SECURITY_SETTINGS -> ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
+            MANAGEMENT_RESET_SECURITY_SETTINGS -> ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS
         }
 
     override fun parseOrNull(value: String): AuditActionType? = fromValueOrNull(value)
@@ -24,6 +28,7 @@ enum class SecurityAuditActionType : AuditActionType {
 
     companion object {
         private const val ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS = "management_update_security_settings"
+        private const val ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS = "management_reset_security_settings"
 
         /**
          * Returns [SecurityAuditActionType] based on the provided string value, or null if the value is invalid.

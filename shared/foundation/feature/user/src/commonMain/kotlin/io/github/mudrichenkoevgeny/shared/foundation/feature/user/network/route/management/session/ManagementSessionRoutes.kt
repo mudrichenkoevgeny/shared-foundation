@@ -113,8 +113,9 @@ object ManagementSessionRoutes {
      * - **Authority Level:** Actor's level must be strictly greater than the target's level.
      * Actor cannot target own account.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -143,8 +144,9 @@ object ManagementSessionRoutes {
      * - **Authority Level:** Actor's level must be strictly greater than the target's level.
      * Actor cannot target own account.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.

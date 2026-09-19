@@ -83,7 +83,7 @@ Every callable endpoint must follow this exact order. Sections should be omitted
  *   Actor cannot target own account.
  *
  * **Security:** Sensitive operation. MFA Step-up required. Returns 
- * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+ * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
  *
  * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
  * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].

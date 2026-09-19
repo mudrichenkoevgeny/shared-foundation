@@ -54,7 +54,8 @@ object UserErrorCodes {
     /** * The user account has been explicitly blocked by an administrator or temporary lockout.
      *
      * **Public arguments:**
-     * - [UserErrorArgs.BLOCKED_UNTIL]: Temporary lockout expiration timestamp in epoch milliseconds (absent for permanent blocks).
+     * - [UserErrorArgs.BLOCKED_UNTIL]: Temporary lockout expiration timestamp in epoch
+     * milliseconds (absent for permanent blocks).
      *
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the blocked user.
@@ -145,6 +146,16 @@ object UserErrorCodes {
     /** Self-service unlock is currently disabled by security policy. */
     const val SELF_SERVICE_UNLOCK_DISABLED = "SELF_SERVICE_UNLOCK_DISABLED"
 
-    /** The registration, login, or email linkage attempt was rejected because the email address or domain is not permitted by email restriction policy. */
+    /** The registration, login, or email linkage attempt was rejected because the email
+     * address or domain is not permitted by email restriction policy. */
     const val EMAIL_NOT_ALLOWED = "EMAIL_NOT_ALLOWED"
+
+    /** Authentication or operation failed because the account has no password set or initial password setup is required. */
+    const val PASSWORD_SETUP_REQUIRED = "PASSWORD_SETUP_REQUIRED"
+
+    /** Operation failed because the specified identifier type does not support password credentials. */
+    const val USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED = "USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED"
+
+    /** Operation failed because no password credential is set on the specified identifier record. */
+    const val USER_IDENTIFIER_PASSWORD_NOT_SET = "USER_IDENTIFIER_PASSWORD_NOT_SET"
 }

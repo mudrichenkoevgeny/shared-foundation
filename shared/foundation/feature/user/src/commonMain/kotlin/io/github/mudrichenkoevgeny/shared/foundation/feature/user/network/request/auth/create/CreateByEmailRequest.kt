@@ -11,9 +11,11 @@ import kotlinx.serialization.Serializable
  * Request body for creating a user account with email and password (e.g. management create-user flow).
  *
  * @property email The email address for the new account.
- * @property password The initial password for the new account.
+ * @property password Optional initial password for the new account. If null, an invitation
+ * email is sent to set up the initial password.
  * @property role The role to assign to the new account.
  * @property status The initial account status.
+ * @property authorityLevel Authority level assigned to the new account.
  * @property permissionCodes Explicit [PermissionCode] values to assign.
  */
 @Serializable
@@ -22,9 +24,8 @@ data class CreateByEmailRequest(
     @SerialName(UserApiFields.EMAIL)
     val email: String,
 
-    @NotBlankStringField
     @SerialName(UserApiFields.PASSWORD)
-    val password: String,
+    val password: String? = null,
 
     @NotBlankStringField
     @SerialName(UserApiFields.ROLE)

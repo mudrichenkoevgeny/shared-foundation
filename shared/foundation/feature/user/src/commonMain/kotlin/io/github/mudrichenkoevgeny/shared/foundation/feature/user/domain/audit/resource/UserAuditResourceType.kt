@@ -20,7 +20,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * User-feature audit resource kinds (management API, open/self-service flows).
  */
 enum class UserAuditResourceType : AuditResourceType {
-    /** [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS] request/response ([ManagementAuthSettingsPayload]). */
+    /**
+     * [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS],
+     * [ManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS]
+     * request/response ([ManagementAuthSettingsPayload]).
+     */
     AUTH_SETTINGS,
 
     /**

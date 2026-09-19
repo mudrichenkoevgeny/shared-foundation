@@ -27,8 +27,14 @@ enum class UserAuditActionType : AuditActionType {
     /** [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS]. */
     MANAGEMENT_UPDATE_AUTH_SETTINGS,
 
+    /** [ManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS]. */
+    MANAGEMENT_RESET_AUTH_SETTINGS,
+
     /** [ManagementIdentifierRoutes.DELETE_IDENTIFIER]. */
     MANAGEMENT_DELETE_IDENTIFIER,
+
+    /** [ManagementIdentifierRoutes.DELETE_IDENTIFIER_PASSWORD]. */
+    MANAGEMENT_DELETE_IDENTIFIER_PASSWORD,
 
     /** [ManagementSessionRoutes.DELETE_SESSION]. */
     MANAGEMENT_DELETE_SESSION,
@@ -132,7 +138,9 @@ enum class UserAuditActionType : AuditActionType {
     override val serialName: String
         get() = when (this) {
             MANAGEMENT_UPDATE_AUTH_SETTINGS -> ACTION_MANAGEMENT_UPDATE_AUTH_SETTINGS
+            MANAGEMENT_RESET_AUTH_SETTINGS -> ACTION_MANAGEMENT_RESET_AUTH_SETTINGS
             MANAGEMENT_DELETE_IDENTIFIER -> ACTION_MANAGEMENT_DELETE_IDENTIFIER
+            MANAGEMENT_DELETE_IDENTIFIER_PASSWORD -> ACTION_MANAGEMENT_DELETE_IDENTIFIER_PASSWORD
             MANAGEMENT_DELETE_SESSION -> ACTION_MANAGEMENT_DELETE_SESSION
             MANAGEMENT_DELETE_ALL_USER_SESSIONS -> ACTION_MANAGEMENT_DELETE_ALL_USER_SESSIONS
             MANAGEMENT_UPDATE_USER -> ACTION_MANAGEMENT_UPDATE_USER
@@ -173,7 +181,9 @@ enum class UserAuditActionType : AuditActionType {
 
     companion object {
         private const val ACTION_MANAGEMENT_UPDATE_AUTH_SETTINGS = "management_update_auth_settings"
+        private const val ACTION_MANAGEMENT_RESET_AUTH_SETTINGS = "management_reset_auth_settings"
         private const val ACTION_MANAGEMENT_DELETE_IDENTIFIER = "management_delete_identifier"
+        private const val ACTION_MANAGEMENT_DELETE_IDENTIFIER_PASSWORD = "management_delete_identifier_password"
         private const val ACTION_MANAGEMENT_DELETE_SESSION = "management_delete_session"
         private const val ACTION_MANAGEMENT_DELETE_ALL_USER_SESSIONS = "management_delete_all_user_sessions"
         private const val ACTION_MANAGEMENT_UPDATE_USER = "management_update_user"

@@ -16,4 +16,9 @@ object BaseManagementAuthSettingsRoutes {
      * Complete management authentication settings path.
      */
     const val MANAGEMENT_AUTH_SETTINGS_PATH = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
+
+    /**
+     * Path template for resetting management authentication settings to default values.
+     */
+    const val RESET_MANAGEMENT_AUTH_SETTINGS_PATH = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
 }

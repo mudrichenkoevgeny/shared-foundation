@@ -19,8 +19,8 @@ object SelfManagementUserRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     * (**OR** semantics).
      * - **Required Permissions:** None.
      */
     const val GET_USER = BaseSelfManagementUserRoutes.GET_USER

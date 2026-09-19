@@ -68,4 +68,19 @@ object UserAuditMetadataDeniedReasonValues {
      * Associated with [UserErrorCodes.TOTAL_USER_IDENTIFIERS_LIMIT_REACHED].
      */
     const val TOTAL_USER_IDENTIFIERS_LIMIT_REACHED = "total_user_identifier_limit_reached"
+
+    /** * Operation rejected because initial password setup is required for the account.
+     * Associated with [UserErrorCodes.PASSWORD_SETUP_REQUIRED].
+     */
+    const val PASSWORD_SETUP_REQUIRED = "password_setup_required"
+
+    /** * Operation rejected because the identifier type does not support password credentials.
+     * Associated with [UserErrorCodes.USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED].
+     */
+    const val USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED = "user_identifier_password_not_supported"
+
+    /** * Operation rejected because no password credential is set on the identifier record.
+     * Associated with [UserErrorCodes.USER_IDENTIFIER_PASSWORD_NOT_SET].
+     */
+    const val USER_IDENTIFIER_PASSWORD_NOT_SET = "user_identifier_password_not_set"
 }

@@ -41,7 +41,7 @@ object SecurityAuditMetadataDeniedReasonValues {
     const val RECOVERY_CODE_ALREADY_USED = "recovery_code_already_used"
 
     /** * Operation denied because a Multi-Factor Authentication step is mandatory.
-     * Associated with [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED].
+     * Associated with [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      */
     const val MFA_REQUIRED = "mfa_required"
 }

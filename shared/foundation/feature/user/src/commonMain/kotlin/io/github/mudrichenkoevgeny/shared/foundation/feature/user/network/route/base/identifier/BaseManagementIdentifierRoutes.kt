@@ -37,4 +37,10 @@ object BaseManagementIdentifierRoutes {
      */
     const val DELETE_IDENTIFIER =
         "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+
+    /**
+     * Path template for deleting/revoking a password credential on an identifier record; path parameter [UserApiPaths.USER_IDENTIFIER_ID].
+     */
+    const val DELETE_IDENTIFIER_PASSWORD =
+        "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/password"
 }

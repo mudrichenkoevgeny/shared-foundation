@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
@@ -30,15 +31,15 @@ object SelfManagementLoginRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the credentials belong to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
      * **Security:** Sensitive operation. If MFA is enabled for the account, this method returns
-     * a [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] error and a challenge token.
+     * a [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] error and a challenge token.
      * The process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
@@ -65,8 +66,8 @@ object SelfManagementLoginRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the challenge token belongs to an account
@@ -94,8 +95,8 @@ object SelfManagementLoginRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the challenge token belongs to an account

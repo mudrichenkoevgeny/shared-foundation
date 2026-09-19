@@ -86,8 +86,9 @@ object SelfManagementUserSecurityRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -113,8 +114,9 @@ object SelfManagementUserSecurityRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -140,8 +142,9 @@ object SelfManagementUserSecurityRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.

@@ -8,7 +8,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route
  * Settings-module audit resource kinds (global settings, not security settings).
  */
 enum class SettingsAuditResourceType : AuditResourceType {
-    /** [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS] request/response ([ManagementGlobalSettingsPayload]). */
+    /**
+     * [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS],
+     * [ManagementGlobalSettingsRoutes.RESET_MANAGEMENT_GLOBAL_SETTINGS]
+     * request/response ([ManagementGlobalSettingsPayload]).
+     */
     GLOBAL_SETTINGS;
 
     /**

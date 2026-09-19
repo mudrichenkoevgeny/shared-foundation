@@ -28,8 +28,8 @@ object SelfManagementResetPasswordRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the operation is performed on an account
@@ -56,8 +56,8 @@ object SelfManagementResetPasswordRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the provided email belongs to an account

@@ -101,8 +101,9 @@ object ManagementIdentifierRoutes {
      * - **Authority Level:** Actor's level must be strictly greater than the target's level.
      * Actor cannot target own account.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -114,4 +115,35 @@ object ManagementIdentifierRoutes {
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
      */
     const val DELETE_IDENTIFIER = BaseManagementIdentifierRoutes.DELETE_IDENTIFIER
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Revokes and removes the password credential from the specified identifier record.
+     *
+     * Path parameters: [UserApiPaths.USER_ID], [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** [IdentifierPermissionCode.IDENTIFIER_DELETE_PASSWORD_FOR_USER] when owner has [UserRole.USER];
+     * [IdentifierPermissionCode.IDENTIFIER_DELETE_PASSWORD_FOR_STAFF] when owner has [UserRole.STAFF] (**AND** semantics).
+     * - **Authority Level:** Actor's level must be strictly greater than the target's level.
+     * Actor cannot target own account.
+     *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER_PASSWORD].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the password revocation.
+     * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * 2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
+     */
+    const val DELETE_IDENTIFIER_PASSWORD = BaseManagementIdentifierRoutes.DELETE_IDENTIFIER_PASSWORD
 }

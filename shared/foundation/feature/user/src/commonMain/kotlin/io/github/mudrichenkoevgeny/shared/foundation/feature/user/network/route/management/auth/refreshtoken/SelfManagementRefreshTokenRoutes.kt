@@ -1,8 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.refreshtoken
 
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole.ADMIN
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole.STAFF
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.RefreshTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.SessionTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.refreshtoken.BaseSelfManagementRefreshTokenRoutes
@@ -22,8 +21,8 @@ object SelfManagementRefreshTokenRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Note:** The server strictly validates that the provided token belongs to an account

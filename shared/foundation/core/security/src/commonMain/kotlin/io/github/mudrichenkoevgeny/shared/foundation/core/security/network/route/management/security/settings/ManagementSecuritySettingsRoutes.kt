@@ -52,4 +52,26 @@ object ManagementSecuritySettingsRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE}"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Resets global security settings and policies to default values.
+     *
+     * Response body: [ManagementSecuritySettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
+     * - **Required Permissions:** [SecurityPermissionCode.SECURITY_SETTINGS_UPDATE] (**AND** semantics).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful resets and all failed attempts.
+     * * **Action:** [SecurityAuditActionType.MANAGEMENT_RESET_SECURITY_SETTINGS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the reset.
+     * * **Resource:** [SecurityAuditResourceType.SECURITY_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     */
+    const val RESET_MANAGEMENT_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.RESET_SECURITY_SETTINGS_ROUTE}"
 }

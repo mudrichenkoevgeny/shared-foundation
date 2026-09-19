@@ -37,7 +37,7 @@ Permissions are strictly scoped by target roles ([UserRole]) and objects:
 | :--- | :--- |
 | **Users** | [UserPermissionCode] — CRUD, status, authority, and security updates. |
 | **Sessions** | [SessionPermissionCode] — View (masked/unmasked) and terminate sessions. |
-| **Identifiers** | [IdentifierPermissionCode] — View (masked/unmasked) and manage linked IDs. |
+| **Identifiers** | [IdentifierPermissionCode] — View (masked/unmasked), manage linked IDs, and revoke passwords. |
 | **Auth Settings** | [AuthSettingsPermissionCode] — Manage global auth provider availability and email restrictions. |
 
 ## Network & Data Contracts

@@ -18,7 +18,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths.USER_IDENTIFIER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseSelfManagementIdentifierRoutes
@@ -90,8 +89,8 @@ object SelfManagementIdentifierRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled for the account). Returns
+     * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.

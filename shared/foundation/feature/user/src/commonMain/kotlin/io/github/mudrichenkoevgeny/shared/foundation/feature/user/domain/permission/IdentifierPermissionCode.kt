@@ -15,6 +15,12 @@ object IdentifierPermissionCode {
     /** Delete identifiers of accounts with [UserRole.STAFF]. */
     val IDENTIFIER_DELETE_FOR_STAFF = PermissionCode("identifier.delete.for.staff")
 
+    /** Delete or revoke passwords on identifiers of accounts with [UserRole.USER]. */
+    val IDENTIFIER_DELETE_PASSWORD_FOR_USER = PermissionCode("identifier.delete.password.for.user")
+
+    /** Delete or revoke passwords on identifiers of accounts with [UserRole.STAFF]. */
+    val IDENTIFIER_DELETE_PASSWORD_FOR_STAFF = PermissionCode("identifier.delete.password.for.staff")
+
     /** Read identifier list of [UserRole.USER] accounts with masked sensitive data. */
     val IDENTIFIER_GET_OF_USER_MASKED = PermissionCode("identifier.get.of.user.masked")
 
@@ -33,6 +39,8 @@ object IdentifierPermissionCode {
     val ALL: Set<PermissionCode> = setOf(
         IDENTIFIER_DELETE_FOR_USER,
         IDENTIFIER_DELETE_FOR_STAFF,
+        IDENTIFIER_DELETE_PASSWORD_FOR_USER,
+        IDENTIFIER_DELETE_PASSWORD_FOR_STAFF,
         IDENTIFIER_GET_OF_USER_MASKED,
         IDENTIFIER_GET_OF_USER_UNMASKED,
         IDENTIFIER_GET_OF_STAFF_MASKED,

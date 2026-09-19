@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByEmailConfirmationRequest
@@ -33,8 +34,8 @@ object SelfManagementUnlockRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Management roles ([UserRole.STAFF], [UserRole.ADMIN]).
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      */
     const val SEND_UNLOCK_EMAIL_CONFIRMATION = BaseSelfManagementUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION
@@ -48,8 +49,8 @@ object SelfManagementUnlockRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Management roles ([UserRole.STAFF], [UserRole.ADMIN]).
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -73,8 +74,8 @@ object SelfManagementUnlockRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Management roles ([UserRole.STAFF], [UserRole.ADMIN]).
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      */
     const val SEND_UNLOCK_PHONE_CONFIRMATION = BaseSelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION
@@ -88,8 +89,8 @@ object SelfManagementUnlockRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Management roles ([UserRole.STAFF], [UserRole.ADMIN]).
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -111,8 +112,8 @@ object SelfManagementUnlockRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
-     * - **Allowed Roles:** Management roles ([UserRole.STAFF], [UserRole.ADMIN]).
-     * - **Allowed Account Statuses:** Any.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.

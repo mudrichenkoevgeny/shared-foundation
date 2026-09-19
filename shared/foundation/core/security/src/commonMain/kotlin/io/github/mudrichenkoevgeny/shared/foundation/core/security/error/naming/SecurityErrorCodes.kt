@@ -8,14 +8,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
  */
 object SecurityErrorCodes {
     /**
-     * Action requires confirmation via a TOTP (Time-based One-Time Password).
-     *
-     * **Public arguments:**
-     * - [SecurityErrorArgs.MFA_TOKEN]: The token required for the subsequent verification request.
-     */
-    const val TOTP_CONFIRMATION_REQUIRED = "TOTP_CONFIRMATION_REQUIRED"
-
-    /**
      * Password does not satisfy the configured [ManagementPasswordPolicy].
      *
      * **Public arguments:**
@@ -43,6 +35,14 @@ object SecurityErrorCodes {
 
     /** Operation failed because TOTP is not enabled for this account. */
     const val TOTP_NOT_ENABLED = "TOTP_NOT_ENABLED"
+
+    /**
+     * Action requires confirmation via Multi-Factor Authentication (MFA).
+     *
+     * **Public arguments:**
+     * - [SecurityErrorArgs.MFA_TOKEN]: The token required for the subsequent verification request.
+     */
+    const val MFA_CONFIRMATION_REQUIRED = "MFA_CONFIRMATION_REQUIRED"
 
     /** The provided MFA challenge token has expired. */
     const val MFA_TOKEN_EXPIRED = "MFA_TOKEN_EXPIRED"

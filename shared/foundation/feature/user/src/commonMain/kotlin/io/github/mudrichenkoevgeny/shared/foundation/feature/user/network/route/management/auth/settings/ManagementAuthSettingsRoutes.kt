@@ -58,4 +58,26 @@ object ManagementAuthSettingsRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Resets global authentication settings to default values.
+     *
+     * Response body: [ManagementAuthSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** [AuthSettingsPermissionCode.AUTH_SETTINGS_UPDATE] (**AND** semantics).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful resets and all failed attempts.
+     * * **Action:** [UserAuditActionType.MANAGEMENT_RESET_AUTH_SETTINGS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] of the administrator performing the reset.
+     * * **Resource:** [UserAuditResourceType.AUTH_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     */
+    const val RESET_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS_PATH
 }

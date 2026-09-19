@@ -52,4 +52,26 @@ object ManagementGlobalSettingsRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
     const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Resets platform-wide global settings to default values.
+     *
+     * Response body: [ManagementGlobalSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
+     * - **Required Permissions:** [SettingsPermissionCode.GLOBAL_SETTINGS_UPDATE] (**AND** semantics).
+     *
+     * **Audit logging:** Persist an [AuditEvent] for successful resets and all failed attempts.
+     * * **Action:** [SettingsAuditActionType.MANAGEMENT_RESET_GLOBAL_SETTINGS].
+     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the reset.
+     * * **Resource:** [SettingsAuditResourceType.GLOBAL_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * * **Metadata:** Include:
+     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     */
+    const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.RESET_GLOBAL_SETTINGS_ROUTE}"
 }

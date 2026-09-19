@@ -5,12 +5,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming
  */
 object SecurityErrorArgs {
     /**
-     * Temporary challenge token required to proceed with Multi-Factor Authentication.
-     * Associated with [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED].
-     */
-    const val MFA_TOKEN = "mfaToken"
-
-    /**
      * Minimum password length required by policy.
      * Associated with [SecurityErrorCodes.PASSWORD_TOO_WEAK].
      */
@@ -57,4 +51,10 @@ object SecurityErrorArgs {
      * Associated with [SecurityErrorCodes.PASSWORD_TOO_WEAK].
      */
     const val PASSWORD_FAIL_TOO_COMMON = "passwordTooCommon"
+
+    /**
+     * Temporary challenge token required to proceed with Multi-Factor Authentication.
+     * Associated with [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     */
+    const val MFA_TOKEN = "mfaToken"
 }

@@ -47,8 +47,8 @@ object OpenUserRoutes {
      * [UserAccountStatus.BANNED], [UserAccountStatus.SECURITY_HOLD] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled for the account). Returns
+     * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
@@ -73,8 +73,8 @@ object OpenUserRoutes {
      * - **Allowed Account Statuses:** [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Security:** Sensitive operation. MFA Step-up required (if enabled). Returns
-     * [SecurityErrorCodes.TOTP_CONFIRMATION_REQUIRED] if additional verification is needed.
+     * **Security:** Sensitive operation. MFA Step-up required (if enabled for the account). Returns
+     * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
