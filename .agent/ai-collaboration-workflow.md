@@ -26,17 +26,15 @@ This document defines the interaction model and workflow requirements for AI-ass
 - **Version Catalog:** All dependencies must use aliases from `gradle/libs.versions.toml`. Hardcoding versions in `build.gradle.kts` is strictly prohibited.
 - **BOM Management:** When adding a new module, ensure it is correctly registered in the `bom` module's constraints to keep consumer versions aligned.
 
-## 4. Responsibility Mapping (Module Grid)
+## 4. Responsibility Mapping
 
-Place code in the correct module based on its functional role. Feature-specific logic is split between `core` (data) and `feature-api` (transport).
+Place code in the correct module based on its functional role:
 
-| Category | Core Module (`core/`) | Feature API Module (`feature/`) |
-| :--- | :--- | :--- |
-| **Common** | `common`: Base errors, JSON config, envelopes. | — |
-| **Audit** | `audit`: Events, redaction, mappers. | `auditapi`: Mgmt routes, permissions. |
-| **Security** | `security`: MFA/TOTP, PasswordPolicy logic. | `securityapi`: Security settings routes. |
-| **Settings** | `settings`: Global settings DTOs/Mappers. | `settingsapi`: Global settings routes. |
-| **User** | — (Shared logic in Security/Common) | `user`: Auth, Sessions, User Mgmt, TOTP Flow. |
+- **`core/common`:** Base errors, JSON configuration, WebSocket envelopes, common DTOs, and base permission codes.
+- **`core/audit`:** Audit events, redaction policies, mappers, management routes, and permission codes.
+- **`core/security`:** MFA/TOTP lifecycle, password policy logic, security settings, routes, and permission codes.
+- **`core/settings`:** Global settings domain models, payloads, mappers, routes, and permission codes.
+- **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, and self-service account unlocking.
 
 **Strict Boundary:** This repository defines the **Contract**. Framework-specific wiring (Ktor engines, Auth session storage, UI mapping) belongs in consumer projects (Backend/KMP Platform SDKs).
 

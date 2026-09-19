@@ -2,7 +2,7 @@
 
 **Audit log wire and domain contracts** shared by backend and client: serialized **event models**, JSON **field names**, list **filters/sort** keys, path **parameter** names, and **mappers** between domain and API payloads. Depends on **core/common** ([CommonApiFields], [PagedResult], [ListingParamNames]) so listings stay consistent across the platform.
 
-HTTP **URL constants** and **feature permission codes** live in **feature/audit/api** ([README](../../feature/audit/api/README.md)); this module stays free of those so server and client can depend only on payloads and parsing logic if needed.
+HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes** ([AuditPermissionCode]) live in this module.
 
 ## What it provides
 
@@ -52,3 +52,5 @@ HTTP **URL constants** and **feature permission codes** live in **feature/audit/
 [CompositeAuditActionTypeParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/CompositeAuditActionTypeParser.kt
 [CompositeAuditResourceTypeParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/CompositeAuditResourceTypeParser.kt
 [CompositeAuditMetadataKeyParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CompositeAuditMetadataKeyParser.kt
+[ManagementAuditRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/route/management/ManagementAuditRoutes.kt
+[AuditPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/permissions/AuditPermissionCode.kt

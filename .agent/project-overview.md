@@ -23,16 +23,13 @@ alwaysApply: true
 Focus on domain logic, data models, and transport payloads.
 
 - **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `ClientInfo`, and `PagedResult`. Defines base `PermissionCode`.
-- **`core/audit`:** Audit domain logic. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), and mappers for converting domain events to wire payloads.
-- **`core/security`:** Security primitives. MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
-- **`core/settings`:** Global system settings shapes. `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
+- **`core/audit`:** Audit domain logic and HTTP routes. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `AuditPermissionCode`, and `CommonAuditResourceType`.
+- **`core/security`:** Security primitives and HTTP routes. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
+- **`core/settings`:** Global system settings shapes and HTTP routes. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
 
-### Feature API Modules (`feature/`)
-Focus on HTTP contracts, specific route constants, and access control.
+### Feature Modules (`feature/`)
+Focus on feature-specific contracts and workflows.
 
-- **`feature/auditapi`:** Management endpoints for audit logs. Contains `ManagementAuditRoutes` and `AuditPermissionCode` (controlling masked vs unmasked data visibility).
-- **`feature/securityapi`:** Security configuration routes. `OpenSecuritySettingsRoutes` (open) and `ManagementSecuritySettingsRoutes` (restricted).
-- **`feature/settingsapi`:** System-wide settings routes. `OpenGlobalSettingsRoutes` and `ManagementGlobalSettingsRoutes`.
 - **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), and aggregates `core/security` for MFA/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
 ### Utility
@@ -40,8 +37,7 @@ Focus on HTTP contracts, specific route constants, and access control.
 
 ## Boundaries & Dependencies
 - **`core/common`** is the leaf: It must not depend on any other internal modules.
-- **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`.
-- **Feature-to-Core:** Feature-API modules depend on their respective `core` modules (e.g., `feature/securityapi` -> `core/security`).
+- **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`; `core/security` and `core/settings` depend on `core/audit`.
 - **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, and `core/settings`.
 - **No Frameworks:** No Ktor Server/Client engines or database drivers. Only "pure" Kotlin logic and serialization.
 

@@ -18,16 +18,13 @@ This document is the entry point for architectural and coding standards. These r
 *Internal logic, domain models, and transport payloads.*
 
 - **`core/common`:** `FoundationJson` (serialization), `ApiErrorResponse`, base `PermissionCode`, `WebSocketContract` (frames/envelopes), `ClientInfo`, `PagedResult`.
-- **`core/audit`:** `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (redaction), `AuditEventMapper`, listing filters/sort keys.
-- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` (rules + `PasswordPolicyValidator`), `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, `EncryptedString`, `SecurityErrorCodes`.
-- **`core/settings`:** `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version limits, and `SettingsWebSocketEventTypes`.
+- **`core/audit`:** `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (redaction), `AuditEventMapper`, listing filters/sort keys, `ManagementAuditRoutes`, `AuditPermissionCode` (masked/unmasked access), `CommonAuditResourceType`.
+- **`core/security`:** MFA/TOTP (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` (rules + `PasswordPolicyValidator`), `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, `EncryptedString`, `SecurityErrorCodes`, `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`.
+- **`core/settings`:** `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version limits, `SettingsWebSocketEventTypes`, `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`.
 
-### Feature API Modules (`feature/*-api`)
-*HTTP route definitions, permissions, and audit taxonomy.*
+### Feature Modules (`feature/*`)
+*Feature-specific contracts and workflows.*
 
-- **`feature/auditapi`:** `ManagementAuditRoutes`, `AuditPermissionCode` (masked/unmasked access), `CommonAuditResourceType`.
-- **`feature/securityapi`:** `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`.
-- **`feature/settingsapi`:** `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`.
 - **`feature/user`:** Comprehensive auth/user/session/identifier/configuration contracts. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), distinct active session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific logging (`UserAuditActionType`).
 
 ## Detailed Standards (`.agent/`)

@@ -2,7 +2,7 @@
 
 **Security-related shared contracts:** password policy **domain** and **payloads**, **MFA (TOTP)** setup and verification, **cryptographic value objects**, **mappers**, **error code/args** strings, and **security settings** (open and management). Depends on **core/common** and **core/audit** for shared listing and audit alignment.
 
-**Open and management HTTP paths** for security operations are in **feature/securityapi** ([README](../../feature/securityapi/README.md)). This module keeps policy, validation, and payload types only.
+**Open and management HTTP paths** ([OpenSecuritySettingsRoutes], [ManagementSecuritySettingsRoutes]) and **permission codes** ([SecurityPermissionCode]) live in this module alongside policy, validation, and payload types.
 
 ## What it provides
 
@@ -69,4 +69,7 @@
 [PasswordHash]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordhash/PasswordHash.kt
 [SecurityAuditMetadataDeniedReasonValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/metadata/SecurityAuditMetadataDeniedReasonValues.kt
 [SecurityWebSocketEventTypes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/contract/SecurityWebSocketEventTypes.kt
+[SecurityPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/permission/SecurityPermissionCode.kt
+[OpenSecuritySettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/open/security/settings/OpenSecuritySettingsRoutes.kt
+[ManagementSecuritySettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/management/security/settings/ManagementSecuritySettingsRoutes.kt
 [FoundationJson]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJson.kt
