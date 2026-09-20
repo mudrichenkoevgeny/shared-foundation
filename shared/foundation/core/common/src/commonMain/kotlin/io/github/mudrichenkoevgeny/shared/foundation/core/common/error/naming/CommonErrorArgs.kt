@@ -60,10 +60,4 @@ object CommonErrorArgs {
      * Associated with [CommonErrorCodes.NOT_FOUND].
      */
     const val RESOURCE = "resource"
-
-    /**
-     * Target completion timestamp in epoch milliseconds indicating when the service
-     * is expected to become available again.
-     */
-    const val MAINTENANCE_UNTIL_EPOCH_MILLIS = "maintenanceUntilEpochMillis"
 }

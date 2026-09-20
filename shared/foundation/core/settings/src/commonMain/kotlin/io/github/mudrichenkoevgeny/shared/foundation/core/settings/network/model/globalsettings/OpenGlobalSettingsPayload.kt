@@ -10,7 +10,6 @@ import kotlinx.serialization.Serializable
  * @property privacyPolicyUrl URL of the privacy policy page.
  * @property termsOfServiceUrl URL of the terms of service page.
  * @property contactSupportEmail Support contact email address.
- * @property maintenanceUntilEpochMillis Maintenance mode expiration timestamp in epoch milliseconds.
  * @property minSupportedAppVersions Minimum supported application versions mapped by client type string.
  */
 @Serializable
@@ -23,9 +22,6 @@ data class OpenGlobalSettingsPayload(
 
     @SerialName(GlobalSettingsApiFields.CONTACT_SUPPORT_EMAIL)
     val contactSupportEmail: String?,
-
-    @SerialName(GlobalSettingsApiFields.MAINTENANCE_UNTIL_EPOCH_MILLIS)
-    val maintenanceUntilEpochMillis: Long?,
 
     @SerialName(GlobalSettingsApiFields.MIN_SUPPORTED_APP_VERSIONS)
     val minSupportedAppVersions: Map<String, String>

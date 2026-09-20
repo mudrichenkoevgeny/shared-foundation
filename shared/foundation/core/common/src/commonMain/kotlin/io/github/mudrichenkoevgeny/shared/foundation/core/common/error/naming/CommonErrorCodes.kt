@@ -30,9 +30,6 @@ object CommonErrorCodes {
 
     /** * Service or dependency temporarily unavailable.
      *
-     * **Public arguments:**
-     * - [CommonErrorArgs.MAINTENANCE_UNTIL_EPOCH_MILLIS]: Target completion timestamp in epoch milliseconds.
-     *
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Details about the unavailable service.
      */

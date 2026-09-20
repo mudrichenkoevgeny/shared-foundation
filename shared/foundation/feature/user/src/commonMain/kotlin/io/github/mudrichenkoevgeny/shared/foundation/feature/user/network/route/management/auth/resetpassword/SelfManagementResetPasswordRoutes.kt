@@ -16,13 +16,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.resetpassword.BaseSelfManagementResetPasswordRoutes
 
 /**
- * Route paths for password recovery in the management API.
+ * Route paths for password recovery and initial password setup in the management API.
  */
 object SelfManagementResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Completes the password reset for a management account.
+     * Completes the password reset or initial password setup for a management account.
      *
      * Request body: [ResetPasswordRequest].
      *
@@ -48,7 +48,7 @@ object SelfManagementResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Initiates password recovery for a management account by sending a confirmation code.
+     * Initiates password recovery or initial password setup for a management account by sending a confirmation code.
      *
      * Request body: [SendResetPasswordConfirmationRequest].
      *

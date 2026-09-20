@@ -22,9 +22,6 @@ object GlobalSettingsApiFields {
     /** JSON field name for the verbose logging enablement flag. */
     const val IS_VERBOSE_LOGGING_ENABLED = "is_verbose_logging_enabled"
 
-    /** JSON field name for the maintenance mode expiration epoch timestamp in milliseconds. */
-    const val MAINTENANCE_UNTIL_EPOCH_MILLIS = "maintenance_until_epoch_millis"
-
     /** JSON field name for the minimum supported application versions dictionary. */
     const val MIN_SUPPORTED_APP_VERSIONS = "min_supported_app_versions"
 }

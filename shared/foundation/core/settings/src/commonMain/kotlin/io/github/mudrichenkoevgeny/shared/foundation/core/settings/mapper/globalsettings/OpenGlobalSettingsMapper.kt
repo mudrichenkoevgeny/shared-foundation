@@ -8,7 +8,6 @@ fun OpenGlobalSettingsPayload.toOpenGlobalSettings(): OpenGlobalSettings = OpenG
     privacyPolicyUrl = privacyPolicyUrl,
     termsOfServiceUrl = termsOfServiceUrl,
     contactSupportEmail = contactSupportEmail,
-    maintenanceUntilEpochMillis = maintenanceUntilEpochMillis,
     minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) }
 )
 
@@ -16,6 +15,5 @@ fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload 
     privacyPolicyUrl = privacyPolicyUrl,
     termsOfServiceUrl = termsOfServiceUrl,
     contactSupportEmail = contactSupportEmail,
-    maintenanceUntilEpochMillis = maintenanceUntilEpochMillis,
     minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.serialName }
 )

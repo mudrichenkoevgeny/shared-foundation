@@ -16,13 +16,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.resetpassword.BaseOpenResetPasswordRoutes
 
 /**
- * Route paths for password recovery in the open API.
+ * Route paths for password recovery and initial password setup in the open API.
  */
 object OpenResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Resets the user's password using a previously sent confirmation code.
+     * Resets a forgotten password or sets up an initial password using a previously sent confirmation code or invitation token.
      *
      * Request body: [ResetPasswordRequest].
      *
@@ -46,7 +46,7 @@ object OpenResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Requests a confirmation code (OTP) to be sent to the user's email to initiate password recovery.
+     * Requests a confirmation code (OTP) to be sent to the user's email to initiate password recovery or initial setup.
      *
      * Request body: [SendResetPasswordConfirmationRequest].
      *
