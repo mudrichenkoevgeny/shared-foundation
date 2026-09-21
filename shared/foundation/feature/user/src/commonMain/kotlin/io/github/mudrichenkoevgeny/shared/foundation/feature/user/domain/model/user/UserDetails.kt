@@ -16,8 +16,8 @@ import kotlin.time.Instant
  * @property id Unique user id ([UserId]); defaults to [UserId.generate] when creating new instances.
  * @property role Access level assigned to the user ([UserRole]).
  * @property accountStatus Current account state ([UserAccountStatus]).
- * @property accountStatusBeforeDeletion Status before a deletion was requested; meaningful when
- *   [accountStatus] is [UserAccountStatus.PENDING_DELETION].
+ * @property accountStatusOnRestore Target account status assigned to the user upon restoring the account / canceling
+ *   deletion procedure; meaningful when [accountStatus] is [UserAccountStatus.PENDING_DELETION].
  * @property authorityLevel Hierarchical weight of the user (0-100) used for access control.
  * @property permissionCodes Explicit permission codes assigned to the user ([PermissionCode]).
  * @property isTotpEnabled Whether Time-based One-Time Password (TOTP) two-factor authentication is active.
@@ -33,7 +33,7 @@ data class UserDetails(
     val id: UserId = UserId.generate(),
     val role: UserRole,
     val accountStatus: UserAccountStatus,
-    val accountStatusBeforeDeletion: UserAccountStatus?,
+    val accountStatusOnRestore: UserAccountStatus?,
     val authorityLevel: Int,
     val permissionCodes: Set<PermissionCode>,
     val isTotpEnabled: Boolean,

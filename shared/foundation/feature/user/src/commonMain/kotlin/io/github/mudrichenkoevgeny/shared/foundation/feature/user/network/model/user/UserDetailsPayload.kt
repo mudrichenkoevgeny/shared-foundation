@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  * @property id The unique identifier of the user.
  * @property role The access level assigned to the user (e.g. [UserRole]).
  * @property accountStatus The current state of the account (e.g. [UserAccountStatus]).
- * @property accountStatusBeforeDeletion Account status before deletion was requested; only meaningful when the account is pending deletion (e.g. [UserAccountStatus]).
+ * @property accountStatusOnRestore Target account status assigned to the user upon restoring the account / canceling deletion procedure; only meaningful when the account is pending deletion (e.g. [UserAccountStatus]).
  * @property authorityLevel The hierarchical weight of the user (0-100), used for access control and preventing escalation of privileges.
  * @property permissionCodes Explicit permissions assigned to the user (see [PermissionCode]).
  * @property isTotpEnabled Indicates whether Time-based One-Time Password (TOTP) two-factor authentication is active for this account.
@@ -39,8 +39,8 @@ data class UserDetailsPayload(
     @SerialName(UserApiFields.ACCOUNT_STATUS)
     val accountStatus: String,
 
-    @SerialName(UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION)
-    val accountStatusBeforeDeletion: String?,
+    @SerialName(UserApiFields.ACCOUNT_STATUS_ON_RESTORE)
+    val accountStatusOnRestore: String?,
 
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
     val authorityLevel: Int,

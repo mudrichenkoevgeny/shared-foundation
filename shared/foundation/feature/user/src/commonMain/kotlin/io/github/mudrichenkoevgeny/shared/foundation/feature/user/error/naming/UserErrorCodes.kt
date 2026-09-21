@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 
 /**
  * User-specific error codes for API responses and backend logging, used to categorize failures.
@@ -51,16 +52,24 @@ object UserErrorCodes {
      */
     const val USER_ILLEGAL_ACCOUNT_STATUS = "USER_ILLEGAL_ACCOUNT_STATUS"
 
-    /** * The user account has been explicitly blocked by an administrator or temporary lockout.
-     *
-     * **Public arguments:**
-     * - [UserErrorArgs.BLOCKED_UNTIL]: Temporary lockout expiration timestamp in epoch
-     * milliseconds (absent for permanent blocks).
+    /** * The user account has been explicitly blocked by an administrator.
      *
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the blocked user.
      */
     const val USER_BLOCKED = "USER_BLOCKED"
+
+    /** * The account is temporarily or indefinitely locked out due to exceeding maximum allowed failed authentication attempts or security policy violations.
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.ACCOUNT_LOCKOUT_TYPE]: Category of account lockout ([AccountLockoutType]: `NONE`, `INDEFINITE`, `TEMPORARY`).
+     * - [UserErrorArgs.TEMPORARY_LOCKOUT_UNTIL]: Temporary lockout expiration timestamp in epoch milliseconds
+     * (absent for indefinite lockouts).
+     *
+     * **Secret arguments:**
+     * - [UserErrorArgs.USER_ID]: Identifier of the locked user.
+     */
+    const val USER_LOCKED = "USER_LOCKED"
 
     /** * The account is in read-only mode.
      *

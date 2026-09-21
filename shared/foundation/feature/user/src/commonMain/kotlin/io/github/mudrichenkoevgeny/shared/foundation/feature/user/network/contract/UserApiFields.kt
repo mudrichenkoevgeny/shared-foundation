@@ -72,10 +72,9 @@ object UserApiFields {
     const val ACCOUNT_STATUS = "account_status"
 
     /**
-     * JSON field name for the account status snapshot before deletion was scheduled; wire value follows the status enum’s
-     * serial name (user details, filters).
+     * JSON field name for the target account status assigned to the user upon restoring the account / canceling deletion procedure.
      */
-    const val ACCOUNT_STATUS_BEFORE_DELETION = "account_status_before_deletion"
+    const val ACCOUNT_STATUS_ON_RESTORE = "account_status_on_restore"
 
     /**
      * JSON field name for the hierarchical weight of the user; used for access control logic and

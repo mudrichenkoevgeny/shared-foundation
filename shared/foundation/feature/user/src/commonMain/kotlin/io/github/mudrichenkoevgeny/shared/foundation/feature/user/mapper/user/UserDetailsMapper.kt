@@ -22,14 +22,14 @@ import kotlin.time.Instant
  * Builds domain [UserDetails] from [UserDetailsPayload].
  *
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value
- * for `role`, `accountStatus`, `accountStatusBeforeDeletion`, or `lockoutType` is not recognized.
+ * for `role`, `accountStatus`, `accountStatusOnRestore`, or `lockoutType` is not recognized.
  */
 fun UserDetailsPayload.toUserDetails() = UserDetails(
     id = id.toUserIdOrThrow(),
     role = UserRole.fromValueOrThrow(role),
     accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
-    accountStatusBeforeDeletion = accountStatusBeforeDeletion?.let { accountStatusBeforeDeletion ->
-        UserAccountStatus.fromValueOrNull(accountStatusBeforeDeletion)
+    accountStatusOnRestore = accountStatusOnRestore?.let { accountStatusOnRestore ->
+        UserAccountStatus.fromValueOrNull(accountStatusOnRestore)
     },
     authorityLevel = authorityLevel,
     permissionCodes = permissionCodes.map { permissionCode ->
@@ -52,7 +52,7 @@ fun UserDetails.toUserDetailsPayload() = UserDetailsPayload(
     id = id.asHexDashString(),
     role = role.serialName,
     accountStatus = accountStatus.serialName,
-    accountStatusBeforeDeletion = accountStatusBeforeDeletion?.serialName,
+    accountStatusOnRestore = accountStatusOnRestore?.serialName,
     authorityLevel = authorityLevel,
     permissionCodes = permissionCodes.map { permissionCode ->
         permissionCode.value

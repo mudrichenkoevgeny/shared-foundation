@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 
 /**
@@ -10,7 +11,7 @@ object UserErrorArgs {
      * Mostly used as a **secret argument** for internal logging.
      *
      * Associated with [UserErrorCodes.USER_ROLE_NOT_ALLOWED], [UserErrorCodes.USER_MISSING_PERMISSIONS],
-     * [UserErrorCodes.USER_ILLEGAL_ACCOUNT_STATUS], [UserErrorCodes.USER_BLOCKED],
+     * [UserErrorCodes.USER_ILLEGAL_ACCOUNT_STATUS], [UserErrorCodes.USER_BLOCKED], [UserErrorCodes.USER_LOCKED],
      * [UserErrorCodes.USER_READ_ONLY], [UserErrorCodes.USER_SECURITY_HOLD],
      * [UserErrorCodes.USER_PENDING_DELETION], [UserErrorCodes.USER_FORBIDDEN], [UserErrorCodes.USER_NOT_FOUND].
      */
@@ -32,11 +33,19 @@ object UserErrorArgs {
     const val USER_AUTH_PROVIDER = "userAuthProvider"
 
     /**
-     * Key for the temporary account lockout expiration timestamp (epoch milliseconds).
+     * Key for the lockout category ([AccountLockoutType]: `NONE`, `INDEFINITE`, `TEMPORARY`).
+     * Used as a **public argument** for client-side localization and behavior handling.
+     *
+     * Associated with [UserErrorCodes.USER_LOCKED].
+     */
+    const val ACCOUNT_LOCKOUT_TYPE = "accountLockoutType"
+
+    /**
+     * Key for the temporary account lockout expiration timestamp in epoch milliseconds.
      * Used as a **public argument** for client-side localization and countdown timers.
      *
-     * Associated with [UserErrorCodes.USER_BLOCKED].
-     * Present only during temporary lockouts with the expiration timestamp; absent for permanent blocks.
+     * Associated with [UserErrorCodes.USER_LOCKED].
+     * Present only during temporary lockouts with the expiration timestamp; absent for indefinite lockouts.
      */
-    const val BLOCKED_UNTIL = "blockedUntil"
+    const val TEMPORARY_LOCKOUT_UNTIL = "temporaryLockoutUntil"
 }

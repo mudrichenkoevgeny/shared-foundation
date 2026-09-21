@@ -28,8 +28,8 @@ object UserFilterValues {
         /** Filter by [UserAccountStatus]. */
         const val ACCOUNT_STATUS = UserApiFields.ACCOUNT_STATUS
 
-        /** Filter by stored pre-deletion [UserAccountStatus]. */
-        const val ACCOUNT_STATUS_BEFORE_DELETION = UserApiFields.ACCOUNT_STATUS_BEFORE_DELETION
+        /** Filter by target [UserAccountStatus] assigned upon account restoration. */
+        const val ACCOUNT_STATUS_ON_RESTORE = UserApiFields.ACCOUNT_STATUS_ON_RESTORE
 
         /** Filter by [AccountLockoutType]. */
         const val ACCOUNT_LOCKOUT_TYPE = UserApiFields.ACCOUNT_LOCKOUT_TYPE
