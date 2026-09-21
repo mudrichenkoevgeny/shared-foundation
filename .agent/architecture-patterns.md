@@ -50,7 +50,7 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
 ## 5. Error Handling & Machine-Readable Codes
 
 - **Wire Shape:** All errors must use `ApiErrorResponse`.
-- **Contract Only:** This library defines **only the code strings** (e.g., `SecurityErrorCodes.INVALID_MFA_CODE`, `UserErrorCodes.USER_BLOCKED`) and **argument keys** (e.g., `UserErrorArgs.BLOCKED_UNTIL`).
+- **Contract Only:** This library defines **only the code strings** (e.g., `SecurityErrorCodes.PASSWORD_TOO_WEAK`, `UserErrorCodes.USER_LOCKED`) and **argument keys** (e.g., `UserErrorArgs.TEMPORARY_LOCKOUT_UNTIL`, `UserErrorArgs.ACCOUNT_LOCKOUT_TYPE`).
 - **No Localization:** Do not include human-readable text. Consumers map `code` to localized strings in the UI.
 
 ## 6. WebSocket Communication

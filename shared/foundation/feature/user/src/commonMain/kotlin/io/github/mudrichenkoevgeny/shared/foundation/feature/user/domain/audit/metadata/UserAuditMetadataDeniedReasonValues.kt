@@ -14,10 +14,15 @@ object UserAuditMetadataDeniedReasonValues {
      */
     const val USER_READ_ONLY = "user_read_only"
 
-    /** * Operation rejected because the user account is blocked.
-     * Associated with [UserErrorCodes.USER_BLOCKED].
+    /** * Operation rejected because the user account is banned.
+     * Associated with [UserErrorCodes.USER_BANNED].
      */
-    const val USER_BLOCKED = "user_blocked"
+    const val USER_BANNED = "user_banned"
+
+    /** * Operation rejected because the user account is locked out.
+     * Associated with [UserErrorCodes.USER_LOCKED].
+     */
+    const val USER_LOCKED = "user_locked"
 
     /** * Operation rejected because the user account is under a security hold.
      * Associated with [UserErrorCodes.USER_SECURITY_HOLD].

@@ -52,12 +52,12 @@ object UserErrorCodes {
      */
     const val USER_ILLEGAL_ACCOUNT_STATUS = "USER_ILLEGAL_ACCOUNT_STATUS"
 
-    /** * The user account has been explicitly blocked by an administrator.
+    /** * The user account has been explicitly banned by an administrator.
      *
      * **Secret arguments:**
-     * - [UserErrorArgs.USER_ID]: Identifier of the blocked user.
+     * - [UserErrorArgs.USER_ID]: Identifier of the banned user.
      */
-    const val USER_BLOCKED = "USER_BLOCKED"
+    const val USER_BANNED = "USER_BANNED"
 
     /** * The account is temporarily or indefinitely locked out due to exceeding maximum allowed failed authentication attempts or security policy violations.
      *

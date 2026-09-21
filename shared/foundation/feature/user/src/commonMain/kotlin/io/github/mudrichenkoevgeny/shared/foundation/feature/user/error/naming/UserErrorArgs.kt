@@ -11,7 +11,7 @@ object UserErrorArgs {
      * Mostly used as a **secret argument** for internal logging.
      *
      * Associated with [UserErrorCodes.USER_ROLE_NOT_ALLOWED], [UserErrorCodes.USER_MISSING_PERMISSIONS],
-     * [UserErrorCodes.USER_ILLEGAL_ACCOUNT_STATUS], [UserErrorCodes.USER_BLOCKED], [UserErrorCodes.USER_LOCKED],
+     * [UserErrorCodes.USER_ILLEGAL_ACCOUNT_STATUS], [UserErrorCodes.USER_BANNED], [UserErrorCodes.USER_LOCKED],
      * [UserErrorCodes.USER_READ_ONLY], [UserErrorCodes.USER_SECURITY_HOLD],
      * [UserErrorCodes.USER_PENDING_DELETION], [UserErrorCodes.USER_FORBIDDEN], [UserErrorCodes.USER_NOT_FOUND].
      */

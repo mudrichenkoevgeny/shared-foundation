@@ -14,5 +14,5 @@ object UserWebSocketCloseReasons {
     const val SESSION_DELETED = "Session deleted"
 
     /** The user account has been banned or deactivated. */
-    const val USER_BLOCKED = "User blocked"
+    const val USER_BANNED = "User banned"
 }

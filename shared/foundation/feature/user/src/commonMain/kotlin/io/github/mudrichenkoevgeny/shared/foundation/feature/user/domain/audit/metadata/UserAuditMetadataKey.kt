@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -61,9 +62,16 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
     },
 
     /**
-     * Expiration timestamp for temporary account lockouts, represented in Unix epoch milliseconds.
+     * Category of account lockout; value aligned with [AccountLockoutType.serialName].
      */
-    BLOCKED_UNTIL {
+    ACCOUNT_LOCKOUT_TYPE {
+        override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
+    },
+
+    /**
+     * Temporary account lockout expiration timestamp in Unix epoch milliseconds.
+     */
+    TEMPORARY_LOCKOUT_UNTIL {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
     };
 
@@ -76,7 +84,8 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
             PHONE_NUMBER -> KEY_PHONE_NUMBER
             USER_AUTH_PROVIDER -> KEY_USER_AUTH_PROVIDER
             EXTERNAL_ID -> KEY_EXTERNAL_ID
-            BLOCKED_UNTIL -> KEY_BLOCKED_UNTIL
+            ACCOUNT_LOCKOUT_TYPE -> KEY_ACCOUNT_LOCKOUT_TYPE
+            TEMPORARY_LOCKOUT_UNTIL -> KEY_TEMPORARY_LOCKOUT_UNTIL
         }
 
     override fun parseOrNull(value: String): AuditMetadataKey? = fromValueOrNull(value)
@@ -91,7 +100,8 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
         private const val KEY_PHONE_NUMBER = "phone_number"
         private const val KEY_USER_AUTH_PROVIDER = "user_auth_provider"
         private const val KEY_EXTERNAL_ID = "external_id"
-        private const val KEY_BLOCKED_UNTIL = "blocked_until"
+        private const val KEY_ACCOUNT_LOCKOUT_TYPE = "account_lockout_type"
+        private const val KEY_TEMPORARY_LOCKOUT_UNTIL = "temporary_lockout_until"
 
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
