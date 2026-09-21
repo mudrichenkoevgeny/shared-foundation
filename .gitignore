@@ -25,6 +25,10 @@ out/
 local.properties
 .DS_Store
 
+# Temporary & Dump files
+*.hprof
+*.log
+
 # Editors
 .vscode/
 .history/
