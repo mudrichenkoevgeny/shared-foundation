@@ -17,6 +17,9 @@ object UserApiFields {
     /** JSON field name for the token type of the issued access token (for example `Bearer`). */
     const val TOKEN_TYPE = "token_type"
 
+    /** JSON field name for the session id (in session token payloads and path parameters). */
+    const val SESSION_ID = "session_id"
+
     /** JSON field name for the access token issued for the session. */
     const val ACCESS_TOKEN = "access_token"
 
@@ -128,6 +131,12 @@ object UserApiFields {
 
     /** JSON field name for the credential record id tied to a session row. */
     const val IDENTIFIER_ID = "identifier_id"
+
+    /** JSON field name for the display name of an identifier. */
+    const val DISPLAY_NAME = "display_name"
+
+    /** JSON field name for the display name of the identifier associated with a session. */
+    const val IDENTIFIER_DISPLAY_NAME = "identifier_display_name"
 
     /**
      * JSON field name for the provider of the session’s credential; wire value follows [UserAuthProvider.serialName]

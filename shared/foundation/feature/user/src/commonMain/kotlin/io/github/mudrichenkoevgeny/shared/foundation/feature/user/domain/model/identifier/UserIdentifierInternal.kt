@@ -27,6 +27,7 @@ data class UserIdentifierInternal(
     val userId: UserId,
     val userAuthProvider: UserAuthProvider,
     val identifier: String,
+    val displayName: String,
     val externalProviderEmail: String?,
     val passwordHash: PasswordHash?,
     val createdAt: Instant,

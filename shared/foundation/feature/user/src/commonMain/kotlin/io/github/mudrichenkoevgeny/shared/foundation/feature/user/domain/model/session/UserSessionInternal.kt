@@ -22,6 +22,7 @@ data class UserSessionInternal(
     val userRole: UserRole,
     val identifier: String,
     val identifierId: UserIdentifierId,
+    val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val refreshTokenHash: RefreshTokenHash,
     val deviceInfo: ClientDeviceInfo,

@@ -14,7 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.security.BaseSelfManagementUserSecurityRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for the authenticated staff or admin's self-service security management.
@@ -89,7 +89,7 @@ object SelfManagementUserSecurityRoutes {
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
      * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
@@ -117,7 +117,7 @@ object SelfManagementUserSecurityRoutes {
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
      * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
@@ -145,7 +145,7 @@ object SelfManagementUserSecurityRoutes {
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
      * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].

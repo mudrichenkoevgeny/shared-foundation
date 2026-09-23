@@ -18,6 +18,7 @@ import kotlinx.serialization.Serializable
  * @property userRole Wire value matching [UserRole.serialName].
  * @property identifier Raw or masked login identifier string depending on [isSensitiveValuesMasked] and [SessionPermissionCode].
  * @property identifierId Id of the identifier used for login as a hex-dash string.
+ * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Wire value matching [UserAuthProvider.serialName].
  * @property clientDeviceInfo Hardware and environment information payload ([ClientDeviceInfoPayload]).
  * @property userAgent HTTP `User-Agent` header value, or `null` if missing.
@@ -45,6 +46,9 @@ data class UserSessionPayload(
 
     @SerialName(UserApiFields.IDENTIFIER_ID)
     val identifierId: String,
+
+    @SerialName(UserApiFields.IDENTIFIER_DISPLAY_NAME)
+    val identifierDisplayName: String,
 
     @SerialName(UserApiFields.IDENTIFIER_AUTH_PROVIDER)
     val identifierAuthProvider: String,

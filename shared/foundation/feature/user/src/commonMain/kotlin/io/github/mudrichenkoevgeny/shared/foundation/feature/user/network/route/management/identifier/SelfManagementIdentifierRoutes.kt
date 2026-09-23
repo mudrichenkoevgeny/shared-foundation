@@ -21,7 +21,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contra
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseSelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for managing the current authenticated principal's identifiers in the management API (self-service).
@@ -91,7 +91,7 @@ object SelfManagementIdentifierRoutes {
      *
      * **Security:** Sensitive operation. MFA Step-up required (if enabled for the account). Returns
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.CHANGE_PASSWORD].

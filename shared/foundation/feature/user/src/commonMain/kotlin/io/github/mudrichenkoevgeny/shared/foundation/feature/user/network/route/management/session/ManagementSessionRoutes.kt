@@ -21,7 +21,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permiss
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 
 /**
  * Route paths for user sessions in the management API (list, single read, revocation).
@@ -116,7 +115,7 @@ object ManagementSessionRoutes {
      * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
      * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_SESSION].
@@ -147,7 +146,7 @@ object ManagementSessionRoutes {
      * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
      * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_ALL_USER_SESSIONS].

@@ -44,6 +44,11 @@ object ManagementGlobalSettingsRoutes {
      * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** [SettingsPermissionCode.GLOBAL_SETTINGS_UPDATE] (**AND** semantics).
      *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns `SecurityErrorCodes.TOTP_NOT_ENABLED` if TOTP is not configured. When enabled,
+     * MFA Step-up is required via `SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED`.
+     * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
+     *
      * **Audit logging:** Persist an [AuditEvent] for successful updates and all failed attempts.
      * * **Action:** [SettingsAuditActionType.MANAGEMENT_UPDATE_GLOBAL_SETTINGS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the update.
@@ -65,6 +70,11 @@ object ManagementGlobalSettingsRoutes {
      * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
      * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** [SettingsPermissionCode.GLOBAL_SETTINGS_UPDATE] (**AND** semantics).
+     *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns `SecurityErrorCodes.TOTP_NOT_ENABLED` if TOTP is not configured. When enabled,
+     * MFA Step-up is required via `SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED`.
+     * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful resets and all failed attempts.
      * * **Action:** [SettingsAuditActionType.MANAGEMENT_RESET_GLOBAL_SETTINGS].

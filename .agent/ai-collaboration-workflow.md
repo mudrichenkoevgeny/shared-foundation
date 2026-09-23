@@ -17,8 +17,10 @@ This document defines the interaction model and workflow requirements for AI-ass
 
 ## 2. Operational Constraints
 
-- **Execution Ban (Tests):** Do not suggest or initiate the execution of test suites (via Gradle or other runners). This is a strict policy to ensure intentional and manual verification by the developer.
-- **Permitted Commands:** Diagnostic and build commands that **do not** trigger tests are allowed (e.g., `./gradlew assemble`, `./gradlew dependencies`, `./gradlew lintKotlin`).
+- **Execution Ban (Tests):** Do not suggest, initiate, or invite the user to run test suites (Gradle or otherwise). Verification is a manual developer-led process.
+- **Permitted Commands:** Diagnostic and build commands that **do not** trigger tests are allowed (e.g., `./gradlew assemble`, `./gradlew dependencies`, `./gradlew detekt`).
+- **Redundant Build Prohibition:** Do not invoke Gradle build tasks or attempt to compile the project after making documentation changes (like KDoc) or other edits that cannot possibly break the build.
+- **Complete Code:** Provide full, runnable implementations. Avoid `// ... rest of code` or `TODO` markers.
 - **Refactoring:** When refactoring, ensure that the removal of comments is applied to all modified files to maintain consistency with existing "clean" modules.
 
 ## 3. Dependency Management

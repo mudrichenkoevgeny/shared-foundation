@@ -20,7 +20,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permiss
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for user identifiers in the management API (list, single read, delete).
@@ -104,7 +104,7 @@ object ManagementIdentifierRoutes {
      * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
      * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER].
@@ -135,7 +135,7 @@ object ManagementIdentifierRoutes {
      * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
      * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
-     * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER_PASSWORD].

@@ -13,6 +13,7 @@ import kotlinx.serialization.Serializable
  * @property userId Owning user id.
  * @property userAuthProvider [UserAuthProvider] serial name.
  * @property identifier Login value or server-defined masked form; meaning depends on [isSensitiveValuesMasked].
+ * @property displayName Display name for the identifier.
  * @property externalProviderEmail Verified email address associated with the external identity provider
  * @property isSensitiveValuesMasked `true` when [identifier] must be treated as non-raw for the caller.
  * @property createdAt Epoch millis when linked.
@@ -31,6 +32,9 @@ data class UserIdentifierPayload(
 
     @SerialName(UserApiFields.IDENTIFIER)
     val identifier: String,
+
+    @SerialName(UserApiFields.DISPLAY_NAME)
+    val displayName: String,
 
     @SerialName(UserApiFields.EXTERNAL_PROVIDER_EMAIL)
     val externalProviderEmail: String?,
