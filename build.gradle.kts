@@ -16,7 +16,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.46"
+    version = "0.0.47"
 }
 
 subprojects {
@@ -104,4 +104,10 @@ subprojects {
             }
         }
     }
+}
+
+tasks.register("generateNpmPackage") {
+    group = "publishing"
+    description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types, Zod schemas, and route constants."
+    dependsOn(":tools:npm-generator:run")
 }

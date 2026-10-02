@@ -75,3 +75,28 @@ Performs a complete deployment workflow, including uploading, closing the stagin
 ```bash
 ./gradlew publishAndReleaseToMavenCentral
 ```
+
+## NPM Package Generation & Publishing
+
+The project exports TypeScript declarations, Zod schemas, and route constants to npm as [`@mudrichenkoevgeny/shared-foundation`](https://www.npmjs.com/package/@mudrichenkoevgeny/shared-foundation).
+
+### 1. Local Package Generation
+
+To compile and generate the NPM package artifact (CJS, ESM, and TypeScript typings):
+
+```bash
+./gradlew generateNpmPackage
+```
+
+The output package will be generated at `build/npm-package/`.
+
+### 2. Publishing to npmjs.com
+
+1. Authenticate with your npm account (if not logged in):
+   ```bash
+   npm login
+   ```
+2. Publish the generated package directly from the project root:
+   ```bash
+   npm publish ./build/npm-package --access public
+   ```

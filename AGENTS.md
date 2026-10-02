@@ -28,6 +28,9 @@ This document is the entry point for architectural and coding standards. These r
 
 - **`feature/user`:** Comprehensive auth/user/session/identifier/configuration contracts. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), distinct active session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific logging (`UserAuditActionType`).
 
+### Tooling & Code Generation (`tools/*`)
+- **`tools/npm-generator`:** Executable JVM module triggered via `./gradlew generateNpmPackage`. Generates the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`) containing TypeScript declarations (`index.d.ts`), Zod schemas, route objects, error codes, permission objects, branded types, and helpers for TypeScript/React consumers (`web-platform-sdk`).
+
 ## Detailed Standards (`.agent/`)
 
 - **`project-overview.md`** — Identity, module boundaries, and consumer SDK relations.
