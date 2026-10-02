@@ -13,12 +13,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.resetpassword.BaseOpenResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for password recovery and initial password setup in the open API.
  */
 object OpenResetPasswordRoutes {
+    /** Base path for open password reset operations. */
+    private const val BASE_RESET_PASSWORD_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -41,7 +44,7 @@ object OpenResetPasswordRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val RESET_EMAIL_PASSWORD = BaseOpenResetPasswordRoutes.RESET_PASSWORD
+    const val RESET_EMAIL_PASSWORD = BASE_RESET_PASSWORD_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -59,5 +62,5 @@ object OpenResetPasswordRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = BaseOpenResetPasswordRoutes.SEND_RESET_PASSWORD_CONFIRMATION
+    const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = "$BASE_RESET_PASSWORD_ROUTE/send-confirmation"
 }

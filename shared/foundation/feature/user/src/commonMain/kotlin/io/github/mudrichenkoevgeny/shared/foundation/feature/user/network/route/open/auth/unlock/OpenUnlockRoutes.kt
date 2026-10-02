@@ -16,12 +16,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.unlock.BaseOpenUnlockRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for self-service account unlocking in the open API.
  */
 object OpenUnlockRoutes {
+    /** Base path for open unlock operations. */
+    private const val BASE_OPEN_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+
+    /** Base path for email unlock operations. */
+    private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_OPEN_UNLOCK_ROUTE/email"
+
+    /** Base path for phone unlock operations. */
+    private const val UNLOCK_BY_PHONE_ROUTE = "$BASE_OPEN_UNLOCK_ROUTE/phone"
 
     /**
      * **HTTP method:** `POST`
@@ -39,7 +47,7 @@ object OpenUnlockRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_UNLOCK_EMAIL_CONFIRMATION = BaseOpenUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION
+    const val SEND_UNLOCK_EMAIL_CONFIRMATION = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -63,7 +71,7 @@ object OpenUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val UNLOCK_BY_EMAIL = BaseOpenUnlockRoutes.UNLOCK_BY_EMAIL
+    const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -81,7 +89,7 @@ object OpenUnlockRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_UNLOCK_PHONE_CONFIRMATION = BaseOpenUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION
+    const val SEND_UNLOCK_PHONE_CONFIRMATION = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -105,7 +113,7 @@ object OpenUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
      */
-    const val UNLOCK_BY_PHONE = BaseOpenUnlockRoutes.UNLOCK_BY_PHONE
+    const val UNLOCK_BY_PHONE = UNLOCK_BY_PHONE_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -129,5 +137,5 @@ object OpenUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_AUTH_PROVIDER] — the identity provider used.
      */
-    const val UNLOCK_BY_EXTERNAL_PROVIDER = BaseOpenUnlockRoutes.UNLOCK_BY_EXTERNAL_PROVIDER
+    const val UNLOCK_BY_EXTERNAL_PROVIDER = "$BASE_OPEN_UNLOCK_ROUTE/external-provider"
 }

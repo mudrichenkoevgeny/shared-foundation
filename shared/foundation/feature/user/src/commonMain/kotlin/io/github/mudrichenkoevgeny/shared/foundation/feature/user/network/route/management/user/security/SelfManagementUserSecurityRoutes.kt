@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totprecoverycodes.TotpRecoveryCodesPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totpsetup.TotpSetupPayload
@@ -13,7 +14,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.security.BaseSelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
@@ -23,6 +23,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * a recently re-authenticated session.
  */
 object SelfManagementUserSecurityRoutes {
+    /** Base path for TOTP-related operations. */
+    private const val BASE_SELF_TOTP_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/self/user/security/totp"
+
+    /** Base path for recovery codes. */
+    private const val BASE_SELF_RECOVERY_CODES_ROUTE = "$BASE_SELF_TOTP_ROUTE/recovery-codes"
 
     /**
      * **HTTP method:** `POST`
@@ -46,7 +51,7 @@ object SelfManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val SETUP_TOTP = BaseSelfManagementUserSecurityRoutes.TOTP_SETUP
+    const val SETUP_TOTP = "$BASE_SELF_TOTP_ROUTE/setup"
 
     /**
      * **HTTP method:** `POST`
@@ -72,7 +77,7 @@ object SelfManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val ENABLE_TOTP = BaseSelfManagementUserSecurityRoutes.TOTP_ENABLE
+    const val ENABLE_TOTP = "$BASE_SELF_TOTP_ROUTE/enable"
 
     /**
      * **HTTP method:** `DELETE`
@@ -98,7 +103,7 @@ object SelfManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val DISABLE_TOTP = BaseSelfManagementUserSecurityRoutes.TOTP_DISABLE
+    const val DISABLE_TOTP = "$BASE_SELF_TOTP_ROUTE/disable"
 
     /**
      * **HTTP method:** `GET`
@@ -126,7 +131,7 @@ object SelfManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val GET_RECOVERY_CODES = BaseSelfManagementUserSecurityRoutes.GET_RECOVERY_CODES
+    const val GET_RECOVERY_CODES = BASE_SELF_RECOVERY_CODES_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -154,5 +159,5 @@ object SelfManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val REGENERATE_RECOVERY_CODES = BaseSelfManagementUserSecurityRoutes.REGENERATE_RECOVERY_CODES
+    const val REGENERATE_RECOVERY_CODES = "$BASE_SELF_RECOVERY_CODES_ROUTE/regenerate"
 }

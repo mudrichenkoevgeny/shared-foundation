@@ -12,12 +12,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.register.RegisterByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.register.BaseOpenRegisterRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for registration in the open API.
  */
 object OpenRegisterRoutes {
+    /** Base path for email registration operations. */
+    private const val REGISTER_BY_EMAIL_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/register/email"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -41,7 +44,7 @@ object OpenRegisterRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val REGISTER_BY_EMAIL = BaseOpenRegisterRoutes.REGISTER_BY_EMAIL
+    const val REGISTER_BY_EMAIL = REGISTER_BY_EMAIL_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -58,5 +61,5 @@ object OpenRegisterRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val SEND_REGISTER_CONFIRMATION_TO_EMAIL = BaseOpenRegisterRoutes.SEND_REGISTER_CONFIRMATION_TO_EMAIL
+    const val SEND_REGISTER_CONFIRMATION_TO_EMAIL = "$REGISTER_BY_EMAIL_ROUTE/confirmation/send-to-email"
 }

@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -13,12 +14,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.resetpassword.BaseSelfManagementResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for password recovery and initial password setup in the management API.
  */
 object SelfManagementResetPasswordRoutes {
+    /** Base path for management password reset operations. */
+    private const val BASE_MANAGEMENT_RESET_PASSWORD_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -43,7 +47,7 @@ object SelfManagementResetPasswordRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val RESET_PASSWORD = BaseSelfManagementResetPasswordRoutes.RESET_PASSWORD
+    const val RESET_PASSWORD = BASE_MANAGEMENT_RESET_PASSWORD_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -63,5 +67,5 @@ object SelfManagementResetPasswordRoutes {
      * **Note:** The server strictly validates that the provided email belongs to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      */
-    const val SEND_RESET_PASSWORD_CONFIRMATION = BaseSelfManagementResetPasswordRoutes.SEND_RESET_PASSWORD_CONFIRMATION
+    const val SEND_RESET_PASSWORD_CONFIRMATION = "$BASE_MANAGEMENT_RESET_PASSWORD_ROUTE/send-confirmation"
 }

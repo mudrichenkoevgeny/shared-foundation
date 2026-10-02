@@ -13,7 +13,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.security.BaseOpenUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 
 /**
@@ -22,6 +21,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * a recently re-authenticated session.
  */
 object OpenUserSecurityRoutes {
+    /** Base path for TOTP-related operations. */
+    private const val BASE_TOTP_ROUTE = "/user/security/totp"
+
+    /** Base path for recovery codes. */
+    private const val BASE_RECOVERY_CODES_ROUTE = "$BASE_TOTP_ROUTE/recovery-codes"
 
     /**
      * **HTTP method:** `POST`
@@ -45,7 +49,7 @@ object OpenUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val SETUP_TOTP = BaseOpenUserSecurityRoutes.TOTP_SETUP
+    const val SETUP_TOTP = "$BASE_TOTP_ROUTE/setup"
 
     /**
      * **HTTP method:** `POST`
@@ -71,7 +75,7 @@ object OpenUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val ENABLE_TOTP = BaseOpenUserSecurityRoutes.TOTP_ENABLE
+    const val ENABLE_TOTP = "$BASE_TOTP_ROUTE/enable"
 
     /**
      * **HTTP method:** `DELETE`
@@ -97,7 +101,7 @@ object OpenUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val DISABLE_TOTP = BaseOpenUserSecurityRoutes.TOTP_DISABLE
+    const val DISABLE_TOTP = "$BASE_TOTP_ROUTE/disable"
 
     /**
      * **HTTP method:** `GET`
@@ -125,7 +129,7 @@ object OpenUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val GET_RECOVERY_CODES = BaseOpenUserSecurityRoutes.GET_RECOVERY_CODES
+    const val GET_RECOVERY_CODES = BASE_RECOVERY_CODES_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -153,5 +157,5 @@ object OpenUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val REGENERATE_RECOVERY_CODES = BaseOpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES
+    const val REGENERATE_RECOVERY_CODES = "$BASE_RECOVERY_CODES_ROUTE/regenerate"
 }

@@ -10,12 +10,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permission.SecurityPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.base.security.settings.BaseSecuritySettingsRoutes
 
 /**
  * Route paths for security settings in the management API.
  */
 object ManagementSecuritySettingsRoutes {
+    /** Base path for management security settings endpoints. */
+    private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/security/settings"
+
     /**
      * **HTTP method:** `GET`
      *
@@ -30,7 +32,7 @@ object ManagementSecuritySettingsRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_MANAGEMENT_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE}"
+    const val GET_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -57,7 +59,7 @@ object ManagementSecuritySettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.BASE_SECURITY_SETTINGS_ROUTE}"
+    const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -84,5 +86,5 @@ object ManagementSecuritySettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val RESET_MANAGEMENT_SECURITY_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSecuritySettingsRoutes.RESET_SECURITY_SETTINGS_ROUTE}"
+    const val RESET_MANAGEMENT_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
 }

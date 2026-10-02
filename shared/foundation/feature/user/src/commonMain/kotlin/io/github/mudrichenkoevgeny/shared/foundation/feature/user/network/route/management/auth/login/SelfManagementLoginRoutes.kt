@@ -12,14 +12,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.login.BaseSelfManagementLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for login in the management API.
  */
 object SelfManagementLoginRoutes {
+    /** Base path for management login operations. */
+    private const val BASE_MANAGEMENT_LOGIN_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -53,7 +57,7 @@ object SelfManagementLoginRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val LOGIN_BY_EMAIL = BaseSelfManagementLoginRoutes.LOGIN_BY_EMAIL
+    const val LOGIN_BY_EMAIL = "$BASE_MANAGEMENT_LOGIN_ROUTE/email"
 
     /**
      * **HTTP method:** `POST`
@@ -82,7 +86,7 @@ object SelfManagementLoginRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGIN_BY_TOTP = BaseSelfManagementLoginRoutes.LOGIN_BY_TOTP
+    const val LOGIN_BY_TOTP = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp"
 
     /**
      * **HTTP method:** `POST`
@@ -111,5 +115,5 @@ object SelfManagementLoginRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = BaseSelfManagementLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE
+    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp-recovery-code"
 }

@@ -1,10 +1,8 @@
 # Gradle
 .gradle/
 build/
-.kotlin/
-
-# Ставим исключение для враппера
 !gradle/wrapper/gradle-wrapper.jar
+.kotlin/
 
 # IntelliJ IDEA
 .idea/

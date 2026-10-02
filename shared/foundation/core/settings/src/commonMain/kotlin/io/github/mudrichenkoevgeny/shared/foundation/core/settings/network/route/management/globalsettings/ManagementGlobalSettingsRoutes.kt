@@ -9,12 +9,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource.SettingsAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.permission.SettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.base.globalsettings.BaseGlobalSettingsRoutes
 
 /**
  * Route paths for global settings in the management API.
  */
 object ManagementGlobalSettingsRoutes {
+    /** Base path for management global settings endpoints. */
+    private const val BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/global-settings"
+
     /**
      * **HTTP method:** `GET`
      *
@@ -29,7 +31,7 @@ object ManagementGlobalSettingsRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+    const val GET_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -56,7 +58,7 @@ object ManagementGlobalSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.BASE_GLOBAL_SETTINGS_ROUTE}"
+    const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -83,5 +85,5 @@ object ManagementGlobalSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseGlobalSettingsRoutes.RESET_GLOBAL_SETTINGS_ROUTE}"
+    const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/reset"
 }

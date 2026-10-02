@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -16,12 +17,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.unlock.BaseSelfManagementUnlockRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for authenticated self-service account unlocking in the management API.
  */
 object SelfManagementUnlockRoutes {
+    /** Base path for management self-unlock operations. */
+    private const val BASE_SELF_MANAGEMENT_UNLOCK_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+
+    /** Base path for email unlock operations. */
+    private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/email"
+
+    /** Base path for phone unlock operations. */
+    private const val UNLOCK_BY_PHONE_ROUTE = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/phone"
 
     /**
      * **HTTP method:** `POST`
@@ -38,7 +47,7 @@ object SelfManagementUnlockRoutes {
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_UNLOCK_EMAIL_CONFIRMATION = BaseSelfManagementUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION
+    const val SEND_UNLOCK_EMAIL_CONFIRMATION = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -61,7 +70,7 @@ object SelfManagementUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val UNLOCK_BY_EMAIL = BaseSelfManagementUnlockRoutes.UNLOCK_BY_EMAIL
+    const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -78,7 +87,7 @@ object SelfManagementUnlockRoutes {
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_UNLOCK_PHONE_CONFIRMATION = BaseSelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION
+    const val SEND_UNLOCK_PHONE_CONFIRMATION = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -101,7 +110,7 @@ object SelfManagementUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
      */
-    const val UNLOCK_BY_PHONE = BaseSelfManagementUnlockRoutes.UNLOCK_BY_PHONE
+    const val UNLOCK_BY_PHONE = UNLOCK_BY_PHONE_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -124,5 +133,5 @@ object SelfManagementUnlockRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_AUTH_PROVIDER] — the identity provider used.
      */
-    const val UNLOCK_BY_EXTERNAL_PROVIDER = BaseSelfManagementUnlockRoutes.UNLOCK_BY_EXTERNAL_PROVIDER
+    const val UNLOCK_BY_EXTERNAL_PROVIDER = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/external-provider"
 }

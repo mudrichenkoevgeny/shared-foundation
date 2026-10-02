@@ -22,12 +22,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseOpenSessionRoutes
 
 /**
  * Route paths for session management in the open API.
  */
 object OpenSessionRoutes {
+    /** Base path for open session management operations. */
+    private const val BASE_SESSION_ROUTE = "/session"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -46,7 +48,7 @@ object OpenSessionRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGOUT = BaseOpenSessionRoutes.LOGOUT
+    const val LOGOUT = "$BASE_SESSION_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -87,7 +89,7 @@ object OpenSessionRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_SESSIONS = BaseOpenSessionRoutes.GET_SESSIONS
+    const val GET_SESSIONS = BASE_SESSION_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -104,7 +106,7 @@ object OpenSessionRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_SESSION = BaseOpenSessionRoutes.GET_SESSION
+    const val GET_SESSION = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -128,7 +130,7 @@ object OpenSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
      */
-    const val DELETE_SESSION = BaseOpenSessionRoutes.DELETE_SESSION
+    const val DELETE_SESSION = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -152,7 +154,7 @@ object OpenSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions are being deleted.
      */
-    const val DELETE_ALL_OTHER_SESSIONS = BaseOpenSessionRoutes.DELETE_ALL_OTHER_SESSIONS
+    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SESSION_ROUTE/delete-others"
 
     /**
      * **HTTP method:** `POST`
@@ -175,5 +177,5 @@ object OpenSessionRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val REAUTHENTICATE_SESSION = BaseOpenSessionRoutes.REAUTHENTICATE_SESSION
+    const val REAUTHENTICATE_SESSION = "$BASE_SESSION_ROUTE/reauthenticate"
 }

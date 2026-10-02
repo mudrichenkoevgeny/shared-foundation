@@ -7,13 +7,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.sta
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.base.BaseAuditRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 
 /** Management API route constants for audit. */
 object ManagementAuditRoutes {
+    /** Base path for management audit events endpoints. */
+    private const val BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/audit/events"
+
     /**
      * **HTTP method:** `GET`
      *
@@ -55,7 +58,7 @@ object ManagementAuditRoutes {
      * - For Admin actors: [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_MASKED]
      * or [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED].
      */
-    const val GET_AUDIT_EVENTS = BaseAuditRoutes.GET_AUDIT_EVENTS
+    const val GET_AUDIT_EVENTS = BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -83,5 +86,5 @@ object ManagementAuditRoutes {
      * - For Admin actors: [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_MASKED]
      * or [AuditPermissionCode.AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED].
      */
-    const val GET_AUDIT_EVENT = BaseAuditRoutes.GET_AUDIT_EVENT
+    const val GET_AUDIT_EVENT = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/{${AuditApiPaths.EVENT_ID}}"
 }

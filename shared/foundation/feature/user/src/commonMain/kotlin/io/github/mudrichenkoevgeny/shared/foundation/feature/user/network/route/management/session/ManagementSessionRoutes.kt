@@ -20,12 +20,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseManagementSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
 /**
  * Route paths for user sessions in the management API (list, single read, revocation).
  */
 object ManagementSessionRoutes {
+    /** Base path for managing user sessions in management API. */
+    private const val BASE_MANAGEMENT_SESSIONS_ROUTE = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/sessions"
     /**
      * **HTTP method:** `GET`
      *
@@ -72,7 +74,7 @@ object ManagementSessionRoutes {
      * For [UserRole.STAFF], needs [SessionPermissionCode.SESSION_GET_OF_STAFF_MASKED]
      * or [SessionPermissionCode.SESSION_GET_OF_STAFF_UNMASKED].
      */
-    const val GET_SESSIONS = BaseManagementSessionRoutes.GET_SESSIONS
+    const val GET_SESSIONS = BASE_MANAGEMENT_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -94,7 +96,7 @@ object ManagementSessionRoutes {
      * For [UserRole.STAFF], needs [SessionPermissionCode.SESSION_GET_OF_STAFF_MASKED]
      * or [SessionPermissionCode.SESSION_GET_OF_STAFF_UNMASKED].
      */
-    const val GET_SESSION = BaseManagementSessionRoutes.GET_SESSION
+    const val GET_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -125,7 +127,7 @@ object ManagementSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
      */
-    const val DELETE_SESSION = BaseManagementSessionRoutes.DELETE_SESSION
+    const val DELETE_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -156,5 +158,5 @@ object ManagementSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions were deleted.
      */
-    const val DELETE_ALL_USER_SESSIONS = BaseManagementSessionRoutes.DELETE_ALL_USER_SESSIONS
+    const val DELETE_ALL_USER_SESSIONS = "$BASE_MANAGEMENT_SESSIONS_ROUTE/delete-all-for-user/{${UserApiPaths.USER_ID}}"
 }

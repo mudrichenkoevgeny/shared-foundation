@@ -13,17 +13,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.login.BaseOpenLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for login in the open API.
  */
 object OpenLoginRoutes {
+    /** Base path for open login operations. */
+    private const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+
+    /** Base path for phone login operations. */
+    private const val BASE_LOGIN_PHONE_ROUTE = "$BASE_LOGIN_ROUTE/phone"
     /**
      * **HTTP method:** `POST`
      *
@@ -53,7 +58,7 @@ object OpenLoginRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
      */
-    const val LOGIN_BY_EMAIL = BaseOpenLoginRoutes.LOGIN_BY_EMAIL
+    const val LOGIN_BY_EMAIL = "$BASE_LOGIN_ROUTE/email"
 
     /**
      * **HTTP method:** `POST`
@@ -84,7 +89,7 @@ object OpenLoginRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
      */
-    const val LOGIN_BY_PHONE = BaseOpenLoginRoutes.LOGIN_BY_PHONE
+    const val LOGIN_BY_PHONE = BASE_LOGIN_PHONE_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -116,7 +121,7 @@ object OpenLoginRoutes {
      * 2. [UserAuditMetadataKey.EXTERNAL_ID] — external subject identifier.
      * 3. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address if provided by the external provider.
      */
-    const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = BaseOpenLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER
+    const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "$BASE_LOGIN_ROUTE/external-auth-provider"
 
     /**
      * **HTTP method:** `POST`
@@ -143,7 +148,7 @@ object OpenLoginRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGIN_BY_TOTP = BaseOpenLoginRoutes.LOGIN_BY_TOTP
+    const val LOGIN_BY_TOTP = "$BASE_LOGIN_ROUTE/totp"
 
     /**
      * **HTTP method:** `POST`
@@ -170,7 +175,7 @@ object OpenLoginRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = BaseOpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE
+    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_LOGIN_ROUTE/totp-recovery-code"
 
     /**
      * **HTTP method:** `POST`
@@ -188,5 +193,5 @@ object OpenLoginRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = BaseOpenLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE
+    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = "$BASE_LOGIN_PHONE_ROUTE/confirmation/send-to-phone"
 }

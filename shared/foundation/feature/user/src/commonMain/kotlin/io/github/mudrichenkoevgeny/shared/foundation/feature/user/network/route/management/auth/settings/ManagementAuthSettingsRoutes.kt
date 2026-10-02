@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
@@ -12,7 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.settings.BaseManagementAuthSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
@@ -22,6 +23,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * read-only auth-settings route (no management prefix, open slice).
  */
 object ManagementAuthSettingsRoutes {
+    /** Base path for management authentication settings operations. */
+    private const val BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
 
     /**
      * **HTTP method:** `GET`
@@ -37,7 +40,7 @@ object ManagementAuthSettingsRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val GET_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -64,7 +67,7 @@ object ManagementAuthSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.MANAGEMENT_AUTH_SETTINGS_PATH
+    const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -91,5 +94,5 @@ object ManagementAuthSettingsRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val RESET_MANAGEMENT_AUTH_SETTINGS = BaseManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS_PATH
+    const val RESET_MANAGEMENT_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
 }

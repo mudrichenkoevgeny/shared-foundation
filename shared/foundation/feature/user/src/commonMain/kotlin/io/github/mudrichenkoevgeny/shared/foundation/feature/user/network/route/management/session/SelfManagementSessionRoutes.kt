@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -22,12 +23,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.session.BaseSelfManagementSessionRoutes
 
 /**
  * Route paths for the current authenticated principal's sessions in the management API (self-service).
  */
 object SelfManagementSessionRoutes {
+    /** Base path for self-service session operations in management API. */
+    private const val BASE_SELF_SESSION_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/self/session"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -46,7 +49,7 @@ object SelfManagementSessionRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val LOGOUT = BaseSelfManagementSessionRoutes.LOGOUT
+    const val LOGOUT = "$BASE_SELF_SESSION_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -87,7 +90,7 @@ object SelfManagementSessionRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_SESSIONS = BaseSelfManagementSessionRoutes.GET_SESSIONS
+    const val GET_SESSIONS = BASE_SELF_SESSION_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -104,7 +107,7 @@ object SelfManagementSessionRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_SESSION = BaseSelfManagementSessionRoutes.GET_SESSION
+    const val GET_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -128,7 +131,7 @@ object SelfManagementSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
      */
-    const val DELETE_SESSION = BaseSelfManagementSessionRoutes.DELETE_SESSION
+    const val DELETE_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -152,7 +155,7 @@ object SelfManagementSessionRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the account whose sessions are being deleted.
      */
-    const val DELETE_ALL_OTHER_SESSIONS = BaseSelfManagementSessionRoutes.DELETE_ALL_OTHER_SESSIONS
+    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SELF_SESSION_ROUTE/delete-others"
 
     /**
      * **HTTP method:** `POST`
@@ -175,5 +178,5 @@ object SelfManagementSessionRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val REAUTHENTICATE_SESSION = BaseSelfManagementSessionRoutes.REAUTHENTICATE_SESSION
+    const val REAUTHENTICATE_SESSION = "$BASE_SELF_SESSION_ROUTE/reauthenticate"
 }

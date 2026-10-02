@@ -1,7 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.OpenUserConfigurationPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.configuration.BaseOpenUserConfigurationRoutes
 
 /**
  * Route paths for user configuration in the open API.
@@ -20,5 +19,5 @@ object OpenUserConfigurationRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val GET_CONFIGURATION = BaseOpenUserConfigurationRoutes.BASE_USER_CONFIGURATION_ROUTE
+    const val GET_CONFIGURATION = "user-configuration"
 }

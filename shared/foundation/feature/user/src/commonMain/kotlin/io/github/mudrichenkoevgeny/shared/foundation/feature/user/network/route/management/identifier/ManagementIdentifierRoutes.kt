@@ -19,13 +19,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseManagementIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for user identifiers in the management API (list, single read, delete).
  */
 object ManagementIdentifierRoutes {
+    /** Base path for managing user identifiers in management API. */
+    private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/identifiers"
+
     /**
      * **HTTP method:** `GET`
      *
@@ -59,7 +62,7 @@ object ManagementIdentifierRoutes {
      * For [UserRole.STAFF], needs [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED] or
      * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED].
      */
-    const val GET_IDENTIFIERS = BaseManagementIdentifierRoutes.GET_IDENTIFIERS
+    const val GET_IDENTIFIERS = BASE_MANAGEMENT_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -81,7 +84,7 @@ object ManagementIdentifierRoutes {
      * For [UserRole.STAFF], needs [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED] or
      * [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED].
      */
-    const val GET_IDENTIFIER = BaseManagementIdentifierRoutes.GET_IDENTIFIER
+    const val GET_IDENTIFIER = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -114,7 +117,7 @@ object ManagementIdentifierRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
      */
-    const val DELETE_IDENTIFIER = BaseManagementIdentifierRoutes.DELETE_IDENTIFIER
+    const val DELETE_IDENTIFIER = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -145,5 +148,5 @@ object ManagementIdentifierRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
      */
-    const val DELETE_IDENTIFIER_PASSWORD = BaseManagementIdentifierRoutes.DELETE_IDENTIFIER_PASSWORD
+    const val DELETE_IDENTIFIER_PASSWORD = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/password"
 }

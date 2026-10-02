@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.RefreshTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.SessionTokenPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.refreshtoken.BaseOpenRefreshTokenRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for refresh-token operations in the authentication API.
@@ -26,5 +26,5 @@ object OpenRefreshTokenRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val REFRESH_TOKEN = BaseOpenRefreshTokenRoutes.BASE_REFRESH_TOKEN_ROUTE
+    const val REFRESH_TOKEN = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/refresh"
 }

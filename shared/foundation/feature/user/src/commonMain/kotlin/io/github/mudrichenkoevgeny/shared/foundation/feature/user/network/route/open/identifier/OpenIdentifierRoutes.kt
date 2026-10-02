@@ -26,13 +26,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers.AddUserIdentifierEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers.AddUserIdentifierExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers.AddUserIdentifierPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseOpenIdentifiersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 
 /**
  * Route paths for managing user authentication identifiers in the open API.
  */
 object OpenIdentifierRoutes {
+    /** Base path for managing authentication identifiers linked to the current account. */
+    private const val BASE_IDENTIFIER_ROUTE = "/identifier"
+
+    /** Base path for email identifier operations. */
+    private const val ADD_EMAIL_IDENTIFIER_ROUTE = "$BASE_IDENTIFIER_ROUTE/email"
+
+    /** Base path for identifier verification (confirmation codes). */
+    private const val BASE_IDENTIFIER_CONFIRMATION_ROUTE = "$BASE_IDENTIFIER_ROUTE/confirmation"
 
     /**
      * **HTTP method:** `GET`
@@ -50,7 +57,7 @@ object OpenIdentifierRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_IDENTIFIER = BaseOpenIdentifiersRoutes.GET_IDENTIFIER
+    const val GET_IDENTIFIER = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `GET`
@@ -79,7 +86,7 @@ object OpenIdentifierRoutes {
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
      * - **Required Permissions:** None.
      */
-    const val GET_IDENTIFIERS = BaseOpenIdentifiersRoutes.GET_IDENTIFIERS
+    const val GET_IDENTIFIERS = BASE_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `DELETE`
@@ -107,7 +114,7 @@ object OpenIdentifierRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      */
-    const val DELETE_IDENTIFIER = BaseOpenIdentifiersRoutes.DELETE_IDENTIFIER
+    const val DELETE_IDENTIFIER = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -138,7 +145,7 @@ object OpenIdentifierRoutes {
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      * 3. [UserAuditMetadataKey.EMAIL_ADDRESS] — the email address being linked.
      */
-    const val ADD_IDENTIFIER_EMAIL = BaseOpenIdentifiersRoutes.ADD_IDENTIFIER_EMAIL
+    const val ADD_IDENTIFIER_EMAIL = ADD_EMAIL_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -169,7 +176,7 @@ object OpenIdentifierRoutes {
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      * 3. [UserAuditMetadataKey.PHONE_NUMBER] — the phone number being linked.
      */
-    const val ADD_IDENTIFIER_PHONE = BaseOpenIdentifiersRoutes.ADD_IDENTIFIER_PHONE
+    const val ADD_IDENTIFIER_PHONE = "$BASE_IDENTIFIER_ROUTE/phone"
 
     /**
      * **HTTP method:** `POST`
@@ -200,7 +207,7 @@ object OpenIdentifierRoutes {
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      * 3. [UserAuditMetadataKey.EXTERNAL_ID] — the subject identifier from the external provider.
      */
-    const val ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER = BaseOpenIdentifiersRoutes.ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER
+    const val ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER = "$BASE_IDENTIFIER_ROUTE/external-auth-provider"
 
     /**
      * **HTTP method:** `POST`
@@ -218,7 +225,7 @@ object OpenIdentifierRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION = BaseOpenIdentifiersRoutes.SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION
+    const val SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION = "$BASE_IDENTIFIER_CONFIRMATION_ROUTE/send-to-email"
 
     /**
      * **HTTP method:** `POST`
@@ -236,7 +243,7 @@ object OpenIdentifierRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION = BaseOpenIdentifiersRoutes.SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION
+    const val SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION = "$BASE_IDENTIFIER_CONFIRMATION_ROUTE/send-to-phone"
 
     /**
      * **HTTP method:** `POST`
@@ -264,5 +271,5 @@ object OpenIdentifierRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = BaseOpenIdentifiersRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD
+    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = "$ADD_EMAIL_IDENTIFIER_ROUTE/password"
 }

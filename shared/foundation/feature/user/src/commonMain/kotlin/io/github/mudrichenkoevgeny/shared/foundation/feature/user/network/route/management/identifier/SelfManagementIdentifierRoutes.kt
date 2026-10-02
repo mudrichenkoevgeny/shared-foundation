@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -20,13 +21,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.identifier.BaseSelfManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for managing the current authenticated principal's identifiers in the management API (self-service).
  */
 object SelfManagementIdentifierRoutes {
+    /** Base path for self-service identifier operations in management API. */
+    private const val BASE_SELF_IDENTIFIER_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/self/identifier"
 
     /**
      * **HTTP method:** `GET`
@@ -44,7 +46,7 @@ object SelfManagementIdentifierRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_IDENTIFIER = BaseSelfManagementIdentifierRoutes.GET_IDENTIFIER
+    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `GET`
@@ -73,7 +75,7 @@ object SelfManagementIdentifierRoutes {
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
      * - **Required Permissions:** None.
      */
-    const val GET_IDENTIFIERS = BaseSelfManagementIdentifierRoutes.GET_IDENTIFIERS
+    const val GET_IDENTIFIERS = BASE_SELF_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -101,5 +103,5 @@ object SelfManagementIdentifierRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.SESSION_ID] — the unique identifier of the authenticated session.
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = BaseSelfManagementIdentifierRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD
+    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = "$BASE_SELF_IDENTIFIER_ROUTE/email/password"
 }

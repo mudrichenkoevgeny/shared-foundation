@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.settings
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.OpenAuthSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.settings.BaseOpenAuthSettingsRoutes.BASE_OPEN_AUTH_SETTINGS_ROUTE
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
 
 /**
  * Route paths for authentication settings in the open API.
@@ -20,5 +20,5 @@ object OpenAuthSettingsRoutes {
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
      */
-    const val GET_OPEN_AUTH_SETTINGS = BASE_OPEN_AUTH_SETTINGS_ROUTE
+    const val GET_OPEN_AUTH_SETTINGS = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
 }

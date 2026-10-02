@@ -12,7 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.security.BaseManagementUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
 /**
@@ -48,5 +48,5 @@ object ManagementUserSecurityRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val DISABLE_TOTP = BaseManagementUserSecurityRoutes.DISABLE_TOTP
+    const val DISABLE_TOTP = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/security/totp/disable"
 }

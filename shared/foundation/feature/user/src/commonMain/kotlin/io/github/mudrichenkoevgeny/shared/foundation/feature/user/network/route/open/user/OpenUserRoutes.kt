@@ -11,13 +11,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseOpenUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 
 /**
  * Route paths for the authenticated user's account in the open API.
  */
 object OpenUserRoutes {
+    /** Base path for open self-service user account operations. */
+    private const val BASE_USER_ROUTE = "/user"
+
     /**
      * **HTTP method:** `GET`
      *
@@ -31,7 +33,7 @@ object OpenUserRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      */
-    const val GET_USER = BaseOpenUserRoutes.GET_USER
+    const val GET_USER = BASE_USER_ROUTE
 
     /**
      * **HTTP method:** `DELETE`
@@ -58,7 +60,7 @@ object OpenUserRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val SCHEDULE_DELETION = BaseOpenUserRoutes.SCHEDULE_DELETION
+    const val SCHEDULE_DELETION = "$BASE_USER_ROUTE/schedule-deletion"
 
     /**
      * **HTTP method:** `POST`
@@ -84,5 +86,5 @@ object OpenUserRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val RESTORE_USER = BaseOpenUserRoutes.RESTORE_USER
+    const val RESTORE_USER = "$BASE_USER_ROUTE/restore"
 }

@@ -58,7 +58,7 @@ object ManagementUserRoutes {
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — the email used for creation.
      */
-    const val CREATE_USER = BaseManagementUserRoutes.CREATE_USER
+    const val CREATE_USER = BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -90,7 +90,7 @@ object ManagementUserRoutes {
      * - **Required Permissions:** [UserPermissionCode.USER_GET_OF_USER] for [UserRole.USER] targets;
      * [UserPermissionCode.USER_GET_OF_STAFF] for [UserRole.STAFF] targets (**AND** semantics).
      */
-    const val GET_USERS = BaseManagementUserRoutes.GET_USERS
+    const val GET_USERS = BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -109,7 +109,7 @@ object ManagementUserRoutes {
      * - **Required Permissions:** [UserPermissionCode.USER_GET_OF_USER] for [UserRole.USER] targets;
      * [UserPermissionCode.USER_GET_OF_STAFF] for [UserRole.STAFF] targets (**AND** semantics).
      */
-    const val GET_USER = BaseManagementUserRoutes.GET_USER
+    const val GET_USER = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}"
 
     /**
      * **HTTP method:** `PATCH`
@@ -153,7 +153,7 @@ object ManagementUserRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val UPDATE_USER = BaseManagementUserRoutes.UPDATE_USER
+    const val UPDATE_USER = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -183,5 +183,5 @@ object ManagementUserRoutes {
      * * **Metadata:** Include:
      * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
      */
-    const val DELETE_USER = BaseManagementUserRoutes.DELETE_USER
+    const val DELETE_USER = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}"
 }
