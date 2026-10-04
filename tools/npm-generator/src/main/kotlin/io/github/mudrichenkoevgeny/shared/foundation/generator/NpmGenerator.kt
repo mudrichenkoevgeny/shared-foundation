@@ -2,16 +2,26 @@ package io.github.mudrichenkoevgeny.shared.foundation.generator
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource.CommonAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventMetadataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management.ManagementAuditRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -25,16 +35,28 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketCloseReasons
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketEventTypes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.SocketFrame
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action.SecurityAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.metadata.SecurityAuditMetadataDeniedReasonValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.DecryptedString
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.EncryptedString
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.iprestriction.IpRestrictionPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.otpconfirmation.OtpConfirmation
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash.PasswordHash
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.OpenPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyFailReason
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings.ManagementSecuritySettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings.OpenSecuritySettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.totprecoverycodes.TotpRecoveryCodes
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.totpsetup.TotpSetup
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.verifytotp.VerifyTotp
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permission.SecurityPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
@@ -54,6 +76,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.open.security.settings.OpenSecuritySettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.action.SettingsAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource.SettingsAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.OpenGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.permission.SettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.contract.GlobalSettingsApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.contract.SettingsWebSocketEventTypes
@@ -62,21 +86,35 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.management.globalsettings.ManagementGlobalSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.open.globalsettings.OpenGlobalSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataDeniedReasonValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.authoritylevel.UserRoleDefaultAuthorityLevel
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.data.AuthData
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.AvailableAuthProviders
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.OpenAuthSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.ExternalAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.ManagementUserConfiguration
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.OpenUserConfiguration
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.emailrestriction.EmailRestrictionPolicy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifier
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPublic
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifier
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.data.AuthData
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.DeletedSessions
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSession
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.AccessToken
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshToken
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshTokenHash
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPublic
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.AuthSettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
@@ -84,6 +122,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permiss
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserAuthSpec
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserWebSocketCloseReasons
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserWebSocketEventTypes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.AvailableAuthProvidersPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
@@ -116,9 +159,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers.AddUserIdentifierPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.UpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.SelfManagementLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.refreshtoken.SelfManagementRefreshTokenRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.unlock.SelfManagementUnlockRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.configuration.ManagementUserConfigurationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.ManagementSessionRoutes
@@ -128,9 +173,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.ManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.refreshtoken.OpenRefreshTokenRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.settings.OpenAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration.OpenUserConfigurationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
@@ -210,6 +258,7 @@ fun main() {
         - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `CommonErrorCodes`) and permission strings (`SecurityPermissionCode`, `UserPermissionCode`).
         - **Branded Types & Helpers**: Type-safe domain identifiers (`UserId`, `PermissionCode`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`) with converter helpers (`toUserIdOrThrow`, `toPermissionCodeOrNull`).
         - **Domain Models & Mappers**: Fully typed TS domain models (`UserSession`, `UserDetails`, `ClientDeviceInfo`) and their runtime mappers from/to API payloads (`toUserSession`, `toUserSessionPayload`).
+        - **Composite Parsers**: Helper classes for runtime parsing of polymorphic values (`CompositeAuditActionTypeParser`, `CompositeAuditMetadataKeyParser`, `CompositeAuditResourceTypeParser`).
 
         ## Quick Usage Example
 
@@ -255,6 +304,7 @@ fun main() {
         File(outputDir, "README.md").writeText(npmReadme)
 
         val brandedCode = generateBrandedTypes()
+        val compositeParsersJsCode = generateCompositeParsersJs()
         val routeCode = generateRouteObjects()
         val contractCode = generateContractObjects()
         val errorCodeCode = generateErrorCodeObjects()
@@ -267,6 +317,8 @@ fun main() {
         import { z } from 'zod';
 
         $brandedCode
+
+        $compositeParsersJsCode
 
         $routeCode
 
@@ -314,7 +366,13 @@ private fun generateBrandedTypes(): String {
         "UserIdentifierId",
         "UserSessionId",
         "AuditEventId",
-        "ClientDeviceId"
+        "ClientDeviceId",
+        "DecryptedString",
+        "EncryptedString",
+        "PasswordHash",
+        "AccessToken",
+        "RefreshToken",
+        "RefreshTokenHash"
     )
 
     return types.joinToString("\n\n") { name ->
@@ -345,6 +403,99 @@ private fun generateBrandedTypes(): String {
         });
         """.trimIndent()
     }
+}
+
+private fun generateCompositeParsersJs(): String {
+    return """
+    export class CompositeAuditActionTypeParser {
+      constructor(auditActionTypes) {
+        this.auditActionTypes = auditActionTypes;
+      }
+
+      fromValueOrThrow(value) {
+        for (const parse of this.auditActionTypes) {
+          const result = typeof parse === 'function'
+            ? parse(value)
+            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
+          if (result !== null && result !== undefined) {
+            return result;
+          }
+        }
+        throw new Error("Unknown value of AuditActionType: '" + value + "'");
+      }
+    }
+
+    export class CompositeAuditMetadataKeyParser {
+      constructor(metadataKeys) {
+        this.metadataKeys = metadataKeys;
+      }
+
+      fromValueOrThrow(value) {
+        for (const parse of this.metadataKeys) {
+          const result = typeof parse === 'function'
+            ? parse(value)
+            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
+          if (result !== null && result !== undefined) {
+            return result;
+          }
+        }
+        throw new Error("Unknown value of AuditMetadataKey: '" + value + "'");
+      }
+    }
+
+    export class CompositeAuditResourceTypeParser {
+      constructor(auditResourceTypes) {
+        this.auditResourceTypes = auditResourceTypes;
+      }
+
+      fromValueOrThrow(value) {
+        for (const parse of this.auditResourceTypes) {
+          const result = typeof parse === 'function'
+            ? parse(value)
+            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
+          if (result !== null && result !== undefined) {
+            return result;
+          }
+        }
+        throw new Error("Unknown value of AuditResourceType: '" + value + "'");
+      }
+    }
+    """.trimIndent()
+}
+
+private fun generateCompositeParsersDts(): String {
+    return """
+    export type AuditActionType = SecurityAuditActionType | SettingsAuditActionType | UserAuditActionType | string;
+    export type AuditMetadataKey = CommonAuditMetadataKey | UserAuditMetadataKey | string;
+    export type AuditResourceType = CommonAuditResourceType | SecurityAuditResourceType | SettingsAuditResourceType | UserAuditResourceType | string;
+
+    export interface AuditActionTypeParser {
+      parseOrNull(value: string): AuditActionType | null;
+    }
+
+    export interface AuditMetadataKeyParser {
+      parseOrNull(value: string): AuditMetadataKey | null;
+    }
+
+    export interface AuditResourceTypeParser {
+      parseOrNull(value: string): AuditResourceType | null;
+    }
+
+    export declare class CompositeAuditActionTypeParser {
+      constructor(auditActionTypes: Array<((value: string) => AuditActionType | null) | AuditActionTypeParser>);
+      fromValueOrThrow(value: string): AuditActionType;
+    }
+
+    export declare class CompositeAuditMetadataKeyParser {
+      constructor(metadataKeys: Array<((value: string) => AuditMetadataKey | null) | AuditMetadataKeyParser>);
+      fromValueOrThrow(value: string): AuditMetadataKey;
+    }
+
+    export declare class CompositeAuditResourceTypeParser {
+      constructor(auditResourceTypes: Array<((value: string) => AuditResourceType | null) | AuditResourceTypeParser>);
+      fromValueOrThrow(value: string): AuditResourceType;
+    }
+    """.trimIndent()
 }
 
 private fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, String>> {
@@ -384,6 +535,8 @@ private val routeClasses = listOf(
     OpenGlobalSettingsRoutes::class,
     OpenLoginRoutes::class,
     SelfManagementLoginRoutes::class,
+    OpenRefreshTokenRoutes::class,
+    SelfManagementRefreshTokenRoutes::class,
     OpenRegisterRoutes::class,
     OpenResetPasswordRoutes::class,
     SelfManagementResetPasswordRoutes::class,
@@ -401,7 +554,10 @@ private val routeClasses = listOf(
     OpenUserRoutes::class,
     SelfManagementUserRoutes::class,
     ManagementUserRoutes::class,
-    ManagementAuthSettingsRoutes::class
+    ManagementAuthSettingsRoutes::class,
+    OpenAuthSettingsRoutes::class,
+    OpenUserConfigurationRoutes::class,
+    ManagementUserConfigurationRoutes::class
 )
 
 private val contractClasses = listOf(
@@ -414,7 +570,16 @@ private val contractClasses = listOf(
     CommonWebSocketCloseReasons::class,
     CommonWebSocketEventTypes::class,
     SecurityWebSocketEventTypes::class,
-    SettingsWebSocketEventTypes::class
+    SettingsWebSocketEventTypes::class,
+    UserWebSocketCloseReasons::class,
+    UserWebSocketEventTypes::class,
+    UserApiPaths::class,
+    UserApiQueryParams::class,
+    UserAuthSpec::class,
+    AuditApiPaths::class,
+    UserRoleDefaultAuthorityLevel::class,
+    SecurityAuditMetadataDeniedReasonValues::class,
+    UserAuditMetadataDeniedReasonValues::class
 )
 
 private val errorClasses = listOf(
@@ -451,6 +616,8 @@ private val enumClasses = listOf(
     SecurityAuditActionType::class,
     SettingsAuditActionType::class,
     UserAuditActionType::class,
+    CommonAuditMetadataKey::class,
+    UserAuditMetadataKey::class,
     UserAccountStatus::class,
     UserRole::class,
     UserAuthProvider::class,
@@ -639,6 +806,52 @@ private fun generateContractObjects(): String {
         SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}"
       }
     };
+
+    export const AuditFilterValues = {
+      AuditEventFilterValues: {
+        ACTOR_ID: "${AuditFilterValues.AuditEventFilterValues.ACTOR_ID}",
+        ACTOR_TYPE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE}",
+        ACTOR_USER_ROLE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE}",
+        ACTION: "${AuditFilterValues.AuditEventFilterValues.ACTION}",
+        RESOURCE: "${AuditFilterValues.AuditEventFilterValues.RESOURCE}",
+        RESOURCE_ID: "${AuditFilterValues.AuditEventFilterValues.RESOURCE_ID}",
+        STATUS: "${AuditFilterValues.AuditEventFilterValues.STATUS}",
+        MESSAGE: "${AuditFilterValues.AuditEventFilterValues.MESSAGE}"
+      }
+    };
+
+    export const UserFilterValues = {
+      UserFilterValues: {
+        ROLE: "${UserFilterValues.UserFilterValues.ROLE}",
+        ACCOUNT_STATUS: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS}",
+        ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}",
+        ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE}",
+        AUTHORITY_LEVEL_FROM: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM}",
+        AUTHORITY_LEVEL_TO: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO}",
+        IS_TOTP_ENABLED: "${UserFilterValues.UserFilterValues.IS_TOTP_ENABLED}",
+        PERMISSION_CODES: "${UserFilterValues.UserFilterValues.PERMISSION_CODES}"
+      },
+      UserIdentifierFilterValues: {
+        USER_ID: "${UserFilterValues.UserIdentifierFilterValues.USER_ID}",
+        USER_AUTH_PROVIDER: "${UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER}",
+        IDENTIFIER: "${UserFilterValues.UserIdentifierFilterValues.IDENTIFIER}"
+      },
+      UserSessionFilterValues: {
+        USER_ID: "${UserFilterValues.UserSessionFilterValues.USER_ID}",
+        USER_ROLE: "${UserFilterValues.UserSessionFilterValues.USER_ROLE}",
+        IDENTIFIER_ID: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID}",
+        USER_AUTH_PROVIDER: "${UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER}",
+        CLIENT_TYPE: "${UserFilterValues.UserSessionFilterValues.CLIENT_TYPE}",
+        USER_AGENT: "${UserFilterValues.UserSessionFilterValues.USER_AGENT}",
+        IP_ADDRESS: "${UserFilterValues.UserSessionFilterValues.IP_ADDRESS}",
+        LANGUAGE: "${UserFilterValues.UserSessionFilterValues.LANGUAGE}",
+        DEVICE_ID: "${UserFilterValues.UserSessionFilterValues.DEVICE_ID}",
+        DEVICE_NAME: "${UserFilterValues.UserSessionFilterValues.DEVICE_NAME}",
+        APP_VERSION: "${UserFilterValues.UserSessionFilterValues.APP_VERSION}",
+        OPERATION_SYSTEM_VERSION: "${UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION}",
+        IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}"
+      }
+    };
     """.trimIndent()
 
     return "$standardContracts\n\n$listingParamNamesCode"
@@ -786,6 +999,8 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == AuditActorType::class -> "auditActorTypeSchema"
         classifier == AuditValueSensitivity::class -> "auditValueSensitivitySchema"
         classifier == AuditStatus::class -> "auditStatusSchema"
+        classifier == CommonAuditMetadataKey::class -> "commonAuditMetadataKeySchema"
+        classifier == UserAuditMetadataKey::class -> "userAuditMetadataKeySchema"
         classifier == ClientType::class -> "clientTypeSchema"
         classifier == SortOrder::class -> "sortOrderSchema"
         classifier == PasswordPolicyFailReason::class -> "passwordPolicyFailReasonSchema"
@@ -804,7 +1019,7 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         paramName == "actorType" -> "auditActorTypeSchema"
         paramName == "status" && parentClass == AuditEventPayload::class -> "auditStatusSchema"
         paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "userAuthProviderSchema"
-        paramName == "sensitivity" -> "auditValueSensitivitySchema"
+        paramName == "sensitivity" || paramName == "valueSensitivity" -> "auditValueSensitivitySchema"
         paramName == "permissionCodes" -> "z.array(permissionCodeSchema)"
 
         classifier == String::class -> {
@@ -831,12 +1046,13 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == UserSessionId::class -> "userSessionIdSchema"
         classifier == AuditEventId::class -> "auditEventIdSchema"
         classifier == ClientDeviceId::class -> "clientDeviceIdSchema"
-        classifier == List::class -> {
-            val elementType = type.arguments.firstOrNull()?.type
-            val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
-            "z.array($elementZod)"
-        }
-        classifier == Set::class -> {
+        classifier == DecryptedString::class -> "decryptedStringSchema"
+        classifier == EncryptedString::class -> "encryptedStringSchema"
+        classifier == PasswordHash::class -> "passwordHashSchema"
+        classifier == AccessToken::class -> "accessTokenSchema"
+        classifier == RefreshToken::class -> "refreshTokenSchema"
+        classifier == RefreshTokenHash::class -> "refreshTokenHashSchema"
+        classifier == List::class || classifier == Set::class -> {
             val elementType = type.arguments.firstOrNull()?.type
             val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
             "z.array($elementZod)"
@@ -867,6 +1083,8 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == AuditActorType::class -> "AuditActorType"
         classifier == AuditValueSensitivity::class -> "AuditValueSensitivity"
         classifier == AuditStatus::class -> "AuditStatus"
+        classifier == CommonAuditMetadataKey::class -> "CommonAuditMetadataKey"
+        classifier == UserAuditMetadataKey::class -> "UserAuditMetadataKey"
         classifier == ClientType::class -> "ClientType"
         classifier == SortOrder::class -> "SortOrder"
         classifier == PasswordPolicyFailReason::class -> "PasswordPolicyFailReason"
@@ -876,6 +1094,7 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == AuditSortValues.AuditEventSortBy::class -> "AuditEventSortBy"
         classifier == CommonSortValues.TimestampSortBy::class -> "TimestampSortBy"
         classifier == JsonElement::class -> "unknown"
+        classifier.simpleName == "Instant" -> "Instant"
 
         paramName == "clientType" -> "ClientType"
         paramName == "deviceId" || paramName == "clientDeviceId" -> "ClientDeviceId"
@@ -885,7 +1104,7 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         paramName == "actorType" -> "AuditActorType"
         paramName == "status" && parentClass == AuditEventPayload::class -> "AuditStatus"
         paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "UserAuthProvider"
-        paramName == "sensitivity" -> "AuditValueSensitivity"
+        paramName == "sensitivity" || paramName == "valueSensitivity" -> "AuditValueSensitivity"
         paramName == "permissionCodes" -> "PermissionCode[]"
 
         classifier == String::class -> {
@@ -912,6 +1131,12 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == UserSessionId::class -> "UserSessionId"
         classifier == AuditEventId::class -> "AuditEventId"
         classifier == ClientDeviceId::class -> "ClientDeviceId"
+        classifier == DecryptedString::class -> "DecryptedString"
+        classifier == EncryptedString::class -> "EncryptedString"
+        classifier == PasswordHash::class -> "PasswordHash"
+        classifier == AccessToken::class -> "AccessToken"
+        classifier == RefreshToken::class -> "RefreshToken"
+        classifier == RefreshTokenHash::class -> "RefreshTokenHash"
         classifier == List::class || classifier == Set::class -> {
             val elementType = type.arguments.firstOrNull()?.type
             val elementTs = if (elementType != null) resolveTsType(paramName, elementType, parentClass) else "unknown"
@@ -968,6 +1193,52 @@ private fun generateDeclarationFile(): String {
         readonly SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}";
       };
     };
+
+    export declare const AuditFilterValues: {
+      readonly AuditEventFilterValues: {
+        readonly ACTOR_ID: "${AuditFilterValues.AuditEventFilterValues.ACTOR_ID}";
+        readonly ACTOR_TYPE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE}";
+        readonly ACTOR_USER_ROLE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE}";
+        readonly ACTION: "${AuditFilterValues.AuditEventFilterValues.ACTION}";
+        readonly RESOURCE: "${AuditFilterValues.AuditEventFilterValues.RESOURCE}";
+        readonly RESOURCE_ID: "${AuditFilterValues.AuditEventFilterValues.RESOURCE_ID}";
+        readonly STATUS: "${AuditFilterValues.AuditEventFilterValues.STATUS}";
+        readonly MESSAGE: "${AuditFilterValues.AuditEventFilterValues.MESSAGE}";
+      };
+    };
+
+    export declare const UserFilterValues: {
+      readonly UserFilterValues: {
+        readonly ROLE: "${UserFilterValues.UserFilterValues.ROLE}";
+        readonly ACCOUNT_STATUS: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS}";
+        readonly ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}";
+        readonly ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE}";
+        readonly AUTHORITY_LEVEL_FROM: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM}";
+        readonly AUTHORITY_LEVEL_TO: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO}";
+        readonly IS_TOTP_ENABLED: "${UserFilterValues.UserFilterValues.IS_TOTP_ENABLED}";
+        readonly PERMISSION_CODES: "${UserFilterValues.UserFilterValues.PERMISSION_CODES}";
+      };
+      readonly UserIdentifierFilterValues: {
+        readonly USER_ID: "${UserFilterValues.UserIdentifierFilterValues.USER_ID}";
+        readonly USER_AUTH_PROVIDER: "${UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER}";
+        readonly IDENTIFIER: "${UserFilterValues.UserIdentifierFilterValues.IDENTIFIER}";
+      };
+      readonly UserSessionFilterValues: {
+        readonly USER_ID: "${UserFilterValues.UserSessionFilterValues.USER_ID}";
+        readonly USER_ROLE: "${UserFilterValues.UserSessionFilterValues.USER_ROLE}";
+        readonly IDENTIFIER_ID: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID}";
+        readonly USER_AUTH_PROVIDER: "${UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER}";
+        readonly CLIENT_TYPE: "${UserFilterValues.UserSessionFilterValues.CLIENT_TYPE}";
+        readonly USER_AGENT: "${UserFilterValues.UserSessionFilterValues.USER_AGENT}";
+        readonly IP_ADDRESS: "${UserFilterValues.UserSessionFilterValues.IP_ADDRESS}";
+        readonly LANGUAGE: "${UserFilterValues.UserSessionFilterValues.LANGUAGE}";
+        readonly DEVICE_ID: "${UserFilterValues.UserSessionFilterValues.DEVICE_ID}";
+        readonly DEVICE_NAME: "${UserFilterValues.UserSessionFilterValues.DEVICE_NAME}";
+        readonly APP_VERSION: "${UserFilterValues.UserSessionFilterValues.APP_VERSION}";
+        readonly OPERATION_SYSTEM_VERSION: "${UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION}";
+        readonly IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}";
+      };
+    };
     """.trimIndent()
 
     val errorDeclarations = errorClasses.joinToString("\n\n") { kClass ->
@@ -1013,6 +1284,8 @@ private fun generateDeclarationFile(): String {
     export const confirmationKeySchema: z.ZodType<ConfirmationKey>;
 
     ${generateDomainModelsAndMappersDts()}
+
+    ${generateCompositeParsersDts()}
 
     export type UserSortValues = 'created_at' | 'updated_at' | 'last_accessed_at' | 'last_reauthenticated_at' | 'expires_at';
 
@@ -1075,6 +1348,8 @@ private fun generateDeclarationFile(): String {
     return """
     import { z } from 'zod';
 
+    export type Instant = number;
+
     export type PermissionCode = string & { readonly __brand: 'PermissionCode' };
     export function toPermissionCodeOrNull(value: string | null | undefined): PermissionCode | null;
     export function toPermissionCodeOrThrow(value: string): PermissionCode;
@@ -1104,6 +1379,36 @@ private fun generateDeclarationFile(): String {
     export function toClientDeviceIdOrNull(value: string | null | undefined): ClientDeviceId | null;
     export function toClientDeviceIdOrThrow(value: string): ClientDeviceId;
     export const clientDeviceIdSchema: z.ZodType<ClientDeviceId>;
+
+    export type DecryptedString = string & { readonly __brand: 'DecryptedString' };
+    export function toDecryptedStringOrNull(value: string | null | undefined): DecryptedString | null;
+    export function toDecryptedStringOrThrow(value: string): DecryptedString;
+    export const decryptedStringSchema: z.ZodType<DecryptedString>;
+
+    export type EncryptedString = string & { readonly __brand: 'EncryptedString' };
+    export function toEncryptedStringOrNull(value: string | null | undefined): EncryptedString | null;
+    export function toEncryptedStringOrThrow(value: string): EncryptedString;
+    export const encryptedStringSchema: z.ZodType<EncryptedString>;
+
+    export type PasswordHash = string & { readonly __brand: 'PasswordHash' };
+    export function toPasswordHashOrNull(value: string | null | undefined): PasswordHash | null;
+    export function toPasswordHashOrThrow(value: string): PasswordHash;
+    export const passwordHashSchema: z.ZodType<PasswordHash>;
+
+    export type AccessToken = string & { readonly __brand: 'AccessToken' };
+    export function toAccessTokenOrNull(value: string | null | undefined): AccessToken | null;
+    export function toAccessTokenOrThrow(value: string): AccessToken;
+    export const accessTokenSchema: z.ZodType<AccessToken>;
+
+    export type RefreshToken = string & { readonly __brand: 'RefreshToken' };
+    export function toRefreshTokenOrNull(value: string | null | undefined): RefreshToken | null;
+    export function toRefreshTokenOrThrow(value: string): RefreshToken;
+    export const refreshTokenSchema: z.ZodType<RefreshToken>;
+
+    export type RefreshTokenHash = string & { readonly __brand: 'RefreshTokenHash' };
+    export function toRefreshTokenHashOrNull(value: string | null | undefined): RefreshTokenHash | null;
+    export function toRefreshTokenHashOrThrow(value: string): RefreshTokenHash;
+    export const refreshTokenHashSchema: z.ZodType<RefreshTokenHash>;
 
     $routeDeclarations
 
@@ -1142,12 +1447,33 @@ private fun generateDeclarationFile(): String {
 private val domainToDtoClasses = listOf(
     ClientInfo::class to ClientInfoPayload::class,
     ClientDeviceInfo::class to ClientDeviceInfoPayload::class,
-    UserSession::class to UserSessionPayload::class,
-    UserDetails::class to UserDetailsPayload::class,
-    UserIdentifier::class to UserIdentifierPayload::class,
-    UserPublic::class to UserPublicPayload::class,
+    AccountLockoutPolicy::class to AccountLockoutPolicyPayload::class,
+    IpRestrictionPolicy::class to IpRestrictionPolicyPayload::class,
+    OtpConfirmation::class to OtpConfirmationPayload::class,
+    ManagementPasswordPolicy::class to ManagementPasswordPolicyPayload::class,
+    OpenPasswordPolicy::class to OpenPasswordPolicyPayload::class,
+    ManagementSecuritySettings::class to ManagementSecuritySettingsPayload::class,
+    OpenSecuritySettings::class to OpenSecuritySettingsPayload::class,
+    TotpRecoveryCodes::class to TotpRecoveryCodesPayload::class,
+    TotpSetup::class to TotpSetupPayload::class,
+    VerifyTotp::class to VerifyTotpPayload::class,
+    ManagementGlobalSettings::class to ManagementGlobalSettingsPayload::class,
+    OpenGlobalSettings::class to OpenGlobalSettingsPayload::class,
+    AuditEvent::class to AuditEventPayload::class,
+    AuditEventMetadata::class to AuditEventMetadataPayload::class,
     AuthData::class to AuthDataPayload::class,
-    SessionToken::class to SessionTokenPayload::class
+    AvailableAuthProviders::class to AvailableAuthProvidersPayload::class,
+    ManagementAuthSettings::class to ManagementAuthSettingsPayload::class,
+    OpenAuthSettings::class to OpenAuthSettingsPayload::class,
+    ManagementUserConfiguration::class to ManagementUserConfigurationPayload::class,
+    OpenUserConfiguration::class to OpenUserConfigurationPayload::class,
+    EmailRestrictionPolicy::class to EmailRestrictionPolicyPayload::class,
+    UserIdentifier::class to UserIdentifierPayload::class,
+    DeletedSessions::class to DeletedSessionsPayload::class,
+    UserSession::class to UserSessionPayload::class,
+    SessionToken::class to SessionTokenPayload::class,
+    UserDetails::class to UserDetailsPayload::class,
+    UserPublic::class to UserPublicPayload::class
 )
 
 private fun getWireKey(payloadClass: KClass<*>, paramName: String): String {
@@ -1157,12 +1483,91 @@ private fun getWireKey(payloadClass: KClass<*>, paramName: String): String {
     return serialNameAnnotation?.value ?: paramName
 }
 
+private fun findMatchingPayloadParam(
+    domainParamName: String,
+    domainParamType: KType,
+    payloadClass: KClass<*>
+): Pair<String, KType>? {
+    val primaryParams = payloadClass.primaryConstructor?.parameters ?: return null
+    val domainClassifier = domainParamType.classifier as? KClass<*>
+
+    // 1. Check exact name match on constructor param or SerialName
+    val exact = primaryParams.firstOrNull {
+        it.name == domainParamName ||
+        it.annotations.filterIsInstance<SerialName>().firstOrNull()?.value == domainParamName
+    }
+    if (exact != null) return (exact.name ?: domainParamName) to exact.type
+
+    // 2. Check alias name match
+    val aliasName = when (domainParamName) {
+        "deviceInfo" -> "clientDeviceInfo"
+        "userDetails" -> "userDetailsPayload"
+        "sessionToken" -> "sessionTokenPayload"
+        else -> null
+    }
+    if (aliasName != null) {
+        val aliasMatch = primaryParams.firstOrNull {
+            it.name == aliasName ||
+            it.annotations.filterIsInstance<SerialName>().firstOrNull()?.value == aliasName
+        }
+        if (aliasMatch != null) return (aliasMatch.name ?: aliasName) to aliasMatch.type
+    }
+
+    // 3. Type-based match
+    val targetPayloadClass = domainToDtoClasses.firstOrNull { it.first == domainClassifier }?.second
+    if (targetPayloadClass != null) {
+        val typeMatch = primaryParams.firstOrNull { (it.type.classifier as? KClass<*>) == targetPayloadClass }
+        if (typeMatch != null) return (typeMatch.name ?: "") to typeMatch.type
+    }
+
+    return null
+}
+
+private fun findMatchingDomainParam(
+    payloadParamName: String,
+    payloadParamType: KType,
+    domainClass: KClass<*>
+): Pair<String, KType>? {
+    val primaryParams = domainClass.primaryConstructor?.parameters ?: return null
+    val payloadClassifier = payloadParamType.classifier as? KClass<*>
+
+    // 1. Check exact name match
+    val exact = primaryParams.firstOrNull { it.name == payloadParamName }
+    if (exact != null) return (exact.name ?: payloadParamName) to exact.type
+
+    // 2. Check alias name match
+    val aliasName = when (payloadParamName) {
+        "clientDeviceInfo" -> "deviceInfo"
+        "userDetailsPayload" -> "userDetails"
+        "sessionTokenPayload" -> "sessionToken"
+        else -> null
+    }
+    if (aliasName != null) {
+        val aliasMatch = primaryParams.firstOrNull { it.name == aliasName }
+        if (aliasMatch != null) return (aliasMatch.name ?: aliasName) to aliasMatch.type
+    }
+
+    // 3. Type-based match
+    val targetDomainClass = domainToDtoClasses.firstOrNull { it.second == payloadClassifier }?.first
+    if (targetDomainClass != null) {
+        val typeMatch = primaryParams.firstOrNull { (it.type.classifier as? KClass<*>) == targetDomainClass }
+        if (typeMatch != null) return (typeMatch.name ?: "") to typeMatch.type
+    }
+
+    return null
+}
+
 private fun buildToDomainFields(domainClass: KClass<*>, payloadClass: KClass<*>): String {
     val fields = domainClass.primaryConstructor?.parameters?.mapNotNull { domainParam ->
         val domainParamName = domainParam.name ?: return@mapNotNull null
-        val payloadParamName = if (domainParamName == "deviceInfo") "clientDeviceInfo" else domainParamName
-        val wireKey = getWireKey(payloadClass, payloadParamName)
+        val match = findMatchingPayloadParam(domainParamName, domainParam.type, payloadClass)
         
+        if (match == null) {
+            return@mapNotNull "  $domainParamName: null"
+        }
+
+        val (payloadParamName, _) = match
+        val wireKey = getWireKey(payloadClass, payloadParamName)
         val payloadRef = "payload.$wireKey"
         val type = domainParam.type
         val classifier = type.classifier as? KClass<*>
@@ -1185,6 +1590,12 @@ private fun buildToDomainFields(domainClass: KClass<*>, payloadClass: KClass<*>)
                 val typeArg = type.arguments.firstOrNull()?.type?.classifier as? KClass<*>
                 if (typeArg == PermissionCode::class) {
                     "$payloadRef ? $payloadRef.map(val => toPermissionCodeOrThrow(val)) : []"
+                } else if (typeArg?.simpleName?.endsWith("Id") == true) {
+                    val brandName = typeArg.simpleName
+                    "$payloadRef ? $payloadRef.map(val => to${brandName}OrThrow(val)) : []"
+                } else if (domainToDtoClasses.any { it.first == typeArg }) {
+                    val nestedDomainName = typeArg?.simpleName
+                    "$payloadRef ? $payloadRef.map(val => to$nestedDomainName(val)) : []"
                 } else {
                     payloadRef
                 }
@@ -1208,9 +1619,14 @@ private fun buildToDomainFields(domainClass: KClass<*>, payloadClass: KClass<*>)
 private fun buildToPayloadFields(domainClass: KClass<*>, payloadClass: KClass<*>): String {
     val fields = payloadClass.primaryConstructor?.parameters?.mapNotNull { payloadParam ->
         val payloadParamName = payloadParam.name ?: return@mapNotNull null
-        val domainParamName = if (payloadParamName == "clientDeviceInfo") "deviceInfo" else payloadParamName
         val wireKey = getWireKey(payloadClass, payloadParamName)
+        val match = findMatchingDomainParam(payloadParamName, payloadParam.type, domainClass)
         
+        if (match == null) {
+            return@mapNotNull "  $wireKey: null"
+        }
+
+        val (domainParamName, _) = match
         val domainRef = "domain.$domainParamName"
         val payloadParamType = payloadParam.type
         val isNullable = payloadParamType.isMarkedNullable
@@ -1221,7 +1637,16 @@ private fun buildToPayloadFields(domainClass: KClass<*>, payloadClass: KClass<*>
         val mappedValue = when {
             domainClassifier?.simpleName?.endsWith("Id") == true -> domainRef
             domainClassifier == PermissionCode::class -> domainRef
-            domainClassifier == Set::class || domainClassifier == List::class -> domainRef
+            domainClassifier == Set::class || domainClassifier == List::class -> {
+                val typeArg = domainParam?.type?.arguments?.firstOrNull()?.type?.classifier as? KClass<*>
+                if (domainToDtoClasses.any { it.first == typeArg }) {
+                    val nestedDomainDtoPair = domainToDtoClasses.firstOrNull { it.first == typeArg }
+                    val nestedPayloadName = nestedDomainDtoPair?.second?.simpleName
+                    "$domainRef ? $domainRef.map(val => to$nestedPayloadName(val)) : []"
+                } else {
+                    domainRef
+                }
+            }
             domainToDtoClasses.any { it.first == domainClassifier } -> {
                 val nestedDomainDtoPair = domainToDtoClasses.firstOrNull { it.first == domainClassifier }
                 val nestedPayloadNameCorrect = nestedDomainDtoPair?.second?.simpleName
