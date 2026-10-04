@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Project identity
 - **Type:** Kotlin Multiplatform **library** of **shared API contracts** (same serialized JSON shapes, path strings, permissions, and machine-readable error **code** strings).
-- **Publishing:** Maven Central via `com.vanniktech.maven.publish` for Kotlin/JVM/Android/iOS/Wasm; npmjs.com (`@mudrichenkoevgeny/shared-foundation`) via `./gradlew generateNpmPackage` for Web/TypeScript.
+- **Publishing:** Maven Central via `com.vanniktech.maven.publish` for Kotlin/JVM/Android/iOS/Wasm; npmjs.com (`@mudrichenkoevgeny/shared-foundation`) via `./gradlew generateNpmPackage` for Web/TypeScript. The NPM package exports constants, route maps, Zod schemas, fully-typed domain models and runtime mappers.
 - **Coordinates:** group `io.github.mudrichenkoevgeny`; artifact ids follow `shared-foundation-*`; npm package `@mudrichenkoevgeny/shared-foundation`.
 - **Consumers:** Not in this repo. Consumed by **[Backend Platform SDK](https://github.com/mudrichenkoevgeny/backend-platform-sdk)** (server), **[KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk)** (client), and **[Web Platform SDK](https://github.com/mudrichenkoevgeny/web-platform-sdk)** (web).
 
