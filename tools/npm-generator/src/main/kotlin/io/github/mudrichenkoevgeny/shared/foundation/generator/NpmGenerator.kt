@@ -210,7 +210,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.49",
+          "version": "0.0.50",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -663,38 +663,38 @@ private val extraEnumInfos = listOf(
 
 private val dtoClasses = listOf(
     ApiErrorResponse::class,
-    ClientInfoPayload::class,
     ClientDeviceInfoPayload::class,
     AccountLockoutPolicyPayload::class,
     IpRestrictionPolicyPayload::class,
     OtpConfirmationPayload::class,
     ManagementPasswordPolicyPayload::class,
     OpenPasswordPolicyPayload::class,
-    ManagementSecuritySettingsPayload::class,
-    OpenSecuritySettingsPayload::class,
-    TotpRecoveryCodesPayload::class,
-    TotpSetupPayload::class,
-    VerifyTotpPayload::class,
     ManagementGlobalSettingsPayload::class,
     OpenGlobalSettingsPayload::class,
-    AuditEventPayload::class,
     AuditEventMetadataPayload::class,
-    AuthDataPayload::class,
     AvailableAuthProvidersPayload::class,
-    ManagementAuthSettingsPayload::class,
-    OpenAuthSettingsPayload::class,
-    ManagementUserConfigurationPayload::class,
-    OpenUserConfigurationPayload::class,
     EmailRestrictionPolicyPayload::class,
-    UserIdentifierPayload::class,
-    DeletedSessionsPayload::class,
-    UserSessionPayload::class,
-    RefreshTokenPayload::class,
     SessionTokenPayload::class,
     UserDetailsPayload::class,
     UserPublicPayload::class,
+    UserIdentifierPayload::class,
+    DeletedSessionsPayload::class,
+    RefreshTokenPayload::class,
+    TotpRecoveryCodesPayload::class,
+    TotpSetupPayload::class,
+    VerifyTotpPayload::class,
     SocketFrame::class,
     WebSocketInitializePayload::class,
+    ClientInfoPayload::class,
+    UserSessionPayload::class,
+    AuditEventPayload::class,
+    AuthDataPayload::class,
+    ManagementAuthSettingsPayload::class,
+    OpenAuthSettingsPayload::class,
+    ManagementSecuritySettingsPayload::class,
+    OpenSecuritySettingsPayload::class,
+    ManagementUserConfigurationPayload::class,
+    OpenUserConfigurationPayload::class,
     CreateByEmailRequest::class,
     LoginByEmailRequest::class,
     LoginByExternalAuthProviderRequest::class,
@@ -1491,14 +1491,12 @@ private fun findMatchingPayloadParam(
     val primaryParams = payloadClass.primaryConstructor?.parameters ?: return null
     val domainClassifier = domainParamType.classifier as? KClass<*>
 
-    // 1. Check exact name match on constructor param or SerialName
     val exact = primaryParams.firstOrNull {
         it.name == domainParamName ||
         it.annotations.filterIsInstance<SerialName>().firstOrNull()?.value == domainParamName
     }
     if (exact != null) return (exact.name ?: domainParamName) to exact.type
 
-    // 2. Check alias name match
     val aliasName = when (domainParamName) {
         "deviceInfo" -> "clientDeviceInfo"
         "userDetails" -> "userDetailsPayload"
@@ -1513,7 +1511,6 @@ private fun findMatchingPayloadParam(
         if (aliasMatch != null) return (aliasMatch.name ?: aliasName) to aliasMatch.type
     }
 
-    // 3. Type-based match
     val targetPayloadClass = domainToDtoClasses.firstOrNull { it.first == domainClassifier }?.second
     if (targetPayloadClass != null) {
         val typeMatch = primaryParams.firstOrNull { (it.type.classifier as? KClass<*>) == targetPayloadClass }
@@ -1531,11 +1528,9 @@ private fun findMatchingDomainParam(
     val primaryParams = domainClass.primaryConstructor?.parameters ?: return null
     val payloadClassifier = payloadParamType.classifier as? KClass<*>
 
-    // 1. Check exact name match
     val exact = primaryParams.firstOrNull { it.name == payloadParamName }
     if (exact != null) return (exact.name ?: payloadParamName) to exact.type
 
-    // 2. Check alias name match
     val aliasName = when (payloadParamName) {
         "clientDeviceInfo" -> "deviceInfo"
         "userDetailsPayload" -> "userDetails"
@@ -1547,7 +1542,6 @@ private fun findMatchingDomainParam(
         if (aliasMatch != null) return (aliasMatch.name ?: aliasName) to aliasMatch.type
     }
 
-    // 3. Type-based match
     val targetDomainClass = domainToDtoClasses.firstOrNull { it.second == payloadClassifier }?.first
     if (targetDomainClass != null) {
         val typeMatch = primaryParams.firstOrNull { (it.type.classifier as? KClass<*>) == targetDomainClass }
