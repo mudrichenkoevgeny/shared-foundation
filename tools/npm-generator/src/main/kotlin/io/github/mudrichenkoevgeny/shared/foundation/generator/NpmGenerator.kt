@@ -210,7 +210,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.50",
+          "version": "0.0.51",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -414,11 +414,16 @@ private fun generateCompositeParsersJs(): String {
 
       fromValueOrThrow(value) {
         for (const parse of this.auditActionTypes) {
-          const result = typeof parse === 'function'
-            ? parse(value)
-            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
-          if (result !== null && result !== undefined) {
-            return result;
+          if (typeof parse === 'function') {
+            const result = parse(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse.parseOrNull === 'function') {
+            const result = parse.parseOrNull(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse === 'object') {
+            // Support passing the enum object directly (e.g. UserAuditActionType)
+            const matchedValue = Object.values(parse).find(val => val === value);
+            if (matchedValue !== undefined) return matchedValue;
           }
         }
         throw new Error("Unknown value of AuditActionType: '" + value + "'");
@@ -432,11 +437,15 @@ private fun generateCompositeParsersJs(): String {
 
       fromValueOrThrow(value) {
         for (const parse of this.metadataKeys) {
-          const result = typeof parse === 'function'
-            ? parse(value)
-            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
-          if (result !== null && result !== undefined) {
-            return result;
+          if (typeof parse === 'function') {
+            const result = parse(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse.parseOrNull === 'function') {
+            const result = parse.parseOrNull(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse === 'object') {
+            const matchedValue = Object.values(parse).find(val => val === value);
+            if (matchedValue !== undefined) return matchedValue;
           }
         }
         throw new Error("Unknown value of AuditMetadataKey: '" + value + "'");
@@ -450,11 +459,15 @@ private fun generateCompositeParsersJs(): String {
 
       fromValueOrThrow(value) {
         for (const parse of this.auditResourceTypes) {
-          const result = typeof parse === 'function'
-            ? parse(value)
-            : (parse && typeof parse.parseOrNull === 'function' ? parse.parseOrNull(value) : null);
-          if (result !== null && result !== undefined) {
-            return result;
+          if (typeof parse === 'function') {
+            const result = parse(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse.parseOrNull === 'function') {
+            const result = parse.parseOrNull(value);
+            if (result !== null && result !== undefined) return result;
+          } else if (parse && typeof parse === 'object') {
+            const matchedValue = Object.values(parse).find(val => val === value);
+            if (matchedValue !== undefined) return matchedValue;
           }
         }
         throw new Error("Unknown value of AuditResourceType: '" + value + "'");
@@ -482,17 +495,17 @@ private fun generateCompositeParsersDts(): String {
     }
 
     export declare class CompositeAuditActionTypeParser {
-      constructor(auditActionTypes: Array<((value: string) => AuditActionType | null) | AuditActionTypeParser>);
+      constructor(auditActionTypes: Array<((value: string) => AuditActionType | null) | AuditActionTypeParser | Record<string, string>>);
       fromValueOrThrow(value: string): AuditActionType;
     }
 
     export declare class CompositeAuditMetadataKeyParser {
-      constructor(metadataKeys: Array<((value: string) => AuditMetadataKey | null) | AuditMetadataKeyParser>);
+      constructor(metadataKeys: Array<((value: string) => AuditMetadataKey | null) | AuditMetadataKeyParser | Record<string, string>>);
       fromValueOrThrow(value: string): AuditMetadataKey;
     }
 
     export declare class CompositeAuditResourceTypeParser {
-      constructor(auditResourceTypes: Array<((value: string) => AuditResourceType | null) | AuditResourceTypeParser>);
+      constructor(auditResourceTypes: Array<((value: string) => AuditResourceType | null) | AuditResourceTypeParser | Record<string, string>>);
       fromValueOrThrow(value: string): AuditResourceType;
     }
     """.trimIndent()
@@ -1663,6 +1676,55 @@ private fun generateDomainModelsAndMappersJs(): String {
         val domainName = domainClass.simpleName ?: ""
         val payloadName = payloadClass.simpleName ?: ""
         
+        if (domainName == "AuditEvent") {
+            return@joinToString """
+            export const toAuditEvent = (payload, actionTypeParser, resourceTypeParser, metadataKeyParser) => ({
+              id: toAuditEventIdOrThrow(payload.id),
+              actorId: payload.actorId,
+              actorType: payload.actorType,
+              actorUserRole: payload.actorUserRole,
+              action: actionTypeParser.fromValueOrThrow(payload.action),
+              resource: resourceTypeParser.fromValueOrThrow(payload.resource),
+              resourceId: payload.resourceId,
+              resourceValueSensitivity: 'non_sensitive',
+              status: payload.status,
+              metadata: payload.metadata ? payload.metadata.map(val => toAuditEventMetadata(val, metadataKeyParser)) : [],
+              message: payload.message,
+              createdAt: payload.createdAt
+            });
+            
+            export const toAuditEventPayload = (domain) => ({
+              id: domain.id,
+              actorId: domain.actorId,
+              actorType: domain.actorType,
+              actorUserRole: domain.actorUserRole,
+              action: domain.action,
+              resource: domain.resource,
+              resourceId: domain.resourceId,
+              status: domain.status,
+              metadata: domain.metadata ? domain.metadata.map(val => toAuditEventMetadataPayload(val)) : [],
+              message: domain.message,
+              createdAt: domain.createdAt
+            });
+            """.trimIndent()
+        }
+        
+        if (domainName == "AuditEventMetadata") {
+            return@joinToString """
+            export const toAuditEventMetadata = (payload, metadataKeyParser) => ({
+              key: metadataKeyParser.fromValueOrThrow(payload.key),
+              value: payload.value,
+              valueSensitivity: payload.valueSensitivity
+            });
+            
+            export const toAuditEventMetadataPayload = (domain) => ({
+              key: domain.key,
+              value: domain.value,
+              valueSensitivity: domain.valueSensitivity
+            });
+            """.trimIndent()
+        }
+        
         val toDomainFields = buildToDomainFields(domainClass, payloadClass)
         val toPayloadFields = buildToPayloadFields(domainClass, payloadClass)
         
@@ -1688,6 +1750,28 @@ private fun generateDomainModelsAndMappersDts(): String {
             val tsType = resolveTsType(paramName, param.type, domainClass)
             "  readonly $paramName: $tsType;"
         }?.joinToString("\n") ?: ""
+        
+        if (domainName == "AuditEvent") {
+            return@joinToString """
+            export interface $domainName {
+            $fields
+            }
+            
+            export declare const toAuditEvent: (payload: AuditEventPayload, actionTypeParser: CompositeAuditActionTypeParser, resourceTypeParser: CompositeAuditResourceTypeParser, metadataKeyParser: CompositeAuditMetadataKeyParser) => AuditEvent;
+            export declare const toAuditEventPayload: (domain: AuditEvent) => AuditEventPayload;
+            """.trimIndent()
+        }
+        
+        if (domainName == "AuditEventMetadata") {
+            return@joinToString """
+            export interface $domainName {
+            $fields
+            }
+            
+            export declare const toAuditEventMetadata: (payload: AuditEventMetadataPayload, metadataKeyParser: CompositeAuditMetadataKeyParser) => AuditEventMetadata;
+            export declare const toAuditEventMetadataPayload: (domain: AuditEventMetadata) => AuditEventMetadataPayload;
+            """.trimIndent()
+        }
         
         """
         export interface $domainName {
