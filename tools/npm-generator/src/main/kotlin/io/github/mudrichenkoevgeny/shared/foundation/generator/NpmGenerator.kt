@@ -34,6 +34,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonHttpHeaders
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketCloseReasons
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketEventTypes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.WebSocketContract
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.SocketFrame
@@ -210,7 +211,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.52",
+          "version": "0.0.53",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -570,7 +571,8 @@ private val routeClasses = listOf(
     ManagementAuthSettingsRoutes::class,
     OpenAuthSettingsRoutes::class,
     OpenUserConfigurationRoutes::class,
-    ManagementUserConfigurationRoutes::class
+    ManagementUserConfigurationRoutes::class,
+    WebSocketContract::class
 )
 
 private val contractClasses = listOf(
