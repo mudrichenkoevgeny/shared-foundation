@@ -211,7 +211,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.54",
+          "version": "0.0.55",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -1074,11 +1074,17 @@ private fun generateDtoSchemasAndTypes(): String {
     export function pagedResultSchema(itemSchema) {
       return z.object({
         items: z.array(itemSchema),
-        totalCount: z.number(),
-        pageNumber: z.number(),
-        pageSize: z.number(),
-        totalPages: z.number()
-      });
+        total_count: z.number(),
+        page_number: z.number(),
+        page_size: z.number(),
+        total_pages: z.number()
+      }).transform(data => ({
+        items: data.items,
+        totalCount: data.total_count,
+        pageNumber: data.page_number,
+        pageSize: data.page_size,
+        totalPages: data.total_pages
+      }));
     }
     """.trimIndent()
 
@@ -1554,13 +1560,7 @@ private fun generateDeclarationFile(): String {
 
     $extraDeclarations
 
-    export function pagedResultSchema<T extends z.ZodTypeAny>(itemSchema: T): z.ZodObject<{
-      items: z.ZodArray<T>;
-      totalCount: z.ZodNumber;
-      pageNumber: z.ZodNumber;
-      pageSize: z.ZodNumber;
-      totalPages: z.ZodNumber;
-    }>;
+    export function pagedResultSchema<T extends z.ZodTypeAny>(itemSchema: T): z.ZodType<PagedResult<z.infer<T>>>;
 
     export interface PagedResult<T> {
       items: T[];
