@@ -34,6 +34,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonHttpHeaders
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketCloseReasons
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonWebSocketEventTypes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.WebSocketContract
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.SocketFrame
@@ -210,7 +211,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.52",
+          "version": "0.0.53",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -570,7 +571,8 @@ private val routeClasses = listOf(
     ManagementAuthSettingsRoutes::class,
     OpenAuthSettingsRoutes::class,
     OpenUserConfigurationRoutes::class,
-    ManagementUserConfigurationRoutes::class
+    ManagementUserConfigurationRoutes::class,
+    WebSocketContract::class
 )
 
 private val contractClasses = listOf(
@@ -674,7 +676,120 @@ private val extraEnumInfos = listOf(
     )
 )
 
-private val dtoClasses = listOf(
+private fun extractReferencedClasses(type: KType): Set<KClass<*>> {
+    val result = mutableSetOf<KClass<*>>()
+    val classifier = type.classifier as? KClass<*>
+    if (classifier != null) {
+        result.add(classifier)
+    }
+    for (arg in type.arguments) {
+        val argType = arg.type
+        if (argType != null) {
+            result.addAll(extractReferencedClasses(argType))
+        }
+    }
+    return result
+}
+
+private fun getDtoDependencies(kClass: KClass<*>, allClasses: Set<KClass<*>>): Set<KClass<*>> {
+    val dependencies = mutableSetOf<KClass<*>>()
+    val primaryConstructor = kClass.primaryConstructor ?: return dependencies
+    for (param in primaryConstructor.parameters) {
+        val refClasses = extractReferencedClasses(param.type)
+        for (refClass in refClasses) {
+            if (refClass != kClass && refClass in allClasses) {
+                dependencies.add(refClass)
+            }
+        }
+    }
+    return dependencies
+}
+
+private fun sortDtosTopologically(classes: List<KClass<*>>): List<KClass<*>> {
+    val allClasses = classes.toSet()
+    val depMap = classes.associateWith { kClass ->
+        getDtoDependencies(kClass, allClasses)
+    }
+
+    val sorted = mutableListOf<KClass<*>>()
+    val visited = mutableSetOf<KClass<*>>()
+    val visiting = mutableSetOf<KClass<*>>()
+
+    fun visit(kClass: KClass<*>) {
+        if (kClass in visited) return
+        if (kClass in visiting) return
+        visiting.add(kClass)
+        val deps = depMap[kClass] ?: emptySet()
+        for (dep in deps) {
+            visit(dep)
+        }
+        visiting.remove(kClass)
+        visited.add(kClass)
+        sorted.add(kClass)
+    }
+
+    for (kClass in classes) {
+        visit(kClass)
+    }
+
+    return sorted
+}
+
+private fun getDomainPairDependencies(
+    pair: Pair<KClass<*>, KClass<*>>,
+    allPairs: List<Pair<KClass<*>, KClass<*>>>
+): Set<Pair<KClass<*>, KClass<*>>> {
+    val dependencies = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
+    val (domainClass, payloadClass) = pair
+    val domainRefClasses = (domainClass.primaryConstructor?.parameters ?: emptyList())
+        .flatMap { extractReferencedClasses(it.type) }
+        .toSet()
+    val payloadRefClasses = (payloadClass.primaryConstructor?.parameters ?: emptyList())
+        .flatMap { extractReferencedClasses(it.type) }
+        .toSet()
+
+    for (otherPair in allPairs) {
+        if (otherPair == pair) continue
+        val (otherDomain, otherPayload) = otherPair
+        if (otherDomain in domainRefClasses || otherPayload in payloadRefClasses || otherDomain in payloadRefClasses || otherPayload in domainRefClasses) {
+            dependencies.add(otherPair)
+        }
+    }
+    return dependencies
+}
+
+private fun sortDomainToDtoTopologically(
+    pairs: List<Pair<KClass<*>, KClass<*>>>
+): List<Pair<KClass<*>, KClass<*>>> {
+    val depMap = pairs.associateWith { pair ->
+        getDomainPairDependencies(pair, pairs)
+    }
+
+    val sorted = mutableListOf<Pair<KClass<*>, KClass<*>>>()
+    val visited = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
+    val visiting = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
+
+    fun visit(pair: Pair<KClass<*>, KClass<*>>) {
+        if (pair in visited) return
+        if (pair in visiting) return
+        visiting.add(pair)
+        val deps = depMap[pair] ?: emptySet()
+        for (dep in deps) {
+            visit(dep)
+        }
+        visiting.remove(pair)
+        visited.add(pair)
+        sorted.add(pair)
+    }
+
+    for (pair in pairs) {
+        visit(pair)
+    }
+
+    return sorted
+}
+
+private val rawDtoClasses = listOf(
     ApiErrorResponse::class,
     ClientDeviceInfoPayload::class,
     AccountLockoutPolicyPayload::class,
@@ -726,6 +841,8 @@ private val dtoClasses = listOf(
     AddUserIdentifierPhoneRequest::class,
     UpdateUserRequest::class
 )
+
+private val dtoClasses = sortDtosTopologically(rawDtoClasses)
 
 private fun getEnumInfo(kClass: KClass<*>): EnumInfo {
     val name = kClass.simpleName ?: ""
@@ -1065,12 +1182,12 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == AccessToken::class -> "accessTokenSchema"
         classifier == RefreshToken::class -> "refreshTokenSchema"
         classifier == RefreshTokenHash::class -> "refreshTokenHashSchema"
-        classifier == List::class || classifier == Set::class -> {
+        classifier == List::class || classifier == Set::class || classifier == Collection::class || classifier.simpleName == "Set" || classifier.simpleName == "List" || classifier.simpleName == "Collection" -> {
             val elementType = type.arguments.firstOrNull()?.type
             val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
             "z.array($elementZod)"
         }
-        classifier == Map::class -> {
+        classifier == Map::class || classifier.simpleName == "Map" -> {
             val valType = type.arguments.getOrNull(1)?.type
             val valZod = if (valType != null) resolveZodType(paramName, valType, parentClass) else "z.unknown()"
             "z.record(z.string(), $valZod)"
@@ -1150,12 +1267,12 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == AccessToken::class -> "AccessToken"
         classifier == RefreshToken::class -> "RefreshToken"
         classifier == RefreshTokenHash::class -> "RefreshTokenHash"
-        classifier == List::class || classifier == Set::class -> {
+        classifier == List::class || classifier == Set::class || classifier == Collection::class || classifier.simpleName == "Set" || classifier.simpleName == "List" || classifier.simpleName == "Collection" -> {
             val elementType = type.arguments.firstOrNull()?.type
             val elementTs = if (elementType != null) resolveTsType(paramName, elementType, parentClass) else "unknown"
             "$elementTs[]"
         }
-        classifier == Map::class -> {
+        classifier == Map::class || classifier.simpleName == "Map" -> {
             val valType = type.arguments.getOrNull(1)?.type
             val valTs = if (valType != null) resolveTsType(paramName, valType, parentClass) else "unknown"
             "Record<string, $valTs>"
@@ -1457,7 +1574,7 @@ private fun generateDeclarationFile(): String {
     """.trimIndent()
 }
 
-private val domainToDtoClasses = listOf(
+private val rawDomainToDtoClasses = listOf(
     ClientInfo::class to ClientInfoPayload::class,
     ClientDeviceInfo::class to ClientDeviceInfoPayload::class,
     AccountLockoutPolicy::class to AccountLockoutPolicyPayload::class,
@@ -1488,6 +1605,8 @@ private val domainToDtoClasses = listOf(
     UserDetails::class to UserDetailsPayload::class,
     UserPublic::class to UserPublicPayload::class
 )
+
+private val domainToDtoClasses = sortDomainToDtoTopologically(rawDomainToDtoClasses)
 
 private fun getWireKey(payloadClass: KClass<*>, paramName: String): String {
     val param = payloadClass.primaryConstructor?.parameters?.firstOrNull { it.name == paramName }
