@@ -210,7 +210,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.51",
+          "version": "0.0.52",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -1680,31 +1680,31 @@ private fun generateDomainModelsAndMappersJs(): String {
             return@joinToString """
             export const toAuditEvent = (payload, actionTypeParser, resourceTypeParser, metadataKeyParser) => ({
               id: toAuditEventIdOrThrow(payload.id),
-              actorId: payload.actorId,
-              actorType: payload.actorType,
-              actorUserRole: payload.actorUserRole,
+              actorId: payload.actor_id,
+              actorType: payload.actor_type,
+              actorUserRole: payload.actor_user_role,
               action: actionTypeParser.fromValueOrThrow(payload.action),
               resource: resourceTypeParser.fromValueOrThrow(payload.resource),
-              resourceId: payload.resourceId,
+              resourceId: payload.resource_id,
               resourceValueSensitivity: 'non_sensitive',
               status: payload.status,
               metadata: payload.metadata ? payload.metadata.map(val => toAuditEventMetadata(val, metadataKeyParser)) : [],
               message: payload.message,
-              createdAt: payload.createdAt
+              createdAt: payload.created_at
             });
             
             export const toAuditEventPayload = (domain) => ({
               id: domain.id,
-              actorId: domain.actorId,
-              actorType: domain.actorType,
-              actorUserRole: domain.actorUserRole,
+              actor_id: domain.actorId,
+              actor_type: domain.actorType,
+              actor_user_role: domain.actorUserRole,
               action: domain.action,
               resource: domain.resource,
-              resourceId: domain.resourceId,
+              resource_id: domain.resourceId,
               status: domain.status,
               metadata: domain.metadata ? domain.metadata.map(val => toAuditEventMetadataPayload(val)) : [],
               message: domain.message,
-              createdAt: domain.createdAt
+              created_at: domain.createdAt
             });
             """.trimIndent()
         }
@@ -1714,13 +1714,13 @@ private fun generateDomainModelsAndMappersJs(): String {
             export const toAuditEventMetadata = (payload, metadataKeyParser) => ({
               key: metadataKeyParser.fromValueOrThrow(payload.key),
               value: payload.value,
-              valueSensitivity: payload.valueSensitivity
+              valueSensitivity: payload.value_sensitivity
             });
             
             export const toAuditEventMetadataPayload = (domain) => ({
               key: domain.key,
               value: domain.value,
-              valueSensitivity: domain.valueSensitivity
+              value_sensitivity: domain.valueSensitivity
             });
             """.trimIndent()
         }
