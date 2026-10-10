@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
@@ -39,7 +39,7 @@ object SelfManagementResetPasswordRoutes {
      * **Note:** The server strictly validates that the operation is performed on an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
-     * **Audit logging:** Persist an [AuditEvent] for every management password reset attempt.
+     * **Audit logging:** Persist an [AuditEventPrivate] for every management password reset attempt.
      * * **Action:** [UserAuditActionType.RESET_PASSWORD].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.

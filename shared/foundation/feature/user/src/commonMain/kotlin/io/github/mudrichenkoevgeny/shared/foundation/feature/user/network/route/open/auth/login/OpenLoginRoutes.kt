@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
@@ -48,7 +48,7 @@ object OpenLoginRoutes {
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
      * unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -79,7 +79,7 @@ object OpenLoginRoutes {
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGIN_BY_PHONE]. (If the sign-in is from a new,
      * unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -110,7 +110,7 @@ object OpenLoginRoutes {
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]. (If the sign-in is
      * from a new, unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -139,7 +139,7 @@ object OpenLoginRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
      * unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -166,7 +166,7 @@ object OpenLoginRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from a
      * new, unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).

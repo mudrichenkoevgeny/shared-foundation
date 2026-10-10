@@ -23,7 +23,7 @@ import kotlin.time.Instant
  * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Authentication provider category.
  * @property refreshTokenHash Hash of the refresh token.
- * @property deviceInfo Hardware and environment device info.
+ * @property clientDeviceInfo Hardware and environment device info.
  * @property userAgent HTTP `User-Agent` header value, or `null`.
  * @property ipAddress Raw or masked client IP address, or `null`.
  * @property expiresAt Session expiration timestamp.
@@ -41,7 +41,7 @@ data class UserSessionInternal(
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val refreshTokenHash: RefreshTokenHash,
-    val deviceInfo: ClientDeviceInfo,
+    val clientDeviceInfo: ClientDeviceInfo,
     val userAgent: String?,
     val ipAddress: String?,
     val expiresAt: Instant,
@@ -63,7 +63,7 @@ data class UserSessionInternal(
     private fun isExpired(now: Instant): Boolean = expiresAt <= now
 
     private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
-        val sessionDeviceId = deviceInfo.deviceId
+        val sessionDeviceId = clientDeviceInfo.deviceId
         if (clientDeviceId == null || sessionDeviceId == null) {
             return true
         }

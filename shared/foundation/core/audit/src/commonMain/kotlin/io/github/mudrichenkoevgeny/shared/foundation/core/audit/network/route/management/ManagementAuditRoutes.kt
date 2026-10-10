@@ -26,7 +26,9 @@ object ManagementAuditRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of [AuditSortValues.AuditEventSortBy.CREATED_AT].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     * [AuditSortValues.AuditEventSortBy.CREATED_AT],
+     * [AuditSortValues.AuditEventSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
      * **Filters** ([AuditFilterValues.AuditEventFilterValues]): all filters are optional.

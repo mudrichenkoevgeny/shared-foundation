@@ -60,7 +60,27 @@ On Windows PowerShell you can use the same redirection; ensure `build/reports` e
 
 The project utilizes the `com.vanniktech.maven.publish` plugin for artifact management.
 
-### 1. Remote Staging
+### 1. Local Maven Deployment (`mavenLocal`)
+
+1. **Publish artifacts to local Maven repository:**
+   Uploads all KMP library artifacts to your machine's local Maven cache (`~/.m2/repository/`):
+   ```bash
+   ./gradlew publishToMavenLocal
+   ```
+
+2. **Connect in your consumer project:**
+   Add `mavenLocal()` to your consumer project's `settings.gradle.kts` (or root `build.gradle.kts`):
+   ```kotlin
+   dependencyResolutionManagement {
+       repositories {
+           mavenLocal() // Must be at the top to take priority over remote repositories
+           mavenCentral()
+           google()
+       }
+   }
+   ```
+
+### 2. Remote Staging
 
 Uploads all publications to the remote staging repository (Maven Central) without performing a final release. Use this for manual verification in the repository manager:
 
@@ -68,7 +88,7 @@ Uploads all publications to the remote staging repository (Maven Central) withou
 ./gradlew publishAllPublicationsToMavenCentralRepository
 ```
 
-### 2. Full Release Cycle
+### 3. Full Release Cycle
 
 Performs a complete deployment workflow, including uploading, closing the staging repository, and releasing artifacts to Maven Central:
 
@@ -90,7 +110,29 @@ To compile and generate the NPM package artifact (CJS, ESM, and TypeScript typin
 
 The output package will be generated at `build/npm-package/`.
 
-### 2. Publishing to npmjs.com
+### 2. Local Testing in Consumer Web Projects (`npm pack`)
+
+To test the generated package locally in any web project or library (pnpm workspace) without publishing to a remote registry:
+
+1. **Generate the `.tgz` tarball archive:**
+   ```bash
+   cd build/npm-package
+   npm pack
+   ```
+   The archive `mudrichenkoevgeny-shared-foundation-0.0.57.tgz` will be created inside `build/npm-package/`.
+
+2. **Connect to your consumer pnpm workspace:**
+   In your consumer project, update the catalog in `pnpm-workspace.yaml`:
+   ```yaml
+   catalog:
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.57.tgz'
+   ```
+   And run from the root directory:
+   ```bash
+   pnpm install
+   ```
+
+### 3. Publishing to npmjs.com
 
 1. Authenticate with your npm account (if not logged in):
    ```bash

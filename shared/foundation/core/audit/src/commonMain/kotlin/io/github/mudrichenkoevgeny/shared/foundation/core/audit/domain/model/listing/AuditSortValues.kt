@@ -16,11 +16,18 @@ object AuditSortValues {
     enum class AuditEventSortBy {
         /** Sort by creation timestamp ([CommonApiFields.CREATED_AT]; [AuditEventPrivatePayload.createdAt]). */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT;
+        CREATED_AT,
+
+        /** Sort by update timestamp ([CommonApiFields.UPDATED_AT]; [AuditEventPrivatePayload.updatedAt]). */
+        @SerialName(CommonApiFields.UPDATED_AT)
+        UPDATED_AT;
 
         /** Wire value for `sort_by`. */
         val serialName: String
-            get() = CommonApiFields.CREATED_AT
+            get() = when (this) {
+                CREATED_AT -> CommonApiFields.CREATED_AT
+                UPDATED_AT -> CommonApiFields.UPDATED_AT
+            }
 
         companion object {
             /**

@@ -11,7 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.i
 /**
  * Converts a [UserIdentifierInternal] into a client-facing [UserIdentifierPrivate].
  *
- * Excludes `passwordHash` and database row modification timestamp: `updatedAt`.
+ * Excludes `passwordHash`.
  */
 fun UserIdentifierInternal.toUserIdentifierPrivate(
     isSensitiveValuesMasked: Boolean = false
@@ -23,7 +23,8 @@ fun UserIdentifierInternal.toUserIdentifierPrivate(
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt
+    createdAt = createdAt,
+    updatedAt = updatedAt
 )
 
 /**

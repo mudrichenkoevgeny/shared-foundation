@@ -26,6 +26,7 @@ import kotlin.time.Instant
  * @property lastLoginAt [UserPrivate.lastLoginAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property lastActiveAt [UserPrivate.lastActiveAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property createdAt [UserPrivate.createdAt] as Unix epoch milliseconds ([Instant]).
+ * @property updatedAt [UserPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property scheduledPermanentDeletionAt [UserPrivate.scheduledPermanentDeletionAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property lockoutType [UserPrivate.lockoutType]; wire values match [AccountLockoutType.serialName].
  * @property temporaryLockoutUntil [UserPrivate.temporaryLockoutUntil] as Unix epoch milliseconds ([Instant]), or `null`.
@@ -61,6 +62,9 @@ data class UserPrivatePayload(
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long,
+
+    @SerialName(CommonApiFields.UPDATED_AT)
+    val updatedAt: Long? = null,
 
     @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
     val scheduledPermanentDeletionAt: Long? = null,

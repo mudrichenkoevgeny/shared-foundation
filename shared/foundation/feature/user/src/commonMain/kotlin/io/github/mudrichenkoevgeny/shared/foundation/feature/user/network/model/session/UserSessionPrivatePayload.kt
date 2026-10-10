@@ -25,7 +25,7 @@ import kotlin.time.Instant
  * @property identifierId [UserSessionPrivate.identifierId] on the wire: [UserIdentifierId] as hex-dash string.
  * @property identifierDisplayName [UserSessionPrivate.identifierDisplayName].
  * @property identifierAuthProvider [UserSessionPrivate.identifierAuthProvider]; wire values match [UserAuthProvider.serialName].
- * @property deviceInfo [UserSessionPrivate.deviceInfo].
+ * @property clientDeviceInfo [UserSessionPrivate.clientDeviceInfo].
  * @property userAgent [UserSessionPrivate.userAgent].
  * @property ipAddress [UserSessionPrivate.ipAddress].
  * @property expiresAt [UserSessionPrivate.expiresAt] as Unix epoch milliseconds ([Instant]).
@@ -33,6 +33,7 @@ import kotlin.time.Instant
  * @property lastReauthenticatedAt [UserSessionPrivate.lastReauthenticatedAt] as Unix epoch milliseconds ([Instant]).
  * @property isSensitiveValuesMasked [UserSessionPrivate.isSensitiveValuesMasked].
  * @property createdAt [UserSessionPrivate.createdAt] as Unix epoch milliseconds ([Instant]).
+ * @property updatedAt [UserSessionPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
 data class UserSessionPrivatePayload(
@@ -58,7 +59,7 @@ data class UserSessionPrivatePayload(
     val identifierAuthProvider: String,
 
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val deviceInfo: ClientDeviceInfoPayload,
+    val clientDeviceInfo: ClientDeviceInfoPayload,
 
     @SerialName(CommonApiFields.USER_AGENT)
     val userAgent: String? = null,
@@ -79,5 +80,8 @@ data class UserSessionPrivatePayload(
     val isSensitiveValuesMasked: Boolean,
 
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long
+    val createdAt: Long,
+
+    @SerialName(CommonApiFields.UPDATED_AT)
+    val updatedAt: Long? = null
 )

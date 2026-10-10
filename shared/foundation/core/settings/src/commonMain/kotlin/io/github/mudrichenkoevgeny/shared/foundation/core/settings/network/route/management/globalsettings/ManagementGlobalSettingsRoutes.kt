@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.management.globalsettings
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
@@ -51,7 +51,7 @@ object ManagementGlobalSettingsRoutes {
      * MFA Step-up is required via `SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED`.
      * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful updates and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful updates and all failed attempts.
      * * **Action:** [SettingsAuditActionType.MANAGEMENT_UPDATE_GLOBAL_SETTINGS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the update.
      * * **Resource:** [SettingsAuditResourceType.GLOBAL_SETTINGS]. Leave `resourceId` unset (singleton resource).
@@ -78,7 +78,7 @@ object ManagementGlobalSettingsRoutes {
      * MFA Step-up is required via `SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED`.
      * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful resets and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful resets and all failed attempts.
      * * **Action:** [SettingsAuditActionType.MANAGEMENT_RESET_GLOBAL_SETTINGS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the reset.
      * * **Resource:** [SettingsAuditResourceType.GLOBAL_SETTINGS]. Leave `resourceId` unset (singleton resource).

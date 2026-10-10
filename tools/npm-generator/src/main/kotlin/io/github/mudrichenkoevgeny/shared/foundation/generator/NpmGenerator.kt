@@ -2,7 +2,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.generator
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource.CommonAuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
@@ -11,9 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
@@ -217,7 +214,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.56",
+          "version": "0.0.57",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -236,6 +233,7 @@ fun main() {
         """.trimIndent()
 
         File(outputDir, "package.json").writeText(packageJson)
+        File(outputDir, ".npmignore").writeText("*.tgz\n")
 
         val npmReadme = """
         # @mudrichenkoevgeny/shared-foundation

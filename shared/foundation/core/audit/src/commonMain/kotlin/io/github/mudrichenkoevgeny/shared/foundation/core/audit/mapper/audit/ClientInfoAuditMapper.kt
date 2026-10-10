@@ -11,25 +11,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
  */
 fun ClientInfo.toAuditMetadata(): Set<AuditEventMetadata> {
     val clientInfo = this
-    val deviceInfo = clientInfo.deviceInfo
+    val clientDeviceInfo = clientInfo.clientDeviceInfo
 
     return buildSet {
-        deviceInfo.deviceId?.asHexDashString()?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.deviceId?.asHexDashString()?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.DEVICE_ID, value))
         }
-        deviceInfo.deviceName?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.deviceName?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.DEVICE_NAME, value))
         }
-        deviceInfo.clientType?.serialName?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.clientType?.serialName?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.CLIENT_TYPE, value))
         }
-        deviceInfo.language?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.language?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.LANGUAGE, value))
         }
-        deviceInfo.appVersion?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.appVersion?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.APP_VERSION, value))
         }
-        deviceInfo.operationSystemVersion?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.operationSystemVersion?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.OS_VERSION, value))
         }
         clientInfo.userAgent?.takeIf { it.isNotBlank() }?.let { value ->

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.security
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
@@ -42,7 +42,7 @@ object OpenUserSecurityRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_SETUP_TOTP_INITIATED].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
@@ -68,7 +68,7 @@ object OpenUserSecurityRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_ENABLE_TOTP].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
@@ -94,7 +94,7 @@ object OpenUserSecurityRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
@@ -122,7 +122,7 @@ object OpenUserSecurityRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
@@ -150,7 +150,7 @@ object OpenUserSecurityRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].

@@ -18,6 +18,7 @@ import kotlin.time.Instant
  * @property externalProviderEmail Verified email address associated with external provider, or `null`.
  * @property isSensitiveValuesMasked `true` when [identifier] is masked.
  * @property createdAt Creation timestamp.
+ * @property updatedAt Last credential record modification timestamp, or `null`.
  */
 data class UserIdentifierPrivate(
     val id: UserIdentifierId = UserIdentifierId.generate(),
@@ -27,5 +28,6 @@ data class UserIdentifierPrivate(
     val displayName: String,
     val externalProviderEmail: String?,
     val isSensitiveValuesMasked: Boolean,
-    val createdAt: Instant
+    val createdAt: Instant,
+    val updatedAt: Instant?
 )

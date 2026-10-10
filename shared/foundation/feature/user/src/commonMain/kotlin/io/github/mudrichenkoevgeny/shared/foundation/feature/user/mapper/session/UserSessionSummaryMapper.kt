@@ -17,7 +17,7 @@ import kotlin.time.Instant
  */
 fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
     id = id.toUserSessionIdOrThrow(),
-    deviceInfo = deviceInfo.toClientDeviceInfo(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
     lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
@@ -29,7 +29,7 @@ fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary = UserS
  */
 fun UserSessionSummary.toUserSessionSummaryPayload(): UserSessionSummaryPayload = UserSessionSummaryPayload(
     id = id.asHexDashString(),
-    deviceInfo = deviceInfo.toClientDeviceInfoPayload(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider.serialName,
     lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),

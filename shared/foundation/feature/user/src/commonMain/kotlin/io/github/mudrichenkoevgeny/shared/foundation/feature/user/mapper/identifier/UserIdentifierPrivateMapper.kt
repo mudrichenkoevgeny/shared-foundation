@@ -22,7 +22,8 @@ fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivat
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
@@ -36,5 +37,6 @@ fun UserIdentifierPrivate.toUserIdentifierPrivatePayload(): UserIdentifierPrivat
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt.toEpochMilliseconds()
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
 )

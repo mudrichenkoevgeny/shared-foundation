@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
@@ -63,7 +63,7 @@ object OpenUnlockRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
@@ -105,7 +105,7 @@ object OpenUnlockRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
@@ -129,7 +129,7 @@ object OpenUnlockRoutes {
      * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.

@@ -28,6 +28,7 @@ import kotlin.time.Instant
  * @property metadata [AuditEventPrivate.metadata] as a JSON array of [AuditEventMetadataPayload] objects under [CommonApiFields.METADATA].
  * @property message [AuditEventPrivate.message].
  * @property createdAt [AuditEventPrivate.createdAt] as Unix epoch milliseconds ([Instant]).
+ * @property updatedAt [AuditEventPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
 data class AuditEventPrivatePayload(
@@ -62,5 +63,8 @@ data class AuditEventPrivatePayload(
     val message: String?,
 
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long
+    val createdAt: Long,
+
+    @SerialName(CommonApiFields.UPDATED_AT)
+    val updatedAt: Long? = null
 )

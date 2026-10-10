@@ -11,9 +11,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 /**
  * Converts a [UserSessionInternal] into a client-facing [UserSessionPrivate].
  *
- * Excludes `refreshTokenHash` and database row modification timestamp (`updatedAt`).
+ * Excludes `refreshTokenHash`.
  */
-fun UserSessionInternal.toUserSessionPrivate(): UserSessionPrivate = UserSessionPrivate(
+fun UserSessionInternal.toUserSessionPrivate(
+    isSensitiveValuesMasked: Boolean = false
+): UserSessionPrivate = UserSessionPrivate(
     id = id,
     userId = userId,
     userRole = userRole,
@@ -21,14 +23,27 @@ fun UserSessionInternal.toUserSessionPrivate(): UserSessionPrivate = UserSession
     identifierId = identifierId,
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider,
-    deviceInfo = deviceInfo,
+    clientDeviceInfo = clientDeviceInfo,
     userAgent = userAgent,
     ipAddress = ipAddress,
     expiresAt = expiresAt,
     lastAccessedAt = lastAccessedAt,
     lastReauthenticatedAt = lastReauthenticatedAt,
-    isSensitiveValuesMasked = false,
-    createdAt = createdAt
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
+
+/**
+ * Converts a [UserSessionPrivate] into a condensed [UserSessionSummary].
+ */
+fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
+    id = id,
+    clientDeviceInfo = clientDeviceInfo,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    lastAccessedAt = lastAccessedAt,
+    expiresAt = expiresAt
 )
 
 /**
@@ -38,20 +53,7 @@ fun UserSessionInternal.toUserSessionPrivate(): UserSessionPrivate = UserSession
  */
 fun UserSessionInternal.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
     id = id,
-    deviceInfo = deviceInfo,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    lastAccessedAt = lastAccessedAt,
-    expiresAt = expiresAt
-)
-
-
-/**
- * Converts a [UserSessionPrivate] into a condensed [UserSessionSummary].
- */
-fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
-    id = id,
-    deviceInfo = deviceInfo,
+    clientDeviceInfo = clientDeviceInfo,
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider,
     lastAccessedAt = lastAccessedAt,

@@ -45,7 +45,7 @@ fun ClientDeviceInfo.toClientDeviceInfoPayload(): ClientDeviceInfoPayload = Clie
  * @return domain model aligned with [ClientInfo] semantics.
  */
 fun ClientInfoPayload.toClientInfo(): ClientInfo = ClientInfo(
-    deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     host = null,
@@ -59,7 +59,7 @@ fun ClientInfoPayload.toClientInfo(): ClientInfo = ClientInfo(
  * @return payload DTO aligned with [ClientInfoPayload] contract.
  */
 fun ClientInfo.toClientInfoPayload(): ClientInfoPayload = ClientInfoPayload(
-    clientDeviceInfo = deviceInfo.toClientDeviceInfoPayload(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     apiVersion = apiVersion

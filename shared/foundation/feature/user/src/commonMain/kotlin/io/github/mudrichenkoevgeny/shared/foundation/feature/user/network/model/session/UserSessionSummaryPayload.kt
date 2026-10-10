@@ -16,7 +16,7 @@ import kotlin.time.Instant
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserSessionSummary].
  *
  * @property id [UserSessionSummary.id] on the wire: [UserSessionId] as hex-dash string.
- * @property deviceInfo [UserSessionSummary.deviceInfo].
+ * @property clientDeviceInfo [UserSessionSummary.clientDeviceInfo].
  * @property identifierDisplayName [UserSessionSummary.identifierDisplayName].
  * @property identifierAuthProvider [UserSessionSummary.identifierAuthProvider]; wire values match [UserAuthProvider.serialName].
  * @property lastAccessedAt [UserSessionSummary.lastAccessedAt] as Unix epoch milliseconds ([Instant]).
@@ -28,7 +28,7 @@ data class UserSessionSummaryPayload(
     val id: String,
 
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val deviceInfo: ClientDeviceInfoPayload,
+    val clientDeviceInfo: ClientDeviceInfoPayload,
 
     @SerialName(UserApiFields.IDENTIFIER_DISPLAY_NAME)
     val identifierDisplayName: String,

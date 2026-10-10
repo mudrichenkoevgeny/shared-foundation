@@ -12,7 +12,7 @@ import kotlin.time.Instant
  * Wire counterpart is [UserSessionSummaryPayload].
  *
  * @property id Session row id.
- * @property deviceInfo Hardware and environment device info.
+ * @property clientDeviceInfo Hardware and environment device info.
  * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Authentication provider category.
  * @property lastAccessedAt Timestamp of last session activity.
@@ -20,7 +20,7 @@ import kotlin.time.Instant
  */
 data class UserSessionSummary(
     val id: UserSessionId = UserSessionId.generate(),
-    val deviceInfo: ClientDeviceInfo,
+    val clientDeviceInfo: ClientDeviceInfo,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val lastAccessedAt: Instant,
@@ -39,7 +39,7 @@ data class UserSessionSummary(
     private fun isExpired(now: Instant): Boolean = expiresAt <= now
 
     private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
-        val sessionDeviceId = deviceInfo.deviceId
+        val sessionDeviceId = clientDeviceInfo.deviceId
         if (clientDeviceId == null || sessionDeviceId == null) {
             return true
         }

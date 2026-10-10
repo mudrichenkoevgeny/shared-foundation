@@ -25,6 +25,7 @@ import kotlin.time.Instant
  * @property metadata Set of diagnostic key-value entries ([AuditEventMetadata]).
  * @property message Optional human-readable message or diagnostic details.
  * @property createdAt Timestamp when the audit event occurred ([Instant]).
+ * @property updatedAt Timestamp when the audit event record was last modified ([Instant]), or `null`.
  */
 data class AuditEventPrivate(
     val id: AuditEventId = AuditEventId.generate(),
@@ -37,5 +38,6 @@ data class AuditEventPrivate(
     val status: AuditStatus,
     val metadata: Set<AuditEventMetadata>,
     val message: String?,
-    val createdAt: Instant
+    val createdAt: Instant,
+    val updatedAt: Instant?
 )

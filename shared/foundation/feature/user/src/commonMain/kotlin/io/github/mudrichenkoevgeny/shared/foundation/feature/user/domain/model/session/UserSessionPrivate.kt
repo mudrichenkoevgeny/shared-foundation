@@ -21,7 +21,7 @@ import kotlin.time.Instant
  * @property identifierId Id of the identifier used for login.
  * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Authentication provider category.
- * @property deviceInfo Hardware and environment device info.
+ * @property clientDeviceInfo Hardware and environment device info.
  * @property userAgent HTTP `User-Agent` header value, or `null`.
  * @property ipAddress Raw or masked client IP address, or `null`.
  * @property expiresAt Session expiration timestamp.
@@ -29,6 +29,7 @@ import kotlin.time.Instant
  * @property lastReauthenticatedAt Timestamp of last re-authentication.
  * @property isSensitiveValuesMasked `true` when [identifier] and [ipAddress] are masked.
  * @property createdAt Creation timestamp.
+ * @property updatedAt Last session record modification timestamp, or `null`.
  */
 data class UserSessionPrivate(
     val id: UserSessionId = UserSessionId.generate(),
@@ -38,14 +39,15 @@ data class UserSessionPrivate(
     val identifierId: UserIdentifierId,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
-    val deviceInfo: ClientDeviceInfo,
+    val clientDeviceInfo: ClientDeviceInfo,
     val userAgent: String?,
     val ipAddress: String?,
     val expiresAt: Instant,
     val lastAccessedAt: Instant,
     val lastReauthenticatedAt: Instant,
     val isSensitiveValuesMasked: Boolean,
-    val createdAt: Instant
+    val createdAt: Instant,
+    val updatedAt: Instant?
 ) {
     /**
      * Returns `true` when the session is not expired and matches the caller device.
@@ -60,7 +62,7 @@ data class UserSessionPrivate(
     private fun isExpired(now: Instant): Boolean = expiresAt <= now
 
     private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
-        val sessionDeviceId = deviceInfo.deviceId
+        val sessionDeviceId = clientDeviceInfo.deviceId
         if (clientDeviceId == null || sessionDeviceId == null) {
             return true
         }

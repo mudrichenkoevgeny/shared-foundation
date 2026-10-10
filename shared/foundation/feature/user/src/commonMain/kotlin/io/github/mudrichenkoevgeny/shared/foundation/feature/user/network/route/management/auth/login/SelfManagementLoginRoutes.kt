@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
@@ -46,7 +46,7 @@ object SelfManagementLoginRoutes {
      * a [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] error and a challenge token.
      * The process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
-     * **Audit logging:** Persist an [AuditEvent] for every authentication attempt.
+     * **Audit logging:** Persist an [AuditEventPrivate] for every authentication attempt.
      * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
      * unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -77,7 +77,7 @@ object SelfManagementLoginRoutes {
      * **Note:** The server strictly validates that the challenge token belongs to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
-     * **Audit logging:** Persist an [AuditEvent] for the second-factor verification.
+     * **Audit logging:** Persist an [AuditEventPrivate] for the second-factor verification.
      * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
      * unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
@@ -106,7 +106,7 @@ object SelfManagementLoginRoutes {
      * **Note:** The server strictly validates that the challenge token belongs to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
-     * **Audit logging:** Persist an [AuditEvent] for the backup-factor verification.
+     * **Audit logging:** Persist an [AuditEventPrivate] for the backup-factor verification.
      * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from
      * a new, unrecognized device, an additional audit event with action
      * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
