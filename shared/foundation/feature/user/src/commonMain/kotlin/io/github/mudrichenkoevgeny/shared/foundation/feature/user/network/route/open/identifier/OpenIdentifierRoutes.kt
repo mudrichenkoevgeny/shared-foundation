@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -19,7 +19,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
@@ -44,11 +45,11 @@ object OpenIdentifierRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific identifier details.
+     * Retrieves specific private identifier details.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
-     * Response body: [UserIdentifierPayload].
+     * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -62,7 +63,7 @@ object OpenIdentifierRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns identifiers linked to the **current** authenticated account (self-service).
+     * Returns summary identifiers linked to the **current** authenticated account (self-service).
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -75,10 +76,10 @@ object OpenIdentifierRoutes {
      *
      * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional). Same key repeated means **OR**;
      * different keys combine as **AND**.
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserIdentifierPayload.userAuthProvider]).
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserIdentifierPrivatePayload.userAuthProvider]).
      * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined matching.
      *
-     * Response body: [PagedResult] of [UserIdentifierPayload].
+     * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -106,7 +107,7 @@ object OpenIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DELETE_IDENTIFIER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].
@@ -123,7 +124,7 @@ object OpenIdentifierRoutes {
      *
      * Request body: [AddUserIdentifierEmailRequest].
      *
-     * Response body: [UserIdentifierPayload].
+     * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -136,7 +137,7 @@ object OpenIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.ADD_IDENTIFIER_EMAIL].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the new identifier record id upon success.
@@ -154,7 +155,7 @@ object OpenIdentifierRoutes {
      *
      * Request body: [AddUserIdentifierPhoneRequest].
      *
-     * Response body: [UserIdentifierPayload].
+     * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -167,7 +168,7 @@ object OpenIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.ADD_IDENTIFIER_PHONE].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the new identifier record id upon success.
@@ -185,7 +186,7 @@ object OpenIdentifierRoutes {
      *
      * Request body: [AddUserIdentifierExternalAuthProviderRequest].
      *
-     * Response body: [UserIdentifierPayload].
+     * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -198,7 +199,7 @@ object OpenIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the new identifier record id upon success.
@@ -263,7 +264,7 @@ object OpenIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.CHANGE_PASSWORD].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the identifier record id associated with the password.

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -17,7 +17,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.UpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
@@ -34,7 +35,7 @@ object ManagementUserRoutes {
      *
      * Request body: [CreateByEmailRequest].
      *
-     * Response body: [UserDetailsPayload].
+     * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -50,7 +51,7 @@ object ManagementUserRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_CREATE_USER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the operation.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the new account id.
@@ -63,7 +64,7 @@ object ManagementUserRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a paged list of users based on filters.
+     * Returns a paged list of summary users based on filters.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -80,7 +81,7 @@ object ManagementUserRoutes {
      *
      * **Filters** ([UserFilterValues.UserFilterValues]): all filters are optional.
      *
-     * Response body: [PagedResult] of [UserDetailsPayload].
+     * Response body: [PagedResult] of [UserSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -95,11 +96,11 @@ object ManagementUserRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific user details.
+     * Retrieves specific private user profile details.
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
-     * Response body: [UserDetailsPayload].
+     * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -146,7 +147,7 @@ object ManagementUserRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the update.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].
@@ -176,7 +177,7 @@ object ManagementUserRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_USER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the deletion.
      * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].

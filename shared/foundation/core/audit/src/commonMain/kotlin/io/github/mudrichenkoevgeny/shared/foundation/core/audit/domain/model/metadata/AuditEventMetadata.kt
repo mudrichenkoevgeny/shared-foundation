@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 
 /**
- * A single key-value pair attached to an [AuditEvent].
+ * A single key-value pair attached to an [AuditEventPrivate].
  * Redaction policy for [value] is defined by [AuditMetadataKey.valueSensitivity] on [key].
  *
  * @property key Metadata key (e.g. for filtering or analytics).

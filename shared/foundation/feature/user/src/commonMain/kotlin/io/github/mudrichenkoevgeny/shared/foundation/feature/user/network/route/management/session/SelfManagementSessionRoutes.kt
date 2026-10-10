@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
@@ -22,7 +22,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 
 /**
  * Route paths for the current authenticated principal's sessions in the management API (self-service).
@@ -42,7 +43,7 @@ object SelfManagementSessionRoutes {
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.LOGOUT].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current session identifier.
@@ -54,7 +55,7 @@ object SelfManagementSessionRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns active sessions for the **current** authenticated management account.
+     * Returns active summary sessions for the **current** authenticated management account.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -71,8 +72,8 @@ object SelfManagementSessionRoutes {
      * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
      * Same key repeated — **OR**; different keys — **AND**.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPrivatePayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names ([UserSessionPrivatePayload.identifierAuthProvider]).
      * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
      * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
      * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of free-text IP addresses; server-defined.
@@ -82,7 +83,7 @@ object SelfManagementSessionRoutes {
      * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
      * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
      *
-     * Response body: [PagedResult] of [UserSessionPayload].
+     * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -95,11 +96,11 @@ object SelfManagementSessionRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns details of a specific session owned by the current management account.
+     * Returns private details of a specific session owned by the current management account.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
-     * Response body: [UserSessionPayload].
+     * Response body: [UserSessionPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -123,7 +124,7 @@ object SelfManagementSessionRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DELETE_SESSION].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserSessionId] from [UserApiPaths.SESSION_ID].
@@ -147,7 +148,7 @@ object SelfManagementSessionRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.SELF_DELETE_OTHER_SESSIONS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
@@ -171,7 +172,7 @@ object SelfManagementSessionRoutes {
      * (**OR** semantics).
      * - **Required Permissions:** None.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.REAUTHENTICATE_SESSION].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current [UserSessionId].

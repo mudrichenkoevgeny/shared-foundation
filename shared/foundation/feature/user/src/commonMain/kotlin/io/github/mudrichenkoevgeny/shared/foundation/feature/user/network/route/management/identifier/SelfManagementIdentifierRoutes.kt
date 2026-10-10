@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -19,7 +19,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
@@ -33,25 +34,7 @@ object SelfManagementIdentifierRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific identifier details.
-     *
-     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
-     *
-     * Response body: [UserIdentifierPayload].
-     *
-     * **Authorization:**
-     * - **Public Access:** Denied.
-     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
-     * (**OR** semantics).
-     * - **Required Permissions:** None.
-     */
-    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
-
-    /**
-     * **HTTP method:** `GET`
-     *
-     * Returns identifiers linked to the **current** authenticated management account.
+     * Returns summary identifiers linked to the **current** authenticated management account.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -67,7 +50,7 @@ object SelfManagementIdentifierRoutes {
      * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
      * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
      *
-     * Response body: [PagedResult] of [UserIdentifierPayload].
+     * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -76,6 +59,24 @@ object SelfManagementIdentifierRoutes {
      * - **Required Permissions:** None.
      */
     const val GET_IDENTIFIERS = BASE_SELF_IDENTIFIER_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves specific private identifier details.
+     *
+     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Response body: [UserIdentifierPrivatePayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * (**OR** semantics).
+     * - **Required Permissions:** None.
+     */
+    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -95,7 +96,7 @@ object SelfManagementIdentifierRoutes {
      * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.CHANGE_PASSWORD].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the identifier record id associated with the password.

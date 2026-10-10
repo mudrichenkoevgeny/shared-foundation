@@ -5,23 +5,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.t
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSession
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
 import kotlin.time.Instant
 
 /**
- * Maps between [UserSessionPayload] and domain [UserSession].
+ * Extension functions mapping private session models between domain and network representations.
  */
 
 /**
- * Builds domain [UserSession] from [UserSessionPayload].
- *
- * @throws IllegalArgumentException when the session `id`, `userId`, or `identifierId` is not a valid UUID string, when
- * `identifierAuthProvider` is unknown to [UserAuthProvider.fromValueOrNull].
+ * Builds domain [UserSessionPrivate] from [UserSessionPrivatePayload].
  */
-fun UserSessionPayload.toUserSession(): UserSession = UserSession(
+fun UserSessionPrivatePayload.toUserSessionPrivate(): UserSessionPrivate = UserSessionPrivate(
     id = id.toUserSessionIdOrThrow(),
     userId = userId.toUserIdOrThrow(),
     userRole = UserRole.fromValueOrThrow(userRole),
@@ -29,21 +26,20 @@ fun UserSessionPayload.toUserSession(): UserSession = UserSession(
     identifierId = identifierId.toUserIdentifierIdOrThrow(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
-    deviceInfo = clientDeviceInfo.toClientDeviceInfo(),
+    deviceInfo = deviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     expiresAt = Instant.fromEpochMilliseconds(expiresAt),
     lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
     lastReauthenticatedAt = Instant.fromEpochMilliseconds(lastReauthenticatedAt),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = Instant.fromEpochMilliseconds(createdAt),
-    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
+    createdAt = Instant.fromEpochMilliseconds(createdAt)
 )
 
 /**
- * Builds network [UserSessionPayload] from domain [UserSession].
+ * Builds network [UserSessionPrivatePayload] from domain [UserSessionPrivate].
  */
-fun UserSession.toUserSessionPayload(): UserSessionPayload = UserSessionPayload(
+fun UserSessionPrivate.toUserSessionPrivatePayload(): UserSessionPrivatePayload = UserSessionPrivatePayload(
     id = id.asHexDashString(),
     userId = userId.asHexDashString(),
     userRole = userRole.serialName,
@@ -51,13 +47,12 @@ fun UserSession.toUserSessionPayload(): UserSessionPayload = UserSessionPayload(
     identifierId = identifierId.asHexDashString(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider.serialName,
-    clientDeviceInfo = deviceInfo.toClientDeviceInfoPayload(),
+    deviceInfo = deviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     expiresAt = expiresAt.toEpochMilliseconds(),
     lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
     lastReauthenticatedAt = lastReauthenticatedAt.toEpochMilliseconds(),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt.toEpochMilliseconds(),
-    updatedAt = updatedAt?.toEpochMilliseconds()
+    createdAt = createdAt.toEpochMilliseconds()
 )

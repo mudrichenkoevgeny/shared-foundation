@@ -15,13 +15,15 @@ Supports diverse authentication strategies across all lifecycle stages (registra
 - **Token Management:** Handling of Access, Refresh, and Session tokens, including secure hashing and refresh cycles.
 
 ### 2. User & Profile Management
-- **Self-Service:** Profile retrieval, updates, and account deletion/restoration.
-- **Administrative CRUD:** Full management of user accounts, status ([UserAccountStatus]), authority levels ([UserRoleDefaultAuthorityLevel]), and account lockout states ([AccountLockoutType]).
+Entities follow the standardized 4-tier projection model (`Summary`, `Private`, `Internal`):
+- **User Summary:** [UserSummary] / [UserSummaryPayload] for compact list views, mentions, and cards.
+- **User Private:** [UserPrivate] / [UserPrivatePayload] for authenticated self-service ("My Account") and management CRUD.
+- **User Internal:** [UserInternal] for server/database storage (includes `updatedAt`). **No wire Payload!**
 - **User Configuration:** Open ([OpenUserConfiguration]) and Management ([ManagementUserConfiguration]) aggregated configuration slices.
 
 ### 3. Identity & Session Control
-- **Identifiers:** Linking and unlinking multiple identities (Email, Phone, External IDs) to a single account ([UserIdentifier]).
-- **Session Management:** Full visibility into active sessions ([UserSession]) with separate session limit policies for open users vs. management users, and ability to terminate individual or global sessions ([DeletedSessions]).
+- **Identifiers:** Linking and unlinking multiple identities ([UserIdentifierSummary], [UserIdentifierPrivate], [UserIdentifierInternal]).
+- **Session Management:** Full visibility into active sessions ([UserSessionSummary], [UserSessionPrivate], [UserSessionInternal]) with separate session limit policies for open users vs. management users, and ability to terminate individual or global sessions ([DeletedSessions]).
 - **Data Masking:** Permissions-based masking of sensitive data in identifiers and sessions (e.g., masked vs. unmasked emails).
 
 ### 4. Multifactor Security
@@ -48,8 +50,8 @@ The module provides DTOs and Request models for every domain entity to ensure ty
 - **Auth Data & Settings:** [AuthDataPayload], [AvailableAuthProvidersPayload], [OpenAuthSettingsPayload], [ManagementAuthSettingsPayload], [EmailRestrictionPolicyPayload].
 - **Configuration:** [OpenUserConfigurationPayload], [ManagementUserConfigurationPayload].
 - **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
-- **Sessions & Identifiers:** [UserSessionPayload], [DeletedSessionsPayload], [UserIdentifierPayload].
-- **User Profile:** [UserDetailsPayload], [UserPublicPayload].
+- **Sessions & Identifiers:** [UserSessionSummaryPayload], [UserSessionPrivatePayload], [DeletedSessionsPayload], [UserIdentifierSummaryPayload], [UserIdentifierPrivatePayload].
+- **User Profile:** [UserSummaryPayload], [UserPrivatePayload].
 - **Requests:** [RegisterByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
 
 ### Real-Time Communication
@@ -83,8 +85,8 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 | :--- | :--- |
 | **Auth & Settings** | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper]<br>[EmailRestrictionPolicyMapper] |
 | **Configuration** | [OpenUserConfigurationMapper]<br>[ManagementUserConfigurationMapper] |
-| **User Profile** | [UserDetailsMapper]<br>[UserPublicMapper] |
-| **Identifiers & Sessions** | [UserIdentifierMapper]<br>[UserSessionMapper]<br>[DeletedSessionsMapper]<br>[SessionTokenMapper] |
+| **User Profile** | [UserSummaryMapper]<br>[UserPrivateMapper]<br>[UserDomainMapper] |
+| **Identifiers & Sessions** | [UserIdentifierSummaryMapper]<br>[UserIdentifierPrivateMapper]<br>[UserIdentifierDomainMapper]<br>[UserSessionSummaryMapper]<br>[UserSessionPrivateMapper]<br>[UserSessionDomainMapper]<br>[DeletedSessionsMapper]<br>[SessionTokenMapper] |
 
 ### Domain Models
 
@@ -92,9 +94,9 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 | :--- | :--- |
 | **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
 | **Configuration** | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
-| **User Profile** | [UserDetails]<br>[UserPublic]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
-| **Identifiers** | [UserIdentifier]<br>[UserIdentifierId]<br>[UserIdentifierInternal] |
-| **Sessions** | [UserSession]<br>[UserSessionId]<br>[UserSessionInternal]<br>[DeletedSessions] |
+| **User Profile** | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
+| **Identifiers** | [UserIdentifierSummary]<br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
+| **Sessions** | [UserSessionSummary]<br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
 | **Tokens** | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
 | **Listings & Filters** | [UserFilterValues]<br>[UserSortValues]<br>[UserSortBy]<br>[UserIdentifierSortBy]<br>[UserSessionSortBy] |
 
@@ -135,12 +137,17 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [EmailRestrictionPolicyMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/emailrestriction/EmailRestrictionPolicyMapper.kt
 [OpenUserConfigurationMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/configuration/OpenUserConfigurationMapper.kt
 [ManagementUserConfigurationMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/configuration/ManagementUserConfigurationMapper.kt
-[UserIdentifierMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/identifier/UserIdentifierMapper.kt
-[UserSessionMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/session/UserSessionMapper.kt
+[UserIdentifierSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/identifier/UserIdentifierSummaryMapper.kt
+[UserIdentifierPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/identifier/UserIdentifierPrivateMapper.kt
+[UserIdentifierDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/identifier/UserIdentifierDomainMapper.kt
+[UserSessionSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/session/UserSessionSummaryMapper.kt
+[UserSessionPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/session/UserSessionPrivateMapper.kt
+[UserSessionDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/session/UserSessionDomainMapper.kt
 [DeletedSessionsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/session/DeletedSessionsMapper.kt
 [SessionTokenMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/token/SessionTokenMapper.kt
-[UserDetailsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/user/UserDetailsMapper.kt
-[UserPublicMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/user/UserPublicMapper.kt
+[UserSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/user/UserSummaryMapper.kt
+[UserPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/user/UserPrivateMapper.kt
+[UserDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/user/UserDomainMapper.kt
 
 [AuthData]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/auth/data/AuthData.kt
 [AvailableAuthProviders]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/auth/settings/AvailableAuthProviders.kt
@@ -151,19 +158,22 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [UserAuthProvider]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/authprovider/UserAuthProvider.kt
 [OpenUserConfiguration]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/configuration/OpenUserConfiguration.kt
 [ManagementUserConfiguration]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/configuration/ManagementUserConfiguration.kt
-[UserDetails]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserDetails.kt
-[UserPublic]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserPublic.kt
+[UserSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserSummary.kt
+[UserPrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserPrivate.kt
+[UserInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserInternal.kt
 [UserId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/user/UserId.kt
 [UserRole]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/role/UserRole.kt
 [UserAccountStatus]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/accountstatus/UserAccountStatus.kt
 [UserRoleDefaultAuthorityLevel]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/authoritylevel/UserRoleDefaultAuthorityLevel.kt
 [AccountLockoutType]: ../core/security/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
-[UserIdentifier]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifier.kt
-[UserIdentifierId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierId.kt
+[UserIdentifierSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierSummary.kt
+[UserIdentifierPrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierPrivate.kt
 [UserIdentifierInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierInternal.kt
-[UserSession]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSession.kt
-[UserSessionId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSessionId.kt
+[UserIdentifierId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierId.kt
+[UserSessionSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSessionSummary.kt
+[UserSessionPrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSessionPrivate.kt
 [UserSessionInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSessionInternal.kt
+[UserSessionId]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/UserSessionId.kt
 [DeletedSessions]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/session/DeletedSessions.kt
 [AccessToken]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/token/AccessToken.kt
 [RefreshToken]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/token/RefreshToken.kt
@@ -182,11 +192,13 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [EmailRestrictionPolicyPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/emailrestriction/EmailRestrictionPolicyPayload.kt
 [OpenUserConfigurationPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/configuration/OpenUserConfigurationPayload.kt
 [ManagementUserConfigurationPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/configuration/ManagementUserConfigurationPayload.kt
-[UserIdentifierPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/identifier/UserIdentifierPayload.kt
-[UserSessionPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/session/UserSessionPayload.kt
+[UserIdentifierSummaryPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/identifier/UserIdentifierSummaryPayload.kt
+[UserIdentifierPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/identifier/UserIdentifierPrivatePayload.kt
+[UserSessionSummaryPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/session/UserSessionSummaryPayload.kt
+[UserSessionPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/session/UserSessionPrivatePayload.kt
 [DeletedSessionsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/session/DeletedSessionsPayload.kt
-[UserDetailsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/user/UserDetailsPayload.kt
-[UserPublicPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/user/UserPublicPayload.kt
+[UserSummaryPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/user/UserSummaryPayload.kt
+[UserPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/user/UserPrivatePayload.kt
 [RefreshTokenPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/token/RefreshTokenPayload.kt
 [SessionTokenPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/token/SessionTokenPayload.kt
 

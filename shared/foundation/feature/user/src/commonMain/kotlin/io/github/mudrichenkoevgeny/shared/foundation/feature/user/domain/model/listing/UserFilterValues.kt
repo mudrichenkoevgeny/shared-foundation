@@ -8,7 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
 
 /**
  * Stable **keys** for filtering user-related listings (users, identifiers, sessions).
@@ -102,7 +102,7 @@ object UserFilterValues {
         const val OPERATION_SYSTEM_VERSION = CommonApiFields.OPERATION_SYSTEM_VERSION
 
         /**
-         * Raw login / identifier value filter; not a DTO field on [UserSessionPayload]; server-defined matching.
+         * Raw login / identifier value filter; not a DTO field on [UserSessionPrivatePayload]; server-defined matching.
          */
         const val IDENTIFIER = UserApiFields.IDENTIFIER
     }

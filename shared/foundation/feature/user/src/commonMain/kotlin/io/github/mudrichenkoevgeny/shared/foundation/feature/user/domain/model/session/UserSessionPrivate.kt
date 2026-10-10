@@ -6,12 +6,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
 import kotlin.time.Instant
 
 /**
- * Session row; wire counterpart [UserSessionPayload]. [identifier] and [ipAddress] follow [isSensitiveValuesMasked].
- * Use [UserSessionInternal] for server-side storage fields that must not be exposed via API payloads.
+ * Detailed session row for authenticated self-service and management inspection.
+ *
+ * Wire counterpart is [UserSessionPrivatePayload].
  *
  * @property id Session row id.
  * @property userId Owning user id.
@@ -28,9 +29,8 @@ import kotlin.time.Instant
  * @property lastReauthenticatedAt Timestamp of last re-authentication.
  * @property isSensitiveValuesMasked `true` when [identifier] and [ipAddress] are masked.
  * @property createdAt Creation timestamp.
- * @property updatedAt Last modification timestamp, or `null`.
  */
-data class UserSession(
+data class UserSessionPrivate(
     val id: UserSessionId = UserSessionId.generate(),
     val userId: UserId,
     val userRole: UserRole,
@@ -45,8 +45,7 @@ data class UserSession(
     val lastAccessedAt: Instant,
     val lastReauthenticatedAt: Instant,
     val isSensitiveValuesMasked: Boolean,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+    val createdAt: Instant
 ) {
     /**
      * Returns `true` when the session is not expired and matches the caller device.

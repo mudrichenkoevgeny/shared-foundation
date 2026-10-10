@@ -2,7 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contr
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.OpenAuthSettingsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
 
 /**
  * WebSocket event types related to user functionality.
@@ -29,7 +29,7 @@ object UserWebSocketEventTypes {
     /**
      * Sent when the user's data (profile, role, account status, or permissions) is updated.
      * Use this to synchronize the local state of the current user.
-     * Payload: [UserDetailsPayload]
+     * Payload: [UserPrivatePayload]
      */
     const val USER_UPDATED = "USER_UPDATED"
 

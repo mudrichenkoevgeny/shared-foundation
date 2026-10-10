@@ -6,7 +6,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.lis
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
@@ -20,7 +21,7 @@ object ManagementAuditRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a paged list of audit events.
+     * Returns a paged list of condensed audit events.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -39,7 +40,7 @@ object ManagementAuditRoutes {
      * - [AuditFilterValues.AuditEventFilterValues.STATUS] — list of [AuditStatus] serial names.
      * - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — list of free-text messages; server-defined.
      *
-     * Response body: [PagedResult] of [AuditEventPayload].
+     * Response body: [PagedResult] of [AuditEventSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -67,7 +68,7 @@ object ManagementAuditRoutes {
      *
      * Path parameter: [AuditApiPaths.EVENT_ID].
      *
-     * Response body: [AuditEventPayload].
+     * Response body: [AuditEventPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.

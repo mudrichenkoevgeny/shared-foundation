@@ -1,12 +1,12 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Supported `sort_by` wire values for audit event list endpoints (aligned with [AuditEventPayload.createdAt]).
+ * Supported `sort_by` wire values for audit event list endpoints (aligned with [AuditEventPrivatePayload.createdAt]).
  */
 object AuditSortValues {
     /**
@@ -14,7 +14,7 @@ object AuditSortValues {
      */
     @Serializable
     enum class AuditEventSortBy {
-        /** Sort by creation timestamp ([CommonApiFields.CREATED_AT]; [AuditEventPayload.createdAt]). */
+        /** Sort by creation timestamp ([CommonApiFields.CREATED_AT]; [AuditEventPrivatePayload.createdAt]). */
         @SerialName(CommonApiFields.CREATED_AT)
         CREATED_AT;
 

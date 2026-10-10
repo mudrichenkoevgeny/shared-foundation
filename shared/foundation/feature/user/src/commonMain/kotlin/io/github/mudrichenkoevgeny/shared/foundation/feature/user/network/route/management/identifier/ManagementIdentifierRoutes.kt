@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -18,7 +18,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
 
@@ -32,7 +33,7 @@ object ManagementIdentifierRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a paged list of identifiers.
+     * Returns a paged list of summary identifiers.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -49,7 +50,7 @@ object ManagementIdentifierRoutes {
      * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
      * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined matching.
      *
-     * Response body: [PagedResult] of [UserIdentifierPayload].
+     * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -67,11 +68,11 @@ object ManagementIdentifierRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific identifier details.
+     * Retrieves specific private identifier details.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
-     * Response body: [UserIdentifierPayload].
+     * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -109,7 +110,7 @@ object ManagementIdentifierRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the deletion.
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].
@@ -140,7 +141,7 @@ object ManagementIdentifierRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_IDENTIFIER_PASSWORD].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the password revocation.
      * * **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].

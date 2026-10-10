@@ -4,27 +4,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.pe
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserDetails
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPublic
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserDetailsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
 import kotlin.time.Instant
 
 /**
- * Maps between [UserDetailsPayload] and domain [UserDetails].
- *
- * Role and account status strings use [UserRole.fromValueOrNull] / [UserAccountStatus.fromValueOrNull]; reverse
- * mapping uses [UserRole.serialName] / [UserAccountStatus.serialName]. Epoch millis fields use
- * [Instant.fromEpochMilliseconds] / [Instant.toEpochMilliseconds].
+ * Extension functions mapping private user models between domain and network representations.
  */
 
 /**
- * Builds domain [UserDetails] from [UserDetailsPayload].
+ * Builds domain [UserPrivate] from [UserPrivatePayload].
  *
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value
  * for `role`, `accountStatus`, `accountStatusOnRestore`, or `lockoutType` is not recognized.
  */
-fun UserDetailsPayload.toUserDetails() = UserDetails(
+fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     id = id.toUserIdOrThrow(),
     role = UserRole.fromValueOrThrow(role),
     accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
@@ -39,16 +34,15 @@ fun UserDetailsPayload.toUserDetails() = UserDetails(
     lastLoginAt = lastLoginAt?.let(Instant::fromEpochMilliseconds),
     lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
     createdAt = Instant.fromEpochMilliseconds(createdAt),
-    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
     lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
     temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
- * Builds network [UserDetailsPayload] from domain [UserDetails].
+ * Builds network [UserPrivatePayload] from domain [UserPrivate].
  */
-fun UserDetails.toUserDetailsPayload() = UserDetailsPayload(
+fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     id = id.asHexDashString(),
     role = role.serialName,
     accountStatus = accountStatus.serialName,
@@ -61,17 +55,7 @@ fun UserDetails.toUserDetailsPayload() = UserDetailsPayload(
     lastLoginAt = lastLoginAt?.toEpochMilliseconds(),
     lastActiveAt = lastActiveAt?.toEpochMilliseconds(),
     createdAt = createdAt.toEpochMilliseconds(),
-    updatedAt = updatedAt?.toEpochMilliseconds(),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
     lockoutType = lockoutType.serialName,
     temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds()
-)
-
-/**
- * Builds [UserPublic] from this [UserDetails] (id, role, and account status only).
- */
-fun UserDetails.toUserPublic() = UserPublic(
-    id = id,
-    role = role,
-    accountStatus = accountStatus
 )

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
@@ -19,7 +19,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.user.BaseManagementUserRoutes
 
 /**
@@ -28,10 +29,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 object ManagementSessionRoutes {
     /** Base path for managing user sessions in management API. */
     private const val BASE_MANAGEMENT_SESSIONS_ROUTE = "${BaseManagementUserRoutes.BASE_MANAGEMENT_USERS_ROUTE}/sessions"
+
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a paged list of active sessions based on filters.
+     * Returns a paged list of active summary sessions based on filters.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -50,7 +52,7 @@ object ManagementSessionRoutes {
      * - [UserFilterValues.UserSessionFilterValues.USER_ID] — list of user IDs.
      * - [UserFilterValues.UserSessionFilterValues.USER_ROLE] — list of [UserRole] serial names.
      * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs ([UserSessionPrivatePayload.identifierId]).
      * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
      * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
      * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
@@ -61,7 +63,7 @@ object ManagementSessionRoutes {
      * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
      * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
      *
-     * Response body: [PagedResult] of [UserSessionPayload].
+     * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -79,11 +81,11 @@ object ManagementSessionRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific session details.
+     * Retrieves specific private session details.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
-     * Response body: [UserSessionPayload].
+     * Response body: [UserSessionPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -119,7 +121,7 @@ object ManagementSessionRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_SESSION].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the revocation.
      * * **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserApiPaths.SESSION_ID].
@@ -150,7 +152,7 @@ object ManagementSessionRoutes {
      * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
      * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
-     * **Audit logging:** Persist an [AuditEvent] for successful execution and all failed attempts.
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * * **Action:** [UserAuditActionType.MANAGEMENT_DELETE_ALL_USER_SESSIONS].
      * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the revocation.
      * * **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).

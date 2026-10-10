@@ -7,14 +7,16 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 ## What it provides
 
 - **Domain Models:**
-    - [AuditEvent]: Central record capturing *who* ([AuditActorType]), *did what* ([AuditActionType]), *to what* ([AuditResourceType]), and the *outcome* ([AuditStatus]).
+    - [AuditEventSummary]: Condensed record capturing high-level audit information for list views and tables.
+    - [AuditEventPrivate]: Detailed record capturing full actor/resource identifiers and diagnostic metadata for inspection.
+    - [AuditEventInternal]: Server-side storage entity with redaction policy ([AuditValueSensitivity]) and `updatedAt` timestamp. **No wire payload!**
     - [AuditEventMetadata]: Key-value pairs for rich diagnostics (e.g., HTTP headers, trace IDs).
     - [AuditValueSensitivity]: Defines redaction policies (Full mask, Partial mask, IP-address) for sensitive data in resource IDs or metadata.
 - **Common Metadata:**
     - [CommonAuditMetadataKey]: Standardized keys for client diagnostics (Device Info, User-Agent, IP, Trace ID) and error tracking (`error_id`, `denied_reason`).
-- **Wire Payloads:** [AuditEventPayload], [AuditEventMetadataPayload] for consistent JSON serialization.
+- **Wire Payloads:** [AuditEventSummaryPayload], [AuditEventPrivatePayload], [AuditEventMetadataPayload] for consistent JSON serialization.
 - **Mappers:**
-    - [AuditEventMapper], [AuditEventMetadataMapper]: Domain ↔ Payload conversion.
+    - [AuditEventSummaryMapper], [AuditEventPrivateMapper], [AuditEventDomainMapper], [AuditEventMetadataMapper]: Domain ↔ Payload and Domain ↔ Domain conversions.
     - [ClientInfo.toAuditMetadata()][ClientInfoAuditMapper]: Extension to automatically extract audit metadata from standard `ClientInfo`.
 - **List & Search Contract:**
     - [AuditFilterValues.AuditEventFilterValues]: Constants for query parameters (actor_id, action, status, etc.).
@@ -35,19 +37,24 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 [PagedResult]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult.kt
 [ListingParamNames]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames.kt
 [AuditStatus]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus.kt
-[AuditEvent]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEvent.kt
+[AuditEventSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary.kt
+[AuditEventPrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate.kt
+[AuditEventInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal.kt
 [AuditActorType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType.kt
 [AuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType.kt
 [AuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType.kt
 [AuditValueSensitivity]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity.kt
 [AuditEventMetadata]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata.kt
 [CommonAuditMetadataKey]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey.kt
-[AuditEventPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPayload.kt
+[AuditEventSummaryPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload.kt
+[AuditEventPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload.kt
 [AuditEventMetadataPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload.kt
 [AuditApiPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/contract/AuditApiPaths.kt
 [AuditFilterValues.AuditEventFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditFilterValues.kt
 [AuditSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditSortValues.kt
-[AuditEventMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventMapper.kt
+[AuditEventSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventSummaryMapper.kt
+[AuditEventPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventPrivateMapper.kt
+[AuditEventDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventDomainMapper.kt
 [ClientInfoAuditMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/ClientInfoAuditMapper.kt
 [CompositeAuditActionTypeParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/CompositeAuditActionTypeParser.kt
 [CompositeAuditResourceTypeParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/CompositeAuditResourceTypeParser.kt

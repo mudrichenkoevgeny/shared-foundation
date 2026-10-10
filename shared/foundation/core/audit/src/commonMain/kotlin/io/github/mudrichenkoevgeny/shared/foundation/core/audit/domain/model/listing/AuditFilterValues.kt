@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 
 /**
@@ -27,28 +27,28 @@ object AuditFilterValues {
      * [AuditStatus] serial names for [STATUS]).
      */
     object AuditEventFilterValues {
-        /** Filter by actor id ([AuditEventPayload.actorId]); UUID string, hex with dashes. */
+        /** Filter by actor id ([AuditEventPrivatePayload.actorId]); UUID string, hex with dashes. */
         const val ACTOR_ID = AuditEventFields.ACTOR_ID
 
-        /** Filter by actor type ([AuditEventPayload.actorType]); wire values are [AuditActorType] serial names. */
+        /** Filter by actor type ([AuditEventPrivatePayload.actorType]); wire values are [AuditActorType] serial names. */
         const val ACTOR_TYPE = AuditEventFields.ACTOR_TYPE
 
-        /** Filter by user actor role snapshot ([AuditEventPayload.actorUserRole]). */
+        /** Filter by user actor role snapshot ([AuditEventPrivatePayload.actorUserRole]). */
         const val ACTOR_USER_ROLE = AuditEventFields.ACTOR_USER_ROLE
 
-        /** Filter by action name ([AuditEventPayload.action]). */
+        /** Filter by action name ([AuditEventPrivatePayload.action]). */
         const val ACTION = AuditEventFields.ACTION
 
-        /** Filter by resource type ([AuditEventPayload.resource]). */
+        /** Filter by resource type ([AuditEventPrivatePayload.resource]). */
         const val RESOURCE = AuditEventFields.RESOURCE
 
-        /** Filter by resource instance id ([AuditEventPayload.resourceId]). */
+        /** Filter by resource instance id ([AuditEventPrivatePayload.resourceId]). */
         const val RESOURCE_ID = AuditEventFields.RESOURCE_ID
 
         /** Filter by outcome; wire values are [AuditStatus] JSON names (`SUCCESS`, `FAILED`, `DENIED`). */
         const val STATUS = AuditEventFields.STATUS
 
-        /** Filter by [AuditEventPayload.message] (typically case-insensitive substring). */
+        /** Filter by [AuditEventPrivatePayload.message] (typically case-insensitive substring). */
         const val MESSAGE = CommonApiFields.MESSAGE
     }
 }
