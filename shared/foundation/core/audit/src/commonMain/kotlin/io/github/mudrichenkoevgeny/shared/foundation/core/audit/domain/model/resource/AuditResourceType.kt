@@ -6,7 +6,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  * Other modules can provide their own resource type implementations.
  */
 interface AuditResourceType {
-    val serialName: String
+    val value: String
 
     fun parseOrNull(value: String): AuditResourceType?
     fun parseOrThrow(value: String): AuditResourceType

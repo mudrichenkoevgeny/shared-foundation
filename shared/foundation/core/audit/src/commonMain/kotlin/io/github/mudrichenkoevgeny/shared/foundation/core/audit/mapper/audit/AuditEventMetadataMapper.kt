@@ -25,7 +25,7 @@ fun AuditEventMetadataPayload.toAuditEventMetadata(
  */
 fun AuditEventMetadata.toAuditEventMetadataPayload(): AuditEventMetadataPayload =
     AuditEventMetadataPayload(
-        key = key.serialName,
+        key = key.value,
         value = value,
-        valueSensitivity = key.valueSensitivity.serialName
+        valueSensitivity = key.valueSensitivity.value
     )

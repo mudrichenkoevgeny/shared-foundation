@@ -20,8 +20,10 @@ object ManagementUserConfigurationRoutes {
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
-     * (**OR** semantics).
+     *   (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
      */
     const val GET_CONFIGURATION = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/user-configuration"
 }

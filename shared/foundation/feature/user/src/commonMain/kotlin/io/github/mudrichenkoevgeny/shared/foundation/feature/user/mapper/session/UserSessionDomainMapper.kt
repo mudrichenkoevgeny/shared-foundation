@@ -39,6 +39,7 @@ fun UserSessionInternal.toUserSessionPrivate(
  */
 fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
     id = id,
+    userId = userId,
     clientDeviceInfo = clientDeviceInfo,
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider,
@@ -53,6 +54,7 @@ fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary = UserSessionS
  */
 fun UserSessionInternal.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
     id = id,
+    userId = userId,
     clientDeviceInfo = clientDeviceInfo,
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = identifierAuthProvider,

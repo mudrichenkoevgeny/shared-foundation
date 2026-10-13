@@ -32,6 +32,7 @@ fun UserIdentifierInternal.toUserIdentifierPrivate(
  */
 fun UserIdentifierPrivate.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
     id = id,
+    userId = userId,
     userAuthProvider = userAuthProvider,
     identifier = identifier,
     displayName = displayName
@@ -44,6 +45,7 @@ fun UserIdentifierPrivate.toUserIdentifierSummary(): UserIdentifierSummary = Use
  */
 fun UserIdentifierInternal.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
     id = id,
+    userId = userId,
     userAuthProvider = userAuthProvider,
     identifier = identifier,
     displayName = displayName

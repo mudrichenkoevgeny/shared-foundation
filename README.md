@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.57"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.59"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -43,11 +43,11 @@ pnpm add @mudrichenkoevgeny/shared-foundation
 
 Published artifacts (versions aligned via the BOM):
 
-- **core-common** — shared errors, network contracts, WebSocket envelopes, common DTOs ([module README](shared/foundation/core/common/README.md)).
-- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, validation, HTTP routes, permission codes, and mappers ([module README](shared/foundation/core/security/README.md)).
-- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, and mappers ([module README](shared/foundation/core/settings/README.md)).
-- **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers ([module README](shared/foundation/core/audit/README.md)).
-- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers (self-service & management), open/management user configurations, and self-service account unlocking ([module README](shared/foundation/feature/user/README.md)).
+- **core-common** — shared errors, network contracts, WebSocket envelopes, common DTOs, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), and parameter normalizers ([module README](shared/foundation/core/common/README.md)).
+- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, validation, HTTP routes, permission codes, mappers, and management security navigation (`ManagementSecurityNavigation`) ([module README](shared/foundation/core/security/README.md)).
+- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and management settings navigation (`ManagementSettingsNavigation`) ([module README](shared/foundation/core/settings/README.md)).
+- **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
+- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers (self-service & management), open/management user configurations, self-service account unlocking, and client/management navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementUsersNavigation`, etc.) and parameters ([module README](shared/foundation/feature/user/README.md)).
 - **bom** — dependency constraints for the modules above.
 
 ## Documentation & Architecture

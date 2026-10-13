@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.register.RegisterByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
@@ -37,12 +38,17 @@ object OpenRegisterRoutes {
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.REGISTER_BY_EMAIL].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the new [UserId] only upon successful registration.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * - **Action:** [UserAuditActionType.REGISTER_BY_EMAIL].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the new [UserId] only upon successful registration.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.Registration]
      */
     const val REGISTER_BY_EMAIL = REGISTER_BY_EMAIL_ROUTE
 
@@ -60,6 +66,10 @@ object OpenRegisterRoutes {
      * - **Allowed Roles:** Any.
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.Registration]
      */
-    const val SEND_REGISTER_CONFIRMATION_TO_EMAIL = "$REGISTER_BY_EMAIL_ROUTE/confirmation/send-to-email"
+    const val SEND_REGISTER_CONFIRMATION_TO_EMAIL = "$REGISTER_BY_EMAIL_ROUTE/send-confirmation"
 }

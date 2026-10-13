@@ -6,7 +6,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.ac
  * Other modules can provide their own action type implementations.
  */
 interface AuditActionType {
-    val serialName: String
+    val value: String
 
     fun parseOrNull(value: String): AuditActionType?
     fun parseOrThrow(value: String): AuditActionType

@@ -11,35 +11,33 @@ import kotlinx.serialization.Serializable
 object AuditSortValues {
     /**
      * Supported `sort_by` values for audit event list endpoints.
+     *
+     * @property value Wire value for `sort_by`.
      */
     @Serializable
-    enum class AuditEventSortBy {
+    enum class AuditEventSortBy(val value: String) {
         /** Sort by creation timestamp ([CommonApiFields.CREATED_AT]; [AuditEventPrivatePayload.createdAt]). */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT,
+        CREATED_AT(CommonApiFields.CREATED_AT),
 
         /** Sort by update timestamp ([CommonApiFields.UPDATED_AT]; [AuditEventPrivatePayload.updatedAt]). */
         @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT;
-
-        /** Wire value for `sort_by`. */
-        val serialName: String
-            get() = when (this) {
-                CREATED_AT -> CommonApiFields.CREATED_AT
-                UPDATED_AT -> CommonApiFields.UPDATED_AT
-            }
+        UPDATED_AT(CommonApiFields.UPDATED_AT);
 
         companion object {
+            /**
+             * Default sort field ([CREATED_AT]).
+             */
+            val DEFAULT = CREATED_AT
+
             /**
              * Returns [AuditEventSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): AuditEventSortBy? =
                 entries.firstOrNull {
-                    it.serialName.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
-                } ?: runCatching {
-                    valueOf(value.uppercase())
-                }.getOrNull()
+                    it.value.equals(value, ignoreCase = true) ||
+                            it.name.equals(value, ignoreCase = true)
+                }
 
             /**
              * Returns [AuditEventSortBy] for the given wire or enum-style string.

@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import kotlin.time.Instant
 
@@ -12,6 +13,7 @@ import kotlin.time.Instant
  * Wire counterpart is [UserSessionSummaryPayload].
  *
  * @property id Session row id.
+ * @property userId Identifier of the user account that owns this session ([UserId]).
  * @property clientDeviceInfo Hardware and environment device info.
  * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Authentication provider category.
@@ -20,6 +22,7 @@ import kotlin.time.Instant
  */
 data class UserSessionSummary(
     val id: UserSessionId = UserSessionId.generate(),
+    val userId: UserId,
     val clientDeviceInfo: ClientDeviceInfo,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,

@@ -11,6 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByEmailConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
@@ -23,7 +24,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenUnlockRoutes {
     /** Base path for open unlock operations. */
-    private const val BASE_OPEN_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+    const val BASE_OPEN_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
 
     /** Base path for email unlock operations. */
     private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_OPEN_UNLOCK_ROUTE/email"
@@ -44,8 +45,13 @@ object OpenUnlockRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.UnlockTargetInput]
+     *   - [ClientAuthNavigation.UnlockOtpInput]
      */
     const val SEND_UNLOCK_EMAIL_CONFIRMATION = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
 
@@ -60,16 +66,20 @@ object OpenUnlockRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * - **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.UnlockOtpInput]
      */
     const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
 
@@ -86,8 +96,13 @@ object OpenUnlockRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.UnlockTargetInput]
+     *   - [ClientAuthNavigation.UnlockOtpInput]
      */
     const val SEND_UNLOCK_PHONE_CONFIRMATION = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
 
@@ -102,16 +117,20 @@ object OpenUnlockRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
+     * - **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.UnlockOtpInput]
      */
     const val UNLOCK_BY_PHONE = UNLOCK_BY_PHONE_ROUTE
 
@@ -126,16 +145,20 @@ object OpenUnlockRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.USER_AUTH_PROVIDER] — the identity provider used.
+     * - **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful unlock.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.USER_AUTH_PROVIDER] — the identity provider used.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.UnlockMethodSelection]
      */
     const val UNLOCK_BY_EXTERNAL_PROVIDER = "$BASE_OPEN_UNLOCK_ROUTE/external-provider"
 }

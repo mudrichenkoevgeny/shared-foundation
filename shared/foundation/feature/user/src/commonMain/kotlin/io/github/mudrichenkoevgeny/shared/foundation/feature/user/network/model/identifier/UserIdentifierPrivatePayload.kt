@@ -17,7 +17,7 @@ import kotlin.time.Instant
  *
  * @property id [UserIdentifierPrivate.id] on the wire: [UserIdentifierId] as hex-dash string.
  * @property userId [UserIdentifierPrivate.userId] on the wire: [UserId] as hex-dash string.
- * @property userAuthProvider [UserIdentifierPrivate.userAuthProvider]; wire values match [UserAuthProvider.serialName].
+ * @property userAuthProvider [UserIdentifierPrivate.userAuthProvider]; wire values match [UserAuthProvider.value].
  * @property identifier [UserIdentifierPrivate.identifier].
  * @property displayName [UserIdentifierPrivate.displayName].
  * @property externalProviderEmail [UserIdentifierPrivate.externalProviderEmail].

@@ -10,60 +10,51 @@ import kotlinx.serialization.Serializable
 object UserSortValues {
     /**
      * Supported `sort_by` values for user list endpoints.
+     *
+     * @property value Wire value for `sort_by`.
      */
     @Serializable
-    enum class UserSortBy {
+    enum class UserSortBy(val value: String) {
         /** Sort by [UserApiFields.LAST_LOGIN_AT]. */
         @SerialName(UserApiFields.LAST_LOGIN_AT)
-        LAST_LOGIN_AT,
+        LAST_LOGIN_AT(UserApiFields.LAST_LOGIN_AT),
 
         /** Sort by [UserApiFields.LAST_ACTIVE_AT]. */
         @SerialName(UserApiFields.LAST_ACTIVE_AT)
-        LAST_ACTIVE_AT,
+        LAST_ACTIVE_AT(UserApiFields.LAST_ACTIVE_AT),
 
         /** Sort by [UserApiFields.SCHEDULED_PERMANENT_DELETION_AT]. */
         @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
-        SCHEDULED_PERMANENT_DELETION_AT,
+        SCHEDULED_PERMANENT_DELETION_AT(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT),
 
         /** Sort by [UserApiFields.ACCOUNT_LOCKOUT_TYPE]. */
         @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
-        ACCOUNT_LOCKOUT_TYPE,
+        ACCOUNT_LOCKOUT_TYPE(UserApiFields.ACCOUNT_LOCKOUT_TYPE),
 
         /** Sort by [UserApiFields.TEMPORARY_LOCKOUT_UNTIL]. */
         @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-        TEMPORARY_LOCKOUT_UNTIL,
+        TEMPORARY_LOCKOUT_UNTIL(UserApiFields.TEMPORARY_LOCKOUT_UNTIL),
 
         /** Sort by creation timestamp. */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT,
+        CREATED_AT(CommonApiFields.CREATED_AT),
 
         /** Sort by update timestamp. */
         @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT;
-
-        /** Wire value for `sort_by`. */
-        val serialName: String
-            get() = when (this) {
-                LAST_LOGIN_AT -> UserApiFields.LAST_LOGIN_AT
-                LAST_ACTIVE_AT -> UserApiFields.LAST_ACTIVE_AT
-                SCHEDULED_PERMANENT_DELETION_AT -> UserApiFields.SCHEDULED_PERMANENT_DELETION_AT
-                ACCOUNT_LOCKOUT_TYPE -> UserApiFields.ACCOUNT_LOCKOUT_TYPE
-                TEMPORARY_LOCKOUT_UNTIL -> UserApiFields.TEMPORARY_LOCKOUT_UNTIL
-                CREATED_AT -> CommonApiFields.CREATED_AT
-                UPDATED_AT -> CommonApiFields.UPDATED_AT
-            }
+        UPDATED_AT(CommonApiFields.UPDATED_AT);
 
         companion object {
+            /** Default sort field ([CREATED_AT]). */
+            val DEFAULT = CREATED_AT
+
             /**
              * Returns [UserSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserSortBy? =
                 entries.firstOrNull {
-                    it.serialName.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
-                } ?: runCatching {
-                    valueOf(value.uppercase())
-                }.getOrNull()
+                    it.value.equals(value, ignoreCase = true) ||
+                            it.name.equals(value, ignoreCase = true)
+                }
 
             /**
              * Returns [UserSortBy] for the given wire or enum-style string.
@@ -78,35 +69,31 @@ object UserSortValues {
     /**
      * Supported `sort_by` values for user identifier list endpoints, aligned with timestamp fields on
      * [UserIdentifierPrivatePayload] (`created_at`, `updated_at` only).
+     *
+     * @property value Wire value for `sort_by`.
      */
     @Serializable
-    enum class UserIdentifierSortBy {
+    enum class UserIdentifierSortBy(val value: String) {
         /** Sort by creation timestamp. */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT,
+        CREATED_AT(CommonApiFields.CREATED_AT),
 
         /** Sort by update timestamp. */
         @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT;
-
-        /** Wire value for `sort_by`. */
-        val serialName: String
-            get() = when (this) {
-                CREATED_AT -> CommonApiFields.CREATED_AT
-                UPDATED_AT -> CommonApiFields.UPDATED_AT
-            }
+        UPDATED_AT(CommonApiFields.UPDATED_AT);
 
         companion object {
+            /** Default sort field ([CREATED_AT]). */
+            val DEFAULT = CREATED_AT
+
             /**
              * Returns [UserIdentifierSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserIdentifierSortBy? =
                 entries.firstOrNull {
-                    it.serialName.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
-                } ?: runCatching {
-                    valueOf(value.uppercase())
-                }.getOrNull()
+                    it.value.equals(value, ignoreCase = true) ||
+                            it.name.equals(value, ignoreCase = true)
+                }
 
             /**
              * Returns [UserIdentifierSortBy] for the given wire or enum-style string.
@@ -121,50 +108,43 @@ object UserSortValues {
     /**
      * Supported `sort_by` wire values for **session list** endpoints (open and management), aligned with session DTO
      * timestamp fields (`expires_at`, `last_accessed_at`, `last_reauthenticated_at`, `created_at`, `updated_at`).
+     *
+     * @property value Wire value for `sort_by`.
      */
     @Serializable
-    enum class UserSessionSortBy {
+    enum class UserSessionSortBy(val value: String) {
         /** Sort by [UserApiFields.EXPIRES_AT] (`expires_at`). */
         @SerialName(UserApiFields.EXPIRES_AT)
-        EXPIRES_AT,
+        EXPIRES_AT(UserApiFields.EXPIRES_AT),
 
         /** Sort by [UserApiFields.LAST_ACCESSED_AT] (`last_accessed_at`). */
         @SerialName(UserApiFields.LAST_ACCESSED_AT)
-        LAST_ACCESSED_AT,
+        LAST_ACCESSED_AT(UserApiFields.LAST_ACCESSED_AT),
 
         /** Sort by [UserApiFields.LAST_REAUTHENTICATED_AT] (`last_reauthenticated_at`). */
         @SerialName(UserApiFields.LAST_REAUTHENTICATED_AT)
-        LAST_REAUTHENTICATED_AT,
+        LAST_REAUTHENTICATED_AT(UserApiFields.LAST_REAUTHENTICATED_AT),
 
         /** Sort by creation timestamp ([CommonSortValues.TimestampSortBy.CREATED_AT]). */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT,
+        CREATED_AT(CommonApiFields.CREATED_AT),
 
         /** Sort by update timestamp ([CommonSortValues.TimestampSortBy.UPDATED_AT]). */
         @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT;
-
-        /** Wire value for `sort_by`. */
-        val serialName: String
-            get() = when (this) {
-                EXPIRES_AT -> UserApiFields.EXPIRES_AT
-                LAST_ACCESSED_AT -> UserApiFields.LAST_ACCESSED_AT
-                LAST_REAUTHENTICATED_AT -> UserApiFields.LAST_REAUTHENTICATED_AT
-                CREATED_AT -> CommonApiFields.CREATED_AT
-                UPDATED_AT -> CommonApiFields.UPDATED_AT
-            }
+        UPDATED_AT(CommonApiFields.UPDATED_AT);
 
         companion object {
+            /** Default sort field ([CREATED_AT]). */
+            val DEFAULT = CREATED_AT
+
             /**
              * Returns [UserSessionSortBy] for the given wire value or case-insensitive enum name.
              */
             fun fromValueOrNull(value: String): UserSessionSortBy? =
                 entries.firstOrNull {
-                    it.serialName.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
-                } ?: runCatching {
-                    valueOf(value.uppercase())
-                }.getOrNull()
+                    it.value.equals(value, ignoreCase = true) ||
+                            it.name.equals(value, ignoreCase = true)
+                }
 
             /**
              * Returns [UserSessionSortBy] for the given wire or enum-style string.

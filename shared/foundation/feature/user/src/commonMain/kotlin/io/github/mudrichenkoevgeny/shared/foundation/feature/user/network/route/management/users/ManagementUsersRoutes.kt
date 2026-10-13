@@ -1,0 +1,226 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes.BASE_MANAGEMENT_ROUTE
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.UpdateUserRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
+
+/**
+ * Route paths for user management in the management API.
+ */
+object ManagementUsersRoutes {
+    /**
+     * Base path for user management operations under [ManagementRoutes.BASE_MANAGEMENT_ROUTE].
+     */
+    internal const val BASE_MANAGEMENT_USERS_ROUTE = "$BASE_MANAGEMENT_ROUTE/users"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a paged list of summary users based on filters.
+     *
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSortBy.LAST_LOGIN_AT],
+     *   [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
+     *   [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT],
+     *   [UserSortValues.UserSortBy.ACCOUNT_LOCKOUT_TYPE],
+     *   [UserSortValues.UserSortBy.TEMPORARY_LOCKOUT_UNTIL],
+     *   [UserSortValues.UserSortBy.CREATED_AT],
+     *   [UserSortValues.UserSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     *
+     * **Filters** ([UserFilterValues.UserFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys combine as **AND**.
+     * - [UserFilterValues.UserFilterValues.ROLE] — list of [UserRole] serial names.
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — list of [UserAccountStatus] serial names.
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] — list of [UserAccountStatus] serial names.
+     * - [UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE] — list of [AccountLockoutType] serial names.
+     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level.
+     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level.
+     * - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP status.
+     * - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — list of [PermissionCode] strings.
+     *
+     * Response body: [PagedResult] of [UserSummaryPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** [UserPermissionCode.USER_GET_OF_USER] for [UserRole.USER] targets;
+     *   [UserPermissionCode.USER_GET_OF_STAFF] for [UserRole.STAFF] targets (**AND** semantics).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserList]
+     */
+    const val GET_USERS = BASE_MANAGEMENT_USERS_ROUTE
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Creates a new user account.
+     *
+     * Request body: [CreateByEmailRequest].
+     *
+     * Response body: [UserPrivatePayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** [UserPermissionCode.USER_CREATE_AS_USER] for [UserRole.USER] target;
+     *   [UserPermissionCode.USER_CREATE_AS_STAFF] for [UserRole.STAFF] target (**AND** semantics).
+     * - **Authority Level:** Actor cannot create a user with an authority level equal to
+     *   or greater than their own.
+     *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.MANAGEMENT_CREATE_USER].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the operation.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the new account id.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — the email used for creation.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.CreateUser]
+     */
+    const val CREATE_USER = BASE_MANAGEMENT_USERS_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves specific private user profile details.
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * Response body: [UserPrivatePayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** [UserPermissionCode.USER_GET_OF_USER] for [UserRole.USER] targets;
+     *   [UserPermissionCode.USER_GET_OF_STAFF] for [UserRole.STAFF] targets (**AND** semantics).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserDetail]
+     */
+    const val GET_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+
+    /**
+     * **HTTP method:** `PATCH`
+     *
+     * Updates user details, status, or permissions.
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * Request body: [UpdateUserRequest].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** Required permissions depend on the fields provided in [UpdateUserRequest]
+     *   and the target user's role (**AND** semantics for all provided fields):
+     *   - If [UpdateUserRequest.accountStatus] is set:
+     *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target: [UserRole.USER])
+     *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target: [UserRole.STAFF])
+     *   - If [UpdateUserRequest.authorityLevel] is set:
+     *     [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_USER] (target: [UserRole.USER])
+     *     [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_STAFF] (target: [UserRole.STAFF])
+     *   - If [UpdateUserRequest.permissionCodes] is set:
+     *     [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER] (target: [UserRole.USER])
+     *     [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF] (target: [UserRole.STAFF])
+     *   - If [UpdateUserRequest.lockoutType] or [UpdateUserRequest.temporaryLockoutUntil] is set:
+     *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target: [UserRole.USER])
+     *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target: [UserRole.STAFF])
+     * - **Authority Level:** Actor's level must be strictly greater than the target's level.
+     *   Actor cannot target own account.
+     *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the update.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserDetail]
+     */
+    const val UPDATE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes the specified user account.
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** [UserPermissionCode.USER_DELETE_FOR_USER] for [UserRole.USER] target;
+     *   [UserPermissionCode.USER_DELETE_FOR_STAFF] for [UserRole.STAFF] target (**AND** semantics).
+     * - **Authority Level:** Actor's level must be strictly greater than the target's level.
+     *   Actor cannot target own account.
+     *
+     * **Security:** Sensitive administrative operation. Requires mandatory MFA setup on the manager's
+     * account; returns [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.MANAGEMENT_DELETE_USER].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the deletion.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserDetail]
+     */
+    const val DELETE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+}

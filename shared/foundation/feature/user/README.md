@@ -73,11 +73,20 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 | Domain | Open Routes | Self-Management Routes | Management Routes |
 | :--- | :--- | :--- | :--- |
 | **Auth** | [OpenLoginRoutes]<br>[OpenRegisterRoutes]<br>[OpenResetPasswordRoutes]<br>[OpenUnlockRoutes]<br>[OpenRefreshTokenRoutes]<br>[OpenAuthSettingsRoutes] | [SelfManagementLoginRoutes]<br>[SelfManagementRefreshTokenRoutes]<br>[SelfManagementResetPasswordRoutes]<br>[SelfManagementUnlockRoutes] | [ManagementAuthSettingsRoutes] |
-| **User Profile** | [OpenUserRoutes] | [SelfManagementUserRoutes] | [ManagementUserRoutes] |
-| **User Security** | [OpenUserSecurityRoutes] | [SelfManagementUserSecurityRoutes] | [ManagementUserSecurityRoutes] |
-| **Identifiers** | [OpenIdentifierRoutes] | [SelfManagementIdentifierRoutes] | [ManagementIdentifierRoutes] |
-| **Sessions** | [OpenSessionRoutes] | [SelfManagementSessionRoutes] | [ManagementSessionRoutes] |
+| **User Profile** | [OpenUserRoutes] | [SelfManagementUserRoutes] | [ManagementUsersRoutes] |
+| **User Security** | [OpenUserSecurityRoutes] | [SelfManagementUserSecurityRoutes] | [ManagementUsersSecurityRoutes] |
+| **Identifiers** | [OpenIdentifierRoutes] | [SelfManagementIdentifierRoutes] | [ManagementIdentifiersRoutes] |
+| **Sessions** | [OpenSessionRoutes] | [SelfManagementSessionRoutes] | [ManagementSessionsRoutes] |
 | **Configuration** | [OpenUserConfigurationRoutes] | — | [ManagementUserConfigurationRoutes] |
+
+### Navigation Screen Routes & Parameters
+
+| Category | Navigation Classes & Screen Params |
+| :--- | :--- |
+| **Client Auth & User** | [ClientAuthNavigation]<br>[ClientUserNavigation] |
+| **Management Auth & Profile** | [ManagementAuthNavigation]<br>[ManagementAuthSettingsNavigation]<br>[ManagementSelfUserNavigation]<br>[ManagementUsersNavigation] |
+| **Base Profile Params** | [SelfSessionListParams]<br>[SelfSessionListParamsParser]<br>[SessionDetailParams]<br>[SessionDetailParamsParser]<br>[SelfIdentifierListParams]<br>[SelfIdentifierListParamsParser]<br>[IdentifierDetailParams]<br>[IdentifierDetailParamsParser]<br>[TotpMainParams]<br>[TotpMainParamsParser] |
+| **Management Params** | [ManagementUserListParams]<br>[ManagementUserListParamsParser]<br>[UserDetailParams]<br>[UserDetailParamsParser]<br>[ManagementGlobalSessionListParams]<br>[ManagementGlobalSessionListParamsParser]<br>[ManagementUserSessionListParams]<br>[ManagementUserSessionListParamsParser]<br>[ManagementGlobalIdentifierListParams]<br>[ManagementGlobalIdentifierListParamsParser]<br>[ManagementUserIdentifierListParams]<br>[ManagementUserIdentifierListParamsParser] |
 
 ### Mappers
 
@@ -95,8 +104,8 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 | **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
 | **Configuration** | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
 | **User Profile** | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
-| **Identifiers** | [UserIdentifierSummary]<br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
-| **Sessions** | [UserSessionSummary]<br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
+| **Identifiers** | [UserIdentifierSummary] (with `userId`) <br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
+| **Sessions** | [UserSessionSummary] (with `userId`) <br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
 | **Tokens** | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
 | **Listings & Filters** | [UserFilterValues]<br>[UserSortValues]<br>[UserSortBy]<br>[UserIdentifierSortBy]<br>[UserSessionSortBy] |
 
@@ -109,8 +118,8 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [OpenRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/refreshtoken/OpenRefreshTokenRoutes.kt
 [OpenAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/settings/OpenAuthSettingsRoutes.kt
 [OpenUserConfigurationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/configuration/OpenUserConfigurationRoutes.kt
-[OpenIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/identifier/OpenIdentifierRoutes.kt
-[OpenSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/session/OpenSessionRoutes.kt
+[OpenIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/identifier/OpenIdentifierRoutes.kt
+[OpenSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/session/OpenSessionRoutes.kt
 [OpenUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/OpenUserRoutes.kt
 [OpenUserSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/user/security/OpenUserSecurityRoutes.kt
 
@@ -118,17 +127,48 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [SelfManagementRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/refreshtoken/SelfManagementRefreshTokenRoutes.kt
 [SelfManagementResetPasswordRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/resetpassword/SelfManagementResetPasswordRoutes.kt
 [SelfManagementUnlockRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/unlock/SelfManagementUnlockRoutes.kt
-[SelfManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/identifier/SelfManagementIdentifierRoutes.kt
-[SelfManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/session/SelfManagementSessionRoutes.kt
-[SelfManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/SelfManagementUserRoutes.kt
-[SelfManagementUserSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/security/SelfManagementUserSecurityRoutes.kt
+[SelfManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/self/user/identifier/SelfManagementIdentifierRoutes.kt
+[SelfManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/self/user/session/SelfManagementSessionRoutes.kt
+[SelfManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/self/user/SelfManagementUserRoutes.kt
+[SelfManagementUserSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/self/user/security/SelfManagementUserSecurityRoutes.kt
 
 [ManagementAuthSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/auth/settings/ManagementAuthSettingsRoutes.kt
 [ManagementUserConfigurationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/configuration/ManagementUserConfigurationRoutes.kt
-[ManagementIdentifierRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/identifier/ManagementIdentifierRoutes.kt
-[ManagementSessionRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/session/ManagementSessionRoutes.kt
-[ManagementUserRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/ManagementUserRoutes.kt
-[ManagementUserSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/user/security/ManagementUserSecurityRoutes.kt
+[ManagementIdentifiersRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/users/identifiers/ManagementIdentifiersRoutes.kt
+[ManagementSessionsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/users/sessions/ManagementSessionsRoutes.kt
+[ManagementUsersRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/users/ManagementUsersRoutes.kt
+[ManagementUsersSecurityRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/management/users/security/ManagementUsersSecurityRoutes.kt
+
+[ClientAuthNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/client/ClientAuthNavigation.kt
+[ClientUserNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/client/ClientUserNavigation.kt
+[ManagementAuthNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementAuthNavigation.kt
+[ManagementAuthSettingsNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementAuthSettingsNavigation.kt
+[ManagementSelfUserNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementSelfUserNavigation.kt
+[ManagementUsersNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementUsersNavigation.kt
+
+[SelfSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/list/SelfSessionListParams.kt
+[SelfSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/list/SelfSessionListParamsParser.kt
+[SessionDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/detail/SessionDetailParams.kt
+[SessionDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/detail/SessionDetailParamsParser.kt
+[SelfIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/list/SelfIdentifierListParams.kt
+[SelfIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/list/SelfIdentifierListParamsParser.kt
+[IdentifierDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/detail/IdentifierDetailParams.kt
+[IdentifierDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/detail/IdentifierDetailParamsParser.kt
+[TotpMainParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/totp/main/TotpMainParams.kt
+[TotpMainParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/totp/main/TotpMainParamsParser.kt
+
+[ManagementUserListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/globallist/ManagementUserListParams.kt
+[ManagementUserListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/globallist/ManagementUserListParamsParser.kt
+[UserDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/detail/UserDetailParams.kt
+[UserDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/detail/UserDetailParamsParser.kt
+[ManagementGlobalSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/globallist/ManagementGlobalSessionListParams.kt
+[ManagementGlobalSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/globallist/ManagementGlobalSessionListParamsParser.kt
+[ManagementUserSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/userlist/ManagementUserSessionListParams.kt
+[ManagementUserSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/userlist/ManagementUserSessionListParamsParser.kt
+[ManagementGlobalIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/globallist/ManagementGlobalIdentifierListParams.kt
+[ManagementGlobalIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/globallist/ManagementGlobalIdentifierListParamsParser.kt
+[ManagementUserIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/userlist/ManagementUserIdentifierListParams.kt
+[ManagementUserIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/userlist/ManagementUserIdentifierListParamsParser.kt
 
 [AuthDataMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/data/AuthDataMapper.kt
 [AvailableAuthProvidersMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/settings/AvailableAuthProvidersMapper.kt

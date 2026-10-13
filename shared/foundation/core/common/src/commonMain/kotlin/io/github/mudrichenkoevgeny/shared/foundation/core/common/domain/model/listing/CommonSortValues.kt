@@ -11,25 +11,18 @@ import kotlinx.serialization.Serializable
 object CommonSortValues {
     /**
      * Supported `sort_by` values for timestamp-based fields.
+     *
+     * @property value Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
      */
     @Serializable
-    enum class TimestampSortBy {
+    enum class TimestampSortBy(val value: String) {
         /** Sort by [CommonApiFields.CREATED_AT]. */
         @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT,
+        CREATED_AT(CommonApiFields.CREATED_AT),
 
         /** Sort by [CommonApiFields.UPDATED_AT]. */
         @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT;
-
-        /**
-         * Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
-         */
-        val serialName: String
-            get() = when (this) {
-                CREATED_AT -> CommonApiFields.CREATED_AT
-                UPDATED_AT -> CommonApiFields.UPDATED_AT
-            }
+        UPDATED_AT(CommonApiFields.UPDATED_AT);
 
         companion object {
             /**
@@ -37,11 +30,9 @@ object CommonSortValues {
              */
             fun fromValueOrNull(value: String): TimestampSortBy? =
                 entries.firstOrNull {
-                    it.serialName.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
-                } ?: runCatching {
-                    valueOf(value.uppercase())
-                }.getOrNull()
+                    it.value.equals(value, ignoreCase = true) ||
+                            it.name.equals(value, ignoreCase = true)
+                }
 
             /**
              * Returns [TimestampSortBy] for the given wire or enum-style string.

@@ -19,12 +19,12 @@ import kotlin.time.Instant
  *
  * @property id [AuditEventPrivate.id] on the wire: [AuditEventId] as hex-dash string.
  * @property actorId [AuditEventPrivate.actorId].
- * @property actorType [AuditEventPrivate.actorType]; wire values match [AuditActorType.serialName].
+ * @property actorType [AuditEventPrivate.actorType]; wire values match [AuditActorType.value].
  * @property actorUserRole [AuditEventPrivate.actorUserRole].
- * @property action [AuditEventPrivate.action]; wire values match [AuditActionType.serialName].
- * @property resource [AuditEventPrivate.resource]; wire values match [AuditResourceType.serialName].
+ * @property action [AuditEventPrivate.action]; wire values match [AuditActionType.value].
+ * @property resource [AuditEventPrivate.resource]; wire values match [AuditResourceType.value].
  * @property resourceId [AuditEventPrivate.resourceId].
- * @property status [AuditEventPrivate.status]; wire values match [AuditStatus.serialName].
+ * @property status [AuditEventPrivate.status]; wire values match [AuditStatus.value].
  * @property metadata [AuditEventPrivate.metadata] as a JSON array of [AuditEventMetadataPayload] objects under [CommonApiFields.METADATA].
  * @property message [AuditEventPrivate.message].
  * @property createdAt [AuditEventPrivate.createdAt] as Unix epoch milliseconds ([Instant]).

@@ -54,9 +54,57 @@ Every callable endpoint must follow this exact order. Sections should be omitted
 * **Metadata:** Use a numbered list for keys:
   1. `[MetadataKey]` — description of the value source.
 
+### VI. Navigation Traceability (UI Presentation)
+* **UI Presentation:** Reference the UI screens or flows where this API endpoint is consumed:
+  * Format: Always start with `**UI Presentation:**` followed by bulleted items for `- Screens:` and optional `- Flow:`:
+    ```kotlin
+    /**
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuditNavigation.AuditEventList]
+     */
+    ```
+  * For background-only routes without dedicated UI screens:
+    ```kotlin
+    /**
+     * **UI Presentation:** None.
+     */
+    ```
+  * For routes associated with global flows or dialogs (no standalone screen):
+    ```kotlin
+    /**
+     * **UI Presentation:**
+     * - Screens: None.
+     * - Flow: Global re-authentication dialog (no dedicated screen).
+     */
+    ```
+
 ---
 
-## 2. Example: Dynamic Management Route
+## 2. Navigation Screen KDoc Standards
+
+All navigation screen objects (`XxxNavigation`) must adhere to this standard for `Primary API` and `Secondary Action APIs`:
+
+1. **Primary API:**
+   - For **Listing and Detail screens**: The principal HTTP API endpoint executed automatically upon screen mount/initialization to load primary screen data (e.g., `GET /management/audit/events` or `GET /management/users/{user_id}`).
+   - For **Form/Auth screens**: The principal HTTP API endpoint executed when submitting the primary action of that screen (e.g., `POST /auth/register/email` or `POST /auth/login/email`).
+   - If no auto-fetch or primary form submit exists on the screen, mark as `None.`
+
+2. **Secondary Action APIs:**
+   - Auxiliary HTTP API endpoints triggered by user interaction buttons on the screen (e.g., resending OTP confirmation codes, restoring an account, logging out, toggling 2FA mode, or deleting a resource).
+   - If multiple auxiliary actions exist, format as a bulleted list on new lines:
+     ```kotlin
+     /**
+      * **Secondary Action APIs:**
+      * - [OpenUserRoutes.RESTORE_USER]
+      * - [OpenSessionRoutes.LOGOUT]
+      */
+     ```
+   - If no auxiliary actions exist, mark as `None.`
+
+---
+
+## 3. Example: Dynamic Management Route
 ```kotlin
 /**
  * **HTTP method:** `PATCH`
@@ -86,12 +134,17 @@ Every callable endpoint must follow this exact order. Sections should be omitted
  * [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED] if additional verification is needed.
  *
  * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
- * * **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].
- * * **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the update.
- * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].
- * * **Metadata:** 1. [ClientInfo] — technical client details.
+ * - **Action:** [UserAuditActionType.MANAGEMENT_UPDATE_USER].
+ * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the update.
+ * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserApiPaths.USER_ID].
+ * - **Metadata:**
+ *   1. [ClientInfo] — technical client details.
+ *
+ * **UI Presentation:**
+ * - Screens:
+ *   - [ManagementUsersNavigation.UserDetail]
  */
-const val UPDATE_USER = BaseManagementUserRoutes.UPDATE_USER
+const val UPDATE_USER = ManagementUsersRoutes.UPDATE_USER
 ```
 
 ---

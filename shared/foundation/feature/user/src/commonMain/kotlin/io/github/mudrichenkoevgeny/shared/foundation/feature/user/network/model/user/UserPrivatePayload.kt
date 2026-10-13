@@ -17,9 +17,9 @@ import kotlin.time.Instant
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserPrivate].
  *
  * @property id [UserPrivate.id] on the wire: [UserId] as hex-dash string.
- * @property role [UserPrivate.role]; wire values match [UserRole.serialName].
- * @property accountStatus [UserPrivate.accountStatus]; wire values match [UserAccountStatus.serialName].
- * @property accountStatusOnRestore [UserPrivate.accountStatusOnRestore]; wire values match [UserAccountStatus.serialName], or `null`.
+ * @property role [UserPrivate.role]; wire values match [UserRole.value].
+ * @property accountStatus [UserPrivate.accountStatus]; wire values match [UserAccountStatus.value].
+ * @property accountStatusOnRestore [UserPrivate.accountStatusOnRestore]; wire values match [UserAccountStatus.value], or `null`.
  * @property authorityLevel [UserPrivate.authorityLevel].
  * @property permissionCodes [UserPrivate.permissionCodes] as strings.
  * @property isTotpEnabled [UserPrivate.isTotpEnabled].
@@ -28,7 +28,7 @@ import kotlin.time.Instant
  * @property createdAt [UserPrivate.createdAt] as Unix epoch milliseconds ([Instant]).
  * @property updatedAt [UserPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property scheduledPermanentDeletionAt [UserPrivate.scheduledPermanentDeletionAt] as Unix epoch milliseconds ([Instant]), or `null`.
- * @property lockoutType [UserPrivate.lockoutType]; wire values match [AccountLockoutType.serialName].
+ * @property lockoutType [UserPrivate.lockoutType]; wire values match [AccountLockoutType.value].
  * @property temporaryLockoutUntil [UserPrivate.temporaryLockoutUntil] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable

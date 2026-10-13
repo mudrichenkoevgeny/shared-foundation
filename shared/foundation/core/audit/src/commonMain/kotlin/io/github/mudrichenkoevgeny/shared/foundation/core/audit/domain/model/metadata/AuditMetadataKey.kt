@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.me
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 
 interface AuditMetadataKey {
-    val serialName: String
+    val value: String
     val valueSensitivity: AuditValueSensitivity
 
     fun parseOrNull(value: String): AuditMetadataKey?

@@ -18,7 +18,7 @@ enum class SecurityAuditResourceType : AuditResourceType {
     /**
      * String representation of the [SecurityAuditResourceType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             SECURITY_SETTINGS -> SecurityAuditResourceType.RESOURCE_SECURITY_SETTINGS
         }
@@ -41,7 +41,7 @@ enum class SecurityAuditResourceType : AuditResourceType {
          */
         fun fromValueOrNull(value: String): SecurityAuditResourceType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

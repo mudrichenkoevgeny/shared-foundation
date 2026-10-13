@@ -50,6 +50,7 @@ This document defines the mandatory Kotlin syntax and formatting standards for t
 
 ## 5. Sealed Types and Enums
 - **Exhaustiveness:** When using `when` on `sealed class` or `enum`, do not provide an `else` branch unless it is logically unavoidable. Ensure all cases are handled explicitly.
+- **Value Property for Wire Values:** All domain enums and extensible interfaces representing serialized constants expose a `.value` property for wire string representation (replacing legacy `.serialName` getters/calls).
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

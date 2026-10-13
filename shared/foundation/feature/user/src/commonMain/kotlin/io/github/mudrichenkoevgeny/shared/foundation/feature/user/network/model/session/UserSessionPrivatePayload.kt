@@ -20,11 +20,11 @@ import kotlin.time.Instant
  *
  * @property id [UserSessionPrivate.id] on the wire: [UserSessionId] as hex-dash string.
  * @property userId [UserSessionPrivate.userId] on the wire: [UserId] as hex-dash string.
- * @property userRole [UserSessionPrivate.userRole]; wire values match [UserRole.serialName].
+ * @property userRole [UserSessionPrivate.userRole]; wire values match [UserRole.value].
  * @property identifier [UserSessionPrivate.identifier].
  * @property identifierId [UserSessionPrivate.identifierId] on the wire: [UserIdentifierId] as hex-dash string.
  * @property identifierDisplayName [UserSessionPrivate.identifierDisplayName].
- * @property identifierAuthProvider [UserSessionPrivate.identifierAuthProvider]; wire values match [UserAuthProvider.serialName].
+ * @property identifierAuthProvider [UserSessionPrivate.identifierAuthProvider]; wire values match [UserAuthProvider.value].
  * @property clientDeviceInfo [UserSessionPrivate.clientDeviceInfo].
  * @property userAgent [UserSessionPrivate.userAgent].
  * @property ipAddress [UserSessionPrivate.ipAddress].

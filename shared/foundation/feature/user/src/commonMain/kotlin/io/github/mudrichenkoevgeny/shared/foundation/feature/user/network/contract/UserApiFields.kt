@@ -56,7 +56,7 @@ object UserApiFields {
     /** JSON field name for a one-time or confirmation code (OTP / email confirmation flows). */
     const val CONFIRMATION_CODE = "confirmation_code"
 
-    /** JSON field name for an external authentication provider id; wire value follows [UserAuthProvider.serialName]. */
+    /** JSON field name for an external authentication provider id; wire value follows [UserAuthProvider.value]. */
     const val AUTH_PROVIDER = "auth_provider"
 
     /** JSON field name for the nested user profile object on authentication responses. */
@@ -125,7 +125,7 @@ object UserApiFields {
 
     /**
      * JSON field name for the authentication provider dimension on identifiers or sessions; wire value follows
-     * [UserAuthProvider.serialName].
+     * [UserAuthProvider.value].
      */
     const val USER_AUTH_PROVIDER = "user_auth_provider"
 
@@ -139,7 +139,7 @@ object UserApiFields {
     const val IDENTIFIER_DISPLAY_NAME = "identifier_display_name"
 
     /**
-     * JSON field name for the provider of the session’s credential; wire value follows [UserAuthProvider.serialName]
+     * JSON field name for the provider of the session’s credential; wire value follows [UserAuthProvider.value]
      * (session payloads).
      */
     const val IDENTIFIER_AUTH_PROVIDER = "identifier_auth_provider"
@@ -177,7 +177,7 @@ object UserApiFields {
     const val MAX_ACTIVE_SESSIONS_FOR_MANAGEMENT_USER = "max_active_sessions_for_management_user"
 
     /**
-     * JSON field name for provider availability lists (primary and secondary); entries use [UserAuthProvider.serialName]
+     * JSON field name for provider availability lists (primary and secondary); entries use [UserAuthProvider.value]
      * on the wire (open and management auth settings).
      */
     const val AVAILABLE_AUTH_PROVIDERS = "available_auth_providers"
@@ -218,13 +218,13 @@ object UserApiFields {
 
     /**
      * JSON field name for the list of primary (main) authentication methods under [AVAILABLE_AUTH_PROVIDERS]; values use
-     * [UserAuthProvider.serialName].
+     * [UserAuthProvider.value].
      */
     const val PRIMARY = "primary"
 
     /**
      * JSON field name for the list of secondary (alternative) authentication methods under [AVAILABLE_AUTH_PROVIDERS];
-     * values use [UserAuthProvider.serialName].
+     * values use [UserAuthProvider.value].
      */
     const val SECONDARY = "secondary"
 

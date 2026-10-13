@@ -20,7 +20,7 @@ fun ClientInfo.toAuditMetadata(): Set<AuditEventMetadata> {
         clientDeviceInfo.deviceName?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.DEVICE_NAME, value))
         }
-        clientDeviceInfo.clientType?.serialName?.takeIf { it.isNotBlank() }?.let { value ->
+        clientDeviceInfo.clientType?.value?.takeIf { it.isNotBlank() }?.let { value ->
             add(AuditEventMetadata(CommonAuditMetadataKey.CLIENT_TYPE, value))
         }
         clientDeviceInfo.language?.takeIf { it.isNotBlank() }?.let { value ->

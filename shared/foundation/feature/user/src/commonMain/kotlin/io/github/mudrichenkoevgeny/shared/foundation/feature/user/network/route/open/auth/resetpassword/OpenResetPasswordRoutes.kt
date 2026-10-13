@@ -11,6 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
@@ -25,7 +26,8 @@ object OpenResetPasswordRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Resets a forgotten password or sets up an initial password using a previously sent confirmation code or invitation token.
+     * Resets a forgotten password or sets up an initial password using a previously sent confirmation code or
+     * invitation token.
      *
      * Request body: [ResetPasswordRequest].
      *
@@ -33,23 +35,29 @@ object OpenResetPasswordRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.RESET_PASSWORD].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * - **Action:** [UserAuditActionType.RESET_PASSWORD].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.ResetPassword]
      */
     const val RESET_EMAIL_PASSWORD = BASE_RESET_PASSWORD_ROUTE
 
     /**
      * **HTTP method:** `POST`
      *
-     * Requests a confirmation code (OTP) to be sent to the user's email to initiate password recovery or initial setup.
+     * Requests a confirmation code (OTP) to be sent to the user's email to initiate password recovery
+     * or initial setup.
      *
      * Request body: [SendResetPasswordConfirmationRequest].
      *
@@ -59,8 +67,12 @@ object OpenResetPasswordRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.ResetPassword]
      */
     const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = "$BASE_RESET_PASSWORD_ROUTE/send-confirmation"
 }

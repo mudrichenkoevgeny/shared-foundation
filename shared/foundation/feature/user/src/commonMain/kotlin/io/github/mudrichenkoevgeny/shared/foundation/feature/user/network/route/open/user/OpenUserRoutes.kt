@@ -10,15 +10,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 
 /**
  * Route paths for the authenticated user's account in the open API.
  */
 object OpenUserRoutes {
     /** Base path for open self-service user account operations. */
-    private const val BASE_USER_ROUTE = "/user"
+    const val BASE_USER_ROUTE = "/user"
 
     /**
      * **HTTP method:** `GET`
@@ -32,6 +34,10 @@ object OpenUserRoutes {
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.Main]
      */
     const val GET_USER = BASE_USER_ROUTE
 
@@ -46,7 +52,7 @@ object OpenUserRoutes {
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.BANNED], [UserAccountStatus.SECURITY_HOLD] (**OR** semantics).
+     *   [UserAccountStatus.BANNED], [UserAccountStatus.SECURITY_HOLD] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. MFA Step-up required (if enabled for the account). Returns
@@ -54,11 +60,15 @@ object OpenUserRoutes {
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_SCHEDULE_USER_DELETION].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_SCHEDULE_USER_DELETION].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.Main]
      */
     const val SCHEDULE_DELETION = "$BASE_USER_ROUTE/schedule-deletion"
 
@@ -80,11 +90,15 @@ object OpenUserRoutes {
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_RESTORE_USER].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_RESTORE_USER].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.PendingDeletion]
      */
     const val RESTORE_USER = "$BASE_USER_ROUTE/restore"
 }

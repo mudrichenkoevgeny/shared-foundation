@@ -4,19 +4,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.SelfManagementLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.ManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.ManagementUserRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.ManagementUserSecurityRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.SelfManagementUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.security.ManagementUsersSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier.OpenIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.security.OpenUserSecurityRoutes
 
@@ -30,28 +30,28 @@ enum class UserAuditActionType : AuditActionType {
     /** [ManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS]. */
     MANAGEMENT_RESET_AUTH_SETTINGS,
 
-    /** [ManagementIdentifierRoutes.DELETE_IDENTIFIER]. */
+    /** [ManagementIdentifiersRoutes.DELETE_IDENTIFIER]. */
     MANAGEMENT_DELETE_IDENTIFIER,
 
-    /** [ManagementIdentifierRoutes.DELETE_IDENTIFIER_PASSWORD]. */
+    /** [ManagementIdentifiersRoutes.DELETE_IDENTIFIER_PASSWORD]. */
     MANAGEMENT_DELETE_IDENTIFIER_PASSWORD,
 
-    /** [ManagementSessionRoutes.DELETE_SESSION]. */
+    /** [ManagementSessionsRoutes.DELETE_SESSION]. */
     MANAGEMENT_DELETE_SESSION,
 
-    /** [ManagementSessionRoutes.DELETE_ALL_USER_SESSIONS]. */
+    /** [ManagementSessionsRoutes.DELETE_ALL_USER_SESSIONS]. */
     MANAGEMENT_DELETE_ALL_USER_SESSIONS,
 
-    /** [ManagementUserRoutes.UPDATE_USER]. */
+    /** [ManagementUsersRoutes.UPDATE_USER]. */
     MANAGEMENT_UPDATE_USER,
 
-    /** [ManagementUserRoutes.DELETE_USER]. */
+    /** [ManagementUsersRoutes.DELETE_USER]. */
     MANAGEMENT_DELETE_USER,
 
-    /** [ManagementUserRoutes.CREATE_USER]. */
+    /** [ManagementUsersRoutes.CREATE_USER]. */
     MANAGEMENT_CREATE_USER,
 
-    /** [ManagementUserSecurityRoutes.DISABLE_TOTP]. */
+    /** [ManagementUsersSecurityRoutes.DISABLE_TOTP]. */
     MANAGEMENT_DISABLE_USER_TOTP,
 
     /** [SelfManagementLoginRoutes.LOGIN_BY_EMAIL], [OpenLoginRoutes.LOGIN_BY_EMAIL]. */
@@ -135,7 +135,7 @@ enum class UserAuditActionType : AuditActionType {
     /**
      * String representation of the [UserAuditActionType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             MANAGEMENT_UPDATE_AUTH_SETTINGS -> ACTION_MANAGEMENT_UPDATE_AUTH_SETTINGS
             MANAGEMENT_RESET_AUTH_SETTINGS -> ACTION_MANAGEMENT_RESET_AUTH_SETTINGS
@@ -222,7 +222,7 @@ enum class UserAuditActionType : AuditActionType {
          */
         fun fromValueOrNull(value: String): UserAuditActionType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

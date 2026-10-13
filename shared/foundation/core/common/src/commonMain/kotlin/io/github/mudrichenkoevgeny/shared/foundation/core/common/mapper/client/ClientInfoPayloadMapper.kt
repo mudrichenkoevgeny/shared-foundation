@@ -31,7 +31,7 @@ fun ClientDeviceInfoPayload.toClientDeviceInfo(): ClientDeviceInfo = ClientDevic
  * @return payload DTO aligned with [ClientDeviceInfoPayload] contract.
  */
 fun ClientDeviceInfo.toClientDeviceInfoPayload(): ClientDeviceInfoPayload = ClientDeviceInfoPayload(
-    clientType = clientType?.serialName,
+    clientType = clientType?.value,
     language = language,
     deviceId = deviceId?.asHexDashString(),
     deviceName = deviceName,

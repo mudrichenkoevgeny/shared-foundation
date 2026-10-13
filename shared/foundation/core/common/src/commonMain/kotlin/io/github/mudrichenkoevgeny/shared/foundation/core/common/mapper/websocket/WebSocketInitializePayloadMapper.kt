@@ -77,7 +77,7 @@ fun WebSocketInitializePayload.mergeClientDeviceInfo(
  * @return payload model aligned with [WebSocketInitializePayload] contract.
  */
 fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?): WebSocketInitializePayload = WebSocketInitializePayload(
-    clientType = clientType?.serialName,
+    clientType = clientType?.value,
     language = language,
     deviceId = deviceId?.asHexDashString(),
     deviceName = deviceName,

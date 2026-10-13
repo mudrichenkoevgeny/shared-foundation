@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 /**
  * DTO representing categories of available authentication providers.
  *
- * @property primary A list of main authentication methods. Values correspond to [UserAuthProvider.serialName].
- * @property secondary A list of alternative authentication methods. Values correspond to [UserAuthProvider.serialName].
+ * @property primary A list of main authentication methods. Values correspond to [UserAuthProvider.value].
+ * @property secondary A list of alternative authentication methods. Values correspond to [UserAuthProvider.value].
  */
 @Serializable
 data class AvailableAuthProvidersPayload(

@@ -1,56 +1,53 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val PROVIDER_EMAIL = "email"
+private const val PROVIDER_PHONE = "phone"
+private const val PROVIDER_GOOGLE = "google"
+private const val PROVIDER_APPLE = "apple"
+
 /**
  * Represents the authentication provider used for user login or registration.
+ *
+ * @property value String representation of the [UserAuthProvider].
  */
-enum class UserAuthProvider {
+@Serializable
+enum class UserAuthProvider(val value: String) {
     /**
      * Authentication using email and password.
      */
-    EMAIL,
+    @SerialName(PROVIDER_EMAIL)
+    EMAIL(PROVIDER_EMAIL),
 
     /**
      * Authentication via SMS code or phone-based services.
      */
-    PHONE,
+    @SerialName(PROVIDER_PHONE)
+    PHONE(PROVIDER_PHONE),
 
     /**
      * Social authentication via Google OAuth.
      */
-    GOOGLE,
+    @SerialName(PROVIDER_GOOGLE)
+    GOOGLE(PROVIDER_GOOGLE),
 
     /**
      * Social authentication via Apple ID.
      */
-    APPLE;
-
-    /**
-     * String representation of the [UserAuthProvider].
-     */
-    val serialName: String
-        get() = when (this) {
-            EMAIL -> PROVIDER_EMAIL
-            PHONE -> PROVIDER_PHONE
-            GOOGLE -> PROVIDER_GOOGLE
-            APPLE -> PROVIDER_APPLE
-        }
+    @SerialName(PROVIDER_APPLE)
+    APPLE(PROVIDER_APPLE);
 
     companion object {
-        private const val PROVIDER_EMAIL = "email"
-        private const val PROVIDER_PHONE = "phone"
-        private const val PROVIDER_GOOGLE = "google"
-        private const val PROVIDER_APPLE = "apple"
-
         /**
          * Returns [UserAuthProvider] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): UserAuthProvider? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [UserAuthProvider] for the given wire or enum-style string (case-insensitive enum name).

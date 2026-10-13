@@ -13,6 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByExternalAuthProviderRequest
@@ -25,10 +26,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenLoginRoutes {
     /** Base path for open login operations. */
-    private const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+    const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
 
     /** Base path for phone login operations. */
     private const val BASE_LOGIN_PHONE_ROUTE = "$BASE_LOGIN_ROUTE/phone"
+
     /**
      * **HTTP method:** `POST`
      *
@@ -42,21 +44,25 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
-     * unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * - **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
+     *   unrecognized device, an additional audit event with action [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.LoginByEmail]
      */
     const val LOGIN_BY_EMAIL = "$BASE_LOGIN_ROUTE/email"
 
@@ -73,21 +79,25 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_PHONE]. (If the sign-in is from a new,
-     * unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
+     * - **Action:** [UserAuditActionType.LOGIN_BY_PHONE]. (If the sign-in is from a new,
+     *   unrecognized device, an additional audit event with action [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.LoginByPhone]
      */
     const val LOGIN_BY_PHONE = BASE_LOGIN_PHONE_ROUTE
 
@@ -104,22 +114,27 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. If MFA is enabled, returns [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED]
      * and a challenge token. Process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]. (If the sign-in is
-     * from a new, unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EXTERNAL_ID] — external subject identifier.
-     * 3. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address if provided by the external provider.
+     * - **Action:** [UserAuditActionType.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]. (If the sign-in is
+     *   from a new, unrecognized device, an additional audit event with action [UserAuditActionType.NEW_DEVICE_DETECTED]
+     *   is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EXTERNAL_ID] — external subject identifier.
+     *   3. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address if provided by the external provider.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.Welcome]
      */
     const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "$BASE_LOGIN_ROUTE/external-auth-provider"
 
@@ -136,17 +151,20 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
-     * unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
+     *   unrecognized device, an additional audit event with action [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.LoginByTotp]
      */
     const val LOGIN_BY_TOTP = "$BASE_LOGIN_ROUTE/totp"
 
@@ -163,17 +181,21 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from a
-     * new, unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from a
+     *   new, unrecognized device, an additional audit event with action [UserAuditActionType.NEW_DEVICE_DETECTED]
+     *   is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.LoginByTotp]
      */
     const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_LOGIN_ROUTE/totp-recovery-code"
 
@@ -190,8 +212,12 @@ object OpenLoginRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.LoginByPhone]
      */
-    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = "$BASE_LOGIN_PHONE_ROUTE/confirmation/send-to-phone"
+    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = "$BASE_LOGIN_PHONE_ROUTE/send-confirmation"
 }

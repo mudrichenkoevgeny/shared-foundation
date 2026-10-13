@@ -13,16 +13,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes.BASE_USER_ROUTE
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 
 /**
  * Open API route paths for the authenticated user's self-service security management.
- * * Sensitive operations (disabling TOTP, viewing/regenerating recovery codes) require
+ *
+ * Sensitive operations (disabling TOTP, viewing/regenerating recovery codes) require
  * a recently re-authenticated session.
  */
 object OpenUserSecurityRoutes {
     /** Base path for TOTP-related operations. */
-    private const val BASE_TOTP_ROUTE = "/user/security/totp"
+    const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/security/totp"
 
     /** Base path for recovery codes. */
     private const val BASE_RECOVERY_CODES_ROUTE = "$BASE_TOTP_ROUTE/recovery-codes"
@@ -38,16 +41,19 @@ object OpenUserSecurityRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_SETUP_TOTP_INITIATED].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_SETUP_TOTP_INITIATED].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.TotpMain]
      */
     const val SETUP_TOTP = "$BASE_TOTP_ROUTE/setup"
 
@@ -64,16 +70,19 @@ object OpenUserSecurityRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_ENABLE_TOTP].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_ENABLE_TOTP].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.TotpMain]
      */
     const val ENABLE_TOTP = "$BASE_TOTP_ROUTE/enable"
 
@@ -85,8 +94,7 @@ object OpenUserSecurityRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
@@ -95,13 +103,17 @@ object OpenUserSecurityRoutes {
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.TotpMain]
      */
-    const val DISABLE_TOTP = "$BASE_TOTP_ROUTE/disable"
+    const val DISABLE_TOTP = BASE_TOTP_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -113,8 +125,7 @@ object OpenUserSecurityRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
@@ -123,11 +134,15 @@ object OpenUserSecurityRoutes {
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.TotpRecoveryCodes]
      */
     const val GET_RECOVERY_CODES = BASE_RECOVERY_CODES_ROUTE
 
@@ -141,8 +156,7 @@ object OpenUserSecurityRoutes {
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **Security:** Sensitive operation. Requires active TOTP on the account; returns
@@ -151,11 +165,15 @@ object OpenUserSecurityRoutes {
      * Session must be verified via [OpenSessionRoutes.REAUTHENTICATE_SESSION] if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * * **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.TotpRecoveryCodes]
      */
     const val REGENERATE_RECOVERY_CODES = "$BASE_RECOVERY_CODES_ROUTE/regenerate"
 }

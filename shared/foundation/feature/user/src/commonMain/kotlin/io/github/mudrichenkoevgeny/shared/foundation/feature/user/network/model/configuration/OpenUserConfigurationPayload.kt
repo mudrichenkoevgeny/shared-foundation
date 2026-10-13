@@ -8,7 +8,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO representing the comprehensive set of user-related configuration.
+ * DTO representing the global system configuration for the user domain
  *
  * @property openGlobalSettings Global settings.
  * @property openSecuritySettings Security-related settings.

@@ -45,9 +45,9 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
  */
 fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     id = id.asHexDashString(),
-    role = role.serialName,
-    accountStatus = accountStatus.serialName,
-    accountStatusOnRestore = accountStatusOnRestore?.serialName,
+    role = role.value,
+    accountStatus = accountStatus.value,
+    accountStatusOnRestore = accountStatusOnRestore?.value,
     authorityLevel = authorityLevel,
     permissionCodes = permissionCodes.map { permissionCode ->
         permissionCode.value
@@ -58,6 +58,6 @@ fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds(),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
-    lockoutType = lockoutType.serialName,
+    lockoutType = lockoutType.value,
     temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds()
 )

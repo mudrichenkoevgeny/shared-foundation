@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.t
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import kotlin.time.Instant
 
@@ -17,6 +18,7 @@ import kotlin.time.Instant
  */
 fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
     id = id.toUserSessionIdOrThrow(),
+    userId = userId.toUserIdOrThrow(),
     clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
@@ -29,9 +31,10 @@ fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary = UserS
  */
 fun UserSessionSummary.toUserSessionSummaryPayload(): UserSessionSummaryPayload = UserSessionSummaryPayload(
     id = id.asHexDashString(),
+    userId = userId.asHexDashString(),
     clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
     identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider.serialName,
+    identifierAuthProvider = identifierAuthProvider.value,
     lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
     expiresAt = expiresAt.toEpochMilliseconds()
 )

@@ -20,17 +20,17 @@ alwaysApply: true
 ## Modules Structure (`shared/foundation/`)
 
 ### Core Modules (`core/`)
-Focus on domain logic, data models, and transport payloads.
+Focus on domain logic, data models, navigation structures, and transport payloads.
 
-- **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `ClientInfo`, and `PagedResult`. Defines base `PermissionCode`.
-- **`core/audit`:** Audit domain logic and HTTP routes. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `AuditPermissionCode`, and `CommonAuditResourceType`.
-- **`core/security`:** Security primitives and HTTP routes. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
-- **`core/settings`:** Global system settings shapes and HTTP routes. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
+- **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `ClientInfo`, and `PagedResult`. Defines base `PermissionCode`, root client/management navigation (`ClientMainNavigation`, `ManagementMainNavigation`), and parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`).
+- **`core/audit`:** Audit domain logic, HTTP routes, and navigation. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `ManagementAuditNavigation`, screen params (`ManagementAuditEventListParams`, `ManagementAuditEventDetailParams`), `AuditPermissionCode`, and `CommonAuditResourceType`.
+- **`core/security`:** Security primitives, HTTP routes, and navigation. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `ManagementSecurityNavigation`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
+- **`core/settings`:** Global system settings shapes, HTTP routes, and navigation. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `ManagementSettingsNavigation`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
 
 ### Feature Modules (`feature/`)
-Focus on feature-specific contracts and workflows.
+Focus on feature-specific contracts, navigation, and workflows.
 
-- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), and aggregates `core/security` for MFA/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
+- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core/security` for MFA/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
 ### Utility
 - **`bom`:** Bill of Materials to align versions across all `shared-foundation-*` artifacts.

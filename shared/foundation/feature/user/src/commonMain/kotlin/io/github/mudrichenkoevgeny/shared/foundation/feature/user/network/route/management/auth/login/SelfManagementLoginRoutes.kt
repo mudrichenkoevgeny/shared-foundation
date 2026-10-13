@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
@@ -12,7 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
@@ -22,7 +23,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementLoginRoutes {
     /** Base path for management login operations. */
-    private const val BASE_MANAGEMENT_LOGIN_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+    const val BASE_MANAGEMENT_LOGIN_ROUTE =
+        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
 
     /**
      * **HTTP method:** `POST`
@@ -47,15 +49,19 @@ object SelfManagementLoginRoutes {
      * The process must be completed via [LOGIN_BY_TOTP] or [LOGIN_BY_TOTP_RECOVERY_CODE].
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for every authentication attempt.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
-     * unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success;
-     * leave as `null` for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * - **Action:** [UserAuditActionType.LOGIN_BY_EMAIL]. (If the sign-in is from a new,
+     *   unrecognized device, an additional audit event with action
+     *   [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful authentication.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success;
+     *   leave as `null` for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuthNavigation.LoginByEmail]
      */
     const val LOGIN_BY_EMAIL = "$BASE_MANAGEMENT_LOGIN_ROUTE/email"
 
@@ -78,13 +84,17 @@ object SelfManagementLoginRoutes {
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for the second-factor verification.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
-     * unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.LOGIN_BY_TOTP]. (If the sign-in is from a new,
+     *   unrecognized device, an additional audit event with action
+     *   [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuthNavigation.LoginByTotp]
      */
     const val LOGIN_BY_TOTP = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp"
 
@@ -107,13 +117,17 @@ object SelfManagementLoginRoutes {
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for the backup-factor verification.
-     * * **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from
-     * a new, unrecognized device, an additional audit event with action
-     * [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [UserAuditActionType.LOGIN_BY_TOTP_RECOVERY_CODE]. (If the sign-in is from
+     *   a new, unrecognized device, an additional audit event with action
+     *   [UserAuditActionType.NEW_DEVICE_DETECTED] is persisted).
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuthNavigation.LoginByTotp]
      */
     const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp-recovery-code"
 }

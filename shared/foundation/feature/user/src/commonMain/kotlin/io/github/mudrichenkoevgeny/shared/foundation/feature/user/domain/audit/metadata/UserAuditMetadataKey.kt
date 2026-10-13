@@ -62,7 +62,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
     },
 
     /**
-     * Category of account lockout; value aligned with [AccountLockoutType.serialName].
+     * Category of account lockout; value aligned with [AccountLockoutType.value].
      */
     ACCOUNT_LOCKOUT_TYPE {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
@@ -75,7 +75,7 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
     };
 
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             USER_ID -> KEY_USER_ID
             SESSION_ID -> KEY_SESSION_ID
@@ -105,11 +105,11 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
 
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
-         * then by case-insensitive [serialName] match.
+         * then by case-insensitive [value] match.
          */
         fun fromValueOrNull(value: String): AuditMetadataKey? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

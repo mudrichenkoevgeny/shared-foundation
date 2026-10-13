@@ -27,6 +27,6 @@ fun UserSummaryPayload.toUserSummary(): UserSummary = UserSummary(
  */
 fun UserSummary.toUserSummaryPayload(): UserSummaryPayload = UserSummaryPayload(
     id = id.asHexDashString(),
-    role = role.serialName,
-    accountStatus = accountStatus.serialName
+    role = role.value,
+    accountStatus = accountStatus.value
 )

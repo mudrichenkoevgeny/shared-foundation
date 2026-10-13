@@ -13,6 +13,7 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 - **Wire payloads:** [OpenGlobalSettingsPayload] and [ManagementGlobalSettingsPayload] — `@Serializable` models for network transport, using constants for field naming.
 - **Mappers:** Extension functions for mapping between payloads and domain models.
 - **WebSocket:** [SettingsWebSocketEventTypes] — event strings `OPEN_GLOBAL_SETTINGS_UPDATED` (carries [OpenGlobalSettingsPayload]) and `MANAGEMENT_GLOBAL_SETTINGS_UPDATED` (carries [ManagementGlobalSettingsPayload]).
+- **Navigation:** [ManagementSettingsNavigation] — route constants for settings management screens.
 
 ## Usage
 
@@ -29,4 +30,5 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 [SettingsPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/permission/SettingsPermissionCode.kt
 [OpenGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/open/globalsettings/OpenGlobalSettingsRoutes.kt
 [ManagementGlobalSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/management/globalsettings/ManagementGlobalSettingsRoutes.kt
+[ManagementSettingsNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation.kt
 [FoundationJson]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJson.kt

@@ -1,0 +1,185 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totprecoverycodes.TotpRecoveryCodesPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totpsetup.TotpSetupPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.SelfManagementUserRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
+
+/**
+ * Route paths for the authenticated staff or admin's self-service security management.
+ *
+ * Sensitive operations (disabling TOTP, viewing/regenerating recovery codes) require
+ * a recently re-authenticated session.
+ */
+object SelfManagementUserSecurityRoutes {
+    /** Base path for TOTP-related operations. */
+    private const val BASE_SELF_MANAGEMENT_TOTP_ROUTE =
+        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/security/totp"
+
+    /** Base path for recovery codes. */
+    private const val BASE_SELF_RECOVERY_CODES_ROUTE = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/recovery-codes"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Generates a new TOTP secret and returns setup data (secret key, otpauth URL, and challenge token).
+     * The factor is not active until verified via [ENABLE_TOTP].
+     *
+     * Response body: [TotpSetupPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_SETUP_TOTP_INITIATED].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.TotpMain]
+     */
+    const val SETUP_TOTP = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/setup"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Finalizes TOTP activation by verifying the first code from the authenticator app.
+     * Upon success, TOTP is marked as enabled for the account.
+     *
+     * Request body: [VerifyTotpPayload].
+     *
+     * Response body: [TotpRecoveryCodesPayload] (initial set of backup codes).
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_ENABLE_TOTP].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.TotpMain]
+     */
+    const val ENABLE_TOTP = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/enable"
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Disables TOTP and invalidates all associated recovery codes for the authenticated account.
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_DISABLE_TOTP].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.TotpMain]
+     */
+    const val DISABLE_TOTP = BASE_SELF_MANAGEMENT_TOTP_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns the current active recovery codes for the authenticated user.
+     *
+     * Response body: [TotpRecoveryCodesPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_GET_RECOVERY_CODES].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.TotpRecoveryCodes]
+     */
+    const val GET_RECOVERY_CODES = BASE_SELF_RECOVERY_CODES_ROUTE
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Invalidates all existing recovery codes and generates a new set for the account.
+     *
+     * Response body: [TotpRecoveryCodesPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Security:** Sensitive operation. Requires active TOTP on the account; returns
+     * [SecurityErrorCodes.TOTP_NOT_ENABLED] if TOTP is not configured. When enabled,
+     * MFA Step-up is required via [SecurityErrorCodes.MFA_CONFIRMATION_REQUIRED].
+     * Session must be verified via [SelfManagementSessionRoutes.REAUTHENTICATE_SESSION] if stale.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_REGENERATE_RECOVERY_CODES].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current user's [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current user's [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.TotpRecoveryCodes]
+     */
+    const val REGENERATE_RECOVERY_CODES = "$BASE_SELF_RECOVERY_CODES_ROUTE/regenerate"
+}

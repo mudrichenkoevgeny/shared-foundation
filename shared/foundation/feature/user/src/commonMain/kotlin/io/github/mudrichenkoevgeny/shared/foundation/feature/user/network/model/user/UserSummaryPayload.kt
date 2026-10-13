@@ -15,8 +15,8 @@ import kotlinx.serialization.Serializable
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserSummary].
  *
  * @property id [UserSummary.id] on the wire: [UserId] as hex-dash string.
- * @property role [UserSummary.role]; wire values match [UserRole.serialName].
- * @property accountStatus [UserSummary.accountStatus]; wire values match [UserAccountStatus.serialName].
+ * @property role [UserSummary.role]; wire values match [UserRole.value].
+ * @property accountStatus [UserSummary.accountStatus]; wire values match [UserAccountStatus.value].
  */
 @Serializable
 data class UserSummaryPayload(

@@ -18,10 +18,10 @@ import kotlin.time.Instant
  * Wire keys use `snake_case` via [CommonApiFields] and [AuditEventFields]. Aligns with domain [AuditEventSummary].
  *
  * @property id [AuditEventSummary.id] on the wire: [AuditEventId] as hex-dash string.
- * @property actorType [AuditEventSummary.actorType]; wire values match [AuditActorType.serialName].
- * @property action [AuditEventSummary.action]; wire values match [AuditActionType.serialName].
- * @property resource [AuditEventSummary.resource]; wire values match [AuditResourceType.serialName].
- * @property status [AuditEventSummary.status]; wire values match [AuditStatus.serialName].
+ * @property actorType [AuditEventSummary.actorType]; wire values match [AuditActorType.value].
+ * @property action [AuditEventSummary.action]; wire values match [AuditActionType.value].
+ * @property resource [AuditEventSummary.resource]; wire values match [AuditResourceType.value].
+ * @property status [AuditEventSummary.status]; wire values match [AuditStatus.value].
  * @property createdAt [AuditEventSummary.createdAt] as Unix epoch milliseconds ([Instant]).
  */
 @Serializable

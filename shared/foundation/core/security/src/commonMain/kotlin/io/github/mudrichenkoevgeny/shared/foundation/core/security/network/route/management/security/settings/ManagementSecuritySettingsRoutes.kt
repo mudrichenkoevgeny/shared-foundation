@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permission.SecurityPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
 
 /**
@@ -16,7 +17,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  */
 object ManagementSecuritySettingsRoutes {
     /** Base path for management security settings endpoints. */
-    private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/security/settings"
+    private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE =
+        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/security/settings"
 
     /**
      * **HTTP method:** `GET`
@@ -29,8 +31,12 @@ object ManagementSecuritySettingsRoutes {
      * - **Public Access:** Denied.
      * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
      * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY`
-     * (**OR** semantics).
+     *   (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSecurityNavigation.EditSecuritySettings]
      */
     const val GET_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
@@ -53,11 +59,15 @@ object ManagementSecuritySettingsRoutes {
      * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful updates and all failed attempts.
-     * * **Action:** [SecurityAuditActionType.MANAGEMENT_UPDATE_SECURITY_SETTINGS].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the update.
-     * * **Resource:** [SecurityAuditResourceType.SECURITY_SETTINGS]. Leave `resourceId` unset (singleton resource).
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [SecurityAuditActionType.MANAGEMENT_UPDATE_SECURITY_SETTINGS].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the update.
+     * - **Resource:** [SecurityAuditResourceType.SECURITY_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSecurityNavigation.EditSecuritySettings]
      */
     const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
@@ -80,11 +90,15 @@ object ManagementSecuritySettingsRoutes {
      * Session must be verified via `SelfManagementSessionRoutes.REAUTHENTICATE_SESSION` if stale.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful resets and all failed attempts.
-     * * **Action:** [SecurityAuditActionType.MANAGEMENT_RESET_SECURITY_SETTINGS].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the reset.
-     * * **Resource:** [SecurityAuditResourceType.SECURITY_SETTINGS]. Leave `resourceId` unset (singleton resource).
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     * - **Action:** [SecurityAuditActionType.MANAGEMENT_RESET_SECURITY_SETTINGS].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the `UserId` of the administrator performing the reset.
+     * - **Resource:** [SecurityAuditResourceType.SECURITY_SETTINGS]. Leave `resourceId` unset (singleton resource).
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSecurityNavigation.EditSecuritySettings]
      */
     const val RESET_MANAGEMENT_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
 }

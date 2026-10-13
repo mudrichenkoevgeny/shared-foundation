@@ -32,7 +32,7 @@ fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivat
 fun UserIdentifierPrivate.toUserIdentifierPrivatePayload(): UserIdentifierPrivatePayload = UserIdentifierPrivatePayload(
     id = id.asHexDashString(),
     userId = userId.asHexDashString(),
-    userAuthProvider = userAuthProvider.serialName,
+    userAuthProvider = userAuthProvider.value,
     identifier = identifier,
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,

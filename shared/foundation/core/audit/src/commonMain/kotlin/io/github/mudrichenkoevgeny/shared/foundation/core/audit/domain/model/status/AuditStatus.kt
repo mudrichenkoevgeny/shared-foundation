@@ -1,43 +1,40 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val STATUS_SUCCESS = "success"
+private const val STATUS_FAILED = "failed"
+private const val STATUS_DENIED = "denied"
+
 /**
  * Outcome of an audited action on the API wire and in shared domain code.
+ *
+ * @property value String representation of the [AuditStatus].
  */
-enum class AuditStatus {
+@Serializable
+enum class AuditStatus(val value: String) {
     /** Action completed successfully. */
-    SUCCESS,
+    @SerialName(STATUS_SUCCESS)
+    SUCCESS(STATUS_SUCCESS),
 
     /** Action was attempted but failed (e.g. validation or business error). */
-    FAILED,
+    @SerialName(STATUS_FAILED)
+    FAILED(STATUS_FAILED),
 
     /** Action was denied (e.g. insufficient permissions). */
-    DENIED;
-
-    /**
-     * String representation of the [AuditStatus].
-     */
-    val serialName: String
-        get() = when (this) {
-            SUCCESS -> STATUS_SUCCESS
-            FAILED -> STATUS_FAILED
-            DENIED -> STATUS_DENIED
-        }
+    @SerialName(STATUS_DENIED)
+    DENIED(STATUS_DENIED);
 
     companion object {
-        private const val STATUS_SUCCESS = "success"
-        private const val STATUS_FAILED = "failed"
-        private const val STATUS_DENIED = "denied"
-
         /**
          * Returns [AuditStatus] based on the provided wire value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): AuditStatus? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [AuditStatus] for the given wire or enum-style string (case-insensitive enum name).
