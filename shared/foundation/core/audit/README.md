@@ -24,6 +24,9 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 - **Extensibility:**
     - [AuditActionType] & [AuditResourceType]: Interface-based contracts allowing feature-modules to define their own domain-specific actions and resources.
     - **Composite Parsers:** [CompositeAuditActionTypeParser], [CompositeAuditResourceTypeParser], [CompositeAuditMetadataKeyParser] — tools to resolve these extensible types from wire strings.
+- **Navigation:**
+    - [ManagementAuditNavigation]: Management navigation screen routes (`AuditEventList`, `AuditEventDetail`).
+    - Screen params and parsers: [ManagementAuditEventListParams], [ManagementAuditEventDetailParams], [ManagementAuditEventListParamsParser], [ManagementAuditEventDetailParamsParser].
 
 ## Usage
 
@@ -61,3 +64,8 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 [CompositeAuditMetadataKeyParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CompositeAuditMetadataKeyParser.kt
 [ManagementAuditRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/route/management/ManagementAuditRoutes.kt
 [AuditPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/permissions/AuditPermissionCode.kt
+[ManagementAuditNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation.kt
+[ManagementAuditEventListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams.kt
+[ManagementAuditEventDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams.kt
+[ManagementAuditEventListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParamsParser.kt
+[ManagementAuditEventDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParamsParser.kt

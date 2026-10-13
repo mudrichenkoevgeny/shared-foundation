@@ -24,6 +24,7 @@ import kotlin.time.Instant
  * Parses [AuditEventPrivatePayload.status] wire string value into [AuditStatus] (throws if invalid).
  * Maps [AuditEventPrivatePayload.metadata] entries using [compositeMetadataKeyParser].
  * Converts [AuditEventPrivatePayload.createdAt] epoch millis into [AuditEventPrivate.createdAt] ([Instant]).
+ * Converts [AuditEventPrivatePayload.updatedAt] epoch millis into [AuditEventPrivate.updatedAt] ([Instant]), if present.
  *
  * @param compositeActionTypeParser Resolves payload `action` strings to [AuditActionType].
  * @param compositeResourceTypeParser Resolves payload `resource` strings to [AuditResourceType].
@@ -45,28 +46,31 @@ fun AuditEventPrivatePayload.toAuditEventPrivate(
     status = AuditStatus.fromValueOrThrow(status),
     metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
     message = message,
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
  * Builds a network [AuditEventPrivatePayload] from a domain [AuditEventPrivate].
  *
- * Writes [AuditEventPrivate.status] as a wire string matching [AuditStatus.serialName].
+ * Writes [AuditEventPrivate.status] as a wire string matching [AuditStatus.value].
  * Maps [AuditEventPrivate.metadata] entries to [AuditEventMetadataPayload] payloads.
  * Converts [AuditEventPrivate.createdAt] ([Instant]) into epoch millis for [AuditEventPrivatePayload.createdAt].
+ * Converts [AuditEventPrivate.updatedAt] ([Instant]) into epoch millis for [AuditEventPrivatePayload.updatedAt], if present.
  *
  * @return payload DTO aligned with the shared [AuditEventPrivatePayload] contract (`snake_case` keys, epoch millis timestamps).
  */
 fun AuditEventPrivate.toAuditEventPrivatePayload(): AuditEventPrivatePayload = AuditEventPrivatePayload(
     id = id.asHexDashString(),
     actorId = actorId,
-    actorType = actorType.serialName,
+    actorType = actorType.value,
     actorUserRole = actorUserRole,
-    action = action.serialName,
-    resource = resource.serialName,
+    action = action.value,
+    resource = resource.value,
     resourceId = resourceId,
-    status = status.serialName,
+    status = status.value,
     metadata = metadata.map { it.toAuditEventMetadataPayload() },
     message = message,
-    createdAt = createdAt.toEpochMilliseconds()
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
 )

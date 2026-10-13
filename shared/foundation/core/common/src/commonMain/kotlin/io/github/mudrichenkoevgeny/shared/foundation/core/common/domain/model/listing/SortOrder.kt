@@ -6,37 +6,33 @@ import kotlinx.serialization.Serializable
 
 /**
  * Sort direction for list endpoints. Serialized with the same strings as [CommonApiFields.SortOrder].
+ *
+ * @property value Wire value for `sort_order` (matches [CommonApiFields.SortOrder]).
  */
 @Serializable
-enum class SortOrder {
+enum class SortOrder(val value: String) {
     /** Ascending order ([CommonApiFields.SortOrder.ASC]). */
     @SerialName(CommonApiFields.SortOrder.ASC)
-    ASC,
+    ASC(CommonApiFields.SortOrder.ASC),
 
     /** Descending order ([CommonApiFields.SortOrder.DESC]). */
     @SerialName(CommonApiFields.SortOrder.DESC)
-    DESC;
-
-    /**
-     * Wire value for `sort_order` (matches [CommonApiFields.SortOrder]).
-     */
-    val serialName: String
-        get() = when (this) {
-            ASC -> CommonApiFields.SortOrder.ASC
-            DESC -> CommonApiFields.SortOrder.DESC
-        }
+    DESC(CommonApiFields.SortOrder.DESC);
 
     companion object {
+        /**
+         * Default sort direction ([DESC]).
+         */
+        val DEFAULT = DESC
+
         /**
          * Returns [SortOrder] for the given wire value (`asc` / `desc`) or case-insensitive enum name (`ASC` / `DESC`).
          */
         fun fromValueOrNull(value: String): SortOrder? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [SortOrder] for the given wire or enum-style string.

@@ -34,6 +34,7 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     lastLoginAt = lastLoginAt?.let(Instant::fromEpochMilliseconds),
     lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
     createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
     lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
     temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds)
@@ -44,9 +45,9 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
  */
 fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     id = id.asHexDashString(),
-    role = role.serialName,
-    accountStatus = accountStatus.serialName,
-    accountStatusOnRestore = accountStatusOnRestore?.serialName,
+    role = role.value,
+    accountStatus = accountStatus.value,
+    accountStatusOnRestore = accountStatusOnRestore?.value,
     authorityLevel = authorityLevel,
     permissionCodes = permissionCodes.map { permissionCode ->
         permissionCode.value
@@ -55,7 +56,8 @@ fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     lastLoginAt = lastLoginAt?.toEpochMilliseconds(),
     lastActiveAt = lastActiveAt?.toEpochMilliseconds(),
     createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds(),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
-    lockoutType = lockoutType.serialName,
+    lockoutType = lockoutType.value,
     temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds()
 )

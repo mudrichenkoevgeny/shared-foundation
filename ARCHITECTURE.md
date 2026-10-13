@@ -27,14 +27,15 @@ graph TD
     feature_user --> core_common
 ```
 
-## 2. Surface Separation: Open vs Management
+## 2. Surface Separation: Open, Self-Management, and Management
 
-This flowchart visualizes the architectural separation between unprivileged (Open) and protected (Management) API surfaces. It maps management routes to their corresponding, strongly-typed permission codes.
+This flowchart visualizes the architectural separation between unprivileged (Open), authenticated self-service (Self-Management), and protected admin (Management) API surfaces. It maps management routes to their corresponding, strongly-typed permission codes.
 
 ```mermaid
 flowchart TB
     subgraph APISurfaces ["API Surfaces"]
         OpenAPI["Open API (Public / Unprivileged)"]
+        SelfManagementAPI["Self-Management API (Authenticated Self-Service)"]
         ManagementAPI["Management API (Protected / Admin)"]
     end
 
@@ -42,29 +43,44 @@ flowchart TB
         OpenGlobalSettingsRoutes["OpenGlobalSettingsRoutes"]
         OpenSecuritySettingsRoutes["OpenSecuritySettingsRoutes"]
         OpenUserRoutes["OpenUserRoutes"]
-        OpenSessionRoutes["OpenSessionRoutes"]
+        OpenSessionRoutes["OpenSessionRoutes (open.user.session)"]
         OpenUnlockRoutes["OpenUnlockRoutes"]
-        OpenIdentifierRoutes["OpenIdentifierRoutes"]
+        OpenIdentifierRoutes["OpenIdentifierRoutes (open.user.identifier)"]
         OpenAuthSettingsRoutes["OpenAuthSettingsRoutes"]
+    end
+
+    subgraph SelfManagementRoutes ["Self-Management Routes"]
+        SelfManagementUserRoutes["SelfManagementUserRoutes"]
+        SelfManagementSessionRoutes["SelfManagementSessionRoutes"]
+        SelfManagementIdentifierRoutes["SelfManagementIdentifierRoutes"]
+        SelfManagementUserSecurityRoutes["SelfManagementUserSecurityRoutes"]
+        SelfManagementLoginRoutes["SelfManagementLoginRoutes"]
+        SelfManagementUnlockRoutes["SelfManagementUnlockRoutes"]
+        SelfManagementResetPasswordRoutes["SelfManagementResetPasswordRoutes"]
     end
 
     subgraph ManagementRoutes ["Management Routes"]
         ManagementGlobalSettingsRoutes["ManagementGlobalSettingsRoutes"]
         ManagementSecuritySettingsRoutes["ManagementSecuritySettingsRoutes"]
         ManagementAuditRoutes["ManagementAuditRoutes"]
-        ManagementUserRoutes["ManagementUserRoutes"]
-        ManagementSessionRoutes["ManagementSessionRoutes"]
-        SelfManagementRoutes["SelfManagement Routes"]
+        ManagementUsersRoutes["ManagementUsersRoutes"]
+        ManagementSessionsRoutes["ManagementSessionsRoutes"]
+        ManagementIdentifiersRoutes["ManagementIdentifiersRoutes"]
+        ManagementUsersSecurityRoutes["ManagementUsersSecurityRoutes"]
     end
 
     subgraph PermissionCodes ["Permission Codes"]
         SettingsPermissionCode["SettingsPermissionCode"]
         SecurityPermissionCode["SecurityPermissionCode"]
         AuditPermissionCode["AuditPermissionCode"]
+        UserPermissionCode["UserPermissionCode"]
+        SessionPermissionCode["SessionPermissionCode"]
+        IdentifierPermissionCode["IdentifierPermissionCode"]
         PermissionCode["PermissionCode (Base Inline Class)"]
     end
 
     OpenAPI --> OpenRoutes
+    SelfManagementAPI --> SelfManagementRoutes
     ManagementAPI --> ManagementRoutes
 
     OpenRoutes -.-> OpenGlobalSettingsRoutes
@@ -75,20 +91,35 @@ flowchart TB
     OpenRoutes -.-> OpenIdentifierRoutes
     OpenRoutes -.-> OpenAuthSettingsRoutes
 
+    SelfManagementRoutes -.-> SelfManagementUserRoutes
+    SelfManagementRoutes -.-> SelfManagementSessionRoutes
+    SelfManagementRoutes -.-> SelfManagementIdentifierRoutes
+    SelfManagementRoutes -.-> SelfManagementUserSecurityRoutes
+    SelfManagementRoutes -.-> SelfManagementLoginRoutes
+    SelfManagementRoutes -.-> SelfManagementUnlockRoutes
+    SelfManagementRoutes -.-> SelfManagementResetPasswordRoutes
+
     ManagementRoutes -.-> ManagementGlobalSettingsRoutes
     ManagementRoutes -.-> ManagementSecuritySettingsRoutes
     ManagementRoutes -.-> ManagementAuditRoutes
-    ManagementRoutes -.-> ManagementUserRoutes
-    ManagementRoutes -.-> ManagementSessionRoutes
-    ManagementRoutes -.-> SelfManagementRoutes
+    ManagementRoutes -.-> ManagementUsersRoutes
+    ManagementRoutes -.-> ManagementSessionsRoutes
+    ManagementRoutes -.-> ManagementIdentifiersRoutes
+    ManagementRoutes -.-> ManagementUsersSecurityRoutes
 
     ManagementGlobalSettingsRoutes -->|Enforced By| SettingsPermissionCode
     ManagementSecuritySettingsRoutes -->|Enforced By| SecurityPermissionCode
     ManagementAuditRoutes -->|Enforced By| AuditPermissionCode
-    
+    ManagementUsersRoutes -->|Enforced By| UserPermissionCode
+    ManagementSessionsRoutes -->|Enforced By| SessionPermissionCode
+    ManagementIdentifiersRoutes -->|Enforced By| IdentifierPermissionCode
+
     SettingsPermissionCode -->|Wraps| PermissionCode
     SecurityPermissionCode -->|Wraps| PermissionCode
     AuditPermissionCode -->|Wraps| PermissionCode
+    UserPermissionCode -->|Wraps| PermissionCode
+    SessionPermissionCode -->|Wraps| PermissionCode
+    IdentifierPermissionCode -->|Wraps| PermissionCode
 ```
 
 ## 3. WebSocket Wire Contract
@@ -177,3 +208,53 @@ classDiagram
     ApiErrorResponse --> SecurityErrorCodes : "Supplies code"
     ApiErrorResponse --> UserErrorCodes : "Supplies code"
 ```
+
+## 5. Navigation Architecture & UI Presentation Traceability
+
+This diagram illustrates how Network Routes, Navigation Screen Routes, and Navigation Screen Parameter Parsers link together to form a type-safe bridge between network endpoints and client UI screens.
+
+```mermaid
+flowchart LR
+    subgraph NetworkLayer ["Network Layer"]
+        NetworkRoute["Network Route Constant\n(e.g., ManagementUsersRoutes.GET_USERS)"]
+    end
+
+    subgraph NavigationLayer ["Navigation Layer"]
+        ScreenRoute["Navigation Screen Route\n(e.g., ManagementUsersNavigation.UserList)"]
+        ScreenParams["Screen Parameters\n(e.g., ManagementUserListParams)"]
+        ScreenParser["Params Parser\n(e.g., ManagementUserListParamsParser)"]
+    end
+
+    subgraph UILayer ["Client UI Layer"]
+        UIScreen["UI Screen Composable / Component"]
+    end
+
+    NetworkRoute -->|Documented via KDoc\nUI Presentation| ScreenRoute
+    ScreenRoute -->|Declares Params Type| ScreenParams
+    ScreenParser -->|Parses Query/Path to| ScreenParams
+    ScreenRoute -->|Mounts & Triggers Primary API| NetworkRoute
+    UIScreen -->|Binds to Route & Params| ScreenRoute
+```
+
+### Complete Navigation Classes Index
+
+The library provides 11 strongly-typed navigation objects across two main hierarchies (Client and Management):
+
+#### 1. Core Navigation Roots (`core/common`)
+- **`ClientMainNavigation`**: Root navigation entry point for Client applications (`ROUTE = "/"`).
+- **`ManagementMainNavigation`**: Root navigation entry point for Management/Admin applications (`ROUTE = "/management"`).
+
+#### 2. Client Application Navigation (`feature/user`)
+- **`ClientAuthNavigation`**: Unauthenticated authentication and onboarding screens (Welcome, Login by Email/Phone/TOTP, Registration, Reset Password, Account Pending Deletion, and Unlock flows).
+- **`ClientUserNavigation`**: Authenticated client profile screens (Main Profile, Self Session List & Details, Self Identifier List & Details, TOTP Setup & Management).
+
+#### 3. Management Application Navigation (`core/*` & `feature/user`)
+- **`ManagementAuthNavigation`**: Admin authentication screens (Login by Email/TOTP, Reset Password, Unlock flows).
+- **`ManagementAuthSettingsNavigation`**: Management authentication provider and email restriction configuration screen.
+- **`ManagementSelfUserNavigation`**: Authenticated admin profile self-service screens (Profile Main, Self Sessions, Self Identifiers, TOTP).
+- **`ManagementUsersNavigation`**: Admin user management screens (User List & Detail, Global & User-Specific Session Lists, Global & User-Specific Identifier Lists).
+- **`ManagementAuditNavigation`** (`core/audit`): System audit event listing (`AuditEventList`) and detailed view (`AuditEventDetail`).
+- **`ManagementSecurityNavigation`** (`core/security`): Password policies, lockout rules, rate limits, and IP restriction settings (`SecuritySettings`).
+- **`ManagementSettingsNavigation`** (`core/settings`): System-wide global settings and version requirements (`GlobalSettings`).
+
+

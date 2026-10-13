@@ -2,7 +2,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.generator
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource.CommonAuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.AuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
@@ -11,21 +10,55 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventMetadataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventSummaryPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.detail.ManagementAuditEventDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list.ManagementAuditEventListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client.ClientMainNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management.ManagementSettingsNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthSettingsNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.phone.LoginByPhoneParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.welcome.LoginWelcomeParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.register.email.ClientRegistrationByEmailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.LoginByTotpMode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.globallist.ManagementGlobalIdentifierListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.userlist.ManagementUserIdentifierListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.globallist.ManagementGlobalSessionListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.userlist.ManagementUserSessionListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.detail.UserDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.globallist.ManagementUserListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.detail.IdentifierDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.list.SelfIdentifierListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.detail.SessionDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.list.SelfSessionListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.totp.main.TotpMainParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.targetinput.UnlockTargetInputParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.otpinput.UnlockOtpInputParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.methodselection.UnlockMethodSelectionParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.success.UnlockSuccessParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management.ManagementAuditRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
@@ -171,14 +204,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.unlock.SelfManagementUnlockRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.configuration.ManagementUserConfigurationRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.ManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.ManagementUserRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.SelfManagementUserRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.ManagementUserSecurityRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.security.SelfManagementUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.SelfManagementUserRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.security.ManagementUsersSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.refreshtoken.OpenRefreshTokenRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
@@ -186,8 +219,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.settings.OpenAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.configuration.OpenUserConfigurationRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier.OpenIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.security.OpenUserSecurityRoutes
 import kotlinx.serialization.SerialName
@@ -217,7 +250,7 @@ fun main() {
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.56",
+          "version": "0.0.58",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -236,6 +269,7 @@ fun main() {
         """.trimIndent()
 
         File(outputDir, "package.json").writeText(packageJson)
+        File(outputDir, ".npmignore").writeText("*.tgz\n")
 
         val npmReadme = """
         # @mudrichenkoevgeny/shared-foundation
@@ -547,8 +581,19 @@ private fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, 
 }
 
 private val routeClasses = listOf(
+    ClientMainNavigation::class,
+    ManagementMainNavigation::class,
     ManagementRoutes::class,
     ManagementAuditRoutes::class,
+    ManagementAuditNavigation::class,
+    ClientAuthNavigation::class,
+    ManagementAuthNavigation::class,
+    ManagementAuthSettingsNavigation::class,
+    ClientUserNavigation::class,
+    ManagementSelfUserNavigation::class,
+    ManagementUsersNavigation::class,
+    ManagementSecurityNavigation::class,
+    ManagementSettingsNavigation::class,
     ManagementSecuritySettingsRoutes::class,
     OpenSecuritySettingsRoutes::class,
     ManagementGlobalSettingsRoutes::class,
@@ -564,16 +609,16 @@ private val routeClasses = listOf(
     SelfManagementUnlockRoutes::class,
     OpenUserSecurityRoutes::class,
     SelfManagementUserSecurityRoutes::class,
-    ManagementUserSecurityRoutes::class,
+    ManagementUsersSecurityRoutes::class,
     OpenIdentifierRoutes::class,
     SelfManagementIdentifierRoutes::class,
-    ManagementIdentifierRoutes::class,
+    ManagementIdentifiersRoutes::class,
     OpenSessionRoutes::class,
     SelfManagementSessionRoutes::class,
-    ManagementSessionRoutes::class,
+    ManagementSessionsRoutes::class,
     OpenUserRoutes::class,
     SelfManagementUserRoutes::class,
-    ManagementUserRoutes::class,
+    ManagementUsersRoutes::class,
     ManagementAuthSettingsRoutes::class,
     OpenAuthSettingsRoutes::class,
     OpenUserConfigurationRoutes::class,
@@ -806,6 +851,30 @@ private val rawDtoClasses = listOf(
     ManagementGlobalSettingsPayload::class,
     OpenGlobalSettingsPayload::class,
     AuditEventMetadataPayload::class,
+    ManagementAuditEventListParams::class,
+    ManagementAuditEventDetailParams::class,
+    LoginWelcomeParams::class,
+    LoginByEmailParams::class,
+    LoginByPhoneParams::class,
+    LoginByTotpParams::class,
+    ClientRegistrationByEmailParams::class,
+    ResetPasswordParams::class,
+    UnlockMethodSelectionParams::class,
+    UnlockTargetInputParams::class,
+    UnlockOtpInputParams::class,
+    UnlockSuccessParams::class,
+    IdentifierDetailParams::class,
+    SelfIdentifierListParams::class,
+    SessionDetailParams::class,
+    SelfSessionListParams::class,
+    TotpMainParams::class,
+    LoginByTotpMode::class,
+    ManagementUserListParams::class,
+    UserDetailParams::class,
+    ManagementUserSessionListParams::class,
+    ManagementGlobalSessionListParams::class,
+    ManagementUserIdentifierListParams::class,
+    ManagementGlobalIdentifierListParams::class,
     AvailableAuthProvidersPayload::class,
     EmailRestrictionPolicyPayload::class,
     SessionTokenPayload::class,
@@ -874,7 +943,7 @@ private fun getEnumInfo(kClass: KClass<*>): EnumInfo {
         }
     } else if (kClass == ExternalAuthProvider::class) {
         for (ext in ExternalAuthProvider.all) {
-            entries.add(ext.userAuthProvider.name to ext.userAuthProvider.serialName)
+            entries.add(ext.userAuthProvider.name to ext.userAuthProvider.value)
         }
     }
 
@@ -943,6 +1012,15 @@ private fun generateContractObjects(): String {
       Sort: {
         SORT_BY: "${ListingParamNames.Sort.SORT_BY}",
         SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}"
+      }
+    };
+
+    export const ListingDefaultValues = {
+      PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER},
+      PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE},
+      Pagination: {
+        PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER},
+        PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE}
       }
     };
 
@@ -1336,6 +1414,15 @@ private fun generateDeclarationFile(): String {
       readonly Sort: {
         readonly SORT_BY: "${ListingParamNames.Sort.SORT_BY}";
         readonly SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}";
+      };
+    };
+
+    export declare const ListingDefaultValues: {
+      readonly PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER};
+      readonly PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE};
+      readonly Pagination: {
+        readonly PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER};
+        readonly PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE};
       };
     };
 

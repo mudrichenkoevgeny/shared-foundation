@@ -16,7 +16,7 @@ enum class CommonAuditResourceType : AuditResourceType {
     /**
      * String representation of the [CommonAuditResourceType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             AUDIT_EVENT -> RESOURCE_AUDIT_EVENT
             AUDIT_EVENTS -> RESOURCE_AUDIT_EVENTS
@@ -35,7 +35,7 @@ enum class CommonAuditResourceType : AuditResourceType {
          */
         fun fromValueOrNull(value: String): CommonAuditResourceType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

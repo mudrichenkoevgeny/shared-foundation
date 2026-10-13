@@ -18,7 +18,7 @@ enum class SettingsAuditResourceType : AuditResourceType {
     /**
      * String representation of the [SettingsAuditResourceType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             GLOBAL_SETTINGS -> RESOURCE_GLOBAL_SETTINGS
         }
@@ -35,7 +35,7 @@ enum class SettingsAuditResourceType : AuditResourceType {
          */
         fun fromValueOrNull(value: String): SettingsAuditResourceType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

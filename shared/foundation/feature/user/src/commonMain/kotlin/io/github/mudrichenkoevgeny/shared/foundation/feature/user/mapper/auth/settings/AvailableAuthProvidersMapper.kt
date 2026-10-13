@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Maps between [AvailableAuthProvidersPayload] and domain [AvailableAuthProviders].
  *
- * Wire list entries use [UserAuthProvider.serialName]; [UserAuthProvider.fromValueOrNull] parses them.
+ * Wire list entries use [UserAuthProvider.value]; [UserAuthProvider.fromValueOrNull] parses them.
  * Unknown wire values fail mapping with [IllegalArgumentException].
  */
 
@@ -25,8 +25,8 @@ fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProvi
  */
 fun AvailableAuthProviders.toAvailableAuthProvidersPayload(): AvailableAuthProvidersPayload =
     AvailableAuthProvidersPayload(
-        primary = primary.map(UserAuthProvider::serialName),
-        secondary = secondary.map(UserAuthProvider::serialName)
+        primary = primary.map(UserAuthProvider::value),
+        secondary = secondary.map(UserAuthProvider::value)
     )
 
 private fun String.toUserAuthProviderOnWire(): UserAuthProvider {

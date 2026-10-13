@@ -1,48 +1,47 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val CLIENT_WEB = "web"
+private const val CLIENT_ANDROID = "android"
+private const val CLIENT_IOS = "ios"
+private const val CLIENT_DESKTOP = "desktop"
+
 /**
  * Represents the type of client application used to access the system.
+ *
+ * @property value String representation of the [ClientType].
  */
-enum class ClientType {
+@Serializable
+enum class ClientType(val value: String) {
     /**
      * Web browser based client.
      */
-    WEB,
+    @SerialName(CLIENT_WEB)
+    WEB(CLIENT_WEB),
 
     /**
      * Android mobile application.
      */
-    ANDROID,
+    @SerialName(CLIENT_ANDROID)
+    ANDROID(CLIENT_ANDROID),
 
     /**
      * iOS mobile application.
      */
-    IOS,
+    @SerialName(CLIENT_IOS)
+    IOS(CLIENT_IOS),
 
     /**
      * Desktop application.
      */
-    DESKTOP;
-
-    /**
-     * String representation of the [ClientType].
-     */
-    val serialName: String
-        get() = when (this) {
-            WEB -> CLIENT_WEB
-            ANDROID -> CLIENT_ANDROID
-            IOS -> CLIENT_IOS
-            DESKTOP -> CLIENT_DESKTOP
-        }
+    @SerialName(CLIENT_DESKTOP)
+    DESKTOP(CLIENT_DESKTOP);
 
     fun isMobileClient(): Boolean = this == ANDROID || this == IOS
 
     companion object {
-        private const val CLIENT_WEB = "web"
-        private const val CLIENT_ANDROID = "android"
-        private const val CLIENT_IOS = "ios"
-        private const val CLIENT_DESKTOP = "desktop"
-
         /**
          * Returns [ClientType] based on the provided string value, or null if the value is invalid.
          *
@@ -50,11 +49,9 @@ enum class ClientType {
          */
         fun fromValueOrNull(value: String): ClientType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [ClientType] for the given wire or enum-style string (case-insensitive enum name).

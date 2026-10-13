@@ -40,16 +40,16 @@ fun AuditEventSummaryPayload.toAuditEventSummary(
 /**
  * Builds a network [AuditEventSummaryPayload] from a domain [AuditEventSummary].
  *
- * Writes [AuditEventSummary.status] as a wire string matching [AuditStatus.serialName].
+ * Writes [AuditEventSummary.status] as a wire string matching [AuditStatus.value].
  * Converts [AuditEventSummary.createdAt] ([Instant]) into epoch millis for [AuditEventSummaryPayload.createdAt].
  *
  * @return payload DTO aligned with the shared [AuditEventSummaryPayload] contract (`snake_case` keys, epoch millis timestamps).
  */
 fun AuditEventSummary.toAuditEventSummaryPayload(): AuditEventSummaryPayload = AuditEventSummaryPayload(
     id = id.asHexDashString(),
-    actorType = actorType.serialName,
-    action = action.serialName,
-    resource = resource.serialName,
-    status = status.serialName,
+    actorType = actorType.value,
+    action = action.value,
+    resource = resource.value,
+    status = status.value,
     createdAt = createdAt.toEpochMilliseconds()
 )

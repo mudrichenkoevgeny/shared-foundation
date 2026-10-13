@@ -18,6 +18,8 @@ object OpenGlobalSettingsRoutes {
      * - **Allowed Roles:** Any.
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
      */
     const val GET_OPEN_GLOBAL_SETTINGS = "/global-settings"
 }

@@ -16,9 +16,10 @@ import kotlin.time.Instant
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserSessionSummary].
  *
  * @property id [UserSessionSummary.id] on the wire: [UserSessionId] as hex-dash string.
- * @property deviceInfo [UserSessionSummary.deviceInfo].
+ * @property userId [UserSessionSummary.userId] on the wire: user ID as hex-dash string.
+ * @property clientDeviceInfo [UserSessionSummary.clientDeviceInfo].
  * @property identifierDisplayName [UserSessionSummary.identifierDisplayName].
- * @property identifierAuthProvider [UserSessionSummary.identifierAuthProvider]; wire values match [UserAuthProvider.serialName].
+ * @property identifierAuthProvider [UserSessionSummary.identifierAuthProvider]; wire values match [UserAuthProvider.value].
  * @property lastAccessedAt [UserSessionSummary.lastAccessedAt] as Unix epoch milliseconds ([Instant]).
  * @property expiresAt [UserSessionSummary.expiresAt] as Unix epoch milliseconds ([Instant]).
  */
@@ -27,8 +28,11 @@ data class UserSessionSummaryPayload(
     @SerialName(CommonApiFields.ID)
     val id: String,
 
+    @SerialName(UserApiFields.USER_ID)
+    val userId: String,
+
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val deviceInfo: ClientDeviceInfoPayload,
+    val clientDeviceInfo: ClientDeviceInfoPayload,
 
     @SerialName(UserApiFields.IDENTIFIER_DISPLAY_NAME)
     val identifierDisplayName: String,

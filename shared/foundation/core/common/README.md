@@ -12,6 +12,7 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 - **Domain — Client:** [ClientType] serializable enum, [ClientInfo], and [ClientDeviceInfo] to describe connecting applications.
 - **Domain — Permissions:** [PermissionCode] base type for shared permission constants.
 - **Domain — Listing:** [PagedResult], [ListingParamNames], [SortOrder], and [CommonSortValues] for standardized pagination and sorting contracts.
+- **Navigation — Core:** [ClientMainNavigation] and [ManagementMainNavigation] for root route definitions; [NavigationScreenParams] marker interface; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter parsing.
 - **Validation hints:** [RequiredField], [NotBlankStringField], [NotEmptyCollectionField] in [NetworkFieldAnnotations] (runtime interpretation is outside this module unless you add validators).
 
 ## Usage
@@ -46,3 +47,8 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 [NotBlankStringField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NotEmptyCollectionField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NetworkFieldAnnotations]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
+[ClientMainNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation.kt
+[ManagementMainNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation.kt
+[NavigationScreenParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams.kt
+[QueryParamNormalizer]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/QueryParamNormalizer.kt
+[PhoneParamNormalizer]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/PhoneParamNormalizer.kt

@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import kotlin.time.Instant
 
@@ -12,7 +13,8 @@ import kotlin.time.Instant
  * Wire counterpart is [UserSessionSummaryPayload].
  *
  * @property id Session row id.
- * @property deviceInfo Hardware and environment device info.
+ * @property userId Identifier of the user account that owns this session ([UserId]).
+ * @property clientDeviceInfo Hardware and environment device info.
  * @property identifierDisplayName Display name of the identifier used for login.
  * @property identifierAuthProvider Authentication provider category.
  * @property lastAccessedAt Timestamp of last session activity.
@@ -20,7 +22,8 @@ import kotlin.time.Instant
  */
 data class UserSessionSummary(
     val id: UserSessionId = UserSessionId.generate(),
-    val deviceInfo: ClientDeviceInfo,
+    val userId: UserId,
+    val clientDeviceInfo: ClientDeviceInfo,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val lastAccessedAt: Instant,
@@ -39,7 +42,7 @@ data class UserSessionSummary(
     private fun isExpired(now: Instant): Boolean = expiresAt <= now
 
     private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
-        val sessionDeviceId = deviceInfo.deviceId
+        val sessionDeviceId = clientDeviceInfo.deviceId
         if (clientDeviceId == null || sessionDeviceId == null) {
             return true
         }

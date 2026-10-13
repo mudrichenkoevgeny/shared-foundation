@@ -53,9 +53,9 @@ Domain models and API wire payloads follow a standardized 4-tier projection hier
 - **Naming:** Use `@SerialName` for all properties. Values must come from `CommonApiFields`, `SecurityApiFields`, `UserApiFields`, or other module-specific contract objects.
 - **Validation Hints:** Use JVM-retention annotations from `core/common` (`@RequiredField`, `@NotBlankStringField`) to mark DTO requirements for consumers.
 
-## 4. HTTP Route Documentation (The "Gold Standard")
+## 4. HTTP Route Documentation & Navigation Traceability
 
-Every route constant in `feature/*-api` must be documented using a strict KDoc hierarchy. This is the **primary source of truth** for both backend and client developers.
+Every route constant in `feature/*` and `core/*` network route objects must be documented using a strict KDoc hierarchy. This is the **primary source of truth** for backend, client, and UI developers.
 
 ### Required KDoc Structure:
 1. **HTTP Method:** `**HTTP method:** METHOD` (e.g., `GET`, `POST`).
@@ -71,6 +71,7 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
    - **Public Access:** State `Allowed` or `Denied`.
 6. **Security:** Notes on **MFA Step-up** requirements (e.g., `REAUTHENTICATE_SESSION`) for sensitive actions.
 7. **Observability (Audit):** Define the `AuditActionType` and `AuditResourceType` triggered by this route.
+8. **UI Presentation:** Reference the associated navigation screen routes (`Screens:`) and/or UI flow (`Flow:`).
 
 ## 5. Audit & Extensibility Patterns
 
@@ -94,6 +95,18 @@ Every route constant in `feature/*-api` must be documented using a strict KDoc h
 - **No Framework Imports:** Do not add dependencies on Ktor Server, Ktor Client, or Database drivers.
 - **Pure Logic:** Logic like `PasswordPolicyValidatorImpl` must be pure Kotlin. If a feature requires platform-specific behavior, define an `interface` in `core` and let consumers provide the implementation.
 - **No Environment Data:** Base URLs and secrets are forbidden. Use relative path segments only.
+
+## 9. Navigation Screen Routes & Parameters Architecture
+
+To provide full type safety and declarative navigation for client platforms, each module defines a structured navigation layer (`*.navigation.*`):
+
+- **Route Declarations (`*Navigation.kt`):**
+  - Defines screen route paths (`ROUTE`) and parent route hierarchies (`PARENT_ROUTE`).
+  - Documents `Screen Parameters`, `Primary API` (auto-fetch or main submit endpoint), and `Secondary Action APIs` (user action buttons).
+- **Screen Parameter Types (`*Params.kt`):**
+  - Strongly typed parameter data classes implementing `NavigationScreenParams`.
+- **Parameter Parsers (`*ParamsParser.kt`):**
+  - Standalone parser components responsible for converting route query/path parameters into strongly typed `*Params` objects, utilizing `QueryParamNormalizer` and `PhoneParamNormalizer`.
 
 ---
 *Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

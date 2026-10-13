@@ -22,7 +22,8 @@ fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivat
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
@@ -31,10 +32,11 @@ fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivat
 fun UserIdentifierPrivate.toUserIdentifierPrivatePayload(): UserIdentifierPrivatePayload = UserIdentifierPrivatePayload(
     id = id.asHexDashString(),
     userId = userId.asHexDashString(),
-    userAuthProvider = userAuthProvider.serialName,
+    userAuthProvider = userAuthProvider.value,
     identifier = identifier,
     displayName = displayName,
     externalProviderEmail = externalProviderEmail,
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt.toEpochMilliseconds()
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
 )

@@ -23,6 +23,7 @@ Every `const val` representing an endpoint must follow the format defined in `ap
 - **HTTP Method:** Explicitly stated in backticks (e.g., `GET`).
 - **Request/Response:** Linked types only if they exist in the current or dependent modules.
 - **Redundancy Policy:** Intentionally duplicate authorization, pagination, and filter logic. Do not use "See [OtherRoute]".
+- **UI Presentation:** Reference associated navigation screen routes (`Screens:`) and/or UI flows (`Flow:`).
 
 ## 5. Value Classes & Wrappers
 - **Invariants:** Document what the wrapper represents (e.g., "A hex-encoded, dash-separated UUID") and any validation logic.
@@ -30,6 +31,14 @@ Every `const val` representing an endpoint must follow the format defined in `ap
 ## 6. Logic Components (Validators)
 - **Contracts:** Document the `validate` function's behavior relative to policy models.
 - **Outcome Mapping:** Explain how result variants relate to server-side settings.
+
+## 7. Navigation Screen Routes & Screen Parameters
+- **Navigation Screen Routes (`*Navigation`):** Each screen object inside a navigation object must document:
+  - `Screen Parameters:` Link to the corresponding `*Params` class or state `None.`
+  - `Primary API:` Link to the primary endpoint auto-fetched on screen mount or submitted on form submit, or state `None.`
+  - `Secondary Action APIs:` Bulleted list of auxiliary endpoints triggered by user actions, or state `None.`
+- **Screen Parameter Classes (`*Params`):** Document each parameter field and default value.
+- **Parameter Parsers (`*ParamsParser`):** Document parsing, normalization rules, and fallback defaults.
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

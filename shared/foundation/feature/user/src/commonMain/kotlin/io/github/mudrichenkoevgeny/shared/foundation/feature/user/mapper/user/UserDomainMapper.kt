@@ -10,8 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 
 /**
  * Converts a [UserInternal] into a client-facing [UserPrivate].
- *
- * Excludes database row modification timestamp (`updatedAt`).
  */
 fun UserInternal.toUserPrivate(): UserPrivate = UserPrivate(
     id = id,
@@ -24,6 +22,7 @@ fun UserInternal.toUserPrivate(): UserPrivate = UserPrivate(
     lastLoginAt = lastLoginAt,
     lastActiveAt = lastActiveAt,
     createdAt = createdAt,
+    updatedAt = updatedAt,
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil

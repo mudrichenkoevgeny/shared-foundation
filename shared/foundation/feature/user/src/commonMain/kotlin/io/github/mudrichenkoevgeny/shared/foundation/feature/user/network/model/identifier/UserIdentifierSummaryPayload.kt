@@ -14,7 +14,8 @@ import kotlinx.serialization.Serializable
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserIdentifierSummary].
  *
  * @property id [UserIdentifierSummary.id] on the wire: [UserIdentifierId] as hex-dash string.
- * @property userAuthProvider [UserIdentifierSummary.userAuthProvider]; wire values match [UserAuthProvider.serialName].
+ * @property userId [UserIdentifierSummary.userId] on the wire: user ID as hex-dash string.
+ * @property userAuthProvider [UserIdentifierSummary.userAuthProvider]; wire values match [UserAuthProvider.value].
  * @property identifier [UserIdentifierSummary.identifier].
  * @property displayName [UserIdentifierSummary.displayName].
  */
@@ -22,6 +23,9 @@ import kotlinx.serialization.Serializable
 data class UserIdentifierSummaryPayload(
     @SerialName(CommonApiFields.ID)
     val id: String,
+
+    @SerialName(UserApiFields.USER_ID)
+    val userId: String,
 
     @SerialName(UserApiFields.USER_AUTH_PROVIDER)
     val userAuthProvider: String,

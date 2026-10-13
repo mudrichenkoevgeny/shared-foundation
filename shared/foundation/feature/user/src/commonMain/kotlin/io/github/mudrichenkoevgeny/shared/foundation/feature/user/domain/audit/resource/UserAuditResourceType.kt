@@ -4,16 +4,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.res
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.ManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.identifier.SelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.ManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.session.SelfManagementSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.user.ManagementUserRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.identifier.OpenIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.session.OpenSessionRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 
 /**
@@ -28,7 +28,7 @@ enum class UserAuditResourceType : AuditResourceType {
     AUTH_SETTINGS,
 
     /**
-     * User account ([ManagementUserRoutes], [OpenUserRoutes]).
+     * User account ([ManagementUsersRoutes], [OpenUserRoutes]).
      */
     USER,
 
@@ -43,19 +43,19 @@ enum class UserAuditResourceType : AuditResourceType {
     PHONE_NUMBER,
 
     /**
-     * User identifier credential record ([ManagementIdentifierRoutes], [SelfManagementIdentifierRoutes], [OpenIdentifierRoutes]).
+     * User identifier credential record ([ManagementIdentifiersRoutes], [SelfManagementIdentifierRoutes], [OpenIdentifierRoutes]).
      */
     IDENTIFIER,
 
     /**
-     * User session ([ManagementSessionRoutes], [SelfManagementSessionRoutes], [OpenSessionRoutes]).
+     * User session ([ManagementSessionsRoutes], [SelfManagementSessionRoutes], [OpenSessionRoutes]).
      */
     SESSION;
 
     /**
      * String representation of the [UserAuditResourceType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             AUTH_SETTINGS -> RESOURCE_AUTH_SETTINGS
             USER -> RESOURCE_USER
@@ -82,7 +82,7 @@ enum class UserAuditResourceType : AuditResourceType {
          */
         fun fromValueOrNull(value: String): UserAuditResourceType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

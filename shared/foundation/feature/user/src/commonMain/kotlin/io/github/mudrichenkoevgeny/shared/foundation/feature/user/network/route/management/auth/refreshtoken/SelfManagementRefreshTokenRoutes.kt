@@ -28,6 +28,9 @@ object SelfManagementRefreshTokenRoutes {
      *
      * **Note:** The server strictly validates that the provided token belongs to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
+     *
+     * **UI Presentation:** None.
      */
-    const val REFRESH_TOKEN = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/refresh"
+    const val REFRESH_TOKEN =
+        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/refresh"
 }

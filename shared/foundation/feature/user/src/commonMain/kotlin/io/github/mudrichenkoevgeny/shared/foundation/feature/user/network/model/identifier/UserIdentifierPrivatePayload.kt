@@ -17,12 +17,13 @@ import kotlin.time.Instant
  *
  * @property id [UserIdentifierPrivate.id] on the wire: [UserIdentifierId] as hex-dash string.
  * @property userId [UserIdentifierPrivate.userId] on the wire: [UserId] as hex-dash string.
- * @property userAuthProvider [UserIdentifierPrivate.userAuthProvider]; wire values match [UserAuthProvider.serialName].
+ * @property userAuthProvider [UserIdentifierPrivate.userAuthProvider]; wire values match [UserAuthProvider.value].
  * @property identifier [UserIdentifierPrivate.identifier].
  * @property displayName [UserIdentifierPrivate.displayName].
  * @property externalProviderEmail [UserIdentifierPrivate.externalProviderEmail].
  * @property isSensitiveValuesMasked [UserIdentifierPrivate.isSensitiveValuesMasked].
  * @property createdAt [UserIdentifierPrivate.createdAt] as Unix epoch milliseconds ([Instant]).
+ * @property updatedAt [UserIdentifierPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
 data class UserIdentifierPrivatePayload(
@@ -48,5 +49,8 @@ data class UserIdentifierPrivatePayload(
     val isSensitiveValuesMasked: Boolean,
 
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long
+    val createdAt: Long,
+
+    @SerialName(CommonApiFields.UPDATED_AT)
+    val updatedAt: Long? = null
 )

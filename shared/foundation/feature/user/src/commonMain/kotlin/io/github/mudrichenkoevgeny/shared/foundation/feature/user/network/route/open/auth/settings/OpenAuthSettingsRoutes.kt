@@ -19,6 +19,8 @@ object OpenAuthSettingsRoutes {
      * - **Allowed Roles:** Any.
      * - **Allowed Account Statuses:** Any.
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
      */
     const val GET_OPEN_AUTH_SETTINGS = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
 }

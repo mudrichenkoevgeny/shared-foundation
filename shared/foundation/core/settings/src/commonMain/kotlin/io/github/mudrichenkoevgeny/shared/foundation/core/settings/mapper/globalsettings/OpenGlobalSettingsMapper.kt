@@ -15,5 +15,5 @@ fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload 
     privacyPolicyUrl = privacyPolicyUrl,
     termsOfServiceUrl = termsOfServiceUrl,
     contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.serialName }
+    minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value }
 )

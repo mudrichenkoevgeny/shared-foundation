@@ -16,7 +16,7 @@ enum class SecurityAuditActionType : AuditActionType {
     /**
      * String representation of the [SecurityAuditActionType].
      */
-    override val serialName: String
+    override val value: String
         get() = when (this) {
             MANAGEMENT_UPDATE_SECURITY_SETTINGS -> ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS
             MANAGEMENT_RESET_SECURITY_SETTINGS -> ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS
@@ -35,7 +35,7 @@ enum class SecurityAuditActionType : AuditActionType {
          */
         fun fromValueOrNull(value: String): SecurityAuditActionType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
+                it.value.equals(value, ignoreCase = true) ||
                         it.name.equals(value, ignoreCase = true)
             } ?: runCatching {
                 valueOf(value.uppercase())

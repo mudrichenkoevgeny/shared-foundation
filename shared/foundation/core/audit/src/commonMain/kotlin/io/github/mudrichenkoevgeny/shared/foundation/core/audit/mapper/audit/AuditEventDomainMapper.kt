@@ -11,7 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 /**
  * Converts an [AuditEventInternal] into a client-facing [AuditEventPrivate].
  *
- * Excludes server-side redaction policy (`resourceValueSensitivity`) and database row modification timestamp (`updatedAt`).
+ * Excludes server-side redaction policy (`resourceValueSensitivity`).
  */
 fun AuditEventInternal.toAuditEventPrivate(): AuditEventPrivate = AuditEventPrivate(
     id = id,
@@ -24,7 +24,8 @@ fun AuditEventInternal.toAuditEventPrivate(): AuditEventPrivate = AuditEventPriv
     status = status,
     metadata = metadata,
     message = message,
-    createdAt = createdAt
+    createdAt = createdAt,
+    updatedAt = updatedAt
 )
 
 /**

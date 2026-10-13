@@ -1,0 +1,213 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.SelfManagementUserRoutes
+
+/**
+ * Route paths for the current authenticated principal's sessions in the management API (self-service).
+ */
+object SelfManagementSessionRoutes {
+    /** Base path for self-service session operations in management API. */
+    private const val BASE_SELF_SESSION_ROUTE =
+        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/session"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Deletes the current active management session.
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.LOGOUT].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current session identifier.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.SessionList]
+     */
+    const val LOGOUT = "$BASE_SELF_SESSION_ROUTE/logout"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns active summary sessions for the **current** authenticated management account.
+     *
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
+     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or
+     *   [CommonApiFields.SortOrder.DESC].
+     *
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys — **AND**.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of free-text identifiers; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs
+     *   ([UserSessionPrivatePayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names
+     *   ([UserSessionPrivatePayload.identifierAuthProvider]).
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of free-text agents; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of free-text IP addresses; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — list of free-text languages; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — list of opaque device IDs.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — list of free-text device names; server-defined.
+     * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
+     * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of free-text values; server-defined.
+     *
+     * Response body: [PagedResult] of [UserSessionSummaryPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.SessionList]
+     */
+    const val GET_SESSIONS = BASE_SELF_SESSION_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns private details of a specific session owned by the current management account.
+     *
+     * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * Response body: [UserSessionPrivatePayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** Any [UserAccountStatus] (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.SessionDetail]
+     */
+    const val GET_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes a specific session for the current management account.
+     *
+     * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_DELETE_SESSION].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserSessionId]
+     *   from [UserApiPaths.SESSION_ID].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.SessionList]
+     *   - [ManagementSelfUserNavigation.SessionDetail]
+     */
+    const val DELETE_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+
+    /**
+     * **HTTP method:** `DELETE`
+     *
+     * Deletes all sessions for the current management account except the one used for this request.
+     *
+     * Response body: [DeletedSessionsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_DELETE_OTHER_SESSIONS].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.USER_ID] — the account whose sessions are being deleted.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementSelfUserNavigation.SessionList]
+     */
+    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SELF_SESSION_ROUTE/delete-others"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Performs re-authentication via TOTP for the current management session to update its trust level.
+     *
+     * Request body: [VerifyTotpPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.REAUTHENTICATE_SESSION].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the current [UserSessionId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens: None.
+     * - Flow: Global re-authentication dialog (no dedicated screen).
+     */
+    const val REAUTHENTICATE_SESSION = "$BASE_SELF_SESSION_ROUTE/reauthenticate"
+}

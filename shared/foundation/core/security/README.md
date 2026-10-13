@@ -28,6 +28,7 @@
     - [PasswordPolicyValidator]: Interface and default implementation for enforcing password rules.
     - **Mappers:** Extensive set of mappers for Domain ↔ Payload conversion (including [IpRestrictionPolicyMapper]).
 - **WebSocket:** [SecurityWebSocketEventTypes] — event strings `OPEN_SECURITY_SETTINGS_UPDATED` and `MANAGEMENT_SECURITY_SETTINGS_UPDATED`.
+- **Navigation:** [ManagementSecurityNavigation] — route constants for security management screens.
 
 ## Usage
 
@@ -72,4 +73,5 @@
 [SecurityPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/permission/SecurityPermissionCode.kt
 [OpenSecuritySettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/open/security/settings/OpenSecuritySettingsRoutes.kt
 [ManagementSecuritySettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/management/security/settings/ManagementSecuritySettingsRoutes.kt
+[ManagementSecurityNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation.kt
 [FoundationJson]: ../common/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJson.kt

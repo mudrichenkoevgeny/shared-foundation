@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 /**
  * Network payload DTO representing client device information, aligned with [ClientDeviceInfo].
  *
- * @property clientType Wire value matching [ClientType.serialName].
+ * @property clientType Wire value matching [ClientType.value].
  * @property language Preferred language code.
  * @property deviceId Unique identifier of the device as a hex-dash string.
  * @property deviceName Human-readable device name or model.

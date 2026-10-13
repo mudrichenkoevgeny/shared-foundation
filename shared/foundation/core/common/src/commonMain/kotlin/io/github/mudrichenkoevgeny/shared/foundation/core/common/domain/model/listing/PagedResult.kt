@@ -42,8 +42,8 @@ data class PagedResult<T>(
         fun <T> empty() = PagedResult<T>(
             items = emptyList(),
             totalCount = 0,
-            pageNumber = 1,
-            pageSize = 20,
+            pageNumber = ListingDefaultValues.Pagination.PAGE_NUMBER,
+            pageSize = ListingDefaultValues.Pagination.PAGE_SIZE,
             totalPages = 0
         )
     }

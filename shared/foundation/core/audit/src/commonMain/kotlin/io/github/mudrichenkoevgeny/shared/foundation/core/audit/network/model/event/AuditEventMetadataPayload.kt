@@ -7,11 +7,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * One metadata entry on the audit event wire model ([AuditEventPayload.metadata]), aligned with domain [AuditEventMetadata].
+ * One metadata entry on the audit event wire model ([AuditEventPrivatePayload.metadata]), aligned with domain [AuditEventMetadata].
  *
  * @property key Logical key for filtering or analytics.
  * @property value Raw value as stored for the audit record.
- * @property valueSensitivity Wire string matching [AuditValueSensitivity.serialName].
+ * @property valueSensitivity Wire string matching [AuditValueSensitivity.value].
  */
 @Serializable
 data class AuditEventMetadataPayload(

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEvent
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
@@ -12,6 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
@@ -21,7 +22,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementResetPasswordRoutes {
     /** Base path for management password reset operations. */
-    private const val BASE_MANAGEMENT_RESET_PASSWORD_ROUTE = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+    private const val BASE_MANAGEMENT_RESET_PASSWORD_ROUTE =
+        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
 
     /**
      * **HTTP method:** `POST`
@@ -39,13 +41,18 @@ object SelfManagementResetPasswordRoutes {
      * **Note:** The server strictly validates that the operation is performed on an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
      *
-     * **Audit logging:** Persist an [AuditEvent] for every management password reset attempt.
-     * * **Action:** [UserAuditActionType.RESET_PASSWORD].
-     * * **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
-     * * **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave as `null` for failed attempts.
-     * * **Metadata:** Include:
-     * 1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     * 2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     * **Audit logging:** Persist an [AuditEventPrivate] for every management password reset attempt.
+     * - **Action:** [UserAuditActionType.RESET_PASSWORD].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] only upon successful reset.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success;
+     *   leave as `null` for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuthNavigation.ResetPassword]
      */
     const val RESET_PASSWORD = BASE_MANAGEMENT_RESET_PASSWORD_ROUTE
 
@@ -66,6 +73,11 @@ object SelfManagementResetPasswordRoutes {
      *
      * **Note:** The server strictly validates that the provided email belongs to an account
      * with management-level roles ([UserRole.STAFF] or [UserRole.ADMIN]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementAuthNavigation.ResetPassword]
      */
-    const val SEND_RESET_PASSWORD_CONFIRMATION = "$BASE_MANAGEMENT_RESET_PASSWORD_ROUTE/send-confirmation"
+    const val SEND_RESET_PASSWORD_CONFIRMATION =
+        "$BASE_MANAGEMENT_RESET_PASSWORD_ROUTE/send-confirmation"
 }

@@ -23,8 +23,10 @@ object OpenRefreshTokenRoutes {
      * - **Public Access:** Allowed.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY],
-     * [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
+     *   [UserAccountStatus.PENDING_DELETION] (**OR** semantics).
      * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
      */
     const val REFRESH_TOKEN = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/refresh"
 }

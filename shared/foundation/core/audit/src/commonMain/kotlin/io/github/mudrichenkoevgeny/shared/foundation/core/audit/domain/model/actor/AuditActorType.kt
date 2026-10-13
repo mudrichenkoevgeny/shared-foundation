@@ -1,43 +1,40 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val TYPE_USER = "user"
+private const val TYPE_SYSTEM = "system"
+private const val TYPE_SERVICE = "service"
+
 /**
  * Type of actor that initiated an audited action.
+ *
+ * @property value String representation of the [AuditActorType].
  */
-enum class AuditActorType {
+@Serializable
+enum class AuditActorType(val value: String) {
     /** Authenticated user actor. */
-    USER,
+    @SerialName(TYPE_USER)
+    USER(TYPE_USER),
 
     /** Internal system actor. */
-    SYSTEM,
+    @SerialName(TYPE_SYSTEM)
+    SYSTEM(TYPE_SYSTEM),
 
     /** External or internal service actor. */
-    SERVICE;
-
-    /**
-     * String representation of the [AuditActorType].
-     */
-    val serialName: String
-        get() = when (this) {
-            USER -> TYPE_USER
-            SYSTEM -> TYPE_SYSTEM
-            SERVICE -> TYPE_SERVICE
-        }
+    @SerialName(TYPE_SERVICE)
+    SERVICE(TYPE_SERVICE);
 
     companion object {
-        private const val TYPE_USER = "user"
-        private const val TYPE_SYSTEM = "system"
-        private const val TYPE_SERVICE = "service"
-
         /**
          * Returns [AuditActorType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): AuditActorType? =
             entries.firstOrNull {
-                it.serialName.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [AuditActorType] for the given wire or enum-style string (case-insensitive enum name).

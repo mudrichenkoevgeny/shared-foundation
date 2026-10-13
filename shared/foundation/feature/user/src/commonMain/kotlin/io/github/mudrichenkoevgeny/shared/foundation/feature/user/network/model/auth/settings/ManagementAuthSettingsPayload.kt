@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 /**
  * Wire body for updating authentication settings via the **management** API.
  *
- * @property availableAuthProviders Provider lists; wire values follow [UserAuthProvider.serialName].
+ * @property availableAuthProviders Provider lists; wire values follow [UserAuthProvider.value].
  * @property maxTotalIdentifiers Maximum number of identifiers of any type allowed per account.
  * @property maxEmailIdentifiers Maximum number of email-based identifiers allowed per account.
  * @property maxPhoneIdentifiers Maximum number of phone-based identifiers allowed per account.

@@ -26,14 +26,15 @@ fun UserSessionPrivatePayload.toUserSessionPrivate(): UserSessionPrivate = UserS
     identifierId = identifierId.toUserIdentifierIdOrThrow(),
     identifierDisplayName = identifierDisplayName,
     identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
-    deviceInfo = deviceInfo.toClientDeviceInfo(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     expiresAt = Instant.fromEpochMilliseconds(expiresAt),
     lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
     lastReauthenticatedAt = Instant.fromEpochMilliseconds(lastReauthenticatedAt),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
@@ -42,17 +43,18 @@ fun UserSessionPrivatePayload.toUserSessionPrivate(): UserSessionPrivate = UserS
 fun UserSessionPrivate.toUserSessionPrivatePayload(): UserSessionPrivatePayload = UserSessionPrivatePayload(
     id = id.asHexDashString(),
     userId = userId.asHexDashString(),
-    userRole = userRole.serialName,
+    userRole = userRole.value,
     identifier = identifier,
     identifierId = identifierId.asHexDashString(),
     identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider.serialName,
-    deviceInfo = deviceInfo.toClientDeviceInfoPayload(),
+    identifierAuthProvider = identifierAuthProvider.value,
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
     userAgent = userAgent,
     ipAddress = ipAddress,
     expiresAt = expiresAt.toEpochMilliseconds(),
     lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
     lastReauthenticatedAt = lastReauthenticatedAt.toEpochMilliseconds(),
     isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt.toEpochMilliseconds()
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
 )

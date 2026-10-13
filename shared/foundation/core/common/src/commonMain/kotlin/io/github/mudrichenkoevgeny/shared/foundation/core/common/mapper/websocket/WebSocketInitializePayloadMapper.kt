@@ -20,7 +20,7 @@ fun WebSocketInitializePayload.mergeClientInfo(
     existingClientInfo: ClientInfo? = null
 ): ClientInfo {
     val currentClientInfo = existingClientInfo ?: ClientInfo(
-        deviceInfo = ClientDeviceInfo(
+        clientDeviceInfo = ClientDeviceInfo(
             deviceId = null,
             deviceName = null,
             clientType = null,
@@ -35,7 +35,7 @@ fun WebSocketInitializePayload.mergeClientInfo(
         apiVersion = null
     )
     return currentClientInfo.copy(
-        deviceInfo = mergeClientDeviceInfo(currentClientInfo.deviceInfo),
+        clientDeviceInfo = mergeClientDeviceInfo(currentClientInfo.clientDeviceInfo),
         apiVersion = apiVersion ?: currentClientInfo.apiVersion
     )
 }
@@ -77,7 +77,7 @@ fun WebSocketInitializePayload.mergeClientDeviceInfo(
  * @return payload model aligned with [WebSocketInitializePayload] contract.
  */
 fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?): WebSocketInitializePayload = WebSocketInitializePayload(
-    clientType = clientType?.serialName,
+    clientType = clientType?.value,
     language = language,
     deviceId = deviceId?.asHexDashString(),
     deviceName = deviceName,
