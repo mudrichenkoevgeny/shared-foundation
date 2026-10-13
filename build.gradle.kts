@@ -35,6 +35,7 @@ subprojects {
 
     plugins.withId("org.jetbrains.kotlin.multiplatform") {
         extensions.configure<KotlinMultiplatformExtension>("kotlin") {
+            jvmToolchain(libs.versions.jvmToolchain.get().toInt())
             compilerOptions {
                 optIn.add(uuidExperimentalOptInFqcn)
             }
@@ -43,6 +44,12 @@ subprojects {
             compilerOptions {
                 freeCompilerArgs.add(uuidExperimentalOptIn)
             }
+        }
+    }
+
+    plugins.withId("org.jetbrains.kotlin.jvm") {
+        extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension>("kotlin") {
+            jvmToolchain(libs.versions.jvmToolchain.get().toInt())
         }
     }
 
