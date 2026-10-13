@@ -17,3 +17,7 @@ dependencies {
 application {
     mainClass.set("io.github.mudrichenkoevgeny.shared.foundation.generator.NpmGeneratorKt")
 }
+
+tasks.named<JavaExec>("run") {
+    systemProperty("PACKAGE_VERSION", rootProject.version.toString())
+}

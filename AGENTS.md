@@ -11,7 +11,7 @@ This document is the entry point for architectural and coding standards. These r
 - **Strict Boundary:** No UI, no Ktor `Application`/`HttpClient` engine wiring. Consumers handle implementation.
 - **Mandatory Complete Implementation:** All created or modified files must contain complete, production-ready code. Placeholder code, dummy components, and default generator stubs are strictly prohibited unless the developer explicitly asks for a stub.
 - **FQN Forbidden:** Do not write fully qualified names (FQN) in expressions, types, or generics. Use imports/typealiases. Minimal FQN only if technically unavoidable (explain why in the commit).
-- **No Comments:** Do not write comments in the code. Logic must be self-documenting through naming and structure.
+- **No Implementation Comments (Preserve KDoc):** Do not write inline implementation comments (`//` or `/* ... */`) inside code bodies; logic must be self-documenting. **CRITICAL:** KDoc documentation (`/** ... */`) on classes, interfaces, properties, and functions is structured API documentation, NOT code comments. AI must NEVER delete, strip, wipe, or omit KDoc documentation during code edits or refactorings!
 - **No Trailing Commas:** Do not use trailing commas at the end of argument, parameter, or entry lists.
 - **Route Documentation Parity:** Every API route constant MUST include a complete KDoc section with **UI Presentation:** listing associated UI screens (`Screens:`) or flows (`Flow:`), alongside authorization, audit logging, and payload references.
 - **Manual Test Execution:** Test runs must be triggered explicitly. Automated execution on file change is prohibited.

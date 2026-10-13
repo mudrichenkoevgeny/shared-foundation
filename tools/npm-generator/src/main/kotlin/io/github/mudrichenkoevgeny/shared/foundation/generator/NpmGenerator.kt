@@ -36,7 +36,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.welcome.LoginWelcomeParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.register.email.ClientRegistrationByEmailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.login.LoginStep
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.LoginByTotpMode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.globallist.ManagementGlobalIdentifierListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.userlist.ManagementUserIdentifierListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.globallist.ManagementGlobalSessionListParams
@@ -247,10 +250,16 @@ fun main() {
         val outputDir = File(rootDir, "build/npm-package")
         outputDir.mkdirs()
 
+        val packageVersion = System.getProperty("PACKAGE_VERSION")
+            ?.takeIf { it.isNotBlank() && it != "unspecified" }
+            ?: System.getenv("PACKAGE_VERSION")
+            ?: parseRootBuildGradleVersion(rootDir)
+            ?: "0.0.60"
+
         val packageJson = """
         {
           "name": "@mudrichenkoevgeny/shared-foundation",
-          "version": "0.0.59",
+          "version": "$packageVersion",
           "description": "Shared Foundation - TypeScript & Zod contracts and routes",
           "main": "index.js",
           "module": "index.mjs",
@@ -345,19 +354,21 @@ fun main() {
         File(outputDir, "README.md").writeText(npmReadme)
 
         val brandedCode = generateBrandedTypes()
+        val enumCode = generateEnumsJs()
         val compositeParsersJsCode = generateCompositeParsersJs()
         val routeCode = generateRouteObjects()
         val contractCode = generateContractObjects()
         val errorCodeCode = generateErrorCodeObjects()
         val permissionCodeCode = generatePermissionCodeObjects()
-        val enumCode = generateEnumsJs()
-        val dtoCode = generateDtoSchemasAndTypes()
         val domainModelsAndMappersCode = generateDomainModelsAndMappersJs()
+        val dtoCode = generateDtoSchemasAndTypes()
 
         val fullJsContent = """
         import { z } from 'zod';
 
         $brandedCode
+
+        $enumCode
 
         $compositeParsersJsCode
 
@@ -370,8 +381,6 @@ fun main() {
         $permissionCodeCode
 
         $domainModelsAndMappersCode
-
-        $enumCode
 
         $dtoCode
         """.trimIndent()
@@ -688,6 +697,10 @@ private val enumClasses = listOf(
     UserRole::class,
     UserAuthProvider::class,
     ExternalAuthProvider::class,
+    LoginStep::class,
+    TotpStep::class,
+    LoginByTotpMode::class,
+    UnlockMethod::class,
     UserSortValues.UserSortBy::class,
     UserSortValues.UserIdentifierSortBy::class,
     UserSortValues.UserSessionSortBy::class,
@@ -696,14 +709,6 @@ private val enumClasses = listOf(
 )
 
 private val extraEnumInfos = listOf(
-    EnumInfo(
-        name = "UnlockMethod",
-        schemaName = "unlockMethodSchema",
-        entries = listOf(
-            "EMAIL" to "EMAIL",
-            "PHONE" to "PHONE"
-        )
-    ),
     EnumInfo(
         name = "ConfirmationType",
         schemaName = "confirmationTypeSchema",
@@ -868,7 +873,6 @@ private val rawDtoClasses = listOf(
     SessionDetailParams::class,
     SelfSessionListParams::class,
     TotpMainParams::class,
-    LoginByTotpMode::class,
     ManagementUserListParams::class,
     UserDetailParams::class,
     ManagementUserSessionListParams::class,
@@ -1227,6 +1231,10 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == ClientType::class -> "clientTypeSchema"
         classifier == SortOrder::class -> "sortOrderSchema"
         classifier == PasswordPolicyFailReason::class -> "passwordPolicyFailReasonSchema"
+        classifier == LoginStep::class -> "loginStepSchema"
+        classifier == TotpStep::class -> "totpStepSchema"
+        classifier == LoginByTotpMode::class -> "loginByTotpModeSchema"
+        classifier == UnlockMethod::class -> "unlockMethodSchema"
         classifier == UserSortValues.UserSortBy::class -> "userSortBySchema"
         classifier == UserSortValues.UserIdentifierSortBy::class -> "userIdentifierSortBySchema"
         classifier == UserSortValues.UserSessionSortBy::class -> "userSessionSortBySchema"
@@ -1234,6 +1242,10 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == CommonSortValues.TimestampSortBy::class -> "timestampSortBySchema"
         classifier == JsonElement::class -> "z.unknown()"
 
+        paramName == "loginStep" -> "loginStepSchema"
+        paramName == "totpStep" -> "totpStepSchema"
+        paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "loginByTotpModeSchema"
+        paramName == "unlockMethod" -> "unlockMethodSchema"
         paramName == "clientType" -> "clientTypeSchema"
         paramName == "deviceId" || paramName == "clientDeviceId" -> "clientDeviceIdSchema"
         paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "userRoleSchema"
@@ -1311,6 +1323,10 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == ClientType::class -> "ClientType"
         classifier == SortOrder::class -> "SortOrder"
         classifier == PasswordPolicyFailReason::class -> "PasswordPolicyFailReason"
+        classifier == LoginStep::class -> "LoginStep"
+        classifier == TotpStep::class -> "TotpStep"
+        classifier == LoginByTotpMode::class -> "LoginByTotpMode"
+        classifier == UnlockMethod::class -> "UnlockMethod"
         classifier == UserSortValues.UserSortBy::class -> "UserSortBy"
         classifier == UserSortValues.UserIdentifierSortBy::class -> "UserIdentifierSortBy"
         classifier == UserSortValues.UserSessionSortBy::class -> "UserSessionSortBy"
@@ -1319,6 +1335,10 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == JsonElement::class -> "unknown"
         classifier.simpleName == "Instant" -> "Instant"
 
+        paramName == "loginStep" -> "LoginStep"
+        paramName == "totpStep" -> "TotpStep"
+        paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "LoginByTotpMode"
+        paramName == "unlockMethod" -> "UnlockMethod"
         paramName == "clientType" -> "ClientType"
         paramName == "deviceId" || paramName == "clientDeviceId" -> "ClientDeviceId"
         paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "UserRole"
@@ -2031,6 +2051,15 @@ private fun generateDomainModelsAndMappersDts(): String {
         export declare const to$domainName: (payload: $payloadName) => $domainName;
         export declare const to$payloadName: (domain: $domainName) => $payloadName;
         """.trimIndent()
+    }
+}
+
+private fun parseRootBuildGradleVersion(rootDir: File): String? {
+    val buildFile = File(rootDir, "build.gradle.kts")
+    if (!buildFile.exists()) return null
+    val regex = Regex("""version\s*=\s*["']([^"']+)["']""")
+    return buildFile.useLines { lines ->
+        lines.mapNotNull { line -> regex.find(line)?.groupValues?.get(1) }.firstOrNull()
     }
 }
 

@@ -115,17 +115,17 @@ The output package will be generated at `build/npm-package/`.
 To test the generated package locally in any web project or library (pnpm workspace) without publishing to a remote registry:
 
 1. **Generate the `.tgz` tarball archive:**
+   Run `npm pack` from the project root specifying the output directory as the destination:
    ```bash
-   cd build/npm-package
-   npm pack
+   npm pack ./build/npm-package --pack-destination ./build/npm-package
    ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.0.59.tgz` will be created inside `build/npm-package/`.
+   The archive `mudrichenkoevgeny-shared-foundation-0.0.60.tgz` will be created inside `build/npm-package/`.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.59.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.60.tgz'
    ```
    And run from the root directory:
    ```bash
