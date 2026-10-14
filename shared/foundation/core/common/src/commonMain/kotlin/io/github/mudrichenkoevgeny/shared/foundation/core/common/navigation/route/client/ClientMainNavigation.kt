@@ -1,9 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
+import kotlinx.serialization.Serializable
+
 /**
  * Root navigation route for the client application.
  */
-object ClientMainNavigation {
+@Serializable
+sealed interface ClientMainNavigation : NavigationRoute {
 
     /**
      * Entry home/main screen for clients.
@@ -14,7 +18,11 @@ object ClientMainNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object Main {
+    @Serializable
+    data object Main : ClientMainNavigation {
+        override val route: String get() = ROUTE
+        override val parentRoute: String? get() = PARENT_ROUTE
+
         /** Route path for the client entry home screen. */
         const val ROUTE = "/"
 

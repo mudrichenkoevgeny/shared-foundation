@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.ParameterizedNavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
@@ -13,14 +15,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.SelfManagementLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.unlock.SelfManagementUnlockRoutes
+import kotlinx.serialization.Serializable
 
 /**
  * Navigation screen routes for staff and management authentication flows.
  */
-object ManagementAuthNavigation {
-
-    private const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
-    private const val BASE_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+@Serializable
+sealed interface ManagementAuthNavigation : NavigationRoute {
 
     /**
      * Welcome/entry authentication screen for management.
@@ -29,12 +30,20 @@ object ManagementAuthNavigation {
      * **Primary API:** None.
      * **Secondary Action APIs:** None.
      */
-    object Welcome {
-        /** Route path for management welcome authentication screen. */
-        const val ROUTE = "$BASE_LOGIN_ROUTE/welcome"
+    @Serializable
+    data class Welcome(
+        override val params: LoginWelcomeParams = LoginWelcomeParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<LoginWelcomeParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route (root authentication screen). */
-        const val PARENT_ROUTE: String = ManagementMainNavigation.Main.ROUTE
+        companion object {
+            /** Route path for management welcome authentication screen. */
+            const val ROUTE = "$BASE_LOGIN_ROUTE/welcome"
+
+            /** Parent navigation route (root authentication screen). */
+            const val PARENT_ROUTE = ManagementMainNavigation.Main.ROUTE
+        }
     }
 
     /**
@@ -44,12 +53,20 @@ object ManagementAuthNavigation {
      * **Primary API:** [SelfManagementLoginRoutes.LOGIN_BY_EMAIL]
      * **Secondary Action APIs:** None.
      */
-    object LoginByEmail {
-        /** Route path for management login by email screen. */
-        const val ROUTE = "$BASE_LOGIN_ROUTE/email"
+    @Serializable
+    data class LoginByEmail(
+        override val params: LoginByEmailParams = LoginByEmailParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<LoginByEmailParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for management login by email screen. */
+            const val ROUTE = "$BASE_LOGIN_ROUTE/email"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -60,12 +77,20 @@ object ManagementAuthNavigation {
      * **Secondary Action APIs:**
      * - [SelfManagementLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]
      */
-    object LoginByTotp {
-        /** Route path for management TOTP verification screen. */
-        const val ROUTE = "$BASE_LOGIN_ROUTE/totp"
+    @Serializable
+    data class LoginByTotp(
+        override val params: LoginByTotpParams = LoginByTotpParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<LoginByTotpParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for management TOTP verification screen. */
+            const val ROUTE = "$BASE_LOGIN_ROUTE/totp"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -76,12 +101,20 @@ object ManagementAuthNavigation {
      * **Secondary Action APIs:**
      * - [SelfManagementResetPasswordRoutes.SEND_RESET_PASSWORD_CONFIRMATION]
      */
-    object ResetPassword {
-        /** Route path for management password reset screen. */
-        const val ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+    @Serializable
+    data class ResetPassword(
+        override val params: ResetPasswordParams = ResetPasswordParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<ResetPasswordParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = LoginByEmail.ROUTE
+        companion object {
+            /** Route path for management password reset screen. */
+            const val ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = LoginByEmail.ROUTE
+        }
     }
 
     /**
@@ -91,12 +124,20 @@ object ManagementAuthNavigation {
      * **Primary API:** None.
      * **Secondary Action APIs:** None.
      */
-    object UnlockMethodSelection {
-        /** Route path for management unlock method selection screen. */
-        const val ROUTE = BASE_UNLOCK_ROUTE
+    @Serializable
+    data class UnlockMethodSelection(
+        override val params: UnlockMethodSelectionParams = UnlockMethodSelectionParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<UnlockMethodSelectionParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for management unlock method selection screen. */
+            const val ROUTE = BASE_UNLOCK_ROUTE
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -108,12 +149,20 @@ object ManagementAuthNavigation {
      * - [SelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      * **Secondary Action APIs:** None.
      */
-    object UnlockTargetInput {
-        /** Route path for management unlock target input screen. */
-        const val ROUTE = "$BASE_UNLOCK_ROUTE/input"
+    @Serializable
+    data class UnlockTargetInput(
+        override val params: UnlockTargetInputParams = UnlockTargetInputParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<UnlockTargetInputParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = UnlockMethodSelection.ROUTE
+        companion object {
+            /** Route path for management unlock target input screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/input"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = UnlockMethodSelection.ROUTE
+        }
     }
 
     /**
@@ -127,12 +176,20 @@ object ManagementAuthNavigation {
      * - [SelfManagementUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION]
      * - [SelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      */
-    object UnlockOtpInput {
-        /** Route path for management unlock OTP verification screen. */
-        const val ROUTE = "$BASE_UNLOCK_ROUTE/otp"
+    @Serializable
+    data class UnlockOtpInput(
+        override val params: UnlockOtpInputParams = UnlockOtpInputParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<UnlockOtpInputParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = UnlockTargetInput.ROUTE
+        companion object {
+            /** Route path for management unlock OTP verification screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/otp"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = UnlockTargetInput.ROUTE
+        }
     }
 
     /**
@@ -142,11 +199,27 @@ object ManagementAuthNavigation {
      * **Primary API:** None.
      * **Secondary Action APIs:** None.
      */
-    object UnlockSuccess {
-        /** Route path for management unlock success screen. */
-        const val ROUTE = "$BASE_UNLOCK_ROUTE/success"
+    @Serializable
+    data class UnlockSuccess(
+        override val params: UnlockSuccessParams = UnlockSuccessParams()
+    ) : ManagementAuthNavigation, ParameterizedNavigationRoute<UnlockSuccessParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for management unlock success screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/success"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
+    }
+
+    companion object {
+        /** Base route path for management login screens. */
+        const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+
+        /** Base route path for management unlock screens. */
+        const val BASE_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
     }
 }

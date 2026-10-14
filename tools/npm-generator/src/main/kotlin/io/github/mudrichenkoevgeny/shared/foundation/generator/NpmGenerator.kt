@@ -233,6 +233,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
+import kotlin.reflect.full.companionObjectInstance
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.primaryConstructor
@@ -254,7 +255,7 @@ fun main() {
             ?.takeIf { it.isNotBlank() && it != "unspecified" }
             ?: System.getenv("PACKAGE_VERSION")
             ?: parseRootBuildGradleVersion(rootDir)
-            ?: "0.0.63"
+            ?: "0.0.64"
 
         val packageJson = """
         {
@@ -667,31 +668,51 @@ private fun generateCompositeParsersDts(): String {
 }
 
 private fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, String>> {
-    val instance = kClass.objectInstance
+    val result = mutableListOf<Pair<String, String>>()
+
     val staticFields = kClass.java.declaredFields
         .filter { java.lang.reflect.Modifier.isStatic(it.modifiers) && it.type == String::class.java }
         .mapNotNull { field ->
-            field.isAccessible = true
-            val valName = field.name
-            val valValue = field.get(null) as? String
-            if (valValue != null) valName to valValue else null
+            try {
+                field.isAccessible = true
+                val valName = field.name
+                val valValue = field.get(null) as? String
+                if (valValue != null) valName to valValue else null
+            } catch (_: Exception) { null }
         }
+    result.addAll(staticFields)
 
-    if (staticFields.isNotEmpty()) return staticFields
+    val companionInstance = try { kClass.companionObjectInstance } catch (_: Exception) { null }
+    if (companionInstance != null) {
+        val companionFields = (companionInstance as Any).javaClass.declaredFields
+            .filter { it.type == String::class.java }
+            .mapNotNull { field ->
+                try {
+                    field.isAccessible = true
+                    val valName = field.name
+                    val valValue = field.get(companionInstance) as? String
+                    if (valValue != null && result.none { it.first == valName }) valName to valValue else null
+                } catch (_: Exception) { null }
+            }
+        result.addAll(companionFields)
+    }
 
+    val instance = kClass.objectInstance
     if (instance != null) {
         val instanceFields = kClass.java.declaredFields
             .filter { it.type == String::class.java }
             .mapNotNull { field ->
-                field.isAccessible = true
-                val valName = field.name
-                val valValue = field.get(instance) as? String
-                if (valValue != null) valName to valValue else null
+                try {
+                    field.isAccessible = true
+                    val valName = field.name
+                    val valValue = field.get(instance) as? String
+                    if (valValue != null && result.none { it.first == valName }) valName to valValue else null
+                } catch (_: Exception) { null }
             }
-        if (instanceFields.isNotEmpty()) return instanceFields
+        result.addAll(instanceFields)
     }
 
-    return emptyList()
+    return result
 }
 
 data class ClassStructure(

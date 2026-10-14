@@ -1,27 +1,31 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.ParameterizedNavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client.ClientMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.phone.LoginByPhoneParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.welcome.LoginWelcomeParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.targetinput.UnlockTargetInputParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.otpinput.UnlockOtpInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.methodselection.UnlockMethodSelectionParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.otpinput.UnlockOtpInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.success.UnlockSuccessParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.targetinput.UnlockTargetInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.register.email.ClientRegistrationByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
+import kotlinx.serialization.Serializable
 
 /**
  * Navigation screen routes for client authentication and registration flows.
  */
-object ClientAuthNavigation {
+@Serializable
+sealed interface ClientAuthNavigation : NavigationRoute {
 
     /**
      * Welcome/entry authentication screen for clients.
@@ -32,12 +36,20 @@ object ClientAuthNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object Welcome {
-        /** Route path for welcome authentication screen. */
-        const val ROUTE = "${OpenLoginRoutes.BASE_LOGIN_ROUTE}/welcome"
+    @Serializable
+    data class Welcome(
+        override val params: LoginWelcomeParams = LoginWelcomeParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginWelcomeParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route (root authentication screen). */
-        const val PARENT_ROUTE: String = ClientMainNavigation.Main.ROUTE
+        companion object {
+            /** Route path for welcome authentication screen. */
+            const val ROUTE = "${OpenLoginRoutes.BASE_LOGIN_ROUTE}/welcome"
+
+            /** Parent navigation route (root authentication screen). */
+            const val PARENT_ROUTE = ClientMainNavigation.Main.ROUTE
+        }
     }
 
     /**
@@ -49,12 +61,20 @@ object ClientAuthNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object LoginByEmail {
-        /** Route path for login by email screen. */
-        const val ROUTE = OpenLoginRoutes.LOGIN_BY_EMAIL
+    @Serializable
+    data class LoginByEmail(
+        override val params: LoginByEmailParams = LoginByEmailParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByEmailParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for login by email screen. */
+            const val ROUTE = OpenLoginRoutes.LOGIN_BY_EMAIL
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -67,12 +87,20 @@ object ClientAuthNavigation {
      * **Secondary Action APIs:**
      * - [OpenLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE]
      */
-    object LoginByPhone {
-        /** Route path for login by phone screen. */
-        const val ROUTE = OpenLoginRoutes.LOGIN_BY_PHONE
+    @Serializable
+    data class LoginByPhone(
+        override val params: LoginByPhoneParams = LoginByPhoneParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByPhoneParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for login by phone screen. */
+            const val ROUTE = OpenLoginRoutes.LOGIN_BY_PHONE
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -85,12 +113,20 @@ object ClientAuthNavigation {
      * **Secondary Action APIs:**
      * - [OpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]
      */
-    object LoginByTotp {
-        /** Route path for TOTP verification screen. */
-        const val ROUTE = OpenLoginRoutes.LOGIN_BY_TOTP
+    @Serializable
+    data class LoginByTotp(
+        override val params: LoginByTotpParams = LoginByTotpParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByTotpParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for TOTP verification screen. */
+            const val ROUTE = OpenLoginRoutes.LOGIN_BY_TOTP
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -103,12 +139,20 @@ object ClientAuthNavigation {
      * **Secondary Action APIs:**
      * - [OpenRegisterRoutes.SEND_REGISTER_CONFIRMATION_TO_EMAIL]
      */
-    object Registration {
-        /** Route path for user registration screen. */
-        const val ROUTE = OpenRegisterRoutes.REGISTER_BY_EMAIL
+    @Serializable
+    data class Registration(
+        override val params: ClientRegistrationByEmailParams = ClientRegistrationByEmailParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<ClientRegistrationByEmailParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for user registration screen. */
+            const val ROUTE = OpenRegisterRoutes.REGISTER_BY_EMAIL
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -121,12 +165,20 @@ object ClientAuthNavigation {
      * **Secondary Action APIs:**
      * - [OpenResetPasswordRoutes.SEND_RESET_EMAIL_PASSWORD_CONFIRMATION]
      */
-    object ResetPassword {
-        /** Route path for password reset screen. */
-        const val ROUTE = OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD
+    @Serializable
+    data class ResetPassword(
+        override val params: ResetPasswordParams = ResetPasswordParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<ResetPasswordParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = LoginByEmail.ROUTE
+        companion object {
+            /** Route path for password reset screen. */
+            const val ROUTE = OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = LoginByEmail.ROUTE
+        }
     }
 
     /**
@@ -140,7 +192,11 @@ object ClientAuthNavigation {
      * - [OpenUserRoutes.RESTORE_USER]
      * - [OpenSessionRoutes.LOGOUT]
      */
-    object PendingDeletion {
+    @Serializable
+    data object PendingDeletion : ClientAuthNavigation {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
+
         /** Route path for account pending deletion screen. */
         const val ROUTE = "${OpenLoginRoutes.BASE_LOGIN_ROUTE}/pending-deletion"
 
@@ -157,12 +213,20 @@ object ClientAuthNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object UnlockMethodSelection {
-        /** Route path for unlock method selection screen. */
-        const val ROUTE = OpenUnlockRoutes.BASE_OPEN_UNLOCK_ROUTE
+    @Serializable
+    data class UnlockMethodSelection(
+        override val params: UnlockMethodSelectionParams = UnlockMethodSelectionParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockMethodSelectionParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for unlock method selection screen. */
+            const val ROUTE = BASE_UNLOCK_ROUTE
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
     }
 
     /**
@@ -176,12 +240,20 @@ object ClientAuthNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object UnlockTargetInput {
-        /** Route path for unlock target input screen. */
-        const val ROUTE = "${OpenUnlockRoutes.BASE_OPEN_UNLOCK_ROUTE}/input"
+    @Serializable
+    data class UnlockTargetInput(
+        override val params: UnlockTargetInputParams = UnlockTargetInputParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockTargetInputParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = UnlockMethodSelection.ROUTE
+        companion object {
+            /** Route path for unlock target input screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/input"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = UnlockMethodSelection.ROUTE
+        }
     }
 
     /**
@@ -197,12 +269,20 @@ object ClientAuthNavigation {
      * - [OpenUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION]
      * - [OpenUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      */
-    object UnlockOtpInput {
-        /** Route path for unlock OTP verification screen. */
-        const val ROUTE = "${OpenUnlockRoutes.BASE_OPEN_UNLOCK_ROUTE}/otp"
+    @Serializable
+    data class UnlockOtpInput(
+        override val params: UnlockOtpInputParams = UnlockOtpInputParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockOtpInputParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = UnlockTargetInput.ROUTE
+        companion object {
+            /** Route path for unlock OTP verification screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/otp"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = UnlockTargetInput.ROUTE
+        }
     }
 
     /**
@@ -214,11 +294,27 @@ object ClientAuthNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object UnlockSuccess {
-        /** Route path for unlock success screen. */
-        const val ROUTE = "${OpenUnlockRoutes.BASE_OPEN_UNLOCK_ROUTE}/success"
+    @Serializable
+    data class UnlockSuccess(
+        override val params: UnlockSuccessParams = UnlockSuccessParams()
+    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockSuccessParams> {
+        override val route: String get() = ROUTE
+        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = Welcome.ROUTE
+        companion object {
+            /** Route path for unlock success screen. */
+            const val ROUTE = "$BASE_UNLOCK_ROUTE/success"
+
+            /** Parent navigation route for fallback navigation. */
+            const val PARENT_ROUTE = Welcome.ROUTE
+        }
+    }
+
+    companion object {
+        /** Base route path for login navigation. */
+        const val BASE_LOGIN_ROUTE = "${OpenLoginRoutes.BASE_LOGIN_ROUTE}/login"
+
+        /** Base route path for unlock navigation. */
+        const val BASE_UNLOCK_ROUTE = OpenUnlockRoutes.BASE_OPEN_UNLOCK_ROUTE
     }
 }

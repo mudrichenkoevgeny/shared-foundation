@@ -1,9 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
+import kotlinx.serialization.Serializable
+
 /**
  * Root navigation route for the staff and management portal.
  */
-object ManagementMainNavigation {
+@Serializable
+sealed interface ManagementMainNavigation : NavigationRoute {
 
     /**
      * Entry main dashboard/hub screen for management.
@@ -14,7 +18,11 @@ object ManagementMainNavigation {
      *
      * **Secondary Action APIs:** None.
      */
-    object Main {
+    @Serializable
+    data object Main : ManagementMainNavigation {
+        override val route: String get() = ROUTE
+        override val parentRoute: String? get() = PARENT_ROUTE
+
         /** Route path for the management entry dashboard. */
         const val ROUTE = "/"
 
