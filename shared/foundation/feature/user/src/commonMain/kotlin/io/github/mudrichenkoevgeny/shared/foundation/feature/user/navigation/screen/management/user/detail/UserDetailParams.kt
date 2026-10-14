@@ -13,14 +13,14 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class UserDetailParams(
-    val userId: String? = null
+    val userId: String
 ) : NavigationScreenParams {
 
     /**
      * Typed [UserId] representation of [userId], or `null` if invalid/absent.
      */
     val typedUserId: UserId?
-        get() = userId?.toUserIdOrNull()
+        get() = userId.takeIf { it.isNotBlank() }?.toUserIdOrNull()
 
     override fun toQueryMap(): Map<String, List<String>> =
         UserDetailParamsParser.serialize(this)

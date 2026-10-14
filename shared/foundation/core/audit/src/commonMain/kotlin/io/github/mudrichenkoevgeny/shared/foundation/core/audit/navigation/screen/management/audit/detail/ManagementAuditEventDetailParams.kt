@@ -13,14 +13,14 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ManagementAuditEventDetailParams(
-    val eventId: String? = null
+    val eventId: String
 ) : NavigationScreenParams {
 
     /**
      * Typed [AuditEventId] representation of [eventId], or `null` if invalid/absent.
      */
     val typedEventId: AuditEventId?
-        get() = eventId?.toAuditEventIdOrNull()
+        get() = eventId.takeIf { it.isNotBlank() }?.toAuditEventIdOrNull()
 
     override fun toQueryMap(): Map<String, List<String>> =
         ManagementAuditEventDetailParamsParser.serialize(this)

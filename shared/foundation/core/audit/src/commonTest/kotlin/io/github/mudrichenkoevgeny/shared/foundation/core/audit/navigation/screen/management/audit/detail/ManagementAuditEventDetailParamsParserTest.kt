@@ -20,10 +20,10 @@ class ManagementAuditEventDetailParamsParserTest {
     }
 
     @Test
-    fun `parse returns null eventId when map is empty`() {
+    fun `parse returns empty eventId when map is empty`() {
         val parsed = ManagementAuditEventDetailParams.parse(emptyMap())
 
-        assertNull(parsed.eventId)
+        assertEquals("", parsed.eventId)
         assertNull(parsed.typedEventId)
     }
 

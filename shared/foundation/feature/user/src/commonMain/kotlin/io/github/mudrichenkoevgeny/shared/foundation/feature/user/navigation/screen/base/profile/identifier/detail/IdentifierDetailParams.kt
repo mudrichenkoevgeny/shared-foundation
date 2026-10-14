@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class IdentifierDetailParams(
-    val identifierId: String? = null,
+    val identifierId: String,
     val userId: String? = null
 ) : NavigationScreenParams {
 
@@ -24,7 +24,7 @@ data class IdentifierDetailParams(
      * Typed [UserIdentifierId] representation of [identifierId], or `null` if invalid/absent.
      */
     val typedIdentifierId: UserIdentifierId?
-        get() = identifierId?.toUserIdentifierIdOrNull()
+        get() = identifierId.takeIf { it.isNotBlank() }?.toUserIdentifierIdOrNull()
 
     /**
      * Typed [UserId] representation of [userId], or `null` if invalid/absent.

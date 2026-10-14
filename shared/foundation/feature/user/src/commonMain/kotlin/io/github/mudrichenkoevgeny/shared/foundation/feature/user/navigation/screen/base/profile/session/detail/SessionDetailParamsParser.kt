@@ -17,7 +17,7 @@ object SessionDetailParamsParser {
      */
     fun parse(params: Map<String, Any?>): SessionDetailParams {
         val normalized = params.normalizeQueryParams()
-        val sessionId = normalized[UserApiPaths.SESSION_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
+        val sessionId = normalized[UserApiPaths.SESSION_ID]?.firstOrNull()?.takeIf { it.isNotBlank() } ?: ""
         val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
         return SessionDetailParams(sessionId = sessionId, userId = userId)
     }
@@ -31,7 +31,7 @@ object SessionDetailParamsParser {
      */
     fun serialize(params: SessionDetailParams): Map<String, List<String>> {
         val result = mutableMapOf<String, List<String>>()
-        if (params.sessionId != null) {
+        if (params.sessionId.isNotBlank()) {
             result[UserApiPaths.SESSION_ID] = listOf(params.sessionId)
         }
         if (params.userId != null) {

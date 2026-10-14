@@ -81,12 +81,75 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 
 ### Navigation Screen Routes & Parameters
 
-| Category | Navigation Classes & Screen Params |
-| :--- | :--- |
-| **Client Auth & User** | [ClientAuthNavigation]<br>[ClientUserNavigation] |
-| **Management Auth & Profile** | [ManagementAuthNavigation]<br>[ManagementAuthSettingsNavigation]<br>[ManagementSelfUserNavigation]<br>[ManagementUsersNavigation] |
-| **Base Profile Params** | [SelfSessionListParams]<br>[SelfSessionListParamsParser]<br>[SessionDetailParams]<br>[SessionDetailParamsParser]<br>[SelfIdentifierListParams]<br>[SelfIdentifierListParamsParser]<br>[IdentifierDetailParams]<br>[IdentifierDetailParamsParser]<br>[TotpMainParams]<br>[TotpMainParamsParser] |
-| **Management Params** | [ManagementUserListParams]<br>[ManagementUserListParamsParser]<br>[UserDetailParams]<br>[UserDetailParamsParser]<br>[ManagementGlobalSessionListParams]<br>[ManagementGlobalSessionListParamsParser]<br>[ManagementUserSessionListParams]<br>[ManagementUserSessionListParamsParser]<br>[ManagementGlobalIdentifierListParams]<br>[ManagementGlobalIdentifierListParamsParser]<br>[ManagementUserIdentifierListParams]<br>[ManagementUserIdentifierListParamsParser] |
+The 6 navigation classes define all screens required on client and management frontends along with their associated screen parameters:
+
+#### 1. [ClientAuthNavigation] — Client Authentication & Registration
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `Welcome` | `/auth/login/welcome` | [LoginWelcomeParams] ([LoginWelcomeParamsParser]) |
+| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] ([LoginByEmailParamsParser]) |
+| `LoginByPhone` | `/auth/login/phone` | [LoginByPhoneParams] (Client: [LoginByPhoneParamsParser]) |
+| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] ([LoginByTotpParamsParser]) |
+| `Registration` | `/auth/register/email` | [ClientRegistrationByEmailParams] ([ClientRegistrationByEmailParamsParser]) |
+| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] ([ResetPasswordParamsParser]) |
+| `PendingDeletion` | `/auth/login/pending-deletion` | None |
+| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] ([UnlockMethodSelectionParamsParser]) |
+| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] ([UnlockTargetInputParamsParser]) |
+| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] ([UnlockOtpInputParamsParser]) |
+| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] ([UnlockSuccessParamsParser]) |
+
+#### 2. [ClientUserNavigation] — Client Profile & Self-Service Management
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `Main` | `/user` | None |
+| `IdentifierList` | `/user/identifier` | [SelfIdentifierListParams] ([SelfIdentifierListParamsParser]) |
+| `IdentifierDetail` | `/user/identifier/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
+| `SessionList` | `/user/session` | [SelfSessionListParams] ([SelfSessionListParamsParser]) |
+| `SessionDetail` | `/user/session/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
+| `TotpMain` | `/user/security/totp` | [TotpMainParams] ([TotpMainParamsParser]) |
+| `TotpRecoveryCodes` | `/user/security/totp/recovery-codes` | None |
+
+#### 3. [ManagementAuthNavigation] — Staff & Management Authentication
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `Welcome` | `/auth/login/welcome` | [LoginWelcomeParams] ([LoginWelcomeParamsParser]) |
+| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] ([LoginByEmailParamsParser]) |
+| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] ([LoginByTotpParamsParser]) |
+| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] ([ResetPasswordParamsParser]) |
+| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] ([UnlockMethodSelectionParamsParser]) |
+| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] ([UnlockTargetInputParamsParser]) |
+| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] ([UnlockOtpInputParamsParser]) |
+| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] ([UnlockSuccessParamsParser]) |
+
+#### 4. [ManagementAuthSettingsNavigation] — Management Auth Policy Settings
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `EditAuthSettings` | `/settings/auth` | None |
+
+#### 5. [ManagementSelfUserNavigation] — Staff Self-Service Profile
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `Main` | `/self/user` | None |
+| `IdentifierList` | `/self/user/identifier` | [SelfIdentifierListParams] ([SelfIdentifierListParamsParser]) |
+| `IdentifierDetail` | `/self/user/identifier/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
+| `SessionList` | `/self/user/session` | [SelfSessionListParams] ([SelfSessionListParamsParser]) |
+| `SessionDetail` | `/self/user/session/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
+| `TotpMain` | `/self/user/security/totp` | [TotpMainParams] ([TotpMainParamsParser]) |
+| `TotpRecoveryCodes` | `/self/user/security/totp/recovery-codes` | None |
+
+#### 6. [ManagementUsersNavigation] — Staff User Administration
+| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| :--- | :--- | :--- |
+| `Main` | `/` | None |
+| `UserList` | `/users` | [ManagementUserListParams] ([ManagementUserListParamsParser]) |
+| `CreateUser` | `/users/create` | None |
+| `UserDetail` | `/users/{userId}` | [UserDetailParams] ([UserDetailParamsParser]) |
+| `UserSessionList` | `/users/{userId}/sessions` | [ManagementUserSessionListParams] ([ManagementUserSessionListParamsParser]) |
+| `UserIdentifierList` | `/users/{userId}/identifiers` | [ManagementUserIdentifierListParams] ([ManagementUserIdentifierListParamsParser]) |
+| `GlobalSessionList` | `/users/sessions` | [ManagementGlobalSessionListParams] ([ManagementGlobalSessionListParamsParser]) |
+| `GlobalIdentifierList` | `/users/identifiers` | [ManagementGlobalIdentifierListParams] ([ManagementGlobalIdentifierListParamsParser]) |
+| `IdentifierDetail` | `/users/identifiers/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
+| `SessionDetail` | `/users/sessions/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
 
 ### Mappers
 
@@ -276,3 +339,24 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 [UserAuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/resource/UserAuditResourceType.kt
 [UserAuditMetadataKey]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/metadata/UserAuditMetadataKey.kt
 [UserAuditMetadataDeniedReasonValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/metadata/UserAuditMetadataDeniedReasonValues.kt
+
+[LoginWelcomeParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/welcome/LoginWelcomeParams.kt
+[LoginWelcomeParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/welcome/LoginWelcomeParamsParser.kt
+[LoginByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/email/LoginByEmailParams.kt
+[LoginByEmailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/email/LoginByEmailParamsParser.kt
+[LoginByPhoneParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/phone/LoginByPhoneParams.kt
+[LoginByPhoneParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/phone/LoginByPhoneParamsParser.kt
+[LoginByTotpParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/totp/LoginByTotpParams.kt
+[LoginByTotpParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/totp/LoginByTotpParamsParser.kt
+[ClientRegistrationByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/register/email/ClientRegistrationByEmailParams.kt
+[ClientRegistrationByEmailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/register/email/ClientRegistrationByEmailParamsParser.kt
+[ResetPasswordParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/resetpassword/ResetPasswordParams.kt
+[ResetPasswordParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/resetpassword/ResetPasswordParamsParser.kt
+[UnlockMethodSelectionParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/methodselection/UnlockMethodSelectionParams.kt
+[UnlockMethodSelectionParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/methodselection/UnlockMethodSelectionParamsParser.kt
+[UnlockTargetInputParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/targetinput/UnlockTargetInputParams.kt
+[UnlockTargetInputParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/targetinput/UnlockTargetInputParamsParser.kt
+[UnlockOtpInputParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/otpinput/UnlockOtpInputParams.kt
+[UnlockOtpInputParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/otpinput/UnlockOtpInputParamsParser.kt
+[UnlockSuccessParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/success/UnlockSuccessParams.kt
+[UnlockSuccessParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/success/UnlockSuccessParamsParser.kt

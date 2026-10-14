@@ -12,7 +12,10 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 - **Domain — Client:** [ClientType] serializable enum, [ClientInfo], and [ClientDeviceInfo] to describe connecting applications.
 - **Domain — Permissions:** [PermissionCode] base type for shared permission constants.
 - **Domain — Listing:** [PagedResult], [ListingParamNames], [SortOrder], and [CommonSortValues] for standardized pagination and sorting contracts.
-- **Navigation — Core:** [ClientMainNavigation] and [ManagementMainNavigation] for root route definitions; [NavigationScreenParams] marker interface; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter parsing.
+- **Navigation — Core:** Root navigation route definitions:
+    - [ClientMainNavigation]: `Main` screen (`/`, Params: None) for client applications.
+    - [ManagementMainNavigation]: `Main` screen (`/`, Params: None) for management portal.
+    - [NavigationScreenParams] marker interface; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter parsing.
 - **Validation hints:** [RequiredField], [NotBlankStringField], [NotEmptyCollectionField] in [NetworkFieldAnnotations] (runtime interpretation is outside this module unless you add validators).
 
 ## Usage

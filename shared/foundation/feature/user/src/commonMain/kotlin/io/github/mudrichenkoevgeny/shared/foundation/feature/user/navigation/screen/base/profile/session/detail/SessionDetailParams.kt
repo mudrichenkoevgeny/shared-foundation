@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SessionDetailParams(
-    val sessionId: String? = null,
+    val sessionId: String,
     val userId: String? = null
 ) : NavigationScreenParams {
 
@@ -24,7 +24,7 @@ data class SessionDetailParams(
      * Typed [UserSessionId] representation of [sessionId], or `null` if invalid/absent.
      */
     val typedSessionId: UserSessionId?
-        get() = sessionId?.toUserSessionIdOrNull()
+        get() = sessionId.takeIf { it.isNotBlank() }?.toUserSessionIdOrNull()
 
     /**
      * Typed [UserId] representation of [userId], or `null` if invalid/absent.

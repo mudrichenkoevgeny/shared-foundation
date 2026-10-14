@@ -22,10 +22,10 @@ class IdentifierDetailParamsParserTest {
     }
 
     @Test
-    fun `parse returns null for missing parameters`() {
+    fun `parse returns empty for missing parameters`() {
         val emptyParsed = IdentifierDetailParams.parse(emptyMap())
 
-        assertNull(emptyParsed.identifierId)
+        assertEquals("", emptyParsed.identifierId)
         assertNull(emptyParsed.userId)
         assertNull(emptyParsed.typedIdentifierId)
         assertNull(emptyParsed.typedUserId)

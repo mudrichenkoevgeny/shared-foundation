@@ -17,7 +17,7 @@ object IdentifierDetailParamsParser {
      */
     fun parse(params: Map<String, Any?>): IdentifierDetailParams {
         val normalized = params.normalizeQueryParams()
-        val identifierId = normalized[UserApiPaths.USER_IDENTIFIER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
+        val identifierId = normalized[UserApiPaths.USER_IDENTIFIER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() } ?: ""
         val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
         return IdentifierDetailParams(identifierId = identifierId, userId = userId)
     }
@@ -31,7 +31,7 @@ object IdentifierDetailParamsParser {
      */
     fun serialize(params: IdentifierDetailParams): Map<String, List<String>> {
         val result = mutableMapOf<String, List<String>>()
-        if (params.identifierId != null) {
+        if (params.identifierId.isNotBlank()) {
             result[UserApiPaths.USER_IDENTIFIER_ID] = listOf(params.identifierId)
         }
         if (params.userId != null) {

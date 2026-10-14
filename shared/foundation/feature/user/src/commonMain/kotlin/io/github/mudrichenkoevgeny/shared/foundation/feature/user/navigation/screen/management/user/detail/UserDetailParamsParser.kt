@@ -17,7 +17,7 @@ object UserDetailParamsParser {
      */
     fun parse(params: Map<String, Any?>): UserDetailParams {
         val normalized = params.normalizeQueryParams()
-        val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
+        val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.takeIf { it.isNotBlank() } ?: ""
         return UserDetailParams(userId = userId)
     }
 
@@ -29,7 +29,7 @@ object UserDetailParamsParser {
      * @return Map of parameter names to string lists suitable for building URL search strings.
      */
     fun serialize(params: UserDetailParams): Map<String, List<String>> {
-        val userId = params.userId ?: return emptyMap()
-        return mapOf(UserApiPaths.USER_ID to listOf(userId))
+        if (params.userId.isBlank()) return emptyMap()
+        return mapOf(UserApiPaths.USER_ID to listOf(params.userId))
     }
 }

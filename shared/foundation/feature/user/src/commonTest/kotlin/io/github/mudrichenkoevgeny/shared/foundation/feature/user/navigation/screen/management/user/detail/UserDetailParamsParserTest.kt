@@ -17,10 +17,10 @@ class UserDetailParamsParserTest {
     }
 
     @Test
-    fun `parse returns null when userId is missing`() {
+    fun `parse returns empty when userId is missing`() {
         val emptyParsed = UserDetailParams.parse(emptyMap())
 
-        assertNull(emptyParsed.userId)
+        assertEquals("", emptyParsed.userId)
         assertNull(emptyParsed.typedUserId)
     }
 

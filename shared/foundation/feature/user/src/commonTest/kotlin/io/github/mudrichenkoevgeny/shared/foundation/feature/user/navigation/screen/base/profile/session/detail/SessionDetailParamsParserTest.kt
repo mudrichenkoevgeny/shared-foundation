@@ -22,10 +22,10 @@ class SessionDetailParamsParserTest {
     }
 
     @Test
-    fun `parse returns null for missing parameters`() {
+    fun `parse returns empty for missing parameters`() {
         val emptyParsed = SessionDetailParams.parse(emptyMap())
 
-        assertNull(emptyParsed.sessionId)
+        assertEquals("", emptyParsed.sessionId)
         assertNull(emptyParsed.userId)
         assertNull(emptyParsed.typedSessionId)
         assertNull(emptyParsed.typedUserId)

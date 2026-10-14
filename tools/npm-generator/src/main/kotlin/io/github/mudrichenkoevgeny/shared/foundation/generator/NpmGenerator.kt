@@ -254,7 +254,7 @@ fun main() {
             ?.takeIf { it.isNotBlank() && it != "unspecified" }
             ?: System.getenv("PACKAGE_VERSION")
             ?: parseRootBuildGradleVersion(rootDir)
-            ?: "0.0.60"
+            ?: "0.0.63"
 
         val packageJson = """
         {
@@ -283,9 +283,9 @@ fun main() {
         val npmReadme = """
         # @mudrichenkoevgeny/shared-foundation
 
-        TypeScript & Zod contracts, API routes, error codes, permission models, runtime enums, and branded types generated directly from the [shared-foundation](https://github.com/mudrichenkoevgeny/shared-foundation) Kotlin Multiplatform (KMP) repository.
+        TypeScript & Zod contracts, REST API routes, navigation screen routes, screen parameter schemas, error codes, permission models, runtime enums, branded types, and domain models generated directly from the [shared-foundation](https://github.com/mudrichenkoevgeny/shared-foundation) Kotlin Multiplatform (KMP) repository.
 
-        Provides a single source of truth (SSOT) between Kotlin Backend/KMP services and TypeScript/React web applications.
+        Provides a Single Source of Truth (SSOT) between Kotlin Backend/KMP services and TypeScript/React web applications (`web-platform-sdk`).
 
         ## Installation
 
@@ -300,44 +300,149 @@ fun main() {
         yarn add @mudrichenkoevgeny/shared-foundation zod
         ```
 
-        ## Features
+        ## Features & Exports
 
-        - **Zod Schemas**: Auto-generated `z.ZodType` validation schemas for all Request payloads and Response DTOs (`loginByEmailRequestSchema`, `apiErrorResponseSchema`, `userDetailsPayloadSchema`).
-        - **Runtime Enums**: TS types & runtime JS objects for all enums and string unions (`UserAuthProvider`, `UserRole`, `UserAccountStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, etc.).
-        - **Route Constants**: Strongly typed API endpoint routes (`ManagementSecuritySettingsRoutes`, `OpenLoginRoutes`, `SelfManagementUserRoutes`).
-        - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `CommonErrorCodes`) and permission strings (`SecurityPermissionCode`, `UserPermissionCode`).
+        - **Zod Validation Schemas (`*Schema`)**: Auto-generated `z.ZodType` validation schemas for all Request payloads, Response DTOs, and Screen Parameter models (`managementAuditEventListParamsSchema`, `loginWelcomeParamsSchema`, `apiErrorResponseSchema`, `userPrivatePayloadSchema`).
+        - **Navigation Screen Routes (`*Navigation`)**: Strongly typed screen routes and parent fallback routes for client and management apps (`ClientMainNavigation`, `ManagementMainNavigation`, `ClientAuthNavigation`, `ClientUserNavigation`, `ManagementUsersNavigation`, `ManagementAuditNavigation`, `ManagementSecurityNavigation`, `ManagementSettingsNavigation`).
+        - **REST API Routes**: Strongly typed REST API endpoint paths (`ManagementUsersRoutes`, `ManagementAuditRoutes`, `OpenLoginRoutes`, `SelfManagementUserRoutes`).
+        - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, `LoginStep`, `TotpStep`, `UnlockMethod`, etc.).
+        - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `UserErrorCodes`, `CommonErrorCodes`) and permission strings (`UserPermissionCode`, `SecurityPermissionCode`, `AuditPermissionCode`).
         - **Branded Types & Helpers**: Type-safe domain identifiers (`UserId`, `PermissionCode`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`) with converter helpers (`toUserIdOrThrow`, `toPermissionCodeOrNull`).
-        - **Domain Models & Mappers**: Fully typed TS domain models (`UserSession`, `UserDetails`, `ClientDeviceInfo`) and their runtime mappers from/to API payloads (`toUserSession`, `toUserSessionPayload`).
-        - **Composite Parsers**: Helper classes for runtime parsing of polymorphic values (`CompositeAuditActionTypeParser`, `CompositeAuditMetadataKeyParser`, `CompositeAuditResourceTypeParser`).
+        - **Domain Models & Mappers**: Fully typed TS domain models (`UserSessionSummary`, `UserPrivate`, `AuditEventSummary`) and their runtime mappers from/to API payloads (`toUserPrivate`, `toUserPrivatePayload`, `toAuditEventSummary`).
 
-        ## Quick Usage Example
+        ## Navigation Screen Routes & Parameter Schemas by Module
+
+        All 11 navigation classes and their Zod parameter validation schemas (`*ParamsSchema`) organized by module/subsystem:
+
+        ### 1. `core/common` (Root Navigation)
+        - **`ClientMainNavigation.Main`** (`/`) — Screen Params: None
+        - **`ManagementMainNavigation.Main`** (`/`) — Screen Params: None
+
+        ### 2. `core/audit` (Audit Navigation)
+        - **`ManagementAuditNavigation`**:
+          - `AuditEventList` (`/audit/events`) — Zod Schema: `managementAuditEventListParamsSchema`
+          - `AuditEventDetail` (`/audit/events/{eventId}`) — Zod Schema: `managementAuditEventDetailParamsSchema`
+
+        ### 3. `core/security` (Security Settings Navigation)
+        - **`ManagementSecurityNavigation`**:
+          - `EditSecuritySettings` (`/settings/security`) — Screen Params: None
+
+        ### 4. `core/settings` (Global Settings Navigation)
+        - **`ManagementSettingsNavigation`**:
+          - `EditGlobalSettings` (`/settings/global`) — Screen Params: None
+
+        ### 5. `feature/user` (IAM / User & Auth Navigation)
+        - **`ClientAuthNavigation`** (Client Authentication & Registration):
+          - `Welcome` (`/auth/login/welcome`) — `loginWelcomeParamsSchema`
+          - `LoginByEmail` (`/auth/login/email`) — `loginByEmailParamsSchema`
+          - `LoginByPhone` (`/auth/login/phone`) — `loginByPhoneParamsSchema`
+          - `LoginByTotp` (`/auth/login/totp`) — `loginByTotpParamsSchema`
+          - `Registration` (`/auth/register/email`) — `clientRegistrationByEmailParamsSchema`
+          - `ResetPassword` (`/auth/reset-password`) — `resetPasswordParamsSchema`
+          - `PendingDeletion` (`/auth/login/pending-deletion`) — None
+          - `UnlockMethodSelection` (`/auth/unlock`) — `unlockMethodSelectionParamsSchema`
+          - `UnlockTargetInput` (`/auth/unlock/input`) — `unlockTargetInputParamsSchema`
+          - `UnlockOtpInput` (`/auth/unlock/otp`) — `unlockOtpInputParamsSchema`
+          - `UnlockSuccess` (`/auth/unlock/success`) — `unlockSuccessParamsSchema`
+
+        - **`ClientUserNavigation`** (Client Profile & Self-Service):
+          - `Main` (`/user`) — None
+          - `IdentifierList` (`/user/identifier`) — `selfIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/user/identifier/{userIdentifierId}`) — `identifierDetailParamsSchema`
+          - `SessionList` (`/user/session`) — `selfSessionListParamsSchema`
+          - `SessionDetail` (`/user/session/{sessionId}`) — `sessionDetailParamsSchema`
+          - `TotpMain` (`/user/security/totp`) — `totpMainParamsSchema`
+          - `TotpRecoveryCodes` (`/user/security/totp/recovery-codes`) — None
+
+        - **`ManagementAuthNavigation`** (Staff Authentication):
+          - `Welcome` (`/auth/login/welcome`) — `loginWelcomeParamsSchema`
+          - `LoginByEmail` (`/auth/login/email`) — `loginByEmailParamsSchema`
+          - `LoginByTotp` (`/auth/login/totp`) — `loginByTotpParamsSchema`
+          - `ResetPassword` (`/auth/reset-password`) — `resetPasswordParamsSchema`
+          - `UnlockMethodSelection` (`/auth/unlock`) — `unlockMethodSelectionParamsSchema`
+          - `UnlockTargetInput` (`/auth/unlock/input`) — `unlockTargetInputParamsSchema`
+          - `UnlockOtpInput` (`/auth/unlock/otp`) — `unlockOtpInputParamsSchema`
+          - `UnlockSuccess` (`/auth/unlock/success`) — `unlockSuccessParamsSchema`
+
+        - **`ManagementAuthSettingsNavigation`** (Auth Policy Settings):
+          - `EditAuthSettings` (`/settings/auth`) — None
+
+        - **`ManagementSelfUserNavigation`** (Staff Self-Service Profile):
+          - `Main` (`/self/user`) — None
+          - `IdentifierList` (`/self/user/identifier`) — `selfIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/self/user/identifier/{userIdentifierId}`) — `identifierDetailParamsSchema`
+          - `SessionList` (`/self/user/session`) — `selfSessionListParamsSchema`
+          - `SessionDetail` (`/self/user/session/{sessionId}`) — `sessionDetailParamsSchema`
+          - `TotpMain` (`/self/user/security/totp`) — `totpMainParamsSchema`
+          - `TotpRecoveryCodes` (`/self/user/security/totp/recovery-codes`) — None
+
+        - **`ManagementUsersNavigation`** (Staff User Administration):
+          - `Main` (`/`) — None
+          - `UserList` (`/users`) — `managementUserListParamsSchema`
+          - `CreateUser` (`/users/create`) — None
+          - `UserDetail` (`/users/{userId}`) — `userDetailParamsSchema`
+          - `UserSessionList` (`/users/{userId}/sessions`) — `managementUserSessionListParamsSchema`
+          - `UserIdentifierList` (`/users/{userId}/identifiers`) — `managementUserIdentifierListParamsSchema`
+          - `GlobalSessionList` (`/users/sessions`) — `managementGlobalSessionListParamsSchema`
+          - `GlobalIdentifierList` (`/users/identifiers`) — `managementGlobalIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/users/identifiers/{userIdentifierId}`) — `identifierDetailParamsSchema`
+          - `SessionDetail` (`/users/sessions/{sessionId}`) — `sessionDetailParamsSchema`
+
+        ## Usage Examples
+
+        ### 1. Validating Screen Parameters (Deep Link & URL Router)
 
         ```typescript
         import { 
-          ManagementSecuritySettingsRoutes, 
-          SecurityErrorCodes, 
+          managementAuditEventListParamsSchema, 
+          ManagementAuditNavigation 
+        } from '@mudrichenkoevgeny/shared-foundation';
+
+        // Safe URL query parameter validation with defaults
+        function parseSearchParams(rawParams: Record<string, unknown>) {
+          const params = managementAuditEventListParamsSchema.parse(rawParams);
+          console.log(params.pageNumber); // Defaults to 1 if omitted
+          console.log(params.actorIds);   // Defaults to [] if omitted
+          return params;
+        }
+
+        // Accessing Screen Route & Parent Route for Fallback Back-Navigation
+        const screenRoute = ManagementAuditNavigation.AuditEventList.ROUTE; // "/management/audit/events"
+        const parentRoute = ManagementAuditNavigation.AuditEventList.PARENT_ROUTE; // "/management"
+        ```
+
+        ### 2. Issuing API Requests with Route Constants
+
+        ```typescript
+        import { 
+          ManagementAuditRoutes, 
+          AuditApiPaths 
+        } from '@mudrichenkoevgeny/shared-foundation';
+
+        // REST API Path for fetching audit event details
+        const eventId = '123e4567-e89b-12d3-a456-426614174000';
+        const url = ManagementAuditRoutes.GET_AUDIT_EVENT.replace(`{${AuditApiPaths.EVENT_ID}}`, eventId);
+        ```
+
+        ### 3. Validating API Responses with Zod & Error Handling
+
+        ```typescript
+        import { 
           apiErrorResponseSchema, 
+          SecurityErrorCodes, 
           toUserIdOrThrow 
         } from '@mudrichenkoevgeny/shared-foundation';
 
-        // 1. Using Route Constants
-        const url = ManagementSecuritySettingsRoutes.GET_MANAGEMENT_SECURITY_SETTINGS;
-
-        // 2. Branded Types
-        const userId = toUserIdOrThrow('123e4567-e89b-12d3-a456-426614174000');
-
-        // 3. Validating API Responses with Zod
-        async function fetchUserSettings() {
-          const response = await fetch(url);
-          const json = await response.json();
-
-          if (!response.ok) {
-            const error = apiErrorResponseSchema.parse(json);
-            if (error.code === SecurityErrorCodes.TOTP_NOT_ENABLED) {
-              console.error('TOTP configuration required');
+        async function fetchUserData(rawResponse: unknown) {
+          if (!rawResponse) {
+            const error = apiErrorResponseSchema.parse(rawResponse);
+            if (error.code === SecurityErrorCodes.PASSWORD_TOO_WEAK) {
+              console.error('Password does not meet requirements');
             }
             return;
           }
+
+          const userId = toUserIdOrThrow('123e4567-e89b-12d3-a456-426614174000');
         }
         ```
 
@@ -587,6 +692,27 @@ private fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, 
     }
 
     return emptyList()
+}
+
+data class ClassStructure(
+    val directProps: List<Pair<String, String>>,
+    val nestedObjects: List<Pair<String, List<Pair<String, String>>>>
+)
+
+private fun extractClassStructure(kClass: KClass<*>): ClassStructure {
+    val directProps = extractObjectStringProperties(kClass)
+    val nestedObjects = mutableListOf<Pair<String, List<Pair<String, String>>>>()
+
+    val nestedClasses = try { kClass.nestedClasses } catch (_: Exception) { emptyList() }
+    for (nested in nestedClasses) {
+        val nestedName = nested.simpleName ?: continue
+        val props = extractObjectStringProperties(nested)
+        if (props.isNotEmpty()) {
+            nestedObjects.add(nestedName to props)
+        }
+    }
+
+    return ClassStructure(directProps, nestedObjects)
 }
 
 private val routeClasses = listOf(
@@ -979,12 +1105,19 @@ private fun getAllEnumInfos(): List<EnumInfo> {
 private fun generateRouteObjects(): String {
     return routeClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
-        val props = extractObjectStringProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
+        val structure = extractClassStructure(kClass)
+
+        val directFields = structure.directProps.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
+        val nestedFields = structure.nestedObjects.map { (nestedName, nestedProps) ->
+            val propsCode = nestedProps.joinToString(",\n    ") { (vName, vVal) -> "$vName: \"$vVal\"" }
+            "  $nestedName: {\n    $propsCode\n  }"
+        }
+
+        val allFields = directFields + nestedFields
 
         """
         export const $name = {
-        ${fields.joinToString(",\n")}
+        ${allFields.joinToString(",\n")}
         };
         """.trimIndent()
     }
@@ -1201,7 +1334,17 @@ private fun generateSingleDtoSchema(kClass: KClass<*>): String {
         val wireKey = serialNameAnnotation?.value ?: paramName
 
         val type = param.type
-        val zodType = resolveZodType(paramName, type, kClass)
+        var zodType = resolveZodType(paramName, type, kClass)
+
+        if (param.isOptional) {
+            zodType = when {
+                zodType.startsWith("z.array(") -> "$zodType.default([])"
+                zodType == "z.number()" && paramName == "pageNumber" -> "$zodType.default(ListingDefaultValues.PAGE_NUMBER)"
+                zodType == "z.number()" && paramName == "pageSize" -> "$zodType.default(ListingDefaultValues.PAGE_SIZE)"
+                zodType.contains(".nullable()") -> "$zodType.default(null)"
+                else -> "$zodType.optional()"
+            }
+        }
 
         "    $wireKey: $zodType"
     }
@@ -1398,24 +1541,130 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
     return if (isMarkedNullable) "$baseTs | null" else baseTs
 }
 
+private val sourceFileMap: Map<String, File> by lazy {
+    val currentDir = File(System.getProperty("user.dir"))
+    val rootDir = if (currentDir.name == "npm-generator") currentDir.parentFile.parentFile else currentDir
+    val sourceDir = File(rootDir, "shared/foundation")
+    val map = mutableMapOf<String, File>()
+    if (sourceDir.exists()) {
+        sourceDir.walkTopDown().filter { it.isFile && it.extension == "kt" }.forEach { file ->
+            map[file.nameWithoutExtension] = file
+        }
+    }
+    map
+}
+
+private fun extractKDoc(kClass: KClass<*>, memberName: String? = null, nestedClassName: String? = null): String? {
+    val className = kClass.simpleName ?: return null
+    val file = sourceFileMap[className] ?: return null
+    val fullText = file.readText()
+
+    val text = if (nestedClassName != null) {
+        val nestedBlockRegex = Regex("""(?:object|class)\s+$nestedClassName\b[\s\S]*?(?=(?:(?:object|class)\s+\w+\b)|$)""")
+        nestedBlockRegex.find(fullText)?.value ?: fullText
+    } else {
+        fullText
+    }
+
+    val targetName = memberName ?: nestedClassName ?: className
+
+    val declRegex = Regex("""(?:internal\s+|public\s+|private\s+|const\s+|override\s+|val\s+|var\s+|fun\s+|object\s+|class\s+|interface\s+|enum\s+class\s+)+$targetName\b""")
+    val declMatch = declRegex.find(text)
+    if (declMatch != null) {
+        val declStart = declMatch.range.first
+        val prefix = text.substring(0, declStart)
+        val lastDocStart = prefix.lastIndexOf("/**")
+        if (lastDocStart != -1) {
+            val lastDocEnd = prefix.indexOf("*/", lastDocStart)
+            if (lastDocEnd != -1 && lastDocEnd > lastDocStart) {
+                val between = prefix.substring(lastDocEnd + 2)
+                val hasOtherDecl = between.contains("const ") || between.contains("val ") || between.contains("var ") || between.contains("object ") || between.contains("class ")
+                if (!hasOtherDecl) {
+                    val rawDoc = prefix.substring(lastDocStart + 3, lastDocEnd)
+                    val cleaned = rawDoc.lines()
+                        .map { it.trimStart().removePrefix("*").trim() }
+                        .filter { !it.startsWith("@param") && !it.startsWith("@return") }
+                        .joinToString("\n * ") { it.cleanKDocLinks() }
+                        .trim()
+
+                    if (cleaned.isNotBlank()) {
+                        return "/**\n * $cleaned\n */"
+                    }
+                }
+            }
+        }
+    }
+
+    if (memberName != null) {
+        val classKDocMatch = Regex("""/\*\*([\s\S]*?)\*/\s*(?:@[^\r\n]+\s*)*(?:class|object|interface|enum\s+class)\s+$className\b""").find(fullText)
+        if (classKDocMatch != null) {
+            val classKDocBody = classKDocMatch.groupValues[1]
+            val propRegex = Regex("""@property\s+$memberName\b\s+([^\r\n*]+)""")
+            val propMatch = propRegex.find(classKDocBody)
+            if (propMatch != null) {
+                val desc = propMatch.groupValues[1].trim().cleanKDocLinks()
+                return "/**\n * $desc\n */"
+            }
+        }
+    }
+
+    return null
+}
+
+private fun String.cleanKDocLinks(): String {
+    return this.replace(Regex("""\[([^\]]+)\]""")) { match ->
+        val inner = match.groupValues[1]
+        inner.substringAfterLast('.')
+    }
+}
+
+private fun String.formatAsJsDoc(indent: String = ""): String {
+    val lines = this.lines()
+    if (indent.isEmpty()) return lines.joinToString("\n")
+    return lines.joinToString("\n") { line ->
+        if (line.isBlank()) line else "$indent${line.trimStart()}"
+    }
+}
+
 private fun generateDeclarationFile(): String {
     val routeDeclarations = routeClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
-        val props = extractObjectStringProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "    readonly $valName: \"$valValue\";" }
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val structure = extractClassStructure(kClass)
+
+        val directFields = structure.directProps.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "${fieldDoc}    readonly $valName: \"$valValue\";"
+        }
+
+        val nestedFields = structure.nestedObjects.map { (nestedName, nestedProps) ->
+            val nestedDoc = extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            val propsCode = nestedProps.joinToString("\n") { (vName, vVal) ->
+                val vDoc = extractKDoc(kClass, memberName = vName, nestedClassName = nestedName)?.formatAsJsDoc("      ")?.let { "$it\n" } ?: ""
+                "${vDoc}      readonly $vName: \"$vVal\";"
+            }
+            "${nestedDoc}    readonly $nestedName: {\n$propsCode\n    };"
+        }
+
+        val allFields = directFields + nestedFields
+
         """
-        export declare const $name: {
-        ${fields.joinToString("\n")}
+        $classDoc export declare const $name: {
+        ${allFields.joinToString("\n")}
         };
         """.trimIndent()
     }
 
     val contractDeclarations = contractClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
         val props = extractObjectStringProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "    readonly $valName: \"$valValue\";" }
+        val fields = props.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "${fieldDoc}    readonly $valName: \"$valValue\";"
+        }
         """
-        export declare const $name: {
+        $classDoc export declare const $name: {
         ${fields.joinToString("\n")}
         };
         """.trimIndent()
@@ -1495,10 +1744,14 @@ private fun generateDeclarationFile(): String {
 
     val errorDeclarations = errorClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
         val props = extractObjectStringProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "    readonly $valName: \"$valValue\";" }
+        val fields = props.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "${fieldDoc}    readonly $valName: \"$valValue\";"
+        }
         """
-        export declare const $name: {
+        $classDoc export declare const $name: {
         ${fields.joinToString("\n")}
         };
         """.trimIndent()
@@ -1506,22 +1759,31 @@ private fun generateDeclarationFile(): String {
 
     val permDeclarations = permClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
         val props = extractPermissionCodeProperties(kClass)
-        val fields = props.map { (valName, _) -> "    readonly $valName: PermissionCode;" }
+        val fields = props.map { (valName, _) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "${fieldDoc}    readonly $valName: PermissionCode;"
+        }
         """
-        export const $name: {
+        $classDoc export const $name: {
         ${fields.joinToString(",\n")}
         };
         """.trimIndent()
     }
 
     val enumDeclarations = getAllEnumInfos().joinToString("\n\n") { info ->
+        val enumClass = enumClasses.firstOrNull { (it.simpleName ?: "") == info.name }
+        val classDoc = enumClass?.let { extractKDoc(it) }?.let { "$it\n" } ?: ""
         val unionType = info.entries.map { it.second }.distinct().joinToString(" | ") { "'$it'" }
-        val objectFields = info.entries.joinToString("\n") { (key, wire) -> "  readonly $key: '$wire';" }
+        val objectFields = info.entries.joinToString("\n") { (key, wire) ->
+            val entryDoc = enumClass?.let { extractKDoc(it, key) }?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
+            "${entryDoc}  readonly $key: '$wire';"
+        }
 
         """
-        export type ${info.name} = $unionType;
-        export const ${info.name}: {
+        $classDoc export type ${info.name} = $unionType;
+        $classDoc export const ${info.name}: {
         $objectFields
         };
         export const ${info.schemaName}: z.ZodType<${info.name}>;
@@ -1572,6 +1834,7 @@ private fun generateDeclarationFile(): String {
 
     val dtoDeclarations = dtoClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
         val schemaName = name.decapitalizeFirstLetter() + "Schema"
         val primaryConstructor = kClass.primaryConstructor
 
@@ -1583,14 +1846,16 @@ private fun generateDeclarationFile(): String {
 
                 val wireKey = serialNameAnnotation?.value ?: paramName
                 val tsType = resolveTsType(paramName, param.type, kClass)
-                "    $wireKey: $tsType;"
+                val optionalSign = if (param.isOptional) "?" else ""
+                val fieldDoc = extractKDoc(kClass, paramName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "${fieldDoc}    $wireKey$optionalSign: $tsType;"
             }
         } else {
             emptyList()
         }
 
         """
-        export interface $name {
+        $classDoc export interface $name {
         ${fields.joinToString("\n")}
         }
         export const $schemaName: z.ZodType<$name>;
@@ -2003,52 +2268,66 @@ private fun generateDomainModelsAndMappersDts(): String {
     return domainToDtoClasses.joinToString("\n\n") { (domainClass, payloadClass) ->
         val domainName = domainClass.simpleName ?: ""
         val payloadName = payloadClass.simpleName ?: ""
+        val domainDoc = extractKDoc(domainClass)?.let { "$it\n" } ?: ""
         
         val fields = domainClass.primaryConstructor?.parameters?.mapNotNull { param ->
             val paramName = param.name ?: return@mapNotNull null
             val tsType = resolveTsType(paramName, param.type, domainClass)
-            "  readonly $paramName: $tsType;"
+            val optionalSign = if (param.isOptional) "?" else ""
+            val fieldDoc = extractKDoc(domainClass, paramName)?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
+            "${fieldDoc}  readonly $paramName$optionalSign: $tsType;"
         }?.joinToString("\n") ?: ""
         
+        val toDomainMapperDoc = "/** Converts $payloadName payload DTO to $domainName domain model. */"
+        val toPayloadMapperDoc = "/** Converts $domainName domain model to $payloadName payload DTO. */"
+
         if (domainName == "AuditEventSummary") {
             return@joinToString """
-            export interface $domainName {
+            $domainDoc export interface $domainName {
             $fields
             }
             
+            $toDomainMapperDoc
             export declare const toAuditEventSummary: (payload: AuditEventSummaryPayload, actionTypeParser: CompositeAuditActionTypeParser, resourceTypeParser: CompositeAuditResourceTypeParser) => AuditEventSummary;
+            $toPayloadMapperDoc
             export declare const toAuditEventSummaryPayload: (domain: AuditEventSummary) => AuditEventSummaryPayload;
             """.trimIndent()
         }
 
         if (domainName == "AuditEventPrivate") {
             return@joinToString """
-            export interface $domainName {
+            $domainDoc export interface $domainName {
             $fields
             }
             
+            $toDomainMapperDoc
             export declare const toAuditEventPrivate: (payload: AuditEventPrivatePayload, actionTypeParser: CompositeAuditActionTypeParser, resourceTypeParser: CompositeAuditResourceTypeParser, metadataKeyParser: CompositeAuditMetadataKeyParser) => AuditEventPrivate;
+            $toPayloadMapperDoc
             export declare const toAuditEventPrivatePayload: (domain: AuditEventPrivate) => AuditEventPrivatePayload;
             """.trimIndent()
         }
         
         if (domainName == "AuditEventMetadata") {
             return@joinToString """
-            export interface $domainName {
+            $domainDoc export interface $domainName {
             $fields
             }
             
+            $toDomainMapperDoc
             export declare const toAuditEventMetadata: (payload: AuditEventMetadataPayload, metadataKeyParser: CompositeAuditMetadataKeyParser) => AuditEventMetadata;
+            $toPayloadMapperDoc
             export declare const toAuditEventMetadataPayload: (domain: AuditEventMetadata) => AuditEventMetadataPayload;
             """.trimIndent()
         }
         
         """
-        export interface $domainName {
+        $domainDoc export interface $domainName {
         $fields
         }
         
+        $toDomainMapperDoc
         export declare const to$domainName: (payload: $payloadName) => $domainName;
+        $toPayloadMapperDoc
         export declare const to$payloadName: (domain: $domainName) => $payloadName;
         """.trimIndent()
     }

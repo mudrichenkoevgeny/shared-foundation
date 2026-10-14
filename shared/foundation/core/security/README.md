@@ -28,7 +28,7 @@
     - [PasswordPolicyValidator]: Interface and default implementation for enforcing password rules.
     - **Mappers:** Extensive set of mappers for Domain ↔ Payload conversion (including [IpRestrictionPolicyMapper]).
 - **WebSocket:** [SecurityWebSocketEventTypes] — event strings `OPEN_SECURITY_SETTINGS_UPDATED` and `MANAGEMENT_SECURITY_SETTINGS_UPDATED`.
-- **Navigation:** [ManagementSecurityNavigation] — route constants for security management screens.
+- **Navigation:** [ManagementSecurityNavigation] — management navigation screen routes: `EditSecuritySettings` (`/settings/security`, Params: None).
 
 ## Usage
 

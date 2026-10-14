@@ -33,7 +33,7 @@ This document is the entry point for architectural and coding standards. These r
 - **`feature/user`:** Comprehensive auth/user/session/identifier/configuration contracts (`UserSummary`, `UserPrivate`, `UserInternal`, `UserSessionSummary` with required `userId`, `UserSessionPrivate`, `UserSessionInternal`, `UserIdentifierSummary` with required `userId`, `UserIdentifierPrivate`, `UserIdentifierInternal`). Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), distinct active session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific logging (`UserAuditActionType`).
 
 ### Tooling & Code Generation (`tools/*`)
-- **`tools/npm-generator`:** Executable JVM module triggered via `./gradlew generateNpmPackage`. Generates the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`) containing TypeScript declarations (`index.d.ts`), Zod schemas, route objects, error codes, permission objects, branded types, TS domain models, runtime mappers, and helpers for TypeScript/React consumers (`web-platform-sdk`).
+- **`tools/npm-generator`:** Executable JVM module triggered via `./gradlew generateNpmPackage`. Generates the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`) containing TypeScript declarations (`index.d.ts`), Zod schemas, route objects, error codes, permission objects, branded types, TS domain models, runtime mappers, and helpers for TypeScript/React consumers (`web-platform-sdk`) ([module README](tools/npm-generator/README.md)).
 
 ## Detailed Standards (`.agent/`)
 
@@ -42,6 +42,7 @@ This document is the entry point for architectural and coding standards. These r
 - **`api-documentation-standard.md`** — Mandatory KDoc fields (Auth, Audit, Method, UI Presentation) for API route constants.
 - **`docs-kdoc-basics.md`** — Language standards, link resolution rules, and KDoc Definition of Done.
 - **`docs-kdoc-type-requirements.md`** — Specific KDoc patterns for DTOs, Error Codes, Sealed types, Routes, and Navigation Screen Params.
+- **`ts-npm-package-standard.md`** — TypeScript declarations, Zod schema generation, ESM evaluation order, and Web SDK contract standards.
 - **`kotlin-coding-style.md`** — Naming, `when` subject rules, brace requirements, FQN/Comments ban, Trailing Commas ban, and `.value` usage for wire values.
 - **`testing-conventions.md`** — Unit and integration test standards, mocking policy, and manual execution rule.
 - **`ai-collaboration-workflow.md`** — AI constraints, dependency management (Version Catalog), and module responsibility mapping.

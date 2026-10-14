@@ -20,7 +20,7 @@ object ManagementAuditEventDetailParamsParser {
      */
     fun parse(params: Map<String, Any?>): ManagementAuditEventDetailParams {
         val normalized = params.normalizeQueryParams()
-        val eventId = normalized[AuditApiPaths.EVENT_ID]?.firstOrNull()?.takeIf { it.isNotBlank() }
+        val eventId = normalized[AuditApiPaths.EVENT_ID]?.firstOrNull()?.takeIf { it.isNotBlank() } ?: ""
         return ManagementAuditEventDetailParams(eventId = eventId)
     }
 
@@ -32,7 +32,7 @@ object ManagementAuditEventDetailParamsParser {
      * @return Map of parameter names to string lists suitable for building URL query or path strings.
      */
     fun serialize(params: ManagementAuditEventDetailParams): Map<String, List<String>> {
-        val eventId = params.eventId ?: return emptyMap()
-        return mapOf(AuditApiPaths.EVENT_ID to listOf(eventId))
+        if (params.eventId.isBlank()) return emptyMap()
+        return mapOf(AuditApiPaths.EVENT_ID to listOf(params.eventId))
     }
 }

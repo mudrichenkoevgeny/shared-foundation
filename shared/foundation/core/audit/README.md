@@ -25,8 +25,10 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
     - [AuditActionType] & [AuditResourceType]: Interface-based contracts allowing feature-modules to define their own domain-specific actions and resources.
     - **Composite Parsers:** [CompositeAuditActionTypeParser], [CompositeAuditResourceTypeParser], [CompositeAuditMetadataKeyParser] — tools to resolve these extensible types from wire strings.
 - **Navigation:**
-    - [ManagementAuditNavigation]: Management navigation screen routes (`AuditEventList`, `AuditEventDetail`).
-    - Screen params and parsers: [ManagementAuditEventListParams], [ManagementAuditEventDetailParams], [ManagementAuditEventListParamsParser], [ManagementAuditEventDetailParamsParser].
+    - [ManagementAuditNavigation]: Management navigation screen routes:
+        - `AuditEventList` (`/audit/events`) — Params: [ManagementAuditEventListParams]
+        - `AuditEventDetail` (`/audit/events/{eventId}`) — Params: [ManagementAuditEventDetailParams]
+    - Screen params & parsers: [ManagementAuditEventListParams], [ManagementAuditEventDetailParams], [ManagementAuditEventListParamsParser], [ManagementAuditEventDetailParamsParser].
 
 ## Usage
 
