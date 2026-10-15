@@ -32,11 +32,11 @@ This document defines the interaction model and workflow requirements for AI-ass
 
 Place code in the correct module based on its functional role:
 
-- **`core/common`:** Base errors, JSON configuration, WebSocket envelopes, common DTOs, and base permission codes.
-- **`core/audit`:** Audit events, redaction policies, mappers, management routes, and permission codes.
-- **`core/security`:** MFA/TOTP lifecycle, password policy logic, security settings, routes, and permission codes.
-- **`core/settings`:** Global settings domain models, payloads, mappers, routes, and permission codes.
-- **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, and self-service account unlocking.
+- **`core/common`:** Base errors, JSON configuration, WebSocket envelopes, common DTOs, base permission codes, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), and base network routes (`BaseManagementRoutes`, `BaseSettingsRoutes`).
+- **`core/audit`:** Audit events, redaction policies, mappers, management routes, audit navigation (`ManagementAuditNavigation`), and permission codes.
+- **`core/security`:** MFA/TOTP lifecycle, password policy logic, security settings, routes, security navigation (`ManagementSecurityNavigation`), and permission codes.
+- **`core/settings`:** Global settings domain models, payloads, mappers, routes, settings navigation (`ManagementSettingsNavigation`), and permission codes.
+- **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, self-service account unlocking, user navigation contracts (`UserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes, screen parameters, and parameter parsers.
 
 **Strict Boundary:** This repository defines the **Contract**. Framework-specific wiring (Ktor engines, Auth session storage, UI mapping) belongs in consumer projects (Backend/KMP Platform SDKs).
 

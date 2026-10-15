@@ -87,7 +87,7 @@ All navigation screen objects (`XxxNavigation`) must adhere to this standard for
 
 1. **Primary API:**
    - For **Listing and Detail screens**: The principal HTTP API endpoint executed automatically upon screen mount/initialization to load primary screen data (e.g., `GET /management/audit/events` or `GET /management/users/{user_id}`).
-   - For **Form/Auth screens**: The principal HTTP API endpoint executed when submitting the primary action of that screen (e.g., `POST /auth/register/email` or `POST /auth/login/email`).
+   - For **Form/Auth screens**: The principal HTTP API endpoint executed when submitting the primary action of that screen (e.g., `POST /auth/registration/email` or `POST /auth/login/email`).
    - If no auto-fetch or primary form submit exists on the screen, mark as `None.`
 
 2. **Secondary Action APIs:**

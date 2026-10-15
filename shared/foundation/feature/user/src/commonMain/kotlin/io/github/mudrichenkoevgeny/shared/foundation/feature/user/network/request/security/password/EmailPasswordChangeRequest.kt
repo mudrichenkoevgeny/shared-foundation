@@ -8,15 +8,11 @@ import kotlinx.serialization.Serializable
 /**
  * DTO for changing an existing user password.
  *
- * @property email The email address of the account owner.
  * @property oldPassword The current password for identity verification.
  * @property newPassword The new password to be set for the account.
  */
 @Serializable
 data class EmailPasswordChangeRequest(
-    @NotBlankStringField
-    @SerialName(UserApiFields.EMAIL)
-    val email: String,
 
     @NotBlankStringField
     @SerialName(UserApiFields.OLD_PASSWORD)

@@ -32,7 +32,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenSessionRoutes {
     /** Base path for open session management operations. */
-    const val BASE_SESSION_ROUTE = "$BASE_USER_ROUTE/session"
+    private const val BASE_SESSIONS_ROUTE = "$BASE_USER_ROUTE/sessions"
 
     /**
      * **HTTP method:** `POST`
@@ -57,7 +57,7 @@ object OpenSessionRoutes {
      *   - [ClientAuthNavigation.PendingDeletion]
      *   - [ClientUserNavigation.SessionList]
      */
-    const val LOGOUT = "$BASE_SESSION_ROUTE/logout"
+    const val LOGOUT = "$BASE_SESSIONS_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -103,7 +103,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionList]
      */
-    const val GET_SESSIONS = BASE_SESSION_ROUTE
+    const val GET_SESSIONS = BASE_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -124,7 +124,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionDetail]
      */
-    const val GET_SESSION = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val GET_SESSION = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -153,7 +153,7 @@ object OpenSessionRoutes {
      *   - [ClientUserNavigation.SessionList]
      *   - [ClientUserNavigation.SessionDetail]
      */
-    const val DELETE_SESSION = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val DELETE_SESSION = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -180,7 +180,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionList]
      */
-    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SESSION_ROUTE/delete-others"
+    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SESSIONS_ROUTE/others"
 
     /**
      * **HTTP method:** `POST`
@@ -206,5 +206,5 @@ object OpenSessionRoutes {
      * - Screens: None.
      * - Flow: Global re-authentication dialog (no dedicated screen).
      */
-    const val REAUTHENTICATE_SESSION = "$BASE_SESSION_ROUTE/reauthenticate"
+    const val REAUTHENTICATE_SESSION = "$BASE_SESSIONS_ROUTE/reauthenticate"
 }

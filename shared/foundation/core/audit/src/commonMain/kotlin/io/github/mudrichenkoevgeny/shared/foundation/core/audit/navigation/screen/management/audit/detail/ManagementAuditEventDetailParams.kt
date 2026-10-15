@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.detail
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.toAuditEventIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
 import kotlinx.serialization.Serializable
 
 /**
@@ -14,19 +14,42 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ManagementAuditEventDetailParams(
     val eventId: String
-) : NavigationScreenParams {
+) : NavigationScreenParams<ManagementAuditEventDetailParams> {
 
-    /**
-     * Typed [AuditEventId] representation of [eventId], or `null` if invalid/absent.
-     */
-    val typedEventId: AuditEventId?
-        get() = eventId.takeIf { it.isNotBlank() }?.toAuditEventIdOrNull()
+    override val parser: NavigationScreenParamsParser<ManagementAuditEventDetailParams>
+        get() = Companion
 
-    override fun toQueryMap(): Map<String, List<String>> =
-        ManagementAuditEventDetailParamsParser.serialize(this)
+    companion object : NavigationScreenParamsParser<ManagementAuditEventDetailParams> {
 
-    companion object {
-        fun parse(params: Map<String, Any?>): ManagementAuditEventDetailParams =
-            ManagementAuditEventDetailParamsParser.parse(params)
+        /**
+         * Parses raw URL query or path parameters into typed [ManagementAuditEventDetailParams].
+         *
+         * Accepts both canonical `Map<String, List<String>>` and flexible `Map<String, Any?>`
+         * (e.g. single strings or arrays from JS/TS query objects).
+         *
+         * @param params Map of parameter keys to raw parameter values.
+         * @return Validated [ManagementAuditEventDetailParams] instance.
+         */
+        override fun parse(params: Map<String, Any?>): ManagementAuditEventDetailParams {
+            val normalized = params.normalizeQueryParams()
+            val eventId = normalized[AuditApiPaths.EVENT_ID]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+                ?: ""
+            return ManagementAuditEventDetailParams(eventId = eventId)
+        }
+
+        /**
+         * Serializes [ManagementAuditEventDetailParams] into a map of URL query parameter strings.
+         *
+         * Returns an empty map because the event ID is represented as a path parameter in the route URL
+         * rather than a query parameter.
+         *
+         * @param params Typed [ManagementAuditEventDetailParams] to serialize.
+         * @return Empty map as no query parameters are associated with this screen.
+         */
+        override fun serialize(
+            params: ManagementAuditEventDetailParams
+        ): Map<String, List<String>> = emptyMap()
     }
 }

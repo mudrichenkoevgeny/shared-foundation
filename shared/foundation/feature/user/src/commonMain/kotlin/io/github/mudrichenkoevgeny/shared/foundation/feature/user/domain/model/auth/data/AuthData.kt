@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 
 /**
- * Authenticated sign-in result: private profile plus issued session tokens.
+ * Authenticated sign-in result: private user plus issued session tokens.
  *
  * Aligns with [AuthDataPayload] on the wire.
  */

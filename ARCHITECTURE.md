@@ -217,12 +217,15 @@ This diagram illustrates how Network Routes, Navigation Screen Routes, and Navig
 flowchart LR
     subgraph NetworkLayer ["Network Layer"]
         NetworkRoute["Network Route Constant\n(e.g., ManagementUsersRoutes.GET_USERS)"]
+        BaseNetworkRoute["Base Network Routes\n(e.g., BaseManagementRoutes, BaseSettingsRoutes)"]
     end
 
     subgraph NavigationLayer ["Navigation Layer"]
+        NavigationRoute["NavigationRoute / Parameterized / Redirect"]
         ScreenRoute["Navigation Screen Route\n(e.g., ManagementUsersNavigation.UserList)"]
         ScreenParams["Screen Parameters\n(e.g., ManagementUserListParams)"]
-        ScreenParser["Params Parser\n(e.g., ManagementUserListParamsParser)"]
+        ScreenParser["Params Parser\n(e.g., NavigationScreenParamsParser)"]
+        RoutePaths["Path Helpers\n(UserNavigationPaths, CommonNavigationRoutes)"]
     end
 
     subgraph UILayer ["Client UI Layer"]
@@ -230,11 +233,29 @@ flowchart LR
     end
 
     NetworkRoute -->|Documented via KDoc\nUI Presentation| ScreenRoute
+    ScreenRoute -->|Implements| NavigationRoute
     ScreenRoute -->|Declares Params Type| ScreenParams
     ScreenParser -->|Parses Query/Path to| ScreenParams
     ScreenRoute -->|Mounts & Triggers Primary API| NetworkRoute
     UIScreen -->|Binds to Route & Params| ScreenRoute
 ```
+
+### Core Navigation Contracts & Helper Index
+
+#### 1. Core Navigation Contracts (`core/common`)
+- **`NavigationRoute`**: Common base interface for all strongly-typed screen destinations (`route: String`, `parentRoute: String?`).
+- **`ParameterizedNavigationRoute<P : NavigationScreenParams<*>>`**: Contract for navigation destinations carrying strongly-typed parameters (`params: P`).
+- **`RedirectNavigationRoute`**: Contract for virtual/alias destination endpoints that delegate and redirect navigation to a target route (`targetRoute: String`) without rendering a standalone UI screen.
+- **`NavigationScreenParams`**: Marker interface for typed screen parameter data classes.
+- **`NavigationScreenParamsParser<T>`**: Contract for bidirectional parameter serialization (`parse(params: Map<String, Any?>): T` and `serialize(params: T): Map<String, List<String>>`).
+- **`NavigationRouteUrlMapper`**: Utility object for formatting path strings, appending query maps, and building parameterized URLs.
+- **`CommonNavigationRoutes`**: Common base navigation route path segments shared across platforms (`BASE_SETTINGS_ROUTE = "/settings"`).
+
+#### 2. Base Network Routes & Navigation Paths
+- **`BaseManagementRoutes`** (`core/common`): Base network route segments for management operations (`BASE_MANAGEMENT_ROUTE = "/management"`, `BASE_SELF_MANAGEMENT_ROUTE = "/management/self"`).
+- **`BaseSettingsRoutes`** (`core/common`): Base network route segment for settings endpoints (`BASE_SETTINGS_ROUTE = "/settings"`).
+- **`UserNavigationRoutes`** (`feature/user`): Base navigation route segment for user feature screens (`BASE_AUTH_ROUTE = "/auth"`).
+- **`UserNavigationPaths`** (`feature/user`): Naming conventions for user navigation query parameters (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`).
 
 ### Complete Navigation Classes Index
 
@@ -245,13 +266,13 @@ The library provides 11 strongly-typed navigation objects across two main hierar
 - **`ManagementMainNavigation`**: Root navigation entry point for Management/Admin applications (`ROUTE = "/management"`).
 
 #### 2. Client Application Navigation (`feature/user`)
-- **`ClientAuthNavigation`**: Unauthenticated authentication and onboarding screens (Welcome, Login by Email/Phone/TOTP, Registration, Reset Password, Account Pending Deletion, and Unlock flows).
-- **`ClientUserNavigation`**: Authenticated client profile screens (Main Profile, Self Session List & Details, Self Identifier List & Details, TOTP Setup & Management).
+- **`ClientAuthNavigation`**: Unauthenticated authentication and onboarding screens (Login by Email/Phone/TOTP, Registration, Reset Password, Account Pending Deletion, and Unlock flows).
+- **`ClientUserNavigation`**: Authenticated client user screens (Main User, Self Session List & Details, Self Identifier List & Details, TOTP Setup & Management).
 
 #### 3. Management Application Navigation (`core/*` & `feature/user`)
 - **`ManagementAuthNavigation`**: Admin authentication screens (Login by Email/TOTP, Reset Password, Unlock flows).
 - **`ManagementAuthSettingsNavigation`**: Management authentication provider and email restriction configuration screen.
-- **`ManagementSelfUserNavigation`**: Authenticated admin profile self-service screens (Profile Main, Self Sessions, Self Identifiers, TOTP).
+- **`ManagementSelfUserNavigation`**: Authenticated admin user self-service screens (User Main, Self Sessions, Self Identifiers, TOTP).
 - **`ManagementUsersNavigation`**: Admin user management screens (User List & Detail, Global & User-Specific Session Lists, Global & User-Specific Identifier Lists).
 - **`ManagementAuditNavigation`** (`core/audit`): System audit event listing (`AuditEventList`) and detailed view (`AuditEventDetail`).
 - **`ManagementSecurityNavigation`** (`core/security`): Password policies, lockout rules, rate limits, and IP restriction settings (`SecuritySettings`).

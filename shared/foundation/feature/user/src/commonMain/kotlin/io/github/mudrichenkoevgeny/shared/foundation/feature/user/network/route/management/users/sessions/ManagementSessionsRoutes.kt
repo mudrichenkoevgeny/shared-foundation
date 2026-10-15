@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes.BASE_MANAGEMENT_ROUTE
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -29,9 +30,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Route paths for user sessions in the management API (list, single read, revocation).
  */
 object ManagementSessionsRoutes {
-    /** Base path for managing user sessions in management API. */
-    private const val BASE_MANAGEMENT_SESSIONS_ROUTE =
-        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/sessions"
+    /** Base path for global sessions management in the management API. */
+    private const val BASE_MANAGEMENT_SESSIONS_ROUTE = "$BASE_MANAGEMENT_ROUTE/sessions"
+
+    /** Base path for user-scoped sessions management. */
+    private const val BASE_MANAGEMENT_USER_SESSIONS_ROUTE =
+        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/sessions"
 
     /**
      * **HTTP method:** `GET`
@@ -81,10 +85,61 @@ object ManagementSessionsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementUsersNavigation.UserSessionList]
      *   - [ManagementUsersNavigation.GlobalSessionList]
      */
     const val GET_SESSIONS = BASE_MANAGEMENT_SESSIONS_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a paged list of active summary sessions for a specific target user.
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
+     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
+     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
+     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
+     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     *
+     * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys combine as **AND**.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
+     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs
+     *   ([UserSessionPrivatePayload.identifierId]).
+     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
+     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
+     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of user agent substring patterns.
+     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of IP addresses.
+     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — list of BCP 47 language tags.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — list of opaque device IDs.
+     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — list of device name substring patterns.
+     * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
+     * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of OS versions.
+     *
+     * Response body: [PagedResult] of [UserSessionSummaryPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** For sessions of [UserRole.USER], needs
+     *   [SessionPermissionCode.SESSION_GET_OF_USER_MASKED] or
+     *   [SessionPermissionCode.SESSION_GET_OF_USER_UNMASKED].
+     *   For [UserRole.STAFF], needs [SessionPermissionCode.SESSION_GET_OF_STAFF_MASKED] or
+     *   [SessionPermissionCode.SESSION_GET_OF_STAFF_UNMASKED].
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserSessionList]
+     */
+    const val GET_USER_SESSIONS = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -115,7 +170,7 @@ object ManagementSessionsRoutes {
     /**
      * **HTTP method:** `DELETE`
      *
-     * Deletes a specific session for the given user.
+     * Deletes a specific session for the given session ID.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
@@ -138,8 +193,8 @@ object ManagementSessionsRoutes {
      * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the revocation.
      * - **Resource:** [UserAuditResourceType.SESSION]. Set `resourceId` to the [UserApiPaths.SESSION_ID].
      * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.USER_ID] — the owner of the session.
+     *   - [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   - [UserAuditMetadataKey.USER_ID] — the owner of the session.
      *
      * **UI Presentation:**
      * - Screens:
@@ -175,13 +230,12 @@ object ManagementSessionsRoutes {
      * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the revocation.
      * - **Resource:** [UserAuditResourceType.SESSION]. Leave `resourceId` unset (bulk operation).
      * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.USER_ID] — the account whose sessions were deleted.
+     *   - [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   - [UserAuditMetadataKey.USER_ID] — the account whose sessions were deleted.
      *
      * **UI Presentation:**
      * - Screens:
      *   - [ManagementUsersNavigation.UserSessionList]
      */
-    const val DELETE_ALL_USER_SESSIONS =
-        "$BASE_MANAGEMENT_SESSIONS_ROUTE/delete-all-for-user/{${UserApiPaths.USER_ID}}"
+    const val DELETE_ALL_USER_SESSIONS = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
 }

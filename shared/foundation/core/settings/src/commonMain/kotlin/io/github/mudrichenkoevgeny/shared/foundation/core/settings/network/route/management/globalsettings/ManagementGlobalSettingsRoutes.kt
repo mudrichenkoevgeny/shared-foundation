@@ -4,7 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.action.SettingsAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource.SettingsAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.permission.SettingsPermissionCode
@@ -17,7 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model
 object ManagementGlobalSettingsRoutes {
     /** Base path for management global settings endpoints. */
     private const val BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE =
-        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/global-settings"
+        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/global"
 
     /**
      * **HTTP method:** `GET`
@@ -34,7 +35,7 @@ object ManagementGlobalSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSettingsNavigation.EditGlobalSettings]
+     *   - [ManagementSettingsNavigation.GlobalSettings]
      */
     const val GET_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
@@ -65,7 +66,7 @@ object ManagementGlobalSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSettingsNavigation.EditGlobalSettings]
+     *   - [ManagementSettingsNavigation.GlobalSettings]
      */
     const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
@@ -96,7 +97,7 @@ object ManagementGlobalSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSettingsNavigation.EditGlobalSettings]
+     *   - [ManagementSettingsNavigation.GlobalSettings]
      */
     const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/reset"
 }

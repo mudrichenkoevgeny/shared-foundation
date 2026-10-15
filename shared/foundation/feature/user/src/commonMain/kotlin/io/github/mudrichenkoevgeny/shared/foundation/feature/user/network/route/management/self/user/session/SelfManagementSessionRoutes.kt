@@ -31,8 +31,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementSessionRoutes {
     /** Base path for self-service session operations in management API. */
-    private const val BASE_SELF_SESSION_ROUTE =
-        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/session"
+    private const val BASE_SELF_SESSIONS_ROUTE =
+        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/sessions"
 
     /**
      * **HTTP method:** `POST`
@@ -56,7 +56,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val LOGOUT = "$BASE_SELF_SESSION_ROUTE/logout"
+    const val LOGOUT = "$BASE_SELF_SESSIONS_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -103,7 +103,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val GET_SESSIONS = BASE_SELF_SESSION_ROUTE
+    const val GET_SESSIONS = BASE_SELF_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -124,7 +124,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionDetail]
      */
-    const val GET_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val GET_SESSION = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -154,7 +154,7 @@ object SelfManagementSessionRoutes {
      *   - [ManagementSelfUserNavigation.SessionList]
      *   - [ManagementSelfUserNavigation.SessionDetail]
      */
-    const val DELETE_SESSION = "$BASE_SELF_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    const val DELETE_SESSION = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -182,7 +182,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SELF_SESSION_ROUTE/delete-others"
+    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SELF_SESSIONS_ROUTE/others"
 
     /**
      * **HTTP method:** `POST`
@@ -209,5 +209,5 @@ object SelfManagementSessionRoutes {
      * - Screens: None.
      * - Flow: Global re-authentication dialog (no dedicated screen).
      */
-    const val REAUTHENTICATE_SESSION = "$BASE_SELF_SESSION_ROUTE/reauthenticate"
+    const val REAUTHENTICATE_SESSION = "$BASE_SELF_SESSIONS_ROUTE/reauthenticate"
 }

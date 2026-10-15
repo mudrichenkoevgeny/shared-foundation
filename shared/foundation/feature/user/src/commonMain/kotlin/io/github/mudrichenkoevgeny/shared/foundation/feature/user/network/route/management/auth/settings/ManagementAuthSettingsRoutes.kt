@@ -4,7 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
@@ -26,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 object ManagementAuthSettingsRoutes {
     /** Base path for management authentication settings operations. */
     private const val BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE =
-        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/settings"
+        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}"
 
     /**
      * **HTTP method:** `GET`
@@ -44,7 +45,7 @@ object ManagementAuthSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementAuthSettingsNavigation.EditAuthSettings]
+     *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
     const val GET_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
@@ -75,7 +76,7 @@ object ManagementAuthSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementAuthSettingsNavigation.EditAuthSettings]
+     *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
     const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
@@ -106,7 +107,7 @@ object ManagementAuthSettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementAuthSettingsNavigation.EditAuthSettings]
+     *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
     const val RESET_MANAGEMENT_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
 }

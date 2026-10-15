@@ -54,5 +54,5 @@ object ManagementUsersSecurityRoutes {
      *   - [ManagementUsersNavigation.UserDetail]
      */
     const val DISABLE_TOTP =
-        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/security/totp"
+        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/totp"
 }

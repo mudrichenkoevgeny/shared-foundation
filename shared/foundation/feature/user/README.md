@@ -14,7 +14,7 @@ Supports diverse authentication strategies across all lifecycle stages (registra
 - **Self-Service Account Unlock:** Email/SMS OTP and OAuth token-based unlock flows for temporarily locked accounts.
 - **Token Management:** Handling of Access, Refresh, and Session tokens, including secure hashing and refresh cycles.
 
-### 2. User & Profile Management
+### 2. User & Management
 Entities follow the standardized 4-tier projection model (`Summary`, `Private`, `Internal`):
 - **User Summary:** [UserSummary] / [UserSummaryPayload] for compact list views, mentions, and cards.
 - **User Private:** [UserPrivate] / [UserPrivatePayload] for authenticated self-service ("My Account") and management CRUD.
@@ -51,8 +51,8 @@ The module provides DTOs and Request models for every domain entity to ensure ty
 - **Configuration:** [OpenUserConfigurationPayload], [ManagementUserConfigurationPayload].
 - **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
 - **Sessions & Identifiers:** [UserSessionSummaryPayload], [UserSessionPrivatePayload], [DeletedSessionsPayload], [UserIdentifierSummaryPayload], [UserIdentifierPrivatePayload].
-- **User Profile:** [UserSummaryPayload], [UserPrivatePayload].
-- **Requests:** [RegisterByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
+- **User:** [UserSummaryPayload], [UserPrivatePayload].
+- **Requests:** [RegistrationByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
 
 ### Real-Time Communication
 Typed WebSocket contracts for live updates:
@@ -70,112 +70,115 @@ Full audit taxonomy mapped via **[UserAuditActionType]**, **[UserAuditResourceTy
 
 ### HTTP Routes
 
-| Domain | Open Routes | Self-Management Routes | Management Routes |
-| :--- | :--- | :--- | :--- |
-| **Auth** | [OpenLoginRoutes]<br>[OpenRegisterRoutes]<br>[OpenResetPasswordRoutes]<br>[OpenUnlockRoutes]<br>[OpenRefreshTokenRoutes]<br>[OpenAuthSettingsRoutes] | [SelfManagementLoginRoutes]<br>[SelfManagementRefreshTokenRoutes]<br>[SelfManagementResetPasswordRoutes]<br>[SelfManagementUnlockRoutes] | [ManagementAuthSettingsRoutes] |
-| **User Profile** | [OpenUserRoutes] | [SelfManagementUserRoutes] | [ManagementUsersRoutes] |
+| Domain            | Open Routes | Self-Management Routes | Management Routes |
+|:------------------| :--- | :--- | :--- |
+| **Auth**          | [OpenLoginRoutes]<br>[OpenRegistrationRoutes]<br>[OpenResetPasswordRoutes]<br>[OpenUnlockRoutes]<br>[OpenRefreshTokenRoutes]<br>[OpenAuthSettingsRoutes] | [SelfManagementLoginRoutes]<br>[SelfManagementRefreshTokenRoutes]<br>[SelfManagementResetPasswordRoutes]<br>[SelfManagementUnlockRoutes] | [ManagementAuthSettingsRoutes] |
+| **User**          | [OpenUserRoutes] | [SelfManagementUserRoutes] | [ManagementUsersRoutes] |
 | **User Security** | [OpenUserSecurityRoutes] | [SelfManagementUserSecurityRoutes] | [ManagementUsersSecurityRoutes] |
-| **Identifiers** | [OpenIdentifierRoutes] | [SelfManagementIdentifierRoutes] | [ManagementIdentifiersRoutes] |
-| **Sessions** | [OpenSessionRoutes] | [SelfManagementSessionRoutes] | [ManagementSessionsRoutes] |
+| **Identifiers**   | [OpenIdentifierRoutes] | [SelfManagementIdentifierRoutes] | [ManagementIdentifiersRoutes] |
+| **Sessions**      | [OpenSessionRoutes] | [SelfManagementSessionRoutes] | [ManagementSessionsRoutes] |
 | **Configuration** | [OpenUserConfigurationRoutes] | — | [ManagementUserConfigurationRoutes] |
 
 ### Navigation Screen Routes & Parameters
 
-The 6 navigation classes define all screens required on client and management frontends along with their associated screen parameters:
+The 6 navigation classes define all screens required on client and management frontends along with their associated screen parameters.
+
+Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"`) and standard query parameter keys from [UserNavigationPaths] (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`). All navigation screen objects implement `NavigationRoute`, `ParameterizedNavigationRoute`, or `RedirectNavigationRoute`, with typed parameter classes implementing `NavigationScreenParams` and parsed via `NavigationScreenParamsParser`.
 
 #### 1. [ClientAuthNavigation] — Client Authentication & Registration
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
-| :--- | :--- | :--- |
-| `Welcome` | `/auth/login/welcome` | [LoginWelcomeParams] ([LoginWelcomeParamsParser]) |
-| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] ([LoginByEmailParamsParser]) |
-| `LoginByPhone` | `/auth/login/phone` | [LoginByPhoneParams] (Client: [LoginByPhoneParamsParser]) |
-| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] ([LoginByTotpParamsParser]) |
-| `Registration` | `/auth/register/email` | [ClientRegistrationByEmailParams] ([ClientRegistrationByEmailParamsParser]) |
-| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] ([ResetPasswordParamsParser]) |
+| Screen Object | Route Path                     | Screen Parameters (`Params`) |
+| :--- |:-------------------------------| :--- |
+| `Auth` (Redirect -> `Main`) | `/auth` | None |
+| `Main` | `/auth/login` | None |
+| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] |
+| `LoginByPhone` | `/auth/login/phone` | [LoginByPhoneParams] |
+| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] |
+| `Registration` | `/auth/registration` | [ClientRegistrationByEmailParams] |
+| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] |
 | `PendingDeletion` | `/auth/login/pending-deletion` | None |
-| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] ([UnlockMethodSelectionParamsParser]) |
-| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] ([UnlockTargetInputParamsParser]) |
-| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] ([UnlockOtpInputParamsParser]) |
-| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] ([UnlockSuccessParamsParser]) |
+| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] |
+| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] |
+| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] |
+| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] |
 
-#### 2. [ClientUserNavigation] — Client Profile & Self-Service Management
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+#### 2. [ClientUserNavigation] — Client Self-Service Management
+| Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
 | `Main` | `/user` | None |
-| `IdentifierList` | `/user/identifier` | [SelfIdentifierListParams] ([SelfIdentifierListParamsParser]) |
-| `IdentifierDetail` | `/user/identifier/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
-| `SessionList` | `/user/session` | [SelfSessionListParams] ([SelfSessionListParamsParser]) |
-| `SessionDetail` | `/user/session/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
-| `TotpMain` | `/user/security/totp` | [TotpMainParams] ([TotpMainParamsParser]) |
-| `TotpRecoveryCodes` | `/user/security/totp/recovery-codes` | None |
+| `IdentifierList` | `/user/identifiers` | [SelfIdentifierListParams] |
+| `IdentifierDetail` | `/user/identifiers/{user_identifier_id}` | [IdentifierDetailParams] |
+| `SessionList` | `/user/sessions` | [SelfSessionListParams] |
+| `SessionDetail` | `/user/sessions/{session_id}` | [SessionDetailParams] |
+| `TotpMain` | `/user/totp` | [TotpMainParams] |
+| `TotpRecoveryCodes` | `/user/totp/recovery-codes` | None |
 
 #### 3. [ManagementAuthNavigation] — Staff & Management Authentication
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
-| `Welcome` | `/auth/login/welcome` | [LoginWelcomeParams] ([LoginWelcomeParamsParser]) |
-| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] ([LoginByEmailParamsParser]) |
-| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] ([LoginByTotpParamsParser]) |
-| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] ([ResetPasswordParamsParser]) |
-| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] ([UnlockMethodSelectionParamsParser]) |
-| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] ([UnlockTargetInputParamsParser]) |
-| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] ([UnlockOtpInputParamsParser]) |
-| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] ([UnlockSuccessParamsParser]) |
+| `Auth` (Redirect -> `Main`) | `/auth` | None |
+| `Main` | `/auth/login` | None |
+| `LoginByEmail` | `/auth/login/email` | [LoginByEmailParams] |
+| `LoginByTotp` | `/auth/login/totp` | [LoginByTotpParams] |
+| `ResetPassword` | `/auth/reset-password` | [ResetPasswordParams] |
+| `UnlockMethodSelection` | `/auth/unlock` | [UnlockMethodSelectionParams] |
+| `UnlockTargetInput` | `/auth/unlock/input` | [UnlockTargetInputParams] |
+| `UnlockOtpInput` | `/auth/unlock/otp` | [UnlockOtpInputParams] |
+| `UnlockSuccess` | `/auth/unlock/success` | [UnlockSuccessParams] |
 
 #### 4. [ManagementAuthSettingsNavigation] — Management Auth Policy Settings
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
-| `EditAuthSettings` | `/settings/auth` | None |
+| `AuthSettings` | `/settings/auth` | None |
 
-#### 5. [ManagementSelfUserNavigation] — Staff Self-Service Profile
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+#### 5. [ManagementSelfUserNavigation] — Staff Self-Service
+| Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
 | `Main` | `/self/user` | None |
-| `IdentifierList` | `/self/user/identifier` | [SelfIdentifierListParams] ([SelfIdentifierListParamsParser]) |
-| `IdentifierDetail` | `/self/user/identifier/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
-| `SessionList` | `/self/user/session` | [SelfSessionListParams] ([SelfSessionListParamsParser]) |
-| `SessionDetail` | `/self/user/session/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
-| `TotpMain` | `/self/user/security/totp` | [TotpMainParams] ([TotpMainParamsParser]) |
-| `TotpRecoveryCodes` | `/self/user/security/totp/recovery-codes` | None |
+| `IdentifierList` | `/self/user/identifiers` | [SelfIdentifierListParams] |
+| `IdentifierDetail` | `/self/user/identifiers/{user_identifier_id}` | [IdentifierDetailParams] |
+| `SessionList` | `/self/user/sessions` | [SelfSessionListParams] |
+| `SessionDetail` | `/self/user/sessions/{session_id}` | [SessionDetailParams] |
+| `TotpMain` | `/self/user/totp` | [TotpMainParams] |
+| `TotpRecoveryCodes` | `/self/user/totp/recovery-codes` | None |
 
 #### 6. [ManagementUsersNavigation] — Staff User Administration
-| Screen Object | Route Path | Screen Parameters (`Params`) & Parsers |
+| Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
-| `Main` | `/` | None |
-| `UserList` | `/users` | [ManagementUserListParams] ([ManagementUserListParamsParser]) |
+| `UserList` | `/users` | [ManagementUserListParams] |
 | `CreateUser` | `/users/create` | None |
-| `UserDetail` | `/users/{userId}` | [UserDetailParams] ([UserDetailParamsParser]) |
-| `UserSessionList` | `/users/{userId}/sessions` | [ManagementUserSessionListParams] ([ManagementUserSessionListParamsParser]) |
-| `UserIdentifierList` | `/users/{userId}/identifiers` | [ManagementUserIdentifierListParams] ([ManagementUserIdentifierListParamsParser]) |
-| `GlobalSessionList` | `/users/sessions` | [ManagementGlobalSessionListParams] ([ManagementGlobalSessionListParamsParser]) |
-| `GlobalIdentifierList` | `/users/identifiers` | [ManagementGlobalIdentifierListParams] ([ManagementGlobalIdentifierListParamsParser]) |
-| `IdentifierDetail` | `/users/identifiers/{userIdentifierId}` | [IdentifierDetailParams] ([IdentifierDetailParamsParser]) |
-| `SessionDetail` | `/users/sessions/{sessionId}` | [SessionDetailParams] ([SessionDetailParamsParser]) |
+| `UserDetail` | `/users/{user_id}` | [UserDetailParams] |
+| `UserSessionList` | `/users/{user_id}/sessions` | [ManagementUserSessionListParams] |
+| `UserIdentifierList` | `/users/{user_id}/identifiers` | [ManagementUserIdentifierListParams] |
+| `GlobalSessionList` | `/sessions` | [ManagementGlobalSessionListParams] |
+| `GlobalIdentifierList` | `/identifiers` | [ManagementGlobalIdentifierListParams] |
+| `IdentifierDetail` | `/identifiers/{user_identifier_id}` | [IdentifierDetailParams] |
+| `SessionDetail` | `/sessions/{session_id}` | [SessionDetailParams] |
 
 ### Mappers
 
-| Category | Mapper Classes |
-| :--- | :--- |
-| **Auth & Settings** | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper]<br>[EmailRestrictionPolicyMapper] |
-| **Configuration** | [OpenUserConfigurationMapper]<br>[ManagementUserConfigurationMapper] |
-| **User Profile** | [UserSummaryMapper]<br>[UserPrivateMapper]<br>[UserDomainMapper] |
+| Category                   | Mapper Classes |
+|:---------------------------| :--- |
+| **Auth & Settings**        | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper]<br>[EmailRestrictionPolicyMapper] |
+| **Configuration**          | [OpenUserConfigurationMapper]<br>[ManagementUserConfigurationMapper] |
+| **User**                   | [UserSummaryMapper]<br>[UserPrivateMapper]<br>[UserDomainMapper] |
 | **Identifiers & Sessions** | [UserIdentifierSummaryMapper]<br>[UserIdentifierPrivateMapper]<br>[UserIdentifierDomainMapper]<br>[UserSessionSummaryMapper]<br>[UserSessionPrivateMapper]<br>[UserSessionDomainMapper]<br>[DeletedSessionsMapper]<br>[SessionTokenMapper] |
 
 ### Domain Models
 
-| Category | Domain Classes |
-| :--- | :--- |
-| **Auth & Settings** | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
-| **Configuration** | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
-| **User Profile** | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
-| **Identifiers** | [UserIdentifierSummary] (with `userId`) <br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
-| **Sessions** | [UserSessionSummary] (with `userId`) <br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
-| **Tokens** | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
+| Category               | Domain Classes |
+|:-----------------------| :--- |
+| **Auth & Settings**    | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
+| **Configuration**      | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
+| **User**               | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
+| **Identifiers**        | [UserIdentifierSummary] (with `userId`) <br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
+| **Sessions**           | [UserSessionSummary] (with `userId`) <br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
+| **Tokens**             | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
 | **Listings & Filters** | [UserFilterValues]<br>[UserSortValues]<br>[UserSortBy]<br>[UserIdentifierSortBy]<br>[UserSessionSortBy] |
 
 ---
 
 [OpenLoginRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/login/OpenLoginRoutes.kt
-[OpenRegisterRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/register/OpenRegisterRoutes.kt
+[OpenRegistrationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/registration/OpenRegistrationRoutes.kt
 [OpenResetPasswordRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/resetpassword/OpenResetPasswordRoutes.kt
 [OpenUnlockRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/unlock/OpenUnlockRoutes.kt
 [OpenRefreshTokenRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/route/open/auth/refreshtoken/OpenRefreshTokenRoutes.kt
@@ -209,29 +212,18 @@ The 6 navigation classes define all screens required on client and management fr
 [ManagementSelfUserNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementSelfUserNavigation.kt
 [ManagementUsersNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/management/ManagementUsersNavigation.kt
 
-[SelfSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/list/SelfSessionListParams.kt
-[SelfSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/list/SelfSessionListParamsParser.kt
-[SessionDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/detail/SessionDetailParams.kt
-[SessionDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/session/detail/SessionDetailParamsParser.kt
-[SelfIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/list/SelfIdentifierListParams.kt
-[SelfIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/list/SelfIdentifierListParamsParser.kt
-[IdentifierDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/detail/IdentifierDetailParams.kt
-[IdentifierDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/identifier/detail/IdentifierDetailParamsParser.kt
-[TotpMainParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/totp/main/TotpMainParams.kt
-[TotpMainParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/profile/totp/main/TotpMainParamsParser.kt
+[SelfSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/user/session/list/SelfSessionListParams.kt
+[SessionDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/user/session/detail/SessionDetailParams.kt
+[SelfIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/user/identifier/list/SelfIdentifierListParams.kt
+[IdentifierDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/user/identifier/detail/IdentifierDetailParams.kt
+[TotpMainParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/user/totp/main/TotpMainParams.kt
 
 [ManagementUserListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/globallist/ManagementUserListParams.kt
-[ManagementUserListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/globallist/ManagementUserListParamsParser.kt
 [UserDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/detail/UserDetailParams.kt
-[UserDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/user/detail/UserDetailParamsParser.kt
 [ManagementGlobalSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/globallist/ManagementGlobalSessionListParams.kt
-[ManagementGlobalSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/globallist/ManagementGlobalSessionListParamsParser.kt
 [ManagementUserSessionListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/userlist/ManagementUserSessionListParams.kt
-[ManagementUserSessionListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/session/userlist/ManagementUserSessionListParamsParser.kt
 [ManagementGlobalIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/globallist/ManagementGlobalIdentifierListParams.kt
-[ManagementGlobalIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/globallist/ManagementGlobalIdentifierListParamsParser.kt
 [ManagementUserIdentifierListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/userlist/ManagementUserIdentifierListParams.kt
-[ManagementUserIdentifierListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/management/identifier/userlist/ManagementUserIdentifierListParamsParser.kt
 
 [AuthDataMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/data/AuthDataMapper.kt
 [AvailableAuthProvidersMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/mapper/auth/settings/AvailableAuthProvidersMapper.kt
@@ -305,7 +297,7 @@ The 6 navigation classes define all screens required on client and management fr
 [RefreshTokenPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/token/RefreshTokenPayload.kt
 [SessionTokenPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/token/SessionTokenPayload.kt
 
-[RegisterByEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/register/RegisterByEmailRequest.kt
+[RegistrationByEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/registration/RegistrationByEmailRequest.kt
 [LoginByEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/login/LoginByEmailRequest.kt
 [LoginByPhoneRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/login/LoginByPhoneRequest.kt
 [LoginByExternalAuthProviderRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/auth/login/LoginByExternalAuthProviderRequest.kt
@@ -340,23 +332,15 @@ The 6 navigation classes define all screens required on client and management fr
 [UserAuditMetadataKey]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/metadata/UserAuditMetadataKey.kt
 [UserAuditMetadataDeniedReasonValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/metadata/UserAuditMetadataDeniedReasonValues.kt
 
-[LoginWelcomeParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/welcome/LoginWelcomeParams.kt
-[LoginWelcomeParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/welcome/LoginWelcomeParamsParser.kt
 [LoginByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/email/LoginByEmailParams.kt
-[LoginByEmailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/email/LoginByEmailParamsParser.kt
 [LoginByPhoneParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/phone/LoginByPhoneParams.kt
-[LoginByPhoneParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/phone/LoginByPhoneParamsParser.kt
 [LoginByTotpParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/totp/LoginByTotpParams.kt
-[LoginByTotpParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/totp/LoginByTotpParamsParser.kt
-[ClientRegistrationByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/register/email/ClientRegistrationByEmailParams.kt
-[ClientRegistrationByEmailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/register/email/ClientRegistrationByEmailParamsParser.kt
+[ClientRegistrationByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/registration/email/ClientRegistrationByEmailParams.kt
 [ResetPasswordParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/resetpassword/ResetPasswordParams.kt
-[ResetPasswordParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/resetpassword/ResetPasswordParamsParser.kt
 [UnlockMethodSelectionParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/methodselection/UnlockMethodSelectionParams.kt
-[UnlockMethodSelectionParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/methodselection/UnlockMethodSelectionParamsParser.kt
 [UnlockTargetInputParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/targetinput/UnlockTargetInputParams.kt
-[UnlockTargetInputParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/targetinput/UnlockTargetInputParamsParser.kt
 [UnlockOtpInputParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/otpinput/UnlockOtpInputParams.kt
-[UnlockOtpInputParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/otpinput/UnlockOtpInputParamsParser.kt
 [UnlockSuccessParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/success/UnlockSuccessParams.kt
-[UnlockSuccessParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/success/UnlockSuccessParamsParser.kt
+
+[UserNavigationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/UserNavigationRoutes.kt
+[UserNavigationPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/contract/UserNavigationPaths.kt

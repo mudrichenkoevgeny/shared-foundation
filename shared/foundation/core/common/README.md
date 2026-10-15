@@ -6,16 +6,17 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 
 - **Serialization:** [FoundationJson] — shared `Json` configuration (`ignoreUnknownKeys`, `encodeDefaults`, etc.) for encoding/decoding DTOs in this library and dependent modules.
 - **API errors (wire):** [ApiErrorResponse] with snake_case JSON keys via [CommonApiFields]; machine-readable **codes** and **args** keys in [CommonErrorCodes] and [CommonErrorArgs].
-- **HTTP naming & routes:** [CommonApiFields] (JSON field names), [CommonHttpHeaders] (e.g. trace, client type, device, API version headers), and [ManagementRoutes] for platform-wide paths.
+- **HTTP naming & routes:** [CommonApiFields] (JSON field names), [CommonHttpHeaders] (e.g. trace, client type, device, API version headers), [ManagementRoutes] for platform-wide management paths, [BaseManagementRoutes] (`/management`, `/management/self`), and [BaseSettingsRoutes] (`/settings`).
 - **WebSocket — paths and envelopes:** [WebSocketContract] (realtime path string); [SocketFrame] (id, type, optional `JsonElement` payload, metadata, timestamp); [WebSocketInitializePayload] for client metadata on connect.
 - **WebSocket — event and close strings:** [CommonWebSocketEventTypes] (e.g. PING, INITIALIZE), [CommonWebSocketCloseReasons].
 - **Domain — Client:** [ClientType] serializable enum, [ClientInfo], and [ClientDeviceInfo] to describe connecting applications.
 - **Domain — Permissions:** [PermissionCode] base type for shared permission constants.
 - **Domain — Listing:** [PagedResult], [ListingParamNames], [SortOrder], and [CommonSortValues] for standardized pagination and sorting contracts.
-- **Navigation — Core:** Root navigation route definitions:
-    - [ClientMainNavigation]: `Main` screen (`/`, Params: None) for client applications.
-    - [ManagementMainNavigation]: `Main` screen (`/`, Params: None) for management portal.
-    - [NavigationScreenParams] marker interface; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter parsing.
+- **Navigation — Core Contracts:**
+    - Base navigation interfaces: [NavigationRoute] (`route: String`, `parentRoute: String?`), [ParameterizedNavigationRoute] (for screen destinations carrying typed parameters), and [RedirectNavigationRoute] (for virtual/alias redirect routes delegating to `targetRoute`).
+    - Base navigation routes: [CommonNavigationRoutes] (`BASE_SETTINGS_ROUTE = "/settings"`).
+    - Root navigation route definitions: [ClientMainNavigation] (`/`) and [ManagementMainNavigation] (`/management`).
+    - Screen parameter contracts & parsers: [NavigationScreenParams] marker interface; [NavigationScreenParamsParser] contract interface for bidirectional parameter serialization; [NavigationRouteUrlMapper] utility for building URLs with parameter maps; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter normalization.
 - **Validation hints:** [RequiredField], [NotBlankStringField], [NotEmptyCollectionField] in [NetworkFieldAnnotations] (runtime interpretation is outside this module unless you add validators).
 
 ## Usage
@@ -33,6 +34,8 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 [CommonApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields.kt
 [CommonHttpHeaders]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonHttpHeaders.kt
 [ManagementRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/management/ManagementRoutes.kt
+[BaseManagementRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/base/management/BaseManagementRoutes.kt
+[BaseSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/base/settings/BaseSettingsRoutes.kt
 [WebSocketContract]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/WebSocketContract.kt
 [SocketFrame]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame.kt
 [WebSocketInitializePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload.kt
@@ -50,8 +53,14 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 [NotBlankStringField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NotEmptyCollectionField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NetworkFieldAnnotations]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
+[NavigationRoute]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute.kt
+[ParameterizedNavigationRoute]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute.kt
+[RedirectNavigationRoute]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute.kt
+[CommonNavigationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/CommonNavigationRoutes.kt
 [ClientMainNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation.kt
 [ManagementMainNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation.kt
 [NavigationScreenParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams.kt
+[NavigationScreenParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser.kt
+[NavigationRouteUrlMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRouteUrlMapper.kt
 [QueryParamNormalizer]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/QueryParamNormalizer.kt
 [PhoneParamNormalizer]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/PhoneParamNormalizer.kt

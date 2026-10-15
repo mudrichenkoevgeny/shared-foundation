@@ -33,12 +33,12 @@ Every `const val` representing an endpoint must follow the format defined in `ap
 - **Outcome Mapping:** Explain how result variants relate to server-side settings.
 
 ## 7. Navigation Screen Routes & Screen Parameters
-- **Navigation Screen Routes (`*Navigation`):** Each screen object inside a navigation object must document:
+- **Navigation Screen Routes (`*Navigation`):** Each screen object inside a navigation object implements `NavigationRoute`, `ParameterizedNavigationRoute<P>`, or `RedirectNavigationRoute` and must document:
   - `Screen Parameters:` Link to the corresponding `*Params` class or state `None.`
   - `Primary API:` Link to the primary endpoint auto-fetched on screen mount or submitted on form submit, or state `None.`
   - `Secondary Action APIs:` Bulleted list of auxiliary endpoints triggered by user actions, or state `None.`
-- **Screen Parameter Classes (`*Params`):** Document each parameter field and default value.
-- **Parameter Parsers (`*ParamsParser`):** Document parsing, normalization rules, and fallback defaults.
+- **Screen Parameter Classes (`*Params`):** Document each parameter field and default value. Implement `NavigationScreenParams`.
+- **Parameter Parsers (`*ParamsParser`):** Implement `NavigationScreenParamsParser<T>` and document `parse` and `serialize` methods, normalization rules, and fallback defaults.
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

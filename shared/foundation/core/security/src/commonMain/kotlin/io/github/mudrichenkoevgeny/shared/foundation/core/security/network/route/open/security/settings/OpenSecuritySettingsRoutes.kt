@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.open.security.settings
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.OpenSecuritySettingsPayload
 
 /**
@@ -21,5 +22,5 @@ object OpenSecuritySettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_SECURITY_SETTINGS = "/security/settings"
+    const val GET_OPEN_SECURITY_SETTINGS = "${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/security"
 }

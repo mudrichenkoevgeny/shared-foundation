@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp.VerifyTotpPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
@@ -23,8 +23,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementLoginRoutes {
     /** Base path for management login operations. */
-    const val BASE_MANAGEMENT_LOGIN_ROUTE =
-        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+    private const val BASE_MANAGEMENT_LOGIN_ROUTE =
+        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
 
     /**
      * **HTTP method:** `POST`
@@ -129,5 +129,5 @@ object SelfManagementLoginRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp-recovery-code"
+    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp/recovery-code"
 }

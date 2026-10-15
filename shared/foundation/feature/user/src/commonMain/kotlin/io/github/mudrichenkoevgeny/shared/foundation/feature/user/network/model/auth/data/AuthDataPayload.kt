@@ -7,9 +7,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * DTO containing comprehensive authentication data, including user private profile and session tokens.
+ * DTO containing comprehensive authentication data, including user private and session tokens.
  *
- * @property userPrivatePayload The [UserPrivatePayload] profile information of the authenticated user.
+ * @property userPrivatePayload The [UserPrivatePayload] authenticated user information.
  * @property sessionTokenPayload The [SessionTokenPayload] set of tokens issued for the current session.
  */
 @Serializable

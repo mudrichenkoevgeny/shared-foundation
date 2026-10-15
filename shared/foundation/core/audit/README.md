@@ -27,7 +27,7 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 - **Navigation:**
     - [ManagementAuditNavigation]: Management navigation screen routes:
         - `AuditEventList` (`/audit/events`) — Params: [ManagementAuditEventListParams]
-        - `AuditEventDetail` (`/audit/events/{eventId}`) — Params: [ManagementAuditEventDetailParams]
+        - `AuditEventDetail` (`/audit/events/{event_id}`) — Params: [ManagementAuditEventDetailParams]
     - Screen params & parsers: [ManagementAuditEventListParams], [ManagementAuditEventDetailParams], [ManagementAuditEventListParamsParser], [ManagementAuditEventDetailParamsParser].
 
 ## Usage

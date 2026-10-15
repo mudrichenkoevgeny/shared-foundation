@@ -100,13 +100,20 @@ Every route constant in `feature/*` and `core/*` network route objects must be d
 
 To provide full type safety and declarative navigation for client platforms, each module defines a structured navigation layer (`*.navigation.*`):
 
+- **Core Navigation Contracts (`core/common`):**
+  - **`NavigationRoute`**: Base interface for all typed navigation destinations (`route: String`, `parentRoute: String?`).
+  - **`ParameterizedNavigationRoute<P>`**: Contract for navigation destinations carrying strongly typed parameters (`params: P`).
+  - **`RedirectNavigationRoute`**: Contract for virtual/alias redirect routes delegating to `targetRoute: String` without rendering a standalone UI screen.
 - **Route Declarations (`*Navigation.kt`):**
+  - Concrete screen objects or sealed hierarchies implementing `NavigationRoute`, `ParameterizedNavigationRoute<P>`, or `RedirectNavigationRoute`.
   - Defines screen route paths (`ROUTE`) and parent route hierarchies (`PARENT_ROUTE`).
   - Documents `Screen Parameters`, `Primary API` (auto-fetch or main submit endpoint), and `Secondary Action APIs` (user action buttons).
 - **Screen Parameter Types (`*Params.kt`):**
   - Strongly typed parameter data classes implementing `NavigationScreenParams`.
 - **Parameter Parsers (`*ParamsParser.kt`):**
-  - Standalone parser components responsible for converting route query/path parameters into strongly typed `*Params` objects, utilizing `QueryParamNormalizer` and `PhoneParamNormalizer`.
+  - Standalone parser components implementing `NavigationScreenParamsParser<T>` responsible for bidirectional serialization (`parse` raw query/path maps into typed `*Params` objects, and `serialize` `*Params` back to string query maps), utilizing `QueryParamNormalizer` and `PhoneParamNormalizer`.
+- **Route Segment Constants & Helpers:**
+  - Common base navigation routes in `CommonNavigationRoutes` (e.g., `BASE_SETTINGS_ROUTE`), feature navigation routes in `UserNavigationRoutes` (e.g., `BASE_AUTH_ROUTE`), parameter name constants in `UserNavigationPaths` (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`), and base network routes in `BaseManagementRoutes` and `BaseSettingsRoutes`.
 
 ---
 *Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

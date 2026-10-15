@@ -27,9 +27,6 @@ enum class TotpStep(val value: String) {
     VERIFY(STEP_VERIFY);
 
     companion object {
-        /** Query parameter key for navigation URL maps. */
-        const val PARAM_NAME = "totp_step"
-
         /** Default TOTP step ([OVERVIEW]). */
         val DEFAULT = OVERVIEW
 

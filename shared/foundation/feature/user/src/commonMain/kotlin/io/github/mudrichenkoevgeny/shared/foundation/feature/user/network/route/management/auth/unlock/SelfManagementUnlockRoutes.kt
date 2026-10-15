@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -25,8 +25,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementUnlockRoutes {
     /** Base path for management self-unlock operations. */
-    const val BASE_SELF_MANAGEMENT_UNLOCK_ROUTE =
-        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+    private const val BASE_SELF_MANAGEMENT_UNLOCK_ROUTE =
+        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
 
     /** Base path for email unlock operations. */
     private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/email"

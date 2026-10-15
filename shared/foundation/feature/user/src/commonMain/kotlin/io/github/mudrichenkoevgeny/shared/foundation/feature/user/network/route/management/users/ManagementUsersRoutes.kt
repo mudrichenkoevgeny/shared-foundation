@@ -8,8 +8,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes.BASE_MANAGEMENT_ROUTE
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes.BASE_MANAGEMENT_ROUTE
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
@@ -33,7 +33,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object ManagementUsersRoutes {
     /**
-     * Base path for user management operations under [ManagementRoutes.BASE_MANAGEMENT_ROUTE].
+     * Base path for user management operations under [BaseManagementRoutes.BASE_MANAGEMENT_ROUTE].
      */
     internal const val BASE_MANAGEMENT_USERS_ROUTE = "$BASE_MANAGEMENT_ROUTE/users"
 
@@ -122,7 +122,7 @@ object ManagementUsersRoutes {
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves specific private user profile details.
+     * Retrieves specific private user details.
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * Private user profile wire model for authenticated self-service and administrative management flows.
+ * Private user wire model for authenticated self-service and administrative management flows.
  *
  * Wire keys use `snake_case` via [CommonApiFields] and [UserApiFields]. Aligns with domain [UserPrivate].
  *

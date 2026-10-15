@@ -34,14 +34,14 @@ enum class UserAuditMetadataKey : AuditMetadataKey {
     },
 
     /**
-     * Email address used in authentication or profile operations.
+     * Email address used in authentication or user operations.
      */
     EMAIL_ADDRESS {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.EMAIL
     },
 
     /**
-     * Phone number used in authentication or profile operations.
+     * Phone number used in authentication or user operations.
      */
     PHONE_NUMBER {
         override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.PHONE_NUMBER

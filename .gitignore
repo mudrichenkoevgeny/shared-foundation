@@ -30,3 +30,7 @@ local.properties
 # Editors
 .vscode/
 .history/
+
+# Node / NPM (generated artifacts belong in build/npm-package/)
+node_modules/
+*.tgz

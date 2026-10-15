@@ -36,20 +36,20 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenIdentifierRoutes {
     /** Base path for managing authentication identifiers linked to the current account. */
-    const val BASE_IDENTIFIER_ROUTE = "$BASE_USER_ROUTE/identifier"
+    private const val BASE_IDENTIFIERS_ROUTE = "$BASE_USER_ROUTE/identifiers"
 
     /** Base path for email identifier operations. */
-    private const val EMAIL_IDENTIFIER_ROUTE = "$BASE_IDENTIFIER_ROUTE/email"
+    private const val EMAIL_IDENTIFIER_ROUTE = "$BASE_IDENTIFIERS_ROUTE/email"
 
     /** Base path for phone identifier operations. */
-    private const val PHONE_IDENTIFIER_ROUTE = "$BASE_IDENTIFIER_ROUTE/phone"
+    private const val PHONE_IDENTIFIER_ROUTE = "$BASE_IDENTIFIERS_ROUTE/phone"
 
     /** Base path for external auth provider identifier operations. */
     private const val EXTERNAL_AUTH_PROVIDER_IDENTIFIER_ROUTE =
-        "$BASE_IDENTIFIER_ROUTE/external-auth-provider"
+        "$BASE_IDENTIFIERS_ROUTE/external-auth-provider"
 
     /** Base path for identifier verification (confirmation codes). */
-    private const val BASE_IDENTIFIER_CONFIRMATION_ROUTE = "$BASE_IDENTIFIER_ROUTE/confirmation"
+    private const val BASE_IDENTIFIER_CONFIRMATION_ROUTE = "$BASE_IDENTIFIERS_ROUTE/confirmation"
 
     /**
      * **HTTP method:** `GET`
@@ -82,7 +82,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val GET_IDENTIFIERS = BASE_IDENTIFIER_ROUTE
+    const val GET_IDENTIFIERS = BASE_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -103,7 +103,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val GET_IDENTIFIER = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    const val GET_IDENTIFIER = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -135,7 +135,7 @@ object OpenIdentifierRoutes {
      *   - [ClientUserNavigation.IdentifierList]
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val DELETE_IDENTIFIER = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    const val DELETE_IDENTIFIER = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -288,6 +288,8 @@ object OpenIdentifierRoutes {
      *
      * Updates the account password using current credentials.
      *
+     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
      * Request body: [EmailPasswordChangeRequest].
      *
      * **Authorization:**
@@ -313,5 +315,6 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = "$EMAIL_IDENTIFIER_ROUTE/change-password"
+    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD =
+        "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/change-password"
 }

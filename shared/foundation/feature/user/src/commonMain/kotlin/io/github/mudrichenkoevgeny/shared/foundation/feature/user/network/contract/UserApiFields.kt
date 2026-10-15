@@ -59,7 +59,7 @@ object UserApiFields {
     /** JSON field name for an external authentication provider id; wire value follows [UserAuthProvider.value]. */
     const val AUTH_PROVIDER = "auth_provider"
 
-    /** JSON field name for the nested user profile object on authentication responses. */
+    /** JSON field name for the nested user object on authentication responses. */
     const val USER = "user"
 
     /** JSON field name for the user id (path parameter name alignment, payloads, filters). */

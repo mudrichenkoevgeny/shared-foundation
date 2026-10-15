@@ -25,7 +25,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenUserSecurityRoutes {
     /** Base path for TOTP-related operations. */
-    const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/security/totp"
+    private const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/totp"
 
     /** Base path for recovery codes. */
     private const val BASE_RECOVERY_CODES_ROUTE = "$BASE_TOTP_ROUTE/recovery-codes"
@@ -175,5 +175,5 @@ object OpenUserSecurityRoutes {
      * - Screens:
      *   - [ClientUserNavigation.TotpRecoveryCodes]
      */
-    const val REGENERATE_RECOVERY_CODES = "$BASE_RECOVERY_CODES_ROUTE/regenerate"
+    const val REGENERATE_RECOVERY_CODES = BASE_RECOVERY_CODES_ROUTE
 }

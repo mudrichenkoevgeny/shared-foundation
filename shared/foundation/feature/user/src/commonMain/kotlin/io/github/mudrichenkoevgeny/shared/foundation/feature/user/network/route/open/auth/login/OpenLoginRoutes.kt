@@ -26,7 +26,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenLoginRoutes {
     /** Base path for open login operations. */
-    const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
+    private const val BASE_LOGIN_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/login"
 
     /** Base path for phone login operations. */
     private const val BASE_LOGIN_PHONE_ROUTE = "$BASE_LOGIN_ROUTE/phone"
@@ -134,7 +134,7 @@ object OpenLoginRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ClientAuthNavigation.Welcome]
+     *   - [ClientAuthNavigation.Main]
      */
     const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "$BASE_LOGIN_ROUTE/external-auth-provider"
 
@@ -197,7 +197,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_LOGIN_ROUTE/totp-recovery-code"
+    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_LOGIN_ROUTE/totp/recovery-code"
 
     /**
      * **HTTP method:** `POST`

@@ -27,7 +27,7 @@ object UserWebSocketEventTypes {
     const val MANAGEMENT_AUTH_SETTINGS_UPDATED = "MANAGEMENT_AUTH_SETTINGS_UPDATED"
 
     /**
-     * Sent when the user's data (profile, role, account status, or permissions) is updated.
+     * Sent when the user's data (user, role, account status, or permissions) is updated.
      * Use this to synchronize the local state of the current user.
      * Payload: [UserPrivatePayload]
      */

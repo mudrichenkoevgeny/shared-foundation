@@ -9,11 +9,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.i
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.detail.IdentifierDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.list.SelfIdentifierListParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.detail.SessionDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.list.SelfSessionListParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.totp.main.TotpMainParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.detail.IdentifierDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.detail.SessionDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.list.SelfSessionListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.totp.main.TotpMainParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
@@ -22,104 +22,84 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import kotlinx.serialization.Serializable
 
 /**
- * Navigation screen routes for client personal profile and account self-service management.
+ * Navigation screen routes for client account self-service management.
  */
 @Serializable
 sealed interface ClientUserNavigation : NavigationRoute {
 
     /**
-     * Main user profile dashboard screen.
+     * Main user dashboard screen.
      *
-     * **Screen Parameters:** None.
-     *
-     * **Primary API:** [OpenUserRoutes.GET_USER]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenUserRoutes.SCHEDULE_DELETION]
+     * - **Screen Parameters:** None.
+     * - **Primary API:** [OpenUserRoutes.GET_USER]
+     * - **Secondary Action APIs:**
+     *   - [OpenUserRoutes.SCHEDULE_DELETION]
      */
     @Serializable
     data object Main : ClientUserNavigation {
-        override val route: String get() = ROUTE
-        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Route path for main user profile screen. */
-        const val ROUTE = BASE_USER_ROUTE
+        override val route: String
+            get() = BASE_USER_ROUTE
 
-        /** Parent navigation route. */
-        const val PARENT_ROUTE = ClientMainNavigation.Main.ROUTE
+        override val parentRoute: String
+            get() = ClientMainNavigation.Main.route
     }
 
     /**
      * Navigation screen for displaying a paged list of [UserIdentifierSummary].
      *
-     * **Screen Parameters:** [SelfIdentifierListParams]
-     *
-     * **Primary API:** [OpenIdentifierRoutes.GET_IDENTIFIERS]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenIdentifierRoutes.ADD_IDENTIFIER_EMAIL]
-     * - [OpenIdentifierRoutes.ADD_IDENTIFIER_PHONE]
-     * - [OpenIdentifierRoutes.ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER]
-     * - [OpenIdentifierRoutes.SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION]
-     * - [OpenIdentifierRoutes.SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION]
-     * - [OpenIdentifierRoutes.DELETE_IDENTIFIER]
+     * - **Screen Parameters:** [SelfIdentifierListParams]
+     * - **Primary API:** [OpenIdentifierRoutes.GET_IDENTIFIERS]
+     * - **Secondary Action APIs:**
+     *   - [OpenIdentifierRoutes.ADD_IDENTIFIER_EMAIL]
+     *   - [OpenIdentifierRoutes.ADD_IDENTIFIER_PHONE]
+     *   - [OpenIdentifierRoutes.ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER]
+     *   - [OpenIdentifierRoutes.SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION]
+     *   - [OpenIdentifierRoutes.SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION]
+     *   - [OpenIdentifierRoutes.DELETE_IDENTIFIER]
      */
     @Serializable
     data class IdentifierList(
         override val params: SelfIdentifierListParams = SelfIdentifierListParams()
     ) : ClientUserNavigation, ParameterizedNavigationRoute<SelfIdentifierListParams> {
-        override val route: String get() = ROUTE
-        override val parentRoute: String get() = PARENT_ROUTE
+
+        override val route: String
+            get() = ROUTE
+
+        override val parentRoute: String
+            get() = Main.route
 
         companion object {
-            /** Route path for personal identifiers list screen. */
-            const val ROUTE = BASE_IDENTIFIER_ROUTE
-
-            /** Parent navigation route for fallback navigation. */
-            const val PARENT_ROUTE = Main.ROUTE
+            const val ROUTE = "$BASE_USER_ROUTE/identifiers"
         }
     }
 
     /**
      * Navigation screen for displaying specific [UserIdentifierPrivate] details.
      *
-     * **Screen Parameters:** [IdentifierDetailParams]
-     *
-     * **Primary API:** [OpenIdentifierRoutes.GET_IDENTIFIER]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenIdentifierRoutes.DELETE_IDENTIFIER]
-     * - [OpenIdentifierRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD]
+     * - **Screen Parameters:** [IdentifierDetailParams]
+     * - **Primary API:** [OpenIdentifierRoutes.GET_IDENTIFIER]
+     * - **Secondary Action APIs:**
+     *   - [OpenIdentifierRoutes.DELETE_IDENTIFIER]
+     *   - [OpenIdentifierRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD]
      */
     @Serializable
     data class IdentifierDetail(
         override val params: IdentifierDetailParams
     ) : ClientUserNavigation, ParameterizedNavigationRoute<IdentifierDetailParams> {
-        override val route: String get() = getPath(params.identifierId)
-        override val parentRoute: String get() = PARENT_ROUTE
+
+        override val route: String
+            get() = getPath(params.identifierId)
+
+        override val parentRoute: String
+            get() = IdentifierList.ROUTE
 
         companion object {
-            /** Route template for single identifier detail screen. */
-            const val ROUTE = "$BASE_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+            const val ROUTE = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
-            /** Parent navigation route for fallback navigation. */
-            const val PARENT_ROUTE = IdentifierList.ROUTE
-
-            /**
-             * Builds a concrete route path for the specified [identifierId].
-             *
-             * @param identifierId Target identifier ID.
-             * @return Formatted URL path replacing parameter placeholder with [identifierId].
-             */
             fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
-            /**
-             * Builds a concrete route path for the specified string [identifierId].
-             *
-             * @param identifierId String representation of the target identifier ID.
-             * @return Formatted URL path replacing parameter placeholder with [identifierId].
-             */
             fun getPath(identifierId: String): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
@@ -128,70 +108,54 @@ sealed interface ClientUserNavigation : NavigationRoute {
     /**
      * Navigation screen for displaying a paged list of [UserSessionSummary].
      *
-     * **Screen Parameters:** [SelfSessionListParams]
-     *
-     * **Primary API:** [OpenSessionRoutes.GET_SESSIONS]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenSessionRoutes.DELETE_SESSION]
-     * - [OpenSessionRoutes.DELETE_ALL_OTHER_SESSIONS]
-     * - [OpenSessionRoutes.LOGOUT]
+     * - **Screen Parameters:** [SelfSessionListParams]
+     * - **Primary API:** [OpenSessionRoutes.GET_SESSIONS]
+     * - **Secondary Action APIs:**
+     *   - [OpenSessionRoutes.DELETE_SESSION]
+     *   - [OpenSessionRoutes.DELETE_ALL_OTHER_SESSIONS]
+     *   - [OpenSessionRoutes.LOGOUT]
      */
     @Serializable
     data class SessionList(
         override val params: SelfSessionListParams = SelfSessionListParams()
     ) : ClientUserNavigation, ParameterizedNavigationRoute<SelfSessionListParams> {
-        override val route: String get() = ROUTE
-        override val parentRoute: String get() = PARENT_ROUTE
+
+        override val route: String
+            get() = ROUTE
+
+        override val parentRoute: String
+            get() = Main.route
 
         companion object {
-            /** Route path for personal sessions list screen. */
-            const val ROUTE = BASE_SESSION_ROUTE
-
-            /** Parent navigation route for fallback navigation. */
-            const val PARENT_ROUTE = Main.ROUTE
+            const val ROUTE = "$BASE_USER_ROUTE/sessions"
         }
     }
 
     /**
      * Navigation screen for displaying specific [UserSessionPrivate] details.
      *
-     * **Screen Parameters:** [SessionDetailParams]
-     *
-     * **Primary API:** [OpenSessionRoutes.GET_SESSION]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenSessionRoutes.DELETE_SESSION]
+     * - **Screen Parameters:** [SessionDetailParams]
+     * - **Primary API:** [OpenSessionRoutes.GET_SESSION]
+     * - **Secondary Action APIs:**
+     *   - [OpenSessionRoutes.DELETE_SESSION]
      */
     @Serializable
     data class SessionDetail(
         override val params: SessionDetailParams
     ) : ClientUserNavigation, ParameterizedNavigationRoute<SessionDetailParams> {
-        override val route: String get() = getPath(params.sessionId)
-        override val parentRoute: String get() = PARENT_ROUTE
+
+        override val route: String
+            get() = getPath(params.sessionId)
+
+        override val parentRoute: String
+            get() = SessionList.ROUTE
 
         companion object {
-            /** Route template for single session detail screen. */
-            const val ROUTE = "$BASE_SESSION_ROUTE/{${UserApiPaths.SESSION_ID}}"
+            const val ROUTE = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
 
-            /** Parent navigation route for fallback navigation. */
-            const val PARENT_ROUTE = SessionList.ROUTE
-
-            /**
-             * Builds a concrete route path for the specified [sessionId].
-             *
-             * @param sessionId Target session ID.
-             * @return Formatted URL path replacing parameter placeholder with [sessionId].
-             */
             fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
-            /**
-             * Builds a concrete route path for the specified string [sessionId].
-             *
-             * @param sessionId String representation of the target session ID.
-             * @return Formatted URL path replacing parameter placeholder with [sessionId].
-             */
             fun getPath(sessionId: String): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
@@ -200,66 +164,48 @@ sealed interface ClientUserNavigation : NavigationRoute {
     /**
      * Navigation screen for setting up and configuring TOTP 2FA.
      *
-     * **Screen Parameters:** [TotpMainParams]
-     *
-     * **Primary API:** [OpenUserSecurityRoutes.SETUP_TOTP]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenUserSecurityRoutes.ENABLE_TOTP]
-     * - [OpenUserSecurityRoutes.DISABLE_TOTP]
+     * - **Screen Parameters:** [TotpMainParams]
+     * - **Primary API:** [OpenUserSecurityRoutes.SETUP_TOTP]
+     * - **Secondary Action APIs:**
+     *   - [OpenUserSecurityRoutes.ENABLE_TOTP]
+     *   - [OpenUserSecurityRoutes.DISABLE_TOTP]
      */
     @Serializable
     data class TotpMain(
         override val params: TotpMainParams = TotpMainParams()
     ) : ClientUserNavigation, ParameterizedNavigationRoute<TotpMainParams> {
-        override val route: String get() = ROUTE
-        override val parentRoute: String get() = PARENT_ROUTE
+
+        override val route: String
+            get() = ROUTE
+
+        override val parentRoute: String
+            get() = Main.route
 
         companion object {
-            /** Route path for personal TOTP 2FA setup screen. */
             const val ROUTE = BASE_TOTP_ROUTE
-
-            /** Parent navigation route for fallback navigation. */
-            const val PARENT_ROUTE = Main.ROUTE
         }
     }
 
     /**
      * Navigation screen for viewing and regenerating TOTP recovery codes.
      *
-     * **Screen Parameters:** None.
-     *
-     * **Primary API:** [OpenUserSecurityRoutes.GET_RECOVERY_CODES]
-     *
-     * **Secondary Action APIs:**
-     * - [OpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES]
+     * - **Screen Parameters:** None.
+     * - **Primary API:** [OpenUserSecurityRoutes.GET_RECOVERY_CODES]
+     * - **Secondary Action APIs:**
+     *   - [OpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES]
      */
     @Serializable
     data object TotpRecoveryCodes : ClientUserNavigation {
-        override val route: String get() = ROUTE
-        override val parentRoute: String get() = PARENT_ROUTE
 
-        /** Route path for viewing personal TOTP recovery codes screen. */
-        const val ROUTE = "$BASE_TOTP_ROUTE/recovery-codes"
+        override val route: String
+            get() = "$BASE_TOTP_ROUTE/recovery-codes"
 
-        /** Parent navigation route for fallback navigation. */
-        const val PARENT_ROUTE = TotpMain.ROUTE
+        override val parentRoute: String
+            get() = TotpMain.ROUTE
     }
 
     companion object {
-        /** Base route path for user profile navigation. */
         const val BASE_USER_ROUTE = "/user"
-
-        /** Base route path for identifier management screens. */
-        const val BASE_IDENTIFIER_ROUTE = "$BASE_USER_ROUTE/identifier"
-
-        /** Base route path for session management screens. */
-        const val BASE_SESSION_ROUTE = "$BASE_USER_ROUTE/session"
-
-        /** Base route path for security configuration screens. */
-        const val BASE_SECURITY_ROUTE = "$BASE_USER_ROUTE/security"
-
-        /** Base route path for TOTP 2FA screens. */
-        const val BASE_TOTP_ROUTE = "$BASE_SECURITY_ROUTE/totp"
+        const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/totp"
     }
 }

@@ -20,10 +20,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.detail.ManagementAuditEventDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list.ManagementAuditEventListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.CommonNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client.ClientMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management.ManagementSettingsNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.UserNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
@@ -33,24 +37,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.rou
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.phone.LoginByPhoneParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.welcome.LoginWelcomeParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.register.email.ClientRegistrationByEmailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.login.LoginStep
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.LoginByTotpMode
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.registration.email.ClientRegistrationByEmailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpMode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.unlock.UnlockMethod
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.globallist.ManagementGlobalIdentifierListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.userlist.ManagementUserIdentifierListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.globallist.ManagementGlobalSessionListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.userlist.ManagementUserSessionListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.detail.UserDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.globallist.ManagementUserListParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.detail.IdentifierDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.identifier.list.SelfIdentifierListParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.detail.SessionDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.session.list.SelfSessionListParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.profile.totp.main.TotpMainParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.detail.IdentifierDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.detail.SessionDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.list.SelfSessionListParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.totp.main.TotpMainParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.targetinput.UnlockTargetInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.otpinput.UnlockOtpInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.methodselection.UnlockMethodSelectionParams
@@ -77,7 +79,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.SocketFrame
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action.SecurityAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.metadata.SecurityAuditMetadataDeniedReasonValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
@@ -190,7 +192,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.register.RegisterByEmailRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.registration.RegistrationByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByEmailConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByExternalAuthProviderRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
@@ -217,7 +219,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.refreshtoken.OpenRefreshTokenRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.settings.OpenAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
@@ -255,7 +257,7 @@ fun main() {
             ?.takeIf { it.isNotBlank() && it != "unspecified" }
             ?: System.getenv("PACKAGE_VERSION")
             ?: parseRootBuildGradleVersion(rootDir)
-            ?: "0.0.64"
+            ?: "0.0.66"
 
         val packageJson = """
         {
@@ -303,17 +305,17 @@ fun main() {
 
         ## Features & Exports
 
-        - **Zod Validation Schemas (`*Schema`)**: Auto-generated `z.ZodType` validation schemas for all Request payloads, Response DTOs, and Screen Parameter models (`managementAuditEventListParamsSchema`, `loginWelcomeParamsSchema`, `apiErrorResponseSchema`, `userPrivatePayloadSchema`).
+        - **Zod Validation Schemas (`*Schema`)**: Auto-generated `z.ZodType` validation schemas for all Request payloads, Response DTOs, and Screen Parameter models (`managementAuditEventListParamsSchema`, `apiErrorResponseSchema`, `userPrivatePayloadSchema`).
         - **Navigation Screen Routes (`*Navigation`)**: Strongly typed screen routes and parent fallback routes for client and management apps (`ClientMainNavigation`, `ManagementMainNavigation`, `ClientAuthNavigation`, `ClientUserNavigation`, `ManagementUsersNavigation`, `ManagementAuditNavigation`, `ManagementSecurityNavigation`, `ManagementSettingsNavigation`).
         - **REST API Routes**: Strongly typed REST API endpoint paths (`ManagementUsersRoutes`, `ManagementAuditRoutes`, `OpenLoginRoutes`, `SelfManagementUserRoutes`).
-        - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, `LoginStep`, `TotpStep`, `UnlockMethod`, etc.).
+        - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, `TotpStep`, `UnlockMethod`, etc.).
         - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `UserErrorCodes`, `CommonErrorCodes`) and permission strings (`UserPermissionCode`, `SecurityPermissionCode`, `AuditPermissionCode`).
         - **Branded Types & Helpers**: Type-safe domain identifiers (`UserId`, `PermissionCode`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`) with converter helpers (`toUserIdOrThrow`, `toPermissionCodeOrNull`).
         - **Domain Models & Mappers**: Fully typed TS domain models (`UserSessionSummary`, `UserPrivate`, `AuditEventSummary`) and their runtime mappers from/to API payloads (`toUserPrivate`, `toUserPrivatePayload`, `toAuditEventSummary`).
 
         ## Navigation Screen Routes & Parameter Schemas by Module
 
-        All 11 navigation classes and their Zod parameter validation schemas (`*ParamsSchema`) organized by module/subsystem:
+        All navigation classes and their Zod parameter validation schemas (`*ParamsSchema`) organized by module/subsystem:
 
         ### 1. `core/common` (Root Navigation)
         - **`ClientMainNavigation.Main`** (`/`) — Screen Params: None
@@ -321,24 +323,27 @@ fun main() {
 
         ### 2. `core/audit` (Audit Navigation)
         - **`ManagementAuditNavigation`**:
+           - `Main` (`/audit`) — Redirect to `/audit/events`
           - `AuditEventList` (`/audit/events`) — Zod Schema: `managementAuditEventListParamsSchema`
-          - `AuditEventDetail` (`/audit/events/{eventId}`) — Zod Schema: `managementAuditEventDetailParamsSchema`
+          - `AuditEventDetail` (`/audit/events/{event_id}`) — Zod Schema: `managementAuditEventDetailParamsSchema`
 
         ### 3. `core/security` (Security Settings Navigation)
         - **`ManagementSecurityNavigation`**:
-          - `EditSecuritySettings` (`/settings/security`) — Screen Params: None
+          - `SecuritySettings` (`/settings/security`) — Screen Params: None
 
         ### 4. `core/settings` (Global Settings Navigation)
         - **`ManagementSettingsNavigation`**:
-          - `EditGlobalSettings` (`/settings/global`) — Screen Params: None
+          - `Main` (`/settings`) — Screen Params: None
+          - `GlobalSettings` (`/settings/global`) — Screen Params: None
 
         ### 5. `feature/user` (IAM / User & Auth Navigation)
         - **`ClientAuthNavigation`** (Client Authentication & Registration):
-          - `Welcome` (`/auth/login/welcome`) — `loginWelcomeParamsSchema`
+          - `Auth` (`/auth`) — Redirect to `/auth/login`
+          - `Main` (`/auth/login`) — Screen Params: None
           - `LoginByEmail` (`/auth/login/email`) — `loginByEmailParamsSchema`
           - `LoginByPhone` (`/auth/login/phone`) — `loginByPhoneParamsSchema`
           - `LoginByTotp` (`/auth/login/totp`) — `loginByTotpParamsSchema`
-          - `Registration` (`/auth/register/email`) — `clientRegistrationByEmailParamsSchema`
+          - `Registration` (`/auth/registration`) — `clientRegistrationByEmailParamsSchema`
           - `ResetPassword` (`/auth/reset-password`) — `resetPasswordParamsSchema`
           - `PendingDeletion` (`/auth/login/pending-deletion`) — None
           - `UnlockMethodSelection` (`/auth/unlock`) — `unlockMethodSelectionParamsSchema`
@@ -346,17 +351,18 @@ fun main() {
           - `UnlockOtpInput` (`/auth/unlock/otp`) — `unlockOtpInputParamsSchema`
           - `UnlockSuccess` (`/auth/unlock/success`) — `unlockSuccessParamsSchema`
 
-        - **`ClientUserNavigation`** (Client Profile & Self-Service):
+        - **`ClientUserNavigation`** (Client Self-Service):
           - `Main` (`/user`) — None
-          - `IdentifierList` (`/user/identifier`) — `selfIdentifierListParamsSchema`
-          - `IdentifierDetail` (`/user/identifier/{userIdentifierId}`) — `identifierDetailParamsSchema`
-          - `SessionList` (`/user/session`) — `selfSessionListParamsSchema`
-          - `SessionDetail` (`/user/session/{sessionId}`) — `sessionDetailParamsSchema`
-          - `TotpMain` (`/user/security/totp`) — `totpMainParamsSchema`
-          - `TotpRecoveryCodes` (`/user/security/totp/recovery-codes`) — None
+          - `IdentifierList` (`/user/identifiers`) — `selfIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/user/identifiers/{user_identifier_id}`) — `identifierDetailParamsSchema`
+          - `SessionList` (`/user/sessions`) — `selfSessionListParamsSchema`
+          - `SessionDetail` (`/user/sessions/{session_id}`) — `sessionDetailParamsSchema`
+          - `TotpMain` (`/user/totp`) — `totpMainParamsSchema`
+          - `TotpRecoveryCodes` (`/user/totp/recovery-codes`) — None
 
         - **`ManagementAuthNavigation`** (Staff Authentication):
-          - `Welcome` (`/auth/login/welcome`) — `loginWelcomeParamsSchema`
+          - `Auth` (`/auth`) — Redirect to `/auth/login`
+          - `Main` (`/auth/login`) — None
           - `LoginByEmail` (`/auth/login/email`) — `loginByEmailParamsSchema`
           - `LoginByTotp` (`/auth/login/totp`) — `loginByTotpParamsSchema`
           - `ResetPassword` (`/auth/reset-password`) — `resetPasswordParamsSchema`
@@ -366,28 +372,27 @@ fun main() {
           - `UnlockSuccess` (`/auth/unlock/success`) — `unlockSuccessParamsSchema`
 
         - **`ManagementAuthSettingsNavigation`** (Auth Policy Settings):
-          - `EditAuthSettings` (`/settings/auth`) — None
+          - `AuthSettings` (`/settings/auth`) — None
 
-        - **`ManagementSelfUserNavigation`** (Staff Self-Service Profile):
+        - **`ManagementSelfUserNavigation`** (Staff Self-Service):
           - `Main` (`/self/user`) — None
-          - `IdentifierList` (`/self/user/identifier`) — `selfIdentifierListParamsSchema`
-          - `IdentifierDetail` (`/self/user/identifier/{userIdentifierId}`) — `identifierDetailParamsSchema`
-          - `SessionList` (`/self/user/session`) — `selfSessionListParamsSchema`
-          - `SessionDetail` (`/self/user/session/{sessionId}`) — `sessionDetailParamsSchema`
-          - `TotpMain` (`/self/user/security/totp`) — `totpMainParamsSchema`
-          - `TotpRecoveryCodes` (`/self/user/security/totp/recovery-codes`) — None
+          - `IdentifierList` (`/self/user/identifiers`) — `selfIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/self/user/identifiers/{user_identifier_id}`) — `identifierDetailParamsSchema`
+          - `SessionList` (`/self/user/sessions`) — `selfSessionListParamsSchema`
+          - `SessionDetail` (`/self/user/sessions/{session_id}`) — `sessionDetailParamsSchema`
+          - `TotpMain` (`/self/user/totp`) — `totpMainParamsSchema`
+          - `TotpRecoveryCodes` (`/self/user/totp/recovery-codes`) — None
 
         - **`ManagementUsersNavigation`** (Staff User Administration):
-          - `Main` (`/`) — None
           - `UserList` (`/users`) — `managementUserListParamsSchema`
           - `CreateUser` (`/users/create`) — None
-          - `UserDetail` (`/users/{userId}`) — `userDetailParamsSchema`
-          - `UserSessionList` (`/users/{userId}/sessions`) — `managementUserSessionListParamsSchema`
-          - `UserIdentifierList` (`/users/{userId}/identifiers`) — `managementUserIdentifierListParamsSchema`
-          - `GlobalSessionList` (`/users/sessions`) — `managementGlobalSessionListParamsSchema`
-          - `GlobalIdentifierList` (`/users/identifiers`) — `managementGlobalIdentifierListParamsSchema`
-          - `IdentifierDetail` (`/users/identifiers/{userIdentifierId}`) — `identifierDetailParamsSchema`
-          - `SessionDetail` (`/users/sessions/{sessionId}`) — `sessionDetailParamsSchema`
+          - `UserDetail` (`/users/{user_id}`) — `userDetailParamsSchema`
+          - `UserSessionList` (`/users/{user_id}/sessions`) — `managementUserSessionListParamsSchema`
+          - `UserIdentifierList` (`/users/{user_id}/identifiers`) — `managementUserIdentifierListParamsSchema`
+          - `GlobalSessionList` (`/sessions`) — `managementGlobalSessionListParamsSchema`
+          - `GlobalIdentifierList` (`/identifiers`) — `managementGlobalIdentifierListParamsSchema`
+          - `IdentifierDetail` (`/identifiers/{user_identifier_id}`) — `identifierDetailParamsSchema`
+          - `SessionDetail` (`/sessions/{session_id}`) — `sessionDetailParamsSchema`
 
         ## Usage Examples
 
@@ -710,6 +715,23 @@ private fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, 
                 } catch (_: Exception) { null }
             }
         result.addAll(instanceFields)
+
+        val instanceMethods = kClass.java.declaredMethods
+            .filter { it.parameterCount == 0 && it.returnType == String::class.java && !java.lang.reflect.Modifier.isStatic(it.modifiers) }
+            .mapNotNull { method ->
+                try {
+                    method.isAccessible = true
+                    val name = method.name
+                    if (name.startsWith("get") && name.length > 3) {
+                        val propName = name.substring(3).replaceFirstChar { it.lowercase() }
+                        val valValue = method.invoke(instance) as? String
+                        if (valValue != null && result.none { it.first.equals(propName, ignoreCase = true) }) {
+                            propName to valValue
+                        } else null
+                    } else null
+                } catch (_: Exception) { null }
+            }
+        result.addAll(instanceMethods)
     }
 
     return result
@@ -739,7 +761,10 @@ private fun extractClassStructure(kClass: KClass<*>): ClassStructure {
 private val routeClasses = listOf(
     ClientMainNavigation::class,
     ManagementMainNavigation::class,
-    ManagementRoutes::class,
+    BaseManagementRoutes::class,
+    BaseSettingsRoutes::class,
+    CommonNavigationRoutes::class,
+    UserNavigationRoutes::class,
     ManagementAuditRoutes::class,
     ManagementAuditNavigation::class,
     ClientAuthNavigation::class,
@@ -758,7 +783,7 @@ private val routeClasses = listOf(
     SelfManagementLoginRoutes::class,
     OpenRefreshTokenRoutes::class,
     SelfManagementRefreshTokenRoutes::class,
-    OpenRegisterRoutes::class,
+    OpenRegistrationRoutes::class,
     OpenResetPasswordRoutes::class,
     SelfManagementResetPasswordRoutes::class,
     OpenUnlockRoutes::class,
@@ -797,6 +822,7 @@ private val contractClasses = listOf(
     UserWebSocketEventTypes::class,
     UserApiPaths::class,
     UserApiQueryParams::class,
+    UserNavigationPaths::class,
     UserAuthSpec::class,
     AuditApiPaths::class,
     UserRoleDefaultAuthorityLevel::class,
@@ -844,7 +870,6 @@ private val enumClasses = listOf(
     UserRole::class,
     UserAuthProvider::class,
     ExternalAuthProvider::class,
-    LoginStep::class,
     TotpStep::class,
     LoginByTotpMode::class,
     UnlockMethod::class,
@@ -1005,7 +1030,6 @@ private val rawDtoClasses = listOf(
     AuditEventMetadataPayload::class,
     ManagementAuditEventListParams::class,
     ManagementAuditEventDetailParams::class,
-    LoginWelcomeParams::class,
     LoginByEmailParams::class,
     LoginByPhoneParams::class,
     LoginByTotpParams::class,
@@ -1058,7 +1082,7 @@ private val rawDtoClasses = listOf(
     LoginByPhoneRequest::class,
     ResetPasswordRequest::class,
     SendResetPasswordConfirmationRequest::class,
-    RegisterByEmailRequest::class,
+    RegistrationByEmailRequest::class,
     UnlockByEmailConfirmationRequest::class,
     UnlockByExternalAuthProviderRequest::class,
     UnlockByPhoneConfirmationRequest::class,
@@ -1395,7 +1419,6 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == ClientType::class -> "clientTypeSchema"
         classifier == SortOrder::class -> "sortOrderSchema"
         classifier == PasswordPolicyFailReason::class -> "passwordPolicyFailReasonSchema"
-        classifier == LoginStep::class -> "loginStepSchema"
         classifier == TotpStep::class -> "totpStepSchema"
         classifier == LoginByTotpMode::class -> "loginByTotpModeSchema"
         classifier == UnlockMethod::class -> "unlockMethodSchema"
@@ -1406,7 +1429,6 @@ private fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*
         classifier == CommonSortValues.TimestampSortBy::class -> "timestampSortBySchema"
         classifier == JsonElement::class -> "z.unknown()"
 
-        paramName == "loginStep" -> "loginStepSchema"
         paramName == "totpStep" -> "totpStepSchema"
         paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "loginByTotpModeSchema"
         paramName == "unlockMethod" -> "unlockMethodSchema"
@@ -1487,7 +1509,6 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == ClientType::class -> "ClientType"
         classifier == SortOrder::class -> "SortOrder"
         classifier == PasswordPolicyFailReason::class -> "PasswordPolicyFailReason"
-        classifier == LoginStep::class -> "LoginStep"
         classifier == TotpStep::class -> "TotpStep"
         classifier == LoginByTotpMode::class -> "LoginByTotpMode"
         classifier == UnlockMethod::class -> "UnlockMethod"
@@ -1499,7 +1520,6 @@ private fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>
         classifier == JsonElement::class -> "unknown"
         classifier.simpleName == "Instant" -> "Instant"
 
-        paramName == "loginStep" -> "LoginStep"
         paramName == "totpStep" -> "TotpStep"
         paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "LoginByTotpMode"
         paramName == "unlockMethod" -> "UnlockMethod"

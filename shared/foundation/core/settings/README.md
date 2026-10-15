@@ -13,7 +13,7 @@ This module does **not** implement persistence, Ktor plugins, or authorization.
 - **Wire payloads:** [OpenGlobalSettingsPayload] and [ManagementGlobalSettingsPayload] — `@Serializable` models for network transport, using constants for field naming.
 - **Mappers:** Extension functions for mapping between payloads and domain models.
 - **WebSocket:** [SettingsWebSocketEventTypes] — event strings `OPEN_GLOBAL_SETTINGS_UPDATED` (carries [OpenGlobalSettingsPayload]) and `MANAGEMENT_GLOBAL_SETTINGS_UPDATED` (carries [ManagementGlobalSettingsPayload]).
-- **Navigation:** [ManagementSettingsNavigation] — management navigation screen routes: `EditGlobalSettings` (`/settings/global`, Params: None).
+- **Navigation:** [ManagementSettingsNavigation] — management navigation screen routes: `GlobalSettings` (`/settings/global`, Params: None).
 
 ## Usage
 

@@ -20,12 +20,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object OpenUserRoutes {
     /** Base path for open self-service user account operations. */
-    const val BASE_USER_ROUTE = "/user"
+    internal const val BASE_USER_ROUTE = "/user"
 
     /**
      * **HTTP method:** `GET`
      *
-     * Retrieves the private profile details and account status of the currently authenticated user.
+     * Retrieves the private user details and account status of the currently authenticated user.
      *
      * Response body: [UserPrivatePayload].
      *

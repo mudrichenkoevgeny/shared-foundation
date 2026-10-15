@@ -4,7 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action.SecurityAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permission.SecurityPermissionCode
@@ -18,7 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 object ManagementSecuritySettingsRoutes {
     /** Base path for management security settings endpoints. */
     private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE =
-        "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/security/settings"
+        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/security"
 
     /**
      * **HTTP method:** `GET`
@@ -36,7 +37,7 @@ object ManagementSecuritySettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSecurityNavigation.EditSecuritySettings]
+     *   - [ManagementSecurityNavigation.SecuritySettings]
      */
     const val GET_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
@@ -67,7 +68,7 @@ object ManagementSecuritySettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSecurityNavigation.EditSecuritySettings]
+     *   - [ManagementSecurityNavigation.SecuritySettings]
      */
     const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
@@ -98,7 +99,7 @@ object ManagementSecuritySettingsRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSecurityNavigation.EditSecuritySettings]
+     *   - [ManagementSecurityNavigation.SecuritySettings]
      */
     const val RESET_MANAGEMENT_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
 }

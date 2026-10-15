@@ -10,7 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
@@ -33,7 +33,7 @@ enum class UserAuditResourceType : AuditResourceType {
     USER,
 
     /**
-     * Email address ([SelfManagementResetPasswordRoutes], [OpenRegisterRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
+     * Email address ([SelfManagementResetPasswordRoutes], [OpenRegistrationRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
      */
     EMAIL_ADDRESS,
 

@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 
 /**
  * Permission codes for creating users, updating their account state, updating custom permission grants, deleting accounts,
- * and reading user profile data scoped by target [UserRole].
+ * and reading user data scoped by target [UserRole].
  *
  * Keep values stable once published; add new codes instead of renaming existing ones.
  */

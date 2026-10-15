@@ -1,0 +1,75 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.otpconfirmation.OtpConfirmationPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.registration.RegistrationByEmailRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
+
+/**
+ * Route paths for registration in the open API.
+ */
+object OpenRegistrationRoutes {
+    /** Base path for email registration operations. */
+    private const val REGISTRATION_BY_EMAIL_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/registration/email"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Registers a new user account using an email address and a verification code.
+     *
+     * Request body: [RegistrationByEmailRequest].
+     *
+     * Response body: [AuthDataPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.REGISTRATION_BY_EMAIL].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the new [UserId] only upon successful registration.
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success; leave unset
+     *   for failed attempts.
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [UserAuditMetadataKey.EMAIL_ADDRESS] — email address from the request.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.Registration]
+     */
+    const val REGISTRATION_BY_EMAIL = REGISTRATION_BY_EMAIL_ROUTE
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Requests a confirmation code (OTP) to be sent to the specified email to initiate the registration process.
+     *
+     * Request body: [SendConfirmationToEmailRequest].
+     *
+     * Response body: [OtpConfirmationPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientAuthNavigation.Registration]
+     */
+    const val SEND_REGISTRATION_CONFIRMATION_TO_EMAIL = "$REGISTRATION_BY_EMAIL_ROUTE/send-confirmation"
+}

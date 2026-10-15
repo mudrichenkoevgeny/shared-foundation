@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes.BASE_MANAGEMENT_ROUTE
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -28,14 +29,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Route paths for user identifiers in the management API (list, single read, delete).
  */
 object ManagementIdentifiersRoutes {
-    /** Base path for managing user identifiers in management API. */
-    private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE =
-        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/identifiers"
+    /** Base path for global user identifiers in the management API. */
+    private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE = "$BASE_MANAGEMENT_ROUTE/identifiers"
+
+    /** Base path for user-scoped identifiers management. */
+    private const val BASE_MANAGEMENT_USER_IDENTIFIERS_ROUTE =
+        "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/identifiers"
 
     /**
      * **HTTP method:** `GET`
      *
-     * Returns a paged list of summary identifiers.
+     * Returns a paged list of summary identifiers across all users.
      *
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
@@ -66,10 +70,48 @@ object ManagementIdentifiersRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementUsersNavigation.UserIdentifierList]
      *   - [ManagementUsersNavigation.GlobalIdentifierList]
      */
     const val GET_IDENTIFIERS = BASE_MANAGEMENT_IDENTIFIERS_ROUTE
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Returns a paged list of summary identifiers for a specific target user.
+     *
+     * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * **Pagination & sort** (names from [ListingParamNames]):
+     * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
+     * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
+     *   [UserSortValues.UserIdentifierSortBy.CREATED_AT],
+     *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
+     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     *
+     * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
+     * Same key repeated — **OR**; different keys combine as **AND**.
+     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
+     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
+     *
+     * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY]
+     *   (**OR** semantics).
+     * - **Required Permissions:** For identifiers owned by [UserRole.USER], needs
+     *   [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_MASKED] or
+     *   [IdentifierPermissionCode.IDENTIFIER_GET_OF_USER_UNMASKED].
+     *   For [UserRole.STAFF], needs [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_MASKED] or
+     *   [IdentifierPermissionCode.IDENTIFIER_GET_OF_STAFF_UNMASKED].
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ManagementUsersNavigation.UserIdentifierList]
+     */
+    const val GET_USER_IDENTIFIERS = BASE_MANAGEMENT_USER_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -100,7 +142,7 @@ object ManagementIdentifiersRoutes {
     /**
      * **HTTP method:** `DELETE`
      *
-     * Removes the identifier record for the given user.
+     * Removes the identifier record for the given identifier ID.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
@@ -125,8 +167,8 @@ object ManagementIdentifiersRoutes {
      * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the deletion.
      * - **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].
      * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
+     *   - [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   - [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
      *
      * **UI Presentation:**
      * - Screens:
@@ -162,11 +204,13 @@ object ManagementIdentifiersRoutes {
      * - **Actor:** [AuditActorType.USER]. Set `actorId` to the administrator performing the password revocation.
      * - **Resource:** [UserAuditResourceType.IDENTIFIER]. Set `resourceId` to the [UserApiPaths.USER_IDENTIFIER_ID].
      * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
+     *   - [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   - [UserAuditMetadataKey.USER_ID] — the owner of the identifier.
      *
      * **UI Presentation:**
      * - Screens:
+     *   - [ManagementUsersNavigation.UserIdentifierList]
+     *   - [ManagementUsersNavigation.GlobalIdentifierList]
      *   - [ManagementUsersNavigation.IdentifierDetail]
      */
     const val DELETE_IDENTIFIER_PASSWORD =

@@ -12,7 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.security.ManagementUsersSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.register.OpenRegisterRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
@@ -72,8 +72,8 @@ enum class UserAuditActionType : AuditActionType {
     /** Sign-in attempt detected from a new, unrecognized device. */
     NEW_DEVICE_DETECTED,
 
-    /** [OpenRegisterRoutes.REGISTER_BY_EMAIL]. */
-    REGISTER_BY_EMAIL,
+    /** [OpenRegistrationRoutes.REGISTRATION_BY_EMAIL]. */
+    REGISTRATION_BY_EMAIL,
 
     /** [SelfManagementResetPasswordRoutes.RESET_PASSWORD], [OpenResetPasswordRoutes.RESET_EMAIL_PASSWORD]. */
     RESET_PASSWORD,
@@ -153,7 +153,7 @@ enum class UserAuditActionType : AuditActionType {
             LOGIN_BY_TOTP -> ACTION_LOGIN_BY_TOTP
             LOGIN_BY_TOTP_RECOVERY_CODE -> ACTION_LOGIN_BY_TOTP_RECOVERY_CODE
             NEW_DEVICE_DETECTED -> ACTION_NEW_DEVICE_DETECTED
-            REGISTER_BY_EMAIL -> ACTION_REGISTER_BY_EMAIL
+            REGISTRATION_BY_EMAIL -> ACTION_REGISTRATION_BY_EMAIL
             RESET_PASSWORD -> ACTION_RESET_PASSWORD
             SELF_UNLOCK_ACCOUNT -> ACTION_SELF_UNLOCK_ACCOUNT
             LOGOUT -> ACTION_LOGOUT
@@ -196,7 +196,7 @@ enum class UserAuditActionType : AuditActionType {
         private const val ACTION_LOGIN_BY_TOTP = "login_by_totp"
         private const val ACTION_LOGIN_BY_TOTP_RECOVERY_CODE = "login_by_totp_recovery_code"
         private const val ACTION_NEW_DEVICE_DETECTED = "new_device_detected"
-        private const val ACTION_REGISTER_BY_EMAIL = "register_by_email"
+        private const val ACTION_REGISTRATION_BY_EMAIL = "registration_by_email"
         private const val ACTION_RESET_PASSWORD = "reset_password"
         private const val ACTION_SELF_UNLOCK_ACCOUNT = "self_unlock_account"
         private const val ACTION_LOGOUT = "logout"

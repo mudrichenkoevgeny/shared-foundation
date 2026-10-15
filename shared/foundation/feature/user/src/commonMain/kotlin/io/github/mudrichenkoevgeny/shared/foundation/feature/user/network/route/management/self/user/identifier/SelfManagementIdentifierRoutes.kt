@@ -30,8 +30,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object SelfManagementIdentifierRoutes {
     /** Base path for self-service identifier operations in management API. */
-    private const val BASE_SELF_IDENTIFIER_ROUTE =
-        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/identifier"
+    private const val BASE_SELF_IDENTIFIERS_ROUTE =
+        "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/identifiers"
 
     /**
      * **HTTP method:** `GET`
@@ -63,7 +63,7 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierList]
      */
-    const val GET_IDENTIFIERS = BASE_SELF_IDENTIFIER_ROUTE
+    const val GET_IDENTIFIERS = BASE_SELF_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -84,12 +84,14 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierDetail]
      */
-    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIER_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
      *
      * Updates the management account password using current credentials.
+     *
+     * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
      * Request body: [EmailPasswordChangeRequest].
      *
@@ -117,5 +119,6 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierDetail]
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD = "$BASE_SELF_IDENTIFIER_ROUTE/change-password"
+    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD =
+        "$BASE_SELF_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/change-password"
 }

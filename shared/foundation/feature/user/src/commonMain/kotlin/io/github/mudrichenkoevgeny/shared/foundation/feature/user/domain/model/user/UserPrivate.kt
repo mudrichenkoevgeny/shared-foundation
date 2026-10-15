@@ -8,7 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * Private user profile for authenticated self-service and administrative management flows.
+ * Private user for authenticated self-service and administrative management flows.
  *
  * Wire counterpart is [UserPrivatePayload].
  *
@@ -22,7 +22,7 @@ import kotlin.time.Instant
  * @property lastLoginAt Timestamp of the most recent successful authentication ([Instant]), or `null`.
  * @property lastActiveAt Timestamp of last recorded user activity ([Instant]), or `null`.
  * @property createdAt Timestamp of account creation ([Instant]).
- * @property updatedAt Timestamp of last profile/account modification ([Instant]), or `null`.
+ * @property updatedAt Timestamp of last user modification ([Instant]), or `null`.
  * @property scheduledPermanentDeletionAt Scheduled permanent removal timestamp ([Instant]), or `null`.
  * @property lockoutType Category of account lockout ([AccountLockoutType]).
  * @property temporaryLockoutUntil Timestamp until which the account is temporarily locked out ([Instant]), or `null`.

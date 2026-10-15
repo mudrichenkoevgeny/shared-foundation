@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.configuration
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.management.ManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.ManagementUserConfigurationPayload
@@ -25,5 +25,5 @@ object ManagementUserConfigurationRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_CONFIGURATION = "${ManagementRoutes.BASE_MANAGEMENT_ROUTE}/user-configuration"
+    const val GET_CONFIGURATION = "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}/user-configuration"
 }

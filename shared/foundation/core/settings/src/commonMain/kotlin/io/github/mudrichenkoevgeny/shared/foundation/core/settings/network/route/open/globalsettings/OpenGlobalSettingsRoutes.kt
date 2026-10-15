@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.open.globalsettings
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.OpenGlobalSettingsPayload
 
 /**
@@ -21,5 +22,5 @@ object OpenGlobalSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_GLOBAL_SETTINGS = "/global-settings"
+    const val GET_OPEN_GLOBAL_SETTINGS = "${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/global"
 }
