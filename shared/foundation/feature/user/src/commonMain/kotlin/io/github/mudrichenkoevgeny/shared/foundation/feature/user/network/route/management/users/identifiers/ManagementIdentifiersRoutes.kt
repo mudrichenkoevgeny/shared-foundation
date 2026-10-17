@@ -49,11 +49,12 @@ object ManagementIdentifiersRoutes {
      *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
-     * Same key repeated — **OR**; different keys combine as **AND**.
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_ID] — list of user IDs.
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
-     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
+     * - **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics
+     *   (e.g., `?user_id=1&user_id=2`); different keys combine as **AND**.
+     *   - [UserFilterValues.UserIdentifierFilterValues.USER_ID] — filter by user ID.
+     *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
+     *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
      *
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
@@ -89,10 +90,11 @@ object ManagementIdentifiersRoutes {
      *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
-     * Same key repeated — **OR**; different keys combine as **AND**.
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names.
-     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
+     * - **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics
+     *   (e.g., `?user_auth_provider=EMAIL&user_auth_provider=PHONE`); different keys combine as **AND**.
+     *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
+     *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
      *
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *

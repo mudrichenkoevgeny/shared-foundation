@@ -75,21 +75,22 @@ object OpenSessionRoutes {
      *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
-     * Same key repeated — **OR**; different keys combine as **AND**.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — list of substring patterns for identifier values.
-     * - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — list of credential record IDs
-     *   ([UserSessionPrivatePayload.identifierId]).
-     * - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names
-     *   ([UserSessionPrivatePayload.identifierAuthProvider]).
-     * - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — list of [ClientType] serial names.
-     * - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — list of user agent substring patterns.
-     * - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — list of IP addresses.
-     * - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — list of BCP 47 language tags.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — list of opaque device IDs.
-     * - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — list of device name substring patterns.
-     * - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — list of application versions.
-     * - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — list of OS versions.
+     * - **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics
+     *   (e.g., `?client_type=ANDROID&client_type=WASM`); different keys combine as **AND**.
+     *   - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
+     *   - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — filter by credential record ID
+     *     ([UserSessionPrivatePayload.identifierId]).
+     *   - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name
+     *     ([UserSessionPrivatePayload.identifierAuthProvider]).
+     *   - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — filter by [ClientType] serial name.
+     *   - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — filter by user agent substring pattern.
+     *   - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — filter by IP address.
+     *   - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — filter by BCP 47 language tag.
+     *   - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — filter by opaque device ID.
+     *   - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — filter by device name substring pattern.
+     *   - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — filter by application version.
+     *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by OS version.
      *
      * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *

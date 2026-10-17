@@ -35,16 +35,17 @@ object ManagementAuditRoutes {
      *   [AuditSortValues.AuditEventSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([AuditFilterValues.AuditEventFilterValues]): all filters are optional.
-     * Same key repeated — **OR**; different keys combine as **AND**.
-     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — list of actor IDs.
-     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE] — list of [AuditActorType] serial names.
-     * - [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE] — list of user roles serial names.
-     * - [AuditFilterValues.AuditEventFilterValues.ACTION] — list of audit action names.
-     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE] — list of audit resource names.
-     * - [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID] — list of resource IDs.
-     * - [AuditFilterValues.AuditEventFilterValues.STATUS] — list of [AuditStatus] serial names.
-     * - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — list of message substring patterns.
+     * - **Filters** ([AuditFilterValues.AuditEventFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics (e.g., `?actor_id=1&actor_id=2`);
+     *   different keys combine as **AND**.
+     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — filter by actor ID.
+     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE] — filter by [AuditActorType] serial name.
+     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE] — filter by user role serial name.
+     *   - [AuditFilterValues.AuditEventFilterValues.ACTION] — filter by audit action name.
+     *   - [AuditFilterValues.AuditEventFilterValues.RESOURCE] — filter by audit resource name.
+     *   - [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID] — filter by resource ID.
+     *   - [AuditFilterValues.AuditEventFilterValues.STATUS] — filter by [AuditStatus] serial name.
+     *   - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — filter by message substring pattern.
      *
      * Response body: [PagedResult] of [AuditEventSummaryPayload].
      *

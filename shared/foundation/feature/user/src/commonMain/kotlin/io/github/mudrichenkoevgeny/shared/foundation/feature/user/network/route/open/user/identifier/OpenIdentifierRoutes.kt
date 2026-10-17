@@ -63,12 +63,13 @@ object OpenIdentifierRoutes {
      *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional). Same key repeated means **OR**;
-     * different keys combine as **AND**.
-     * - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — list of [UserAuthProvider] serial names
-     *   ([UserIdentifierPrivatePayload.userAuthProvider]).
-     * - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — list of free-text identifiers;
-     *   server-defined matching.
+     * - **Filters** ([UserFilterValues.UserIdentifierFilterValues], optional).
+     *   Multi-value filters use repeated query keys with **OR** semantics
+     *   (e.g., `?user_auth_provider=EMAIL&user_auth_provider=PHONE`); different keys combine as **AND**.
+     *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name
+     *     ([UserIdentifierPrivatePayload.userAuthProvider]).
+     *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by free-text identifier;
+     *     server-defined matching.
      *
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *

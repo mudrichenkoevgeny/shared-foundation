@@ -55,16 +55,18 @@ object ManagementUsersRoutes {
      *   [UserSortValues.UserSortBy.UPDATED_AT].
      * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
      *
-     * **Filters** ([UserFilterValues.UserFilterValues]): all filters are optional.
-     * Same key repeated — **OR**; different keys combine as **AND**.
-     * - [UserFilterValues.UserFilterValues.ROLE] — list of [UserRole] serial names.
-     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — list of [UserAccountStatus] serial names.
-     * - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] — list of [UserAccountStatus] serial names.
-     * - [UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE] — list of [AccountLockoutType] serial names.
-     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level.
-     * - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level.
-     * - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP status.
-     * - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — list of [PermissionCode] strings.
+     * - **Filters** ([UserFilterValues.UserFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics
+     *   (e.g., `?role=ADMIN&role=STAFF`); different keys combine as **AND**.
+     *   - [UserFilterValues.UserFilterValues.ROLE] — filter by [UserRole] serial name.
+     *   - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — filter by [UserAccountStatus] serial name.
+     *   - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] — filter by [UserAccountStatus] serial name
+     *     on restore.
+     *   - [UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE] — filter by [AccountLockoutType] serial name.
+     *   - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level.
+     *   - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level.
+     *   - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP status.
+     *   - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — filter by [PermissionCode] string.
      *
      * Response body: [PagedResult] of [UserSummaryPayload].
      *
