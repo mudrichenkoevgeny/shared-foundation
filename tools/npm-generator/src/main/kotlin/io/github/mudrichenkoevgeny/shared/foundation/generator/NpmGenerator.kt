@@ -49,6 +49,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.detail.UserDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.globallist.ManagementUserListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.detail.IdentifierDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListAction
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.detail.SessionDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.session.list.SelfSessionListParams
@@ -257,7 +258,7 @@ fun main() {
             ?.takeIf { it.isNotBlank() && it != "unspecified" }
             ?: System.getenv("PACKAGE_VERSION")
             ?: parseRootBuildGradleVersion(rootDir)
-            ?: "0.0.66"
+            ?: "0.0.67"
 
         val packageJson = """
         {
@@ -401,20 +402,28 @@ fun main() {
         ```typescript
         import { 
           managementAuditEventListParamsSchema, 
+          ManagementAuditEventListParamsParser,
+          toQueryMap,
+          toQuerySearchString,
           ManagementAuditNavigation 
         } from '@mudrichenkoevgeny/shared-foundation';
 
-        // Safe URL query parameter validation with defaults
+        // 1. Parsing raw URL search params into typed params
         function parseSearchParams(rawParams: Record<string, unknown>) {
-          const params = managementAuditEventListParamsSchema.parse(rawParams);
+          const params = ManagementAuditEventListParamsParser.parse(rawParams);
           console.log(params.pageNumber); // Defaults to 1 if omitted
-          console.log(params.actorIds);   // Defaults to [] if omitted
           return params;
         }
 
-        // Accessing Screen Route & Parent Route for Fallback Back-Navigation
+        // 2. Serializing typed params back to URL query map or search string
+        // Automatically omits default values (pageNumber=1, pageSize=20) to keep URLs clean
+        const params = { pageNumber: 1, pageSize: 20, actorIds: ['123'] };
+        const queryMap = ManagementAuditEventListParamsParser.toQueryMap(params); // { actor_id: ['123'] }
+        const searchString = toQuerySearchString(params); // "actor_id=123"
+
+        // 3. Accessing Screen Route & Parent Route for Fallback Back-Navigation
         const screenRoute = ManagementAuditNavigation.AuditEventList.ROUTE; // "/management/audit/events"
-        const parentRoute = ManagementAuditNavigation.AuditEventList.PARENT_ROUTE; // "/management"
+        const parentRoute = ManagementAuditNavigation.AuditEventList.PARENT_ROUTE; // "/"
         ```
 
         ### 2. Issuing API Requests with Route Constants
@@ -473,6 +482,7 @@ fun main() {
         val permissionCodeCode = generatePermissionCodeObjects()
         val domainModelsAndMappersCode = generateDomainModelsAndMappersJs()
         val dtoCode = generateDtoSchemasAndTypes()
+        val paramParsersJsCode = generateParamParsersAndSerializersJs()
 
         val fullJsContent = """
         import { z } from 'zod';
@@ -494,6 +504,8 @@ fun main() {
         $domainModelsAndMappersCode
 
         $dtoCode
+
+        $paramParsersJsCode
         """.trimIndent()
 
         File(outputDir, "index.js").writeText(fullJsContent)
@@ -873,6 +885,7 @@ private val enumClasses = listOf(
     TotpStep::class,
     LoginByTotpMode::class,
     UnlockMethod::class,
+    SelfIdentifierListAction::class,
     UserSortValues.UserSortBy::class,
     UserSortValues.UserIdentifierSortBy::class,
     UserSortValues.UserSessionSortBy::class,
@@ -1993,7 +2006,211 @@ private fun generateDeclarationFile(): String {
     }
 
     $dtoDeclarations
+
+    ${generateParamParsersAndSerializersDts()}
     """.trimIndent()
+}
+
+private fun generateParamParsersAndSerializersJs(): String {
+    val paramClasses = rawDtoClasses.filter { kClass ->
+        kClass.simpleName?.endsWith("Params") == true
+    }
+
+    val globalQueryMapCode = """
+    /**
+     * Generic parameter serializer converting a JS/TS parameter object into a URL search query map.
+     * Omits default values (pageNumber=1, pageSize=20, default enums, empty arrays, nulls, undefined).
+     */
+    export function toQueryMap(params) {
+      if (!params || typeof params !== 'object') return {};
+      const res = {};
+
+      for (const [key, val] of Object.entries(params)) {
+        if (val === undefined || val === null) continue;
+
+        let queryKey = key;
+        if (key === 'pageNumber') {
+          if (val === 1 || val === '1') continue;
+          queryKey = 'page_number';
+        } else if (key === 'pageSize') {
+          if (val === 20 || val === '20') continue;
+          queryKey = 'page_size';
+        } else if (key === 'sortBy') {
+          const sVal = String(val).toLowerCase();
+          if (sVal === 'default' || sVal === 'none' || sVal === '') continue;
+          queryKey = 'sort_by';
+        } else if (key === 'sortOrder') {
+          const sVal = String(val).toLowerCase();
+          if (sVal === 'default' || sVal === 'none' || sVal === '') continue;
+          queryKey = 'sort_order';
+        } else if (key === 'userRoles') {
+          queryKey = 'role';
+        } else if (key === 'actorUserRoles') {
+          queryKey = 'actor_user_role';
+        } else if (key === 'actorIds') {
+          queryKey = 'actor_id';
+        } else if (key === 'actorTypes') {
+          queryKey = 'actor_type';
+        } else if (key === 'resourceIds') {
+          queryKey = 'resource_id';
+        } else if (key === 'userAuthProviders') {
+          queryKey = 'user_auth_provider';
+        } else if (key === 'identifiers') {
+          queryKey = 'identifier';
+        } else if (key === 'identifierIds') {
+          queryKey = 'identifier_id';
+        } else if (key === 'clientTypes') {
+          queryKey = 'client_type';
+        } else if (key === 'userAgents') {
+          queryKey = 'user_agent';
+        } else if (key === 'ipAddresses') {
+          queryKey = 'ip_address';
+        } else if (key === 'languages') {
+          queryKey = 'language';
+        } else if (key === 'deviceIds') {
+          queryKey = 'device_id';
+        } else if (key === 'deviceNames') {
+          queryKey = 'device_name';
+        } else if (key === 'appVersions') {
+          queryKey = 'app_version';
+        } else if (key === 'osVersions') {
+          queryKey = 'operation_system_version';
+        } else if (key === 'userIds') {
+          queryKey = 'user_id';
+        } else if (key === 'redirectUrl') {
+          queryKey = 'redirect_url';
+        } else if (key === 'mfaToken') {
+          queryKey = 'mfa_token';
+        } else if (key === 'loginByTotpMode') {
+          queryKey = 'login_by_totp_mode';
+        } else if (key === 'totpStep') {
+          queryKey = 'totp_step';
+        } else if (key === 'unlockMethod') {
+          queryKey = 'unlock_method';
+        } else if (key === 'targetInput') {
+          queryKey = 'target_input';
+        } else if (key === 'accountStatus') {
+          queryKey = 'account_status';
+        } else if (key === 'accountStatuses') {
+          queryKey = 'account_status';
+        } else if (key === 'accountStatusesOnRestore') {
+          queryKey = 'account_status_on_restore';
+        } else if (key === 'accountLockoutTypes') {
+          queryKey = 'account_lockout_type';
+        } else if (key === 'authorityLevelFrom') {
+          queryKey = 'authority_level_from';
+        } else if (key === 'authorityLevelTo') {
+          queryKey = 'authority_level_to';
+        } else if (key === 'isTotpEnabled') {
+          queryKey = 'is_totp_enabled';
+        } else if (key === 'permissionCodes') {
+          queryKey = 'permission_codes';
+        } else if (key === 'phone') {
+          queryKey = 'phone_number';
+        } else if (key === 'actions') {
+          queryKey = 'action';
+        } else if (key === 'resources') {
+          queryKey = 'resource';
+        } else if (key === 'statuses') {
+          queryKey = 'status';
+        } else if (key === 'messages') {
+          queryKey = 'message';
+        } else if (key === 'userId' || key === 'identifierId' || key === 'sessionId' || key === 'eventId') {
+          continue;
+        } else {
+          queryKey = key.replace(/([A-Z])/g, '_$1').toLowerCase();
+        }
+
+        if (Array.isArray(val)) {
+          if (val.length === 0) continue;
+          const strVals = val
+            .map(v => (v !== undefined && v !== null ? String(v).trim() : ''))
+            .filter(v => v.length > 0);
+          if (strVals.length > 0) {
+            res[queryKey] = strVals;
+          }
+        } else {
+          const strVal = String(val).trim();
+          if (strVal.length > 0) {
+            res[queryKey] = [strVal];
+          }
+        }
+      }
+
+      return res;
+    }
+
+    /**
+     * Converts parameter object into a URL search query string.
+     */
+    export function toQuerySearchString(params) {
+      const map = toQueryMap(params);
+      const sp = new URLSearchParams();
+      for (const [k, vals] of Object.entries(map)) {
+        for (const v of vals) {
+          if (v !== undefined && v !== null && v !== '') {
+            sp.append(k, v);
+          }
+        }
+      }
+      return sp.toString();
+    }
+    """.trimIndent()
+
+    val individualParsersCode = paramClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val schemaName = name.decapitalizeFirstLetter() + "Schema"
+        """
+        export function serialize$name(params) {
+          return toQueryMap(params);
+        }
+
+        export function toQueryMap$name(params) {
+          return toQueryMap(params);
+        }
+
+        export const ${name}Parser = {
+          parse(params) {
+            return $schemaName.parse(params);
+          },
+          serialize: serialize$name,
+          toQueryMap: serialize$name,
+          toSearchString(params) {
+            return toQuerySearchString(params);
+          }
+        };
+        """.trimIndent()
+    }
+
+    return "$globalQueryMapCode\n\n$individualParsersCode"
+}
+
+private fun generateParamParsersAndSerializersDts(): String {
+    val paramClasses = rawDtoClasses.filter { kClass ->
+        kClass.simpleName?.endsWith("Params") == true
+    }
+
+    val globalDts = """
+    export declare function toQueryMap(params?: Record<string, unknown> | null): Record<string, string[]>;
+    export declare function toQuerySearchString(params?: Record<string, unknown> | null): string;
+    """.trimIndent()
+
+    val individualDts = paramClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        """
+        export declare function serialize$name(params?: Partial<$name> | null): Record<string, string[]>;
+        export declare function toQueryMap$name(params?: Partial<$name> | null): Record<string, string[]>;
+
+        export declare const ${name}Parser: {
+          parse(params: Record<string, unknown>): $name;
+          serialize(params?: Partial<$name> | null): Record<string, string[]>;
+          toQueryMap(params?: Partial<$name> | null): Record<string, string[]>;
+          toSearchString(params?: Partial<$name> | null): string;
+        };
+        """.trimIndent()
+    }
+
+    return "$globalDts\n\n$individualDts"
 }
 
 private val rawDomainToDtoClasses = listOf(
