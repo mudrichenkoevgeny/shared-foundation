@@ -1,6 +1,6 @@
 # core/common
 
-Cross-cutting **shared contracts** for backend and client: **kotlinx.serialization** defaults, **HTTP/WebSocket JSON field names and headers**, **API error wire shape** (`code` / `args` string constants), **WebSocket frame and handshake payloads**, shared **domain models** (client info, permissions, listing), and **JVM retention annotations** for request validation hints. This module does **not** pull in other in-repo `feature/*` modules. It does **not** include Ktor client/server wiring, UI, or localized error text — consumers (e.g. [KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk), backend SDK) integrate runtime behavior on top of these types.
+Cross-cutting **shared contracts** for backend and client: **kotlinx.serialization** defaults, **HTTP/WebSocket JSON field names and headers**, **API error wire shape** (`code` / `args` string constants), **WebSocket frame and handshake payloads**, shared **domain models** (client info, permissions, listing), and **JVM retention annotations** for request validation hints. This module does **not** pull in other in-repo `feature/*` modules. It does **not** include Ktor client/server wiring, UI, or localized error text — consumers (e.g. [Backend Platform SDK](https://github.com/mudrichenkoevgeny/backend-platform-sdk), [Web Platform SDK](https://github.com/mudrichenkoevgeny/web-platform-sdk), [KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk)) integrate runtime behavior on top of these types.
 
 ## What it provides
 
@@ -17,7 +17,59 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
     - Base navigation routes: [CommonNavigationRoutes] (`BASE_SETTINGS_ROUTE = "/settings"`).
     - Root navigation route definitions: [ClientMainNavigation] (`/`) and [ManagementMainNavigation] (`/management`).
     - Screen parameter contracts & parsers: [NavigationScreenParams] marker interface; [NavigationScreenParamsParser] contract interface for bidirectional parameter serialization; [NavigationRouteUrlMapper] utility for building URLs with parameter maps; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter normalization.
+- **Localization Infrastructure:**
+    - [LocalizedStringResolver]: Functional contract interface `resolve(modulePath: String, bundleName: String, key: String, locale: String): String?` implemented by client applications to load resource bundles from classpath, assets, or native bundles.
+    - [LocalizationFormatter]: Core formatting object replacing `{placeholder}` tokens in string templates (`format(template, params)`).
+    - Generated module facades: [CommonModuleStrings], [ErrorsStrings], and [UiStrings] for type-safe access to `core/common` localized strings.
 - **Validation hints:** [RequiredField], [NotBlankStringField], [NotEmptyCollectionField] in [NetworkFieldAnnotations] (runtime interpretation is outside this module unless you add validators).
+
+## Platform Integration Guidelines for `LocalizedStringResolver`
+
+To integrate localized string Resolution in client and server applications, implement `LocalizedStringResolver` according to target platform capabilities:
+
+### 1. Ktor / Backend (JVM)
+Read JSON resource files directly from the JVM classpath:
+```kotlin
+class ClasspathLocalizedStringResolver : LocalizedStringResolver {
+    override fun resolve(modulePath: String, bundleName: String, key: String, locale: String): String? {
+        val resourcePath = "localization/$modulePath/$locale/$bundleName.json"
+        val stream = Thread.currentThread().contextClassLoader.getResourceAsStream(resourcePath) ?: return null
+        val jsonContent = stream.bufferedReader().use { it.readText() }
+        return parseJsonFlatMap(jsonContent)[key]
+    }
+}
+```
+
+### 2. Android / Compose Multiplatform
+Resolve JSON resources via `ClassLoader`, Android `AssetsManager`, or inject via DI (e.g. Koin):
+```kotlin
+class AndroidAssetsLocalizedStringResolver(private val context: Context) : LocalizedStringResolver {
+    override fun resolve(modulePath: String, bundleName: String, key: String, locale: String): String? {
+        val assetPath = "localization/$modulePath/$locale/$bundleName.json"
+        return try {
+            val jsonContent = context.assets.open(assetPath).bufferedReader().use { it.readText() }
+            parseJsonFlatMap(jsonContent)[key]
+        } catch (e: Exception) {
+            null
+        }
+    }
+}
+```
+
+### 3. iOS (KMP Native)
+Resolve resource files from `NSBundle.mainBundle`:
+```kotlin
+class IosBundleLocalizedStringResolver : LocalizedStringResolver {
+    override fun resolve(modulePath: String, bundleName: String, key: String, locale: String): String? {
+        val path = NSBundle.mainBundle.pathForResource("$bundleName", "json", "localization/$modulePath/$locale") ?: return null
+        val jsonContent = NSString.stringWithContentsOfFile(path, NSUTF8StringEncoding, null) as? String ?: return null
+        return parseJsonFlatMap(jsonContent)[key]
+    }
+}
+```
+
+### 4. Web / Wasm / JS
+Use the pre-built `localizationResources` or `SharedFoundationLocalization` from `@mudrichenkoevgeny/shared-foundation` in npm.
 
 ## Usage
 

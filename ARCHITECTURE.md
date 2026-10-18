@@ -1,6 +1,6 @@
 # shared-foundation Architecture
 
-This document provides a visual representation of the static structure, taxonomy of contracts, and module dependencies within the `shared-foundation` project. As a KMP library containing shared wire types (DTOs, constants, error codes, and routes), it does not include execution flows or engine wiring.
+This document provides a visual representation of the static structure, taxonomy of contracts, and module dependencies within the `shared-foundation` project. As a shared contracts library containing wire types (DTOs, constants, error codes, Zod schemas, and routes), it does not include execution flows or engine wiring.
 
 ## 1. Module Dependency Graph
 

@@ -1,6 +1,6 @@
 # shared-foundation
 
-A Kotlin Multiplatform (KMP) library providing shared business logic, API contracts, WebSocket envelopes, error codes, and permission models between Backend and Client applications (Mobile, Web, Desktop).
+A shared contracts library providing REST/WS API contracts, JSON DTOs, Zod schemas, WebSocket envelopes, error codes, permissions, and domain models for Backend (JVM), Web (TypeScript/NPM), Mobile, and Desktop applications.
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mudrichenkoevgeny/shared-foundation-bom)](https://central.sonatype.com/artifact/io.github.mudrichenkoevgeny/shared-foundation-bom)
 [![npm](https://img.shields.io/npm/v/@mudrichenkoevgeny/shared-foundation)](https://www.npmjs.com/package/@mudrichenkoevgeny/shared-foundation)
@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.67"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.68"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -43,17 +43,18 @@ pnpm add @mudrichenkoevgeny/shared-foundation
 
 Published artifacts (versions aligned via the BOM):
 
-- **core-common** — shared errors, network contracts (`BaseManagementRoutes`, `BaseSettingsRoutes`), WebSocket envelopes, common DTOs, navigation contracts (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`, `CommonNavigationRoutes`), root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter normalizers, and parameter parsers (`NavigationScreenParamsParser`) ([module README](shared/foundation/core/common/README.md)).
-- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, validation, HTTP routes, permission codes, mappers, and management security navigation (`ManagementSecurityNavigation`) ([module README](shared/foundation/core/security/README.md)).
-- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and management settings navigation (`ManagementSettingsNavigation`) ([module README](shared/foundation/core/settings/README.md)).
+- **core-common** — shared errors, network contracts (`BaseManagementRoutes`, `BaseSettingsRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](shared/foundation/core/common/README.md)).
+- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, HTTP routes, permission codes, mappers, navigation (`ManagementSecurityNavigation`), and security localization (`SecurityModuleStrings`) ([module README](shared/foundation/core/security/README.md)).
+- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and settings navigation (`ManagementSettingsNavigation`) ([module README](shared/foundation/core/settings/README.md)).
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
-- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers (self-service & management), open/management user configurations, self-service account unlocking, user navigation contracts (`UserNavigationRoutes`, `UserNavigationPaths`), client/management navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementUsersNavigation`, etc.), screen parameters, and parameter parsers ([module README](shared/foundation/feature/user/README.md)).
-- **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, and domain mappers into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
+- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
+- **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
 ## Documentation & Architecture
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, and error handling taxonomy.
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, and localization architecture.
+- **[core/common README](shared/foundation/core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Build instructions, dependency health checks (`./gradlew projectHealth`), and Maven Central publishing guidelines.
 - **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and constraints for contributors and AI coding assistants.
 

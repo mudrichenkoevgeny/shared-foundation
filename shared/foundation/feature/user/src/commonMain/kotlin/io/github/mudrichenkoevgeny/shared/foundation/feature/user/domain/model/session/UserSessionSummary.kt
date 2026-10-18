@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -21,31 +20,11 @@ import kotlin.time.Instant
  * @property expiresAt Session expiration timestamp.
  */
 data class UserSessionSummary(
-    val id: UserSessionId = UserSessionId.generate(),
-    val userId: UserId,
-    val clientDeviceInfo: ClientDeviceInfo,
+    override val id: UserSessionId = UserSessionId.generate(),
+    override val userId: UserId,
+    override val clientDeviceInfo: ClientDeviceInfo,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val lastAccessedAt: Instant,
-    val expiresAt: Instant
-) {
-    /**
-     * Returns `true` when the session is not expired and matches the caller device.
-     *
-     * Device matching is permissive: if either the session or the client does not provide a device id,
-     * the session is considered valid for device checks.
-     */
-    fun isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean {
-        return !isExpired(now) && isCorrectDevice(clientDeviceId)
-    }
-
-    private fun isExpired(now: Instant): Boolean = expiresAt <= now
-
-    private fun isCorrectDevice(clientDeviceId: ClientDeviceId?): Boolean {
-        val sessionDeviceId = clientDeviceInfo.deviceId
-        if (clientDeviceId == null || sessionDeviceId == null) {
-            return true
-        }
-        return clientDeviceId == sessionDeviceId
-    }
-}
+    override val expiresAt: Instant
+) : UserSession

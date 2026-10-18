@@ -1,0 +1,34 @@
+{
+  "verification_code": {
+    "subject": "Код подтверждения",
+    "body": "<div style=\"font-family: sans-serif;\"><h2>Ваш код: {code}</h2><p>Введите этот код для подтверждения вашего адреса электронной почты.</p></div>"
+  },
+  "reset_password_code": {
+    "subject": "Запрос на сброс пароля",
+    "body": "<div style=\"font-family: sans-serif;\"><h2>Код сброса: {code}</h2><p>Если вы не запрашивали сброс пароля, проигнорируйте это письмо.</p></div>"
+  },
+  "unlock_account_code": {
+    "subject": "Код разблокировки аккаунта",
+    "body": "<div style=\"font-family: sans-serif;\"><h2>Код разблокировки: {code}</h2><p>Введите этот код для разблокировки вашего аккаунта.</p></div>"
+  },
+  "already_registered": {
+    "subject": "Попытка регистрации",
+    "body": "<div style=\"font-family: sans-serif;\"><p>Аккаунт с таким адресом электронной почты уже существует. Если это были не вы, обратитесь в службу поддержки.</p><p>IP: {ipAddress}, Устройство: {deviceName}</p></div>"
+  },
+  "successful_registration": {
+    "subject": "Аккаунт создан",
+    "body": "<div style=\"font-family: sans-serif;\"><h2>Регистрация завершена</h2><p>Ваш аккаунт успешно создан.</p></div>"
+  },
+  "successful_login": {
+    "subject": "Успешный вход",
+    "body": "<div style=\"font-family: sans-serif;\"><p>В вашем аккаунте зафиксирован новый вход.</p><p>IP: {ipAddress}, Устройство: {deviceName}</p></div>"
+  },
+  "new_device_login": {
+    "subject": "Обнаружен вход с нового устройства",
+    "body": "<div style=\"font-family: sans-serif;\"><p>Зафиксирован вход с нового устройства.</p><p>IP: {ipAddress}, Устройство: {deviceName}, Браузер/ОС: {userAgent}</p></div>"
+  },
+  "password_changed": {
+    "subject": "Безопасность: пароль изменен",
+    "body": "<div style=\"font-family: sans-serif;\"><p>Ваш пароль был успешно обновлен.</p><p>IP: {ipAddress}, Устройство: {deviceName}</p></div>"
+  }
+}

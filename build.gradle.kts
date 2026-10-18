@@ -16,7 +16,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.67"
+    version = "0.0.68"
 }
 
 subprojects {
@@ -88,8 +88,8 @@ subprojects {
         }
 
         pom {
-            name.set("Shared Foundation - ${project.name}")
-            description.set("KMP Shared Logic")
+            name.set("Cross-platform Shared Foundation - ${project.name}")
+            description.set("Shared Foundation")
             url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
             licenses {
                 license {

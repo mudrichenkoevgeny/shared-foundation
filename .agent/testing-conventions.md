@@ -22,12 +22,12 @@ This document defines the testing methodology for the `shared-foundation` projec
     - Integration: `[BoundaryName]IntegrationTest.kt`.
 
 ## 3. Multiplatform Strategy
-- **`commonTest` Priority:** Since this is a KMP library, the majority of logic (serialization, validation, mappers) must be tested in `commonTest`.
+- **`commonTest` Priority:** Since this library compiles to multiple target platforms (JVM, Android, iOS, Wasm), the majority of logic (serialization, validation, mappers) must be tested in `commonTest`.
 - **Assertions:** Use `kotlin.test` (e.g., `assertEquals`, `assertTrue`) for all common code to ensure compatibility across JVM, iOS, and Wasm targets.
 - **Mocking:**
     - In `commonTest`: Prefer manual **Fakes** or **Stubs**.
     - In `jvmTest` / `androidMain`: **MockK** is permitted.
-    - Avoid adding heavy mocking frameworks to common code unless they are fully KMP-compatible.
+    - Avoid adding heavy mocking frameworks to common code unless they are fully compatible across all compilation targets.
 
 ## 4. Coding Standards in Tests
 - **No Comments:** Like production code, tests must be self-documenting. Use descriptive method names like `test_paged_result_serialization_with_empty_list()`.

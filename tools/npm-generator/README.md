@@ -16,12 +16,14 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
    - **JSDoc Documentation**: Rich JSDoc hover comments (`/** ... */`) extracted from Kotlin source KDocs for all classes, properties, routes, and mappers.
    - **Branded Identifier Types**: Type-safe IDs (`UserId`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`, `PermissionCode`).
    - **REST & Navigation Route Objects**: Strongly typed route constants (`ManagementUsersRoutes`, `ManagementUsersNavigation`, `ClientAuthNavigation`, etc.).
+   - **Localization Classes & Types**: Type-safe bundle classes (`CommonErrorsStrings`, `CommonUiStrings`, `SecurityErrorsStrings`, `UserErrorsStrings`, `UserUiStrings`), module facades (`CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`), root facade (`SharedFoundationLocalization`), and key types (`*RawKey`, `*Property`).
 3. **`index.mjs` (ESM) & `index.js` (CommonJS)**: JavaScript runtime modules exporting:
    - **Zod Validation Schemas (`*Schema`)**: Auto-generated `z.ZodType` schemas for all payloads, DTOs, and Screen Parameter models (`managementAuditEventListParamsSchema`, `apiErrorResponseSchema`). Handled with safe defaults for optional parameters (`.default(...)`, `.optional()`).
    - **Parameter Serializers & Parsers**: Runtime parser objects (`*ParamsParser`), serializers (`serialize*Params`, `toQueryMap*Params`), and global helpers (`toQueryMap`, `toQuerySearchString`) for converting parameter objects to query parameter maps while omitting default values (`pageNumber=1`, `pageSize=20`).
    - **Runtime Enums**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditStatus`, `TotpStep`, `UnlockMethod`, etc.).
    - **Runtime Mappers**: Mapping functions (`toAuditEventSummary`, `toUserPrivatePayload`).
    - **Polymorphic Composite Parsers**: Runtime parsers (`CompositeAuditActionTypeParser`, `CompositeAuditMetadataKeyParser`, `CompositeAuditResourceTypeParser`).
+   - **Localization Bundles & Formatters**: Raw JSON dictionary constant (`localizationResources`), string template formatter (`formatLocalizedString`), default resolver (`defaultLocalizedStringResolver`), bundle classes, and module facades.
 4. **`README.md`**: Comprehensive documentation for NPM package consumers with installation instructions, module-by-module navigation route & Zod parameter schema (`*ParamsSchema`) index, and code examples for Zod validation, REST API calls, and router search parameter parsing.
 
 ---

@@ -17,28 +17,37 @@ To maintain a clean dependency graph, the library follows a strict separation:
 
 ## 2. Entity Projection Tiers (Summary, Details, Private, Internal)
 
-Domain models and API wire payloads follow a standardized 4-tier projection hierarchy based on scope, detail, and security boundaries.
+Domain models and API wire payloads follow a standardized **up to 4-tier** projection taxonomy based on scope, payload weight, and security boundaries.
+
+**Selective Implementation Rule:** Do NOT blindly generate all 4 tiers for every entity. Implement ONLY the tiers necessitated by distinct data shapes or access control boundaries (e.g., `User` and `UserSession` only implement `Summary`, `Private`, and `Internal`, omitting `Details`). Never invent ad-hoc suffixes like `*Full`, `*View`, `*Admin`, or `*Extended`.
 
 ### The 4 Projection Tiers:
 
 1. **`[Entity]Summary`** (Client & Server — Wire & Domain):
-   - **Scope:** Public condensed snippet for lists, cards, tables, and search results.
-   - **Payload:** `[Entity]SummaryPayload`.
-   - **Excludes:** Heavy lists, nested sub-models, and detailed diagnostic fields.
+    - **Scope:** Public or list-level condensed snippet for feeds, catalogs, cards, tables, and badges.
+    - **Payload:** `[Entity]SummaryPayload`.
+    - **Excludes:** Heavy lists, nested editable sub-models, unredacted sensitive fields, and diagnostic metadata.
 
-2. **`[Entity]Details`** (Client & Server — Wire & Domain, when applicable):
-   - **Scope:** Public/unprivileged detailed view of an entity (e.g. quiz player view without answer keys).
-   - **Payload:** `[Entity]DetailsPayload`.
-   - **Note:** Omitted for entities where public details collapse to `Summary` (e.g. `User`).
+2. **`[Entity]Details`** (Client & Server — Wire & Domain, **when applicable**):
+    - **Scope:** Expanded public/unprivileged representation for viewing a single entity when `Summary` is insufficient (e.g., extra public metadata or non-spoiler item views).
+    - **Payload:** `[Entity]DetailsPayload`.
+    - **Omission Rule:** Omit this tier whenever the public single-item view is identical to `Summary` or when detailed data is restricted strictly to the owner/admin (`Private`) or sequential session flows.
 
 3. **`[Entity]Private`** (Client & Server — Wire & Domain):
-   - **Scope:** Privileged representation for resource owners (Self-service / "My Account") and administrators (Management scope).
-   - **Payload:** `[Entity]PrivatePayload`.
-   - **Excludes:** Pure server-side/database internal fields.
+    - **Scope:** Privileged representation for resource owners (self-service, account settings, creator studio/editor with full localization maps and nested items) and administrators/moderators (management scope).
+    - **Payload:** `[Entity]PrivatePayload`.
+    - **Excludes:** Pure server-side/database internal fields (hashes, vector embeddings, internal DB timestamps).
 
-4. **`[Entity]Internal`** (Server/Database ONLY — Domain ONLY):
-   - **Scope:** Complete, unredacted backend domain model and database row representation (includes `updatedAt`, password/token hashes, vector embeddings).
-   - **STRICT PROHIBITION:** **NEVER** create a `[Entity]InternalPayload` DTO! `Internal` entities live strictly on the server and must **NEVER** be serialized or sent directly over public HTTP/WebSocket API contracts.
+4. **`[Entity]Internal`** (Server/Database Usage — Domain ONLY):
+    - **Scope:** Complete, unredacted domain model and database row representation for backend business logic and persistence (includes `updatedAt`, password/token hashes, vector embeddings, and system flags).
+    - **STRICT PROHIBITION:** **NEVER** create an `[Entity]InternalPayload` DTO! Even if the `Internal` domain class resides in the shared module for domain mapping convenience, it must **NEVER** be serialized or exposed over HTTP/WebSocket API contracts.
+
+### Shared Domain Logic & Mappers:
+- **Base Entity Interface (Optional):** When multiple projections of an entity share domain validation or helper methods (e.g., `isValid`, `getInfo`), extract a common base interface `[Entity]` (without a tier suffix) implemented by each projection to avoid duplicating logic across data classes.
+- **`[Entity]SummaryMapper.kt`**: `[Entity]SummaryPayload <-> [Entity]Summary`
+- **`[Entity]DetailsMapper.kt`**: `[Entity]DetailsPayload <-> [Entity]Details` (only when `Details` tier exists)
+- **`[Entity]PrivateMapper.kt`**: `[Entity]PrivatePayload <-> [Entity]Private`
+- **`[Entity]DomainMapper.kt`**: Direct 1-step domain-to-domain conversions (`Internal -> Private`, `Internal -> Details`, `Private -> Summary`, `Internal -> Summary`) without allocating temporary intermediate objects.
 
 ### Mapper Structure:
 - **`[Entity]SummaryMapper.kt`**: `[Entity]SummaryPayload <-> [Entity]Summary`
@@ -114,6 +123,42 @@ To provide full type safety and declarative navigation for client platforms, eac
   - Standalone parser components implementing `NavigationScreenParamsParser<T>` responsible for bidirectional serialization (`parse` raw query/path maps into typed `*Params` objects, and `serialize` `*Params` back to string query maps), utilizing `QueryParamNormalizer` and `PhoneParamNormalizer`.
 - **Route Segment Constants & Helpers:**
   - Common base navigation routes in `CommonNavigationRoutes` (e.g., `BASE_SETTINGS_ROUTE`), feature navigation routes in `UserNavigationRoutes` (e.g., `BASE_AUTH_ROUTE`), parameter name constants in `UserNavigationPaths` (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`), and base network routes in `BaseManagementRoutes` and `BaseSettingsRoutes`.
+
+## 10. Localization Architecture & Resource Standards
+
+To ensure type-safe, multiplatform string localization across Backend (JVM), Web (TypeScript), Mobile (Android/iOS), and Desktop, the library enforces a strict localization resource structure and code generation pipeline:
+
+### 10.1. File & Directory Layout
+- **Resource Root:** All localization files must be flat JSON files located inside `src/commonMain/resources/localization/<group>/<module>/<locale>/<bundleName>.json`.
+- **Module Path Resolution:** The relative path from `resources/localization/` up to the locale directory forms the module identifier (e.g., `core/common`, `core/security`, `feature/user`).
+- **Locale Directories:** Standard ISO language tags (e.g., `en`, `ru`). English (`en`) serves as the Single Source of Truth (SSOT) fallback for extracting keys and parameter signatures.
+- **Excluded Files:** Email body templates (`email_templates.json`) are excluded from string generator tasks.
+
+### 10.2. Key & Parameter Naming Conventions
+- **Flat JSON Format:** Key-value pairs of string templates (`"key": "template"`).
+- **Snake_case Keys:** JSON keys must use `snake_case` (e.g., `not_found`, `service_unavailable`, `max_failed_attempts`).
+- **Explicit Suffix Rules:**
+  - `_without_args`: Used when a key has a static version without placeholders alongside a parameterized version (e.g., `not_found_without_args` generates property `notFoundWithoutArgs`).
+  - `_with_args`: Used when a key has placeholders alongside a static version (e.g., `not_found_with_args` with value `"Resource {resource} not found"` generates function `notFound(resource: Any)`).
+- **Placeholder Syntax:** Placeholders use single curly braces `{paramName}` (e.g., `"Page {page} of {totalPages}"`).
+  - Keys without placeholders generate Kotlin `val` properties (and TS `get` accessors).
+  - Keys with placeholders generate Kotlin `fun` functions (and TS methods accepting named object or positional arguments).
+
+### 10.3. Generated Kotlin Code (`build/generated/sources/localization`)
+- **Bundle Classes (`*Strings.kt`):** Strongly typed bundle wrappers (e.g., `ErrorsStrings`, `UiStrings`) accepting `LocalizedStringResolver` and `locale: String`.
+- **Module Facade Classes (`*ModuleStrings.kt`):** Module-level facades aggregating all bundle classes for that module (e.g., `CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`).
+- **Core Abstractions (`core/common`):**
+  - `LocalizedStringResolver`: Interface `resolve(modulePath: String, bundleName: String, key: String, locale: String): String?`.
+  - `LocalizationFormatter`: Public object providing `{placeholder}` string interpolation via `format(template: String, params: Map<String, Any>): String`.
+
+### 10.4. Generated Web / TypeScript Code (`tools/npm-generator`)
+- **NPM Artifact Exports (`@mudrichenkoevgeny/shared-foundation`):**
+  - `localizationResources`: Raw JSON resource dictionary constant containing templates for all locales.
+  - `formatLocalizedString`: Pure JavaScript function replacing `{placeholder}` tokens in string templates.
+  - `defaultLocalizedStringResolver`: Built-in string resolver fetching from `localizationResources`.
+  - **Bundle Classes:** `CommonErrorsStrings`, `CommonUiStrings`, `SecurityErrorsStrings`, `UserErrorsStrings`, `UserUiStrings`.
+  - **Module Facades:** `CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`.
+  - **Root Facade:** `SharedFoundationLocalization`.
 
 ---
 *Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

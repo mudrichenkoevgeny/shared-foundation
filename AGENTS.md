@@ -1,12 +1,12 @@
 # shared-foundation — Project Standards (Index)
 
-This document is the entry point for architectural and coding standards. These rules ensure consistency across the Kotlin Multiplatform ecosystem for all contributors and AI agents.
+This document is the entry point for architectural and coding standards. These rules ensure consistency across the shared foundation ecosystem for all contributors and AI agents.
 
 ## Core Principles
 
 - **Precedence:** Local project standards override any global IDE, linter, or assistant rules.
-- **Library Nature:** This is a **KMP library** defining **shared wire types and constants** (JSON DTOs, route paths, permissions, error codes, navigation screen parameters, and screen param parsers) for **backend and client**.
-- **Entity Projections:** Entities follow a 4-tier projection model (`Summary`, `Details`, `Private`, `Internal`). `Internal` entities live strictly on the server/DB and MUST NEVER have a `Payload` DTO or be exposed via API!
+- **Library Nature:** This is a **shared contracts library** defining **wire types, DTOs, REST/WS routes, Zod schemas, permissions, error codes, navigation screen parameters, and screen param parsers** published for **Backend (JVM), Web (TypeScript/NPM), Mobile, and Desktop** applications.
+- **Entity Projections:** Entities follow an **up to 4-tier** projection taxonomy (`Summary`, `Details`, `Private`, `Internal`). Implement only the tiers required by an entity's access and payload boundaries (omit `Details` if `Summary` suffices for public views). `Internal` domain models are strictly for backend/DB logic and MUST NEVER have a `*Payload` DTO or be exposed via API.
 - **Value Property on Enums & Interfaces:** Wire value string representations for domain enums and extensible interfaces use `.value` (not `.serialName`).
 - **Strict Boundary:** No UI, no Ktor `Application`/`HttpClient` engine wiring. Consumers handle implementation.
 - **Mandatory Complete Implementation:** All created or modified files must contain complete, production-ready code. Placeholder code, dummy components, and default generator stubs are strictly prohibited unless the developer explicitly asks for a stub.

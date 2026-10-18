@@ -38,7 +38,7 @@ Place code in the correct module based on its functional role:
 - **`core/settings`:** Global settings domain models, payloads, mappers, routes, settings navigation (`ManagementSettingsNavigation`), and permission codes.
 - **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, self-service account unlocking, user navigation contracts (`UserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes, screen parameters, and parameter parsers.
 
-**Strict Boundary:** This repository defines the **Contract**. Framework-specific wiring (Ktor engines, Auth session storage, UI mapping) belongs in consumer projects (Backend/KMP Platform SDKs).
+**Strict Boundary:** This repository defines the **Contract**. Framework-specific wiring (Ktor engines, Auth session storage, React/UI mapping) belongs in consumer projects (Backend Platform SDK, KMP Platform SDK, Web Platform SDK).
 
 ## 5. Consumer Compatibility & Breaking Changes
 
