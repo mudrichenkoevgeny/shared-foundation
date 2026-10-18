@@ -42,4 +42,15 @@ class DefaultLocalizedStringResolverTest {
             resolver.resolve("core/common", "errors", "unknown", "ru")
         }
     }
+
+    @Test
+    fun testEmbeddedLocalizationResourcesRegistration() {
+        val commonStrings = CommonModuleStrings(
+            resolver = DefaultLocalizedStringResolver(),
+            locale = CommonLocales.RUSSIAN
+        )
+
+        assertEquals("Повторить", commonStrings.ui.retry)
+        assertEquals("Произошла неизвестная ошибка.", commonStrings.errors.unknown)
+    }
 }

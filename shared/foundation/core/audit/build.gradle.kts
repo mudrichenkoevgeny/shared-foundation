@@ -24,7 +24,6 @@ configure<KotlinMultiplatformExtension> {
 
     wasmJs {
         browser()
-        binaries.executable()
     }
 
     sourceSets {

@@ -32,7 +32,6 @@ configure<KotlinMultiplatformExtension> {
 
     wasmJs {
         browser()
-        binaries.executable()
     }
 
     sourceSets {
@@ -50,6 +49,10 @@ configure<KotlinMultiplatformExtension> {
     }
 }
 
-tasks.matching { it.name.startsWith("compileKotlin") }.configureEach {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
+    dependsOn(generateLocalization)
+}
+
+tasks.matching { it.name == "prepareKotlinIdeaImport" }.configureEach {
     dependsOn(generateLocalization)
 }

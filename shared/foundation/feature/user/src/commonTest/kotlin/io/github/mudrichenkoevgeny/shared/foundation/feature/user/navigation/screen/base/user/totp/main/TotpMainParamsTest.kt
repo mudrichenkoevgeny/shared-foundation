@@ -4,7 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.t
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class TotpMainParamsTest {
 
@@ -17,12 +16,12 @@ class TotpMainParamsTest {
     }
 
     @Test
-    fun `parse returns null for missing or invalid totpStep`() {
+    fun `parse returns default totpStep for missing or invalid totpStep`() {
         val emptyParsed = TotpMainParams.parse(emptyMap())
-        assertNull(emptyParsed.totpStep)
+        assertEquals(TotpStep.DEFAULT, emptyParsed.totpStep)
 
         val invalidParsed = TotpMainParams.parse(mapOf(UserNavigationPaths.TOTP_STEP to "invalid"))
-        assertNull(invalidParsed.totpStep)
+        assertEquals(TotpStep.DEFAULT, invalidParsed.totpStep)
     }
 
     @Test

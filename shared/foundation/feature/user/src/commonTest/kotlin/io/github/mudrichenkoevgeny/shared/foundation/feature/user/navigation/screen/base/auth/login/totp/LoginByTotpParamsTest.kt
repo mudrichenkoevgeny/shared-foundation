@@ -21,22 +21,22 @@ class LoginByTotpParamsTest {
     }
 
     @Test
-    fun `parse returns null for missing or invalid values`() {
+    fun `parse returns default mode for missing or invalid values`() {
         val emptyParsed = LoginByTotpParams.parse(emptyMap())
         assertNull(emptyParsed.mfaToken)
-        assertNull(emptyParsed.loginByTotpMode)
+        assertEquals(LoginByTotpMode.DEFAULT, emptyParsed.loginByTotpMode)
 
         val invalidMode = LoginByTotpParams.parse(mapOf(UserNavigationPaths.LOGIN_BY_TOTP_MODE to "invalid_mode"))
-        assertNull(invalidMode.loginByTotpMode)
+        assertEquals(LoginByTotpMode.DEFAULT, invalidMode.loginByTotpMode)
     }
 
     @Test
     fun `serialize and toQueryMap produce correct map`() {
-        val model = LoginByTotpParams(mfaToken = "mfa_123", loginByTotpMode = LoginByTotpMode.TOTP)
+        val model = LoginByTotpParams(mfaToken = "mfa_123", loginByTotpMode = LoginByTotpMode.RECOVERY_CODE)
         val serialized = model.toQueryMap()
 
         assertEquals(listOf("mfa_123"), serialized[SecurityApiFields.MFA_TOKEN])
-        assertEquals(listOf("totp"), serialized[UserNavigationPaths.LOGIN_BY_TOTP_MODE])
+        assertEquals(listOf("recovery_code"), serialized[UserNavigationPaths.LOGIN_BY_TOTP_MODE])
         assertEquals(serialized, LoginByTotpParams.serialize(model))
     }
 }

@@ -145,10 +145,15 @@ To ensure type-safe, multiplatform string localization across Backend (JVM), Web
   - Keys with placeholders generate Kotlin `fun` functions (and TS methods accepting named object or positional arguments).
 
 ### 10.3. Generated Kotlin Code (`build/generated/sources/localization`)
-- **Bundle Classes (`*Strings.kt`):** Strongly typed bundle wrappers (e.g., `ErrorsStrings`, `UiStrings`) accepting `LocalizedStringResolver` and `locale: String`.
-- **Module Facade Classes (`*ModuleStrings.kt`):** Module-level facades aggregating all bundle classes for that module (e.g., `CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`).
+- **Bundle Classes (`*Strings.kt`):** Strongly typed bundle wrappers (e.g., `ErrorsStrings`, `UiStrings`) accepting `LocalizedStringResolver` and `locale: String`. Automatically registers its module embedded resources with `LocalizationRegistry` in `init`.
+- **Module Facade Classes (`*ModuleStrings.kt`):** Module-level facades aggregating all bundle classes for that module (e.g., `CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`). Accepts default parameters (`resolver = DefaultLocalizedStringResolver()`, `locale = CommonLocales.DEFAULT`) and auto-registers module resources in `init`.
+- **Embedded Localization Objects (`*EmbeddedLocalizationResources.kt`):** Generated `internal object <ModulePrefix>EmbeddedLocalizationResources : LocalizationBundleProvider` embedding all string maps directly into compiled Kotlin bytecode. Uses separate private functions per bundle/locale for lazy memory allocation.
 - **Core Abstractions (`core/common`):**
   - `LocalizedStringResolver`: Interface `resolve(modulePath: String, bundleName: String, key: String, locale: String): String?`.
+  - `LocalizationBundleProvider`: Interface `get(module: String, file: String, locale: String): Map<String, String>?`.
+  - `LocalizationRegistry`: Thread-safe singleton `LocalizationRegistry.register(module, provider)` maintaining module bundle providers with O(1) direct map lookup.
+  - `DefaultLocalizedStringResolver`: Out-of-the-box thread-safe resolver with in-memory caching and BCP 47 fallback chain (`locale -> language -> CommonLocales.DEFAULT`). Resolves from `LocalizationRegistry` and supports partial key overrides via optional `resourceLoader`.
+  - `CommonLocales`: Standard BCP 47 language code constants (`ENGLISH = "en"`, `RUSSIAN = "ru"`, `DEFAULT = "en"`).
   - `LocalizationFormatter`: Public object providing `{placeholder}` string interpolation via `format(template: String, params: Map<String, Any>): String`.
 
 ### 10.4. Generated Web / TypeScript Code (`tools/npm-generator`)

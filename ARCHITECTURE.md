@@ -278,4 +278,44 @@ The library provides 11 strongly-typed navigation objects across two main hierar
 - **`ManagementSecurityNavigation`** (`core/security`): Password policies, lockout rules, rate limits, and IP restriction settings (`SecuritySettings`).
 - **`ManagementSettingsNavigation`** (`core/settings`): System-wide global settings and version requirements (`GlobalSettings`).
 
+## 6. Localization Architecture & Resolution Flow
+
+This diagram illustrates the compile-time code generation and runtime resolution flow for localized strings across all multiplatform targets.
+
+```mermaid
+flowchart TD
+    subgraph BuildTime ["Compile-Time (GenerateLocalizationTask)"]
+        JsonFiles["JSON Bundles\n(resources/localization/*)"]
+        GradleTask["GenerateLocalizationTask"]
+        BundleClasses["Generated *Strings.kt & *ModuleStrings.kt"]
+        EmbeddedResources["Generated <ModulePrefix>EmbeddedLocalizationResources"]
+    end
+
+    subgraph Runtime ["Runtime Resolution"]
+        Registry["LocalizationRegistry\n(O(1) Map by Module)"]
+        Resolver["DefaultLocalizedStringResolver\n(Concurrent Map Caching & BCP 47 Fallback)"]
+        ConsumerCall["Client Call\n(e.g., userStrings.ui.login)"]
+        CustomLoader["Optional Custom resourceLoader\n(Partial Key Overrides)"]
+    end
+
+    JsonFiles -->|Scanned by| GradleTask
+    GradleTask -->|Generates| BundleClasses
+    GradleTask -->|Embeds String Maps into| EmbeddedResources
+    BundleClasses -->|Auto-Registers in init| Registry
+    ConsumerCall -->|Queries| BundleClasses
+    BundleClasses -->|Delegates to| Resolver
+    Resolver -->|Checks Custom| CustomLoader
+    Resolver -->|O(1) Module Lookup| Registry
+    Registry -->|Fetches Embedded Strings| EmbeddedResources
+```
+
+### Core Localization Contracts & Helper Index
+
+- **`LocalizedStringResolver`**: Functional interface `resolve(module, file, key, locale): String?` implemented by resolvers.
+- **`LocalizationBundleProvider`**: Functional interface `get(module, file, locale): Map<String, String>?` supplying module string maps.
+- **`LocalizationRegistry`**: Thread-safe registry (`LocalizationRegistry.register(module, provider)`) maintaining module embedded resources with O(1) map lookup.
+- **`DefaultLocalizedStringResolver`**: Out-of-the-box thread-safe resolver with in-memory caching and BCP 47 fallback chain (`locale -> language -> CommonLocales.DEFAULT`). Resolves from `LocalizationRegistry` and supports partial key overrides via optional `resourceLoader`.
+- **`CommonLocales`**: Standard BCP 47 locale constants (`ENGLISH = "en"`, `RUSSIAN = "ru"`, `DEFAULT = "en"`).
+
+
 

@@ -19,41 +19,39 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
     - Screen parameter contracts & parsers: [NavigationScreenParams] marker interface; [NavigationScreenParamsParser] contract interface for bidirectional parameter serialization; [NavigationRouteUrlMapper] utility for building URLs with parameter maps; [QueryParamNormalizer] and [PhoneParamNormalizer] for parameter normalization.
 - **Localization Infrastructure:**
     - [LocalizedStringResolver]: Functional contract interface `resolve(modulePath: String, bundleName: String, key: String, locale: String): String?` implemented by client applications to load resource bundles from classpath, assets, or native bundles.
+    - [LocalizationBundleProvider]: Functional contract supplying localization bundle maps (`get(module, file, locale)`).
+    - [LocalizationRegistry]: Thread-safe registry (`LocalizationRegistry.register(provider)`) maintaining module localization bundle providers.
     - [LocalizationFormatter]: Core formatting object replacing `{placeholder}` tokens in string templates (`format(template, params)`).
+    - Embedded localization: Each module automatically registers its embedded `<ModulePrefix>EmbeddedLocalizationResources` with `LocalizationRegistry`. Out-of-the-box `DefaultLocalizedStringResolver` resolves embedded strings without external resource loaders and supports partial key overrides via optional custom `resourceLoader`.
     - Generated module facades: [CommonModuleStrings], [ErrorsStrings], and [UiStrings] for type-safe access to `core/common` localized strings.
 - **Validation hints:** [RequiredField], [NotBlankStringField], [NotEmptyCollectionField] in [NetworkFieldAnnotations] (runtime interpretation is outside this module unless you add validators).
 
-## Platform Integration Guidelines for `LocalizedStringResolver`
+## Localization Integration Guidelines
 
-To integrate localized string Resolution in client and server applications, implement `LocalizedStringResolver` according to target platform capabilities:
+Localization strings across all modules (`core/common`, `core/security`, `feature/user`) are embedded directly into compiled Kotlin library binaries (`JAR` and `KLIB`) at compile-time.
 
-### 1. Ktor / Backend (JVM)
-Read JSON resource files directly from the JVM classpath:
+### 1. Out-of-the-Box Usage (Zero Config)
+All module facades (`CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`) default to `DefaultLocalizedStringResolver()` and `CommonLocales.DEFAULT`:
 ```kotlin
-class ClasspathLocalizedStringResolver : LocalizedStringResolver {
-    override fun resolve(modulePath: String, bundleName: String, key: String, locale: String): String? {
-        val resourcePath = "localization/$modulePath/$locale/$bundleName.json"
-        val stream = Thread.currentThread().contextClassLoader.getResourceAsStream(resourcePath) ?: return null
-        val jsonContent = stream.bufferedReader().use { it.readText() }
-        return parseJsonFlatMap(jsonContent)[key]
-    }
-}
+// Works out of the box across all KMP targets (JVM, Android, iOS, Wasm, Desktop):
+val commonStrings = CommonModuleStrings()
+val userStrings = UserModuleStrings(locale = CommonLocales.RUSSIAN)
+
+val retryText = commonStrings.ui.retry // "Повторить"
 ```
 
-### 2. Android / Compose Multiplatform
-Resolve JSON resources via `ClassLoader`, Android `AssetsManager`, or inject via DI (e.g. Koin):
+### 2. Optional Custom Resource Overriding
+If a client application needs to partially override string keys from external assets, classpath files, or remote JSON, supply a custom `resourceLoader` lambda to `DefaultLocalizedStringResolver`:
+
 ```kotlin
-class AndroidAssetsLocalizedStringResolver(private val context: Context) : LocalizedStringResolver {
-    override fun resolve(modulePath: String, bundleName: String, key: String, locale: String): String? {
-        val assetPath = "localization/$modulePath/$locale/$bundleName.json"
-        return try {
-            val jsonContent = context.assets.open(assetPath).bufferedReader().use { it.readText() }
-            parseJsonFlatMap(jsonContent)[key]
-        } catch (e: Exception) {
-            null
-        }
+val customResolver = DefaultLocalizedStringResolver(
+    resourceLoader = { path ->
+        // Return custom JSON content string or null to fall back to embedded library strings
+        loadCustomOverrideJsonOrNull(path)
     }
-}
+)
+
+val userStrings = UserModuleStrings(resolver = customResolver, locale = "ru")
 ```
 
 ### 3. iOS (KMP Native)

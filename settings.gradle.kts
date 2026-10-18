@@ -54,7 +54,7 @@ val featureModules = listOf(
 )
 registerModules("$groupBase.feature", featureModules)
 
-registerModules(groupBase, listOf("bom"))
+registerModules(groupBase, listOf("bom", "testing"))
 
 include(":tools:npm-generator")
 project(":tools:npm-generator").projectDir = file("tools/npm-generator")

@@ -20,12 +20,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.detail.ManagementAuditEventDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list.ManagementAuditEventListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.localization.CommonLocales
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.CommonNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client.ClientMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management.ManagementSettingsNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.email.EmailTemplate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.UserNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
@@ -63,6 +65,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.theme.ThemeMode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -258,7 +261,7 @@ fun main() {
             ?.takeIf { it.isNotBlank() && it != "unspecified" }
             ?: System.getenv("PACKAGE_VERSION")
             ?: parseRootBuildGradleVersion(rootDir)
-            ?: "0.0.68"
+            ?: "0.0.71"
 
         val packageJson = """
         {
@@ -824,6 +827,7 @@ private val routeClasses = listOf(
 )
 
 private val contractClasses = listOf(
+    CommonLocales::class,
     CommonApiFields::class,
     SecurityApiFields::class,
     GlobalSettingsApiFields::class,
@@ -866,6 +870,7 @@ private val permClasses = listOf(
 )
 
 private val enumClasses = listOf(
+    ThemeMode::class,
     ClientType::class,
     SortOrder::class,
     AccountLockoutType::class,
@@ -1035,6 +1040,7 @@ private fun sortDomainToDtoTopologically(
 }
 
 private val rawDtoClasses = listOf(
+    EmailTemplate::class,
     ApiErrorResponse::class,
     ClientDeviceInfoPayload::class,
     AccountLockoutPolicyPayload::class,
@@ -2805,7 +2811,47 @@ private fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
         jsSb.append("    this.$fieldName = new ${moduleData.facadeClassName}(resolver, locale);\n")
     }
-    jsSb.append("  }\n}\n")
+    jsSb.append("  }\n}\n\n")
+
+    // Global Singletons & SharedLocalization Configuration
+    jsSb.append("""
+        let _globalLocale = 'en';
+        let _globalResolver = defaultLocalizedStringResolver;
+
+        export const SharedLocalization = {
+          setLocale(locale) {
+            if (locale) _globalLocale = locale;
+          },
+          getLocale() {
+            return _globalLocale;
+          },
+          setResolver(resolver) {
+            if (resolver) _globalResolver = resolver;
+          },
+          getResolver() {
+            return _globalResolver;
+          }
+        };
+
+        export const sharedLocalization = new Proxy({}, {
+          get(_, prop) {
+            return new SharedFoundationLocalization(_globalResolver, _globalLocale)[prop];
+          }
+        });
+
+    """.trimIndent()).append("\n")
+
+    modulesList.forEach { moduleData ->
+        val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
+        jsSb.append("""
+            export const $singletonName = new Proxy({}, {
+              get(_, prop) {
+                return new ${moduleData.facadeClassName}(_globalResolver, _globalLocale)[prop];
+              }
+            });
+
+        """.trimIndent()).append("\n")
+    }
 
 
     val dtsSb = StringBuilder()
@@ -2869,7 +2915,7 @@ private fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         """.trimIndent()).append("\n")
         moduleData.bundles.forEach { bundleData ->
             val fieldName = bundleData.bundleName.split('_').joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }.decapitalizeFirstLetter()
-            dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
+            jsSb.append("  readonly $fieldName: ${bundleData.className};\n")
         }
         dtsSb.append("}\n\n")
     }
@@ -2883,7 +2929,24 @@ private fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
         dtsSb.append("  readonly $fieldName: ${moduleData.facadeClassName};\n")
     }
-    dtsSb.append("}\n")
+    dtsSb.append("}\n\n")
+
+    dtsSb.append("""
+        export declare const SharedLocalization: {
+          setLocale(locale: string): void;
+          getLocale(): string;
+          setResolver(resolver: LocalizedStringResolver): void;
+          getResolver(): LocalizedStringResolver;
+        };
+
+        export declare const sharedLocalization: SharedFoundationLocalization;
+
+    """.trimIndent()).append("\n")
+
+    modulesList.forEach { moduleData ->
+        val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
+        dtsSb.append("export declare const $singletonName: ${moduleData.facadeClassName};\n")
+    }
 
     return Pair(jsSb.toString(), dtsSb.toString())
 }

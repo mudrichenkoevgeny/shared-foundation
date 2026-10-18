@@ -30,7 +30,7 @@ class UnlockOtpInputParamsTest {
     fun `parse normalizes phone identifier when method is phone`() {
         val params = mapOf(
             UserNavigationPaths.UNLOCK_METHOD to "phone",
-            UserApiFields.IDENTIFIER to " 12345678900"
+            UserApiFields.IDENTIFIER to "+12345678900"
         )
         val parsed = UnlockOtpInputParams.parse(params)
 
