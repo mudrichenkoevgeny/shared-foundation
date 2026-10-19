@@ -2915,7 +2915,7 @@ private fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         """.trimIndent()).append("\n")
         moduleData.bundles.forEach { bundleData ->
             val fieldName = bundleData.bundleName.split('_').joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }.decapitalizeFirstLetter()
-            jsSb.append("  readonly $fieldName: ${bundleData.className};\n")
+            dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
         }
         dtsSb.append("}\n\n")
     }
