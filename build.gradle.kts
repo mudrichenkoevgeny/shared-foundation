@@ -4,6 +4,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
@@ -16,8 +17,20 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.72"
+    version = "0.0.73"
 }
+
+val daemonJvmVersion: Int = run {
+    val daemonFile = rootProject.file("gradle/gradle-daemon-jvm.properties")
+    if (daemonFile.exists()) {
+        val properties = Properties().apply {
+            daemonFile.inputStream().use { load(it) }
+        }
+        properties.getProperty("toolchainVersion")?.toIntOrNull()
+    } else {
+        null
+    }
+} ?: libs.versions.jvmToolchain.get().toInt()
 
 subprojects {
     val isBom = project.name == "bom"
@@ -35,7 +48,7 @@ subprojects {
 
     plugins.withId("org.jetbrains.kotlin.multiplatform") {
         extensions.configure<KotlinMultiplatformExtension>("kotlin") {
-            jvmToolchain(libs.versions.jvmToolchain.get().toInt())
+            jvmToolchain(daemonJvmVersion)
             compilerOptions {
                 optIn.add(uuidExperimentalOptInFqcn)
             }
@@ -49,7 +62,7 @@ subprojects {
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
         extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension>("kotlin") {
-            jvmToolchain(libs.versions.jvmToolchain.get().toInt())
+            jvmToolchain(daemonJvmVersion)
         }
     }
 

@@ -290,9 +290,9 @@ fun main() {
         val npmReadme = """
         # @mudrichenkoevgeny/shared-foundation
 
-        TypeScript & Zod contracts, REST API routes, navigation screen routes, screen parameter schemas, error codes, permission models, runtime enums, branded types, and domain models generated directly from the [shared-foundation](https://github.com/mudrichenkoevgeny/shared-foundation) repository.
+        TypeScript & Zod contracts, REST API routes, navigation screen routes, screen parameter schemas, error codes, permission models, runtime enums, branded types, testing fixtures, and domain models generated directly from the [shared-foundation](https://github.com/mudrichenkoevgeny/shared-foundation) repository.
 
-        Provides type-safe REST/WS API contracts, Zod validation schemas, route constants, error codes, permission models, and domain types for Web, Node.js, and TypeScript applications (`web-platform-sdk`).
+        Provides type-safe REST/WS API contracts, Zod validation schemas, route constants, error codes, permission models, testing fixtures/constants, and domain types for Web, Node.js, and TypeScript applications.
 
         ## Installation
 
@@ -315,6 +315,7 @@ fun main() {
         - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, `TotpStep`, `UnlockMethod`, etc.).
         - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `UserErrorCodes`, `CommonErrorCodes`) and permission strings (`UserPermissionCode`, `SecurityPermissionCode`, `AuditPermissionCode`).
         - **Branded Types & Helpers**: Type-safe domain identifiers (`UserId`, `PermissionCode`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`) with converter helpers (`toUserIdOrThrow`, `toPermissionCodeOrNull`).
+        - **Testing Fixtures & Constants**: Ready-to-use testing constants (`TEST_*`), mock payload builders (`createTest*Payload`), and response factories (`createTestApiErrorResponse`) for unit and integration tests.
         - **Domain Models & Mappers**: Fully typed TS domain models (`UserSessionSummary`, `UserPrivate`, `AuditEventSummary`) and their runtime mappers from/to API payloads (`toUserPrivate`, `toUserPrivatePayload`, `toAuditEventSummary`).
         - **Localization (`SharedFoundationLocalization`, `*ModuleStrings`, `*Strings`)**: Type-safe localization bundle classes, string formatters (`formatLocalizedString`), and JSON resources (`localizationResources`) for `core/common`, `core/security`, and `feature/user`.
 
@@ -487,6 +488,8 @@ fun main() {
         val domainModelsAndMappersCode = generateDomainModelsAndMappersJs()
         val dtoCode = generateDtoSchemasAndTypes()
         val paramParsersJsCode = generateParamParsersAndSerializersJs()
+        val testingJsCode = generateTestingExportsJs()
+        val testingDtsCode = generateTestingExportsDts()
         val (localizationJsCode, localizationDtsCode) = generateLocalizationCode(rootDir)
 
         val fullJsContent = """
@@ -512,13 +515,15 @@ fun main() {
 
         $paramParsersJsCode
 
+        $testingJsCode
+
         $localizationJsCode
         """.trimIndent()
 
         File(outputDir, "index.js").writeText(fullJsContent)
         File(outputDir, "index.mjs").writeText(fullJsContent)
 
-        val dtsContent = generateDeclarationFile(localizationDtsCode)
+        val dtsContent = generateDeclarationFile(localizationDtsCode, testingDtsCode)
         File(outputDir, "index.d.ts").writeText(dtsContent)
 
         val localWebSdkDir = File(rootDir.parentFile, "web-platform-sdk/packages/core-common/src/generated")
@@ -1690,7 +1695,7 @@ private fun String.formatAsJsDoc(indent: String = ""): String {
     }
 }
 
-private fun generateDeclarationFile(localizationDtsCode: String): String {
+private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode: String): String {
     val routeDeclarations = routeClasses.joinToString("\n\n") { kClass ->
         val name = kClass.simpleName ?: ""
         val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
@@ -2018,6 +2023,8 @@ private fun generateDeclarationFile(localizationDtsCode: String): String {
     $dtoDeclarations
 
     ${generateParamParsersAndSerializersDts()}
+
+    $testingDtsCode
 
     $localizationDtsCode
     """.trimIndent()
@@ -2986,4 +2993,131 @@ private fun formatAsJsObject(obj: Any?): String {
 private fun String.indent(spaces: Int): String {
     val prefix = " ".repeat(spaces)
     return this.lines().joinToString("\n") { "$prefix$it" }
+}
+
+private fun generateTestingExportsJs(): String {
+    return """
+    export const TEST_USER_ID = "00000000-0000-0000-0000-000000000001";
+    export const TEST_USER_ID_2 = "00000000-0000-0000-0000-000000000002";
+    export const TEST_SESSION_ID = "00000000-0000-0000-0000-000000000010";
+    export const TEST_IDENTIFIER_ID = "00000000-0000-0000-0000-000000000020";
+    export const TEST_AUDIT_EVENT_ID = "00000000-0000-0000-0000-000000000099";
+    export const TEST_CLIENT_DEVICE_ID = "00000000-0000-0000-0000-000000000030";
+    export const TEST_PERMISSION_CODE = "test.permission.read";
+    export const TEST_DECRYPTED_STRING = "test_decrypted_secret";
+    export const TEST_ENCRYPTED_STRING = "test_encrypted_secret";
+    export const TEST_PASSWORD_HASH = "test_password_hash";
+    export const TEST_ACCESS_TOKEN = "test_access_token";
+    export const TEST_REFRESH_TOKEN = "test_refresh_token";
+    export const TEST_REFRESH_TOKEN_HASH = "test_refresh_token_hash";
+    export const TEST_IP_ADDRESS = "127.0.0.1";
+    export const TEST_USER_AGENT = "TestAgent/1.0 (Mobile; Android)";
+    export const TEST_EMAIL = "test.user@example.com";
+    export const TEST_PHONE = "+15550000000";
+    export const TEST_TIME_MILLIS = 1700000000000;
+
+    export const SharedTestConstants = {
+      TEST_IP_ADDRESS,
+      TEST_USER_AGENT,
+      TEST_EMAIL,
+      TEST_PHONE,
+      TEST_TIME_MILLIS
+    };
+
+    export const createTestUserSummaryPayload = (overrides = {}) => ({
+      id: TEST_USER_ID,
+      role: "user",
+      account_status: "active",
+      ...overrides
+    });
+
+    export const createTestUserPrivatePayload = (overrides = {}) => ({
+      id: TEST_USER_ID,
+      role: "user",
+      account_status: "active",
+      account_status_on_restore: null,
+      authority_level: 10,
+      permission_codes: [],
+      is_totp_enabled: false,
+      last_login_at: TEST_TIME_MILLIS,
+      last_active_at: TEST_TIME_MILLIS,
+      created_at: TEST_TIME_MILLIS,
+      updated_at: TEST_TIME_MILLIS,
+      scheduled_permanent_deletion_at: null,
+      lockout_type: "none",
+      temporary_lockout_until: null,
+      ...overrides
+    });
+
+    export const createTestAuditEventSummaryPayload = (overrides = {}) => ({
+      id: TEST_AUDIT_EVENT_ID,
+      actor_type: "user",
+      action: "user.login.email",
+      resource: "audit_event",
+      status: "success",
+      created_at: TEST_TIME_MILLIS,
+      ...overrides
+    });
+
+    export const createTestAuditEventPrivatePayload = (overrides = {}) => ({
+      id: TEST_AUDIT_EVENT_ID,
+      actor_id: TEST_USER_ID,
+      actor_type: "user",
+      actor_user_role: "user",
+      action: "user.login.email",
+      resource: "audit_event",
+      resource_id: TEST_USER_ID,
+      status: "success",
+      metadata: [],
+      message: "User logged in successfully",
+      created_at: TEST_TIME_MILLIS,
+      updated_at: null,
+      ...overrides
+    });
+
+    export const createTestApiErrorResponse = (overrides = {}) => ({
+      id: "err_12345",
+      code: "INTERNAL",
+      message: "Internal server error",
+      args: {},
+      ...overrides
+    });
+    """.trimIndent()
+}
+
+private fun generateTestingExportsDts(): String {
+    return """
+    export const TEST_USER_ID: string;
+    export const TEST_USER_ID_2: string;
+    export const TEST_SESSION_ID: string;
+    export const TEST_IDENTIFIER_ID: string;
+    export const TEST_AUDIT_EVENT_ID: string;
+    export const TEST_CLIENT_DEVICE_ID: string;
+    export const TEST_PERMISSION_CODE: string;
+    export const TEST_DECRYPTED_STRING: string;
+    export const TEST_ENCRYPTED_STRING: string;
+    export const TEST_PASSWORD_HASH: string;
+    export const TEST_ACCESS_TOKEN: string;
+    export const TEST_REFRESH_TOKEN: string;
+    export const TEST_REFRESH_TOKEN_HASH: string;
+    export const TEST_IP_ADDRESS: string;
+    export const TEST_USER_AGENT: string;
+    export const TEST_EMAIL: string;
+    export const TEST_PHONE: string;
+    export const TEST_TIME_MILLIS: number;
+
+    export const SharedTestConstants: {
+      readonly TEST_IP_ADDRESS: string;
+      readonly TEST_USER_AGENT: string;
+      readonly TEST_EMAIL: string;
+      readonly TEST_PHONE: string;
+      readonly TEST_TIME_MILLIS: number;
+    };
+
+    export declare function createTestUserSummaryPayload(overrides?: Partial<UserSummaryPayload>): UserSummaryPayload;
+    export declare function createTestUserPrivatePayload(overrides?: Partial<UserPrivatePayload>): UserPrivatePayload;
+    export declare function createTestAuditEventSummaryPayload(overrides?: Partial<AuditEventSummaryPayload>): AuditEventSummaryPayload;
+    export declare function createTestAuditEventPrivatePayload(overrides?: Partial<AuditEventPrivatePayload>): AuditEventPrivatePayload;
+    export declare function createTestApiErrorResponse(overrides?: Partial<ApiErrorResponse>): ApiErrorResponse;
+    """.trimIndent()
 }

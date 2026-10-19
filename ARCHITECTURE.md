@@ -14,6 +14,7 @@ graph TD
     core_settings["core/settings"]
     
     feature_user["feature/user"]
+    testing["testing"]
     
     core_audit --> core_common
     core_security --> core_audit
@@ -25,6 +26,12 @@ graph TD
     feature_user --> core_security
     feature_user --> core_audit
     feature_user --> core_common
+
+    testing --> feature_user
+    testing --> core_settings
+    testing --> core_security
+    testing --> core_audit
+    testing --> core_common
 ```
 
 ## 2. Surface Separation: Open, Self-Management, and Management

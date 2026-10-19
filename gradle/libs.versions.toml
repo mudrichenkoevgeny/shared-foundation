@@ -1,19 +1,19 @@
 [versions]
 # @keep
-jvmToolchain = "21"
+jvmToolchain = "25"
 # @keep
-android-compileSdk = "36"
+android-compileSdk = "37"
 # @keep
 android-minSdk = "24"
 
 # Plugins & Core
-kotlin = "2.3.20"
-androidGradlePlugin = "9.0.1"
-maven-publish-plugin = "0.36.0"
-dependency-analysis = "3.6.1"
+kotlin = "2.4.21"
+androidGradlePlugin = "9.4.1"
+maven-publish-plugin = "0.37.0"
+dependency-analysis = "3.19.2"
 
 # Kotlin
-kotlinx-serialization = "1.10.0"
+kotlinx-serialization = "1.11.0"
 
 [libraries]
 # Kotlin

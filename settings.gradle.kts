@@ -12,9 +12,12 @@ pluginManagement {
         mavenCentral()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 
 dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
     repositories {
         google {
             content {
@@ -25,6 +28,32 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        ivy {
+            name = "Node Distributions at https://nodejs.org/dist"
+            url = uri("https://nodejs.org/dist")
+            patternLayout {
+                artifact("v[revision]/[artifact]-v[revision]-[classifier].[ext]")
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeGroup("org.nodejs")
+            }
+        }
+        ivy {
+            name = "Yarn Distributions at https://github.com/yarnpkg/yarn/releases/download"
+            url = uri("https://github.com/yarnpkg/yarn/releases/download")
+            patternLayout {
+                artifact("v[revision]/[artifact]-v[revision].[ext]")
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeGroup("com.yarnpkg")
+            }
+        }
     }
 }
 
