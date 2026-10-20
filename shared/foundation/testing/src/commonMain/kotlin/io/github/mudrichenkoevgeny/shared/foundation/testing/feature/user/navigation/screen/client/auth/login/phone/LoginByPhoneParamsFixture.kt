@@ -8,7 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PH
  *
  * @param phone Pre-filled phone number string.
  */
-fun createTestClientLoginByPhoneParams(
+fun createTestLoginByPhoneParams(
     phone: String? = TEST_PHONE
 ): LoginByPhoneParams = LoginByPhoneParams(
     phone = phone

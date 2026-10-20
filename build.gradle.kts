@@ -17,7 +17,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.75"
+    version = "0.0.76"
 }
 
 val daemonJvmVersion: Int = run {
