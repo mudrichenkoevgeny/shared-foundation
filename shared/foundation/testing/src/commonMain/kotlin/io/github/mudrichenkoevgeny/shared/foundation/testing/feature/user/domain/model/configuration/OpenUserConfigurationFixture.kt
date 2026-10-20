@@ -8,6 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings.createTestOpenGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestOpenAuthSettings
 
+/**
+ * Creates a test [OpenUserConfiguration] domain instance.
+ *
+ * @param openGlobalSettings Global application settings for open clients ([OpenGlobalSettings]).
+ * @param openSecuritySettings Security settings for open clients ([OpenSecuritySettings]).
+ * @param openAuthSettings Authentication settings for open clients ([OpenAuthSettings]).
+ */
 fun createTestOpenUserConfiguration(
     openGlobalSettings: OpenGlobalSettings = createTestOpenGlobalSettings(),
     openSecuritySettings: OpenSecuritySettings = createTestOpenSecuritySettings(),

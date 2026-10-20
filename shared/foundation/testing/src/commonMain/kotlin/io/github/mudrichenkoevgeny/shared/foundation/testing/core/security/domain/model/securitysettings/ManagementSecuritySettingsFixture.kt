@@ -10,6 +10,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.otpconfirmation.createTestOtpConfirmation
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordpolicy.createTestManagementPasswordPolicy
 
+/**
+ * Creates a test [ManagementSecuritySettings] domain instance.
+ *
+ * @param recentAuthenticationValiditySecondsForOpenUser Session re-auth validity for open users.
+ * @param recentAuthenticationValiditySecondsForManagementUser Session re-auth validity for management users.
+ * @param passwordPolicy Password strength policy.
+ * @param otpConfirmation OTP code generation and retry rules.
+ * @param accountLockoutPolicy Account lockout rules for failed logins.
+ * @param accountLockoutCheckIntervalSeconds Interval for account lockout cleanup.
+ * @param openIpRestrictionPolicy IP restriction policy for open APIs.
+ * @param managementIpRestrictionPolicy IP restriction policy for management APIs.
+ * @param mfaTokenExpirationSeconds Expiration time in seconds for MFA setup tokens.
+ * @param maxRequestsPerPeriod Maximum rate-limit requests per period.
+ * @param rateLimitPeriodSeconds Duration in seconds of rate limit evaluation period.
+ * @param refreshTokenRotationGracePeriodSeconds Grace period in seconds for refresh token rotation.
+ */
 fun createTestManagementSecuritySettings(
     recentAuthenticationValiditySecondsForOpenUser: Int = 300,
     recentAuthenticationValiditySecondsForManagementUser: Int = 600,

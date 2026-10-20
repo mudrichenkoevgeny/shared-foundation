@@ -9,6 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolic
 
 /**
  * Configurable fake implementation of [PasswordPolicyValidator] for testing.
+ *
+ * @param failReasons List of fail reasons to return when validation fails.
  */
 class FakePasswordPolicyValidator(
     var failReasons: List<PasswordPolicyFailReason> = emptyList()

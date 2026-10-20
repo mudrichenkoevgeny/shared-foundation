@@ -3,6 +3,17 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.netw
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 
+/**
+ * Creates a test [ManagementGlobalSettingsPayload] wire object instance.
+ *
+ * @param privacyPolicyUrl URL of the privacy policy.
+ * @param termsOfServiceUrl URL of the terms of service.
+ * @param contactSupportEmail Contact support email address.
+ * @param minSupportedAppVersions Map of client type wire values to minimum supported app versions.
+ * @param isTracingEnabled Flag indicating whether tracing is enabled.
+ * @param isMetricsEnabled Flag indicating whether metrics collection is enabled.
+ * @param isVerboseLoggingEnabled Flag indicating whether verbose logging is enabled.
+ */
 fun createTestManagementGlobalSettingsPayload(
     privacyPolicyUrl: String? = "https://example.com/privacy",
     termsOfServiceUrl: String? = "https://example.com/terms",

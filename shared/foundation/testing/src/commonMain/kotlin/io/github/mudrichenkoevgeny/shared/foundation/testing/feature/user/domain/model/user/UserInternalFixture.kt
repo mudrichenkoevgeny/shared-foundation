@@ -9,6 +9,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import kotlin.time.Instant
 
+/**
+ * Creates a test [UserInternal] domain instance.
+ *
+ * @param id Unique user ID ([UserId]).
+ * @param role Assigned access role ([UserRole]).
+ * @param accountStatus Current account state ([UserAccountStatus]).
+ * @param accountStatusOnRestore Target account status on restore ([UserAccountStatus]).
+ * @param authorityLevel Hierarchical weight (0-100).
+ * @param permissionCodes Explicit permission codes assigned.
+ * @param isTotpEnabled Whether TOTP 2FA is active.
+ * @param lastLoginAt Last authentication timestamp.
+ * @param lastActiveAt Last activity timestamp.
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ * @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
+ * @param lockoutType Category of lockout ([AccountLockoutType]).
+ * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
+ */
 fun createTestUserInternal(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,

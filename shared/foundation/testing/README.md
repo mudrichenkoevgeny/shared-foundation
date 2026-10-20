@@ -16,7 +16,11 @@ Comprehensive testing infrastructure, mock factories, test fixtures, determinist
    Domain value classes expose both top-level string constants (`TEST_*`) and constructor factories (`createTest*()`).
 4. **Navigation Parameter Fixtures:**
    All screen route parameter classes have corresponding test builders (`createTest*Params()`) for testing router logic, deep link parsing, and screen state.
-5. **In-Memory Fakes:**
+5. **Deterministic Collection Generators (`createTest*List` / `createTest*PayloadList`):**
+   Generates lists of domain models and network payloads with 0-based deterministic IDs (`usr_1`, `usr_2`...), alternating enum properties, and mathematical time shifts (`TEST_TIME_MILLIS + (index * 60_000)`).
+6. **Auto-Calculated `createTestPagedResult`:**
+   Creates `PagedResult<T>` wrappers with auto-computed `totalCount`, `pageSize`, and `totalPages` (returning `0` totalPages when `totalCount == 0`).
+7. **In-Memory Fakes:**
    - **`FakeLocalizedStringResolver`** — Predictable localized string resolution.
    - **`FakeLocalizationBundleProvider`** — In-memory bundle provider for testing localization fallbacks.
    - **`FakePasswordPolicyValidator`** — Configurable password policy validator.
@@ -78,6 +82,26 @@ val user = createTestUserPrivate(
 val payload = createTestUserPrivatePayload(
     role = "admin"
 )
+```
+
+### 2. Generating Collections & Paged Results
+
+```kotlin
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.listing.createTestPagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserSummaryList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user.createTestUserSummaryPayloadList
+
+// Generates a list of 3 users with deterministic IDs (usr_1, usr_2, usr_3) and 1-minute time shifts
+val users = createTestUserSummaryList(count = 3)
+
+// Wraps items into a PagedResult with auto-calculated totalPages = 1
+val pagedUsers = createTestPagedResult(
+    items = users,
+    pageSize = 20
+)
+
+// Generates a list of 2 DTO payloads with raw String IDs
+val userPayloads = createTestUserSummaryPayloadList(count = 2)
 ```
 
 ### 2. Using Navigation Parameter Fixtures

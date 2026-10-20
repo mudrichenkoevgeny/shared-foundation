@@ -25,6 +25,8 @@ object AcceptAnyStringAuditResourceDelegate : AuditResourceType {
 
 /**
  * Creates a permissive [CompositeAuditResourceTypeParser] for testing, accepting any string resource.
+ *
+ * @param delegate Delegate audit resource type used for parsing.
  */
 fun createTestCompositeAuditResourceTypeParser(
     delegate: AuditResourceType = AcceptAnyStringAuditResourceDelegate

@@ -8,6 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings.createTestOpenGlobalSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings.createTestOpenAuthSettingsPayload
 
+/**
+ * Creates a test [OpenUserConfigurationPayload] wire object instance.
+ *
+ * @param openGlobalSettings Global settings payload for open clients ([OpenGlobalSettingsPayload]).
+ * @param openSecuritySettings Security settings payload for open clients ([OpenSecuritySettingsPayload]).
+ * @param openAuthSettings Auth settings payload for open clients ([OpenAuthSettingsPayload]).
+ */
 fun createTestOpenUserConfigurationPayload(
     openGlobalSettings: OpenGlobalSettingsPayload = createTestOpenGlobalSettingsPayload(),
     openSecuritySettings: OpenSecuritySettingsPayload = createTestOpenSecuritySettingsPayload(),

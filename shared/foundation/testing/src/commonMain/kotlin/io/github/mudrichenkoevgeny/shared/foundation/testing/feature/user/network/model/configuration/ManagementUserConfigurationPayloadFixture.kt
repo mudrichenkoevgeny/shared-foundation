@@ -8,6 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings.createTestManagementGlobalSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings.createTestManagementAuthSettingsPayload
 
+/**
+ * Creates a test [ManagementUserConfigurationPayload] wire object instance.
+ *
+ * @param managementGlobalSettings Global settings payload for management ([ManagementGlobalSettingsPayload]).
+ * @param managementSecuritySettings Security settings payload for management ([ManagementSecuritySettingsPayload]).
+ * @param managementAuthSettings Auth settings payload for management ([ManagementAuthSettingsPayload]).
+ */
 fun createTestManagementUserConfigurationPayload(
     managementGlobalSettings: ManagementGlobalSettingsPayload = createTestManagementGlobalSettingsPayload(),
     managementSecuritySettings: ManagementSecuritySettingsPayload = createTestManagementSecuritySettingsPayload(),

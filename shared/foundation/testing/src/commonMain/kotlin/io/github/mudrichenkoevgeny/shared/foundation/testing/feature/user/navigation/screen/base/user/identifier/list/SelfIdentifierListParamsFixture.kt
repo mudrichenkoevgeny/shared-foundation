@@ -7,6 +7,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListAction
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.list.SelfIdentifierListParams
 
+/**
+ * Creates a test [SelfIdentifierListParams] navigation params instance.
+ *
+ * @param action Trigger action ([SelfIdentifierListAction]).
+ * @param pageNumber 1-based page index.
+ * @param pageSize Number of items per page.
+ * @param sortBy Sort field ([UserIdentifierSortBy]).
+ * @param sortOrder Sort direction ([SortOrder]).
+ * @param userAuthProviders Filter provider list ([UserAuthProvider]).
+ * @param identifiers Filter identifiers list.
+ */
 fun createTestSelfIdentifierListParams(
     action: SelfIdentifierListAction? = null,
     pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,

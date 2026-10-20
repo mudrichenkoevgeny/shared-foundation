@@ -8,6 +8,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.globallist.ManagementUserListParams
 
+/**
+ * Creates a test [ManagementUserListParams] navigation params instance.
+ *
+ * @param pageNumber 1-based page index.
+ * @param pageSize Number of items per page.
+ * @param sortBy Sort field ([UserSortBy]).
+ * @param sortOrder Sort direction ([SortOrder]).
+ * @param userRoles Filter user access roles list ([UserRole]).
+ * @param accountStatuses Filter account status list ([UserAccountStatus]).
+ * @param accountStatusesOnRestore Filter account status on restore list ([UserAccountStatus]).
+ * @param accountLockoutTypes Filter account lockout type list ([AccountLockoutType]).
+ * @param authorityLevelFrom Lower bound for authority level filter.
+ * @param authorityLevelTo Upper bound for authority level filter.
+ * @param isTotpEnabled Filter by TOTP 2FA enabled flag.
+ * @param permissionCodes Filter by permission code strings list.
+ */
 fun createTestManagementUserListParams(
     pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
     pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,

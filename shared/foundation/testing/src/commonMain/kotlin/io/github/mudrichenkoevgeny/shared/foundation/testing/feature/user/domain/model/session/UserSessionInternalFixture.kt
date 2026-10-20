@@ -18,6 +18,26 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
+/**
+ * Creates a test [UserSessionInternal] domain instance.
+ *
+ * @param id Unique session ID ([UserSessionId]).
+ * @param userId Owning user ID ([UserId]).
+ * @param userRole Access role ([UserRole]).
+ * @param identifier Credential string.
+ * @param identifierId Credential ID ([UserIdentifierId]).
+ * @param identifierDisplayName Display name of identifier.
+ * @param identifierAuthProvider Provider category ([UserAuthProvider]).
+ * @param clientDeviceInfo Client device info ([ClientDeviceInfo]).
+ * @param userAgent User agent string.
+ * @param ipAddress IP address.
+ * @param refreshTokenHash Refresh token hash ([RefreshTokenHash]).
+ * @param expiresAt Expiration timestamp.
+ * @param lastAccessedAt Last activity timestamp.
+ * @param lastReauthenticatedAt Last re-authentication timestamp.
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ */
 fun createTestUserSessionInternal(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),

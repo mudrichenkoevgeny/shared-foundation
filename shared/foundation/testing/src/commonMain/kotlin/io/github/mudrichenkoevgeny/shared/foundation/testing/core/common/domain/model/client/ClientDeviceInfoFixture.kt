@@ -5,6 +5,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.toClientDeviceIdOrNull
 
+/**
+ * Creates a test [ClientDeviceInfo] domain instance.
+ *
+ * @param deviceId Client device ID.
+ * @param deviceName Name of the client device.
+ * @param clientType Type of the client platform.
+ * @param language Preferred language code.
+ * @param appVersion Version of the client application.
+ * @param operationSystemVersion Version of the operating system.
+ */
 fun createTestClientDeviceInfo(
     deviceId: ClientDeviceId? = "dev_123456".toClientDeviceIdOrNull(),
     deviceName: String? = "Test Device",

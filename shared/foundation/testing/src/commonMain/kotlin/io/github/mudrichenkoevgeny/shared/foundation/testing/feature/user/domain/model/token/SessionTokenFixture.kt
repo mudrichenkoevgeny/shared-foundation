@@ -11,6 +11,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.createTestUserSessionId
 import kotlin.time.Instant
 
+/**
+ * Creates a test [SessionToken] domain instance.
+ *
+ * @param accessToken Access token ([AccessToken]).
+ * @param refreshToken Refresh token ([RefreshToken]).
+ * @param expiresAt Access token expiration timestamp.
+ * @param tokenType Authorization header token type string.
+ * @param sessionId Associated session ID ([UserSessionId]).
+ * @param identifierId Associated identifier ID ([UserIdentifierId]).
+ */
 fun createTestSessionToken(
     accessToken: AccessToken = createTestAccessToken(),
     refreshToken: RefreshToken = createTestRefreshToken(),

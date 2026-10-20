@@ -7,8 +7,27 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import kotlin.time.Instant
 
+/**
+ * Creates a test [UserPrivate] instance with default mock properties for unit testing.
+ *
+ * @param id Unique user ID ([UserId]).
+ * @param role Assigned access role ([UserRole]).
+ * @param accountStatus Current account state ([UserAccountStatus]).
+ * @param accountStatusOnRestore Target account status on restore ([UserAccountStatus]).
+ * @param authorityLevel Hierarchical weight (0-100).
+ * @param permissionCodes Explicit permission codes assigned.
+ * @param isTotpEnabled Whether TOTP 2FA is active.
+ * @param lastLoginAt Last authentication timestamp.
+ * @param lastActiveAt Last activity timestamp.
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ * @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
+ * @param lockoutType Category of lockout ([AccountLockoutType]).
+ * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
+ */
 fun createTestUserPrivate(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,
@@ -40,3 +59,24 @@ fun createTestUserPrivate(
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil
 )
+
+/**
+ * Creates a list of test [UserPrivate] instances with deterministic index-based IDs (`usr_1`, `usr_2`, ...)
+ * and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
+fun createTestUserPrivateList(
+    count: Int = 2,
+    generator: (index: Int) -> UserPrivate = { index ->
+        val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
+        createTestUserPrivate(
+            id = createTestUserId("usr_${index + 1}"),
+            createdAt = Instant.fromEpochMilliseconds(createdAtMs),
+            updatedAt = Instant.fromEpochMilliseconds(createdAtMs + 30_000L),
+            lastLoginAt = Instant.fromEpochMilliseconds(createdAtMs + 15_000L),
+            lastActiveAt = Instant.fromEpochMilliseconds(createdAtMs + 15_000L)
+        )
+    }
+): List<UserPrivate> = createTestList(count, generator)

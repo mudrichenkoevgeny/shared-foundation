@@ -25,6 +25,8 @@ object AcceptAnyStringAuditActionDelegate : AuditActionType {
 
 /**
  * Creates a permissive [CompositeAuditActionTypeParser] for testing, accepting any string action.
+ *
+ * @param delegate Delegate audit action type used for parsing.
  */
 fun createTestCompositeAuditActionTypeParser(
     delegate: AuditActionType = AcceptAnyStringAuditActionDelegate

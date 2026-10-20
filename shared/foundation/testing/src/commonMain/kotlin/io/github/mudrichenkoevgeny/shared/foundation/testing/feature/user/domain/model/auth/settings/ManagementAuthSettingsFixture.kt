@@ -5,6 +5,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.emailrestriction.EmailRestrictionPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.emailrestriction.createTestEmailRestrictionPolicy
 
+/**
+ * Creates a test [ManagementAuthSettings] domain instance.
+ *
+ * @param availableAuthProviders List of supported authentication providers ([AvailableAuthProviders]).
+ * @param maxTotalIdentifiers Maximum allowed identifiers per account.
+ * @param maxEmailIdentifiers Maximum allowed email identifiers per account.
+ * @param maxPhoneIdentifiers Maximum allowed phone identifiers per account.
+ * @param maxIdentifiersPerExternalProvider Maximum identifiers per OAuth provider.
+ * @param maxActiveSessionsForOpenUser Maximum active sessions allowed for open users.
+ * @param maxActiveSessionsForManagementUser Maximum active sessions allowed for management users.
+ * @param accessTokenExpirationSeconds Access token validity period in seconds.
+ * @param refreshTokenExpirationSeconds Refresh token validity period in seconds.
+ * @param accountDeletionGracePeriodSeconds Grace period in seconds before account deletion.
+ * @param accountDeletionCheckIntervalSeconds Check interval in seconds for soft-deleted accounts.
+ * @param isRegistrationEnabled Flag indicating whether public user registration is open.
+ * @param openEmailRestrictionPolicy Email domain restriction policy for open APIs.
+ * @param managementEmailRestrictionPolicy Email domain restriction policy for management APIs.
+ */
 fun createTestManagementAuthSettings(
     availableAuthProviders: AvailableAuthProviders = createTestAvailableAuthProviders(),
     maxTotalIdentifiers: Int = 10,

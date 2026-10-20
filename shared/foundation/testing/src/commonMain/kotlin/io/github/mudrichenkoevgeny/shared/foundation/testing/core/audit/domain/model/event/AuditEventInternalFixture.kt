@@ -15,6 +15,23 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TI
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 import kotlin.time.Instant
 
+/**
+ * Creates a test [AuditEventInternal] instance with default mock properties for unit testing.
+ *
+ * @param id Unique audit event ID ([AuditEventId]).
+ * @param actorId ID of the actor initiating the action.
+ * @param actorType Actor category ([AuditActorType]).
+ * @param actorUserRole User role if applicable.
+ * @param action Executed action ([AuditActionType]).
+ * @param resource Target resource category ([AuditResourceType]).
+ * @param resourceId Target resource ID.
+ * @param resourceValueSensitivity Sensitivity level of resource value ([AuditValueSensitivity]).
+ * @param status Outcome status ([AuditStatus]).
+ * @param metadata Additional metadata entries.
+ * @param message Human-readable log message.
+ * @param createdAt Event timestamp.
+ * @param updatedAt Modification timestamp.
+ */
 fun createTestAuditEventInternal(
     id: AuditEventId = createTestAuditEventId(),
     actorId: String? = TEST_USER_ID,

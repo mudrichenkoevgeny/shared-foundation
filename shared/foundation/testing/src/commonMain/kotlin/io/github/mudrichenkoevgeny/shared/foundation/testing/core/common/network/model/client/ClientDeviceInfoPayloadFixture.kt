@@ -3,6 +3,16 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.networ
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 
+/**
+ * Creates a test [ClientDeviceInfoPayload] wire object instance.
+ *
+ * @param clientType Type of client platform.
+ * @param language Preferred language code.
+ * @param deviceId Client device ID.
+ * @param deviceName Name of the client device.
+ * @param appVersion Version of the client application.
+ * @param operationSystemVersion Version of the operating system.
+ */
 fun createTestClientDeviceInfoPayload(
     clientType: String? = ClientType.ANDROID.value,
     language: String? = "en-US",

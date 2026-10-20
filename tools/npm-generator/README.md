@@ -23,6 +23,7 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
    - **Runtime Enums**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditStatus`, `TotpStep`, `UnlockMethod`, etc.).
    - **Runtime Mappers**: Mapping functions (`toAuditEventSummary`, `toUserPrivatePayload`).
    - **Polymorphic Composite Parsers**: Runtime parsers (`CompositeAuditActionTypeParser`, `CompositeAuditMetadataKeyParser`, `CompositeAuditResourceTypeParser`).
+   - **Testing Fixtures & Collection Generators**: Ready-to-use constants (`TEST_*`), mock factories (`createTestUserSummary`, `createTestUserPrivatePayload`), auto-calculating `createTestPagedResult<T>`, generic helper `createTestList<T>`, and deterministic collection generators (`createTest<Entity>List`, `createTest<Entity>PayloadList`) with 0-based index IDs, alternating providers/devices, and time shifting (`TEST_TIME_MILLIS + index * 60_000`).
    - **Localization Bundles & Formatters**: Raw JSON dictionary constant (`localizationResources`), string template formatter (`formatLocalizedString`), default resolver (`defaultLocalizedStringResolver`), bundle classes, and module facades.
 4. **`README.md`**: Comprehensive documentation for NPM package consumers with installation instructions, module-by-module navigation route & Zod parameter schema (`*ParamsSchema`) index, and code examples for Zod validation, REST API calls, and router search parameter parsing.
 

@@ -8,6 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings.createTestManagementGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestManagementAuthSettings
 
+/**
+ * Creates a test [ManagementUserConfiguration] domain instance.
+ *
+ * @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
+ * @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
+ * @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
+ */
 fun createTestManagementUserConfiguration(
     managementGlobalSettings: ManagementGlobalSettings = createTestManagementGlobalSettings(),
     managementSecuritySettings: ManagementSecuritySettings = createTestManagementSecuritySettings(),

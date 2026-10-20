@@ -7,6 +7,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.scree
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 
+/**
+ * Creates a test [ManagementAuditEventListParams] navigation params instance.
+ *
+ * @param pageNumber 1-based page index.
+ * @param pageSize Number of items per page.
+ * @param sortBy Sort field ([AuditEventSortBy]).
+ * @param sortOrder Sort direction ([SortOrder]).
+ * @param actorIds Filter actor IDs list.
+ * @param actorTypes Filter actor types list ([AuditActorType]).
+ * @param actorUserRoles Filter actor user roles list.
+ * @param actions Filter audit actions list.
+ * @param resources Filter audit resources list.
+ * @param resourceIds Filter resource IDs list.
+ * @param statuses Filter audit statuses list ([AuditStatus]).
+ * @param messages Filter audit messages list.
+ */
 fun createTestManagementAuditEventListParams(
     pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
     pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,

@@ -119,13 +119,13 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm pack ./build/npm-package --pack-destination ./build/npm-package
    ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.0.73.tgz` will be created inside `build/npm-package/`.
+   The archive `mudrichenkoevgeny-shared-foundation-0.0.74.tgz` will be created inside `build/npm-package/`.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.73.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.74.tgz'
    ```
    And run from the root directory:
    ```bash

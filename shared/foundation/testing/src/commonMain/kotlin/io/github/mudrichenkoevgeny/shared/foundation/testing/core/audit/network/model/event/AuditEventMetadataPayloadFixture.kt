@@ -5,6 +5,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.met
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventMetadataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP_ADDRESS
 
+/**
+ * Creates a test [AuditEventMetadataPayload] wire object instance.
+ *
+ * @param key Metadata key wire string.
+ * @param value Metadata value string.
+ * @param valueSensitivity Metadata value sensitivity wire string.
+ */
 fun createTestAuditEventMetadataPayload(
     key: String = CommonAuditMetadataKey.IP_ADDRESS.value,
     value: String = TEST_IP_ADDRESS,

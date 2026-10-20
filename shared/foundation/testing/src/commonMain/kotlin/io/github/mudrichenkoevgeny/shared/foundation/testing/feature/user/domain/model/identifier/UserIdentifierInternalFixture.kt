@@ -11,6 +11,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
+/**
+ * Creates a test [UserIdentifierInternal] domain instance.
+ *
+ * @param id Unique identifier ID ([UserIdentifierId]).
+ * @param userId Owning user ID ([UserId]).
+ * @param userAuthProvider Provider category ([UserAuthProvider]).
+ * @param identifier Raw credential identifier string.
+ * @param displayName Non-null display name.
+ * @param externalProviderEmail External email address if available.
+ * @param passwordHash Password hash if applicable ([PasswordHash]).
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ */
 fun createTestUserIdentifierInternal(
     id: UserIdentifierId = createTestUserIdentifierId(),
     userId: UserId = createTestUserId(),

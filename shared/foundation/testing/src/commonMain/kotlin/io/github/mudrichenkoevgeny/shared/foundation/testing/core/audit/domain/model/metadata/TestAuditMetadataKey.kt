@@ -15,6 +15,9 @@ data class TestAuditMetadataKey(
     override fun parseOrThrow(value: String): AuditMetadataKey = TestAuditMetadataKey(value, valueSensitivity)
 }
 
+/**
+ * Permissive delegate that parses any incoming string into a [TestAuditMetadataKey].
+ */
 object AcceptAnyStringAuditMetadataKeyDelegate : AuditMetadataKey {
     override val value: String = "__test_metadata_key_delegate__"
     override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
@@ -24,6 +27,8 @@ object AcceptAnyStringAuditMetadataKeyDelegate : AuditMetadataKey {
 
 /**
  * Creates a permissive [CompositeAuditMetadataKeyParser] for tests, accepting any string key.
+ *
+ * @param delegate Delegate audit metadata key used for parsing.
  */
 fun createTestCompositeAuditMetadataKeyParser(
     delegate: AuditMetadataKey = AcceptAnyStringAuditMetadataKeyDelegate
