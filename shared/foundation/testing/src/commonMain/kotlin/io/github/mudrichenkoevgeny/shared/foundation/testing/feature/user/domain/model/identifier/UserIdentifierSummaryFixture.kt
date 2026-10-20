@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.i
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 
 /**
@@ -32,7 +33,7 @@ fun createTestUserIdentifierSummary(
 )
 
 /**
- * Creates a list of test [UserIdentifierSummary] instances with deterministic index-based IDs (`ident_1`, ...),
+ * Creates a list of test [UserIdentifierSummary] instances with deterministic index-based UUIDs,
  * and alternating auth providers.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -43,8 +44,8 @@ fun createTestUserIdentifierSummaryList(
     generator: (index: Int) -> UserIdentifierSummary = { index ->
         val isEmail = index % 2 == 0
         createTestUserIdentifierSummary(
-            id = createTestUserIdentifierId("ident_${index + 1}"),
-            userId = createTestUserId("usr_${index + 1}"),
+            id = createTestUserIdentifierId(generateTestUuidString(index = index, group = 1)),
+            userId = createTestUserId(generateTestUuidString(index = index, group = 2)),
             userAuthProvider = if (isEmail) UserAuthProvider.EMAIL else UserAuthProvider.GOOGLE,
             identifier = if (isEmail) "user${index + 1}@example.com" else "+1555000000${index + 1}",
             displayName = if (isEmail) "Email Identifier" else "Google Account"

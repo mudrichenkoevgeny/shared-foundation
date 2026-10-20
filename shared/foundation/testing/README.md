@@ -29,9 +29,21 @@ Comprehensive testing infrastructure, mock factories, test fixtures, determinist
 
 ## Installation & Consumption
 
-### Gradle (Kotlin Multiplatform / JVM / Android)
+### Gradle Version Catalog Configuration
 
-Add `:shared:foundation:testing` as a test dependency:
+When adding the artifact to `gradle/libs.versions.toml`, it is recommended to use the suffix `-fixtures` (or similar) instead of `-testing`. This avoids naming conflicts with the built-in Gradle `Project.testing` extension (from `jvm-test-suite`) when resolving accessors in the root `dependencies { ... }` block of JVM modules:
+
+```toml
+[libraries]
+# Recommended alias (prevents conflict with Gradle TestingExtension)
+shared-foundation-fixtures = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-testing", version.ref = "shared-foundation" }
+```
+
+*Note: If you must use the `shared-foundation-testing` alias, JVM projects will require an explicit call via `libs.findLibrary("shared-foundation-testing").get()` inside the `dependencies` block.*
+
+### Usage in Gradle Build Scripts
+
+**Kotlin Multiplatform (KMP) modules:**
 
 ```kotlin
 // build.gradle.kts
@@ -40,9 +52,18 @@ kotlin {
         commonTest.dependencies {
             implementation(project(":shared:foundation:testing"))
             // or via Published Artifact:
-            // implementation("io.github.mudrichenkoevgeny:shared-foundation-testing")
+            // implementation(libs.shared.foundation.fixtures)
         }
     }
+}
+```
+
+**JVM / Android modules:**
+
+```kotlin
+// build.gradle.kts
+dependencies {
+    testImplementation(libs.shared.foundation.fixtures)
 }
 ```
 
@@ -104,7 +125,7 @@ val pagedUsers = createTestPagedResult(
 val userPayloads = createTestUserSummaryPayloadList(count = 2)
 ```
 
-### 2. Using Navigation Parameter Fixtures
+### 3. Using Navigation Parameter Fixtures
 
 ```kotlin
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.email.createTestLoginByEmailParams
@@ -114,7 +135,7 @@ val params = createTestLoginByEmailParams(
 )
 ```
 
-### 3. Using Fakes
+### 4. Using Fakes
 
 ```kotlin
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator.FakePasswordPolicyValidator

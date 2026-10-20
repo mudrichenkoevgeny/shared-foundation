@@ -10,7 +10,7 @@ class UserIdTest {
 
     @Test
     fun `parsing roundtrips from dash-hex string`() {
-        val uuidString = "123e4567-e89b-12d3-a456-426614174000"
+        val uuidString = "00000000-0000-4000-8000-000000000001"
         val userId = UserId(Uuid.parse(uuidString))
         assertEquals(userId, userId.asHexDashString().toUserIdOrNull())
     }

@@ -7,16 +7,21 @@ import kotlin.test.assertNull
 
 class SessionDetailParamsTest {
 
+    private companion object {
+        const val TEST_SESSION_ID = "00000000-0000-4000-8000-000000000010"
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
+    }
+
     @Test
     fun `parse extracts sessionId and userId correctly`() {
         val params = mapOf(
-            UserApiPaths.SESSION_ID to "123e4567-e89b-12d3-a456-426614174000",
-            UserApiPaths.USER_ID to "123e4567-e89b-12d3-a456-426614174001"
+            UserApiPaths.SESSION_ID to TEST_SESSION_ID,
+            UserApiPaths.USER_ID to TEST_USER_ID
         )
         val parsed = SessionDetailParams.parse(params)
 
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.sessionId)
-        assertEquals("123e4567-e89b-12d3-a456-426614174001", parsed.userId)
+        assertEquals(TEST_SESSION_ID, parsed.sessionId)
+        assertEquals(TEST_USER_ID, parsed.userId)
     }
 
     @Test
@@ -30,8 +35,8 @@ class SessionDetailParamsTest {
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
         val model = SessionDetailParams(
-            sessionId = "123e4567-e89b-12d3-a456-426614174000",
-            userId = "123e4567-e89b-12d3-a456-426614174001"
+            sessionId = TEST_SESSION_ID,
+            userId = TEST_USER_ID
         )
         val serialized = model.toQueryMap()
 

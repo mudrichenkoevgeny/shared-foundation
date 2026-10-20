@@ -12,6 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata.createTestAuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 import kotlin.time.Instant
 
@@ -60,7 +61,7 @@ fun createTestAuditEventPrivate(
 )
 
 /**
- * Creates a list of test [AuditEventPrivate] instances with deterministic index-based IDs (`evt_1`, `evt_2`, ...),
+ * Creates a list of test [AuditEventPrivate] instances with deterministic index-based UUIDs,
  * alternating status, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -71,7 +72,9 @@ fun createTestAuditEventPrivateList(
     generator: (index: Int) -> AuditEventPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestAuditEventPrivate(
-            id = createTestAuditEventId("evt_${index + 1}"),
+            id = createTestAuditEventId(generateTestUuidString(index = index, group = 1)),
+            actorId = generateTestUuidString(index = index, group = 2),
+            resourceId = generateTestUuidString(index = index, group = 3),
             status = if (index % 2 == 0) AuditStatus.SUCCESS else AuditStatus.FAILED,
             createdAt = Instant.fromEpochMilliseconds(createdAtMs)
         )

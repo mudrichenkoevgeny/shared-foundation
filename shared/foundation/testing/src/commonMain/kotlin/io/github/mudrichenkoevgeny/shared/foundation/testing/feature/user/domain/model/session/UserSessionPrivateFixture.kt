@@ -13,6 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TI
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client.createTestClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.createTestUserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
@@ -74,7 +75,7 @@ fun createTestUserSessionPrivate(
 )
 
 /**
- * Creates a list of test [UserSessionPrivate] instances with deterministic index-based IDs (`sess_1`, `sess_2`, ...),
+ * Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,
  * alternating devices, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -96,8 +97,8 @@ fun createTestUserSessionPrivateList(
             operationSystemVersion = "macOS 14.0"
         )
         createTestUserSessionPrivate(
-            id = createTestUserSessionId("sess_${index + 1}"),
-            userId = createTestUserId("usr_${index + 1}"),
+            id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
+            userId = createTestUserId(generateTestUuidString(index = index, group = 2)),
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL else UserAuthProvider.GOOGLE,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
             userAgent = if (isEven) winAgent else macAgent,

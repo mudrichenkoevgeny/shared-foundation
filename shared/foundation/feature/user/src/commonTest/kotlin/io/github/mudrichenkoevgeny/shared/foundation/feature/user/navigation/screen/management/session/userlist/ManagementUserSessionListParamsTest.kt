@@ -13,10 +13,14 @@ import kotlin.test.assertEquals
 
 class ManagementUserSessionListParamsTest {
 
+    private companion object {
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
+    }
+
     @Test
     fun `parse extracts user session list params correctly`() {
         val params = mapOf(
-            UserApiPaths.USER_ID to "123e4567-e89b-12d3-a456-426614174000",
+            UserApiPaths.USER_ID to TEST_USER_ID,
             ListingParamNames.Pagination.PAGE_NUMBER to "1",
             ListingParamNames.Pagination.PAGE_SIZE to "20",
             UserFilterValues.UserSessionFilterValues.USER_ROLE to listOf("user"),
@@ -24,8 +28,8 @@ class ManagementUserSessionListParamsTest {
         )
         val parsed = ManagementUserSessionListParams.parse(params)
 
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.userId)
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.typedUserId?.asHexDashString())
+        assertEquals(TEST_USER_ID, parsed.userId)
+        assertEquals(TEST_USER_ID, parsed.typedUserId?.asHexDashString())
         assertEquals(1, parsed.pageNumber)
         assertEquals(20, parsed.pageSize)
         assertEquals(listOf(UserRole.USER), parsed.userRoles)
@@ -35,7 +39,7 @@ class ManagementUserSessionListParamsTest {
     @Test
     fun `serialize and toQueryMap produce correct map`() {
         val model = ManagementUserSessionListParams(
-            userId = "123e4567-e89b-12d3-a456-426614174000",
+            userId = TEST_USER_ID,
             pageNumber = 2,
             pageSize = 50,
             sortBy = UserSessionSortBy.UPDATED_AT,

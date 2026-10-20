@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
@@ -46,7 +47,7 @@ fun createTestUserIdentifierPrivate(
 )
 
 /**
- * Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based IDs (`ident_1`, ...),
+ * Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,
  * alternating providers, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -58,8 +59,8 @@ fun createTestUserIdentifierPrivateList(
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEmail = index % 2 == 0
         createTestUserIdentifierPrivate(
-            id = createTestUserIdentifierId("ident_${index + 1}"),
-            userId = createTestUserId("usr_${index + 1}"),
+            id = createTestUserIdentifierId(generateTestUuidString(index = index, group = 1)),
+            userId = createTestUserId(generateTestUuidString(index = index, group = 2)),
             userAuthProvider = if (isEmail) UserAuthProvider.EMAIL else UserAuthProvider.GOOGLE,
             identifier = if (isEmail) "user${index + 1}@example.com" else "+1555000000${index + 1}",
             displayName = if (isEmail) "Email Identifier" else "Google Account",

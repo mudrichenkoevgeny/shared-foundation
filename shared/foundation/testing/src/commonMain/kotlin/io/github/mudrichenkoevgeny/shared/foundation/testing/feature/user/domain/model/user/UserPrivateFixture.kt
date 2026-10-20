@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import kotlin.time.Instant
 
 /**
@@ -61,7 +62,7 @@ fun createTestUserPrivate(
 )
 
 /**
- * Creates a list of test [UserPrivate] instances with deterministic index-based IDs (`usr_1`, `usr_2`, ...)
+ * Creates a list of test [UserPrivate] instances with deterministic index-based UUIDs
  * and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -72,7 +73,7 @@ fun createTestUserPrivateList(
     generator: (index: Int) -> UserPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestUserPrivate(
-            id = createTestUserId("usr_${index + 1}"),
+            id = createTestUserId(generateTestUuidString(index)),
             createdAt = Instant.fromEpochMilliseconds(createdAtMs),
             updatedAt = Instant.fromEpochMilliseconds(createdAtMs + 30_000L),
             lastLoginAt = Instant.fromEpochMilliseconds(createdAtMs + 15_000L),

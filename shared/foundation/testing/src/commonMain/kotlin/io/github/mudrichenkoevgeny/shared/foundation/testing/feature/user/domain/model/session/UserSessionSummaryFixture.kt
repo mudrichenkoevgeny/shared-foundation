@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client.createTestClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
@@ -41,7 +42,7 @@ fun createTestUserSessionSummary(
 )
 
 /**
- * Creates a list of test [UserSessionSummary] instances with deterministic index-based IDs (`sess_1`, `sess_2`, ...),
+ * Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,
  * alternating devices, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -61,8 +62,8 @@ fun createTestUserSessionSummaryList(
             operationSystemVersion = "macOS 14.0"
         )
         createTestUserSessionSummary(
-            id = createTestUserSessionId("sess_${index + 1}"),
-            userId = createTestUserId("usr_${index + 1}"),
+            id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
+            userId = createTestUserId(generateTestUuidString(index = index, group = 2)),
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL else UserAuthProvider.GOOGLE,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
             clientDeviceInfo = if (isEven) winDevice else macDevice,

@@ -3,15 +3,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventId
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.toAuditEventIdOrThrow
 
-/**
- * Default audit event ID string for unit testing.
- */
-const val TEST_AUDIT_EVENT_ID = "00000000-0000-0000-0000-000000000099"
+/** Default deterministic audit event ID string for unit tests. */
+const val TEST_AUDIT_EVENT_ID = "00000000-0000-4000-8000-000000000099"
 
 /**
- * Creates a test [AuditEventId] domain instance.
+ * Creates a test [AuditEventId] instance for unit testing.
  *
- * @param value Raw audit event ID string.
+ * @param value String representation of the UUID (defaults to [TEST_AUDIT_EVENT_ID]).
  */
 fun createTestAuditEventId(
     value: String = TEST_AUDIT_EVENT_ID

@@ -3,15 +3,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
 
-/**
- * Default user identifier ID string for unit testing.
- */
-const val TEST_IDENTIFIER_ID = "00000000-0000-0000-0000-000000000020"
+/** Default deterministic user identifier ID string for unit tests. */
+const val TEST_IDENTIFIER_ID = "00000000-0000-4000-8000-000000000020"
 
 /**
- * Creates a test [UserIdentifierId] domain instance.
+ * Creates a test [UserIdentifierId] instance for unit testing.
  *
- * @param value Raw identifier ID string.
+ * @param value String representation of the UUID (defaults to [TEST_IDENTIFIER_ID]).
  */
 fun createTestUserIdentifierId(
     value: String = TEST_IDENTIFIER_ID

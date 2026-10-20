@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
@@ -44,7 +45,7 @@ fun createTestUserIdentifierPrivatePayload(
 )
 
 /**
- * Creates a list of test [UserIdentifierPrivatePayload] wire objects with deterministic raw IDs (`ident_1`, ...),
+ * Creates a list of test [UserIdentifierPrivatePayload] wire objects with deterministic raw UUIDs,
  * alternating providers, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -56,8 +57,8 @@ fun createTestUserIdentifierPrivatePayloadList(
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEmail = index % 2 == 0
         createTestUserIdentifierPrivatePayload(
-            id = "ident_${index + 1}",
-            userId = "usr_${index + 1}",
+            id = generateTestUuidString(index = index, group = 1),
+            userId = generateTestUuidString(index = index, group = 2),
             userAuthProvider = if (isEmail) UserAuthProvider.EMAIL.value else UserAuthProvider.GOOGLE.value,
             identifier = if (isEmail) "user${index + 1}@example.com" else "+1555000000${index + 1}",
             displayName = if (isEmail) "Email Identifier" else "Google Account",

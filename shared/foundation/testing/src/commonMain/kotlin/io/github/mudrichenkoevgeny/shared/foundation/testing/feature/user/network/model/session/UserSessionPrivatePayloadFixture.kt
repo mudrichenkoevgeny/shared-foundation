@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client.createTestClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.TEST_SESSION_ID
@@ -71,7 +72,7 @@ fun createTestUserSessionPrivatePayload(
 )
 
 /**
- * Creates a list of test [UserSessionPrivatePayload] wire objects with deterministic raw IDs (`sess_1`, `sess_2`, ...),
+ * Creates a list of test [UserSessionPrivatePayload] wire objects with deterministic raw UUIDs,
  * alternating devices, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -85,8 +86,8 @@ fun createTestUserSessionPrivatePayloadList(
         val winAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36"
         val macAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15"
         createTestUserSessionPrivatePayload(
-            id = "sess_${index + 1}",
-            userId = "usr_${index + 1}",
+            id = generateTestUuidString(index),
+            userId = generateTestUuidString(index),
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL.value else UserAuthProvider.GOOGLE.value,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
             userAgent = if (isEven) winAgent else macAgent,

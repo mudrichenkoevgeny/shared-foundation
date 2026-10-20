@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event.TEST_AUDIT_EVENT_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
@@ -56,7 +57,7 @@ fun createTestAuditEventPrivatePayload(
 )
 
 /**
- * Creates a list of test [AuditEventPrivatePayload] wire objects with deterministic raw IDs (`evt_1`, `evt_2`, ...),
+ * Creates a list of test [AuditEventPrivatePayload] wire objects with deterministic raw UUIDs,
  * alternating status, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -67,7 +68,9 @@ fun createTestAuditEventPrivatePayloadList(
     generator: (index: Int) -> AuditEventPrivatePayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestAuditEventPrivatePayload(
-            id = "evt_${index + 1}",
+            id = generateTestUuidString(index = index, group = 1),
+            actorId = generateTestUuidString(index = index, group = 2),
+            resourceId = generateTestUuidString(index = index, group = 3),
             status = if (index % 2 == 0) AuditStatus.SUCCESS.value else AuditStatus.FAILED.value,
             createdAt = createdAtMs
         )

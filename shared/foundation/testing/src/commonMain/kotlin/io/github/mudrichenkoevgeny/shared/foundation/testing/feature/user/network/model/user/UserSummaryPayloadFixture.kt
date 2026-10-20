@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
@@ -24,7 +25,7 @@ fun createTestUserSummaryPayload(
 )
 
 /**
- * Creates a list of test [UserSummaryPayload] wire objects with deterministic raw IDs (`usr_1`, `usr_2`, ...).
+ * Creates a list of test [UserSummaryPayload] wire objects with deterministic raw UUIDs.
  *
  * @param count Number of elements to generate (defaults to 2).
  * @param generator Custom item builder receiving 0-based element index.
@@ -33,7 +34,7 @@ fun createTestUserSummaryPayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserSummaryPayload = { index ->
         createTestUserSummaryPayload(
-            id = "usr_${index + 1}",
+            id = generateTestUuidString(index),
             role = UserRole.USER.value,
             accountStatus = UserAccountStatus.ACTIVE.value
         )

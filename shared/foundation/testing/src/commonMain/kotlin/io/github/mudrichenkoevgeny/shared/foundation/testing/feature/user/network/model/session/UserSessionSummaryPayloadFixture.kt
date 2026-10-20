@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client.createTestClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.TEST_SESSION_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
@@ -39,7 +40,7 @@ fun createTestUserSessionSummaryPayload(
 )
 
 /**
- * Creates a list of test [UserSessionSummaryPayload] wire objects with deterministic raw IDs (`sess_1`, `sess_2`, ...),
+ * Creates a list of test [UserSessionSummaryPayload] wire objects with deterministic raw UUIDs,
  * alternating devices, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -51,8 +52,8 @@ fun createTestUserSessionSummaryPayloadList(
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEven = index % 2 == 0
         createTestUserSessionSummaryPayload(
-            id = "sess_${index + 1}",
-            userId = "usr_${index + 1}",
+            id = generateTestUuidString(index),
+            userId = generateTestUuidString(index),
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL.value else UserAuthProvider.GOOGLE.value,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
             clientDeviceInfo = createTestClientDeviceInfoPayload(

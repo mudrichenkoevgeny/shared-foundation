@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.74"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.75"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-With a version catalog: declare BOM and module aliases in `gradle/libs.versions.toml`, then use `implementation(platform(libs.shared.foundation.bom))` and `testImplementation(libs.shared.foundation.testing)`.
+With a version catalog: declare BOM and module aliases in `gradle/libs.versions.toml`, then use `implementation(platform(libs.shared.foundation.bom))` and `testImplementation(libs.shared.foundation.fixtures)`.
 
 ### Web / TypeScript (NPM)
 
@@ -59,6 +59,8 @@ Published artifacts (versions aligned via the BOM):
 The library provides ready-to-use test data builders (`createTest*`), deterministic constants, value class factories, screen parameter fixtures, and in-memory fakes.
 
 You can include `:shared:foundation:testing` in your `testImplementation` / `commonTest.dependencies` (or import from `@mudrichenkoevgeny/shared-foundation` in npm) to use these pre-built fixtures in unit and integration tests instead of writing custom mocks.
+
+> **Note on Gradle Version Catalog (`libs.versions.toml`)**: When defining an alias for the testing module, it is recommended to use the suffix `-fixtures` (e.g. `shared-foundation-fixtures = { ... name = "shared-foundation-testing" }`) instead of `-testing` to prevent naming conflicts with the built-in Gradle `Project.testing` extension in JVM modules. See the [testing README](shared/foundation/testing/README.md) for details.
 
 ## Documentation & Architecture
 

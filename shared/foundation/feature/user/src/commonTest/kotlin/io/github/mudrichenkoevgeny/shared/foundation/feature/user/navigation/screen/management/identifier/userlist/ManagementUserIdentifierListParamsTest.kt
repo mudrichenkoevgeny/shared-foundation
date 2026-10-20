@@ -11,18 +11,22 @@ import kotlin.test.assertEquals
 
 class ManagementUserIdentifierListParamsTest {
 
+    private companion object {
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
+    }
+
     @Test
     fun `parse extracts user identifier list params correctly`() {
         val params = mapOf(
-            UserApiPaths.USER_ID to "123e4567-e89b-12d3-a456-426614174000",
+            UserApiPaths.USER_ID to TEST_USER_ID,
             ListingParamNames.Pagination.PAGE_NUMBER to "1",
             ListingParamNames.Pagination.PAGE_SIZE to "20",
             UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER to listOf("email")
         )
         val parsed = ManagementUserIdentifierListParams.parse(params)
 
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.userId)
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.typedUserId?.asHexDashString())
+        assertEquals(TEST_USER_ID, parsed.userId)
+        assertEquals(TEST_USER_ID, parsed.typedUserId?.asHexDashString())
         assertEquals(1, parsed.pageNumber)
         assertEquals(20, parsed.pageSize)
         assertEquals(listOf(UserAuthProvider.EMAIL), parsed.userAuthProviders)
@@ -31,7 +35,7 @@ class ManagementUserIdentifierListParamsTest {
     @Test
     fun `serialize and toQueryMap produce correct map`() {
         val model = ManagementUserIdentifierListParams(
-            userId = "123e4567-e89b-12d3-a456-426614174000",
+            userId = TEST_USER_ID,
             pageNumber = 2,
             pageSize = 50,
             sortBy = UserIdentifierSortBy.UPDATED_AT,

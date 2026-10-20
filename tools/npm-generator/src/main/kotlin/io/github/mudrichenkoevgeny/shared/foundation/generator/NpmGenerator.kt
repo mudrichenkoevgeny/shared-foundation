@@ -440,7 +440,7 @@ fun main() {
         } from '@mudrichenkoevgeny/shared-foundation';
 
         // REST API Path for fetching audit event details
-        const eventId = '123e4567-e89b-12d3-a456-426614174000';
+        const eventId = '00000000-0000-4000-8000-000000000099';
         const url = ManagementAuditRoutes.GET_AUDIT_EVENT.replace(`{${AuditApiPaths.EVENT_ID}}`, eventId);
         ```
 
@@ -462,7 +462,7 @@ fun main() {
             return;
           }
 
-          const userId = toUserIdOrThrow('123e4567-e89b-12d3-a456-426614174000');
+          const userId = toUserIdOrThrow('00000000-0000-4000-8000-000000000001');
         }
         ```
 
@@ -3116,12 +3116,12 @@ private fun getAllExportableTestClasses(): List<KClass<*>> {
 
 private fun generateTestFixturesJs(): String {
     val constantsJs = """
-    export const TEST_USER_ID = "00000000-0000-0000-0000-000000000001";
-    export const TEST_USER_ID_2 = "00000000-0000-0000-0000-000000000002";
-    export const TEST_SESSION_ID = "00000000-0000-0000-0000-000000000010";
-    export const TEST_IDENTIFIER_ID = "00000000-0000-0000-0000-000000000020";
-    export const TEST_AUDIT_EVENT_ID = "00000000-0000-0000-0000-000000000099";
-    export const TEST_CLIENT_DEVICE_ID = "00000000-0000-0000-0000-000000000030";
+    export const TEST_USER_ID = "00000000-0000-4000-8000-000000000001";
+    export const TEST_USER_ID_2 = "00000000-0000-4000-8000-000000000002";
+    export const TEST_SESSION_ID = "00000000-0000-4000-8000-000000000010";
+    export const TEST_IDENTIFIER_ID = "00000000-0000-4000-8000-000000000020";
+    export const TEST_AUDIT_EVENT_ID = "00000000-0000-4000-8000-000000000099";
+    export const TEST_CLIENT_DEVICE_ID = "00000000-0000-4000-8000-000000000030";
     export const TEST_PERMISSION_CODE = "test.permission.read";
     export const TEST_DECRYPTED_STRING = "test_decrypted_secret";
     export const TEST_ENCRYPTED_STRING = "test_encrypted_secret";
@@ -3134,6 +3134,14 @@ private fun generateTestFixturesJs(): String {
     export const TEST_EMAIL = "test.user@example.com";
     export const TEST_PHONE = "+15550000000";
     export const TEST_TIME_MILLIS = 1700000000000;
+
+    export const generateTestUuidString = (index = 0, group = 0) => {
+      if (index < 0) throw new Error(`Index must be non-negative: ${'$'}{index}`);
+      if (group < 0) throw new Error(`Group must be non-negative: ${'$'}{group}`);
+      const groupHex = group.toString(16).padStart(8, '0');
+      const indexHex = (index + 1).toString(16).padStart(12, '0');
+      return `${'$'}{groupHex}-0000-4000-8000-${'$'}{indexHex}`;
+    };
 
     export const SharedTestConstants = {
       TEST_IP_ADDRESS,
@@ -3222,7 +3230,7 @@ private fun generateTestFixturesJs(): String {
             "UserPrivate", "UserSummary", "UserPrivatePayload", "UserSummaryPayload" -> """
               const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
               return createTest$className({
-                id: ${if (isPayload) "`usr_${'$'}{index + 1}`" else "toUserIdOrThrow(`usr_${'$'}{index + 1}`)"},
+                id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserIdOrThrow(generateTestUuidString(index, 1))"},
                 email: `user${'$'}{index + 1}@example.com`,
                 ${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
                 ${if (isPayload) "updated_at" else "updatedAt"}: createdAtMs + 30000,
@@ -3235,8 +3243,8 @@ private fun generateTestFixturesJs(): String {
             "UserIdentifierPrivate", "UserIdentifierSummary", "UserIdentifierPrivatePayload", "UserIdentifierSummaryPayload" -> """
               const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
               return createTest$className({
-                id: ${if (isPayload) "`ident_${'$'}{index + 1}`" else "toUserIdentifierIdOrThrow(`ident_${'$'}{index + 1}`)"},
-                ${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "`usr_${'$'}{index + 1}`" else "toUserIdOrThrow(`usr_${'$'}{index + 1}`)"},
+                id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserIdentifierIdOrThrow(generateTestUuidString(index, 1))"},
+                ${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "generateTestUuidString(index, 2)" else "toUserIdOrThrow(generateTestUuidString(index, 2))"},
                 ${if (isPayload) "user_auth_provider" else "userAuthProvider"}: index % 2 === 0 ? "email" : "google",
                 identifier: index % 2 === 0 ? `user${'$'}{index + 1}@example.com` : `+1555000000${'$'}{index + 1}`,
                 ${if (isPayload) "display_name" else "displayName"}: index % 2 === 0 ? "Email Identifier" : "Google Account",
@@ -3249,8 +3257,8 @@ private fun generateTestFixturesJs(): String {
             "UserSessionPrivate", "UserSessionSummary", "UserSessionPrivatePayload", "UserSessionSummaryPayload" -> """
               const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
               return createTest$className({
-                id: ${if (isPayload) "`sess_${'$'}{index + 1}`" else "toUserSessionIdOrThrow(`sess_${'$'}{index + 1}`)"},
-                ${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "`usr_${'$'}{index + 1}`" else "toUserIdOrThrow(`usr_${'$'}{index + 1}`)"},
+                id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserSessionIdOrThrow(generateTestUuidString(index, 1))"},
+                ${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "generateTestUuidString(index, 2)" else "toUserIdOrThrow(generateTestUuidString(index, 2))"},
                 ${if (isPayload) "user_agent" else "userAgent"}: index % 2 === 0 ? "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15",
                 ${if (isPayload) "client_device_info" else "clientDeviceInfo"}: index % 2 === 0 ? ${if (isPayload) "createTestClientDeviceInfoPayload({ device_name: \"Windows PC\", operation_system_version: \"Windows 10\" })" else "createTestClientDeviceInfo({ deviceName: \"Windows PC\", operationSystemVersion: \"Windows 10\" })"} : ${if (isPayload) "createTestClientDeviceInfoPayload({ device_name: \"MacBook Pro\", operation_system_version: \"macOS 14.0\" })" else "createTestClientDeviceInfo({ deviceName: \"MacBook Pro\", operationSystemVersion: \"macOS 14.0\" })"},
                 ${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
@@ -3264,7 +3272,7 @@ private fun generateTestFixturesJs(): String {
             "AuditEventPrivate", "AuditEventSummary", "AuditEventPrivatePayload", "AuditEventSummaryPayload" -> """
               const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
               return createTest$className({
-                id: ${if (isPayload) "`evt_${'$'}{index + 1}`" else "toAuditEventIdOrThrow(`evt_${'$'}{index + 1}`)"},
+                id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toAuditEventIdOrThrow(generateTestUuidString(index, 1))"},
                 status: index % 2 === 0 ? "success" : "failed",
                 ${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
                 ...itemOverrides
@@ -3312,6 +3320,13 @@ private fun generateTestFixturesDts(): String {
      * @param overrides Partial properties or overrides for PagedResult.
      */
     export declare function createTestPagedResult<T>(overrides?: Partial<PagedResult<T>>): PagedResult<T>;
+
+    /**
+     * Generates a deterministic, valid 36-character UUID string (hex with dashes).
+     * @param index Used for the last 12 characters (increment).
+     * @param group Used for the first 8 characters (to separate entity types).
+     */
+    export declare function generateTestUuidString(index?: number, group?: number): string;
 
     /** Default test user ID string (UUID format). */
     export const TEST_USER_ID: string;

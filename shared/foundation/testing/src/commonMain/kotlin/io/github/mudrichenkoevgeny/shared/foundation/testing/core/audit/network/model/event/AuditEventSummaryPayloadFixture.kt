@@ -8,6 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event.TEST_AUDIT_EVENT_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 
 /**
  * Creates a test [AuditEventSummaryPayload] wire object for unit testing mapper logic.
@@ -36,7 +37,7 @@ fun createTestAuditEventSummaryPayload(
 )
 
 /**
- * Creates a list of test [AuditEventSummaryPayload] wire objects with deterministic raw IDs (`evt_1`, `evt_2`, ...),
+ * Creates a list of test [AuditEventSummaryPayload] wire objects with deterministic raw IDs,
  * alternating status, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -47,7 +48,7 @@ fun createTestAuditEventSummaryPayloadList(
     generator: (index: Int) -> AuditEventSummaryPayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestAuditEventSummaryPayload(
-            id = "evt_${index + 1}",
+            id = generateTestUuidString(index),
             status = if (index % 2 == 0) AuditStatus.SUCCESS.value else AuditStatus.FAILED.value,
             createdAt = createdAtMs
         )

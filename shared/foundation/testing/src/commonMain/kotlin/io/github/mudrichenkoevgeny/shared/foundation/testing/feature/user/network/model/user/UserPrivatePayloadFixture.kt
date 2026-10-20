@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
@@ -59,7 +60,7 @@ fun createTestUserPrivatePayload(
 )
 
 /**
- * Creates a list of test [UserPrivatePayload] wire objects with deterministic raw IDs (`usr_1`, `usr_2`, ...)
+ * Creates a list of test [UserPrivatePayload] wire objects with deterministic raw UUIDs
  * and epoch-millisecond time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -70,7 +71,7 @@ fun createTestUserPrivatePayloadList(
     generator: (index: Int) -> UserPrivatePayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestUserPrivatePayload(
-            id = "usr_${index + 1}",
+            id = generateTestUuidString(index),
             createdAt = createdAtMs,
             updatedAt = createdAtMs + 30_000L,
             lastLoginAt = createdAtMs + 15_000L,

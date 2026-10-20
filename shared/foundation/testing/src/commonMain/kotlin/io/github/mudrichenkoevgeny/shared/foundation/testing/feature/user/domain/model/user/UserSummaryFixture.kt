@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 
 /**
  * Creates a test [UserSummary] instance with default mock properties for unit testing.
@@ -24,7 +25,7 @@ fun createTestUserSummary(
 )
 
 /**
- * Creates a list of test [UserSummary] instances with deterministic index-based IDs (`usr_1`, `usr_2`, ...).
+ * Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.
  *
  * @param count Number of elements to generate (defaults to 2).
  * @param generator Custom item builder receiving 0-based element index.
@@ -33,7 +34,7 @@ fun createTestUserSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSummary = { index ->
         createTestUserSummary(
-            id = createTestUserId("usr_${index + 1}")
+            id = createTestUserId(generateTestUuidString(index))
         )
     }
 ): List<UserSummary> = createTestList(count, generator)

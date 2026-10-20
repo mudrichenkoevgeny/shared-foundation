@@ -10,6 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.sta
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import kotlin.time.Instant
 
 /**
@@ -39,7 +40,7 @@ fun createTestAuditEventSummary(
 )
 
 /**
- * Creates a list of test [AuditEventSummary] instances with deterministic index-based IDs (`evt_1`, `evt_2`, ...),
+ * Creates a list of test [AuditEventSummary] instances with deterministic index-based IDs,
  * alternating status, and time shifts.
  *
  * @param count Number of elements to generate (defaults to 2).
@@ -50,7 +51,7 @@ fun createTestAuditEventSummaryList(
     generator: (index: Int) -> AuditEventSummary = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestAuditEventSummary(
-            id = createTestAuditEventId("evt_${index + 1}"),
+            id = createTestAuditEventId(generateTestUuidString(index)),
             status = if (index % 2 == 0) AuditStatus.SUCCESS else AuditStatus.FAILED,
             createdAt = Instant.fromEpochMilliseconds(createdAtMs)
         )

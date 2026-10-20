@@ -2,15 +2,13 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.doma
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.DecryptedString
 
-/**
- * Default decrypted secret string for unit testing.
- */
+/** Default deterministic decrypted string for unit tests. */
 const val TEST_DECRYPTED_STRING = "test_decrypted_secret"
 
 /**
- * Creates a test [DecryptedString] domain instance.
+ * Creates a test [DecryptedString] instance for unit testing.
  *
- * @param value Raw decrypted secret string.
+ * @param value Decrypted string value (defaults to [TEST_DECRYPTED_STRING]).
  */
 fun createTestDecryptedString(
     value: String = TEST_DECRYPTED_STRING

@@ -6,15 +6,19 @@ import kotlin.test.assertEquals
 
 class UserDetailParamsTest {
 
+    private companion object {
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
+    }
+
     @Test
     fun `parse extracts userId correctly`() {
         val params = mapOf(
-            UserApiPaths.USER_ID to "123e4567-e89b-12d3-a456-426614174000"
+            UserApiPaths.USER_ID to TEST_USER_ID
         )
 
         val parsed = UserDetailParams.parse(params)
 
-        assertEquals("123e4567-e89b-12d3-a456-426614174000", parsed.userId)
+        assertEquals(TEST_USER_ID, parsed.userId)
     }
 
     @Test
@@ -26,7 +30,7 @@ class UserDetailParamsTest {
 
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
-        val model = UserDetailParams(userId = "123e4567-e89b-12d3-a456-426614174000")
+        val model = UserDetailParams(userId = TEST_USER_ID)
         val serialized = model.toQueryMap()
 
         assertEquals(emptyMap(), serialized)
