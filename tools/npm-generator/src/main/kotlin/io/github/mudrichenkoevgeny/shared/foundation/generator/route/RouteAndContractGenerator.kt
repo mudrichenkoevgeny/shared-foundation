@@ -209,6 +209,44 @@ fun generateEnumsJs(): String {
       identifier: z.string()
     });
 
+    export class PasswordPolicyValidator {
+      validate(policy, password) {
+        if (!policy || typeof password !== 'string') {
+          return { success: false, reasons: [PasswordPolicyFailReason.TOO_SHORT] };
+        }
+        const reasons = [];
+        const minLength = policy.minLength ?? 0;
+        if (password.length < minLength) {
+          reasons.push(PasswordPolicyFailReason.TOO_SHORT);
+        }
+        if (policy.requireLetter && !/[a-zA-Z]/.test(password)) {
+          reasons.push(PasswordPolicyFailReason.NO_LETTER);
+        }
+        if (policy.requireUpperCase && !/[A-Z]/.test(password)) {
+          reasons.push(PasswordPolicyFailReason.NO_UPPERCASE);
+        }
+        if (policy.requireLowerCase && !/[a-z]/.test(password)) {
+          reasons.push(PasswordPolicyFailReason.NO_LOWERCASE);
+        }
+        if (policy.requireDigit && !/[0-9]/.test(password)) {
+          reasons.push(PasswordPolicyFailReason.NO_DIGIT);
+        }
+        if (policy.requireSpecialChar && !/[^a-zA-Z0-9]/.test(password)) {
+          reasons.push(PasswordPolicyFailReason.NO_SPECIAL_CHAR);
+        }
+        if (Array.isArray(policy.commonPasswords) && policy.commonPasswords.includes(password)) {
+          reasons.push(PasswordPolicyFailReason.TOO_COMMON);
+        }
+
+        if (reasons.length > 0) {
+          return { success: false, reasons };
+        }
+        return { success: true, reasons: [] };
+      }
+    }
+
+    export const passwordPolicyValidator = new PasswordPolicyValidator();
+
     export const CommonSortValues = {
       TimestampSortBy
     };
