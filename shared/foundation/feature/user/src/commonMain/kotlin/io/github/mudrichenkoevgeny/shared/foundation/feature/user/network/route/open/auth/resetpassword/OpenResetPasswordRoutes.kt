@@ -14,14 +14,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.ResetPasswordRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.password.SendResetPasswordConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 
 /**
  * Route paths for password recovery and initial password setup in the open API.
  */
 object OpenResetPasswordRoutes {
     /** Base path for open password reset operations. */
-    private const val BASE_RESET_PASSWORD_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/reset-password"
+    private const val BASE_RESET_PASSWORD_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/reset-password"
 
     /**
      * **HTTP method:** `POST`

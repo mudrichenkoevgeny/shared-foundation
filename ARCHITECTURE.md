@@ -259,9 +259,9 @@ flowchart LR
 - **`CommonNavigationRoutes`**: Common base navigation route path segments shared across platforms (`BASE_SETTINGS_ROUTE = "/settings"`).
 
 #### 2. Base Network Routes & Navigation Paths
-- **`BaseManagementRoutes`** (`core/common`): Base network route segments for management operations (`BASE_MANAGEMENT_ROUTE = "/management"`, `BASE_SELF_MANAGEMENT_ROUTE = "/management/self"`).
-- **`BaseSettingsRoutes`** (`core/common`): Base network route segment for settings endpoints (`BASE_SETTINGS_ROUTE = "/settings"`).
-- **`UserNavigationRoutes`** (`feature/user`): Base navigation route segment for user feature screens (`BASE_AUTH_ROUTE = "/auth"`).
+- **`CommonNetworkRoutes`** (`core/common`): Base network route segments for management operations (`BASE_MANAGEMENT_ROUTE = "/management"`, `BASE_SELF_MANAGEMENT_ROUTE = "/management/self"`).
+- **`BaseSettingsNetworkRoutes`** (`core/common`): Base network route segment for settings endpoints (`BASE_SETTINGS_ROUTE = "/settings"`).
+- **`BaseUserNavigationRoutes`** (`feature/user`): Base navigation route segment for user feature screens (`BASE_AUTH_ROUTE = "/auth"`).
 - **`UserNavigationPaths`** (`feature/user`): Naming conventions for user navigation query parameters (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`).
 
 ### Complete Navigation Classes Index

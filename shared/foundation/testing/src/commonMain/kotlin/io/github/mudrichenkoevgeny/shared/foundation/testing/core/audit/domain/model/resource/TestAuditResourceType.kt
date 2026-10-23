@@ -8,26 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.res
  */
 data class TestAuditResourceType(
     override val value: String
-) : AuditResourceType {
-    override fun parseOrNull(value: String): AuditResourceType = TestAuditResourceType(value)
-    override fun parseOrThrow(value: String): AuditResourceType = TestAuditResourceType(value)
-}
-
-/**
- * Permissive delegate that parses any incoming string into a [TestAuditResourceType].
- */
-object AcceptAnyStringAuditResourceDelegate : AuditResourceType {
-    override val value: String = "__test_resource_delegate__"
-
-    override fun parseOrNull(value: String): AuditResourceType = TestAuditResourceType(value)
-    override fun parseOrThrow(value: String): AuditResourceType = TestAuditResourceType(value)
-}
+) : AuditResourceType
 
 /**
  * Creates a permissive [CompositeAuditResourceTypeParser] for testing, accepting any string resource.
  *
- * @param delegate Delegate audit resource type used for parsing.
+ * @param parser Function mapping raw resource strings to [AuditResourceType].
  */
 fun createTestCompositeAuditResourceTypeParser(
-    delegate: AuditResourceType = AcceptAnyStringAuditResourceDelegate
-): CompositeAuditResourceTypeParser = CompositeAuditResourceTypeParser(setOf(delegate))
+    parser: (String) -> AuditResourceType? = { TestAuditResourceType(it) }
+): CompositeAuditResourceTypeParser = CompositeAuditResourceTypeParser(listOf(parser))

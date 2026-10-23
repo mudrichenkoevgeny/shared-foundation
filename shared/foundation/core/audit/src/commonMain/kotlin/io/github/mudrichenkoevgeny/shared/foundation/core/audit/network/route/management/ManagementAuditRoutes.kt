@@ -12,7 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 
 /**
  * Route paths for audit management in the management API.
@@ -20,7 +20,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.b
 object ManagementAuditRoutes {
     /** Base path for management audit events endpoints. */
     private const val BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE =
-        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}/audit/events"
+        "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}/audit/events"
 
     /**
      * **HTTP method:** `GET`

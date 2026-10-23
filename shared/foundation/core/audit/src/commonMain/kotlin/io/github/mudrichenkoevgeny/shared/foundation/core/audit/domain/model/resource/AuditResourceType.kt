@@ -7,7 +7,4 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  */
 interface AuditResourceType {
     val value: String
-
-    fun parseOrNull(value: String): AuditResourceType?
-    fun parseOrThrow(value: String): AuditResourceType
 }

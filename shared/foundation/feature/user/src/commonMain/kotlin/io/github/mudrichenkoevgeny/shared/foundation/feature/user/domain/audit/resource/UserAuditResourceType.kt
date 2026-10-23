@@ -15,68 +15,62 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val RESOURCE_AUTH_SETTINGS = "auth_settings"
+private const val RESOURCE_USER = "user"
+private const val RESOURCE_EMAIL_ADDRESS = "email_address"
+private const val RESOURCE_PHONE_NUMBER = "phone_number"
+private const val RESOURCE_IDENTIFIER = "identifier"
+private const val RESOURCE_SESSION = "session"
 
 /**
  * User-feature audit resource kinds (management API, open/self-service flows).
+ *
+ * @property value String representation of the [UserAuditResourceType].
  */
-enum class UserAuditResourceType : AuditResourceType {
+@Serializable
+enum class UserAuditResourceType(override val value: String) : AuditResourceType {
     /**
      * [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS],
      * [ManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS]
      * request/response ([ManagementAuthSettingsPayload]).
      */
-    AUTH_SETTINGS,
+    @SerialName(RESOURCE_AUTH_SETTINGS)
+    AUTH_SETTINGS(RESOURCE_AUTH_SETTINGS),
 
     /**
      * User account ([ManagementUsersRoutes], [OpenUserRoutes]).
      */
-    USER,
+    @SerialName(RESOURCE_USER)
+    USER(RESOURCE_USER),
 
     /**
      * Email address ([SelfManagementResetPasswordRoutes], [OpenRegistrationRoutes], [OpenResetPasswordRoutes], [OpenIdentifierRoutes]).
      */
-    EMAIL_ADDRESS,
+    @SerialName(RESOURCE_EMAIL_ADDRESS)
+    EMAIL_ADDRESS(RESOURCE_EMAIL_ADDRESS),
 
     /**
      * Phone number ([OpenLoginRoutes], [OpenIdentifierRoutes]).
      */
-    PHONE_NUMBER,
+    @SerialName(RESOURCE_PHONE_NUMBER)
+    PHONE_NUMBER(RESOURCE_PHONE_NUMBER),
 
     /**
      * User identifier credential record ([ManagementIdentifiersRoutes], [SelfManagementIdentifierRoutes], [OpenIdentifierRoutes]).
      */
-    IDENTIFIER,
+    @SerialName(RESOURCE_IDENTIFIER)
+    IDENTIFIER(RESOURCE_IDENTIFIER),
 
     /**
      * User session ([ManagementSessionsRoutes], [SelfManagementSessionRoutes], [OpenSessionRoutes]).
      */
-    SESSION;
-
-    /**
-     * String representation of the [UserAuditResourceType].
-     */
-    override val value: String
-        get() = when (this) {
-            AUTH_SETTINGS -> RESOURCE_AUTH_SETTINGS
-            USER -> RESOURCE_USER
-            EMAIL_ADDRESS -> RESOURCE_EMAIL_ADDRESS
-            PHONE_NUMBER -> RESOURCE_PHONE_NUMBER
-            IDENTIFIER -> RESOURCE_IDENTIFIER
-            SESSION -> RESOURCE_SESSION
-        }
-
-    override fun parseOrNull(value: String): AuditResourceType? = fromValueOrNull(value)
-
-    override fun parseOrThrow(value: String): AuditResourceType = fromValueOrThrow(value)
+    @SerialName(RESOURCE_SESSION)
+    SESSION(RESOURCE_SESSION);
 
     companion object {
-        private const val RESOURCE_AUTH_SETTINGS = "auth_settings"
-        private const val RESOURCE_USER = "user"
-        private const val RESOURCE_EMAIL_ADDRESS = "email_address"
-        private const val RESOURCE_PHONE_NUMBER = "phone_number"
-        private const val RESOURCE_IDENTIFIER = "identifier"
-        private const val RESOURCE_SESSION = "session"
-
         /**
          * Returns [UserAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
@@ -84,9 +78,7 @@ enum class UserAuditResourceType : AuditResourceType {
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+            }
 
         /**
          * Returns [UserAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).

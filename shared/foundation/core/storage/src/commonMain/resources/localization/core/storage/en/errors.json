@@ -1,0 +1,16 @@
+{
+  "file_size_exceeds_limit": "The file size exceeds the maximum permitted limit.",
+  "file_size_below_minimum": "The file size is below the minimum required limit.",
+  "unsupported_mime_type": "The provided file type is not supported.",
+  "unsupported_storage_category": "The specified storage category is not supported.",
+  "storage_quota_exceeded": "Storage quota limit exceeded.",
+  "too_many_pending_uploads": "Too many pending upload sessions. Please complete or cancel existing uploads.",
+  "presigned_url_expired": "The upload URL has expired.",
+  "invalid_upload_token": "The upload token or URL signature is invalid.",
+  "upload_already_completed": "This upload session has already been completed.",
+  "storage_upload_failed": "Upload verification failed.",
+  "file_not_found": "The requested file was not found.",
+  "file_not_ready": "The file is still processing and is not ready yet.",
+  "file_already_exists": "A file with the same identifier already exists.",
+  "file_delete_failed": "Failed to delete the file."
+}

@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.79"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.80"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -45,9 +45,10 @@ pnpm add @mudrichenkoevgeny/shared-foundation
 
 Published artifacts (versions aligned via the BOM):
 
-- **core-common** — shared errors, network contracts (`BaseManagementRoutes`, `BaseSettingsRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](shared/foundation/core/common/README.md)).
+- **core-common** — shared errors, network contracts (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](shared/foundation/core/common/README.md)).
 - **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, HTTP routes, permission codes, mappers, navigation (`ManagementSecurityNavigation`), and security localization (`SecurityModuleStrings`) ([module README](shared/foundation/core/security/README.md)).
 - **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and settings navigation (`ManagementSettingsNavigation`) ([module README](shared/foundation/core/settings/README.md)).
+- **core-storage** — Direct-to-S3 presigned upload contracts, FileId, StorageCategory, StorageFileStatus, StorageFileVisibility, entity projections, storage settings, HTTP routes, permission codes, mappers, and storage navigation (`OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`) ([module README](shared/foundation/core/storage/README.md)).
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
 - **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory fakes for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).

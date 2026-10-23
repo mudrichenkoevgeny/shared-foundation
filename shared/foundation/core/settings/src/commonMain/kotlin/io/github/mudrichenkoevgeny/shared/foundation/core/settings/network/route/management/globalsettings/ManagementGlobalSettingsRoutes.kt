@@ -4,21 +4,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.action.SettingsAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource.SettingsAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.permission.SettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management.ManagementSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.BaseSettingsNetworkRoutes
 
 /**
  * Route paths for global settings in the management API.
  */
 object ManagementGlobalSettingsRoutes {
+
     /** Base path for management global settings endpoints. */
     private const val BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE =
-        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/global"
+        "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSettingsNetworkRoutes.BASE_GLOBAL_SETTINGS_NETWORK_ROUTE}"
 
     /**
      * **HTTP method:** `GET`

@@ -7,7 +7,4 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.ac
  */
 interface AuditActionType {
     val value: String
-
-    fun parseOrNull(value: String): AuditActionType?
-    fun parseOrThrow(value: String): AuditActionType
 }

@@ -2,10 +2,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.me
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 
+/**
+ * Base audit metadata key contract.
+ */
 interface AuditMetadataKey {
     val value: String
     val valueSensitivity: AuditValueSensitivity
-
-    fun parseOrNull(value: String): AuditMetadataKey?
-    fun parseOrThrow(value: String): AuditMetadataKey
 }

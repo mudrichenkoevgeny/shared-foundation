@@ -17,14 +17,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 
 /**
  * Route paths for self-service account unlocking in the open API.
  */
 object OpenUnlockRoutes {
     /** Base path for open unlock operations. */
-    private const val BASE_OPEN_UNLOCK_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/unlock"
+    private const val BASE_OPEN_UNLOCK_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/unlock"
 
     /** Base path for email unlock operations. */
     private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_OPEN_UNLOCK_ROUTE/email"

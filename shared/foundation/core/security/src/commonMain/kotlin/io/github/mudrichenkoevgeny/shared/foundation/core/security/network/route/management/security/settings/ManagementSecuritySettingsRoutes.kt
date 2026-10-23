@@ -4,14 +4,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action.SecurityAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permission.SecurityPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.BaseSecurityNetworkRoutes
 
 /**
  * Route paths for security settings in the management API.
@@ -19,7 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 object ManagementSecuritySettingsRoutes {
     /** Base path for management security settings endpoints. */
     private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE =
-        "${BaseManagementRoutes.BASE_MANAGEMENT_ROUTE}${BaseSettingsRoutes.BASE_SETTINGS_ROUTE}/security"
+        "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSecurityNetworkRoutes.BASE_SECURITY_NETWORK_ROUTE}"
 
     /**
      * **HTTP method:** `GET`

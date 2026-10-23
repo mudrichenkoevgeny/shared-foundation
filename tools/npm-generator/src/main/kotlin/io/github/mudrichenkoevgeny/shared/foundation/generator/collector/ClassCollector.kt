@@ -23,10 +23,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.theme.ThemeMode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.model.ApiErrorResponse
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
@@ -44,18 +41,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.SocketFrame
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.settings.BaseSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action.SecurityAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.metadata.SecurityAuditMetadataDeniedReasonValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource.SecurityAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.DecryptedString
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.EncryptedString
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.iprestriction.IpRestrictionPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.otpconfirmation.OtpConfirmation
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash.PasswordHash
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.ManagementPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.OpenPasswordPolicy
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyFailReason
@@ -110,32 +103,69 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.OpenUserConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.email.EmailTemplate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.emailrestriction.EmailRestrictionPolicy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.DeletedSessions
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.AccessToken
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshToken
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshTokenHash
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.AuthSettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.presigned.PresignedReadUrlBatch
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.presigned.PresignedUrl
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.ManagementStorageSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.OpenStorageSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.permission.StoragePermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming.StorageErrorArgs
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming.StorageErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.BaseSecurityNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.BaseSecurityNetworkRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.BaseSettingsNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.BaseSettingsNetworkRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.BaseStorageNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.BaseStorageNetworkRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageWebSocketEventTypes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageSettingsNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.open.OpenStorageNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action.StorageAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list.SelfStorageFileListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedReadUrlBatchPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedUrlPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.OpenStorageSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file.DeleteFilesBatchRequest
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedReadUrlBatchRequest
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.UserNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.BaseUserNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
@@ -331,10 +361,16 @@ fun extractClassStructure(kClass: KClass<*>): ClassStructure {
 val routeClasses = listOf(
     ClientMainNavigation::class,
     ManagementMainNavigation::class,
-    BaseManagementRoutes::class,
-    BaseSettingsRoutes::class,
+    CommonNetworkRoutes::class,
     CommonNavigationRoutes::class,
-    UserNavigationRoutes::class,
+    BaseSettingsNavigationRoutes::class,
+    BaseSettingsNetworkRoutes::class,
+    BaseSecurityNavigationRoutes::class,
+    BaseSecurityNetworkRoutes::class,
+    BaseStorageNavigationRoutes::class,
+    BaseStorageNetworkRoutes::class,
+    BaseUserNavigationRoutes::class,
+    BaseUserNetworkRoutes::class,
     ManagementAuditRoutes::class,
     ManagementAuditNavigation::class,
     ClientAuthNavigation::class,
@@ -342,6 +378,9 @@ val routeClasses = listOf(
     ManagementAuthSettingsNavigation::class,
     ClientUserNavigation::class,
     ManagementSelfUserNavigation::class,
+    OpenStorageNavigation::class,
+    ManagementStorageNavigation::class,
+    ManagementStorageSettingsNavigation::class,
     ManagementUsersNavigation::class,
     ManagementSecurityNavigation::class,
     ManagementSettingsNavigation::class,
@@ -374,6 +413,10 @@ val routeClasses = listOf(
     OpenAuthSettingsRoutes::class,
     OpenUserConfigurationRoutes::class,
     ManagementUserConfigurationRoutes::class,
+    OpenStorageRoutes::class,
+    ManagementStorageRoutes::class,
+    OpenStorageSettingsRoutes::class,
+    ManagementStorageSettingsRoutes::class,
     WebSocketContract::class
 )
 
@@ -383,15 +426,18 @@ val contractClasses = listOf(
     SecurityApiFields::class,
     GlobalSettingsApiFields::class,
     UserApiFields::class,
+    StorageApiFields::class,
     AuditEventFields::class,
     CommonHttpHeaders::class,
     CommonWebSocketCloseReasons::class,
     CommonWebSocketEventTypes::class,
     SecurityWebSocketEventTypes::class,
+    StorageWebSocketEventTypes::class,
     SettingsWebSocketEventTypes::class,
     UserWebSocketCloseReasons::class,
     UserWebSocketEventTypes::class,
     UserApiPaths::class,
+    StorageApiPaths::class,
     UserApiQueryParams::class,
     UserNavigationPaths::class,
     UserAuthSpec::class,
@@ -407,7 +453,9 @@ val errorClasses = listOf(
     SecurityErrorCodes::class,
     SecurityErrorArgs::class,
     UserErrorCodes::class,
-    UserErrorArgs::class
+    UserErrorArgs::class,
+    StorageErrorCodes::class,
+    StorageErrorArgs::class
 )
 
 val permClasses = listOf(
@@ -417,7 +465,8 @@ val permClasses = listOf(
     AuthSettingsPermissionCode::class,
     IdentifierPermissionCode::class,
     SessionPermissionCode::class,
-    UserPermissionCode::class
+    UserPermissionCode::class,
+    StoragePermissionCode::class
 )
 
 val enumClasses = listOf(
@@ -429,13 +478,18 @@ val enumClasses = listOf(
     AuditActorType::class,
     AuditValueSensitivity::class,
     AuditStatus::class,
+    StorageCategory::class,
+    StorageFileStatus::class,
+    StorageFileVisibility::class,
     CommonAuditResourceType::class,
     SecurityAuditResourceType::class,
     SettingsAuditResourceType::class,
     UserAuditResourceType::class,
+    StorageAuditResourceType::class,
     SecurityAuditActionType::class,
     SettingsAuditActionType::class,
     UserAuditActionType::class,
+    StorageAuditActionType::class,
     CommonAuditMetadataKey::class,
     UserAuditMetadataKey::class,
     UserAccountStatus::class,
@@ -450,6 +504,7 @@ val enumClasses = listOf(
     UserSortValues.UserIdentifierSortBy::class,
     UserSortValues.UserSessionSortBy::class,
     AuditSortValues.AuditEventSortBy::class,
+    StorageSortValues.StorageFileSortBy::class,
     CommonSortValues.TimestampSortBy::class
 )
 
@@ -624,6 +679,9 @@ val rawDtoClasses = listOf(
     ManagementGlobalSessionListParams::class,
     ManagementUserIdentifierListParams::class,
     ManagementGlobalIdentifierListParams::class,
+    StorageFileDetailParams::class,
+    ManagementStorageFileListParams::class,
+    SelfStorageFileListParams::class,
     AvailableAuthProvidersPayload::class,
     EmailRestrictionPolicyPayload::class,
     SessionTokenPayload::class,
@@ -650,6 +708,15 @@ val rawDtoClasses = listOf(
     OpenSecuritySettingsPayload::class,
     ManagementUserConfigurationPayload::class,
     OpenUserConfigurationPayload::class,
+    PresignedUrlPayload::class,
+    PresignedReadUrlBatchPayload::class,
+    StorageFileSummaryPayload::class,
+    StorageFilePrivatePayload::class,
+    ManagementStorageSettingsPayload::class,
+    OpenStorageSettingsPayload::class,
+    DeleteFilesBatchRequest::class,
+    PresignedUrlRequest::class,
+    PresignedReadUrlBatchRequest::class,
     CreateByEmailRequest::class,
     LoginByEmailRequest::class,
     LoginByExternalAuthProviderRequest::class,
@@ -736,6 +803,8 @@ val rawDomainToDtoClasses = listOf(
     VerifyTotp::class to VerifyTotpPayload::class,
     ManagementGlobalSettings::class to ManagementGlobalSettingsPayload::class,
     OpenGlobalSettings::class to OpenGlobalSettingsPayload::class,
+    ManagementStorageSettings::class to ManagementStorageSettingsPayload::class,
+    OpenStorageSettings::class to OpenStorageSettingsPayload::class,
     AuditEventSummary::class to AuditEventSummaryPayload::class,
     AuditEventPrivate::class to AuditEventPrivatePayload::class,
     AuditEventMetadata::class to AuditEventMetadataPayload::class,
@@ -751,6 +820,10 @@ val rawDomainToDtoClasses = listOf(
     DeletedSessions::class to DeletedSessionsPayload::class,
     UserSessionSummary::class to UserSessionSummaryPayload::class,
     UserSessionPrivate::class to UserSessionPrivatePayload::class,
+    PresignedUrl::class to PresignedUrlPayload::class,
+    PresignedReadUrlBatch::class to PresignedReadUrlBatchPayload::class,
+    StorageFileSummary::class to StorageFileSummaryPayload::class,
+    StorageFilePrivate::class to StorageFilePrivatePayload::class,
     SessionToken::class to SessionTokenPayload::class,
     UserPrivate::class to UserPrivatePayload::class,
     UserSummary::class to UserSummaryPayload::class

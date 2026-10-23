@@ -1,51 +1,32 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.management.security.settings.ManagementSecuritySettingsRoutes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val RESOURCE_SECURITY_SETTINGS = "security_settings"
 
 /**
  * Security-module audit resource kinds.
+ *
+ * @property value String representation of the [SecurityAuditResourceType].
  */
-enum class SecurityAuditResourceType : AuditResourceType {
-    /**
-     * [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS],
-     * [ManagementSecuritySettingsRoutes.RESET_MANAGEMENT_SECURITY_SETTINGS]
-     * request/response ([ManagementSecuritySettingsPayload]).
-     */
-    SECURITY_SETTINGS;
-
-    /**
-     * String representation of the [SecurityAuditResourceType].
-     */
-    override val value: String
-        get() = when (this) {
-            SECURITY_SETTINGS -> SecurityAuditResourceType.RESOURCE_SECURITY_SETTINGS
-        }
-
-    override fun parseOrNull(value: String): AuditResourceType? =
-        SecurityAuditResourceType.fromValueOrNull(
-            value
-        )
-
-    override fun parseOrThrow(value: String): AuditResourceType =
-        SecurityAuditResourceType.fromValueOrThrow(
-            value
-        )
+@Serializable
+enum class SecurityAuditResourceType(override val value: String) : AuditResourceType {
+    /** Global security settings resource ([ManagementSecuritySettingsRoutes]). */
+    @SerialName(RESOURCE_SECURITY_SETTINGS)
+    SECURITY_SETTINGS(RESOURCE_SECURITY_SETTINGS);
 
     companion object {
-        private const val RESOURCE_SECURITY_SETTINGS = "security_settings"
-
         /**
          * Returns [SecurityAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): SecurityAuditResourceType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [SecurityAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).

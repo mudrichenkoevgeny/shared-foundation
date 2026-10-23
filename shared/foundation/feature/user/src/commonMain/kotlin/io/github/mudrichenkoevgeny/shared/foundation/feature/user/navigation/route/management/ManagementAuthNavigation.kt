@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.ParameterizedNavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.RedirectNavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.UserNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.BaseUserNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
@@ -233,7 +233,7 @@ sealed interface ManagementAuthNavigation : NavigationRoute {
     }
 
     companion object {
-        const val BASE_AUTH_ROUTE = UserNavigationRoutes.BASE_AUTH_ROUTE
+        const val BASE_AUTH_ROUTE = BaseUserNavigationRoutes.BASE_USER_AUTH_NAVIGATION_ROUTE
         const val BASE_LOGIN_ROUTE = "$BASE_AUTH_ROUTE/login"
         const val BASE_UNLOCK_ROUTE = "$BASE_AUTH_ROUTE/unlock"
     }

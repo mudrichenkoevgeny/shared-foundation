@@ -17,6 +17,7 @@ This document defines the interaction model and workflow requirements for AI-ass
 
 ## 2. Operational Constraints
 
+- **Git Ban (Strict Prohibition):** NEVER run git commands (`git add`, `git commit`, `git push`, etc.) via shell. Version control, staging, and committing are strictly the developer's responsibility. Do not attempt to save or document changes into git history.
 - **Execution Ban (Tests):** Do not suggest, initiate, or invite the user to run test suites (Gradle or otherwise). Verification is a manual developer-led process.
 - **Permitted Commands:** Diagnostic and build commands that **do not** trigger tests are allowed (e.g., `./gradlew assemble`, `./gradlew dependencies`, `./gradlew detekt`).
 - **Redundant Build Prohibition:** Do not invoke Gradle build tasks or attempt to compile the project after making documentation changes (like KDoc) or other edits that cannot possibly break the build.
@@ -32,11 +33,11 @@ This document defines the interaction model and workflow requirements for AI-ass
 
 Place code in the correct module based on its functional role:
 
-- **`core/common`:** Base errors, JSON configuration, WebSocket envelopes, common DTOs, base permission codes, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), and base network routes (`BaseManagementRoutes`, `BaseSettingsRoutes`).
+- **`core/common`:** Base errors, JSON configuration, WebSocket envelopes, common DTOs, base permission codes, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), and base network routes (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`).
 - **`core/audit`:** Audit events, redaction policies, mappers, management routes, audit navigation (`ManagementAuditNavigation`), and permission codes.
 - **`core/security`:** MFA/TOTP lifecycle, password policy logic, security settings, routes, security navigation (`ManagementSecurityNavigation`), and permission codes.
 - **`core/settings`:** Global settings domain models, payloads, mappers, routes, settings navigation (`ManagementSettingsNavigation`), and permission codes.
-- **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, self-service account unlocking, user navigation contracts (`UserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes, screen parameters, and parameter parsers.
+- **`feature/user`:** Comprehensive user management, auth, sessions, identifiers, user configurations, self-service account unlocking, user navigation contracts (`BaseUserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes, screen parameters, and parameter parsers.
 
 **Strict Boundary:** This repository defines the **Contract**. Framework-specific wiring (Ktor engines, Auth session storage, React/UI mapping) belongs in consumer projects (Backend Platform SDK, KMP Platform SDK, Web Platform SDK).
 

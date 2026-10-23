@@ -32,7 +32,7 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
 ## Generator Architecture & Internal Pipeline
 
 1. **Class Collectors**:
-   - `routeClasses`: Collects all REST API route objects, base network route objects (`BaseManagementRoutes`, `BaseSettingsRoutes`), navigation path constants (`UserNavigationPaths`, `CommonNavigationRoutes`), and Navigation screen objects (`ClientMainNavigation`, `ManagementMainNavigation`, `ManagementUsersNavigation`, etc.).
+   - `routeClasses`: Collects all REST API route objects, base network route objects (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), navigation path constants (`UserNavigationPaths`, `CommonNavigationRoutes`), and Navigation screen objects (`ClientMainNavigation`, `ManagementMainNavigation`, `ManagementUsersNavigation`, etc.).
    - `contractClasses`: Collects field name constants (`UserApiFields`), query params (`UserApiQueryParams`), HTTP headers, and WebSocket close/event constants.
    - `errorClasses`: Collects error code strings (`CommonErrorCodes`, `UserErrorCodes`) and error arguments.
    - `permClasses`: Collects permission code constants (`UserPermissionCode`, `AuditPermissionCode`, etc.).

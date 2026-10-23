@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.ro
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.CommonNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.BaseUserNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import kotlinx.serialization.Serializable
 
@@ -25,9 +26,9 @@ sealed interface ManagementAuthSettingsNavigation : NavigationRoute {
     data object AuthSettings : ManagementAuthSettingsNavigation {
 
         override val route: String
-            get() = "${CommonNavigationRoutes.BASE_SETTINGS_ROUTE}/auth"
+            get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseUserNavigationRoutes.BASE_USER_AUTH_NAVIGATION_ROUTE}"
 
         override val parentRoute: String
-            get() = CommonNavigationRoutes.BASE_SETTINGS_ROUTE
+            get() = CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE
     }
 }

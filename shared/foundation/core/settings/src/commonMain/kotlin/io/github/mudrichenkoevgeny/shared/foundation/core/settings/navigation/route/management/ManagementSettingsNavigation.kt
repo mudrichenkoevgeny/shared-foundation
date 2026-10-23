@@ -1,9 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.CommonNavigationRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.NavigationRoute
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.management.ManagementMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.BaseSettingsNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.management.globalsettings.ManagementGlobalSettingsRoutes
 import kotlinx.serialization.Serializable
 
@@ -24,7 +25,7 @@ sealed interface ManagementSettingsNavigation : NavigationRoute {
     data object Main : ManagementSettingsNavigation {
 
         override val route: String
-            get() = CommonNavigationRoutes.BASE_SETTINGS_ROUTE
+            get() = CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
@@ -43,7 +44,7 @@ sealed interface ManagementSettingsNavigation : NavigationRoute {
     data object GlobalSettings : ManagementSettingsNavigation {
 
         override val route: String
-            get() = "${CommonNavigationRoutes.BASE_SETTINGS_ROUTE}/global"
+            get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseSettingsNavigationRoutes.BASE_GLOBAL_SETTINGS_NAVIGATION_ROUTE}"
 
         override val parentRoute: String
             get() = Main.route

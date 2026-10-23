@@ -20,6 +20,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.EncryptedString
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash.PasswordHash
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyFailReason
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileInternal
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.ExternalAuthProvider
@@ -65,6 +74,7 @@ fun generateBrandedTypes(): String {
         "UserIdentifierId",
         "UserSessionId",
         "AuditEventId",
+        "FileId",
         "ClientDeviceId",
         "DecryptedString",
         "EncryptedString",
@@ -197,6 +207,9 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
 
         paramName == "totpStep" -> "totpStepSchema"
         paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "loginByTotpModeSchema"
+        classifier == StorageCategory::class -> "storageCategorySchema"
+        classifier == StorageFileStatus::class -> "storageFileStatusSchema"
+        classifier == StorageFileVisibility::class -> "storageFileVisibilitySchema"
         paramName == "unlockMethod" -> "unlockMethodSchema"
         paramName == "clientType" -> "clientTypeSchema"
         paramName == "deviceId" || paramName == "clientDeviceId" -> "clientDeviceIdSchema"
@@ -216,8 +229,10 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
                     UserSessionSummaryPayload::class, UserSessionPrivatePayload::class, UserSessionSummary::class, UserSessionPrivate::class -> "userSessionIdSchema"
                     AuditEventSummaryPayload::class, AuditEventPrivatePayload::class, AuditEventSummary::class, AuditEventPrivate::class -> "auditEventIdSchema"
                     UserIdentifierSummaryPayload::class, UserIdentifierPrivatePayload::class, UserIdentifierSummary::class, UserIdentifierPrivate::class -> "userIdentifierIdSchema"
+                    StorageFileSummaryPayload::class, StorageFilePrivatePayload::class, StorageFileSummary::class, StorageFilePrivate::class, StorageFileInternal::class -> "fileIdSchema"
                     else -> "z.string()"
                 }
+                "fileId" -> "fileIdSchema"
                 "userId" -> "userIdSchema"
                 "identifierId" -> "userIdentifierIdSchema"
                 "sessionId" -> "userSessionIdSchema"
@@ -233,6 +248,7 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
         classifier == UserIdentifierId::class -> "userIdentifierIdSchema"
         classifier == UserSessionId::class -> "userSessionIdSchema"
         classifier == AuditEventId::class -> "auditEventIdSchema"
+        classifier == FileId::class -> "fileIdSchema"
         classifier == ClientDeviceId::class -> "clientDeviceIdSchema"
         classifier == DecryptedString::class -> "decryptedStringSchema"
         classifier == EncryptedString::class -> "encryptedStringSchema"

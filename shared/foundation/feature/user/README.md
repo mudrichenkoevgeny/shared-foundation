@@ -342,5 +342,5 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [UnlockOtpInputParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/otpinput/UnlockOtpInputParams.kt
 [UnlockSuccessParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/unlock/success/UnlockSuccessParams.kt
 
-[UserNavigationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/UserNavigationRoutes.kt
+[UserNavigationRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/route/BaseUserNavigationRoutes.kt
 [UserNavigationPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/contract/UserNavigationPaths.kt

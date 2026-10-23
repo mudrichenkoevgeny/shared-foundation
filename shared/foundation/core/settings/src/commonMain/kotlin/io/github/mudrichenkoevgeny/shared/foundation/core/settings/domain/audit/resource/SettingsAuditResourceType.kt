@@ -1,45 +1,32 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.management.globalsettings.ManagementGlobalSettingsRoutes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+private const val RESOURCE_GLOBAL_SETTINGS = "global_settings"
 
 /**
- * Settings-module audit resource kinds (global settings, not security settings).
+ * Settings-module audit resource kinds for global configuration settings.
+ *
+ * @property value String representation of the [SettingsAuditResourceType].
  */
-enum class SettingsAuditResourceType : AuditResourceType {
-    /**
-     * [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS],
-     * [ManagementGlobalSettingsRoutes.RESET_MANAGEMENT_GLOBAL_SETTINGS]
-     * request/response ([ManagementGlobalSettingsPayload]).
-     */
-    GLOBAL_SETTINGS;
-
-    /**
-     * String representation of the [SettingsAuditResourceType].
-     */
-    override val value: String
-        get() = when (this) {
-            GLOBAL_SETTINGS -> RESOURCE_GLOBAL_SETTINGS
-        }
-
-    override fun parseOrNull(value: String): AuditResourceType? = fromValueOrNull(value)
-
-    override fun parseOrThrow(value: String): AuditResourceType = fromValueOrThrow(value)
+@Serializable
+enum class SettingsAuditResourceType(override val value: String) : AuditResourceType {
+    /** Global settings resource ([ManagementGlobalSettingsRoutes]). */
+    @SerialName(RESOURCE_GLOBAL_SETTINGS)
+    GLOBAL_SETTINGS(RESOURCE_GLOBAL_SETTINGS);
 
     companion object {
-        private const val RESOURCE_GLOBAL_SETTINGS = "global_settings"
-
         /**
          * Returns [SettingsAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
         fun fromValueOrNull(value: String): SettingsAuditResourceType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            } ?: runCatching {
-                valueOf(value.uppercase())
-            }.getOrNull()
+                        it.name.equals(value, ignoreCase = true)
+            }
 
         /**
          * Returns [SettingsAuditResourceType] for the given wire or enum-style string (case-insensitive enum name).

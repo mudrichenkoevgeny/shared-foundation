@@ -8,5 +8,5 @@ object CommonNavigationRoutes {
     /**
      * Base route path for settings screens.
      */
-    const val BASE_SETTINGS_ROUTE = "/settings"
+    const val BASE_SETTINGS_NAVIGATION_ROUTE = "/settings"
 }

@@ -52,7 +52,7 @@ enum class CommonAuditMetadataKey(
     DEVICE_NAME(KEY_DEVICE_NAME, AuditValueSensitivity.FULL_VALUE_MASK),
 
     /**
-     * From [ClientDeviceInfo.clientType]; [AuditEventMetadata.value] is a [ClientType] wire string such as [ClientType.CLIENT_WEB].
+     * From [ClientDeviceInfo.clientType]; [AuditEventMetadata.value] is a [ClientType] wire string such as [ClientType.WEB].
      */
     @SerialName(KEY_CLIENT_TYPE)
     CLIENT_TYPE(KEY_CLIENT_TYPE, AuditValueSensitivity.NON_SENSITIVE),
@@ -130,16 +130,12 @@ enum class CommonAuditMetadataKey(
     @SerialName(KEY_ERROR_CODE)
     ERROR_CODE(KEY_ERROR_CODE, AuditValueSensitivity.NON_SENSITIVE);
 
-    override fun parseOrNull(value: String): AuditMetadataKey? = fromValueOrNull(value)
-
-    override fun parseOrThrow(value: String): AuditMetadataKey = fromValueOrThrow(value)
-
     companion object {
         /**
          * Returns [CommonAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
          * then by case-insensitive [value] match.
          */
-        fun fromValueOrNull(value: String): AuditMetadataKey? =
+        fun fromValueOrNull(value: String): CommonAuditMetadataKey? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                         it.name.equals(value, ignoreCase = true)
@@ -150,7 +146,7 @@ enum class CommonAuditMetadataKey(
          *
          * @throws IllegalArgumentException if [value] does not match any [CommonAuditMetadataKey].
          */
-        fun fromValueOrThrow(value: String): AuditMetadataKey =
+        fun fromValueOrThrow(value: String): CommonAuditMetadataKey =
             fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for CommonAuditMetadataKey: '$value'")
     }
 }

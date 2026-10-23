@@ -74,7 +74,8 @@ val coreModules = listOf(
     "common",
     "security",
     "settings",
-    "audit"
+    "audit",
+    "storage"
 )
 registerModules("$groupBase.core", coreModules)
 

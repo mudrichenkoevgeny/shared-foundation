@@ -32,7 +32,7 @@ If the report says a dependency **should be declared directly**, inspect how it 
 ./gradlew :<gradle-path>:dependencyInsight --dependency <coordinates> --configuration <configuration-name>
 ```
 
-This repository is **Kotlin Multiplatform** with a JVM target. For the JVM compile classpath of `commonMain` dependencies, use `jvmCompileClasspath` (not plain `compileClasspath`).
+This repository is a **Kotlin Multiplatform (KMP)** library (targeting JVM, Android, iOS, and WasmJS). For inspecting the JVM compile classpath of `commonMain` dependencies, use `jvmCompileClasspath` (not plain `compileClasspath`).
 
 Example for `core:common` and `org.jetbrains.kotlinx:kotlinx-serialization-json`:
 
@@ -119,13 +119,13 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm pack ./build/npm-package --pack-destination ./build/npm-package
    ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.0.79.tgz` will be created inside `build/npm-package/`.
+   The archive `mudrichenkoevgeny-shared-foundation-0.0.80.tgz` will be created inside `build/npm-package/`.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.79.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.0.80.tgz'
    ```
    And run from the root directory:
    ```bash

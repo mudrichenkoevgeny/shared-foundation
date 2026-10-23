@@ -122,7 +122,7 @@ To provide full type safety and declarative navigation for client platforms, eac
 - **Parameter Parsers (`*ParamsParser.kt`):**
   - Standalone parser components implementing `NavigationScreenParamsParser<T>` responsible for bidirectional serialization (`parse` raw query/path maps into typed `*Params` objects, and `serialize` `*Params` back to string query maps), utilizing `QueryParamNormalizer` and `PhoneParamNormalizer`.
 - **Route Segment Constants & Helpers:**
-  - Common base navigation routes in `CommonNavigationRoutes` (e.g., `BASE_SETTINGS_ROUTE`), feature navigation routes in `UserNavigationRoutes` (e.g., `BASE_AUTH_ROUTE`), parameter name constants in `UserNavigationPaths` (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`), and base network routes in `BaseManagementRoutes` and `BaseSettingsRoutes`.
+  - Common base navigation routes in `CommonNavigationRoutes` (e.g., `BASE_SETTINGS_NAVIGATION_ROUTE`), feature navigation routes in `BaseUserNavigationRoutes` (e.g., `BASE_USER_AUTH_NAVIGATION_ROUTE`), storage navigation routes in `BaseStorageNavigationRoutes` (e.g., `BASE_STORAGE_NAVIGATION_ROUTE`), settings navigation routes in `BaseSettingsNavigationRoutes` (e.g., `BASE_GLOBAL_SETTINGS_NAVIGATION_ROUTE`), security navigation routes in `BaseSecurityNavigationRoutes` (e.g., `BASE_SECURITY_NAVIGATION_ROUTE`), parameter name constants in `UserNavigationPaths` (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`), and base network routes in `CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`, `BaseSecurityNetworkRoutes`, `BaseStorageNetworkRoutes`, and `BaseUserNetworkRoutes`.
 
 ## 10. Localization Architecture & Resource Standards
 

@@ -8,26 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
  */
 data class TestAuditActionType(
     override val value: String
-) : AuditActionType {
-    override fun parseOrNull(value: String): AuditActionType = TestAuditActionType(value)
-    override fun parseOrThrow(value: String): AuditActionType = TestAuditActionType(value)
-}
-
-/**
- * Permissive delegate that parses any incoming string into a [TestAuditActionType].
- */
-object AcceptAnyStringAuditActionDelegate : AuditActionType {
-    override val value: String = "__test_action_delegate__"
-
-    override fun parseOrNull(value: String): AuditActionType = TestAuditActionType(value)
-    override fun parseOrThrow(value: String): AuditActionType = TestAuditActionType(value)
-}
+) : AuditActionType
 
 /**
  * Creates a permissive [CompositeAuditActionTypeParser] for testing, accepting any string action.
  *
- * @param delegate Delegate audit action type used for parsing.
+ * @param parser Function mapping raw action strings to [AuditActionType].
  */
 fun createTestCompositeAuditActionTypeParser(
-    delegate: AuditActionType = AcceptAnyStringAuditActionDelegate
-): CompositeAuditActionTypeParser = CompositeAuditActionTypeParser(setOf(delegate))
+    parser: (String) -> AuditActionType? = { TestAuditActionType(it) }
+): CompositeAuditActionTypeParser = CompositeAuditActionTypeParser(listOf(parser))

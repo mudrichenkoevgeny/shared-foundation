@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":shared:foundation:core:audit"))
     implementation(project(":shared:foundation:core:security"))
     implementation(project(":shared:foundation:core:settings"))
+    implementation(project(":shared:foundation:core:storage"))
     implementation(project(":shared:foundation:feature:user"))
 
     implementation(libs.kotlinx.serialization.json)

@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
@@ -11,7 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  */
 object SelfManagementUserRoutes {
     /** Base path for self-service user operations in the management API. */
-    internal const val BASE_SELF_MANAGEMENT_USER_ROUTE = "${BaseManagementRoutes.BASE_SELF_MANAGEMENT_ROUTE}/user"
+    internal const val BASE_SELF_MANAGEMENT_USER_ROUTE = "${CommonNetworkRoutes.BASE_SELF_MANAGEMENT_NETWORK_ROUTE}/user"
 
     /**
      * **HTTP method:** `GET`

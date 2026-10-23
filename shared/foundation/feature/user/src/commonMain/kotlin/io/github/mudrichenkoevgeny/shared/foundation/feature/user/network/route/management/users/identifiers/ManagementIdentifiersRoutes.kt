@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.base.management.BaseManagementRoutes.BASE_MANAGEMENT_ROUTE
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -30,7 +30,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 object ManagementIdentifiersRoutes {
     /** Base path for global user identifiers in the management API. */
-    private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE = "$BASE_MANAGEMENT_ROUTE/identifiers"
+    private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE = "$BASE_MANAGEMENT_NETWORK_ROUTE/identifiers"
 
     /** Base path for user-scoped identifiers management. */
     private const val BASE_MANAGEMENT_USER_IDENTIFIERS_ROUTE =

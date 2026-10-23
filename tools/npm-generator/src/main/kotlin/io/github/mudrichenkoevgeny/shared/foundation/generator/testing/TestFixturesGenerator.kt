@@ -55,11 +55,13 @@ fun getDefaultMockValueJs(paramName: String, type: KType, ownerClass: KClass<*>?
                         "sessionId", "session_id" -> "TEST_SESSION_ID"
                         "identifierId", "userIdentifierId", "user_identifier_id" -> "TEST_IDENTIFIER_ID"
                         "auditEventId", "event_id", "eventId", "audit_event_id" -> "TEST_AUDIT_EVENT_ID"
+                        "fileId", "file_id" -> "TEST_FILE_ID"
                         "clientDeviceId", "device_id", "deviceId" -> "TEST_CLIENT_DEVICE_ID"
                         "id" -> {
                             if (ownerClassName.contains("UserIdentifier")) "TEST_IDENTIFIER_ID"
                             else if (ownerClassName.contains("UserSession") || ownerClassName.contains("DeletedSession") || ownerClassName.contains("RefreshToken")) "TEST_SESSION_ID"
                             else if (ownerClassName.contains("AuditEvent")) "TEST_AUDIT_EVENT_ID"
+                            else if (ownerClassName.contains("StorageFile")) "TEST_FILE_ID"
                             else if (ownerClassName.contains("User") || ownerClassName.contains("AuthData")) "TEST_USER_ID"
                             else "\"00000000-0000-0000-0000-000000000000\""
                         }
@@ -158,6 +160,7 @@ fun generateTestFixturesJs(): String {
     export const TEST_SESSION_ID = "00000000-0000-4000-8000-000000000010";
     export const TEST_IDENTIFIER_ID = "00000000-0000-4000-8000-000000000020";
     export const TEST_AUDIT_EVENT_ID = "00000000-0000-4000-8000-000000000099";
+    export const TEST_FILE_ID = "00000000-0000-4000-8000-000000000040";
     export const TEST_CLIENT_DEVICE_ID = "00000000-0000-4000-8000-000000000030";
     export const TEST_PERMISSION_CODE = "test.permission.read";
     export const TEST_DECRYPTED_STRING = "test_decrypted_secret";

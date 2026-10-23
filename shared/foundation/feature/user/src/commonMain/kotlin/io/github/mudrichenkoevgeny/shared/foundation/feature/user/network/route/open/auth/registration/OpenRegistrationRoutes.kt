@@ -13,14 +13,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.rou
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.registration.RegistrationByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.base.auth.BaseAuthRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 
 /**
  * Route paths for registration in the open API.
  */
 object OpenRegistrationRoutes {
     /** Base path for email registration operations. */
-    private const val REGISTRATION_BY_EMAIL_ROUTE = "${BaseAuthRoutes.BASE_AUTH_ROUTE}/registration/email"
+    private const val REGISTRATION_BY_EMAIL_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/registration/email"
 
     /**
      * **HTTP method:** `POST`

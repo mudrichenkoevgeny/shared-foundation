@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.lis
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.contractClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.dtoClasses
@@ -450,6 +451,19 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
         readonly IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}";
       };
     };
+
+    export declare const StorageFilterValues: {
+      readonly StorageFileFilterValues: {
+        readonly FILE_ID: "${StorageFilterValues.StorageFileFilterValues.FILE_ID}";
+        readonly OWNER_USER_ID: "${StorageFilterValues.StorageFileFilterValues.OWNER_USER_ID}";
+        readonly FILE_NAME: "${StorageFilterValues.StorageFileFilterValues.FILE_NAME}";
+        readonly MIME_TYPE: "${StorageFilterValues.StorageFileFilterValues.MIME_TYPE}";
+        readonly CATEGORY: "${StorageFilterValues.StorageFileFilterValues.CATEGORY}";
+        readonly VISIBILITY: "${StorageFilterValues.StorageFileFilterValues.VISIBILITY}";
+        readonly STATUS: "${StorageFilterValues.StorageFileFilterValues.STATUS}";
+        readonly TARGET_SCOPE: "${StorageFilterValues.StorageFileFilterValues.TARGET_SCOPE}";
+      };
+    };
     """.trimIndent()
 
     val errorDeclarations = errorClasses.joinToString("\n\n") { kClass ->
@@ -540,6 +554,18 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
         readonly UPDATED_AT: 'updated_at';
       };
     }
+
+    export type StorageSortValues = 'created_at' | 'updated_at' | 'file_name' | 'file_size_bytes';
+
+    export namespace StorageSortValues {
+      export type StorageFileSortBy = 'created_at' | 'updated_at' | 'file_name' | 'file_size_bytes';
+      export const StorageFileSortBy: {
+        readonly CREATED_AT: 'created_at';
+        readonly UPDATED_AT: 'updated_at';
+        readonly FILE_NAME: 'file_name';
+        readonly FILE_SIZE_BYTES: 'file_size_bytes';
+      };
+    }
     """.trimIndent()
 
     val dtoDeclarations = dtoClasses.joinToString("\n\n") { kClass ->
@@ -601,6 +627,11 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
     export function toAuditEventIdOrNull(value: string | null | undefined): AuditEventId | null;
     export function toAuditEventIdOrThrow(value: string): AuditEventId;
     export const auditEventIdSchema: z.ZodType<AuditEventId>;
+
+    export type FileId = string & { readonly __brand: 'FileId' };
+    export function toFileIdOrNull(value: string | null | undefined): FileId | null;
+    export function toFileIdOrThrow(value: string): FileId;
+    export const fileIdSchema: z.ZodType<FileId>;
 
     export type ClientDeviceId = string & { readonly __brand: 'ClientDeviceId' };
     export function toClientDeviceIdOrNull(value: string | null | undefined): ClientDeviceId | null;
