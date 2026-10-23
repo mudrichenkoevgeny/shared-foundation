@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings.ManagementSecuritySettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.ManagementStorageSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.ManagementUserConfigurationPayload
 
@@ -12,10 +13,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  *
  * @property managementGlobalSettings Management global settings.
  * @property managementSecuritySettings Management security settings.
+ * @property managementStorageSettings Management storage settings.
  * @property managementAuthSettings Management authentication settings.
  */
 data class ManagementUserConfiguration(
     val managementGlobalSettings: ManagementGlobalSettings,
     val managementSecuritySettings: ManagementSecuritySettings,
+    val managementStorageSettings: ManagementStorageSettings,
     val managementAuthSettings: ManagementAuthSettings
 )

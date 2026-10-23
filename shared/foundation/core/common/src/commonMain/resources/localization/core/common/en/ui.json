@@ -59,6 +59,8 @@
   "device_id": "Device ID",
   "client_type": "Client Type",
   "auth_provider": "Auth Provider",
+  "external_provider": "External Provider",
+  "external_auth_provider": "External Authentication Provider",
   "language": "Language",
   "app_version": "App Version",
   "os_version": "OS Version",

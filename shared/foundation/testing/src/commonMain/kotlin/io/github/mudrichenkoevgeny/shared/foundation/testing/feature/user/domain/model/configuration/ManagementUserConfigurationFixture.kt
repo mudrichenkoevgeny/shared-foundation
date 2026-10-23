@@ -2,10 +2,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.securitysettings.ManagementSecuritySettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.ManagementStorageSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.ManagementUserConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.securitysettings.createTestManagementSecuritySettings
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings.createTestManagementGlobalSettings
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.storagesettings.createTestManagementStorageSettings
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestManagementAuthSettings
 
 /**
@@ -13,14 +15,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  *
  * @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
  * @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
+ * @param managementStorageSettings Storage settings for management ([ManagementStorageSettings]).
  * @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
  */
 fun createTestManagementUserConfiguration(
     managementGlobalSettings: ManagementGlobalSettings = createTestManagementGlobalSettings(),
     managementSecuritySettings: ManagementSecuritySettings = createTestManagementSecuritySettings(),
+    managementStorageSettings: ManagementStorageSettings = createTestManagementStorageSettings(),
     managementAuthSettings: ManagementAuthSettings = createTestManagementAuthSettings()
 ) = ManagementUserConfiguration(
     managementGlobalSettings = managementGlobalSettings,
     managementSecuritySettings = managementSecuritySettings,
+    managementStorageSettings = managementStorageSettings,
     managementAuthSettings = managementAuthSettings
 )

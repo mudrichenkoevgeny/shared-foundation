@@ -10,6 +10,9 @@ object ClientSecurityErrorCodes {
 
     /**
      * Password policy is missing, corrupted, or cannot be fetched from the backend.
+     *
+     * **Localization keys:**
+     * - `password_policy_unavailable`
      */
     const val PASSWORD_POLICY_UNAVAILABLE = "PASSWORD_POLICY_UNAVAILABLE"
 }

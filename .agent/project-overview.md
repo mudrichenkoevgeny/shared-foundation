@@ -39,7 +39,7 @@ Focus on feature-specific contracts, navigation, and workflows.
 ## Boundaries & Dependencies
 - **`core/common`** is the leaf: It must not depend on any other internal modules.
 - **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`; `core/security` and `core/settings` depend on `core/audit`.
-- **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, and `core/settings`.
+- **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, `core/settings`, and `core/storage`.
 - **No Frameworks:** No Ktor Server/Client engines or database drivers. Only "pure" Kotlin logic and serialization.
 
 ## Guidelines for AI

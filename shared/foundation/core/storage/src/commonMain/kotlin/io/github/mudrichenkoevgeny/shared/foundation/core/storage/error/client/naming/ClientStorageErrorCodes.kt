@@ -10,11 +10,17 @@ object ClientStorageErrorCodes {
 
     /**
      * Direct S3 / Object Storage upload failed due to network error, CORS issue, or S3 error response.
+     *
+     * **Localization keys:**
+     * - `storage_upload_failed`
      */
     const val S3_UPLOAD_FAILED = "S3_UPLOAD_FAILED"
 
     /**
      * Direct S3 / Object Storage upload was cancelled by the user or client application.
+     *
+     * **Localization keys:**
+     * - `upload_cancelled`
      */
     const val DIRECT_UPLOAD_CANCELLED = "DIRECT_UPLOAD_CANCELLED"
 }

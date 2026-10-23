@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.ManagementUserConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
@@ -13,6 +14,7 @@ import kotlinx.serialization.Serializable
  *
  * @property managementGlobalSettings Management global settings payload ([ManagementGlobalSettingsPayload]).
  * @property managementSecuritySettings Management security settings payload ([ManagementSecuritySettingsPayload]).
+ * @property managementStorageSettings Management storage settings payload ([ManagementStorageSettingsPayload]).
  * @property managementAuthSettings Management authentication settings payload ([ManagementAuthSettingsPayload]).
  */
 @Serializable
@@ -22,6 +24,9 @@ data class ManagementUserConfigurationPayload(
 
     @SerialName(UserApiFields.MANAGEMENT_SECURITY_SETTINGS)
     val managementSecuritySettings: ManagementSecuritySettingsPayload,
+
+    @SerialName(UserApiFields.MANAGEMENT_STORAGE_SETTINGS)
+    val managementStorageSettings: ManagementStorageSettingsPayload,
 
     @SerialName(UserApiFields.MANAGEMENT_AUTH_SETTINGS)
     val managementAuthSettings: ManagementAuthSettingsPayload

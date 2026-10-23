@@ -59,6 +59,8 @@
   "device_id": "ID устройства",
   "client_type": "Тип клиента",
   "auth_provider": "Провайдер авторизации",
+  "external_provider": "Внешний провайдер",
+  "external_auth_provider": "Внешний провайдер авторизации",
   "language": "Язык",
   "app_version": "Версия приложения",
   "os_version": "Версия ОС",

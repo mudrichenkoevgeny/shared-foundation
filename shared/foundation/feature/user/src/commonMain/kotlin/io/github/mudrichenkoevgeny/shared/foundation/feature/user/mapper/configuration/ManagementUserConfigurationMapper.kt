@@ -4,6 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.securi
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.securitysettings.toManagementSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.mapper.globalsettings.toManagementGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.mapper.globalsettings.toManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.storagesettings.toManagementStorageSettings
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.storagesettings.toManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.configuration.ManagementUserConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.auth.settings.toManagementAuthSettings
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.auth.settings.toManagementAuthSettingsPayload
@@ -20,6 +22,7 @@ fun ManagementUserConfigurationPayload.toManagementUserConfiguration(): Manageme
     ManagementUserConfiguration(
         managementGlobalSettings = managementGlobalSettings.toManagementGlobalSettings(),
         managementSecuritySettings = managementSecuritySettings.toManagementSecuritySettings(),
+        managementStorageSettings = managementStorageSettings.toManagementStorageSettings(),
         managementAuthSettings = managementAuthSettings.toManagementAuthSettings()
     )
 
@@ -30,5 +33,6 @@ fun ManagementUserConfiguration.toManagementUserConfigurationPayload(): Manageme
     ManagementUserConfigurationPayload(
         managementGlobalSettings = managementGlobalSettings.toManagementGlobalSettingsPayload(),
         managementSecuritySettings = managementSecuritySettings.toManagementSecuritySettingsPayload(),
+        managementStorageSettings = managementStorageSettings.toManagementStorageSettingsPayload(),
         managementAuthSettings = managementAuthSettings.toManagementAuthSettingsPayload()
     )

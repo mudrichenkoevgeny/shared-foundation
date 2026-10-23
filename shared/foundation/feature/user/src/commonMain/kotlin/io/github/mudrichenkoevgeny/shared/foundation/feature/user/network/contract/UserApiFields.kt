@@ -245,4 +245,10 @@ object UserApiFields {
 
     /** JSON field name for the nested management authentication settings object on user configuration responses. */
     const val MANAGEMENT_AUTH_SETTINGS = "management_auth_settings"
+
+    /** JSON field name for the nested open storage settings object on user configuration responses. */
+    const val OPEN_STORAGE_SETTINGS = "open_storage_settings"
+
+    /** JSON field name for the nested management storage settings object on user configuration responses. */
+    const val MANAGEMENT_STORAGE_SETTINGS = "management_storage_settings"
 }

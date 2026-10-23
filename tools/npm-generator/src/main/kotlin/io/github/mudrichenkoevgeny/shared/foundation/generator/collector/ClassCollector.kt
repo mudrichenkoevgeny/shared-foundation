@@ -148,6 +148,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.rou
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.open.OpenStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action.StorageAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataDeniedReasonValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
@@ -448,7 +450,8 @@ val contractClasses = listOf(
     AuditApiPaths::class,
     UserRoleDefaultAuthorityLevel::class,
     SecurityAuditMetadataDeniedReasonValues::class,
-    UserAuditMetadataDeniedReasonValues::class
+    UserAuditMetadataDeniedReasonValues::class,
+    StorageAuditMetadataDeniedReasonValues::class
 )
 
 val errorClasses = listOf(
@@ -500,6 +503,7 @@ val enumClasses = listOf(
     StorageAuditActionType::class,
     CommonAuditMetadataKey::class,
     UserAuditMetadataKey::class,
+    StorageAuditMetadataKey::class,
     UserAccountStatus::class,
     UserRole::class,
     UserAuthProvider::class,

@@ -10,21 +10,25 @@ object ClientUserErrorCodes {
 
     /**
      * External authentication (OAuth, Google, Apple) was cancelled by the user.
+     *
+     * **Localization keys:**
+     * - `external_auth_cancelled`
      */
     const val EXTERNAL_AUTH_CANCELLED = "EXTERNAL_AUTH_CANCELLED"
 
     /**
      * External authentication (OAuth, Google, Apple) failed on the client side.
+     *
+     * **Localization keys:**
+     * - `external_auth_failed`
      */
     const val EXTERNAL_AUTH_FAILED = "EXTERNAL_AUTH_FAILED"
 
     /**
      * Client-side throttling error indicating too many confirmation requests initiated locally.
+     *
+     * **Localization keys:**
+     * - `too_many_confirmation_requests`
      */
     const val TOO_MANY_CONFIRMATION_REQUESTS = "TOO_MANY_CONFIRMATION_REQUESTS"
-
-    /**
-     * Client-side validation error indicating self-service registration is disabled by platform policy.
-     */
-    const val REGISTRATION_DISABLED = "REGISTRATION_DISABLED"
 }

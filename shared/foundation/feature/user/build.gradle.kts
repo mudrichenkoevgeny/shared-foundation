@@ -42,6 +42,7 @@ configure<KotlinMultiplatformExtension> {
                 api(project(":shared:foundation:core:audit"))
                 api(project(":shared:foundation:core:security"))
                 api(project(":shared:foundation:core:settings"))
+                api(project(":shared:foundation:core:storage"))
 
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.serialization.core) // Transitive for kotlinx-serialization
@@ -52,6 +53,7 @@ configure<KotlinMultiplatformExtension> {
             api(project(":shared:foundation:core:common")) // Transitive for core.common
             api(project(":shared:foundation:core:security")) // Transitive for core.security
             api(project(":shared:foundation:core:settings")) // Transitive for core.settings
+            api(project(":shared:foundation:core:storage")) // Transitive for core.storage
             api(project(":shared:foundation:core:audit")) // Transitive for core.audit
         }
 

@@ -10,21 +10,33 @@ object ClientCommonErrorCodes {
 
     /**
      * Error code indicating no internet connection available on the client device.
+     *
+     * **Localization keys:**
+     * - `no_internet`
      */
     const val NO_INTERNET_CONNECTION = "NO_INTERNET_CONNECTION"
 
     /**
      * Error code indicating generic network transport failure (e.g. timeout, DNS resolution failure).
+     *
+     * **Localization keys:**
+     * - `network`
      */
     const val NETWORK = "NETWORK"
 
     /**
      * Error code indicating response payload contract violation (e.g. deserialization failure).
+     *
+     * **Localization keys:**
+     * - `bad_request`
      */
     const val CONTRACT_VIOLATION = "CONTRACT_VIOLATION"
 
     /**
      * Error code indicating component or screen lifecycle state error.
+     *
+     * **Localization keys:**
+     * - `internal`
      */
     const val LIFECYCLE_ERROR = "LIFECYCLE_ERROR"
 }

@@ -2,10 +2,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.netwo
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.ManagementUserConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.securitysettings.createTestManagementSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings.createTestManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.storagesettings.createTestManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings.createTestManagementAuthSettingsPayload
 
 /**
@@ -13,14 +15,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.networ
  *
  * @param managementGlobalSettings Global settings payload for management ([ManagementGlobalSettingsPayload]).
  * @param managementSecuritySettings Security settings payload for management ([ManagementSecuritySettingsPayload]).
+ * @param managementStorageSettings Storage settings payload for management ([ManagementStorageSettingsPayload]).
  * @param managementAuthSettings Auth settings payload for management ([ManagementAuthSettingsPayload]).
  */
 fun createTestManagementUserConfigurationPayload(
     managementGlobalSettings: ManagementGlobalSettingsPayload = createTestManagementGlobalSettingsPayload(),
     managementSecuritySettings: ManagementSecuritySettingsPayload = createTestManagementSecuritySettingsPayload(),
+    managementStorageSettings: ManagementStorageSettingsPayload = createTestManagementStorageSettingsPayload(),
     managementAuthSettings: ManagementAuthSettingsPayload = createTestManagementAuthSettingsPayload()
 ) = ManagementUserConfigurationPayload(
     managementGlobalSettings = managementGlobalSettings,
     managementSecuritySettings = managementSecuritySettings,
+    managementStorageSettings = managementStorageSettings,
     managementAuthSettings = managementAuthSettings
 )

@@ -9,6 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action.StorageAuditActionType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageSortValues
@@ -154,6 +155,10 @@ object ManagementStorageRoutes {
      * - **Resource:** [StorageAuditResourceType.STORAGE_FILE]. Set `resourceId` to the specific `file_id`.
      * - **Metadata:** Include:
      *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [StorageAuditMetadataKey.FILE_NAME] — the original name of the deleted file.
+     *   3. [StorageAuditMetadataKey.FILE_SIZE_BYTES] — the binary size of the deleted file in bytes.
+     *   4. [StorageAuditMetadataKey.CATEGORY] — the storage classification category of the deleted file.
+     *   5. [StorageAuditMetadataKey.S3_KEY] — the internal S3 object key or storage path of the deleted file.
      *
      * **UI Presentation:**
      * - Screens:
@@ -183,6 +188,10 @@ object ManagementStorageRoutes {
      * - **Resource:** [StorageAuditResourceType.STORAGE_FILE]. Set `resourceId` to the [StorageApiPaths.FILE_ID].
      * - **Metadata:** Include:
      *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *   2. [StorageAuditMetadataKey.FILE_NAME] — the original name of the deleted file.
+     *   3. [StorageAuditMetadataKey.FILE_SIZE_BYTES] — the binary size of the deleted file in bytes.
+     *   4. [StorageAuditMetadataKey.CATEGORY] — the storage classification category of the deleted file.
+     *   5. [StorageAuditMetadataKey.S3_KEY] — the internal S3 object key or storage path of the deleted file.
      *
      * **UI Presentation:**
      * - Screens:
