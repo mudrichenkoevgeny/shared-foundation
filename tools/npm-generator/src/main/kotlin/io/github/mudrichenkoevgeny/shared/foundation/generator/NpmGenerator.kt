@@ -521,6 +521,16 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
     }
     export const confirmationKeySchema: z.ZodType<ConfirmationKey>;
 
+    export type PasswordPolicyValidatorResult =
+      | { readonly success: true; readonly reasons: readonly [] }
+      | { readonly success: false; readonly reasons: readonly PasswordPolicyFailReason[] };
+
+    export class PasswordPolicyValidator {
+      validate(policy: OpenPasswordPolicy | ManagementPasswordPolicy, password: string): PasswordPolicyValidatorResult;
+    }
+
+    export declare const passwordPolicyValidator: PasswordPolicyValidator;
+
     ${generateDomainModelsAndMappersDts()}
 
     ${generateCompositeParsersDts()}
