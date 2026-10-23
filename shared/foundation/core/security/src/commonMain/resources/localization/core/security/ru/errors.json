@@ -1,6 +1,5 @@
 {
-  "mfa_confirmation_required_without_args": "Требуется подтверждение аутентификации.",
-  "mfa_confirmation_required_with_args": "Требуется подтверждение аутентификации. MFA токен: {mfaToken}",
+  "mfa_confirmation_required": "Требуется подтверждение аутентификации.",
   "totp_already_enabled": "Двухфакторная аутентификация уже включена для этого аккаунта.",
   "totp_not_enabled": "Двухфакторная аутентификация не включена для этого аккаунта.",
   "mfa_token_expired": "Срок действия MFA токена истек. Пожалуйста, запросите новый.",
@@ -9,8 +8,7 @@
   "recovery_code_already_used": "Этот код восстановления уже был использован.",
   "otp_retry_too_soon_without_args": "Слишком много попыток. Пожалуйста, попробуйте позже.",
   "otp_retry_too_soon_with_args": "Слишком много попыток. Пожалуйста, попробуйте снова через {retryAfterSeconds} сек.",
-  "password_too_weak_without_args": "Пароль слишком слабый.",
-  "password_too_weak_with_args": "Пароль слишком слабый. Слишком короткий: {passwordTooShort} (минимальная длина: {passwordMinLength}), Нет букв: {passwordNoLetter}, Нет заглавных букв: {passwordNoUpperCase}, Нет строчных букв: {passwordNoLowerCase}, Нет цифр: {passwordNoDigit}, Нет спецсимволов: {passwordNoSpecialChar}, Слишком распространённый пароль: {passwordTooCommon}.",
+  "password_too_weak": "Пароль слишком слабый.",
   "password_policy_unavailable": "Не удалось загрузить требования к паролю. Пожалуйста, попробуйте снова.",
   "password_too_short_without_args": "Пароль слишком короткий.",
   "password_too_short_with_args": "Пароль должен содержать не менее {minLength} символов.",

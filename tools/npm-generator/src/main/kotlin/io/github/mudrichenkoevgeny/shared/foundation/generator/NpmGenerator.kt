@@ -525,6 +525,25 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
 
     ${generateCompositeParsersDts()}
 
+    export type CommonSortValues = 'created_at' | 'updated_at';
+
+    export namespace CommonSortValues {
+      export type TimestampSortBy = 'created_at' | 'updated_at';
+      export const TimestampSortBy: {
+        readonly CREATED_AT: 'created_at';
+        readonly UPDATED_AT: 'updated_at';
+      };
+    }
+
+    export type AuditSortValues = 'created_at';
+
+    export namespace AuditSortValues {
+      export type AuditEventSortBy = 'created_at';
+      export const AuditEventSortBy: {
+        readonly CREATED_AT: 'created_at';
+      };
+    }
+
     export type UserSortValues = 'created_at' | 'updated_at' | 'last_accessed_at' | 'last_reauthenticated_at' | 'expires_at';
 
     export namespace UserSortValues {

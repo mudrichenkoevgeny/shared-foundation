@@ -17,7 +17,7 @@ plugins {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.0.80"
+    version = "0.0.83"
 }
 
 val daemonJvmVersion: Int = run {
@@ -130,4 +130,5 @@ tasks.register("generateNpmPackage") {
     group = "publishing"
     description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types, Zod schemas, and route constants."
     dependsOn(":tools:npm-generator:run")
+    finalizedBy(":tools:npm-generator:auditNpmExports")
 }

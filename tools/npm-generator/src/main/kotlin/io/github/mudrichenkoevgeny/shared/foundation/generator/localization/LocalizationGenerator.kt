@@ -301,7 +301,7 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
             val fieldName = bundleData.bundleName.split('_').joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }.decapitalizeFirstLetter()
             dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
         }
-        dtsSb.append("  }\n}\n\n")
+        dtsSb.append("}\n\n")
     }
 
     dtsSb.append("""
@@ -313,7 +313,7 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
         dtsSb.append("  readonly $fieldName: ${moduleData.facadeClassName};\n")
     }
-    dtsSb.append("  }\n}\n\n")
+    dtsSb.append("}\n\n")
 
     dtsSb.append("""
         export declare const SharedLocalization: {

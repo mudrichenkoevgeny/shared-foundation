@@ -26,6 +26,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.theme.ThemeMode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.model.ApiErrorResponse
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.client.naming.ClientCommonErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.localization.CommonLocales
@@ -128,9 +129,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.ManagementStorageSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.OpenStorageSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.client.naming.ClientSecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.permission.StoragePermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.client.naming.ClientStorageErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming.StorageErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming.StorageErrorCodes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.client.naming.ClientUserErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.BaseSecurityNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.BaseSecurityNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.BaseSettingsNavigationRoutes
@@ -450,12 +454,16 @@ val contractClasses = listOf(
 val errorClasses = listOf(
     CommonErrorCodes::class,
     CommonErrorArgs::class,
+    ClientCommonErrorCodes::class,
     SecurityErrorCodes::class,
     SecurityErrorArgs::class,
+    ClientSecurityErrorCodes::class,
     UserErrorCodes::class,
     UserErrorArgs::class,
+    ClientUserErrorCodes::class,
     StorageErrorCodes::class,
-    StorageErrorArgs::class
+    StorageErrorArgs::class,
+    ClientStorageErrorCodes::class
 )
 
 val permClasses = listOf(

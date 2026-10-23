@@ -11,9 +11,11 @@ object StorageErrorCodes {
     /**
      * The requested file size exceeds the maximum permitted limit for its category or system policy.
      *
-     * **Public arguments:**
-     * - [StorageErrorArgs.FILE_SIZE_BYTES]: The size of the file provided by the caller in bytes.
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.MAX_FILE_SIZE_BYTES]: Maximum file size permitted in bytes.
+     *
+     * **Secondary Arguments (Contextual Metadata):**
+     * - [StorageErrorArgs.FILE_SIZE_BYTES] (optional): Actual size of the file provided by the caller in bytes.
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
@@ -22,9 +24,11 @@ object StorageErrorCodes {
     /**
      * The requested file size is below the minimum permitted threshold (e.g. empty 0-byte file).
      *
-     * **Public arguments:**
-     * - [StorageErrorArgs.FILE_SIZE_BYTES]: The size of the file provided by the caller in bytes.
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.MIN_FILE_SIZE_BYTES]: Minimum file size permitted in bytes.
+     *
+     * **Secondary Arguments (Contextual Metadata):**
+     * - [StorageErrorArgs.FILE_SIZE_BYTES] (optional): Actual size of the file provided by the caller in bytes.
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
@@ -33,8 +37,10 @@ object StorageErrorCodes {
     /**
      * The provided MIME type is not supported or forbidden for the target storage category.
      *
-     * **Public arguments:**
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.MIME_TYPE]: The rejected MIME type.
+     *
+     * **Secondary Arguments (Contextual Metadata):**
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
@@ -43,7 +49,7 @@ object StorageErrorCodes {
     /**
      * The specified storage category is disabled, unknown, or not supported by the platform configuration.
      *
-     * **Public arguments:**
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.CATEGORY]: Storage category identifier that was rejected.
      */
     const val UNSUPPORTED_STORAGE_CATEGORY = "UNSUPPORTED_STORAGE_CATEGORY"
@@ -51,7 +57,7 @@ object StorageErrorCodes {
     /**
      * The upload or storage operation failed because the user or tenant has exceeded their total allocated storage quota.
      *
-     * **Public arguments:**
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.QUOTA_BYTES]: Allocated storage quota in bytes.
      * - [StorageErrorArgs.USED_BYTES]: Current storage space used in bytes.
      */
@@ -60,7 +66,7 @@ object StorageErrorCodes {
     /**
      * The caller has created too many unfinalized presigned upload sessions without completing or canceling them.
      *
-     * **Public arguments:**
+     * **Primary Arguments (Localization Placeholders):**
      * - [StorageErrorArgs.MAX_PENDING_UPLOADS]: Maximum permitted active upload sessions.
      */
     const val TOO_MANY_PENDING_UPLOADS = "TOO_MANY_PENDING_UPLOADS"
@@ -80,7 +86,7 @@ object StorageErrorCodes {
     /**
      * The upload session or presigned URL has already been completed or finalized.
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The identifier of the file whose upload was already completed.
      */
     const val UPLOAD_ALREADY_COMPLETED = "UPLOAD_ALREADY_COMPLETED"
@@ -88,7 +94,7 @@ object StorageErrorCodes {
     /**
      * Verification or processing of an uploaded file failed after transfer (e.g. actual uploaded size mismatch, corrupted upload, or magic bytes check failure).
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID] (optional): The target file identifier.
      * - [CommonErrorArgs.MESSAGE] (optional): Internal verification error details.
      */
@@ -102,7 +108,7 @@ object StorageErrorCodes {
      * *Note: For security reasons (prevention of resource enumeration attacks), servers MUST return [FILE_NOT_FOUND]
      * rather than an access denied error when a user attempts to access a file they do not own.*
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The file identifier that was requested.
      */
     const val FILE_NOT_FOUND = "FILE_NOT_FOUND"
@@ -110,7 +116,7 @@ object StorageErrorCodes {
     /**
      * The requested file is not yet available because it is still being uploaded, scanned, or processed asynchronously.
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The target file identifier.
      */
     const val FILE_NOT_READY = "FILE_NOT_READY"
@@ -118,7 +124,7 @@ object StorageErrorCodes {
     /**
      * A file with the specified identifier or content hash already exists and cannot be overwritten.
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The file identifier that already exists.
      */
     const val FILE_ALREADY_EXISTS = "FILE_ALREADY_EXISTS"
@@ -126,7 +132,7 @@ object StorageErrorCodes {
     /**
      * Failed to remove the file binary from object storage or database metadata.
      *
-     * **Secret arguments:**
+     * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The identifier of the file that could not be deleted.
      */
     const val FILE_DELETE_FAILED = "FILE_DELETE_FAILED"

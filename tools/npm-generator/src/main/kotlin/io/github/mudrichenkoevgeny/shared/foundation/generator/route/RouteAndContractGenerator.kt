@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.lis
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.contractClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.errorClasses
@@ -118,6 +119,19 @@ fun generateContractObjects(): String {
         IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}"
       }
     };
+
+    export const StorageFilterValues = {
+      StorageFileFilterValues: {
+        FILE_ID: "${StorageFilterValues.StorageFileFilterValues.FILE_ID}",
+        OWNER_USER_ID: "${StorageFilterValues.StorageFileFilterValues.OWNER_USER_ID}",
+        FILE_NAME: "${StorageFilterValues.StorageFileFilterValues.FILE_NAME}",
+        MIME_TYPE: "${StorageFilterValues.StorageFileFilterValues.MIME_TYPE}",
+        CATEGORY: "${StorageFilterValues.StorageFileFilterValues.CATEGORY}",
+        VISIBILITY: "${StorageFilterValues.StorageFileFilterValues.VISIBILITY}",
+        STATUS: "${StorageFilterValues.StorageFileFilterValues.STATUS}",
+        TARGET_SCOPE: "${StorageFilterValues.StorageFileFilterValues.TARGET_SCOPE}"
+      }
+    };
     """.trimIndent()
 
     return "$standardContracts\n\n$listingParamNamesCode"
@@ -194,6 +208,18 @@ fun generateEnumsJs(): String {
       type: confirmationTypeSchema,
       identifier: z.string()
     });
+
+    export const CommonSortValues = {
+      TimestampSortBy
+    };
+
+    export const AuditSortValues = {
+      AuditEventSortBy
+    };
+
+    export const StorageSortValues = {
+      StorageFileSortBy
+    };
 
     export const UserSortValues = {
       UserSortBy,
