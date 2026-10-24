@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reque
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,6 +20,8 @@ import kotlinx.serialization.Serializable
  * If null, the lockout type remains unchanged.
  * @property temporaryLockoutUntil Optional target temporary lockout expiration timestamp in epoch milliseconds.
  * If null, the temporary lockout expiration timestamp remains unchanged.
+ * @property storageConfiguration Optional target storage configuration overrides and limits.
+ * If null, the storage configuration remains unchanged.
  */
 @Serializable
 data class UpdateUserRequest(
@@ -35,5 +38,8 @@ data class UpdateUserRequest(
     val lockoutType: String?,
 
     @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-    val temporaryLockoutUntil: Long?
+    val temporaryLockoutUntil: Long?,
+
+    @SerialName(UserApiFields.STORAGE_CONFIGURATION)
+    val storageConfiguration: UserStorageConfigurationPayload?
 )

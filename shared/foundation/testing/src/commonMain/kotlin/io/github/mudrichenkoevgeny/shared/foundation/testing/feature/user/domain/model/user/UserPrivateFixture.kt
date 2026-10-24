@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserStorageConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
@@ -28,6 +29,7 @@ import kotlin.time.Instant
  * @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
  * @param lockoutType Category of lockout ([AccountLockoutType]).
  * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
+ * @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
  */
 fun createTestUserPrivate(
     id: UserId = createTestUserId(),
@@ -43,7 +45,8 @@ fun createTestUserPrivate(
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     scheduledPermanentDeletionAt: Instant? = null,
     lockoutType: AccountLockoutType = AccountLockoutType.NONE,
-    temporaryLockoutUntil: Instant? = null
+    temporaryLockoutUntil: Instant? = null,
+    storageConfiguration: UserStorageConfiguration? = null
 ) = UserPrivate(
     id = id,
     role = role,
@@ -58,7 +61,8 @@ fun createTestUserPrivate(
     updatedAt = updatedAt,
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration
 )
 
 /**

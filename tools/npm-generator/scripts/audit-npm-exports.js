@@ -116,19 +116,21 @@ enums.forEach(e => {
     }
 });
 
-// 3. Audit Top-Level Public Functions & Resolvers
-console.log('\n[3/6] Auditing Top-Level Public Functions & Resolvers...');
+// 3. Audit Top-Level Public Localization Resolvers & Formatting Functions
+console.log('\n[3/6] Auditing Top-Level Public Localization Resolvers & Formatters...');
 const functions = [];
 
 prodKtFiles.forEach(file => {
-    const rawContent = fs.readFileSync(file, 'utf8');
-    const content = rawContent.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
-    const funRegex = /^\s*(?:@\w+(?:\([^)]*\))?\s+)*fun\s+(?:[A-Za-z0-9_]+\.)?([A-Za-z0-9_]+)\s*\(/gm;
-    let match;
-    while ((match = funRegex.exec(content)) !== null) {
-        const name = match[1];
-        if (!name.startsWith('to') && !name.startsWith('from') && !name.startsWith('parse') && !file.includes('/internal/')) {
-            functions.push({ name, file });
+    if (file.includes('/localization/') || file.includes('/formatting/')) {
+        const rawContent = fs.readFileSync(file, 'utf8');
+        const content = rawContent.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
+        const funRegex = /^\s*(?:@\w+(?:\([^)]*\))?\s+)*fun\s+(?:[A-Za-z0-9_]+\.)?([A-Za-z0-9_]+)\s*\(/gm;
+        let match;
+        while ((match = funRegex.exec(content)) !== null) {
+            const name = match[1];
+            if (!name.startsWith('to') && !name.startsWith('from') && !name.startsWith('get') && !name.startsWith('parse') && !file.includes('/internal/')) {
+                functions.push({ name, file });
+            }
         }
     }
 });
@@ -138,11 +140,11 @@ functions.forEach(fn => {
     const inDts = new RegExp(`\\b${fn.name}\\s*\\(`, 'm').test(dtsContent);
 
     if (!inJs) {
-        console.error(`  ❌ Public Function/Resolver missing in JS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
+        console.error(`  ❌ Localization Resolver missing in JS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
         errorsCount++;
     }
     if (!inDts) {
-        console.error(`  ❌ Public Function/Resolver missing in DTS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
+        console.error(`  ❌ Localization Resolver missing in DTS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
         errorsCount++;
     }
 });

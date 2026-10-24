@@ -12,9 +12,9 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [StorageFileStatus]: Enum representing file lifecycle states (`PENDING_UPLOAD`, `READY`, `PROCESSING`, `DELETED`).
   - [StorageFileVisibility]: Enum controlling access level (`PUBLIC`, `PRIVATE`).
   - **Entity Projections:**
-    - [StorageFileSummary]: Public/summary projection containing non-sensitive embedding metadata.
-    - [StorageFilePrivate]: Detailed private projection containing owner ID, lifecycle, visibility, and timestamps.
-    - [StorageFileInternal]: Internal domain model containing S3 bucket name, object key, and content SHA-256 hash (`contentHash`) for deduplication. *Strictly for backend/DB logic; never exposed via API.*
+    - **Storage File Summary:** [StorageFileSummary] / [StorageFileSummaryPayload] for compact list views and embedding cards.
+    - **Storage File Private:** [StorageFilePrivate] / [StorageFilePrivatePayload] for authenticated self-service ("My Files") and management inspection.
+    - **Storage File Internal:** [StorageFileInternal] for server/database storage (includes S3 bucket, S3 key, and content SHA-256 hash). **No wire Payload!**
 - **Presigned Upload & Batch Contracts:**
   - [PresignedUrlRequest] & [PresignedUrlPayload]: Request/response DTOs for requesting presigned S3 upload URLs with feature scope (`targetScope`).
   - [PresignedReadUrlBatchRequest] & [PresignedReadUrlBatchPayload]: Request/response DTOs for batch requesting temporary presigned read URLs for multiple files.
@@ -35,6 +35,10 @@ This module defines pure KMP contracts and route specifications for direct clien
 - **Error Codes & Audit:**
   - [StorageErrorCodes] & [StorageErrorArgs]: Specific codes for file size limits, MIME restrictions, quota limits, presigned URL expiration, and file deletion failures.
   - [StorageAuditActionType] & [StorageAuditResourceType]: Audit action and resource types for administrative storage management and file deletions.
+- **Mappers & Domain Converters:**
+  - [StorageFileDomainMapper]: Converts internal DB models ([StorageFileInternal]) into public domain projections ([StorageFilePrivate], [StorageFileSummary]) with dynamically resolved `fileUrl`.
+  - [StorageFilePrivateMapper] & [StorageFileSummaryMapper]: Bidirectional conversion between Domain entities and Network DTO payloads ([StorageFilePrivatePayload], [StorageFileSummaryPayload]).
+  - [ManagementStorageSettingsMapper] & [OpenStorageSettingsMapper]: Conversion between Storage Settings domain models and network payloads.
 
 ## Usage
 
@@ -53,6 +57,11 @@ This module defines pure KMP contracts and route specifications for direct clien
 [StorageFileSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary.kt
 [StorageFilePrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate.kt
 [StorageFileInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal.kt
+[StorageFileDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileDomainMapper.kt
+[StorageFilePrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFilePrivateMapper.kt
+[StorageFileSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileSummaryMapper.kt
+[ManagementStorageSettingsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/storagesettings/ManagementStorageSettingsMapper.kt
+[OpenStorageSettingsMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/storagesettings/OpenStorageSettingsMapper.kt
 [PresignedUrlRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest.kt
 [PresignedUrlPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload.kt
 [PresignedReadUrlBatchRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest.kt

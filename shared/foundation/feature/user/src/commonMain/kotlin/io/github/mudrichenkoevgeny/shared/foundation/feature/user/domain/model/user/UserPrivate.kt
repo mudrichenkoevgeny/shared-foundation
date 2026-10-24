@@ -26,6 +26,7 @@ import kotlin.time.Instant
  * @property scheduledPermanentDeletionAt Scheduled permanent removal timestamp ([Instant]), or `null`.
  * @property lockoutType Category of account lockout ([AccountLockoutType]).
  * @property temporaryLockoutUntil Timestamp until which the account is temporarily locked out ([Instant]), or `null`.
+ * @property storageConfiguration Custom user storage configuration overrides and limits ([UserStorageConfiguration]), or `null`.
  */
 data class UserPrivate(
     val id: UserId = UserId.generate(),
@@ -41,5 +42,6 @@ data class UserPrivate(
     val updatedAt: Instant?,
     val scheduledPermanentDeletionAt: Instant?,
     val lockoutType: AccountLockoutType,
-    val temporaryLockoutUntil: Instant?
+    val temporaryLockoutUntil: Instant?,
+    val storageConfiguration: UserStorageConfiguration?
 )

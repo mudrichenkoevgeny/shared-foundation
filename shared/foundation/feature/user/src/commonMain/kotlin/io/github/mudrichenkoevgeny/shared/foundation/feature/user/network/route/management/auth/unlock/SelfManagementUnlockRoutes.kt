@@ -14,10 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByEmailConfirmationRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByExternalAuthProviderRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByPhoneConfirmationRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.confirmation.SendConfirmationToPhoneRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 
 /**
@@ -30,9 +27,6 @@ object SelfManagementUnlockRoutes {
 
     /** Base path for email unlock operations. */
     private const val UNLOCK_BY_EMAIL_ROUTE = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/email"
-
-    /** Base path for phone unlock operations. */
-    private const val UNLOCK_BY_PHONE_ROUTE = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/phone"
 
     /**
      * **HTTP method:** `POST`
@@ -82,80 +76,4 @@ object SelfManagementUnlockRoutes {
      *   - [ManagementAuthNavigation.UnlockOtpInput]
      */
     const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
-
-    /**
-     * **HTTP method:** `POST`
-     *
-     * Requests a confirmation code (OTP) to be sent to the user's phone to initiate the unlock process.
-     *
-     * Request body: [SendConfirmationToPhoneRequest].
-     *
-     * Response body: [OtpConfirmationPayload].
-     *
-     * **Authorization:**
-     * - **Public Access:** Allowed.
-     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
-     * - **Required Permissions:** None.
-     *
-     * **UI Presentation:**
-     * - Screens:
-     *   - [ManagementAuthNavigation.UnlockTargetInput]
-     *   - [ManagementAuthNavigation.UnlockOtpInput]
-     */
-    const val SEND_UNLOCK_PHONE_CONFIRMATION = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
-
-    /**
-     * **HTTP method:** `POST`
-     *
-     * Unlocks a temporarily locked management account using a phone confirmation code.
-     *
-     * Request body: [UnlockByPhoneConfirmationRequest].
-     *
-     * **Authorization:**
-     * - **Public Access:** Allowed.
-     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
-     * - **Required Permissions:** None.
-     *
-     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * - **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
-     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.PHONE_NUMBER] — phone number from the request.
-     *
-     * **UI Presentation:**
-     * - Screens:
-     *   - [ManagementAuthNavigation.UnlockOtpInput]
-     */
-    const val UNLOCK_BY_PHONE = UNLOCK_BY_PHONE_ROUTE
-
-    /**
-     * **HTTP method:** `POST`
-     *
-     * Unlocks a temporarily locked management account using an external authentication provider token.
-     *
-     * Request body: [UnlockByExternalAuthProviderRequest].
-     *
-     * **Authorization:**
-     * - **Public Access:** Allowed.
-     * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
-     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE], [UserAccountStatus.READ_ONLY] (**OR** semantics).
-     * - **Required Permissions:** None.
-     *
-     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
-     * - **Action:** [UserAuditActionType.SELF_UNLOCK_ACCOUNT].
-     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the [UserId] upon success.
-     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the [UserId] upon success.
-     * - **Metadata:** Include:
-     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
-     *   2. [UserAuditMetadataKey.USER_AUTH_PROVIDER] — the identity provider used.
-     *
-     * **UI Presentation:**
-     * - Screens:
-     *   - [ManagementAuthNavigation.UnlockMethodSelection]
-     */
-    const val UNLOCK_BY_EXTERNAL_PROVIDER = "$BASE_SELF_MANAGEMENT_UNLOCK_ROUTE/external-provider"
 }

@@ -37,7 +37,8 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
     lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
-    temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds)
+    temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds),
+    storageConfiguration = storageConfiguration?.toUserStorageConfiguration()
 )
 
 /**
@@ -59,5 +60,6 @@ fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     updatedAt = updatedAt?.toEpochMilliseconds(),
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
     lockoutType = lockoutType.value,
-    temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds()
+    temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds(),
+    storageConfiguration = storageConfiguration?.toUserStorageConfigurationPayload()
 )

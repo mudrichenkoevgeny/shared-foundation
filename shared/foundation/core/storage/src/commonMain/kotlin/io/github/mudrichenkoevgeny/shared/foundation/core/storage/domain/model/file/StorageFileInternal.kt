@@ -23,7 +23,6 @@ import kotlin.time.Instant
  * @property contentHash Optional hash of the file content (e.g., SHA-256) used for deduplication.
  * @property s3Bucket Internal S3 bucket name.
  * @property s3Key Internal S3 object key/path.
- * @property fileUrl Public or presigned read URL for downloading or viewing the file.
  * @property createdAt Timestamp when the file record was created ([Instant]).
  * @property updatedAt Timestamp when the file record was last modified ([Instant]), or `null`.
  */
@@ -40,7 +39,6 @@ data class StorageFileInternal(
     val contentHash: String? = null,
     val s3Bucket: String,
     val s3Key: String,
-    val fileUrl: String,
     val createdAt: Instant,
     val updatedAt: Instant?
 )

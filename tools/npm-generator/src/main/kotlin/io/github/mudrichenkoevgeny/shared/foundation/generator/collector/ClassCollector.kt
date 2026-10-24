@@ -114,6 +114,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserStorageConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.AuthSettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
@@ -223,6 +224,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.RefreshTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.SessionTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByEmailRequest
@@ -700,6 +702,7 @@ val rawDtoClasses = listOf(
     EmailRestrictionPolicyPayload::class,
     SessionTokenPayload::class,
     UserPrivatePayload::class,
+    UserStorageConfigurationPayload::class,
     UserSummaryPayload::class,
     UserIdentifierSummaryPayload::class,
     UserIdentifierPrivatePayload::class,
@@ -840,6 +843,7 @@ val rawDomainToDtoClasses = listOf(
     StorageFilePrivate::class to StorageFilePrivatePayload::class,
     SessionToken::class to SessionTokenPayload::class,
     UserPrivate::class to UserPrivatePayload::class,
+    UserStorageConfiguration::class to UserStorageConfigurationPayload::class,
     UserSummary::class to UserSummaryPayload::class
 )
 

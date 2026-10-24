@@ -251,4 +251,16 @@ object UserApiFields {
 
     /** JSON field name for the nested management storage settings object on user configuration responses. */
     const val MANAGEMENT_STORAGE_SETTINGS = "management_storage_settings"
+
+    /** JSON field name for the user storage configuration object or property. */
+    const val STORAGE_CONFIGURATION = "storage_configuration"
+
+    /** JSON field name for custom storage quota in bytes. */
+    const val QUOTA_BYTES = "quota_bytes"
+
+    /** JSON field name for custom maximum upload size in bytes. */
+    const val MAX_UPLOAD_SIZE_BYTES = "max_upload_size_bytes"
+
+    /** JSON field name for custom maximum pending uploads count. */
+    const val MAX_PENDING_UPLOADS = "max_pending_uploads"
 }

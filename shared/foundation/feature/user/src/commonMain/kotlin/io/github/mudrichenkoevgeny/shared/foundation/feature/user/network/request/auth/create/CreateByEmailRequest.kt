@@ -1,9 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotBlankStringField
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.RequiredField
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,6 +18,7 @@ import kotlinx.serialization.Serializable
  * @property status The initial account status.
  * @property authorityLevel Authority level assigned to the new account.
  * @property permissionCodes Explicit [PermissionCode] values to assign.
+ * @property storageConfiguration Custom storage configuration overrides and limits for the new account.
  */
 @Serializable
 data class CreateByEmailRequest(
@@ -41,5 +43,8 @@ data class CreateByEmailRequest(
 
     @RequiredField
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: Set<String>
+    val permissionCodes: Set<String>,
+
+    @SerialName(UserApiFields.STORAGE_CONFIGURATION)
+    val storageConfiguration: UserStorageConfigurationPayload?
 )

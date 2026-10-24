@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
@@ -26,6 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param scheduledPermanentDeletionAt Scheduled deletion epoch-millisecond timestamp.
  * @param lockoutType Wire string representation of [AccountLockoutType].
  * @param temporaryLockoutUntil Expiration epoch-millisecond timestamp for temporary lockout.
+ * @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
  */
 fun createTestUserPrivatePayload(
     id: String = TEST_USER_ID,
@@ -41,7 +43,8 @@ fun createTestUserPrivatePayload(
     updatedAt: Long? = TEST_TIME_MILLIS,
     scheduledPermanentDeletionAt: Long? = null,
     lockoutType: String = AccountLockoutType.NONE.value,
-    temporaryLockoutUntil: Long? = null
+    temporaryLockoutUntil: Long? = null,
+    storageConfiguration: UserStorageConfigurationPayload? = null
 ) = UserPrivatePayload(
     id = id,
     role = role,
@@ -56,7 +59,8 @@ fun createTestUserPrivatePayload(
     updatedAt = updatedAt,
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration
 )
 
 /**

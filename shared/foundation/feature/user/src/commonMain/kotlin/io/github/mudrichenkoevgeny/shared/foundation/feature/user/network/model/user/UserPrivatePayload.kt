@@ -30,6 +30,7 @@ import kotlin.time.Instant
  * @property scheduledPermanentDeletionAt [UserPrivate.scheduledPermanentDeletionAt] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property lockoutType [UserPrivate.lockoutType]; wire values match [AccountLockoutType.value].
  * @property temporaryLockoutUntil [UserPrivate.temporaryLockoutUntil] as Unix epoch milliseconds ([Instant]), or `null`.
+ * @property storageConfiguration [UserPrivate.storageConfiguration] as [UserStorageConfigurationPayload], or `null`.
  */
 @Serializable
 data class UserPrivatePayload(
@@ -73,5 +74,8 @@ data class UserPrivatePayload(
     val lockoutType: String,
 
     @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-    val temporaryLockoutUntil: Long? = null
+    val temporaryLockoutUntil: Long? = null,
+
+    @SerialName(UserApiFields.STORAGE_CONFIGURATION)
+    val storageConfiguration: UserStorageConfigurationPayload? = null
 )

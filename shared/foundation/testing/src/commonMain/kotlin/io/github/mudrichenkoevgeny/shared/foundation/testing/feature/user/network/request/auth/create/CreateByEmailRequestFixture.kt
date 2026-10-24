@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.netwo
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
@@ -14,6 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
  * @param status Account status wire string ([UserAccountStatus]).
  * @param authorityLevel Hierarchical authority level (0-100).
  * @param permissionCodes Assigned permission code wire strings.
+ * @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
  */
 fun createTestCreateByEmailRequest(
     email: String = TEST_EMAIL,
@@ -21,12 +23,14 @@ fun createTestCreateByEmailRequest(
     role: String = UserRole.USER.value,
     status: String = UserAccountStatus.ACTIVE.value,
     authorityLevel: Int = 10,
-    permissionCodes: Set<String> = emptySet()
+    permissionCodes: Set<String> = emptySet(),
+    storageConfiguration: UserStorageConfigurationPayload? = null
 ) = CreateByEmailRequest(
     email = email,
     password = password,
     role = role,
     status = status,
     authorityLevel = authorityLevel,
-    permissionCodes = permissionCodes
+    permissionCodes = permissionCodes,
+    storageConfiguration = storageConfiguration
 )

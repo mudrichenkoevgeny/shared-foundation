@@ -25,7 +25,8 @@ fun UserInternal.toUserPrivate(): UserPrivate = UserPrivate(
     updatedAt = updatedAt,
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration
 )
 
 /**

@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserInternal
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserStorageConfiguration
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import kotlin.time.Instant
 
@@ -26,6 +27,7 @@ import kotlin.time.Instant
  * @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
  * @param lockoutType Category of lockout ([AccountLockoutType]).
  * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
+ * @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
  */
 fun createTestUserInternal(
     id: UserId = createTestUserId(),
@@ -41,7 +43,8 @@ fun createTestUserInternal(
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     scheduledPermanentDeletionAt: Instant? = null,
     lockoutType: AccountLockoutType = AccountLockoutType.NONE,
-    temporaryLockoutUntil: Instant? = null
+    temporaryLockoutUntil: Instant? = null,
+    storageConfiguration: UserStorageConfiguration? = null
 ) = UserInternal(
     id = id,
     role = role,
@@ -56,5 +59,6 @@ fun createTestUserInternal(
     updatedAt = updatedAt,
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration
 )
