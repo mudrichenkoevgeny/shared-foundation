@@ -21,6 +21,9 @@ object SecurityErrorCodes {
      *   - `password_no_special_char`: When `args.passwordNoSpecialChar == true`.
      *   - `password_too_common`: When `args.passwordTooCommon == true`.
      *
+     * **Formatters & Resolvers:**
+     * - Use `SecurityModuleStrings.resolvePasswordTooWeakReasons` to evaluate `error.args` and return a list of localized violation hint strings.
+     *
      * **Public arguments (Programmatic API payload):**
      * - [SecurityErrorArgs.PASSWORD_MIN_LENGTH] (optional)
      * - [SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT] (optional)

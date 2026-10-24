@@ -134,6 +134,25 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
           return localeData?.[modulePath]?.[bundleName]?.[key];
         };
 
+        /**
+         * Formats a raw byte count into a human-readable localized byte size string (e.g., "100 B", "50 MB", "1 GB").
+         */
+        export function formatByteSize(bytesRaw, locale = 'en', resolver = defaultLocalizedStringResolver) {
+          const bytes = Number(bytesRaw);
+          if (isNaN(bytes) || bytesRaw === null || bytesRaw === undefined) return bytesRaw !== null && bytesRaw !== undefined ? String(bytesRaw) : '';
+          const getUnit = (key) => resolver('core/common', 'general', key, locale) || key;
+          const ONE_KB = 1024;
+          const ONE_MB = 1024 * 1024;
+          const ONE_GB = 1024 * 1024 * 1024;
+          const ONE_TB = 1024 * 1024 * 1024 * 1024;
+
+          if (bytes >= ONE_TB) return Math.floor(bytes / ONE_TB) + ' ' + getUnit('byte_unit_tb');
+          if (bytes >= ONE_GB) return Math.floor(bytes / ONE_GB) + ' ' + getUnit('byte_unit_gb');
+          if (bytes >= ONE_MB) return Math.floor(bytes / ONE_MB) + ' ' + getUnit('byte_unit_mb');
+          if (bytes >= ONE_KB) return Math.floor(bytes / ONE_KB) + ' ' + getUnit('byte_unit_kb');
+          return bytes + ' ' + getUnit('byte_unit_b');
+        }
+
     """.trimIndent()).append("\n\n")
 
     modulesList.forEach { moduleData ->
@@ -185,6 +204,66 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
             val fieldName = bundleData.bundleName.split('_').joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }.decapitalizeFirstLetter()
             jsSb.append("    this.$fieldName = new ${bundleData.className}(resolver, locale);\n")
         }
+
+        if (moduleData.facadeClassName == "SecurityModuleStrings") {
+            jsSb.append("""
+    resolvePasswordTooWeakReasons(args) {
+      if (!args) return [this.errors.passwordTooWeak];
+      const minLength = args.passwordMinLength ? Number(args.passwordMinLength) : undefined;
+      const isTooShort = Boolean(args.passwordTooShort || args.passwordTooShort === 'true');
+      const isNoLetter = Boolean(args.passwordNoLetter || args.passwordNoLetter === 'true');
+      const isNoUpperCase = Boolean(args.passwordNoUpperCase || args.passwordNoUpperCase === 'true');
+      const isNoLowerCase = Boolean(args.passwordNoLowerCase || args.passwordNoLowerCase === 'true');
+      const isNoDigit = Boolean(args.passwordNoDigit || args.passwordNoDigit === 'true');
+      const isNoSpecialChar = Boolean(args.passwordNoSpecialChar || args.passwordNoSpecialChar === 'true');
+      const isTooCommon = Boolean(args.passwordTooCommon || args.passwordTooCommon === 'true');
+
+      const reasons = [];
+      if (isTooShort) {
+        reasons.push(minLength !== undefined && !isNaN(minLength) ? this.errors.passwordTooShort(minLength) : this.errors.passwordTooShortWithoutArgs);
+      }
+      if (isNoLetter) reasons.push(this.errors.passwordNoLetter);
+      if (isNoUpperCase) reasons.push(this.errors.passwordNoUppercase);
+      if (isNoLowerCase) reasons.push(this.errors.passwordNoLowerCase);
+      if (isNoDigit) reasons.push(this.errors.passwordNoDigit);
+      if (isNoSpecialChar) reasons.push(this.errors.passwordNoSpecialChar);
+      if (isTooCommon) reasons.push(this.errors.passwordTooCommon);
+
+      return reasons.length > 0 ? reasons : [this.errors.passwordTooWeak];
+    }
+
+            """.trimIndent()).append("\n")
+        }
+
+        if (moduleData.facadeClassName == "UserModuleStrings") {
+            jsSb.append("""
+    resolveUserLockedMessage(lockoutType, formattedUntil) {
+      if (lockoutType === 'TEMPORARY' && formattedUntil) {
+        return this.errors.locked(formattedUntil);
+      }
+      return this.errors.lockedWithoutArgs;
+    }
+
+    resolveUserIdentifierLimitReachedMessage(commonStrings, limit, providerRaw) {
+      if (limit === undefined || limit === null || !providerRaw) {
+        return this.errors.identifierLimitReachedWithoutArgs;
+      }
+      const raw = String(providerRaw).toLowerCase();
+      const common = commonStrings?.general || {};
+      const localizedProvider = raw === 'email' ? (common.email || 'Email') : raw === 'phone' ? (common.phone || 'Phone') : (common.externalProvider || 'External Provider');
+      return this.errors.identifierLimitReached(limit, localizedProvider);
+    }
+
+    resolveTotalUserIdentifiersLimitReachedMessage(limit) {
+      if (limit !== undefined && limit !== null) {
+        return this.errors.totalIdentifiersLimitReached(limit);
+      }
+      return this.errors.totalIdentifiersLimitReachedWithoutArgs;
+    }
+
+            """.trimIndent()).append("\n")
+        }
+
         jsSb.append("  }\n}\n\n")
     }
 
@@ -245,6 +324,11 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
 
         export declare function formatLocalizedString(template: string, params?: Record<string, unknown>): string;
 
+        /**
+         * Formats a raw byte count into a human-readable localized byte size string (e.g., "100 B", "50 MB", "1 GB").
+         */
+        export declare function formatByteSize(bytesRaw: number | string | bigint | unknown, locale?: string, resolver?: LocalizedStringResolver): string;
+
         export declare const defaultLocalizedStringResolver: LocalizedStringResolver;
 
         export declare const localizationResources: Record<string, Record<string, Record<string, Record<string, string>>>>;
@@ -301,6 +385,17 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
             val fieldName = bundleData.bundleName.split('_').joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }.decapitalizeFirstLetter()
             dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
         }
+
+        if (moduleData.facadeClassName == "SecurityModuleStrings") {
+            dtsSb.append("  resolvePasswordTooWeakReasons(args?: Record<string, unknown> | null): string[];\n")
+        }
+
+        if (moduleData.facadeClassName == "UserModuleStrings") {
+            dtsSb.append("  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n")
+            dtsSb.append("  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n")
+            dtsSb.append("  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n")
+        }
+
         dtsSb.append("}\n\n")
     }
 

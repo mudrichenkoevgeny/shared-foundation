@@ -18,9 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.rou
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedUrlPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file.DeleteFilesBatchRequest
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.BaseStorageNetworkRoutes
 
 /**
@@ -91,48 +89,6 @@ object ManagementStorageRoutes {
      *   - [ManagementStorageNavigation.FileDetail]
      */
     const val GET_FILE = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
-
-    /**
-     * **HTTP method:** `POST`
-     *
-     * Requests a presigned S3 upload URL for a new file via management API.
-     *
-     * Request body: [PresignedUrlRequest].
-     * Response body: [PresignedUrlPayload].
-     *
-     * **Authorization:**
-     * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** None.
-     *
-     * **UI Presentation:**
-     * - Screens:
-     *   - [ManagementStorageNavigation.FileUpload]
-     */
-    const val POST_PRESIGNED_UPLOAD_URL = "$BASE_MANAGEMENT_STORAGE_ROUTE/presigned-url"
-
-    /**
-     * **HTTP method:** `POST`
-     *
-     * Confirms that a file has been successfully uploaded to S3 via management API.
-     *
-     * Path parameter: [StorageApiPaths.FILE_ID].
-     *
-     * Request body: None.
-     * Response body: [StorageFilePrivatePayload].
-     *
-     * **Authorization:**
-     * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** None.
-     *
-     * **UI Presentation:**
-     * - Screens:
-     *   - [ManagementStorageNavigation.FileUpload]
-     */
-    const val CONFIRM_UPLOAD = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
 
     /**
      * **HTTP method:** `POST`

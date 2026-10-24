@@ -105,6 +105,9 @@ object UserErrorCodes {
      * - `locked_without_args`: Static fallback message.
      * - `locked_with_args`: Parameterized message template (`{formattedUntil}`).
      *
+     * **Formatters & Resolvers:**
+     * - Use `UserModuleStrings.resolveUserLockedMessage` to resolve the contextual lockout error message.
+     *
      * **Display arguments (Localization placeholders):**
      * - [UserErrorArgs.TEMPORARY_LOCKOUT_UNTIL]: Temporary lockout expiration timestamp in epoch milliseconds or formatted date string (`{formattedUntil}`).
      *
@@ -196,15 +199,18 @@ object UserErrorCodes {
     const val CAN_NOT_CREATE_USER_IDENTIFIER = "CAN_NOT_CREATE_USER_IDENTIFIER"
 
     /**
-     * The maximum number of identifiers for a specific authentication provider has been reached.
+     * The maximum number of identifiers for a specific authentication provider category (`email`, `phone`, or `external_provider`) has been reached.
      *
      * **Localization keys:**
      * - `identifier_limit_reached_without_args`: Static fallback message.
      * - `identifier_limit_reached_with_args`: Parameterized message template (`{limit}`, `{provider}`).
      *
+     * **Formatters & Resolvers:**
+     * - Use `UserModuleStrings.resolveUserIdentifierLimitReachedMessage` to map provider category and resolve the limit error message.
+     *
      * **Display arguments (Localization placeholders):**
      * - `limit`: Maximum allowed count (`{limit}`, derived from [UserErrorArgs.MAX_NUMBER_OF_IDENTIFIERS]).
-     * - `provider`: Localized provider display label (`{provider}`, mapped from [UserErrorArgs.USER_AUTH_PROVIDER] via `general.json`).
+     * - `provider`: Localized sign-in method category label (`{provider}`, resolved from `general.json` keys: `email`, `phone`, or `external_provider`).
      *
      * **Public arguments (Programmatic API payload):**
      * - [UserErrorArgs.MAX_NUMBER_OF_IDENTIFIERS]: The limit allowed for the sign-in method.
@@ -218,6 +224,9 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `total_identifiers_limit_reached_without_args`: Static fallback message.
      * - `total_identifiers_limit_reached_with_args`: Parameterized message template (`{limit}`).
+     *
+     * **Formatters & Resolvers:**
+     * - Use `UserModuleStrings.resolveTotalUserIdentifiersLimitReachedMessage` to resolve the total identifier limit error message.
      *
      * **Display arguments (Localization placeholders):**
      * - [UserErrorArgs.MAX_NUMBER_OF_IDENTIFIERS]: The total overall limit (`{limit}`).

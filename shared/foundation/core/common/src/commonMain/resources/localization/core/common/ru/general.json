@@ -23,5 +23,10 @@
   "auth_provider": "Провайдер авторизации",
   "language": "Язык",
   "app_version": "Версия приложения",
-  "os_version": "Версия ОС"
+  "os_version": "Версия ОС",
+  "byte_unit_b": "Б",
+  "byte_unit_kb": "КБ",
+  "byte_unit_mb": "МБ",
+  "byte_unit_gb": "ГБ",
+  "byte_unit_tb": "ТБ"
 }

@@ -10,6 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contra
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedUrlPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file.DeleteFilesBatchRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.BaseStorageNetworkRoutes
 
@@ -17,7 +18,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
  * Route paths for open storage operations in the open API.
  */
 object OpenStorageRoutes {
-    /** Base path for open storage operations. */
 
     /** Base path for open storage file endpoints. */
     private const val BASE_STORAGE_FILES_ROUTE = "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/files"
@@ -143,4 +143,24 @@ object OpenStorageRoutes {
      *   - [OpenStorageNavigation.FileDetail]
      */
     const val DELETE_FILE = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+
+    /**
+     * **HTTP method:** `POST`
+     *
+     * Deletes multiple specific files uploaded by the **current** authenticated user in a single batch operation (self-service batch deletion).
+     *
+     * Request body: [DeleteFilesBatchRequest].
+     * Response body: None.
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [OpenStorageNavigation.FileList]
+     */
+    const val DELETE_FILES_BATCH = "$BASE_STORAGE_FILES_ROUTE/batch-delete"
 }

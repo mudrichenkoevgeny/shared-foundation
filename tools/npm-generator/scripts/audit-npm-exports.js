@@ -49,7 +49,7 @@ let errorsCount = 0;
 const ignoredObjects = new Set([
     'Companion', 'QueryParamNormalizer', 'PhoneParamNormalizer', 'LocalizationFormatter',
     'LocalizationRegistry', 'PasswordPolicyValidator', 'PasswordPolicyValidatorResult',
-    'PasswordPolicyRule', 'Success'
+    'PasswordPolicyRule', 'Success', 'ByteSizeFormatter'
 ]);
 
 console.log('==================================================');
@@ -57,7 +57,7 @@ console.log('       NPM PACKAGE EXPORTS PARITY AUDIT          ');
 console.log('==================================================\n');
 
 // 1. Audit Objects (Routes, Contracts, ErrorCodes, FilterValues, SortValues, etc.)
-console.log('[1/4] Auditing Top-Level Objects & Contracts...');
+console.log('[1/6] Auditing Top-Level Objects & Contracts...');
 const topLevelObjects = [];
 
 prodKtFiles.forEach(file => {
@@ -90,7 +90,7 @@ topLevelObjects.forEach(obj => {
 });
 
 // 2. Audit Enums
-console.log('\n[2/4] Auditing Domain Enums...');
+console.log('\n[2/6] Auditing Domain Enums...');
 const enums = [];
 
 prodKtFiles.forEach(file => {
@@ -116,8 +116,39 @@ enums.forEach(e => {
     }
 });
 
-// 3. Audit Testing Fixtures (shared/foundation/testing)
-console.log('\n[3/4] Auditing Testing Fixtures (shared/foundation/testing)...');
+// 3. Audit Top-Level Public Functions & Resolvers
+console.log('\n[3/6] Auditing Top-Level Public Functions & Resolvers...');
+const functions = [];
+
+prodKtFiles.forEach(file => {
+    const rawContent = fs.readFileSync(file, 'utf8');
+    const content = rawContent.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
+    const funRegex = /^\s*(?:@\w+(?:\([^)]*\))?\s+)*fun\s+(?:[A-Za-z0-9_]+\.)?([A-Za-z0-9_]+)\s*\(/gm;
+    let match;
+    while ((match = funRegex.exec(content)) !== null) {
+        const name = match[1];
+        if (!name.startsWith('to') && !name.startsWith('from') && !name.startsWith('parse') && !file.includes('/internal/')) {
+            functions.push({ name, file });
+        }
+    }
+});
+
+functions.forEach(fn => {
+    const inJs = new RegExp(`\\b${fn.name}\\s*\\(`, 'm').test(jsContent);
+    const inDts = new RegExp(`\\b${fn.name}\\s*\\(`, 'm').test(dtsContent);
+
+    if (!inJs) {
+        console.error(`  ❌ Public Function/Resolver missing in JS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
+        errorsCount++;
+    }
+    if (!inDts) {
+        console.error(`  ❌ Public Function/Resolver missing in DTS: ${fn.name} (${path.relative(rootDir, fn.file)})`);
+        errorsCount++;
+    }
+});
+
+// 4. Audit Testing Fixtures (shared/foundation/testing)
+console.log('\n[4/6] Auditing Testing Fixtures (shared/foundation/testing)...');
 const fixtures = [];
 
 testKtFiles.forEach(file => {
@@ -143,8 +174,8 @@ fixtures.forEach(fix => {
     }
 });
 
-// 4. Audit Top-Level Duplicate Exports
-console.log('\n[4/5] Auditing Duplicate Exports...');
+// 5. Audit Top-Level Duplicate Exports
+console.log('\n[5/6] Auditing Duplicate Exports...');
 const lines = jsContent.split('\n');
 const jsExportNames = {};
 lines.forEach(line => {
@@ -162,8 +193,8 @@ Object.entries(jsExportNames).forEach(([name, count]) => {
     }
 });
 
-// 5. Audit Braces & Syntax Integrity
-console.log('\n[5/5] Auditing Braces & Syntax Integrity...');
+// 6. Audit Braces & Syntax Integrity
+console.log('\n[6/6] Auditing Braces & Syntax Integrity...');
 
 try {
     const { execSync } = require('child_process');
@@ -183,8 +214,8 @@ function checkBraceSyntax(filePath, fileContent) {
         .replace(/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`/g, '')
         .replace(/\/(?:\\\/|[^\/\n])+\/[gimsuy]*/g, '');
     for (let i = 0; i < cleanContent.length; i++) {
-        if (cleanContent[i] === '{') depth++;
-        else if (cleanContent[i] === '}') depth--;
+        if (chunkHasChar(cleanContent, i, '{')) depth++;
+        else if (chunkHasChar(cleanContent, i, '}')) depth--;
 
         if (depth < 0) {
             console.error(`  ❌ Syntax Error in ${filename}: Unexpected closing brace '}' at char ${i}`);
@@ -196,6 +227,10 @@ function checkBraceSyntax(filePath, fileContent) {
         console.error(`  ❌ Syntax Error in ${filename}: Mismatched braces (depth delta: ${depth})`);
         errorsCount++;
     }
+}
+
+function chunkHasChar(str, idx, char) {
+    return str[idx] === char;
 }
 
 checkBraceSyntax(dtsPath, dtsContent);

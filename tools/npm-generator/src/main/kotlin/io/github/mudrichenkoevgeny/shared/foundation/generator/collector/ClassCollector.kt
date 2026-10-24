@@ -165,6 +165,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.self.SelfManagementStorageRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorArgs
@@ -420,6 +421,7 @@ val routeClasses = listOf(
     OpenUserConfigurationRoutes::class,
     ManagementUserConfigurationRoutes::class,
     OpenStorageRoutes::class,
+    SelfManagementStorageRoutes::class,
     ManagementStorageRoutes::class,
     OpenStorageSettingsRoutes::class,
     ManagementStorageSettingsRoutes::class,

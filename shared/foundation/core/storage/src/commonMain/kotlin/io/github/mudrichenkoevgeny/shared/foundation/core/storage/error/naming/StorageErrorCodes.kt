@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming.CommonErrorArgs
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.formatting.ByteSizeFormatter
 
 /**
  * Storage-specific error codes for API responses and backend logging, used to categorize failures.
@@ -14,6 +15,9 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `file_size_exceeds_limit_without_args`: Static fallback message.
      * - `file_size_exceeds_limit_with_args`: Parameterized message template (`{formattedMaxFileSize}`).
+     *
+     * **Formatters & Resolvers:**
+     * - Use [ByteSizeFormatter.format] to format [StorageErrorArgs.MAX_FILE_SIZE_BYTES] into `{formattedMaxFileSize}`.
      *
      * **Display arguments (Localization placeholders):**
      * - `formattedMaxFileSize`: Formatted maximum file size string (e.g., "50 MB").
@@ -32,6 +36,9 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `file_size_below_minimum_without_args`: Static fallback message.
      * - `file_size_below_minimum_with_args`: Parameterized message template (`{formattedMinFileSize}`).
+     *
+     * **Formatters & Resolvers:**
+     * - Use [ByteSizeFormatter.format] to format [StorageErrorArgs.MIN_FILE_SIZE_BYTES] into `{formattedMinFileSize}`.
      *
      * **Display arguments (Localization placeholders):**
      * - `formattedMinFileSize`: Formatted minimum file size string (e.g., "1 KB").
@@ -74,6 +81,9 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `storage_quota_exceeded_without_args`: Static fallback message.
      * - `storage_quota_exceeded_with_args`: Parameterized message template (`{formattedUsed}`, `{formattedQuota}`).
+     *
+     * **Formatters & Resolvers:**
+     * - Use [ByteSizeFormatter.format] to format [StorageErrorArgs.QUOTA_BYTES] and [StorageErrorArgs.USED_BYTES].
      *
      * **Display arguments (Localization placeholders):**
      * - `formattedQuota`: Formatted allocated storage quota string (e.g., "1 GB").

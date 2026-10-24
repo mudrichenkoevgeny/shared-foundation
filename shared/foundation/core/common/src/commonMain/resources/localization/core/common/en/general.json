@@ -23,5 +23,10 @@
   "auth_provider": "Auth Provider",
   "language": "Language",
   "app_version": "App Version",
-  "os_version": "OS Version"
+  "os_version": "OS Version",
+  "byte_unit_b": "B",
+  "byte_unit_kb": "KB",
+  "byte_unit_mb": "MB",
+  "byte_unit_gb": "GB",
+  "byte_unit_tb": "TB"
 }

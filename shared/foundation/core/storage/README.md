@@ -23,8 +23,9 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [OpenStorageSettings] & [OpenStorageSettingsPayload]: Open configuration exposing system-wide upload size limits (`minUploadSizeBytes`, `maxUploadSizeBytes`) for client-side UX validation.
   - [ManagementStorageSettings] & [ManagementStorageSettingsPayload]: Complete configuration including global size limits, active user quotas (`totalStorageQuotaForOpenUserBytes`, `totalStorageQuotaForManagementUserBytes`), URL expiration TTL (`presignedUrlExpirationSeconds`), active session rate limits (`maxPendingUploadsForOpenUser`, `maxPendingUploadsForManagementUser`), and deduplication toggle (`isDeduplicationEnabled`).
 - **HTTP Routes & Permissions:**
-  - [OpenStorageRoutes]: Open API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILE`).
-  - [ManagementStorageRoutes]: Administrative API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILES_BATCH`, `DELETE_FILE`).
+  - [OpenStorageRoutes]: Open API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILE`, `DELETE_FILES_BATCH`).
+  - [SelfManagementStorageRoutes]: Self-service staff management API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILE`, `DELETE_FILES_BATCH`).
+  - [ManagementStorageRoutes]: Administrative API routes (`GET_FILES`, `GET_FILE`, `DELETE_FILES_BATCH`, `DELETE_FILE`).
   - [OpenStorageSettingsRoutes] & [ManagementStorageSettingsRoutes]: Routes for reading and updating global storage configuration.
   - [StoragePermissionCode]: Permissions (`STORAGE_DELETE_ANY_FILE`, `STORAGE_VIEW_METADATA`, `STORAGE_SETTINGS_UPDATE`).
 - **Navigation & Screen Params:**
@@ -62,6 +63,7 @@ This module defines pure KMP contracts and route specifications for direct clien
 [ManagementStorageSettings]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings.kt
 [ManagementStorageSettingsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload.kt
 [OpenStorageRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageRoutes.kt
+[SelfManagementStorageRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/self/SelfManagementStorageRoutes.kt
 [ManagementStorageRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageRoutes.kt
 [OpenStorageSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageSettingsRoutes.kt
 [ManagementStorageSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageSettingsRoutes.kt
