@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.generator
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.ui.UiValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
@@ -403,6 +404,13 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
       readonly Pagination: {
         readonly PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER};
         readonly PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE};
+      };
+    };
+
+    export declare const UiValues: {
+      readonly Placeholder: {
+        readonly EMAIL: "${UiValues.Placeholder.EMAIL}";
+        readonly TOTP_CODE: "${UiValues.Placeholder.TOTP_CODE}";
       };
     };
 

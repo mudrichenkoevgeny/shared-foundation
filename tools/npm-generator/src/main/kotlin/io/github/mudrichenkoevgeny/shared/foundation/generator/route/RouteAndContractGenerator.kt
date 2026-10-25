@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.generator.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.ui.UiValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
@@ -71,6 +72,13 @@ fun generateContractObjects(): String {
       Pagination: {
         PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER},
         PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE}
+      }
+    };
+
+    export const UiValues = {
+      Placeholder: {
+        EMAIL: "${UiValues.Placeholder.EMAIL}",
+        TOTP_CODE: "${UiValues.Placeholder.TOTP_CODE}"
       }
     };
 
