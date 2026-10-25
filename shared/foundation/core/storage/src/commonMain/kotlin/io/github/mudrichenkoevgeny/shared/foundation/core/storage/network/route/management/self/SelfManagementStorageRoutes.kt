@@ -53,8 +53,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`, `READ_ONLY`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -74,8 +74,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`, `READ_ONLY`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -94,8 +94,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -117,8 +117,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -139,8 +139,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -159,8 +159,8 @@ object SelfManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**

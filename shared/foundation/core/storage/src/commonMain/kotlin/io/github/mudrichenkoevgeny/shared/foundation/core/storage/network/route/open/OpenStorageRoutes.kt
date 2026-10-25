@@ -48,8 +48,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -69,8 +69,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -89,8 +89,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -112,8 +112,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -134,8 +134,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**
@@ -154,8 +154,8 @@ object OpenStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** Any.
-     * - **Allowed Account Statuses:** `ACTIVE`.
+     * - **Allowed Roles:** `UserRole.USER` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
      * - **Required Permissions:** None.
      *
      * **UI Presentation:**

@@ -18,7 +18,8 @@ fun ManagementStorageSettingsPayload.toManagementStorageSettings(): ManagementSt
     presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
     maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
     maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-    isDeduplicationEnabled = isDeduplicationEnabled
+    isDeduplicationEnabled = isDeduplicationEnabled,
+    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
 )
 
 /**
@@ -32,5 +33,6 @@ fun ManagementStorageSettings.toManagementStorageSettingsPayload(): ManagementSt
     presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
     maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
     maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-    isDeduplicationEnabled = isDeduplicationEnabled
+    isDeduplicationEnabled = isDeduplicationEnabled,
+    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
 )

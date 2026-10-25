@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.NotEmptyCollectionField
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.validation.RequiredField
 import kotlinx.serialization.Serializable
 
@@ -10,6 +11,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class DeleteFilesBatchRequest(
-    @RequiredField
+    @NotEmptyCollectionField
     val fileIds: List<String>
 )

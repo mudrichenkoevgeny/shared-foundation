@@ -13,7 +13,8 @@ fun createTestManagementStorageSettings(
     presignedUrlExpirationSeconds: Int = 900,
     maxPendingUploadsForOpenUser: Int = 10,
     maxPendingUploadsForManagementUser: Int = 100,
-    isDeduplicationEnabled: Boolean = true
+    isDeduplicationEnabled: Boolean = true,
+    deletedFilesCleanupIntervalSeconds: Int = 86400
 ) = ManagementStorageSettings(
     minUploadSizeBytes = minUploadSizeBytes,
     maxUploadSizeBytes = maxUploadSizeBytes,
@@ -22,5 +23,6 @@ fun createTestManagementStorageSettings(
     presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
     maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
     maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-    isDeduplicationEnabled = isDeduplicationEnabled
+    isDeduplicationEnabled = isDeduplicationEnabled,
+    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
 )

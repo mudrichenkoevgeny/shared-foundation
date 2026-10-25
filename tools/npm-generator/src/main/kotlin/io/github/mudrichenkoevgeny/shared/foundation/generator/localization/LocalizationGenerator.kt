@@ -207,7 +207,9 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
 
         if (moduleData.facadeClassName == "SecurityModuleStrings") {
             jsSb.append("""
-    resolvePasswordTooWeakReasons(args) {
+  }
+
+  resolvePasswordTooWeakReasons(args) {
       if (!args) return [this.errors.passwordTooWeak];
       const minLength = args.passwordMinLength ? Number(args.passwordMinLength) : undefined;
       const isTooShort = Boolean(args.passwordTooShort || args.passwordTooShort === 'true');
@@ -231,13 +233,16 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
 
       return reasons.length > 0 ? reasons : [this.errors.passwordTooWeak];
     }
-
             """.trimIndent()).append("\n")
+        } else if (moduleData.facadeClassName != "UserModuleStrings") {
+            jsSb.append("  }\n")
         }
 
         if (moduleData.facadeClassName == "UserModuleStrings") {
             jsSb.append("""
-    resolveUserLockedMessage(lockoutType, formattedUntil) {
+  }
+
+  resolveUserLockedMessage(lockoutType, formattedUntil) {
       if (lockoutType === 'TEMPORARY' && formattedUntil) {
         return this.errors.locked(formattedUntil);
       }
@@ -260,11 +265,10 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
       }
       return this.errors.totalIdentifiersLimitReachedWithoutArgs;
     }
-
             """.trimIndent()).append("\n")
         }
 
-        jsSb.append("  }\n}\n\n")
+        jsSb.append("}\n\n")
     }
 
     jsSb.append("""

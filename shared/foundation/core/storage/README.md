@@ -21,13 +21,13 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [DeleteFilesBatchRequest]: Request DTO for batch deleting multiple files in a single operation.
 - **Storage Settings:**
   - [OpenStorageSettings] & [OpenStorageSettingsPayload]: Open configuration exposing system-wide upload size limits (`minUploadSizeBytes`, `maxUploadSizeBytes`) for client-side UX validation.
-  - [ManagementStorageSettings] & [ManagementStorageSettingsPayload]: Complete configuration including global size limits, active user quotas (`totalStorageQuotaForOpenUserBytes`, `totalStorageQuotaForManagementUserBytes`), URL expiration TTL (`presignedUrlExpirationSeconds`), active session rate limits (`maxPendingUploadsForOpenUser`, `maxPendingUploadsForManagementUser`), and deduplication toggle (`isDeduplicationEnabled`).
+  - [ManagementStorageSettings] & [ManagementStorageSettingsPayload]: Complete configuration including global size limits, active user quotas (`totalStorageQuotaForOpenUserBytes`, `totalStorageQuotaForManagementUserBytes`), URL expiration TTL (`presignedUrlExpirationSeconds`), active session rate limits (`maxPendingUploadsForOpenUser`, `maxPendingUploadsForManagementUser`), deduplication toggle (`isDeduplicationEnabled`), and background cleanup interval (`deletedFilesCleanupIntervalSeconds`).
 - **HTTP Routes & Permissions:**
   - [OpenStorageRoutes]: Open API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILE`, `DELETE_FILES_BATCH`).
   - [SelfManagementStorageRoutes]: Self-service staff management API routes (`GET_FILES`, `GET_FILE`, `POST_PRESIGNED_UPLOAD_URL`, `CONFIRM_UPLOAD`, `DELETE_FILE`, `DELETE_FILES_BATCH`).
   - [ManagementStorageRoutes]: Administrative API routes (`GET_FILES`, `GET_FILE`, `DELETE_FILES_BATCH`, `DELETE_FILE`).
   - [OpenStorageSettingsRoutes] & [ManagementStorageSettingsRoutes]: Routes for reading and updating global storage configuration.
-  - [StoragePermissionCode]: Permissions (`STORAGE_DELETE_ANY_FILE`, `STORAGE_VIEW_METADATA`, `STORAGE_SETTINGS_UPDATE`).
+  - [StoragePermissionCode]: Permissions (`STORAGE_DELETE_OTHER_USERS_FILES`, `STORAGE_VIEW_OTHER_USERS_FILES`, `STORAGE_SETTINGS_UPDATE`).
 - **Navigation & Screen Params:**
   - [OpenStorageNavigation] & [ManagementStorageNavigation]: Screen navigation routes (`FileList`, `FileDetail`, `FileUpload`).
   - [ManagementStorageSettingsNavigation]: Management navigation for storage settings (`StorageSettings`).

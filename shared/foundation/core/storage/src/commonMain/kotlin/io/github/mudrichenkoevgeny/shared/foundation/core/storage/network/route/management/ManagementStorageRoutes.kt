@@ -59,9 +59,10 @@ object ManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** [StoragePermissionCode.STORAGE_VIEW_METADATA].
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
+     * - **Required Permissions:** [StoragePermissionCode.STORAGE_VIEW_OTHER_USERS_FILES].
+     * - **Authority Level:** Actor's level must be strictly greater than the target file owner's authority level.
      *
      * **UI Presentation:**
      * - Screens:
@@ -80,9 +81,10 @@ object ManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** [StoragePermissionCode.STORAGE_VIEW_METADATA].
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE`, `UserAccountStatus.READ_ONLY` (**OR** semantics).
+     * - **Required Permissions:** [StoragePermissionCode.STORAGE_VIEW_OTHER_USERS_FILES].
+     * - **Authority Level:** Actor's level must be strictly greater than the target file owner's authority level.
      *
      * **UI Presentation:**
      * - Screens:
@@ -101,9 +103,10 @@ object ManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** [StoragePermissionCode.STORAGE_DELETE_ANY_FILE].
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
+     * - **Required Permissions:** [StoragePermissionCode.STORAGE_DELETE_OTHER_USERS_FILES].
+     * - **Authority Level:** Actor's level must be strictly greater than the target file owner's authority level.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for **each** file ID in the batch request.
      * - **Action:** [StorageAuditActionType.MANAGEMENT_DELETE_FILE].
@@ -134,9 +137,10 @@ object ManagementStorageRoutes {
      *
      * **Authorization:**
      * - **Public Access:** Denied.
-     * - **Allowed Roles:** `ADMIN`, `STAFF`.
-     * - **Allowed Account Statuses:** `ACTIVE`.
-     * - **Required Permissions:** [StoragePermissionCode.STORAGE_DELETE_ANY_FILE].
+     * - **Allowed Roles:** `UserRole.STAFF`, `UserRole.ADMIN` (**OR** semantics).
+     * - **Allowed Account Statuses:** `UserAccountStatus.ACTIVE` (**OR** semantics).
+     * - **Required Permissions:** [StoragePermissionCode.STORAGE_DELETE_OTHER_USERS_FILES].
+     * - **Authority Level:** Actor's level must be strictly greater than the target file owner's authority level.
      *
      * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
      * - **Action:** [StorageAuditActionType.MANAGEMENT_DELETE_FILE].

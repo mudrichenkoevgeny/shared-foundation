@@ -11,6 +11,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.
  * @property maxPendingUploadsForOpenUser The maximum number of concurrent unfinalized upload sessions allowed for open users.
  * @property maxPendingUploadsForManagementUser The maximum number of concurrent unfinalized upload sessions allowed for management users.
  * @property isDeduplicationEnabled Toggle for enabling content-addressable file deduplication by SHA-256 hash.
+ * @property deletedFilesCleanupIntervalSeconds The background worker execution interval in seconds for permanently deleting marked files from S3 and database records.
  */
 data class ManagementStorageSettings(
     val minUploadSizeBytes: Long,
@@ -20,5 +21,6 @@ data class ManagementStorageSettings(
     val presignedUrlExpirationSeconds: Int,
     val maxPendingUploadsForOpenUser: Int,
     val maxPendingUploadsForManagementUser: Int,
-    val isDeduplicationEnabled: Boolean
+    val isDeduplicationEnabled: Boolean,
+    val deletedFilesCleanupIntervalSeconds: Int
 )

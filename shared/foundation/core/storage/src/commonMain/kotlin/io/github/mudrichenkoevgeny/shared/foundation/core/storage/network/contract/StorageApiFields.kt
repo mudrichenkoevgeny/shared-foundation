@@ -63,4 +63,7 @@ object StorageApiFields {
 
     /** JSON field name for enabling file content deduplication. */
     const val IS_DEDUPLICATION_ENABLED = "is_deduplication_enabled"
+
+    /** JSON field name for background worker cleanup execution interval in seconds for deleted files. */
+    const val DELETED_FILES_CLEANUP_INTERVAL_SECONDS = "deleted_files_cleanup_interval_seconds"
 }
