@@ -14,6 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.AuthSettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementAuthSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.OpenAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.BaseUserNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 
@@ -112,4 +113,22 @@ object ManagementAuthSettingsRoutes {
      *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
     const val RESET_MANAGEMENT_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves the open (public) authentication settings for unauthenticated management users.
+     *
+     * Request body: None.
+     * Response body: [OpenAuthSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
+     */
+    const val GET_OPEN_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/open"
 }

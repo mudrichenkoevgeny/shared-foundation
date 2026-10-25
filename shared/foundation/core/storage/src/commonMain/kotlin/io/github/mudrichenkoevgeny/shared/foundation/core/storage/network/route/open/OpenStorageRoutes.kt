@@ -149,7 +149,8 @@ object OpenStorageRoutes {
     /**
      * **HTTP method:** `POST`
      *
-     * Deletes multiple specific files uploaded by the **current** authenticated user in a single batch operation (self-service batch deletion).
+     * Deletes multiple specific files uploaded by the **current** authenticated user
+     * in a single batch operation (self-service batch deletion).
      *
      * Request body: [DeleteFilesBatchRequest].
      * Response body: None (204 No Content).

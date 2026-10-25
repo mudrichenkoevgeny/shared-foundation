@@ -98,7 +98,6 @@ object ManagementStorageRoutes {
      * **HTTP method:** `POST`
      *
      * Deletes multiple specific files in a single batch operation, removing their binaries from S3, ignoring ownership.
-     * Returns `200 OK` regardless of partial failures, but audit logs must accurately reflect results per-file.
      *
      * Request body: [DeleteFilesBatchRequest].
      * Response body: None (204 No Content).

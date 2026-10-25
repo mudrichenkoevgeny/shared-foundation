@@ -23,5 +23,5 @@ object OpenUserConfigurationRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_CONFIGURATION = "$BASE_USER_ROUTE/configuration"
+    const val GET_OPEN_USER_CONFIGURATION = "$BASE_USER_ROUTE/configuration"
 }

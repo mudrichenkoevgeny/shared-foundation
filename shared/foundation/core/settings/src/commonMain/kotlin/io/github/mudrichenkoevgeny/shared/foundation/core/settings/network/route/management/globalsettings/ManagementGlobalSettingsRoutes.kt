@@ -10,6 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.permission.SettingsPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.navigation.route.management.ManagementSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.OpenGlobalSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.BaseSettingsNetworkRoutes
 
 /**
@@ -104,4 +105,22 @@ object ManagementGlobalSettingsRoutes {
      *   - [ManagementSettingsNavigation.GlobalSettings]
      */
     const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/reset"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves the open (public) platform settings for unauthenticated management users.
+     *
+     * Request body: None.
+     * Response body: [OpenGlobalSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
+     */
+    const val GET_OPEN_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/open"
 }

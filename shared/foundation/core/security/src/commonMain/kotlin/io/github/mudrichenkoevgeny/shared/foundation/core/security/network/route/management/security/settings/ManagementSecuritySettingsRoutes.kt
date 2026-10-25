@@ -11,6 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.permis
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.navigation.route.management.ManagementSecurityNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.OpenSecuritySettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.BaseSecurityNetworkRoutes
 
 /**
@@ -105,4 +106,22 @@ object ManagementSecuritySettingsRoutes {
      *   - [ManagementSecurityNavigation.SecuritySettings]
      */
     const val RESET_MANAGEMENT_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves the open (public) security settings for unauthenticated management users.
+     *
+     * Request body: None.
+     * Response body: [OpenSecuritySettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
+     */
+    const val GET_OPEN_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/open"
 }

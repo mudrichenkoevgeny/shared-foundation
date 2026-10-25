@@ -10,6 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.r
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.permission.StoragePermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.OpenStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.BaseStorageNetworkRoutes
 
 /**
@@ -93,4 +94,22 @@ object ManagementStorageSettingsRoutes {
      *   - [ManagementStorageSettingsNavigation.StorageSettings]
      */
     const val RESET_MANAGEMENT_STORAGE_SETTINGS = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/reset"
+
+    /**
+     * **HTTP method:** `GET`
+     *
+     * Retrieves the open (public) storage settings for unauthenticated management users.
+     *
+     * Request body: None.
+     * Response body: [OpenStorageSettingsPayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Allowed.
+     * - **Allowed Roles:** Any.
+     * - **Allowed Account Statuses:** Any.
+     * - **Required Permissions:** None.
+     *
+     * **UI Presentation:** None.
+     */
+    const val GET_OPEN_STORAGE_SETTINGS = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/open"
 }
