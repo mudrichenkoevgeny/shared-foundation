@@ -249,5 +249,10 @@
   "created_at_label": "Создан: {date}",
   "last_login_at_label": "Последний вход: {date}",
   "last_active_at_label": "Последняя активность: {date}",
-  "scheduled_deletion_at_label": "Запланировано к удалению: {date}"
+  "scheduled_deletion_at_label": "Запланировано к удалению: {date}",
+  "custom_storage_configuration": "Кастомные лимиты хранилища",
+  "user_storage_quota_optional": "Квота хранилища в байтах (необязательно)",
+  "user_max_upload_size_optional": "Макс. размер файла в байтах (необязательно)",
+  "user_max_pending_uploads_optional": "Макс. незавершенных загрузок (необязательно)",
+  "default_null_placeholder": "По умолчанию (системное)"
 }

@@ -249,5 +249,10 @@
   "created_at_label": "Created At: {date}",
   "last_login_at_label": "Last Login At: {date}",
   "last_active_at_label": "Last Active At: {date}",
-  "scheduled_deletion_at_label": "Scheduled Deletion At: {date}"
+  "scheduled_deletion_at_label": "Scheduled Deletion At: {date}",
+  "custom_storage_configuration": "Custom Storage Configuration",
+  "user_storage_quota_optional": "Storage Quota Bytes (optional)",
+  "user_max_upload_size_optional": "Max Upload Size Bytes (optional)",
+  "user_max_pending_uploads_optional": "Max Pending Uploads (optional)",
+  "default_null_placeholder": "Default (system)"
 }

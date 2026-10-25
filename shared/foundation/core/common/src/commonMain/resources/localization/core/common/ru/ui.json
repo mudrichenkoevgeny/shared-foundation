@@ -76,5 +76,10 @@
   "android": "Android",
   "ios": "iOS",
   "web": "Web",
-  "desktop": "Desktop"
+  "desktop": "Desktop",
+  "save": "Сохранить",
+  "reset": "Сбросить",
+  "sort_by": "Сортировка",
+  "filters": "Фильтры",
+  "default_null_placeholder": "По умолчанию (системное)"
 }

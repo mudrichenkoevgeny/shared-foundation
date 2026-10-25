@@ -76,5 +76,10 @@
   "android": "Android",
   "ios": "iOS",
   "web": "Web",
-  "desktop": "Desktop"
+  "desktop": "Desktop",
+  "save": "Save",
+  "reset": "Reset",
+  "sort_by": "Sort By",
+  "filters": "Filters",
+  "default_null_placeholder": "Default (system)"
 }
