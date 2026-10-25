@@ -33,6 +33,7 @@ object ManagementAuthSettingsRoutes {
      *
      * Retrieves global authentication settings for the management portal.
      *
+     * Request body: None.
      * Response body: [ManagementAuthSettingsPayload].
      *
      * **Authorization:**
@@ -54,6 +55,7 @@ object ManagementAuthSettingsRoutes {
      * Updates global authentication settings.
      *
      * Request body: [ManagementAuthSettingsPayload].
+     * Response body: [ManagementAuthSettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -84,6 +86,7 @@ object ManagementAuthSettingsRoutes {
      *
      * Resets global authentication settings to default values.
      *
+     * Request body: None.
      * Response body: [ManagementAuthSettingsPayload].
      *
      * **Authorization:**

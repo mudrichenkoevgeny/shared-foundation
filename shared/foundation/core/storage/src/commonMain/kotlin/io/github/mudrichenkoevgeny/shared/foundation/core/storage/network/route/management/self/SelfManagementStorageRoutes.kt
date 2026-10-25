@@ -49,6 +49,7 @@ object SelfManagementStorageRoutes {
      *   - [StorageFilterValues.StorageFileFilterValues.MIME_TYPE] — filter by MIME type substring.
      *   - [StorageFilterValues.StorageFileFilterValues.FILE_NAME] — filter by file name substring.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [StorageFileSummaryPayload].
      *
      * **Authorization:**
@@ -70,6 +71,7 @@ object SelfManagementStorageRoutes {
      *
      * Path parameter: [StorageApiPaths.FILE_ID].
      *
+     * Request body: None.
      * Response body: [StorageFilePrivatePayload].
      *
      * **Authorization:**
@@ -135,7 +137,7 @@ object SelfManagementStorageRoutes {
      * Path parameter: [StorageApiPaths.FILE_ID].
      *
      * Request body: None.
-     * Response body: None (`204 No Content`).
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -155,7 +157,7 @@ object SelfManagementStorageRoutes {
      * Deletes multiple specific files uploaded by the **current** authenticated staff member in a single batch operation (self-service batch deletion).
      *
      * Request body: [DeleteFilesBatchRequest].
-     * Response body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

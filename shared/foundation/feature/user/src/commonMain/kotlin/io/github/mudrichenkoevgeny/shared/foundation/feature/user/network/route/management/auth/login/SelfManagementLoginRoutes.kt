@@ -32,7 +32,6 @@ object SelfManagementLoginRoutes {
      * Authenticates a management account using email and password.
      *
      * Request body: [LoginByEmailRequest].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -71,7 +70,6 @@ object SelfManagementLoginRoutes {
      * Finalizes the management login process by providing a TOTP code.
      *
      * Request body: [VerifyTotpPayload].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -104,7 +102,6 @@ object SelfManagementLoginRoutes {
      * Finalizes the management login process by providing a recovery code.
      *
      * Request body: [VerifyTotpPayload].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**

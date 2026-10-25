@@ -14,6 +14,7 @@ object OpenGlobalSettingsRoutes {
      *
      * Retrieves open platform settings.
      *
+     * Request body: None.
      * Response body: [OpenGlobalSettingsPayload].
      *
      * **Authorization:**

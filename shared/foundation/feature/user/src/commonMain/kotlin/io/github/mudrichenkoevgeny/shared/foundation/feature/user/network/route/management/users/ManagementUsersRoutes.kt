@@ -68,6 +68,7 @@ object ManagementUsersRoutes {
      *   - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP status.
      *   - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — filter by [PermissionCode] string.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserSummaryPayload].
      *
      * **Authorization:**
@@ -90,7 +91,6 @@ object ManagementUsersRoutes {
      * Creates a new user account.
      *
      * Request body: [CreateByEmailRequest].
-     *
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
@@ -128,6 +128,7 @@ object ManagementUsersRoutes {
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
+     * Request body: None.
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
@@ -152,6 +153,7 @@ object ManagementUsersRoutes {
      * Path parameter: [UserApiPaths.USER_ID].
      *
      * Request body: [UpdateUserRequest].
+     * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -198,6 +200,9 @@ object ManagementUsersRoutes {
      * Deletes the specified user account.
      *
      * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

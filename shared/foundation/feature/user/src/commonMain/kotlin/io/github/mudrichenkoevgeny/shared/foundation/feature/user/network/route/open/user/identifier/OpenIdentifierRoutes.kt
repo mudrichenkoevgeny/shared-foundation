@@ -71,6 +71,7 @@ object OpenIdentifierRoutes {
      *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by free-text identifier;
      *     server-defined matching.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
@@ -92,6 +93,7 @@ object OpenIdentifierRoutes {
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
+     * Request body: None.
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -112,6 +114,9 @@ object OpenIdentifierRoutes {
      * Removes the identifier for the given record id.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -144,7 +149,6 @@ object OpenIdentifierRoutes {
      * Links an email identifier to the current account after verification.
      *
      * Request body: [AddUserIdentifierEmailRequest].
-     *
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -178,7 +182,6 @@ object OpenIdentifierRoutes {
      * Links a phone identifier to the current account after verification.
      *
      * Request body: [AddUserIdentifierPhoneRequest].
-     *
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -212,7 +215,6 @@ object OpenIdentifierRoutes {
      * Links an external authentication provider to the current account.
      *
      * Request body: [AddUserIdentifierExternalAuthProviderRequest].
-     *
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -246,7 +248,6 @@ object OpenIdentifierRoutes {
      * Requests a confirmation code to add an email identifier.
      *
      * Request body: [SendConfirmationToEmailRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**
@@ -268,7 +269,6 @@ object OpenIdentifierRoutes {
      * Requests a confirmation code to add a phone identifier.
      *
      * Request body: [SendConfirmationToPhoneRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**
@@ -292,6 +292,7 @@ object OpenIdentifierRoutes {
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
      * Request body: [EmailPasswordChangeRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

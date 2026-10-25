@@ -38,7 +38,6 @@ object OpenUnlockRoutes {
      * Requests a confirmation code (OTP) to be sent to the user's email to initiate the unlock process.
      *
      * Request body: [SendConfirmationToEmailRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**
@@ -61,6 +60,7 @@ object OpenUnlockRoutes {
      * Unlocks a temporarily locked account using an email confirmation code.
      *
      * Request body: [UnlockByEmailConfirmationRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -89,7 +89,6 @@ object OpenUnlockRoutes {
      * Requests a confirmation code (OTP) to be sent to the user's phone to initiate the unlock process.
      *
      * Request body: [SendConfirmationToPhoneRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**
@@ -112,6 +111,7 @@ object OpenUnlockRoutes {
      * Unlocks a temporarily locked account using a phone confirmation code.
      *
      * Request body: [UnlockByPhoneConfirmationRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -140,6 +140,7 @@ object OpenUnlockRoutes {
      * Unlocks a temporarily locked account using an external authentication provider token.
      *
      * Request body: [UnlockByExternalAuthProviderRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.

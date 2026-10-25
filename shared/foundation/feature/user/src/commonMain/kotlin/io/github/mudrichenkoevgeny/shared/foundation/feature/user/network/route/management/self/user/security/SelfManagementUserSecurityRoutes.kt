@@ -37,6 +37,7 @@ object SelfManagementUserSecurityRoutes {
      * Generates a new TOTP secret and returns setup data (secret key, otpauth URL, and challenge token).
      * The factor is not active until verified via [ENABLE_TOTP].
      *
+     * Request body: None.
      * Response body: [TotpSetupPayload].
      *
      * **Authorization:**
@@ -66,7 +67,6 @@ object SelfManagementUserSecurityRoutes {
      * Upon success, TOTP is marked as enabled for the account.
      *
      * Request body: [VerifyTotpPayload].
-     *
      * Response body: [TotpRecoveryCodesPayload] (initial set of backup codes).
      *
      * **Authorization:**
@@ -93,6 +93,9 @@ object SelfManagementUserSecurityRoutes {
      * **HTTP method:** `DELETE`
      *
      * Disables TOTP and invalidates all associated recovery codes for the authenticated account.
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -124,6 +127,7 @@ object SelfManagementUserSecurityRoutes {
      *
      * Returns the current active recovery codes for the authenticated user.
      *
+     * Request body: None.
      * Response body: [TotpRecoveryCodesPayload].
      *
      * **Authorization:**
@@ -156,6 +160,7 @@ object SelfManagementUserSecurityRoutes {
      *
      * Invalidates all existing recovery codes and generates a new set for the account.
      *
+     * Request body: None.
      * Response body: [TotpRecoveryCodesPayload].
      *
      * **Authorization:**

@@ -26,6 +26,7 @@ object ManagementSecuritySettingsRoutes {
      *
      * Retrieves security settings.
      *
+     * Request body: None.
      * Response body: [ManagementSecuritySettingsPayload].
      *
      * **Authorization:**
@@ -47,6 +48,7 @@ object ManagementSecuritySettingsRoutes {
      * Updates global security settings and policies.
      *
      * Request body: [ManagementSecuritySettingsPayload].
+     * Response body: [ManagementSecuritySettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -77,6 +79,7 @@ object ManagementSecuritySettingsRoutes {
      *
      * Resets global security settings and policies to default values.
      *
+     * Request body: None.
      * Response body: [ManagementSecuritySettingsPayload].
      *
      * **Authorization:**

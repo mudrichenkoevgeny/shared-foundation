@@ -18,6 +18,7 @@ object SelfManagementUserRoutes {
      *
      * Returns the private management-level details of the **current** authenticated staff member or administrator.
      *
+     * Request body: None.
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**

@@ -13,6 +13,7 @@ object OpenAuthSettingsRoutes {
      *
      * Retrieves open authentication settings (e.g., enabled providers, password requirements).
      *
+     * Request body: None.
      * Response body: [OpenAuthSettingsPayload].
      *
      * **Authorization:**

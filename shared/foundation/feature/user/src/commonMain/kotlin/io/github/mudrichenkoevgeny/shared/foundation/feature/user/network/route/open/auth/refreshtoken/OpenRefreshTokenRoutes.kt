@@ -16,7 +16,6 @@ object OpenRefreshTokenRoutes {
      * Exchanges a valid refresh token for a new set of session tokens.
      *
      * Request body: [RefreshTokenPayload].
-     *
      * Response body: [SessionTokenPayload].
      *
      * **Authorization:**

@@ -28,7 +28,6 @@ object OpenRegistrationRoutes {
      * Registers a new user account using an email address and a verification code.
      *
      * Request body: [RegistrationByEmailRequest].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -58,7 +57,6 @@ object OpenRegistrationRoutes {
      * Requests a confirmation code (OTP) to be sent to the specified email to initiate the registration process.
      *
      * Request body: [SendConfirmationToEmailRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**

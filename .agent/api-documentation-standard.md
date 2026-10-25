@@ -24,12 +24,12 @@ Every callable endpoint must follow this exact order. Sections should be omitted
     * *Note:* `page` index is **one-based** (`1` = first page).
   * **Filters:** Reference the domain-specific filter values (e.g., `[UserFilterValues.UserFilterValues]`).
   * **Filter Logic:** **Repeated keys = OR**, **Different keys = AND**. Absent parameters = no filtering.
-* **Request body:** Reference the input DTO.
-  * *Format:* `Request body: [SomeRequestPayload].`
+* **Request body:** Reference the input DTO or explicitly state `None.`
+  * *Format:* `Request body: [SomeRequestPayload].` or `Request body: None.`
 
 ### III. Response Contract
-* **Response body:** Reference the output DTO.
-  * *Format:* `Response body: [SomeResponsePayload].`
+* **Response body:** Reference the output DTO or explicitly state `None (204 No Content).`
+  * *Format:* `Response body: [SomeResponsePayload].` or `Response body: None (204 No Content).`
 
 ### IV. Access Control
 * **Authorization:** Detailed breakdown of access requirements:

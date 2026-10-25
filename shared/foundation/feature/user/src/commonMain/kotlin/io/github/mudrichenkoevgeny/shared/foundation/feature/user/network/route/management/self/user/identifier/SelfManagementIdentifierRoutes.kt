@@ -52,6 +52,7 @@ object SelfManagementIdentifierRoutes {
      *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
      *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
@@ -73,6 +74,7 @@ object SelfManagementIdentifierRoutes {
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
+     * Request body: None.
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -95,6 +97,7 @@ object SelfManagementIdentifierRoutes {
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
      * Request body: [EmailPasswordChangeRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

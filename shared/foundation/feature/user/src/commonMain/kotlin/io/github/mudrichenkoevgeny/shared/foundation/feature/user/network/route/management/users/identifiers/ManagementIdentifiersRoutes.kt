@@ -56,6 +56,7 @@ object ManagementIdentifiersRoutes {
      *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
      *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
@@ -96,6 +97,7 @@ object ManagementIdentifiersRoutes {
      *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
      *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
      *
      * **Authorization:**
@@ -122,6 +124,7 @@ object ManagementIdentifiersRoutes {
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
      *
+     * Request body: None.
      * Response body: [UserIdentifierPrivatePayload].
      *
      * **Authorization:**
@@ -147,6 +150,9 @@ object ManagementIdentifiersRoutes {
      * Removes the identifier record for the given identifier ID.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -186,6 +192,9 @@ object ManagementIdentifiersRoutes {
      * Revokes and removes the password credential from the specified identifier record.
      *
      * Path parameter: [UserApiPaths.USER_IDENTIFIER_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

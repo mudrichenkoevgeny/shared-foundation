@@ -31,6 +31,7 @@ object SelfManagementResetPasswordRoutes {
      * Completes the password reset or initial password setup for a management account.
      *
      * Request body: [ResetPasswordRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -62,7 +63,6 @@ object SelfManagementResetPasswordRoutes {
      * Initiates password recovery or initial password setup for a management account by sending a confirmation code.
      *
      * Request body: [SendResetPasswordConfirmationRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**

@@ -27,6 +27,9 @@ object ManagementUsersSecurityRoutes {
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
+     * Request body: None.
+     * Response body: None (204 No Content).
+     *
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).

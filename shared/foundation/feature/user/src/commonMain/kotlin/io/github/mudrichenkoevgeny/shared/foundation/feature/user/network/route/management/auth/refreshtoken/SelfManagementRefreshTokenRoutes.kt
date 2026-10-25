@@ -17,7 +17,6 @@ object SelfManagementRefreshTokenRoutes {
      * Exchanges a management refresh token for a new management session.
      *
      * Request body: [RefreshTokenPayload].
-     *
      * Response body: [SessionTokenPayload].
      *
      * **Authorization:**

@@ -39,6 +39,9 @@ object SelfManagementSessionRoutes {
      *
      * Deletes the current active management session.
      *
+     * Request body: None.
+     * Response body: None (204 No Content).
+     *
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
@@ -93,6 +96,7 @@ object SelfManagementSessionRoutes {
      *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by free-text OS version;
      *     server-defined.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
@@ -114,6 +118,7 @@ object SelfManagementSessionRoutes {
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
+     * Request body: None.
      * Response body: [UserSessionPrivatePayload].
      *
      * **Authorization:**
@@ -134,6 +139,9 @@ object SelfManagementSessionRoutes {
      * Deletes a specific session for the current management account.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -163,6 +171,7 @@ object SelfManagementSessionRoutes {
      *
      * Deletes all sessions for the current management account except the one used for this request.
      *
+     * Request body: None.
      * Response body: [DeletedSessionsPayload].
      *
      * **Authorization:**
@@ -192,6 +201,7 @@ object SelfManagementSessionRoutes {
      * Performs re-authentication via TOTP for the current management session to update its trust level.
      *
      * Request body: [VerifyTotpPayload].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

@@ -71,6 +71,7 @@ object ManagementSessionsRoutes {
      *   - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — filter by application version.
      *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by OS version.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
@@ -124,6 +125,7 @@ object ManagementSessionsRoutes {
      *   - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — filter by application version.
      *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by OS version.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
@@ -150,6 +152,7 @@ object ManagementSessionsRoutes {
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
+     * Request body: None.
      * Response body: [UserSessionPrivatePayload].
      *
      * **Authorization:**
@@ -175,6 +178,9 @@ object ManagementSessionsRoutes {
      * Deletes a specific session for the given session ID.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -212,6 +218,9 @@ object ManagementSessionsRoutes {
      * Deletes **all** active sessions for the specified user.
      *
      * Path parameter: [UserApiPaths.USER_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

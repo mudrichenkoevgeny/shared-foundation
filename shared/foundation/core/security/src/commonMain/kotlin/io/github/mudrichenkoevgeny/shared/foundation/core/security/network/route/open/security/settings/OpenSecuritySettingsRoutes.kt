@@ -13,6 +13,7 @@ object OpenSecuritySettingsRoutes {
      *
      * Retrieves open security settings.
      *
+     * Request body: None.
      * Response body: [OpenSecuritySettingsPayload].
      *
      * **Authorization:**

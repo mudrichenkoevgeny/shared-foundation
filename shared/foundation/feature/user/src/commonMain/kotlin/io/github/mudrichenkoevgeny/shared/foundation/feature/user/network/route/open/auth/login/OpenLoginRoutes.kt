@@ -37,7 +37,6 @@ object OpenLoginRoutes {
      * Authenticates a user using email and password credentials.
      *
      * Request body: [LoginByEmailRequest].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -72,7 +71,6 @@ object OpenLoginRoutes {
      * Authenticates a user using phone number and a verification code.
      *
      * Request body: [LoginByPhoneRequest].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -107,7 +105,6 @@ object OpenLoginRoutes {
      * Authenticates a user via an external authentication provider.
      *
      * Request body: [LoginByExternalAuthProviderRequest].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -144,7 +141,6 @@ object OpenLoginRoutes {
      * Completes the login process by verifying a TOTP code (second factor).
      *
      * Request body: [VerifyTotpPayload].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -174,7 +170,6 @@ object OpenLoginRoutes {
      * Completes the login process by verifying a backup recovery code.
      *
      * Request body: [VerifyTotpPayload].
-     *
      * Response body: [AuthDataPayload].
      *
      * **Authorization:**
@@ -205,7 +200,6 @@ object OpenLoginRoutes {
      * Requests a confirmation code (OTP) to be sent to the specified phone number for login.
      *
      * Request body: [SendConfirmationToPhoneRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**

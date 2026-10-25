@@ -55,6 +55,7 @@ object ManagementStorageRoutes {
      *   - [StorageFilterValues.StorageFileFilterValues.MIME_TYPE] — filter by MIME type substring.
      *   - [StorageFilterValues.StorageFileFilterValues.FILE_NAME] — filter by file name substring.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [StorageFileSummaryPayload].
      *
      * **Authorization:**
@@ -77,6 +78,7 @@ object ManagementStorageRoutes {
      *
      * Path parameter: [StorageApiPaths.FILE_ID].
      *
+     * Request body: None.
      * Response body: [StorageFilePrivatePayload].
      *
      * **Authorization:**
@@ -99,7 +101,7 @@ object ManagementStorageRoutes {
      * Returns `200 OK` regardless of partial failures, but audit logs must accurately reflect results per-file.
      *
      * Request body: [DeleteFilesBatchRequest].
-     * Response body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -133,7 +135,7 @@ object ManagementStorageRoutes {
      * Path parameter: [StorageApiPaths.FILE_ID].
      *
      * Request body: None.
-     * Response body: None (`204 No Content`).
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

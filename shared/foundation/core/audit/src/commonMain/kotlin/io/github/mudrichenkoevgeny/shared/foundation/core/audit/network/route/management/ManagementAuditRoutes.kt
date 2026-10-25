@@ -47,6 +47,7 @@ object ManagementAuditRoutes {
      *   - [AuditFilterValues.AuditEventFilterValues.STATUS] — filter by [AuditStatus] serial name.
      *   - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — filter by message substring pattern.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [AuditEventSummaryPayload].
      *
      * **Authorization:**
@@ -78,6 +79,7 @@ object ManagementAuditRoutes {
      *
      * Path parameter: [AuditApiPaths.EVENT_ID].
      *
+     * Request body: None.
      * Response body: [AuditEventPrivatePayload].
      *
      * **Authorization:**

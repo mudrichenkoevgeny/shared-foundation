@@ -30,6 +30,7 @@ object OpenResetPasswordRoutes {
      * invitation token.
      *
      * Request body: [ResetPasswordRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.
@@ -60,7 +61,6 @@ object OpenResetPasswordRoutes {
      * or initial setup.
      *
      * Request body: [SendResetPasswordConfirmationRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**

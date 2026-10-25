@@ -34,7 +34,6 @@ object SelfManagementUnlockRoutes {
      * Requests a confirmation code (OTP) to be sent to the user's email to initiate the unlock process.
      *
      * Request body: [SendConfirmationToEmailRequest].
-     *
      * Response body: [OtpConfirmationPayload].
      *
      * **Authorization:**
@@ -56,6 +55,7 @@ object SelfManagementUnlockRoutes {
      * Unlocks a temporarily locked management account using an email confirmation code.
      *
      * Request body: [UnlockByEmailConfirmationRequest].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Allowed.

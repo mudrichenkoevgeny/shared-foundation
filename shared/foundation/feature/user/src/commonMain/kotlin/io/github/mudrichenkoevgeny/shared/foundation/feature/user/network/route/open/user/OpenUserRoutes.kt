@@ -27,6 +27,7 @@ object OpenUserRoutes {
      *
      * Retrieves the private user details and account status of the currently authenticated user.
      *
+     * Request body: None.
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
@@ -46,6 +47,7 @@ object OpenUserRoutes {
      *
      * Schedules the current user account for permanent deletion after a grace period.
      *
+     * Request body: None.
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
@@ -77,6 +79,7 @@ object OpenUserRoutes {
      *
      * Cancels a scheduled account deletion and restores the user to an active state.
      *
+     * Request body: None.
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**

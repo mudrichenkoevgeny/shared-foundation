@@ -39,6 +39,9 @@ object OpenSessionRoutes {
      *
      * Deletes the current active session.
      *
+     * Request body: None.
+     * Response body: None (204 No Content).
+     *
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
@@ -92,6 +95,7 @@ object OpenSessionRoutes {
      *   - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — filter by application version.
      *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by OS version.
      *
+     * Request body: None.
      * Response body: [PagedResult] of [UserSessionSummaryPayload].
      *
      * **Authorization:**
@@ -113,6 +117,7 @@ object OpenSessionRoutes {
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
      *
+     * Request body: None.
      * Response body: [UserSessionPrivatePayload].
      *
      * **Authorization:**
@@ -133,6 +138,9 @@ object OpenSessionRoutes {
      * Deletes the session for the given identifier.
      *
      * Path parameter: [UserApiPaths.SESSION_ID].
+     *
+     * Request body: None.
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -161,6 +169,7 @@ object OpenSessionRoutes {
      *
      * Deletes all sessions for the current user except the one used for this request.
      *
+     * Request body: None.
      * Response body: [DeletedSessionsPayload].
      *
      * **Authorization:**
@@ -189,6 +198,7 @@ object OpenSessionRoutes {
      * Performs re-authentication via TOTP to update the session's trust level.
      *
      * Request body: [VerifyTotpPayload].
+     * Response body: None (204 No Content).
      *
      * **Authorization:**
      * - **Public Access:** Denied.

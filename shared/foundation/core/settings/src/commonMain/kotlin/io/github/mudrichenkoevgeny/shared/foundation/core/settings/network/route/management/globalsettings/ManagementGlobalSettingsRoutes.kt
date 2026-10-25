@@ -26,6 +26,7 @@ object ManagementGlobalSettingsRoutes {
      *
      * Retrieves global platform settings.
      *
+     * Request body: None.
      * Response body: [ManagementGlobalSettingsPayload].
      *
      * **Authorization:**
@@ -46,6 +47,7 @@ object ManagementGlobalSettingsRoutes {
      * Updates platform-wide global settings.
      *
      * Request body: [ManagementGlobalSettingsPayload].
+     * Response body: [ManagementGlobalSettingsPayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
@@ -76,6 +78,7 @@ object ManagementGlobalSettingsRoutes {
      *
      * Resets platform-wide global settings to default values.
      *
+     * Request body: None.
      * Response body: [ManagementGlobalSettingsPayload].
      *
      * **Authorization:**

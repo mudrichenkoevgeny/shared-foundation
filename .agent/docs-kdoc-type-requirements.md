@@ -21,7 +21,7 @@ alwaysApply: true
 ## 4. HTTP Route Constants (Critical)
 Every `const val` representing an endpoint must follow the format defined in `api-documentation-standard.md`:
 - **HTTP Method:** Explicitly stated in backticks (e.g., `GET`).
-- **Request/Response:** Linked types only if they exist in the current or dependent modules.
+- **Request/Response:** Mandatory `Request body:` (`None.` if absent) and `Response body:` (`None (204 No Content)` if absent). Linked types only if they exist in the current or dependent modules.
 - **Redundancy Policy:** Intentionally duplicate authorization, pagination, and filter logic. Do not use "See [OtherRoute]".
 - **UI Presentation:** Reference associated navigation screen routes (`Screens:`) and/or UI flows (`Flow:`).
 

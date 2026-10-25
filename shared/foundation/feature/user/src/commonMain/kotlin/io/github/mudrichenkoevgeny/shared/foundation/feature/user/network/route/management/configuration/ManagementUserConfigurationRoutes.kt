@@ -14,6 +14,7 @@ object ManagementUserConfigurationRoutes {
      *
      * Retrieves the configuration settings relevant for management tasks and staff workflows.
      *
+     * Request body: None.
      * Response body: [ManagementUserConfigurationPayload].
      *
      * **Authorization:**

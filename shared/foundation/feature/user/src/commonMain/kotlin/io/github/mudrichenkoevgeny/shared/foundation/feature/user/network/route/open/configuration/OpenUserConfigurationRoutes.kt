@@ -12,6 +12,7 @@ object OpenUserConfigurationRoutes {
      *
      * Retrieves the global or default user configuration settings.
      *
+     * Request body: None.
      * Response body: [OpenUserConfigurationPayload].
      *
      * **Authorization:**
