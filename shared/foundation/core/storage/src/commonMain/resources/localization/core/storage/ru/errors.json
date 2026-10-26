@@ -4,6 +4,7 @@
   "file_size_below_minimum_without_args": "Размер файла меньше минимально допустимого лимита.",
   "file_size_below_minimum_with_args": "Размер файла меньше минимально допустимого лимита в {formattedMinFileSize}.",
   "unsupported_mime_type": "Указанный тип файла не поддерживается.",
+  "unsupported_storage_category": "Указанная категория хранилища не поддерживается.",
   "storage_quota_exceeded_without_args": "Превышен лимит выделенного хранилища.",
   "storage_quota_exceeded_with_args": "Превышен лимит хранилища (использовано {formattedUsed} из {formattedQuota}).",
   "too_many_pending_uploads_without_args": "Слишком много незавершенных сессий загрузки. Завершите или отмените текущие загрузки.",

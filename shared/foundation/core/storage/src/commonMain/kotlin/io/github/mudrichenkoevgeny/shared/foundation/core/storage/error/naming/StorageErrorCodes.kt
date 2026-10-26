@@ -68,7 +68,7 @@ object StorageErrorCodes {
      * The specified storage category is disabled, unknown, or not supported by the platform configuration.
      *
      * **Localization keys:**
-     * - `unsupported_mime_type`
+     * - `unsupported_storage_category`
      *
      * **Public arguments (Programmatic API payload):**
      * - [StorageErrorArgs.CATEGORY]: Storage category identifier that was rejected.

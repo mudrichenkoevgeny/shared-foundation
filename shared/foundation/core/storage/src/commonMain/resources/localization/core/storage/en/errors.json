@@ -4,6 +4,7 @@
   "file_size_below_minimum_without_args": "The file size is below the minimum required limit.",
   "file_size_below_minimum_with_args": "The file size is below the minimum required limit of {formattedMinFileSize}.",
   "unsupported_mime_type": "The provided file type is not supported.",
+  "unsupported_storage_category": "The specified storage category is not supported.",
   "storage_quota_exceeded_without_args": "Storage quota limit exceeded.",
   "storage_quota_exceeded_with_args": "Storage quota exceeded ({formattedUsed} of {formattedQuota} used).",
   "too_many_pending_uploads_without_args": "Too many pending upload sessions. Please complete or cancel existing uploads.",
