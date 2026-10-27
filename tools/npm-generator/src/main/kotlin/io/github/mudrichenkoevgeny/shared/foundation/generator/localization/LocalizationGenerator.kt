@@ -137,7 +137,11 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         /**
          * Formats a raw byte count into a human-readable localized byte size string (e.g., "100 B", "50 MB", "1 GB").
          */
-        export function formatByteSize(bytesRaw, locale = 'en', resolver = defaultLocalizedStringResolver) {
+        export function formatByteSize(bytesRaw, locale = 'en', decimals = 0, resolver = defaultLocalizedStringResolver) {
+          if (typeof decimals === 'function') {
+            resolver = decimals;
+            decimals = 0;
+          }
           const bytes = Number(bytesRaw);
           if (isNaN(bytes) || bytesRaw === null || bytesRaw === undefined) return bytesRaw !== null && bytesRaw !== undefined ? String(bytesRaw) : '';
           const getUnit = (key) => resolver('core/common', 'general', key, locale) || key;
@@ -145,11 +149,24 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
           const ONE_MB = 1024 * 1024;
           const ONE_GB = 1024 * 1024 * 1024;
           const ONE_TB = 1024 * 1024 * 1024 * 1024;
+          const absBytes = Math.abs(bytes);
 
-          if (bytes >= ONE_TB) return Math.floor(bytes / ONE_TB) + ' ' + getUnit('byte_unit_tb');
-          if (bytes >= ONE_GB) return Math.floor(bytes / ONE_GB) + ' ' + getUnit('byte_unit_gb');
-          if (bytes >= ONE_MB) return Math.floor(bytes / ONE_MB) + ' ' + getUnit('byte_unit_mb');
-          if (bytes >= ONE_KB) return Math.floor(bytes / ONE_KB) + ' ' + getUnit('byte_unit_kb');
+          const formatValue = (divisor) => {
+            if (decimals <= 0) return String(Math.trunc(bytes / divisor));
+            const val = bytes / divisor;
+            const factor = Math.pow(10, decimals);
+            const rounded = Math.round(val * factor);
+            const intPart = Math.trunc(rounded / factor);
+            const fracPart = Math.abs(rounded % factor);
+            if (fracPart === 0) return String(intPart);
+            const fracStr = String(fracPart).padStart(decimals, '0').replace(/0+$/, '');
+            return fracStr.length > 0 ? intPart + '.' + fracStr : String(intPart);
+          };
+
+          if (absBytes >= ONE_TB) return formatValue(ONE_TB) + ' ' + getUnit('byte_unit_tb');
+          if (absBytes >= ONE_GB) return formatValue(ONE_GB) + ' ' + getUnit('byte_unit_gb');
+          if (absBytes >= ONE_MB) return formatValue(ONE_MB) + ' ' + getUnit('byte_unit_mb');
+          if (absBytes >= ONE_KB) return formatValue(ONE_KB) + ' ' + getUnit('byte_unit_kb');
           return bytes + ' ' + getUnit('byte_unit_b');
         }
 
@@ -331,7 +348,8 @@ fun generateLocalizationCode(rootDir: File): Pair<String, String> {
         /**
          * Formats a raw byte count into a human-readable localized byte size string (e.g., "100 B", "50 MB", "1 GB").
          */
-        export declare function formatByteSize(bytesRaw: number | string | bigint | unknown, locale?: string, resolver?: LocalizedStringResolver): string;
+        export declare function formatByteSize(bytesRaw: number | string | bigint | unknown, locale?: string, decimals?: number, resolver?: LocalizedStringResolver): string;
+        export declare function formatByteSize(bytesRaw: number | string | bigint | unknown, locale: string, resolver: LocalizedStringResolver): string;
 
         export declare const defaultLocalizedStringResolver: LocalizedStringResolver;
 
