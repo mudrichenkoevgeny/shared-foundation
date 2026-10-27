@@ -171,6 +171,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.self.SelfManagementStorageRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageSettingsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.contract.StorageNavigationPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorArgs
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.UserErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
@@ -452,6 +453,7 @@ val contractClasses = listOf(
     StorageApiPaths::class,
     UserApiQueryParams::class,
     UserNavigationPaths::class,
+    StorageNavigationPaths::class,
     UserAuthSpec::class,
     AuditApiPaths::class,
     UserRoleDefaultAuthorityLevel::class,
