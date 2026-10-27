@@ -145,6 +145,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageWebSocketEventTypes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementSelfStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageSettingsNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.open.OpenStorageNavigation
@@ -393,6 +394,7 @@ val routeClasses = listOf(
     ClientUserNavigation::class,
     ManagementSelfUserNavigation::class,
     OpenStorageNavigation::class,
+    ManagementSelfStorageNavigation::class,
     ManagementStorageNavigation::class,
     ManagementStorageSettingsNavigation::class,
     ManagementUsersNavigation::class,

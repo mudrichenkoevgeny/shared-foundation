@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageSortValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageNavigation
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementSelfStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
@@ -60,7 +60,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileList]
+     *   - [ManagementSelfStorageNavigation.FileList]
      */
     const val GET_FILES = BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE
 
@@ -82,7 +82,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileDetail]
+     *   - [ManagementSelfStorageNavigation.FileDetail]
      */
     const val GET_FILE = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
@@ -102,7 +102,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileUpload]
+     *   - [ManagementSelfStorageNavigation.FileUpload]
      */
     const val POST_PRESIGNED_UPLOAD_URL = "$BASE_SELF_MANAGEMENT_STORAGE_ROUTE/presigned-url"
 
@@ -125,7 +125,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileUpload]
+     *   - [ManagementSelfStorageNavigation.FileUpload]
      */
     const val CONFIRM_UPLOAD = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
 
@@ -147,7 +147,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileDetail]
+     *   - [ManagementSelfStorageNavigation.FileDetail]
      */
     const val DELETE_FILE = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
@@ -168,7 +168,7 @@ object SelfManagementStorageRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementStorageNavigation.FileList]
+     *   - [ManagementSelfStorageNavigation.FileList]
      */
     const val DELETE_FILES_BATCH = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
 }

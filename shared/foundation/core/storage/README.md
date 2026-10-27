@@ -29,7 +29,7 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [OpenStorageSettingsRoutes] & [ManagementStorageSettingsRoutes]: Routes for reading and updating global storage configuration.
   - [StoragePermissionCode]: Permissions (`STORAGE_DELETE_OTHER_USERS_FILES`, `STORAGE_VIEW_OTHER_USERS_FILES`, `STORAGE_SETTINGS_UPDATE`).
 - **Navigation & Screen Params:**
-  - [OpenStorageNavigation] & [ManagementStorageNavigation]: Screen navigation routes (`FileList`, `FileDetail`, `FileUpload`).
+  - [OpenStorageNavigation], [ManagementSelfStorageNavigation], & [ManagementStorageNavigation]: Screen navigation routes (`FileList`, `FileDetail`, `FileUpload`).
   - [ManagementStorageSettingsNavigation]: Management navigation for storage settings (`StorageSettings`).
   - Screen parameter classes with deep-link query/path parsers: [StorageFileUploadParams], [StorageFileDetailParams], [ManagementStorageFileListParams], [SelfStorageFileListParams].
   - Query & path parameter key constants: [StorageNavigationPaths].
@@ -81,6 +81,7 @@ This module defines pure KMP contracts and route specifications for direct clien
 [ManagementStorageSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageSettingsRoutes.kt
 [StoragePermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/permission/StoragePermissionCode.kt
 [OpenStorageNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation.kt
+[ManagementSelfStorageNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation.kt
 [ManagementStorageNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation.kt
 [ManagementStorageSettingsNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation.kt
 [StorageFileUploadParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams.kt

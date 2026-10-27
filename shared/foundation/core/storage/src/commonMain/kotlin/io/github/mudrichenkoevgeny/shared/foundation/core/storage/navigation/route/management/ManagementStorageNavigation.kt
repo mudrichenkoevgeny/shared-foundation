@@ -59,7 +59,7 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
             get() = ManagementMainNavigation.Main.route
 
         companion object {
-            const val ROUTE = "$${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/files"
+            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/files"
         }
     }
 
