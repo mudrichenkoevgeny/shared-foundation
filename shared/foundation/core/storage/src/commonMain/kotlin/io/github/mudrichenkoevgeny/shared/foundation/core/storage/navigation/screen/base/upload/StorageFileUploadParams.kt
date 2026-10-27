@@ -4,6 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.para
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.contract.StorageNavigationPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiFields
 import kotlinx.serialization.Serializable
@@ -14,6 +15,7 @@ import kotlinx.serialization.Serializable
  * @property maxFiles Maximum number of files permitted to be selected or uploaded in a single batch; wire key is [StorageNavigationPaths.MAX_FILES].
  * @property targetScope Target scope or feature context string (e.g., 'avatar', 'ticket_attachment'); wire key is [StorageApiFields.TARGET_SCOPE].
  * @property category Target storage category to restrict upload selection; wire key is [StorageApiFields.CATEGORY].
+ * @property visibility Target storage file visibility; wire key is [StorageApiFields.VISIBILITY].
  * @property acceptedFileTypes List of accepted file extensions or MIME types (e.g., [".jpg", ".png", "image/png"]); wire key is [StorageNavigationPaths.ACCEPTED_FILE_TYPES].
  * @property maxFileSizeBytes Maximum file size limit in bytes for this upload context; wire key is [StorageNavigationPaths.MAX_FILE_SIZE_BYTES].
  * @property autoSubmit Whether to automatically trigger upload submission upon file selection; wire key is [StorageNavigationPaths.AUTO_SUBMIT].
@@ -23,6 +25,7 @@ data class StorageFileUploadParams(
     val maxFiles: Int? = null,
     val targetScope: String? = null,
     val category: StorageCategory? = null,
+    val visibility: StorageFileVisibility? = null,
     val acceptedFileTypes: List<String> = emptyList(),
     val maxFileSizeBytes: Long? = null,
     val autoSubmit: Boolean = false
@@ -50,6 +53,10 @@ data class StorageFileUploadParams(
                 ?.firstOrNull()
                 ?.let { StorageCategory.fromValueOrNull(it) }
 
+            val visibility = normalized[StorageApiFields.VISIBILITY]
+                ?.firstOrNull()
+                ?.let { StorageFileVisibility.fromValueOrNull(it) }
+
             val acceptedFileTypes = normalized[StorageNavigationPaths.ACCEPTED_FILE_TYPES]
                 ?.flatMap { it.split(",") }
                 ?.map { it.trim() }
@@ -70,6 +77,7 @@ data class StorageFileUploadParams(
                 maxFiles = maxFiles,
                 targetScope = targetScope,
                 category = category,
+                visibility = visibility,
                 acceptedFileTypes = acceptedFileTypes,
                 maxFileSizeBytes = maxFileSizeBytes,
                 autoSubmit = autoSubmit
@@ -87,6 +95,9 @@ data class StorageFileUploadParams(
             }
             if (params.category != null) {
                 result[StorageApiFields.CATEGORY] = listOf(params.category.value)
+            }
+            if (params.visibility != null) {
+                result[StorageApiFields.VISIBILITY] = listOf(params.visibility.value)
             }
             if (params.acceptedFileTypes.isNotEmpty()) {
                 result[StorageNavigationPaths.ACCEPTED_FILE_TYPES] = params.acceptedFileTypes
