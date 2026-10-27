@@ -29,6 +29,12 @@ fun generateRouteObjects(): String {
 
         val allFields = directFields + nestedFields
 
+        if (allFields.isEmpty()) {
+            return@joinToString """
+            export const $name = {};
+            """.trimIndent()
+        }
+
         """
         export const $name = {
         ${allFields.joinToString(",\n")}

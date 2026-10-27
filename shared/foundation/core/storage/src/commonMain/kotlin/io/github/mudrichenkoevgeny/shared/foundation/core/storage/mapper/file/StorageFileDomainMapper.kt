@@ -40,7 +40,10 @@ fun StorageFileInternal.toStorageFileSummary(fileUrl: String): StorageFileSummar
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
     category = category,
-    fileUrl = fileUrl
+    visibility = visibility,
+    status = status,
+    fileUrl = fileUrl,
+    createdAt = createdAt
 )
 
 /**
@@ -52,5 +55,8 @@ fun StorageFilePrivate.toStorageFileSummary(): StorageFileSummary = StorageFileS
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
     category = category,
-    fileUrl = fileUrl
+    visibility = visibility,
+    status = status,
+    fileUrl = fileUrl,
+    createdAt = createdAt
 )

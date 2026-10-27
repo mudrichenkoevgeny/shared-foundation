@@ -3,6 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.toFileIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
 
 /**
@@ -18,7 +20,10 @@ fun StorageFileSummaryPayload.toStorageFileSummary(): StorageFileSummary = Stora
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
     category = StorageCategory.fromValueOrThrow(category),
-    fileUrl = fileUrl
+    visibility = StorageFileVisibility.fromValueOrThrow(visibility),
+    status = StorageFileStatus.fromValueOrThrow(status),
+    fileUrl = fileUrl,
+    createdAt = createdAt
 )
 
 /**
@@ -30,5 +35,8 @@ fun StorageFileSummary.toStorageFileSummaryPayload(): StorageFileSummaryPayload 
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
     category = category.value,
-    fileUrl = fileUrl
+    visibility = visibility.value,
+    status = status.value,
+    fileUrl = fileUrl,
+    createdAt = createdAt
 )

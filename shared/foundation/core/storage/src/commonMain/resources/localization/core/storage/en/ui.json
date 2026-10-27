@@ -68,5 +68,14 @@
   "file_upload_dropzone_prompt": "Drag and drop a file here, or click to browse",
   "file_uploading_progress": "Uploading: {percent}%",
   "status_failed": "Failed",
-  "delete_file_action": "Delete File"
+  "delete_file_action": "Delete File",
+  "preview_not_supported": "Preview is not supported for this file format.",
+  "preview_processing": "File is currently being processed. Preview will be available shortly.",
+  "preview_error": "Unable to load file preview.",
+  "uploaded_at": "Uploaded at",
+  "uploaded_at_label": "Uploaded at: {date}",
+  "uploaded_by": "Uploaded by: {owner}",
+  "owner_anonymous": "Anonymous",
+  "open_in_new_tab": "Open in new tab",
+  "private_link_warning": "This is a private file. The URL is temporary and will expire soon."
 }

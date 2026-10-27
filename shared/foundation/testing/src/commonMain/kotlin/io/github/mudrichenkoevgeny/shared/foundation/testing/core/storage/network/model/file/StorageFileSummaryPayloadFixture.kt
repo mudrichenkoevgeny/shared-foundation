@@ -1,7 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.file
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
+import kotlin.time.Instant
 
 /**
  * Creates a test [StorageFileSummaryPayload] wire object instance.
@@ -12,12 +15,18 @@ fun createTestStorageFileSummaryPayload(
     fileSizeBytes: Long = 1048576L,
     mimeType: String = "image/png",
     category: String = StorageCategory.IMAGE.value,
-    fileUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001"
+    visibility: String = StorageFileVisibility.PUBLIC.value,
+    status: String = StorageFileStatus.READY.value,
+    fileUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001",
+    createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
 ) = StorageFileSummaryPayload(
     id = id,
     fileName = fileName,
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
     category = category,
-    fileUrl = fileUrl
+    visibility = visibility,
+    status = status,
+    fileUrl = fileUrl,
+    createdAt = createdAt
 )
