@@ -22,6 +22,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy.PasswordPolicyFailReason
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItemId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileInternal
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
@@ -75,6 +76,7 @@ fun generateBrandedTypes(): String {
         "UserSessionId",
         "AuditEventId",
         "FileId",
+        "UploadQueueItemId",
         "ClientDeviceId",
         "DecryptedString",
         "EncryptedString",
@@ -249,6 +251,7 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
         classifier == UserSessionId::class -> "userSessionIdSchema"
         classifier == AuditEventId::class -> "auditEventIdSchema"
         classifier == FileId::class -> "fileIdSchema"
+        classifier == UploadQueueItemId::class -> "uploadQueueItemIdSchema"
         classifier == ClientDeviceId::class -> "clientDeviceIdSchema"
         classifier == DecryptedString::class -> "decryptedStringSchema"
         classifier == EncryptedString::class -> "encryptedStringSchema"

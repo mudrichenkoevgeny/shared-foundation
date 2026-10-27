@@ -9,6 +9,8 @@
   "storage_quota_exceeded_with_args": "Storage quota exceeded ({formattedUsed} of {formattedQuota} used).",
   "too_many_pending_uploads_without_args": "Too many pending upload sessions. Please complete or cancel existing uploads.",
   "too_many_pending_uploads_with_args": "Too many pending upload sessions (maximum {maxPendingUploads}). Please complete or cancel existing uploads.",
+  "max_batch_upload_count_exceeded_without_args": "Maximum permitted batch upload limit exceeded.",
+  "max_batch_upload_count_exceeded_with_args": "Maximum permitted batch upload limit exceeded (maximum {maxBatchUploadCount} files).",
   "presigned_url_expired": "The upload session has expired. Please try again.",
   "upload_already_completed": "This upload session has already been completed.",
   "storage_upload_failed": "Failed to upload the file. Please try again.",

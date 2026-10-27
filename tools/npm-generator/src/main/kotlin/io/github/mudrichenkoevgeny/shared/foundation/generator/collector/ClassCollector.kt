@@ -163,6 +163,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.OpenStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.ui.component.fileupload.StorageFileUploadUiConfig
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItem
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItemStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file.DeleteFilesBatchRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedReadUrlBatchRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
@@ -500,6 +502,7 @@ val enumClasses = listOf(
     StorageCategory::class,
     StorageFileStatus::class,
     StorageFileVisibility::class,
+    UploadQueueItemStatus::class,
     CommonAuditResourceType::class,
     SecurityAuditResourceType::class,
     SettingsAuditResourceType::class,
@@ -850,7 +853,8 @@ val rawDomainToDtoClasses: List<Pair<KClass<*>, KClass<*>?>> = listOf(
     UserPrivate::class to UserPrivatePayload::class,
     UserStorageConfiguration::class to UserStorageConfigurationPayload::class,
     UserSummary::class to UserSummaryPayload::class,
-    StorageFileUploadUiConfig::class to null
+    StorageFileUploadUiConfig::class to null,
+    UploadQueueItem::class to null
 )
 
 val domainToDtoClasses = sortDomainToDtoTopologically(rawDomainToDtoClasses)

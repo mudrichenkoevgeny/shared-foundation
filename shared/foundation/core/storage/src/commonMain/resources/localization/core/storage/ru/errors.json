@@ -9,6 +9,8 @@
   "storage_quota_exceeded_with_args": "Превышен лимит хранилища (использовано {formattedUsed} из {formattedQuota}).",
   "too_many_pending_uploads_without_args": "Слишком много незавершенных сессий загрузки. Завершите или отмените текущие загрузки.",
   "too_many_pending_uploads_with_args": "Слишком много незавершенных сессий загрузки (максимум {maxPendingUploads}). Завершите или отмените текущие загрузки.",
+  "max_batch_upload_count_exceeded_without_args": "Превышен максимальный лимит файлов для одновременной загрузки.",
+  "max_batch_upload_count_exceeded_with_args": "Превышен максимальный лимит файлов для одновременной загрузки (максимум {maxBatchUploadCount} файлов).",
   "presigned_url_expired": "Срок действия сессии загрузки истек. Пожалуйста, попробуйте снова.",
   "upload_already_completed": "Эта сессия загрузки уже была завершена.",
   "storage_upload_failed": "Не удалось загрузить файл. Пожалуйста, попробуйте снова.",

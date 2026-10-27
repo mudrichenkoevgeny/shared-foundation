@@ -87,4 +87,12 @@ object StorageErrorArgs {
      * Associated with [StorageErrorCodes.TOO_MANY_PENDING_UPLOADS].
      */
     const val MAX_PENDING_UPLOADS = "maxPendingUploads"
+
+    /**
+     * Key for the maximum permitted file count in a single batch upload selection.
+     * Used as a **public argument** for client-side upload validation error messages.
+     *
+     * Associated with [StorageErrorCodes.MAX_BATCH_UPLOAD_COUNT_EXCEEDED].
+     */
+    const val MAX_BATCH_UPLOAD_COUNT = "maxBatchUploadCount"
 }

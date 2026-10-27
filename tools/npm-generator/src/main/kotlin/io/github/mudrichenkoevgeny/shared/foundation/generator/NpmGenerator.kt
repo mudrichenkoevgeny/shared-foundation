@@ -539,6 +539,12 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
 
     export declare const passwordPolicyValidator: PasswordPolicyValidator;
 
+    export declare const storageUploadValidator: {
+      isFileTypeAccepted(acceptedFileTypes: string[], fileName: string, mimeType?: string | null): boolean;
+      isFileSizeValid(maxFileSizeBytes?: number | null, fileSizeBytes?: number): boolean;
+      isBatchSizeValid(maxFiles?: number | null, currentCount?: number): boolean;
+    };
+
     ${generateDomainModelsAndMappersDts()}
 
     ${generateCompositeParsersDts()}
@@ -669,6 +675,11 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
     export function toFileIdOrNull(value: string | null | undefined): FileId | null;
     export function toFileIdOrThrow(value: string): FileId;
     export const fileIdSchema: z.ZodType<FileId>;
+
+    export type UploadQueueItemId = string & { readonly __brand: 'UploadQueueItemId' };
+    export function toUploadQueueItemIdOrNull(value: string | null | undefined): UploadQueueItemId | null;
+    export function toUploadQueueItemIdOrThrow(value: string): UploadQueueItemId;
+    export const uploadQueueItemIdSchema: z.ZodType<UploadQueueItemId>;
 
     export type ClientDeviceId = string & { readonly __brand: 'ClientDeviceId' };
     export function toClientDeviceIdOrNull(value: string | null | undefined): ClientDeviceId | null;

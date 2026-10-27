@@ -255,6 +255,48 @@ fun generateEnumsJs(): String {
 
     export const passwordPolicyValidator = new PasswordPolicyValidator();
 
+    export const storageUploadValidator = {
+      isFileTypeAccepted: (acceptedFileTypes, fileName, mimeType) => {
+        if (!Array.isArray(acceptedFileTypes) || acceptedFileTypes.length === 0) return true;
+        if (!fileName) return false;
+
+        const lowerFileName = fileName.toLowerCase();
+        const lastDot = lowerFileName.lastIndexOf('.');
+        const extension = lastDot !== -1 ? lowerFileName.substring(lastDot) : '';
+        const normalizedMimeType = mimeType ? mimeType.toLowerCase().trim() : null;
+
+        return acceptedFileTypes.some((rawFilter) => {
+          if (!rawFilter) return false;
+          const filter = rawFilter.trim().lowercase();
+          if (!filter) return false;
+
+          if (filter.startsWith('.')) {
+            return extension === filter || lowerFileName.endsWith(filter);
+          }
+          if (filter.endsWith('/*')) {
+            const mimePrefix = filter.slice(0, -2);
+            return Boolean(normalizedMimeType && normalizedMimeType.startsWith(mimePrefix + '/'));
+          }
+          if (filter.includes('/')) {
+            return normalizedMimeType === filter;
+          }
+          return extension === '.' + filter;
+        });
+      },
+
+      isFileSizeValid: (maxFileSizeBytes, fileSizeBytes) => {
+        if (maxFileSizeBytes === null || maxFileSizeBytes === undefined || maxFileSizeBytes <= 0) return true;
+        if (typeof fileSizeBytes !== 'number' || fileSizeBytes < 0) return false;
+        return fileSizeBytes <= maxFileSizeBytes;
+      },
+
+      isBatchSizeValid: (maxFiles, currentCount) => {
+        if (maxFiles === null || maxFiles === undefined || maxFiles <= 0) return typeof currentCount === 'number' && currentCount >= 0;
+        if (typeof currentCount !== 'number' || currentCount < 0) return false;
+        return currentCount <= maxFiles;
+      }
+    };
+
     export const CommonSortValues = {
       TimestampSortBy
     };

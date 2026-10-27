@@ -110,6 +110,21 @@ object StorageErrorCodes {
      */
     const val TOO_MANY_PENDING_UPLOADS = "TOO_MANY_PENDING_UPLOADS"
 
+    /**
+     * The user attempted to select or upload more files in a single batch than permitted by system policy or component configuration.
+     *
+     * **Localization keys:**
+     * - `max_batch_upload_count_exceeded_without_args`: Static fallback message.
+     * - `max_batch_upload_count_exceeded_with_args`: Parameterized message template (`{maxBatchUploadCount}`).
+     *
+     * **Display arguments (Localization placeholders):**
+     * - [StorageErrorArgs.MAX_BATCH_UPLOAD_COUNT]: Maximum permitted files in a single batch (`{maxBatchUploadCount}`).
+     *
+     * **Public arguments (Programmatic API payload):**
+     * - [StorageErrorArgs.MAX_BATCH_UPLOAD_COUNT]: Maximum permitted files in a single batch.
+     */
+    const val MAX_BATCH_UPLOAD_COUNT_EXCEEDED = "MAX_BATCH_UPLOAD_COUNT_EXCEEDED"
+
     // --- Upload Session & Finalization ---
 
     /**
