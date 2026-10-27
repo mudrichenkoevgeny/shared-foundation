@@ -33,6 +33,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.ExternalAuthProvider
+import kotlin.time.Instant
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
@@ -259,6 +260,7 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
         classifier == AccessToken::class -> "accessTokenSchema"
         classifier == RefreshToken::class -> "refreshTokenSchema"
         classifier == RefreshTokenHash::class -> "refreshTokenHashSchema"
+        classifier == Instant::class -> "z.number()"
         classifier == List::class || classifier == Set::class || classifier == Collection::class || classifier.simpleName == "Set" || classifier.simpleName == "List" || classifier.simpleName == "Collection" -> {
             val elementType = type.arguments.firstOrNull()?.type
             val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
@@ -304,7 +306,7 @@ fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>): Strin
         classifier == AuditSortValues.AuditEventSortBy::class -> "AuditEventSortBy"
         classifier == CommonSortValues.TimestampSortBy::class -> "TimestampSortBy"
         classifier == JsonElement::class -> "unknown"
-        classifier.simpleName == "Instant" -> "Instant"
+        classifier == Instant::class -> "Instant"
 
         paramName == "totpStep" -> "TotpStep"
         paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "LoginByTotpMode"
