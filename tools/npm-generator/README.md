@@ -12,7 +12,7 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
 
 1. **`package.json`**: NPM package descriptor with dynamically inherited version from root `build.gradle.kts` (e.g. `0.0.60`).
 2. **`index.d.ts`**: TypeScript declaration file exporting:
-   - **TypeScript Interfaces & Types**: Typed models for DTOs (`UserSummaryPayload`), Domain Models (`UserSummary`), and Navigation Screen Parameters (`ManagementUserListParams`).
+   - **TypeScript Interfaces & Types**: Typed models for DTOs (`UserSummaryPayload`), Domain Models (`UserSummary`), Navigation Screen Parameters (`ManagementUserListParams`), and UI Component Configurations (`StorageFileUploadUiConfig`).
    - **JSDoc Documentation**: Rich JSDoc hover comments (`/** ... */`) extracted from Kotlin source KDocs for all classes, properties, routes, and mappers.
    - **Branded Identifier Types**: Type-safe IDs (`UserId`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`, `PermissionCode`).
    - **REST & Navigation Route Objects**: Strongly typed route constants (`ManagementUsersRoutes`, `ManagementUsersNavigation`, `ClientAuthNavigation`, etc.).

@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.BaseStorageNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageRoutes
@@ -95,19 +96,25 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
     /**
      * Storage file upload utility screen (e.g. for testing uploads directly from the management panel).
      *
-     * - **Screen Parameters:** None.
+     * - **Screen Parameters:** [StorageFileUploadParams]
      * - **Primary API:** None.
      * - **Secondary Action APIs:**
      *   - [OpenStorageRoutes.POST_PRESIGNED_UPLOAD_URL]
      *   - [OpenStorageRoutes.CONFIRM_UPLOAD]
      */
     @Serializable
-    data object FileUpload : ManagementStorageNavigation {
+    data class FileUpload(
+        override val params: StorageFileUploadParams = StorageFileUploadParams()
+    ) : ManagementStorageNavigation, ParameterizedNavigationRoute<StorageFileUploadParams> {
 
         override val route: String
-            get() = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
+            get() = ROUTE
 
         override val parentRoute: String
             get() = FileList.ROUTE
+
+        companion object {
+            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
+        }
     }
 }

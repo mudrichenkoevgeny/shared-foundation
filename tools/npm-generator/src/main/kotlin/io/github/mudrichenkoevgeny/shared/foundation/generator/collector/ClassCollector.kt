@@ -153,6 +153,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.m
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list.SelfStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
@@ -161,6 +162,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedUrlPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.OpenStorageSettingsPayload
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.ui.component.fileupload.StorageFileUploadUiConfig
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.file.DeleteFilesBatchRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedReadUrlBatchRequest
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.request.presigned.PresignedUrlRequest
@@ -608,15 +610,15 @@ fun sortDtosTopologically(classes: List<KClass<*>>): List<KClass<*>> {
 }
 
 fun getDomainPairDependencies(
-    pair: Pair<KClass<*>, KClass<*>>,
-    allPairs: List<Pair<KClass<*>, KClass<*>>>
-): Set<Pair<KClass<*>, KClass<*>>> {
-    val dependencies = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
+    pair: Pair<KClass<*>, KClass<*>?>,
+    allPairs: List<Pair<KClass<*>, KClass<*>?>>
+): Set<Pair<KClass<*>, KClass<*>?>> {
+    val dependencies = mutableSetOf<Pair<KClass<*>, KClass<*>?>>()
     val (domainClass, payloadClass) = pair
     val domainRefClasses = (domainClass.primaryConstructor?.parameters ?: emptyList())
         .flatMap { extractReferencedClasses(it.type) }
         .toSet()
-    val payloadRefClasses = (payloadClass.primaryConstructor?.parameters ?: emptyList())
+    val payloadRefClasses = (payloadClass?.primaryConstructor?.parameters ?: emptyList())
         .flatMap { extractReferencedClasses(it.type) }
         .toSet()
 
@@ -631,17 +633,17 @@ fun getDomainPairDependencies(
 }
 
 fun sortDomainToDtoTopologically(
-    pairs: List<Pair<KClass<*>, KClass<*>>>
-): List<Pair<KClass<*>, KClass<*>>> {
+    pairs: List<Pair<KClass<*>, KClass<*>?>>
+): List<Pair<KClass<*>, KClass<*>?>> {
     val depMap = pairs.associateWith { pair ->
         getDomainPairDependencies(pair, pairs)
     }
 
-    val sorted = mutableListOf<Pair<KClass<*>, KClass<*>>>()
-    val visited = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
-    val visiting = mutableSetOf<Pair<KClass<*>, KClass<*>>>()
+    val sorted = mutableListOf<Pair<KClass<*>, KClass<*>?>>()
+    val visited = mutableSetOf<Pair<KClass<*>, KClass<*>?>>()
+    val visiting = mutableSetOf<Pair<KClass<*>, KClass<*>?>>()
 
-    fun visit(pair: Pair<KClass<*>, KClass<*>>) {
+    fun visit(pair: Pair<KClass<*>, KClass<*>?>) {
         if (pair in visited) return
         if (pair in visiting) return
         visiting.add(pair)
@@ -696,6 +698,7 @@ val rawDtoClasses = listOf(
     ManagementUserIdentifierListParams::class,
     ManagementGlobalIdentifierListParams::class,
     StorageFileDetailParams::class,
+    StorageFileUploadParams::class,
     ManagementStorageFileListParams::class,
     SelfStorageFileListParams::class,
     AvailableAuthProvidersPayload::class,
@@ -805,7 +808,7 @@ fun getAllEnumInfos(): List<EnumInfo> {
     return enumClasses.map { getEnumInfo(it) } + extraEnumInfos
 }
 
-val rawDomainToDtoClasses = listOf(
+val rawDomainToDtoClasses: List<Pair<KClass<*>, KClass<*>?>> = listOf(
     ClientInfo::class to ClientInfoPayload::class,
     ClientDeviceInfo::class to ClientDeviceInfoPayload::class,
     AccountLockoutPolicy::class to AccountLockoutPolicyPayload::class,
@@ -844,7 +847,8 @@ val rawDomainToDtoClasses = listOf(
     SessionToken::class to SessionTokenPayload::class,
     UserPrivate::class to UserPrivatePayload::class,
     UserStorageConfiguration::class to UserStorageConfigurationPayload::class,
-    UserSummary::class to UserSummaryPayload::class
+    UserSummary::class to UserSummaryPayload::class,
+    StorageFileUploadUiConfig::class to null
 )
 
 val domainToDtoClasses = sortDomainToDtoTopologically(rawDomainToDtoClasses)

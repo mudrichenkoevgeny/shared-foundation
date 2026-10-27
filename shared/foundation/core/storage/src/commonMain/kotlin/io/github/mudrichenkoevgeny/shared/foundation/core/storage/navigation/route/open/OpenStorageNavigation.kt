@@ -7,6 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.BaseStorageNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list.SelfStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageRoutes
@@ -94,19 +95,25 @@ sealed interface OpenStorageNavigation : NavigationRoute {
     /**
      * Storage file upload utility screen.
      *
-     * - **Screen Parameters:** None.
+     * - **Screen Parameters:** [StorageFileUploadParams]
      * - **Primary API:** None.
      * - **Secondary Action APIs:**
      *   - [OpenStorageRoutes.POST_PRESIGNED_UPLOAD_URL]
      *   - [OpenStorageRoutes.CONFIRM_UPLOAD]
      */
     @Serializable
-    data object FileUpload : OpenStorageNavigation {
+    data class FileUpload(
+        override val params: StorageFileUploadParams = StorageFileUploadParams()
+    ) : OpenStorageNavigation, ParameterizedNavigationRoute<StorageFileUploadParams> {
 
         override val route: String
-            get() = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
+            get() = ROUTE
 
         override val parentRoute: String
             get() = FileList.ROUTE
+
+        companion object {
+            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
+        }
     }
 }

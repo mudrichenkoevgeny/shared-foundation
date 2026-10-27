@@ -31,7 +31,10 @@ This module defines pure KMP contracts and route specifications for direct clien
 - **Navigation & Screen Params:**
   - [OpenStorageNavigation] & [ManagementStorageNavigation]: Screen navigation routes (`FileList`, `FileDetail`, `FileUpload`).
   - [ManagementStorageSettingsNavigation]: Management navigation for storage settings (`StorageSettings`).
-  - Screen parameter classes with deep-link query/path parsers: [StorageFileDetailParams], [ManagementStorageFileListParams], [SelfStorageFileListParams].
+  - Screen parameter classes with deep-link query/path parsers: [StorageFileUploadParams], [StorageFileDetailParams], [ManagementStorageFileListParams], [SelfStorageFileListParams].
+  - Query & path parameter key constants: [StorageNavigationPaths].
+- **UI Component Configurations:**
+  - [StorageFileUploadUiConfig]: Configuration data class for embeddable UI file uploader and dropzone components.
 - **Error Codes & Audit:**
   - [StorageErrorCodes] & [StorageErrorArgs]: Specific codes for file size limits, MIME restrictions, quota limits, presigned URL expiration, and file deletion failures.
   - [StorageAuditActionType] & [StorageAuditResourceType]: Audit action and resource types for administrative storage management and file deletions.
@@ -80,9 +83,12 @@ This module defines pure KMP contracts and route specifications for direct clien
 [OpenStorageNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation.kt
 [ManagementStorageNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation.kt
 [ManagementStorageSettingsNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation.kt
+[StorageFileUploadParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams.kt
 [StorageFileDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams.kt
 [ManagementStorageFileListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams.kt
 [SelfStorageFileListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams.kt
+[StorageNavigationPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/contract/StorageNavigationPaths.kt
+[StorageFileUploadUiConfig]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/ui/component/fileupload/StorageFileUploadUiConfig.kt
 [StorageErrorCodes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorCodes.kt
 [StorageErrorArgs]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorArgs.kt
 [StorageAuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType.kt

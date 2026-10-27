@@ -305,7 +305,7 @@ fun buildToPayloadFields(domainClass: KClass<*>, payloadClass: KClass<*>): Strin
 fun generateDomainModelsAndMappersJs(): String {
     return domainToDtoClasses.joinToString("\n\n") { (domainClass, payloadClass) ->
         val domainName = domainClass.simpleName ?: ""
-        val payloadName = payloadClass.simpleName ?: ""
+        val payloadName = payloadClass?.simpleName ?: ""
 
         if (domainName == "AuditEventSummary") {
             return@joinToString """
@@ -377,8 +377,12 @@ fun generateDomainModelsAndMappersJs(): String {
             """.trimIndent()
         }
 
-        val toDomainFields = buildToDomainFields(domainClass, payloadClass)
-        val toPayloadFields = buildToPayloadFields(domainClass, payloadClass)
+        val toDomainFields = payloadClass?.let { buildToDomainFields(domainClass, it) } ?: ""
+        val toPayloadFields = payloadClass?.let { buildToPayloadFields(domainClass, it) } ?: ""
+
+        if (payloadClass == null) {
+            return@joinToString ""
+        }
 
         """
         export const to$domainName = (payload) => ({
@@ -395,7 +399,7 @@ fun generateDomainModelsAndMappersJs(): String {
 fun generateDomainModelsAndMappersDts(): String {
     return domainToDtoClasses.joinToString("\n\n") { (domainClass, payloadClass) ->
         val domainName = domainClass.simpleName ?: ""
-        val payloadName = payloadClass.simpleName ?: ""
+        val payloadName = payloadClass?.simpleName ?: ""
         val domainDoc = extractKDoc(domainClass)?.let { "$it\n" } ?: ""
 
         val fields = domainClass.primaryConstructor?.parameters?.mapNotNull { param ->
@@ -405,6 +409,15 @@ fun generateDomainModelsAndMappersDts(): String {
             val fieldDoc = extractKDoc(domainClass, paramName)?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
             "${fieldDoc}  readonly $paramName$optionalSign: $tsType;"
         }?.joinToString("\n") ?: ""
+
+        if (payloadClass == null) {
+            return@joinToString """
+            $domainDoc
+            export interface $domainName {
+            $fields
+            }
+            """.trimIndent()
+        }
 
         val toDomainMapperDoc = "/** Converts $payloadName payload DTO to $domainName domain model. */"
         val toPayloadMapperDoc = "/** Converts $domainName domain model to $payloadName payload DTO. */"

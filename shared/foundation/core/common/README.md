@@ -12,6 +12,7 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 - **Domain — Client:** [ClientType] serializable enum, [ClientInfo], and [ClientDeviceInfo] to describe connecting applications.
 - **Domain — Permissions:** [PermissionCode] base type for shared permission constants.
 - **Domain — Listing:** [PagedResult], [ListingParamNames], [SortOrder], and [CommonSortValues] for standardized pagination and sorting contracts.
+- **UI — Static Non-Localized Values:** [UiValues] for static, non-localized UI placeholders, sample values, and formatting constants.
 - **Navigation — Core Contracts:**
     - Base navigation interfaces: [NavigationRoute] (`route: String`, `parentRoute: String?`), [ParameterizedNavigationRoute] (for screen destinations carrying typed parameters), and [RedirectNavigationRoute] (for virtual/alias redirect routes delegating to `targetRoute`).
     - Base navigation routes: [CommonNavigationRoutes] (`BASE_SETTINGS_ROUTE = "/settings"`).
@@ -99,6 +100,7 @@ Use the pre-built `localizationResources` or `SharedFoundationLocalization` from
 [ListingParamNames]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames.kt
 [SortOrder]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder.kt
 [CommonSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues.kt
+[UiValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/ui/UiValues.kt
 [RequiredField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NotBlankStringField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
 [NotEmptyCollectionField]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NetworkFieldAnnotations.kt
