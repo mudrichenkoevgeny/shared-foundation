@@ -30,7 +30,7 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
     data object Main : ManagementSelfStorageNavigation, RedirectNavigationRoute {
 
         override val route: String
-            get() = BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE
+            get() = BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE
 
         override val targetRoute: String
             get() = FileList.ROUTE
@@ -59,7 +59,7 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
             get() = ManagementMainNavigation.Main.route
 
         companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/files"
+            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/files"
         }
     }
 
@@ -113,7 +113,7 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
             get() = FileList.ROUTE
 
         companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
+            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/upload"
         }
     }
 }

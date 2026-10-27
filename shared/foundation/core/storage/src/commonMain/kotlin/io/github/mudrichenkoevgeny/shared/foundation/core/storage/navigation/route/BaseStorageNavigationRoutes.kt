@@ -6,7 +6,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.ro
 object BaseStorageNavigationRoutes {
 
     /**
-     * Base route path for storage screens.
+     * Base route path for open and global storage screens.
      */
     const val BASE_STORAGE_NAVIGATION_ROUTE = "/storage"
+
+    /**
+     * Base route path for staff self-service storage screens.
+     */
+    const val BASE_SELF_STORAGE_NAVIGATION_ROUTE = "/self/storage"
 }

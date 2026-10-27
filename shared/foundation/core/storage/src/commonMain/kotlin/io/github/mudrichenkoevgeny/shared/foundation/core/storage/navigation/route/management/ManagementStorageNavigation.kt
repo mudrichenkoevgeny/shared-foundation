@@ -7,11 +7,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.BaseStorageNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.detail.StorageFileDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.management.ManagementStorageRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.open.OpenStorageRoutes
 import kotlinx.serialization.Serializable
 
 /**
@@ -90,31 +88,6 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
 
             fun getPath(fileId: String): String =
                 ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
-        }
-    }
-
-    /**
-     * Storage file upload utility screen (e.g. for testing uploads directly from the management panel).
-     *
-     * - **Screen Parameters:** [StorageFileUploadParams]
-     * - **Primary API:** None.
-     * - **Secondary Action APIs:**
-     *   - [OpenStorageRoutes.POST_PRESIGNED_UPLOAD_URL]
-     *   - [OpenStorageRoutes.CONFIRM_UPLOAD]
-     */
-    @Serializable
-    data class FileUpload(
-        override val params: StorageFileUploadParams = StorageFileUploadParams()
-    ) : ManagementStorageNavigation, ParameterizedNavigationRoute<StorageFileUploadParams> {
-
-        override val route: String
-            get() = ROUTE
-
-        override val parentRoute: String
-            get() = FileList.ROUTE
-
-        companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/upload"
         }
     }
 }
