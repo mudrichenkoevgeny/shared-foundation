@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.error.model.ApiErrorResponse
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 
 /**
  * State representation of a single item in the client file upload queue.
@@ -11,6 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
  *
  * @property id Unique local identifier for the queue item.
  * @property category Storage category assigned to the file.
+ * @property visibility Storage file access visibility level ([StorageFileVisibility]).
  * @property fileName Original file name including extension.
  * @property fileSizeBytes File size in bytes.
  * @property mimeType MIME type of the file if known.
@@ -22,6 +24,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
 data class UploadQueueItem(
     val id: UploadQueueItemId,
     val category: StorageCategory,
+    val visibility: StorageFileVisibility = StorageFileVisibility.PRIVATE,
     val fileName: String,
     val fileSizeBytes: Long,
     val mimeType: String? = null,

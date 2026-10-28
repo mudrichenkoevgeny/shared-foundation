@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItem
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItemId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItemStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 
 /**
  * Creates a test [UploadQueueItem] instance.
@@ -13,6 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.u
 fun createTestUploadQueueItem(
     id: UploadQueueItemId = UploadQueueItemId.generate(),
     category: StorageCategory = StorageCategory.IMAGE,
+    visibility: StorageFileVisibility = StorageFileVisibility.PRIVATE,
     fileName: String = "avatar.png",
     fileSizeBytes: Long = 1048576L,
     mimeType: String? = "image/png",
@@ -23,6 +25,7 @@ fun createTestUploadQueueItem(
 ) = UploadQueueItem(
     id = id,
     category = category,
+    visibility = visibility,
     fileName = fileName,
     fileSizeBytes = fileSizeBytes,
     mimeType = mimeType,
