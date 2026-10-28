@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
+import kotlin.time.Instant
 
 /**
  * Extension functions mapping summary storage file models between domain and network representations.
@@ -23,7 +24,7 @@ fun StorageFileSummaryPayload.toStorageFileSummary(): StorageFileSummary = Stora
     visibility = StorageFileVisibility.fromValueOrThrow(visibility),
     status = StorageFileStatus.fromValueOrThrow(status),
     fileUrl = fileUrl,
-    createdAt = createdAt
+    createdAt = Instant.fromEpochMilliseconds(createdAt)
 )
 
 /**
@@ -38,5 +39,5 @@ fun StorageFileSummary.toStorageFileSummaryPayload(): StorageFileSummaryPayload 
     visibility = visibility.value,
     status = status.value,
     fileUrl = fileUrl,
-    createdAt = createdAt
+    createdAt = createdAt.toEpochMilliseconds()
 )

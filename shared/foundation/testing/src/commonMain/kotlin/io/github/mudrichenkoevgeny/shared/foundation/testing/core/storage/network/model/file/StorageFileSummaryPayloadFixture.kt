@@ -4,7 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
-import kotlin.time.Instant
 
 /**
  * Creates a test [StorageFileSummaryPayload] wire object instance.
@@ -18,7 +17,7 @@ fun createTestStorageFileSummaryPayload(
     visibility: String = StorageFileVisibility.PUBLIC.value,
     status: String = StorageFileStatus.READY.value,
     fileUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001",
-    createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
+    createdAt: Long = 1700000000000L
 ) = StorageFileSummaryPayload(
     id = id,
     fileName = fileName,

@@ -4,7 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiFields
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.time.Instant
 
 /**
  * Wire summary payload for a storage file record.
@@ -17,7 +16,7 @@ import kotlin.time.Instant
  * @property visibility Access visibility classification wire value.
  * @property status Current file lifecycle status wire value.
  * @property fileUrl Direct CDN URL for public files, or short-lived presigned GET read URL for private files generated on-the-fly by the server.
- * @property createdAt Creation timestamp in ISO-8601 format.
+ * @property createdAt Timestamp when record was created in Unix epoch milliseconds.
  */
 @Serializable
 data class StorageFileSummaryPayload(
@@ -46,5 +45,5 @@ data class StorageFileSummaryPayload(
     val fileUrl: String,
 
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Instant
+    val createdAt: Long
 )
