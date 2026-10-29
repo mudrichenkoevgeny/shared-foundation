@@ -3,9 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.locali
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.localization.LocalizedStringResolver
 
 /**
- * Predictable fake implementation of [LocalizedStringResolver] for testing.
+ * Predictable mock implementation of [LocalizedStringResolver] for testing.
  */
-class FakeLocalizedStringResolver(
+class LocalizedStringResolverMock(
     private val prefix: String = "[Test]",
     private val nullKey: String? = null
 ) : LocalizedStringResolver {

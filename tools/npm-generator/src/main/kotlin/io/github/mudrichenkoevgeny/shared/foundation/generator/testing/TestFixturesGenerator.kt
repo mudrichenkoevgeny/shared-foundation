@@ -233,7 +233,7 @@ fun generateTestFixturesJs(): String {
       };
     };
 
-    export class FakeLocalizedStringResolver {
+    export class LocalizedStringResolverMock {
       constructor(prefix = '[Test]', nullKey = null) {
         this.prefix = prefix;
         this.nullKey = nullKey;
@@ -245,7 +245,7 @@ fun generateTestFixturesJs(): String {
       }
     }
 
-    export class FakeLocalizationBundleProvider {
+    export class LocalizationBundleProviderMock {
       constructor(bundles = {}) {
         this.bundles = bundles;
       }
@@ -256,7 +256,7 @@ fun generateTestFixturesJs(): String {
       }
     }
 
-    export class FakePasswordPolicyValidator {
+    export class PasswordPolicyValidatorMock {
       constructor(failReasons = []) {
         this.failReasons = failReasons;
       }
@@ -444,20 +444,20 @@ fun generateTestFixturesDts(): String {
       readonly TEST_TIME_MILLIS: number;
     };
 
-    /** Fake LocalizedStringResolver implementation for testing UI strings. */
-    export class FakeLocalizedStringResolver implements LocalizedStringResolver {
+    /** LocalizedStringResolver mock implementation for testing UI strings. */
+    export class LocalizedStringResolverMock implements LocalizedStringResolver {
       constructor(prefix?: string, nullKey?: string | null);
       resolve(modulePath: string, bundleName: string, key: string, locale?: string): string | undefined;
     }
 
-    /** Fake LocalizationBundleProvider implementation for testing localized bundles. */
-    export class FakeLocalizationBundleProvider {
+    /** LocalizationBundleProvider mock implementation for testing localized bundles. */
+    export class LocalizationBundleProviderMock {
       constructor(bundles?: Record<string, Record<string, string>>);
       get(modulePath: string, bundleName: string, locale: string): Record<string, string> | undefined;
     }
 
-    /** Fake PasswordPolicyValidator implementation for unit testing password validation flows. */
-    export class FakePasswordPolicyValidator {
+    /** PasswordPolicyValidator mock implementation for unit testing password validation flows. */
+    export class PasswordPolicyValidatorMock {
       failReasons: string[];
       constructor(failReasons?: string[]);
       validate(passwordPolicy: unknown, password: string): { isSuccess: boolean; reasons: string[] };

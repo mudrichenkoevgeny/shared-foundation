@@ -3,12 +3,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.locali
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.localization.LocalizationBundleProvider
 
 /**
- * In-memory fake implementation of [LocalizationBundleProvider] for testing.
+ * In-memory mock implementation of [LocalizationBundleProvider] for testing.
  *
  * @param bundles Map where the key is formatted as "$module/$file/$locale"
  *                and the value is the key-value map of translations.
  */
-class FakeLocalizationBundleProvider(
+class LocalizationBundleProviderMock(
     private val bundles: Map<String, Map<String, String>> = emptyMap()
 ) : LocalizationBundleProvider {
 

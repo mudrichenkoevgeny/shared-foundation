@@ -8,7 +8,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
-class FakePasswordPolicyValidatorTest {
+class PasswordPolicyValidatorMockTest {
 
     private val managementPolicy = ManagementPasswordPolicy(
         minLength = 8,
@@ -31,7 +31,7 @@ class FakePasswordPolicyValidatorTest {
 
     @Test
     fun returnsSuccessByDefaultWhenNoFailReasonsConfigured() {
-        val validator = FakePasswordPolicyValidator()
+        val validator = PasswordPolicyValidatorMock()
 
         val managementResult = validator.validate(managementPolicy, "any_password")
         val openResult = validator.validate(openPolicy, "any_password")
@@ -43,7 +43,7 @@ class FakePasswordPolicyValidatorTest {
     @Test
     fun returnsFailWithProvidedReasonsWhenConfigured() {
         val expectedReasons = listOf(PasswordPolicyFailReason.TOO_SHORT, PasswordPolicyFailReason.NO_DIGIT)
-        val validator = FakePasswordPolicyValidator(failReasons = expectedReasons)
+        val validator = PasswordPolicyValidatorMock(failReasons = expectedReasons)
 
         val result = validator.validate(managementPolicy, "pass")
 

@@ -4,11 +4,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-class FakeLocalizedStringResolverTest {
+class LocalizedStringResolverMockTest {
 
     @Test
     fun resolvesFormattedStringWithPrefix() {
-        val resolver = FakeLocalizedStringResolver(prefix = "[Mock]")
+        val resolver = LocalizedStringResolverMock(prefix = "[Mock]")
 
         val result = resolver.resolve(
             module = "core/common",
@@ -23,7 +23,7 @@ class FakeLocalizedStringResolverTest {
     @Test
     fun returnsNullWhenKeyMatchesConfiguredNullKey() {
         val nullKey = "missing_key"
-        val resolver = FakeLocalizedStringResolver(nullKey = nullKey)
+        val resolver = LocalizedStringResolverMock(nullKey = nullKey)
 
         val result = resolver.resolve(
             module = "core/common",

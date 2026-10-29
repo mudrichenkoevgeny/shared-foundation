@@ -1,6 +1,6 @@
 # shared-foundation-testing
 
-Comprehensive testing infrastructure, mock factories, test fixtures, deterministic constants, screen parameter builders, and in-memory fakes for `shared-foundation`.
+Comprehensive testing infrastructure, mock factories, test fixtures, deterministic constants, screen parameter builders, and in-memory mocks for `shared-foundation`.
 
 `shared-foundation-testing` allows consumer applications and SDKs to write clean unit tests, integration tests, and UI preview harnesses using standardized test fixtures instead of writing custom mocks.
 
@@ -20,10 +20,10 @@ Comprehensive testing infrastructure, mock factories, test fixtures, determinist
    Generates lists of domain models and network payloads with 0-based deterministic IDs (`usr_1`, `usr_2`...), alternating enum properties, and mathematical time shifts (`TEST_TIME_MILLIS + (index * 60_000)`).
 6. **Auto-Calculated `createTestPagedResult`:**
    Creates `PagedResult<T>` wrappers with auto-computed `totalCount`, `pageSize`, and `totalPages` (returning `0` totalPages when `totalCount == 0`).
-7. **In-Memory Fakes:**
-   - **`FakeLocalizedStringResolver`** — Predictable localized string resolution.
-   - **`FakeLocalizationBundleProvider`** — In-memory bundle provider for testing localization fallbacks.
-   - **`FakePasswordPolicyValidator`** — Configurable password policy validator.
+7. **In-Memory Mocks:**
+   - **`LocalizedStringResolverMock`** — Predictable localized string resolution.
+   - **`LocalizationBundleProviderMock`** — In-memory bundle provider for testing localization fallbacks.
+   - **`PasswordPolicyValidatorMock`** — Configurable password policy validator.
 
 ---
 
@@ -135,16 +135,16 @@ val params = createTestLoginByEmailParams(
 )
 ```
 
-### 4. Using Fakes
+### 4. Using Mocks
 
 ```kotlin
-import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator.FakePasswordPolicyValidator
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator.PasswordPolicyValidatorMock
 
-// Pass a fake validator that succeeds by default
-val validator = FakePasswordPolicyValidator()
+// Pass a mock validator that succeeds by default
+val validator = PasswordPolicyValidatorMock()
 
 // Or configure it to return specific failure reasons
-val failingValidator = FakePasswordPolicyValidator(
+val failingValidator = PasswordPolicyValidatorMock(
     failReasons = listOf(PasswordPolicyFailReason.TOO_SHORT)
 )
 ```
@@ -164,10 +164,10 @@ io.github.mudrichenkoevgeny.shared.foundation.testing
 │   ├── common
 │   │   ├── domain.model.client (ClientInfoFixture, ClientDeviceIdFixture, ...)
 │   │   ├── error.model (ApiErrorResponseFixture)
-│   │   └── localization (FakeLocalizedStringResolver, FakeLocalizationBundleProvider)
+│   │   └── localization (LocalizedStringResolverMock, LocalizationBundleProviderMock)
 │   └── security
 │       ├── domain.model.passwordpolicy (ManagementPasswordPolicyFixture, ...)
-│       └── passwordpolicy.validator (FakePasswordPolicyValidator)
+│       └── passwordpolicy.validator (PasswordPolicyValidatorMock)
 └── feature
     └── user
         ├── domain.model.user (UserPrivateFixture, UserIdFixture, ...)

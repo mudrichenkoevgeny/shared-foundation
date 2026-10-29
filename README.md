@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.98"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.0.99"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -51,13 +51,13 @@ Published artifacts (versions aligned via the BOM):
 - **core-storage** — Direct-to-S3 presigned upload contracts, FileId, StorageCategory, StorageFileStatus, StorageFileVisibility, entity projections, storage settings, HTTP routes, permission codes, mappers, and storage navigation (`OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`) ([module README](shared/foundation/core/storage/README.md)).
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
-- **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory fakes for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).
+- **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).
 - **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
-## Testing Fixtures & Fakes
+## Testing Fixtures & Mocks
 
-The library provides ready-to-use test data builders (`createTest*`), deterministic constants, value class factories, screen parameter fixtures, and in-memory fakes.
+The library provides ready-to-use test data builders (`createTest*`), deterministic constants, value class factories, screen parameter fixtures, and in-memory mocks.
 
 You can include `:shared:foundation:testing` in your `testImplementation` / `commonTest.dependencies` (or import from `@mudrichenkoevgeny/shared-foundation` in npm) to use these pre-built fixtures in unit and integration tests instead of writing custom mocks.
 
@@ -67,7 +67,7 @@ You can include `:shared:foundation:testing` in your `testImplementation` / `com
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, navigation, and localization architecture.
 - **[core/common README](shared/foundation/core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
-- **[testing README](shared/foundation/testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and fakes.
+- **[testing README](shared/foundation/testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and mocks.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Build instructions, dependency health checks (`./gradlew projectHealth`), and Maven Central publishing guidelines.
 - **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and constraints for contributors and AI coding assistants.
 

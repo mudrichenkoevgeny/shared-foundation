@@ -25,7 +25,7 @@ This document defines the testing methodology for the `shared-foundation` projec
 - **`commonTest` Priority:** Since this library compiles to multiple target platforms (JVM, Android, iOS, Wasm), the majority of logic (serialization, validation, mappers) must be tested in `commonTest`.
 - **Assertions:** Use `kotlin.test` (e.g., `assertEquals`, `assertTrue`) for all common code to ensure compatibility across JVM, iOS, and Wasm targets.
 - **Mocking:**
-    - In `commonTest`: Prefer manual **Fakes** or **Stubs**.
+    - In `commonTest`: Prefer manual **Mocks** (e.g., `PasswordPolicyValidatorMock`, `LocalizedStringResolverMock`) or **Stubs**.
     - In `jvmTest` / `androidMain`: **MockK** is permitted.
     - Avoid adding heavy mocking frameworks to common code unless they are fully compatible across all compilation targets.
 

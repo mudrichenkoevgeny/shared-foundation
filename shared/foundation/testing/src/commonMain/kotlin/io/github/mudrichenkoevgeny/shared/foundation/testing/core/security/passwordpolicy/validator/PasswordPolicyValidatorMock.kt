@@ -8,11 +8,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.validator.PasswordPolicyValidator
 
 /**
- * Configurable fake implementation of [PasswordPolicyValidator] for testing.
+ * Configurable mock implementation of [PasswordPolicyValidator] for testing.
  *
  * @param failReasons List of fail reasons to return when validation fails.
  */
-class FakePasswordPolicyValidator(
+class PasswordPolicyValidatorMock(
     var failReasons: List<PasswordPolicyFailReason> = emptyList()
 ) : PasswordPolicyValidator {
 
