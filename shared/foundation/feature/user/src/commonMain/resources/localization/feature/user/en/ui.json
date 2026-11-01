@@ -255,5 +255,20 @@
   "user_storage_quota_optional": "Storage Quota Bytes (optional)",
   "user_max_upload_size_optional": "Max Upload Size Bytes (optional)",
   "user_max_pending_uploads_optional": "Max Pending Uploads (optional)",
-  "default_null_placeholder": "Default (system)"
+  "default_null_placeholder": "Default (system)",
+  "edit_profile_title": "Edit Profile",
+  "save_profile": "Save Changes",
+  "profile_updated_success": "Profile updated successfully",
+  "personal_information": "Personal Information",
+  "birthdate": "Birthdate",
+  "enter_birthdate": "Select birthdate",
+  "avatar": "Avatar",
+  "upload_avatar": "Upload Avatar",
+  "remove_avatar": "Remove Avatar",
+  "avatar_uploading": "Uploading avatar...",
+  "user_nickname_min_length": "User nickname minimum length",
+  "user_nickname_max_length": "User nickname maximum length",
+  "user_display_name_min_length": "User display name minimum length",
+  "user_display_name_max_length": "User display name maximum length",
+  "is_user_nickname_change_allowed": "Allow users to change nickname"
 }

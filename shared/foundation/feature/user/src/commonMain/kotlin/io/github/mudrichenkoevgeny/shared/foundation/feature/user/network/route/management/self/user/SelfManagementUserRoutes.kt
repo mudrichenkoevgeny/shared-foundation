@@ -65,7 +65,7 @@ object SelfManagementUserRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ManagementSelfUserNavigation.Main]
+     *   - [ManagementSelfUserNavigation.UserEdit]
      */
     const val UPDATE_USER = BASE_SELF_MANAGEMENT_USER_ROUTE
 }

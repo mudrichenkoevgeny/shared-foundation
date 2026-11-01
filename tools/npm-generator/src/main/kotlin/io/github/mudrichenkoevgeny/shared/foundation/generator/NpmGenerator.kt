@@ -158,6 +158,7 @@ fun main() {
 
         - **`ClientUserNavigation`** (Client Self-Service):
           - `Main` (`/user`) — None
+          - `UserEdit` (`/user/edit`) — None
           - `IdentifierList` (`/user/identifiers`) — `selfIdentifierListParamsSchema`
           - `IdentifierDetail` (`/user/identifiers/{user_identifier_id}`) — `identifierDetailParamsSchema`
           - `SessionList` (`/user/sessions`) — `selfSessionListParamsSchema`
@@ -181,6 +182,7 @@ fun main() {
 
         - **`ManagementSelfUserNavigation`** (Staff Self-Service):
           - `Main` (`/self/user`) — None
+          - `UserEdit` (`/self/user/edit`) — None
           - `IdentifierList` (`/self/user/identifiers`) — `selfIdentifierListParamsSchema`
           - `IdentifierDetail` (`/self/user/identifiers/{user_identifier_id}`) — `identifierDetailParamsSchema`
           - `SessionList` (`/self/user/sessions`) — `selfSessionListParamsSchema`
@@ -650,6 +652,15 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
     export declare const displayNameValidator: {
       validate(displayName?: string | null, minLength?: number, maxLength?: number): string | null;
     };
+
+    export interface UserDisplayNameInput {
+      readonly id: string;
+      readonly nickname?: string | null;
+      readonly displayName?: string | null;
+      readonly display_name?: string | null;
+    }
+
+    export function resolveUserDisplayName(user: UserDisplayNameInput, fallbackPrefix: string): string;
 
     ${generateDomainModelsAndMappersDts()}
 

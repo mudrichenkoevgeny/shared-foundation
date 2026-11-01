@@ -255,5 +255,20 @@
   "user_storage_quota_optional": "Квота хранилища в байтах (необязательно)",
   "user_max_upload_size_optional": "Макс. размер файла в байтах (необязательно)",
   "user_max_pending_uploads_optional": "Макс. незавершенных загрузок (необязательно)",
-  "default_null_placeholder": "По умолчанию (системное)"
+  "default_null_placeholder": "По умолчанию (системное)",
+  "edit_profile_title": "Редактирование профиля",
+  "save_profile": "Сохранить изменения",
+  "profile_updated_success": "Профиль успешно обновлен",
+  "personal_information": "Личная информация",
+  "birthdate": "Дата рождения",
+  "enter_birthdate": "Выберите дату рождения",
+  "avatar": "Аватар",
+  "upload_avatar": "Загрузить аватар",
+  "remove_avatar": "Удалить аватар",
+  "avatar_uploading": "Загрузка аватара...",
+  "user_nickname_min_length": "Минимальная длина ника",
+  "user_nickname_max_length": "Максимальная длина ника",
+  "user_display_name_min_length": "Минимальная длина имени",
+  "user_display_name_max_length": "Максимальная длина имени",
+  "is_user_nickname_change_allowed": "Разрешить смену ника"
 }

@@ -20,11 +20,11 @@ import kotlin.time.Instant
  * @property expiresAt Session expiration timestamp.
  */
 data class UserSessionSummary(
-    override val id: UserSessionId = UserSessionId.generate(),
-    override val userId: UserId,
-    override val clientDeviceInfo: ClientDeviceInfo,
+    val id: UserSessionId = UserSessionId.generate(),
+    val userId: UserId,
+    val clientDeviceInfo: ClientDeviceInfo,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val lastAccessedAt: Instant,
-    override val expiresAt: Instant
-) : UserSession
+    val expiresAt: Instant
+)

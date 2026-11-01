@@ -422,6 +422,20 @@ fun generateEnumsJs(): String {
         return null;
       }
     };
+
+    export function resolveUserDisplayName(user, fallbackPrefix) {
+      if (!user) return fallbackPrefix;
+      const displayName = user.displayName || user.display_name;
+      if (displayName && String(displayName).trim().length > 0) {
+        return String(displayName).trim();
+      }
+      if (user.nickname && String(user.nickname).trim().length > 0) {
+        return '@' + String(user.nickname).trim();
+      }
+      const rawId = String(user.id || '');
+      const shortId = rawId.substring(0, 8);
+      return (fallbackPrefix + ' ' + shortId).trim();
+    }
     """.trimIndent()
 
     return (enumJsBlocks + listOf(extraJs)).joinToString("\n\n")

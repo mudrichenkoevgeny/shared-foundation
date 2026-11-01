@@ -46,6 +46,22 @@ sealed interface ClientUserNavigation : NavigationRoute {
     }
 
     /**
+     * Navigation screen for editing the current user's details.
+     *
+     * - **Screen Parameters:** None.
+     * - **Primary API:** [OpenUserRoutes.UPDATE_USER]
+     */
+    @Serializable
+    data object UserEdit : ClientUserNavigation {
+
+        override val route: String
+            get() = "$BASE_USER_ROUTE/edit"
+
+        override val parentRoute: String
+            get() = Main.route
+    }
+
+    /**
      * Navigation screen for displaying a paged list of [UserIdentifierSummary].
      *
      * - **Screen Parameters:** [SelfIdentifierListParams]

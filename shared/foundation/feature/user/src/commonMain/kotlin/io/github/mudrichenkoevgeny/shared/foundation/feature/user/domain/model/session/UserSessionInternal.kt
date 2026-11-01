@@ -32,20 +32,20 @@ import kotlin.time.Instant
  * @property updatedAt Last database row update timestamp, or `null`.
  */
 data class UserSessionInternal(
-    override val id: UserSessionId = UserSessionId.generate(),
-    override val userId: UserId,
+    val id: UserSessionId = UserSessionId.generate(),
+    val userId: UserId,
     val userRole: UserRole,
     val identifier: String,
     val identifierId: UserIdentifierId,
     val identifierDisplayName: String,
     val identifierAuthProvider: UserAuthProvider,
     val refreshTokenHash: RefreshTokenHash,
-    override val clientDeviceInfo: ClientDeviceInfo,
+    val clientDeviceInfo: ClientDeviceInfo,
     val userAgent: String?,
     val ipAddress: String?,
-    override val expiresAt: Instant,
+    val expiresAt: Instant,
     val lastAccessedAt: Instant,
     val lastReauthenticatedAt: Instant,
     val createdAt: Instant,
     val updatedAt: Instant?
-) : UserSession
+)

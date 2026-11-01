@@ -45,6 +45,22 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
     }
 
     /**
+     * Navigation screen for editing the staff user's own account details.
+     *
+     * - **Screen Parameters:** None.
+     * - **Primary API:** [SelfManagementUserRoutes.UPDATE_USER]
+     */
+    @Serializable
+    data object UserEdit : ManagementSelfUserNavigation {
+
+        override val route: String
+            get() = "$BASE_USER_ROUTE/edit"
+
+        override val parentRoute: String
+            get() = Main.route
+    }
+
+    /**
      * Navigation screen for displaying a paged list of [UserIdentifierSummary].
      *
      * - **Screen Parameters:** [SelfIdentifierListParams]

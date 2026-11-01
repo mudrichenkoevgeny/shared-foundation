@@ -129,7 +129,7 @@ object OpenUserRoutes {
      *
      * **UI Presentation:**
      * - Screens:
-     *   - [ClientUserNavigation.Main]
+     *   - [ClientUserNavigation.UserEdit]
      */
     const val UPDATE_USER = BASE_USER_ROUTE
 }

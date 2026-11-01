@@ -81,5 +81,13 @@
   "reset": "Reset",
   "sort_by": "Sort By",
   "filters": "Filters",
-  "default_null_placeholder": "Default (system)"
+  "default_null_placeholder": "Default (system)",
+  "is_set": "Is set",
+  "is_not_set": "Is not set",
+  "include": "Include",
+  "exclude": "Exclude",
+  "filter_mode_include": "Include selected",
+  "filter_mode_exclude": "Exclude selected",
+  "from": "From",
+  "to": "To"
 }

@@ -105,6 +105,7 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 | Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
 | `Main` | `/user` | None |
+| `UserEdit` | `/user/edit` | None |
 | `IdentifierList` | `/user/identifiers` | [SelfIdentifierListParams] |
 | `IdentifierDetail` | `/user/identifiers/{user_identifier_id}` | [IdentifierDetailParams] |
 | `SessionList` | `/user/sessions` | [SelfSessionListParams] |
@@ -134,6 +135,7 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 | Screen Object | Route Path | Screen Parameters (`Params`) |
 | :--- | :--- | :--- |
 | `Main` | `/self/user` | None |
+| `UserEdit` | `/self/user/edit` | None |
 | `IdentifierList` | `/self/user/identifiers` | [SelfIdentifierListParams] |
 | `IdentifierDetail` | `/self/user/identifiers/{user_identifier_id}` | [IdentifierDetailParams] |
 | `SessionList` | `/self/user/sessions` | [SelfSessionListParams] |
@@ -277,9 +279,6 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [UserFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserFilterValues.kt
 [UserIdentifierFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierFilterValues.kt
 [UserSessionFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionFilterValues.kt
-[UserSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortBy.kt
-[UserIdentifierSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierSortBy.kt
-[UserSessionSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionSortBy.kt
 [UserSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortBy.kt
 [UserIdentifierSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierSortBy.kt
 [UserSessionSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionSortBy.kt
