@@ -10,8 +10,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 
 /**
  * Converts a [UserInternal] into a client-facing [UserPrivate].
+ *
+ * @param avatarUrl Optional dynamically generated CDN or presigned GET avatar image URL.
  */
-fun UserInternal.toUserPrivate(): UserPrivate = UserPrivate(
+fun UserInternal.toUserPrivate(avatarUrl: String? = null): UserPrivate = UserPrivate(
     id = id,
     role = role,
     accountStatus = accountStatus,
@@ -26,27 +28,40 @@ fun UserInternal.toUserPrivate(): UserPrivate = UserPrivate(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    avatarUrl = avatarUrl,
+    birthdate = birthdate
 )
 
 /**
  * Converts a [UserPrivate] into a public [UserSummary].
  *
- * Retains only core public identifiers (`id`, `role`, `accountStatus`).
+ * Retains core public identifiers (`id`, `role`, `accountStatus`, `nickname`, `displayName`, `avatarUrl`).
  */
 fun UserPrivate.toUserSummary(): UserSummary = UserSummary(
     id = id,
     role = role,
-    accountStatus = accountStatus
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )
 
 /**
  * Converts a [UserInternal] directly into a public [UserSummary].
  *
  * Maps fields directly without allocating an intermediate [UserPrivate] instance.
+ *
+ * @param avatarUrl Optional dynamically generated CDN or presigned GET avatar image URL.
  */
-fun UserInternal.toUserSummary(): UserSummary = UserSummary(
+fun UserInternal.toUserSummary(avatarUrl: String? = null): UserSummary = UserSummary(
     id = id,
     role = role,
-    accountStatus = accountStatus
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )

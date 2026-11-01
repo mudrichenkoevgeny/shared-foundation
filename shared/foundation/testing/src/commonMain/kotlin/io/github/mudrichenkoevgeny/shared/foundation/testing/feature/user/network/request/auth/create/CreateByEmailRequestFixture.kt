@@ -16,6 +16,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
  * @param authorityLevel Hierarchical authority level (0-100).
  * @param permissionCodes Assigned permission code wire strings.
  * @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
+ * @param nickname User nickname handle string.
+ * @param displayName User display name string.
+ * @param avatarFileId Avatar file identifier string.
  */
 fun createTestCreateByEmailRequest(
     email: String = TEST_EMAIL,
@@ -24,7 +27,10 @@ fun createTestCreateByEmailRequest(
     status: String = UserAccountStatus.ACTIVE.value,
     authorityLevel: Int = 10,
     permissionCodes: Set<String> = emptySet(),
-    storageConfiguration: UserStorageConfigurationPayload? = null
+    storageConfiguration: UserStorageConfigurationPayload? = null,
+    nickname: String? = "newuser",
+    displayName: String? = "New User",
+    avatarFileId: String? = null
 ) = CreateByEmailRequest(
     email = email,
     password = password,
@@ -32,5 +38,8 @@ fun createTestCreateByEmailRequest(
     status = status,
     authorityLevel = authorityLevel,
     permissionCodes = permissionCodes,
-    storageConfiguration = storageConfiguration
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId
 )

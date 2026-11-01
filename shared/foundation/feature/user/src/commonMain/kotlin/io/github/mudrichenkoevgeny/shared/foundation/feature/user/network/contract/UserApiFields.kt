@@ -132,8 +132,35 @@ object UserApiFields {
     /** JSON field name for the credential record id tied to a session row. */
     const val IDENTIFIER_ID = "identifier_id"
 
-    /** JSON field name for the display name of an identifier. */
+    /** JSON field name for the user's unique nickname or handle. */
+    const val NICKNAME = "nickname"
+
+    /** JSON field name for the display name of an identifier or user profile. */
     const val DISPLAY_NAME = "display_name"
+
+    /** JSON field name for the avatar file identifier in core/storage. */
+    const val AVATAR_FILE_ID = "avatar_file_id"
+
+    /** JSON field name for the direct CDN or presigned GET avatar image URL. */
+    const val AVATAR_URL = "avatar_url"
+
+    /** JSON field name for user birthdate in Unix epoch milliseconds. */
+    const val BIRTHDATE = "birthdate"
+
+    /** JSON field name for minimum allowed user nickname character length. */
+    const val USER_NICKNAME_MIN_LENGTH = "user_nickname_min_length"
+
+    /** JSON field name for maximum allowed user nickname character length. */
+    const val USER_NICKNAME_MAX_LENGTH = "user_nickname_max_length"
+
+    /** JSON field name for minimum allowed user display name character length. */
+    const val USER_DISPLAY_NAME_MIN_LENGTH = "user_display_name_min_length"
+
+    /** JSON field name for maximum allowed user display name character length. */
+    const val USER_DISPLAY_NAME_MAX_LENGTH = "user_display_name_max_length"
+
+    /** JSON field name for the flag indicating whether users are permitted to change their nickname. */
+    const val IS_USER_NICKNAME_CHANGE_ALLOWED = "is_user_nickname_change_allowed"
 
     /** JSON field name for the display name of the identifier associated with a session. */
     const val IDENTIFIER_DISPLAY_NAME = "identifier_display_name"

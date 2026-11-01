@@ -39,6 +39,8 @@ enum class SettingsAuditActionType(override val value: String) : AuditActionType
          * @throws IllegalArgumentException if [value] does not match any [SettingsAuditActionType].
          */
         fun fromValueOrThrow(value: String): SettingsAuditActionType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SettingsAuditActionType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${SettingsAuditActionType::class.simpleName}: '$value'"
+            )
     }
 }

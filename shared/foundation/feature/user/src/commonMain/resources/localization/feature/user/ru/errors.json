@@ -29,5 +29,17 @@
   "external_auth_cancelled": "Авторизация была отменена.",
   "external_auth_failed": "Ошибка внешней авторизации.",
   "too_many_confirmation_requests": "Слишком много запросов подтверждения. Пожалуйста, попробуйте позже.",
-  "role_too_high": "Вы не можете создать пользователя с ролью выше вашей собственной."
+  "role_too_high": "Вы не можете создать пользователя с ролью выше вашей собственной.",
+  "nickname_already_taken": "Этот никнейм уже занят другим пользователем.",
+  "nickname_change_disabled": "Смена никнейма отключена.",
+  "nickname_too_short_without_args": "Никнейм слишком короткий.",
+  "nickname_too_short_with_args": "Никнейм слишком короткий. Минимальная длина — {minLength} симв.",
+  "nickname_too_long_without_args": "Никнейм слишком длинный.",
+  "nickname_too_long_with_args": "Никнейм слишком длинный. Максимальная длина — {maxLength} симв.",
+  "invalid_nickname_characters": "Никнейм содержит недопустимые символы. Разрешены только буквы, цифры, подчёркивания и точки.",
+  "display_name_too_short_without_args": "Отображаемое имя слишком короткое.",
+  "display_name_too_short_with_args": "Отображаемое имя слишком короткое. Минимальная длина — {minLength} симв.",
+  "display_name_too_long_without_args": "Отображаемое имя слишком длинное.",
+  "display_name_too_long_with_args": "Отображаемое имя слишком длинное. Максимальная длина — {maxLength} симв.",
+  "invalid_display_name_characters": "Отображаемое имя содержит недопустимые управляющие символы или переносы строк."
 }

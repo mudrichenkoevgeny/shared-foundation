@@ -26,7 +26,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param metadata Additional metadata payloads.
  * @param message Human-readable message string.
  * @param createdAt Event epoch-millisecond timestamp.
- * @param updatedAt Modification epoch-millisecond timestamp.
  */
 fun createTestAuditEventPrivatePayload(
     id: String = TEST_AUDIT_EVENT_ID,
@@ -39,8 +38,7 @@ fun createTestAuditEventPrivatePayload(
     status: String = AuditStatus.SUCCESS.value,
     metadata: List<AuditEventMetadataPayload> = listOf(createTestAuditEventMetadataPayload()),
     message: String? = "User logged in successfully",
-    createdAt: Long = TEST_TIME_MILLIS,
-    updatedAt: Long? = null
+    createdAt: Long = TEST_TIME_MILLIS
 ) = AuditEventPrivatePayload(
     id = id,
     actorId = actorId,
@@ -52,8 +50,7 @@ fun createTestAuditEventPrivatePayload(
     status = status,
     metadata = metadata,
     message = message,
-    createdAt = createdAt,
-    updatedAt = updatedAt
+    createdAt = createdAt
 )
 
 /**

@@ -34,7 +34,9 @@ enum class SelfIdentifierListAction(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any action.
          */
-        fun fromValueOrThrow(value: String): SelfIdentifierListAction = fromValueOrNull(value)
-            ?: throw IllegalArgumentException("Unknown value for SelfIdentifierListAction: '$value'")
+        fun fromValueOrThrow(value: String): SelfIdentifierListAction =
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${SelfIdentifierListAction::class.simpleName}: '$value'"
+            )
     }
 }

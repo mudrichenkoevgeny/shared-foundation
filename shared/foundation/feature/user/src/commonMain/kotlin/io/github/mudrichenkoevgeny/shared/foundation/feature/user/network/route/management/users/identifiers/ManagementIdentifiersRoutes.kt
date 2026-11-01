@@ -14,8 +14,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.m
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.IdentifierPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
@@ -44,17 +45,40 @@ object ManagementIdentifiersRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserIdentifierSortBy.CREATED_AT],
-     *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of:
+     *   - [UserIdentifierSortBy.CREATED_AT]
+     *   - [UserIdentifierSortBy.UPDATED_AT]
+     *   - [UserIdentifierSortBy.IDENTIFIER]
+     *   - [UserIdentifierSortBy.DISPLAY_NAME]
+     * - [ListingParamNames.Sort.SORT_ORDER] — exactly one of:
+     *   - [CommonApiFields.SortOrder.ASC]
+     *   - [CommonApiFields.SortOrder.DESC]
      *
-     * - **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
-     *   Multi-value filters use repeated query keys with **OR** semantics
-     *   (e.g., `?user_id=1&user_id=2`); different keys combine as **AND**.
-     *   - [UserFilterValues.UserIdentifierFilterValues.USER_ID] — filter by user ID.
-     *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
-     *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
+     * - **Filters** ([UserIdentifierFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics; different keys combine as **AND**.
+     *   - **Multi-value Include Filters** (repeated query keys, **OR** semantics):
+     *     - [UserIdentifierFilterValues.IDENTIFIER_ID] — filter by one or more specific identifier IDs.
+     *     - [UserIdentifierFilterValues.USER_ID] — filter by one or more owning user IDs.
+     *     - [UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by one or more [UserAuthProvider] serial names.
+     *   - **Multi-value Exclude Filters** (repeated query keys, **NOT IN** semantics):
+     *     - [UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER] — exclude specific [UserAuthProvider] serial names.
+     *   - **Exact Filters**:
+     *     - [UserIdentifierFilterValues.IDENTIFIER] — filter by exact raw or masked login identifier string.
+     *     - [UserIdentifierFilterValues.DISPLAY_NAME] — filter by exact display name.
+     *     - [UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL] — filter by exact external provider email.
+     *   - **Presence Filters**:
+     *     - [UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET] — filter by external provider email presence.
+     *     - [UserIdentifierFilterValues.IS_UPDATED_AT_SET] — filter by whether record has been updated.
+     *   - **Range Bounds** (inclusive bounds):
+     *     - [UserIdentifierFilterValues.CREATED_AT_FROM] — inclusive lower bound creation timestamp.
+     *     - [UserIdentifierFilterValues.CREATED_AT_TO] — inclusive upper bound creation timestamp.
+     *     - [UserIdentifierFilterValues.UPDATED_AT_FROM] — inclusive lower bound update timestamp.
+     *     - [UserIdentifierFilterValues.UPDATED_AT_TO] — inclusive upper bound update timestamp.
+     *   - **Free-text Search**:
+     *     - [UserIdentifierFilterValues.SEARCH_QUERY] — free-text search query string targeting:
+     *       - Raw or masked login identifier ([UserIdentifierPrivate.identifier]).
+     *       - Display name ([UserIdentifierPrivate.displayName]).
+     *       - External provider email ([UserIdentifierPrivate.externalProviderEmail]).
      *
      * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].
@@ -86,16 +110,39 @@ object ManagementIdentifiersRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserIdentifierSortBy.CREATED_AT],
-     *   [UserSortValues.UserIdentifierSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of:
+     *   - [UserIdentifierSortBy.CREATED_AT]
+     *   - [UserIdentifierSortBy.UPDATED_AT]
+     *   - [UserIdentifierSortBy.IDENTIFIER]
+     *   - [UserIdentifierSortBy.DISPLAY_NAME]
+     * - [ListingParamNames.Sort.SORT_ORDER] — exactly one of:
+     *   - [CommonApiFields.SortOrder.ASC]
+     *   - [CommonApiFields.SortOrder.DESC]
      *
-     * - **Filters** ([UserFilterValues.UserIdentifierFilterValues]): all filters are optional.
-     *   Multi-value filters use repeated query keys with **OR** semantics
-     *   (e.g., `?user_auth_provider=EMAIL&user_auth_provider=PHONE`); different keys combine as **AND**.
-     *   - [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name.
-     *   - [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
+     * - **Filters** ([UserIdentifierFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics; different keys combine as **AND**.
+     *   - **Multi-value Include Filters** (repeated query keys, **OR** semantics):
+     *     - [UserIdentifierFilterValues.IDENTIFIER_ID] — filter by one or more specific identifier IDs.
+     *     - [UserIdentifierFilterValues.USER_AUTH_PROVIDER] — filter by one or more [UserAuthProvider] serial names.
+     *   - **Multi-value Exclude Filters** (repeated query keys, **NOT IN** semantics):
+     *     - [UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER] — exclude specific [UserAuthProvider] serial names.
+     *   - **Exact Filters**:
+     *     - [UserIdentifierFilterValues.IDENTIFIER] — filter by exact raw or masked login identifier string.
+     *     - [UserIdentifierFilterValues.DISPLAY_NAME] — filter by exact display name.
+     *     - [UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL] — filter by exact external provider email.
+     *   - **Presence Filters**:
+     *     - [UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET] — filter by external provider email presence.
+     *     - [UserIdentifierFilterValues.IS_UPDATED_AT_SET] — filter by whether record has been updated.
+     *   - **Range Bounds** (inclusive bounds):
+     *     - [UserIdentifierFilterValues.CREATED_AT_FROM] — inclusive lower bound creation timestamp.
+     *     - [UserIdentifierFilterValues.CREATED_AT_TO] — inclusive upper bound creation timestamp.
+     *     - [UserIdentifierFilterValues.UPDATED_AT_FROM] — inclusive lower bound update timestamp.
+     *     - [UserIdentifierFilterValues.UPDATED_AT_TO] — inclusive upper bound update timestamp.
+     *   - **Free-text Search**:
+     *     - [UserIdentifierFilterValues.SEARCH_QUERY] — free-text search query string targeting:
+     *       - Raw or masked login identifier ([UserIdentifierPrivate.identifier]).
+     *       - Display name ([UserIdentifierPrivate.displayName]).
+     *       - External provider email ([UserIdentifierPrivate.externalProviderEmail]).
      *
      * Request body: None.
      * Response body: [PagedResult] of [UserIdentifierSummaryPayload].

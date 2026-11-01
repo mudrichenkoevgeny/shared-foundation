@@ -45,6 +45,8 @@ enum class StorageAuditActionType(override val value: String) : AuditActionType 
          * @throws IllegalArgumentException if [value] does not match any [StorageAuditActionType].
          */
         fun fromValueOrThrow(value: String): StorageAuditActionType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for StorageAuditActionType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${StorageAuditActionType::class.simpleName}: '$value'"
+            )
     }
 }

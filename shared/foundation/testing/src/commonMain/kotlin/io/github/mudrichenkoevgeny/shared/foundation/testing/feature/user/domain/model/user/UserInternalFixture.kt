@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -28,6 +29,10 @@ import kotlin.time.Instant
  * @param lockoutType Category of lockout ([AccountLockoutType]).
  * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
  * @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarFileId Avatar image file identifier in storage ([FileId]).
+ * @param birthdate User birthdate timestamp ([Instant]).
  */
 fun createTestUserInternal(
     id: UserId = createTestUserId(),
@@ -44,7 +49,11 @@ fun createTestUserInternal(
     scheduledPermanentDeletionAt: Instant? = null,
     lockoutType: AccountLockoutType = AccountLockoutType.NONE,
     temporaryLockoutUntil: Instant? = null,
-    storageConfiguration: UserStorageConfiguration? = null
+    storageConfiguration: UserStorageConfiguration? = null,
+    nickname: String? = "testuser",
+    displayName: String? = "Test User",
+    avatarFileId: FileId? = null,
+    birthdate: Instant? = null
 ) = UserInternal(
     id = id,
     role = role,
@@ -60,5 +69,9 @@ fun createTestUserInternal(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    birthdate = birthdate
 )

@@ -84,6 +84,8 @@ enum class UserAuditMetadataKey(
          * @throws IllegalArgumentException if [value] does not match any [UserAuditMetadataKey].
          */
         fun fromValueOrThrow(value: String): UserAuditMetadataKey =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuditMetadataKey: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserAuditMetadataKey::class.simpleName}: '$value'"
+            )
     }
 }

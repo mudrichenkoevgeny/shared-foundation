@@ -53,6 +53,8 @@ enum class UploadQueueItemStatus(val value: String) {
          * Returns [UploadQueueItemStatus] for the given string value, or throws [IllegalArgumentException].
          */
         fun fromValueOrThrow(value: String): UploadQueueItemStatus =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown UploadQueueItemStatus: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UploadQueueItemStatus::class.simpleName}: '$value'"
+            )
     }
 }

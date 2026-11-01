@@ -52,7 +52,7 @@ The module provides DTOs and Request models for every domain entity to ensure ty
 - **Tokens:** [RefreshTokenPayload], [SessionTokenPayload].
 - **Sessions & Identifiers:** [UserSessionSummaryPayload], [UserSessionPrivatePayload], [DeletedSessionsPayload], [UserIdentifierSummaryPayload], [UserIdentifierPrivatePayload].
 - **User:** [UserSummaryPayload], [UserPrivatePayload].
-- **Requests:** [RegistrationByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [UpdateUserRequest].
+- **Requests:** [RegistrationByEmailRequest], [LoginByEmailRequest], [LoginByPhoneRequest], [LoginByExternalAuthProviderRequest], [CreateByEmailRequest], [ResetPasswordRequest], [SendResetPasswordConfirmationRequest], [SendConfirmationToEmailRequest], [SendConfirmationToPhoneRequest], [UnlockByEmailConfirmationRequest], [UnlockByPhoneConfirmationRequest], [UnlockByExternalAuthProviderRequest], [EmailPasswordChangeRequest], [AddUserIdentifierEmailRequest], [AddUserIdentifierPhoneRequest], [AddUserIdentifierExternalAuthProviderRequest], [SelfUpdateUserRequest], [ManagementUpdateUserRequest].
 
 ### Real-Time Communication
 Typed WebSocket contracts for live updates:
@@ -156,11 +156,11 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 
 ### Mappers
 
-| Category                   | Mapper Classes |
+| Category                   | Mapper & Validator Classes |
 |:---------------------------| :--- |
 | **Auth & Settings**        | [AuthDataMapper]<br>[AvailableAuthProvidersMapper]<br>[OpenAuthSettingsMapper]<br>[ManagementAuthSettingsMapper]<br>[EmailRestrictionPolicyMapper] |
 | **Configuration**          | [OpenUserConfigurationMapper]<br>[ManagementUserConfigurationMapper] |
-| **User**                   | [UserSummaryMapper]<br>[UserPrivateMapper]<br>[UserDomainMapper] |
+| **User & Validation**      | [UserSummaryMapper]<br>[UserPrivateMapper]<br>[UserDomainMapper]<br>[NicknameValidator]<br>[DisplayNameValidator] |
 | **Identifiers & Sessions** | [UserIdentifierSummaryMapper]<br>[UserIdentifierPrivateMapper]<br>[UserIdentifierDomainMapper]<br>[UserSessionSummaryMapper]<br>[UserSessionPrivateMapper]<br>[UserSessionDomainMapper]<br>[DeletedSessionsMapper]<br>[SessionTokenMapper] |
 
 ### Domain Models
@@ -169,11 +169,11 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 |:-----------------------| :--- |
 | **Auth & Settings**    | [AuthData]<br>[AvailableAuthProviders]<br>[OpenAuthSettings]<br>[ManagementAuthSettings]<br>[EmailRestrictionPolicy]<br>[ExternalAuthProvider]<br>[UserAuthProvider] |
 | **Configuration**      | [OpenUserConfiguration]<br>[ManagementUserConfiguration] |
-| **User**               | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType] |
+| **User**               | [UserSummary]<br>[UserPrivate]<br>[UserInternal]<br>[UserId]<br>[UserRole]<br>[UserAccountStatus]<br>[UserRoleDefaultAuthorityLevel]<br>[AccountLockoutType]<br>[UserStorageTargetScopes]<br>[NicknameValidatorResult]<br>[DisplayNameValidatorResult] |
 | **Identifiers**        | [UserIdentifierSummary] (with `userId`) <br>[UserIdentifierPrivate]<br>[UserIdentifierInternal]<br>[UserIdentifierId] |
 | **Sessions**           | [UserSessionSummary] (with `userId`) <br>[UserSessionPrivate]<br>[UserSessionInternal]<br>[UserSessionId]<br>[DeletedSessions] |
 | **Tokens**             | [AccessToken]<br>[RefreshToken]<br>[RefreshTokenHash]<br>[SessionToken] |
-| **Listings & Filters** | [UserFilterValues]<br>[UserSortValues]<br>[UserSortBy]<br>[UserIdentifierSortBy]<br>[UserSessionSortBy] |
+| **Listings & Filters** | [UserFilterValues]<br>[UserIdentifierFilterValues]<br>[UserSessionFilterValues]<br>[UserSortBy]<br>[UserIdentifierSortBy]<br>[UserSessionSortBy] |
 
 ---
 
@@ -275,10 +275,14 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [RefreshTokenHash]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/token/RefreshTokenHash.kt
 [SessionToken]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/token/SessionToken.kt
 [UserFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserFilterValues.kt
-[UserSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortValues.kt
-[UserSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortValues.kt
-[UserIdentifierSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortValues.kt
-[UserSessionSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortValues.kt
+[UserIdentifierFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierFilterValues.kt
+[UserSessionFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionFilterValues.kt
+[UserSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortBy.kt
+[UserIdentifierSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierSortBy.kt
+[UserSessionSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionSortBy.kt
+[UserSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSortBy.kt
+[UserIdentifierSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserIdentifierSortBy.kt
+[UserSessionSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/listing/UserSessionSortBy.kt
 
 [AuthDataPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/data/AuthDataPayload.kt
 [AvailableAuthProvidersPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/model/auth/settings/AvailableAuthProvidersPayload.kt
@@ -313,7 +317,13 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [AddUserIdentifierEmailRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/useridentifiers/AddUserIdentifierEmailRequest.kt
 [AddUserIdentifierPhoneRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/useridentifiers/AddUserIdentifierPhoneRequest.kt
 [AddUserIdentifierExternalAuthProviderRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/security/useridentifiers/AddUserIdentifierExternalAuthProviderRequest.kt
-[UpdateUserRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/user/UpdateUserRequest.kt
+[SelfUpdateUserRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/user/SelfUpdateUserRequest.kt
+[ManagementUpdateUserRequest]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/request/user/ManagementUpdateUserRequest.kt
+[UserStorageTargetScopes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/storage/UserStorageTargetScopes.kt
+[NicknameValidator]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/validator/nickname/NicknameValidator.kt
+[DisplayNameValidator]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/validator/displayname/DisplayNameValidator.kt
+[NicknameValidatorResult]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/validator/nickname/NicknameValidatorResult.kt
+[DisplayNameValidatorResult]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/validator/displayname/DisplayNameValidatorResult.kt
 
 [UserPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/UserPermissionCode.kt
 [SessionPermissionCode]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/permission/SessionPermissionCode.kt

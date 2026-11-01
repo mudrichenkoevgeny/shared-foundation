@@ -8,10 +8,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.sta
 import kotlin.time.Instant
 
 /**
- * Internal audit event row for server-side storage and business logic.
+ * Complete server-side domain model and database entity representation for audit events.
  *
- * Adds server-side redaction policy [resourceValueSensitivity] and database row modification timestamp [updatedAt]
- * to [AuditEventPrivate]-equivalent fields. These internal fields must not be exposed directly via public API payloads.
+ * Adds server-side redaction policy [resourceValueSensitivity] for database storage and internal backend usage.
+ * Immutable append-only record. **STRICT PROHIBITION:** MUST NEVER have a corresponding wire payload DTO.
  *
  * @property id Unique event id; defaults to [AuditEventId.generate] when creating new instances.
  * @property actorId Optional identifier of the user or system that performed the action.
@@ -20,12 +20,11 @@ import kotlin.time.Instant
  * @property action Action type executed ([AuditActionType]).
  * @property resource Resource type target ([AuditResourceType]).
  * @property resourceId Optional identifier of the specific resource instance.
- * @property resourceValueSensitivity Redaction sensitivity policy for [resourceId] ([AuditValueSensitivity]).
+ * @property resourceValueSensitivity Redaction sensitivity classification for the target resource payload ([AuditValueSensitivity]).
  * @property status Outcome status of the action ([AuditStatus]).
  * @property metadata Set of diagnostic key-value entries ([AuditEventMetadata]).
  * @property message Optional human-readable message or diagnostic details.
- * @property createdAt Timestamp when the audit event was created ([Instant]).
- * @property updatedAt Timestamp when the audit event row was last modified ([Instant]), or `null` if unchanged.
+ * @property createdAt Timestamp when the audit event occurred ([Instant]).
  */
 data class AuditEventInternal(
     val id: AuditEventId = AuditEventId.generate(),
@@ -39,6 +38,5 @@ data class AuditEventInternal(
     val status: AuditStatus,
     val metadata: Set<AuditEventMetadata>,
     val message: String?,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+    val createdAt: Instant
 )

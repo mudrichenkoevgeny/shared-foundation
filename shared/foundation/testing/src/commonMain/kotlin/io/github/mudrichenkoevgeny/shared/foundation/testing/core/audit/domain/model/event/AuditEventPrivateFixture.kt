@@ -30,7 +30,6 @@ import kotlin.time.Instant
  * @param metadata Additional metadata entries.
  * @param message Human-readable log message.
  * @param createdAt Event timestamp.
- * @param updatedAt Modification timestamp.
  */
 fun createTestAuditEventPrivate(
     id: AuditEventId = createTestAuditEventId(),
@@ -43,8 +42,7 @@ fun createTestAuditEventPrivate(
     status: AuditStatus = AuditStatus.SUCCESS,
     metadata: Set<AuditEventMetadata> = setOf(createTestAuditEventMetadata()),
     message: String? = "User logged in successfully",
-    createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
-    updatedAt: Instant? = null
+    createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
 ) = AuditEventPrivate(
     id = id,
     actorId = actorId,
@@ -56,8 +54,7 @@ fun createTestAuditEventPrivate(
     status = status,
     metadata = metadata,
     message = message,
-    createdAt = createdAt,
-    updatedAt = updatedAt
+    createdAt = createdAt
 )
 
 /**

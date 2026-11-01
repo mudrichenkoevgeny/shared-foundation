@@ -13,6 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.SelfUpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 
 /**
@@ -104,4 +105,31 @@ object OpenUserRoutes {
      *   - [ClientAuthNavigation.PendingDeletion]
      */
     const val RESTORE_USER = "$BASE_USER_ROUTE/restore"
+
+    /**
+     * **HTTP method:** `PATCH`
+     *
+     * Partially updates the account details and profile fields of the currently authenticated user.
+     *
+     * Request body: [SelfUpdateUserRequest].
+     * Response body: [UserPrivatePayload].
+     *
+     * **Authorization:**
+     * - **Public Access:** Denied.
+     * - **Allowed Roles:** [UserRole.USER] (**OR** semantics).
+     * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
+     * - **Required Permissions:** None.
+     *
+     * **Audit logging:** Persist an [AuditEventPrivate] for successful execution and all failed attempts.
+     * - **Action:** [UserAuditActionType.SELF_UPDATE_USER].
+     * - **Actor:** [AuditActorType.USER]. Set `actorId` to the current [UserId].
+     * - **Resource:** [UserAuditResourceType.USER]. Set `resourceId` to the current [UserId].
+     * - **Metadata:** Include:
+     *   1. [ClientInfo] (see [CommonAuditMetadataKey]).
+     *
+     * **UI Presentation:**
+     * - Screens:
+     *   - [ClientUserNavigation.Main]
+     */
+    const val UPDATE_USER = BASE_USER_ROUTE
 }

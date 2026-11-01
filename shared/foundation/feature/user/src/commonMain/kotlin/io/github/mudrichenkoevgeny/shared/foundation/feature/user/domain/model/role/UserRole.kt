@@ -49,6 +49,8 @@ enum class UserRole(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [UserRole].
          */
         fun fromValueOrThrow(value: String): UserRole =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserRole: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserRole::class.simpleName}: '$value'"
+            )
     }
 }

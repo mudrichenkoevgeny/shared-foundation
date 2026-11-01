@@ -55,6 +55,8 @@ enum class StorageFileStatus(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [StorageFileStatus].
          */
         fun fromValueOrThrow(value: String): StorageFileStatus =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for StorageFileStatus: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${StorageFileStatus::class.simpleName}: '$value'"
+            )
     }
 }

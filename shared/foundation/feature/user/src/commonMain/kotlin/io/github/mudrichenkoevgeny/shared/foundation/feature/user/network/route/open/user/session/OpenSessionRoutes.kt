@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -14,10 +15,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.m
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
@@ -70,30 +72,54 @@ object OpenSessionRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserSessionSortBy.LAST_ACCESSED_AT],
-     *   [UserSortValues.UserSessionSortBy.LAST_REAUTHENTICATED_AT],
-     *   [UserSortValues.UserSessionSortBy.EXPIRES_AT],
-     *   [UserSortValues.UserSessionSortBy.CREATED_AT],
-     *   [UserSortValues.UserSessionSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of:
+     *   - [UserSessionSortBy.EXPIRES_AT]
+     *   - [UserSessionSortBy.LAST_ACCESSED_AT]
+     *   - [UserSessionSortBy.LAST_REAUTHENTICATED_AT]
+     *   - [UserSessionSortBy.CREATED_AT]
+     *   - [UserSessionSortBy.UPDATED_AT]
+     * - [ListingParamNames.Sort.SORT_ORDER] — exactly one of:
+     *   - [CommonApiFields.SortOrder.ASC]
+     *   - [CommonApiFields.SortOrder.DESC]
      *
-     * - **Filters** ([UserFilterValues.UserSessionFilterValues]): all filters are optional.
-     *   Multi-value filters use repeated query keys with **OR** semantics
-     *   (e.g., `?client_type=ANDROID&client_type=WASM`); different keys combine as **AND**.
-     *   - [UserFilterValues.UserSessionFilterValues.IDENTIFIER] — filter by substring pattern for identifier value.
-     *   - [UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID] — filter by credential record ID
-     *     ([UserSessionPrivatePayload.identifierId]).
-     *   - [UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER] — filter by [UserAuthProvider] serial name
-     *     ([UserSessionPrivatePayload.identifierAuthProvider]).
-     *   - [UserFilterValues.UserSessionFilterValues.CLIENT_TYPE] — filter by [ClientType] serial name.
-     *   - [UserFilterValues.UserSessionFilterValues.USER_AGENT] — filter by user agent substring pattern.
-     *   - [UserFilterValues.UserSessionFilterValues.IP_ADDRESS] — filter by IP address.
-     *   - [UserFilterValues.UserSessionFilterValues.LANGUAGE] — filter by BCP 47 language tag.
-     *   - [UserFilterValues.UserSessionFilterValues.DEVICE_ID] — filter by opaque device ID.
-     *   - [UserFilterValues.UserSessionFilterValues.DEVICE_NAME] — filter by device name substring pattern.
-     *   - [UserFilterValues.UserSessionFilterValues.APP_VERSION] — filter by application version.
-     *   - [UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by OS version.
+     * - **Filters** ([UserSessionFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics; different keys combine as **AND**.
+     *   - **Multi-value Include Filters** (repeated query keys, **OR** semantics):
+     *     - [UserSessionFilterValues.SESSION_ID] — filter by one or more specific session IDs.
+     *     - [UserSessionFilterValues.IDENTIFIER_ID] — filter by one or more login identifier IDs.
+     *     - [UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER] — filter by one or more [UserAuthProvider] serial names.
+     *     - [UserSessionFilterValues.CLIENT_TYPE] — filter by one or more [ClientType] serial names.
+     *   - **Multi-value Exclude Filters** (repeated query keys, **NOT IN** semantics):
+     *     - [UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER] — exclude [UserAuthProvider] serial names.
+     *   - **Exact Filters**:
+     *     - [UserSessionFilterValues.IDENTIFIER] — filter by exact raw or masked login identifier string.
+     *     - [UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME] — filter by exact identifier display name.
+     *     - [UserSessionFilterValues.DEVICE_ID] — filter by exact stable device ID.
+     *     - [UserSessionFilterValues.DEVICE_NAME] — filter by exact device name.
+     *     - [UserSessionFilterValues.APP_VERSION] — filter by exact application version.
+     *     - [UserSessionFilterValues.OPERATION_SYSTEM_VERSION] — filter by exact operating system version.
+     *     - [UserSessionFilterValues.USER_AGENT] — filter by exact HTTP User-Agent string.
+     *     - [UserSessionFilterValues.IP_ADDRESS] — filter by exact raw or masked IP address.
+     *   - **Presence Filters**:
+     *     - [UserSessionFilterValues.IS_USER_AGENT_SET] — filter by whether User-Agent header is present.
+     *     - [UserSessionFilterValues.IS_IP_ADDRESS_SET] — filter by whether IP address is present.
+     *     - [UserSessionFilterValues.IS_UPDATED_AT_SET] — filter by whether record has been updated.
+     *   - **Range Bounds** (inclusive bounds):
+     *     - [UserSessionFilterValues.EXPIRES_AT_FROM] — inclusive lower bound expiration timestamp.
+     *     - [UserSessionFilterValues.EXPIRES_AT_TO] — inclusive upper bound expiration timestamp.
+     *     - [UserSessionFilterValues.LAST_ACCESSED_AT_FROM] — inclusive lower bound last accessed timestamp.
+     *     - [UserSessionFilterValues.LAST_ACCESSED_AT_TO] — inclusive upper bound last accessed timestamp.
+     *     - [UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM] — lower bound re-authentication timestamp.
+     *     - [UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO] — upper bound re-authentication timestamp.
+     *     - [UserSessionFilterValues.CREATED_AT_FROM] — inclusive lower bound creation timestamp.
+     *     - [UserSessionFilterValues.CREATED_AT_TO] — inclusive upper bound creation timestamp.
+     *     - [UserSessionFilterValues.UPDATED_AT_FROM] — inclusive lower bound update timestamp.
+     *     - [UserSessionFilterValues.UPDATED_AT_TO] — inclusive upper bound update timestamp.
+     *   - **Free-text Search**:
+     *     - [UserSessionFilterValues.SEARCH_QUERY] — free-text search query string targeting:
+     *       - Raw or masked login identifier ([UserSessionPrivate.identifier]).
+     *       - Identifier display name ([UserSessionPrivate.identifierDisplayName]).
+     *       - Device name ([ClientDeviceInfo.deviceName]).
      *
      * Request body: None.
      * Response body: [PagedResult] of [UserSessionSummaryPayload].

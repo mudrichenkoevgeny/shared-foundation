@@ -8,11 +8,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
  *
  * @param authProvider External provider wire string ([UserAuthProvider]).
  * @param externalProviderToken OAuth token string from provider.
+ * @param displayName Optional display name string.
  */
 fun createTestLoginByExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
-    externalProviderToken: String = "google_token_12345"
+    externalProviderToken: String = "google_token_12345",
+    displayName: String? = null
 ) = LoginByExternalAuthProviderRequest(
     authProvider = authProvider,
-    externalProviderToken = externalProviderToken
+    externalProviderToken = externalProviderToken,
+    displayName = displayName
 )

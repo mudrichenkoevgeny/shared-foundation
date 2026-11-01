@@ -64,6 +64,8 @@ enum class StorageCategory(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [StorageCategory].
          */
         fun fromValueOrThrow(value: String): StorageCategory =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for StorageCategory: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${StorageCategory::class.simpleName}: '$value'"
+            )
     }
 }

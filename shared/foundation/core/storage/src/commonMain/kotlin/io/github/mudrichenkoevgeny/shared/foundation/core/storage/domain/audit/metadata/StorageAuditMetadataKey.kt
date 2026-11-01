@@ -55,6 +55,8 @@ enum class StorageAuditMetadataKey(
          * @throws IllegalArgumentException if [value] does not match any [StorageAuditMetadataKey].
          */
         fun fromValueOrThrow(value: String): StorageAuditMetadataKey =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for StorageAuditMetadataKey: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${StorageAuditMetadataKey::class.simpleName}: '$value'"
+            )
     }
 }

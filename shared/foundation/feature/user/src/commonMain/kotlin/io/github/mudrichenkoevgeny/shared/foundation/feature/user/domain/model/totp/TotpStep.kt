@@ -45,6 +45,8 @@ enum class TotpStep(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [TotpStep].
          */
         fun fromValueOrThrow(value: String): TotpStep =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for TotpStep: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${TotpStep::class.simpleName}: '$value'"
+            )
     }
 }

@@ -31,6 +31,11 @@ import kotlin.time.Instant
  * @property lockoutType [UserPrivate.lockoutType]; wire values match [AccountLockoutType.value].
  * @property temporaryLockoutUntil [UserPrivate.temporaryLockoutUntil] as Unix epoch milliseconds ([Instant]), or `null`.
  * @property storageConfiguration [UserPrivate.storageConfiguration] as [UserStorageConfigurationPayload], or `null`.
+ * @property nickname [UserPrivate.nickname] on the wire.
+ * @property displayName [UserPrivate.displayName] on the wire.
+ * @property avatarFileId [UserPrivate.avatarFileId] on the wire as hex-dash string.
+ * @property avatarUrl [UserPrivate.avatarUrl] on the wire.
+ * @property birthdate [UserPrivate.birthdate] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
 data class UserPrivatePayload(
@@ -77,5 +82,20 @@ data class UserPrivatePayload(
     val temporaryLockoutUntil: Long? = null,
 
     @SerialName(UserApiFields.STORAGE_CONFIGURATION)
-    val storageConfiguration: UserStorageConfigurationPayload? = null
+    val storageConfiguration: UserStorageConfigurationPayload? = null,
+
+    @SerialName(UserApiFields.NICKNAME)
+    val nickname: String? = null,
+
+    @SerialName(UserApiFields.DISPLAY_NAME)
+    val displayName: String? = null,
+
+    @SerialName(UserApiFields.AVATAR_FILE_ID)
+    val avatarFileId: String? = null,
+
+    @SerialName(UserApiFields.AVATAR_URL)
+    val avatarUrl: String? = null,
+
+    @SerialName(UserApiFields.BIRTHDATE)
+    val birthdate: Long? = null
 )

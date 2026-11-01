@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.toFileIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
@@ -38,7 +39,12 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
     lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
     temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds),
-    storageConfiguration = storageConfiguration?.toUserStorageConfiguration()
+    storageConfiguration = storageConfiguration?.toUserStorageConfiguration(),
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId?.toFileIdOrNull(),
+    avatarUrl = avatarUrl,
+    birthdate = birthdate?.let(Instant::fromEpochMilliseconds)
 )
 
 /**
@@ -61,5 +67,10 @@ fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
     lockoutType = lockoutType.value,
     temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds(),
-    storageConfiguration = storageConfiguration?.toUserStorageConfigurationPayload()
+    storageConfiguration = storageConfiguration?.toUserStorageConfigurationPayload(),
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId?.asHexDashString(),
+    avatarUrl = avatarUrl,
+    birthdate = birthdate?.toEpochMilliseconds()
 )

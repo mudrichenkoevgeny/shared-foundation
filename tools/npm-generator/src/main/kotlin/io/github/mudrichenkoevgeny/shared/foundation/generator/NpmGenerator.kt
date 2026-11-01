@@ -1,12 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.generator
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.ui.UiValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.storage.UserStorageTargetScopes
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.contractClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.dtoClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.enumClasses
@@ -106,7 +109,9 @@ fun main() {
         - **Zod Validation Schemas (`*Schema`)**: Auto-generated `z.ZodType` validation schemas for all Request payloads, Response DTOs, and Screen Parameter models (`managementAuditEventListParamsSchema`, `apiErrorResponseSchema`, `userPrivatePayloadSchema`).
         - **Navigation Screen Routes (`*Navigation`)**: Strongly typed screen routes and parent fallback routes for client and management apps (`ClientMainNavigation`, `ManagementMainNavigation`, `ClientAuthNavigation`, `ClientUserNavigation`, `ManagementUsersNavigation`, `ManagementAuditNavigation`, `ManagementSecurityNavigation`, `ManagementSettingsNavigation`).
         - **REST API Routes**: Strongly typed REST API endpoint paths (`ManagementUsersRoutes`, `ManagementAuditRoutes`, `OpenLoginRoutes`, `SelfManagementUserRoutes`).
-        - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortValues`, `TotpStep`, `UnlockMethod`, etc.).
+        - **Runtime Enums (`.value` representation)**: TS types & runtime JS objects for all domain enums and string unions (`UserRole`, `AuditActorType`, `AuditStatus`, `AccountLockoutType`, `ClientType`, `SortOrder`, `UserSortBy`, `UserIdentifierSortBy`, `UserSessionSortBy`, `TotpStep`, `UnlockMethod`, etc.).
+        - **Filter Keys & Target Scopes**: Stable query filter keys (`UserFilterValues`, `AuditEventFilterValues`, `StorageFileFilterValues`) and feature target scopes (`UserStorageTargetScopes.AVATAR`).
+        - **Validators**: Type-safe runtime validators for user profile details (`nicknameValidator`, `displayNameValidator`), password policies (`passwordPolicyValidator`), and file uploads (`storageUploadValidator`).
         - **Error & Permission Codes**: Literal string definitions for all application error codes (`SecurityErrorCodes`, `UserErrorCodes`, `CommonErrorCodes`) and permission strings (`UserPermissionCode`, `SecurityPermissionCode`, `AuditPermissionCode`).
         - **Branded Types & Helpers**: Type-safe domain identifiers (`UserId`, `PermissionCode`, `UserSessionId`, `UserIdentifierId`, `AuditEventId`, `ClientDeviceId`) with converter helpers (`toUserIdOrThrow`, `toPermissionCodeOrNull`).
         - **Testing Fixtures & Collection Generators**: Ready-to-use testing constants (`TEST_*`), single-item mock factories (`createTestUserSummary`, `createTestUserPrivatePayload`), auto-calculating `createTestPagedResult<T>`, generic helper `createTestList<T>`, and deterministic collection generators (`createTest<Entity>List`, `createTest<Entity>PayloadList`) with 0-based index IDs, alternating providers/devices, and time shifting (`TEST_TIME_MILLIS + index * 60_000`). Supports static overrides or callback `(index) => Partial<T>`.
@@ -396,6 +401,9 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
         readonly SORT_BY: "${ListingParamNames.Sort.SORT_BY}";
         readonly SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}";
       };
+      readonly Search: {
+        readonly SEARCH_QUERY: "${ListingParamNames.Search.SEARCH_QUERY}";
+      };
     };
 
     export declare const ListingDefaultValues: {
@@ -414,63 +422,153 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
       };
     };
 
-    export declare const AuditFilterValues: {
-      readonly AuditEventFilterValues: {
-        readonly ACTOR_ID: "${AuditFilterValues.AuditEventFilterValues.ACTOR_ID}";
-        readonly ACTOR_TYPE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE}";
-        readonly ACTOR_USER_ROLE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE}";
-        readonly ACTION: "${AuditFilterValues.AuditEventFilterValues.ACTION}";
-        readonly RESOURCE: "${AuditFilterValues.AuditEventFilterValues.RESOURCE}";
-        readonly RESOURCE_ID: "${AuditFilterValues.AuditEventFilterValues.RESOURCE_ID}";
-        readonly STATUS: "${AuditFilterValues.AuditEventFilterValues.STATUS}";
-        readonly MESSAGE: "${AuditFilterValues.AuditEventFilterValues.MESSAGE}";
-      };
+    export declare const AuditEventFilterValues: {
+      readonly EVENT_ID: "${AuditEventFilterValues.EVENT_ID}";
+      readonly ACTOR_ID: "${AuditEventFilterValues.ACTOR_ID}";
+      readonly ACTOR_TYPE: "${AuditEventFilterValues.ACTOR_TYPE}";
+      readonly EXCLUDE_ACTOR_TYPE: "${AuditEventFilterValues.EXCLUDE_ACTOR_TYPE}";
+      readonly ACTOR_USER_ROLE: "${AuditEventFilterValues.ACTOR_USER_ROLE}";
+      readonly ACTION: "${AuditEventFilterValues.ACTION}";
+      readonly EXCLUDE_ACTION: "${AuditEventFilterValues.EXCLUDE_ACTION}";
+      readonly RESOURCE: "${AuditEventFilterValues.RESOURCE}";
+      readonly RESOURCE_ID: "${AuditEventFilterValues.RESOURCE_ID}";
+      readonly STATUS: "${AuditEventFilterValues.STATUS}";
+      readonly EXCLUDE_STATUS: "${AuditEventFilterValues.EXCLUDE_STATUS}";
+      readonly CREATED_AT_FROM: "${AuditEventFilterValues.CREATED_AT_FROM}";
+      readonly CREATED_AT_TO: "${AuditEventFilterValues.CREATED_AT_TO}";
+      readonly SEARCH_QUERY: "${AuditEventFilterValues.SEARCH_QUERY}";
     };
 
     export declare const UserFilterValues: {
-      readonly UserFilterValues: {
-        readonly ROLE: "${UserFilterValues.UserFilterValues.ROLE}";
-        readonly ACCOUNT_STATUS: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS}";
-        readonly ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}";
-        readonly ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE}";
-        readonly AUTHORITY_LEVEL_FROM: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM}";
-        readonly AUTHORITY_LEVEL_TO: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO}";
-        readonly IS_TOTP_ENABLED: "${UserFilterValues.UserFilterValues.IS_TOTP_ENABLED}";
-        readonly PERMISSION_CODES: "${UserFilterValues.UserFilterValues.PERMISSION_CODES}";
-      };
-      readonly UserIdentifierFilterValues: {
-        readonly USER_ID: "${UserFilterValues.UserIdentifierFilterValues.USER_ID}";
-        readonly USER_AUTH_PROVIDER: "${UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER}";
-        readonly IDENTIFIER: "${UserFilterValues.UserIdentifierFilterValues.IDENTIFIER}";
-      };
-      readonly UserSessionFilterValues: {
-        readonly USER_ID: "${UserFilterValues.UserSessionFilterValues.USER_ID}";
-        readonly USER_ROLE: "${UserFilterValues.UserSessionFilterValues.USER_ROLE}";
-        readonly IDENTIFIER_ID: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID}";
-        readonly USER_AUTH_PROVIDER: "${UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER}";
-        readonly CLIENT_TYPE: "${UserFilterValues.UserSessionFilterValues.CLIENT_TYPE}";
-        readonly USER_AGENT: "${UserFilterValues.UserSessionFilterValues.USER_AGENT}";
-        readonly IP_ADDRESS: "${UserFilterValues.UserSessionFilterValues.IP_ADDRESS}";
-        readonly LANGUAGE: "${UserFilterValues.UserSessionFilterValues.LANGUAGE}";
-        readonly DEVICE_ID: "${UserFilterValues.UserSessionFilterValues.DEVICE_ID}";
-        readonly DEVICE_NAME: "${UserFilterValues.UserSessionFilterValues.DEVICE_NAME}";
-        readonly APP_VERSION: "${UserFilterValues.UserSessionFilterValues.APP_VERSION}";
-        readonly OPERATION_SYSTEM_VERSION: "${UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION}";
-        readonly IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}";
-      };
+      readonly USER_ID: "${UserFilterValues.USER_ID}";
+      readonly ROLE: "${UserFilterValues.ROLE}";
+      readonly EXCLUDE_ROLE: "${UserFilterValues.EXCLUDE_ROLE}";
+      readonly ACCOUNT_STATUS: "${UserFilterValues.ACCOUNT_STATUS}";
+      readonly EXCLUDE_ACCOUNT_STATUS: "${UserFilterValues.EXCLUDE_ACCOUNT_STATUS}";
+      readonly ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}";
+      readonly EXCLUDE_ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE}";
+      readonly IS_ACCOUNT_STATUS_ON_RESTORE_SET: "${UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET}";
+      readonly AUTHORITY_LEVEL_FROM: "${UserFilterValues.AUTHORITY_LEVEL_FROM}";
+      readonly AUTHORITY_LEVEL_TO: "${UserFilterValues.AUTHORITY_LEVEL_TO}";
+      readonly PERMISSION_CODES: "${UserFilterValues.PERMISSION_CODES}";
+      readonly EXCLUDE_PERMISSION_CODES: "${UserFilterValues.EXCLUDE_PERMISSION_CODES}";
+      readonly IS_TOTP_ENABLED: "${UserFilterValues.IS_TOTP_ENABLED}";
+      readonly LAST_LOGIN_AT_FROM: "${UserFilterValues.LAST_LOGIN_AT_FROM}";
+      readonly LAST_LOGIN_AT_TO: "${UserFilterValues.LAST_LOGIN_AT_TO}";
+      readonly IS_LAST_LOGIN_AT_SET: "${UserFilterValues.IS_LAST_LOGIN_AT_SET}";
+      readonly LAST_ACTIVE_AT_FROM: "${UserFilterValues.LAST_ACTIVE_AT_FROM}";
+      readonly LAST_ACTIVE_AT_TO: "${UserFilterValues.LAST_ACTIVE_AT_TO}";
+      readonly IS_LAST_ACTIVE_AT_SET: "${UserFilterValues.IS_LAST_ACTIVE_AT_SET}";
+      readonly CREATED_AT_FROM: "${UserFilterValues.CREATED_AT_FROM}";
+      readonly CREATED_AT_TO: "${UserFilterValues.CREATED_AT_TO}";
+      readonly UPDATED_AT_FROM: "${UserFilterValues.UPDATED_AT_FROM}";
+      readonly UPDATED_AT_TO: "${UserFilterValues.UPDATED_AT_TO}";
+      readonly IS_UPDATED_AT_SET: "${UserFilterValues.IS_UPDATED_AT_SET}";
+      readonly SCHEDULED_PERMANENT_DELETION_AT_FROM: "${UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM}";
+      readonly SCHEDULED_PERMANENT_DELETION_AT_TO: "${UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO}";
+      readonly IS_SCHEDULED_PERMANENT_DELETION_AT_SET: "${UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET}";
+      readonly ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.ACCOUNT_LOCKOUT_TYPE}";
+      readonly EXCLUDE_ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE}";
+      readonly TEMPORARY_LOCKOUT_UNTIL_FROM: "${UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM}";
+      readonly TEMPORARY_LOCKOUT_UNTIL_TO: "${UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO}";
+      readonly IS_TEMPORARY_LOCKOUT_UNTIL_SET: "${UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET}";
+      readonly STORAGE_QUOTA_BYTES_FROM: "${UserFilterValues.STORAGE_QUOTA_BYTES_FROM}";
+      readonly STORAGE_QUOTA_BYTES_TO: "${UserFilterValues.STORAGE_QUOTA_BYTES_TO}";
+      readonly IS_STORAGE_QUOTA_BYTES_SET: "${UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET}";
+      readonly STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM: "${UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM}";
+      readonly STORAGE_MAX_UPLOAD_SIZE_BYTES_TO: "${UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO}";
+      readonly IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET: "${UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET}";
+      readonly STORAGE_MAX_PENDING_UPLOADS_FROM: "${UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM}";
+      readonly STORAGE_MAX_PENDING_UPLOADS_TO: "${UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO}";
+      readonly IS_STORAGE_MAX_PENDING_UPLOADS_SET: "${UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET}";
+      readonly IS_STORAGE_CONFIGURATION_SET: "${UserFilterValues.IS_STORAGE_CONFIGURATION_SET}";
+      readonly NICKNAME: "${UserFilterValues.NICKNAME}";
+      readonly IS_NICKNAME_SET: "${UserFilterValues.IS_NICKNAME_SET}";
+      readonly DISPLAY_NAME: "${UserFilterValues.DISPLAY_NAME}";
+      readonly IS_DISPLAY_NAME_SET: "${UserFilterValues.IS_DISPLAY_NAME_SET}";
+      readonly IS_AVATAR_SET: "${UserFilterValues.IS_AVATAR_SET}";
+      readonly BIRTHDATE_FROM: "${UserFilterValues.BIRTHDATE_FROM}";
+      readonly BIRTHDATE_TO: "${UserFilterValues.BIRTHDATE_TO}";
+      readonly IS_BIRTHDATE_SET: "${UserFilterValues.IS_BIRTHDATE_SET}";
+      readonly SEARCH_QUERY: "${UserFilterValues.SEARCH_QUERY}";
     };
 
-    export declare const StorageFilterValues: {
-      readonly StorageFileFilterValues: {
-        readonly FILE_ID: "${StorageFilterValues.StorageFileFilterValues.FILE_ID}";
-        readonly OWNER_USER_ID: "${StorageFilterValues.StorageFileFilterValues.OWNER_USER_ID}";
-        readonly FILE_NAME: "${StorageFilterValues.StorageFileFilterValues.FILE_NAME}";
-        readonly MIME_TYPE: "${StorageFilterValues.StorageFileFilterValues.MIME_TYPE}";
-        readonly CATEGORY: "${StorageFilterValues.StorageFileFilterValues.CATEGORY}";
-        readonly VISIBILITY: "${StorageFilterValues.StorageFileFilterValues.VISIBILITY}";
-        readonly STATUS: "${StorageFilterValues.StorageFileFilterValues.STATUS}";
-        readonly TARGET_SCOPE: "${StorageFilterValues.StorageFileFilterValues.TARGET_SCOPE}";
-      };
+    export declare const UserIdentifierFilterValues: {
+      readonly IDENTIFIER_ID: "${UserIdentifierFilterValues.IDENTIFIER_ID}";
+      readonly USER_ID: "${UserIdentifierFilterValues.USER_ID}";
+      readonly USER_AUTH_PROVIDER: "${UserIdentifierFilterValues.USER_AUTH_PROVIDER}";
+      readonly EXCLUDE_USER_AUTH_PROVIDER: "${UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER}";
+      readonly IDENTIFIER: "${UserIdentifierFilterValues.IDENTIFIER}";
+      readonly DISPLAY_NAME: "${UserIdentifierFilterValues.DISPLAY_NAME}";
+      readonly EXTERNAL_PROVIDER_EMAIL: "${UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL}";
+      readonly IS_EXTERNAL_PROVIDER_EMAIL_SET: "${UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET}";
+      readonly CREATED_AT_FROM: "${UserIdentifierFilterValues.CREATED_AT_FROM}";
+      readonly CREATED_AT_TO: "${UserIdentifierFilterValues.CREATED_AT_TO}";
+      readonly UPDATED_AT_FROM: "${UserIdentifierFilterValues.UPDATED_AT_FROM}";
+      readonly UPDATED_AT_TO: "${UserIdentifierFilterValues.UPDATED_AT_TO}";
+      readonly IS_UPDATED_AT_SET: "${UserIdentifierFilterValues.IS_UPDATED_AT_SET}";
+      readonly SEARCH_QUERY: "${UserIdentifierFilterValues.SEARCH_QUERY}";
+    };
+
+    export declare const UserSessionFilterValues: {
+      readonly SESSION_ID: "${UserSessionFilterValues.SESSION_ID}";
+      readonly USER_ID: "${UserSessionFilterValues.USER_ID}";
+      readonly USER_ROLE: "${UserSessionFilterValues.USER_ROLE}";
+      readonly EXCLUDE_USER_ROLE: "${UserSessionFilterValues.EXCLUDE_USER_ROLE}";
+      readonly IDENTIFIER: "${UserSessionFilterValues.IDENTIFIER}";
+      readonly IDENTIFIER_ID: "${UserSessionFilterValues.IDENTIFIER_ID}";
+      readonly IDENTIFIER_DISPLAY_NAME: "${UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME}";
+      readonly IDENTIFIER_AUTH_PROVIDER: "${UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER}";
+      readonly EXCLUDE_IDENTIFIER_AUTH_PROVIDER: "${UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER}";
+      readonly CLIENT_TYPE: "${UserSessionFilterValues.CLIENT_TYPE}";
+      readonly DEVICE_ID: "${UserSessionFilterValues.DEVICE_ID}";
+      readonly DEVICE_NAME: "${UserSessionFilterValues.DEVICE_NAME}";
+      readonly APP_VERSION: "${UserSessionFilterValues.APP_VERSION}";
+      readonly OPERATION_SYSTEM_VERSION: "${UserSessionFilterValues.OPERATION_SYSTEM_VERSION}";
+      readonly USER_AGENT: "${UserSessionFilterValues.USER_AGENT}";
+      readonly IS_USER_AGENT_SET: "${UserSessionFilterValues.IS_USER_AGENT_SET}";
+      readonly IP_ADDRESS: "${UserSessionFilterValues.IP_ADDRESS}";
+      readonly IS_IP_ADDRESS_SET: "${UserSessionFilterValues.IS_IP_ADDRESS_SET}";
+      readonly EXPIRES_AT_FROM: "${UserSessionFilterValues.EXPIRES_AT_FROM}";
+      readonly EXPIRES_AT_TO: "${UserSessionFilterValues.EXPIRES_AT_TO}";
+      readonly LAST_ACCESSED_AT_FROM: "${UserSessionFilterValues.LAST_ACCESSED_AT_FROM}";
+      readonly LAST_ACCESSED_AT_TO: "${UserSessionFilterValues.LAST_ACCESSED_AT_TO}";
+      readonly LAST_REAUTHENTICATED_AT_FROM: "${UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM}";
+      readonly LAST_REAUTHENTICATED_AT_TO: "${UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO}";
+      readonly CREATED_AT_FROM: "${UserSessionFilterValues.CREATED_AT_FROM}";
+      readonly CREATED_AT_TO: "${UserSessionFilterValues.CREATED_AT_TO}";
+      readonly UPDATED_AT_FROM: "${UserSessionFilterValues.UPDATED_AT_FROM}";
+      readonly UPDATED_AT_TO: "${UserSessionFilterValues.UPDATED_AT_TO}";
+      readonly IS_UPDATED_AT_SET: "${UserSessionFilterValues.IS_UPDATED_AT_SET}";
+      readonly SEARCH_QUERY: "${UserSessionFilterValues.SEARCH_QUERY}";
+    };
+
+    export declare const StorageFileFilterValues: {
+      readonly FILE_ID: "${StorageFileFilterValues.FILE_ID}";
+      readonly OWNER_USER_ID: "${StorageFileFilterValues.OWNER_USER_ID}";
+      readonly IS_OWNER_USER_ID_SET: "${StorageFileFilterValues.IS_OWNER_USER_ID_SET}";
+      readonly FILE_NAME: "${StorageFileFilterValues.FILE_NAME}";
+      readonly FILE_SIZE_BYTES_FROM: "${StorageFileFilterValues.FILE_SIZE_BYTES_FROM}";
+      readonly FILE_SIZE_BYTES_TO: "${StorageFileFilterValues.FILE_SIZE_BYTES_TO}";
+      readonly MIME_TYPE: "${StorageFileFilterValues.MIME_TYPE}";
+      readonly CATEGORY: "${StorageFileFilterValues.CATEGORY}";
+      readonly EXCLUDE_CATEGORY: "${StorageFileFilterValues.EXCLUDE_CATEGORY}";
+      readonly VISIBILITY: "${StorageFileFilterValues.VISIBILITY}";
+      readonly EXCLUDE_VISIBILITY: "${StorageFileFilterValues.EXCLUDE_VISIBILITY}";
+      readonly STATUS: "${StorageFileFilterValues.STATUS}";
+      readonly EXCLUDE_STATUS: "${StorageFileFilterValues.EXCLUDE_STATUS}";
+      readonly TARGET_SCOPE: "${StorageFileFilterValues.TARGET_SCOPE}";
+      readonly IS_TARGET_SCOPE_SET: "${StorageFileFilterValues.IS_TARGET_SCOPE_SET}";
+      readonly CREATED_AT_FROM: "${StorageFileFilterValues.CREATED_AT_FROM}";
+      readonly CREATED_AT_TO: "${StorageFileFilterValues.CREATED_AT_TO}";
+      readonly UPDATED_AT_FROM: "${StorageFileFilterValues.UPDATED_AT_FROM}";
+      readonly UPDATED_AT_TO: "${StorageFileFilterValues.UPDATED_AT_TO}";
+      readonly IS_UPDATED_AT_SET: "${StorageFileFilterValues.IS_UPDATED_AT_SET}";
+      readonly SEARCH_QUERY: "${StorageFileFilterValues.SEARCH_QUERY}";
+    };
+
+    export declare const UserStorageTargetScopes: {
+      readonly AVATAR: "${UserStorageTargetScopes.AVATAR}";
     };
     """.trimIndent()
 
@@ -498,8 +596,8 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
             "${fieldDoc}    readonly $valName: PermissionCode;"
         }
         """
-        $classDoc export const $name: {
-        ${fields.joinToString(",\n")}
+        $classDoc export declare const $name: {
+        ${fields.joinToString("\n")}
         };
         """.trimIndent()
     }
@@ -545,70 +643,17 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
       isBatchSizeValid(maxFiles?: number | null, currentCount?: number): boolean;
     };
 
+    export declare const nicknameValidator: {
+      validate(nickname?: string | null, minLength?: number, maxLength?: number, isNicknameChangeAllowed?: boolean, isNicknameChanging?: boolean): string | null;
+    };
+
+    export declare const displayNameValidator: {
+      validate(displayName?: string | null, minLength?: number, maxLength?: number): string | null;
+    };
+
     ${generateDomainModelsAndMappersDts()}
 
     ${generateCompositeParsersDts()}
-
-    export type CommonSortValues = 'created_at' | 'updated_at';
-
-    export namespace CommonSortValues {
-      export type TimestampSortBy = 'created_at' | 'updated_at';
-      export const TimestampSortBy: {
-        readonly CREATED_AT: 'created_at';
-        readonly UPDATED_AT: 'updated_at';
-      };
-    }
-
-    export type AuditSortValues = 'created_at';
-
-    export namespace AuditSortValues {
-      export type AuditEventSortBy = 'created_at';
-      export const AuditEventSortBy: {
-        readonly CREATED_AT: 'created_at';
-      };
-    }
-
-    export type UserSortValues = 'created_at' | 'updated_at' | 'last_accessed_at' | 'last_reauthenticated_at' | 'expires_at';
-
-    export namespace UserSortValues {
-      export type UserSortBy = 'last_login_at' | 'last_active_at' | 'scheduled_permanent_deletion_at' | 'account_lockout_type' | 'temporary_lockout_until' | 'created_at' | 'updated_at';
-      export const UserSortBy: {
-        readonly LAST_LOGIN_AT: 'last_login_at';
-        readonly LAST_ACTIVE_AT: 'last_active_at';
-        readonly SCHEDULED_PERMANENT_DELETION_AT: 'scheduled_permanent_deletion_at';
-        readonly ACCOUNT_LOCKOUT_TYPE: 'account_lockout_type';
-        readonly TEMPORARY_LOCKOUT_UNTIL: 'temporary_lockout_until';
-        readonly CREATED_AT: 'created_at';
-        readonly UPDATED_AT: 'updated_at';
-      };
-
-      export type UserIdentifierSortBy = 'created_at' | 'updated_at';
-      export const UserIdentifierSortBy: {
-        readonly CREATED_AT: 'created_at';
-        readonly UPDATED_AT: 'updated_at';
-      };
-
-      export type UserSessionSortBy = 'expires_at' | 'last_accessed_at' | 'last_reauthenticated_at' | 'created_at' | 'updated_at';
-      export const UserSessionSortBy: {
-        readonly EXPIRES_AT: 'expires_at';
-        readonly LAST_ACCESSED_AT: 'last_accessed_at';
-        readonly LAST_REAUTHENTICATED_AT: 'last_reauthenticated_at';
-        readonly CREATED_AT: 'created_at';
-        readonly UPDATED_AT: 'updated_at';
-      };
-    }
-
-    export type StorageSortValues = 'created_at' | 'updated_at' | 'file_name' | 'file_size_bytes';
-
-    export namespace StorageSortValues {
-      export type StorageFileSortBy = 'created_at' | 'updated_at' | 'file_name' | 'file_size_bytes';
-      export const StorageFileSortBy: {
-        readonly CREATED_AT: 'created_at';
-        readonly UPDATED_AT: 'updated_at';
-        readonly FILE_NAME: 'file_name';
-        readonly FILE_SIZE_BYTES: 'file_size_bytes';
-      };
-    }
     """.trimIndent()
 
     val dtoDeclarations = dtoClasses.joinToString("\n\n") { kClass ->

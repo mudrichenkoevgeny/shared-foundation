@@ -12,9 +12,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property id Unique user id ([UserId]); defaults to [UserId.generate] when creating new instances.
  * @property role Access level assigned to the user ([UserRole]).
  * @property accountStatus Current account state ([UserAccountStatus]).
+ * @property nickname Unique handle or username string (e.g. `@username`), or `null`.
+ * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
+ * @property avatarUrl Direct CDN or presigned GET avatar image URL, or `null`.
  */
 data class UserSummary(
     val id: UserId = UserId.generate(),
     val role: UserRole,
-    val accountStatus: UserAccountStatus
+    val accountStatus: UserAccountStatus,
+    val nickname: String?,
+    val displayName: String?,
+    val avatarUrl: String?
 )

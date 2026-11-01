@@ -324,5 +324,15 @@ flowchart TD
 - **`DefaultLocalizedStringResolver`**: Out-of-the-box thread-safe resolver with in-memory caching and BCP 47 fallback chain (`locale -> language -> CommonLocales.DEFAULT`). Resolves from `LocalizationRegistry` and supports partial key overrides via optional `resourceLoader`.
 - **`CommonLocales`**: Standard BCP 47 locale constants (`ENGLISH = "en"`, `RUSSIAN = "ru"`, `DEFAULT = "en"`).
 
+---
+
+## 11. Filtering and Sorting Architecture Standard
+
+To maintain a consistent, predictable, and type-safe API for collection list endpoints across all modules (`core/*` and `feature/*`), the library enforces a strict data-type-driven standard for all filtering and sorting parameters covering Nullability/Presence (`IS_*_SET`), Range Bounds (`*_FROM`/`*_TO`), Text Matching (`*_CONTAINS`, `search_query`), Collections (`EXCLUDE_*`, `*_ALL`), Nested Objects, and Sorting (`sort_by`, `sort_order`).
+
+For the complete rule specifications and examples, refer to Section 11 of [.agent/architecture-patterns.md](.agent/architecture-patterns.md#11-filtering-and-sorting-architecture-standard).
+
+
+
 
 

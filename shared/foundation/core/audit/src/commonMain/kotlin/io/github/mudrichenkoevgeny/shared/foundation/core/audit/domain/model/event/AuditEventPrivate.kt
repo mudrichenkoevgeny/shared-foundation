@@ -12,7 +12,7 @@ import kotlin.time.Instant
  * Detailed domain representation of an audited action for client inspection and management flows.
  *
  * Includes full actor/resource identifiers, diagnostic messages, and metadata entries.
- * Wire counterpart is [AuditEventPrivatePayload].
+ * Immutable append-only audit record. Wire counterpart is [AuditEventPrivatePayload].
  *
  * @property id Unique event id; defaults to [AuditEventId.generate] when creating new instances.
  * @property actorId Optional identifier of the user or system that performed the action.
@@ -25,7 +25,6 @@ import kotlin.time.Instant
  * @property metadata Set of diagnostic key-value entries ([AuditEventMetadata]).
  * @property message Optional human-readable message or diagnostic details.
  * @property createdAt Timestamp when the audit event occurred ([Instant]).
- * @property updatedAt Timestamp when the audit event record was last modified ([Instant]), or `null`.
  */
 data class AuditEventPrivate(
     val id: AuditEventId = AuditEventId.generate(),
@@ -38,6 +37,5 @@ data class AuditEventPrivate(
     val status: AuditStatus,
     val metadata: Set<AuditEventMetadata>,
     val message: String?,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+    val createdAt: Instant
 )

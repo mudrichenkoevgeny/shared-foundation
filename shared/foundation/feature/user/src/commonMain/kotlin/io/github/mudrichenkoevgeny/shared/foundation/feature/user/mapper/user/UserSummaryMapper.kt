@@ -19,7 +19,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 fun UserSummaryPayload.toUserSummary(): UserSummary = UserSummary(
     id = id.toUserIdOrThrow(),
     role = UserRole.fromValueOrThrow(role),
-    accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus)
+    accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )
 
 /**
@@ -28,5 +31,8 @@ fun UserSummaryPayload.toUserSummary(): UserSummary = UserSummary(
 fun UserSummary.toUserSummaryPayload(): UserSummaryPayload = UserSummaryPayload(
     id = id.asHexDashString(),
     role = role.value,
-    accountStatus = accountStatus.value
+    accountStatus = accountStatus.value,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )

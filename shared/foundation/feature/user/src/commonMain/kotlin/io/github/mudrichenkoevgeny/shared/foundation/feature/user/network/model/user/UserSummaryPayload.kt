@@ -17,6 +17,9 @@ import kotlinx.serialization.Serializable
  * @property id [UserSummary.id] on the wire: [UserId] as hex-dash string.
  * @property role [UserSummary.role]; wire values match [UserRole.value].
  * @property accountStatus [UserSummary.accountStatus]; wire values match [UserAccountStatus.value].
+ * @property nickname [UserSummary.nickname] on the wire.
+ * @property displayName [UserSummary.displayName] on the wire.
+ * @property avatarUrl [UserSummary.avatarUrl] on the wire.
  */
 @Serializable
 data class UserSummaryPayload(
@@ -27,5 +30,14 @@ data class UserSummaryPayload(
     val role: String,
 
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val accountStatus: String
+    val accountStatus: String,
+
+    @SerialName(UserApiFields.NICKNAME)
+    val nickname: String? = null,
+
+    @SerialName(UserApiFields.DISPLAY_NAME)
+    val displayName: String? = null,
+
+    @SerialName(UserApiFields.AVATAR_URL)
+    val avatarUrl: String? = null
 )

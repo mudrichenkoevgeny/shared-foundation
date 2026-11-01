@@ -1,8 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
@@ -30,22 +31,33 @@ object ManagementAuditRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [AuditSortValues.AuditEventSortBy.CREATED_AT],
-     *   [AuditSortValues.AuditEventSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of:
+     *   - [AuditEventSortBy.CREATED_AT]
+     * - [ListingParamNames.Sort.SORT_ORDER] — exactly one of:
+     *   - [CommonApiFields.SortOrder.ASC]
+     *   - [CommonApiFields.SortOrder.DESC]
      *
-     * - **Filters** ([AuditFilterValues.AuditEventFilterValues]): all filters are optional.
-     *   Multi-value filters use repeated query keys with **OR** semantics (e.g., `?actor_id=1&actor_id=2`);
-     *   different keys combine as **AND**.
-     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_ID] — filter by actor ID.
-     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE] — filter by [AuditActorType] serial name.
-     *   - [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE] — filter by user role serial name.
-     *   - [AuditFilterValues.AuditEventFilterValues.ACTION] — filter by audit action name.
-     *   - [AuditFilterValues.AuditEventFilterValues.RESOURCE] — filter by audit resource name.
-     *   - [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID] — filter by resource ID.
-     *   - [AuditFilterValues.AuditEventFilterValues.STATUS] — filter by [AuditStatus] serial name.
-     *   - [AuditFilterValues.AuditEventFilterValues.MESSAGE] — filter by message substring pattern.
+     * - **Filters** ([AuditEventFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics; different keys combine as **AND**.
+     *   - **Multi-value Include Filters** (repeated query keys, **OR** semantics):
+     *     - [AuditEventFilterValues.EVENT_ID] — filter by one or more specific audit event record IDs.
+     *     - [AuditEventFilterValues.ACTOR_ID] — filter by one or more actor IDs.
+     *     - [AuditEventFilterValues.ACTOR_TYPE] — filter by one or more [AuditActorType] serial names.
+     *     - [AuditEventFilterValues.ACTOR_USER_ROLE] — filter by one or more user actor role snapshots.
+     *     - [AuditEventFilterValues.ACTION] — filter by one or more audit action names.
+     *     - [AuditEventFilterValues.RESOURCE] — filter by one or more audit resource names.
+     *     - [AuditEventFilterValues.RESOURCE_ID] — filter by one or more resource instance IDs.
+     *     - [AuditEventFilterValues.STATUS] — filter by one or more [AuditStatus] serial names.
+     *   - **Multi-value Exclude Filters** (repeated query keys, **NOT IN** semantics):
+     *     - [AuditEventFilterValues.EXCLUDE_ACTOR_TYPE] — exclude specific [AuditActorType] serial names.
+     *     - [AuditEventFilterValues.EXCLUDE_ACTION] — exclude specific audit action names.
+     *     - [AuditEventFilterValues.EXCLUDE_STATUS] — exclude specific [AuditStatus] serial names.
+     *   - **Range Bounds** (inclusive bounds):
+     *     - [AuditEventFilterValues.CREATED_AT_FROM] — inclusive lower bound creation timestamp.
+     *     - [AuditEventFilterValues.CREATED_AT_TO] — inclusive upper bound creation timestamp.
+     *   - **Free-text Search**:
+     *     - [AuditEventFilterValues.SEARCH_QUERY] — free-text search query string targeting:
+     *       - Event human-readable message ([AuditEventPrivate.message]).
      *
      * Request body: None.
      * Response body: [PagedResult] of [AuditEventSummaryPayload].

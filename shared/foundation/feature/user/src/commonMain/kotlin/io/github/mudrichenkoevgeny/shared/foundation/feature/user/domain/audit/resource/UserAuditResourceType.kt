@@ -86,6 +86,8 @@ enum class UserAuditResourceType(override val value: String) : AuditResourceType
          * @throws IllegalArgumentException if [value] does not match any [UserAuditResourceType].
          */
         fun fromValueOrThrow(value: String): UserAuditResourceType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuditResourceType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserAuditResourceType::class.simpleName}: '$value'"
+            )
     }
 }

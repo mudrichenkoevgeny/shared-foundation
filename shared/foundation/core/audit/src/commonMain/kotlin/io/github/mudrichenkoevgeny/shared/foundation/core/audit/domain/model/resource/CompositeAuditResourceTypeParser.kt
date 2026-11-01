@@ -35,7 +35,7 @@ class CompositeAuditResourceTypeParser(
             }
         }
 
-        throw IllegalArgumentException("Unknown value of AuditResourceType: '$value'")
+        throw IllegalArgumentException("Unknown value for ${AuditResourceType::class.simpleName}: '$value'")
     }
 
     /**

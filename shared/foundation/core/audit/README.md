@@ -19,8 +19,8 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
     - [AuditEventSummaryMapper], [AuditEventPrivateMapper], [AuditEventDomainMapper], [AuditEventMetadataMapper]: Domain ↔ Payload and Domain ↔ Domain conversions.
     - [ClientInfo.toAuditMetadata()][ClientInfoAuditMapper]: Extension to automatically extract audit metadata from standard `ClientInfo`.
 - **List & Search Contract:**
-    - [AuditFilterValues.AuditEventFilterValues]: Constants for query parameters (actor_id, action, status, etc.).
-    - [AuditSortValues]: Supported sorting keys (primarily `created_at`).
+    - [AuditEventFilterValues]: Constants for query parameters (actor_id, action, status, etc.).
+    - [AuditEventSortBy]: Supported sorting keys (primarily `created_at`).
 - **Extensibility:**
     - [AuditActionType] & [AuditResourceType]: Interface-based contracts allowing feature-modules to define their own domain-specific actions and resources.
     - **Composite Parsers:** [CompositeAuditActionTypeParser], [CompositeAuditResourceTypeParser], [CompositeAuditMetadataKeyParser] — tools to resolve these extensible types from wire strings.
@@ -55,8 +55,8 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 [AuditEventPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload.kt
 [AuditEventMetadataPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload.kt
 [AuditApiPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/contract/AuditApiPaths.kt
-[AuditFilterValues.AuditEventFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditFilterValues.kt
-[AuditSortValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditSortValues.kt
+[AuditEventFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditFilterValues.kt
+[AuditEventSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy.kt
 [AuditEventSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventSummaryMapper.kt
 [AuditEventPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventPrivateMapper.kt
 [AuditEventDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventDomainMapper.kt

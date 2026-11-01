@@ -7,8 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.para
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues.UserIdentifierSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
 import kotlinx.serialization.Serializable
 
@@ -22,8 +22,19 @@ import kotlinx.serialization.Serializable
  * @property pageSize Maximum items returned per page; wire key is [ListingParamNames.Pagination.PAGE_SIZE].
  * @property sortBy Field to sort listing results by; wire key is [ListingParamNames.Sort.SORT_BY].
  * @property sortOrder Direction of sorting; wire key is [ListingParamNames.Sort.SORT_ORDER].
- * @property userAuthProviders List of [UserAuthProvider] items to filter by; wire key is [UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER].
- * @property identifiers List of free-text identifier strings to filter by; wire key is [UserFilterValues.UserIdentifierFilterValues.IDENTIFIER].
+ * @property identifierIds Specific identifier IDs to filter by; wire key is [UserIdentifierFilterValues.IDENTIFIER_ID].
+ * @property userAuthProviders List of [UserAuthProvider] items to filter by; wire key is [UserIdentifierFilterValues.USER_AUTH_PROVIDER].
+ * @property excludeUserAuthProviders Excluded [UserAuthProvider] items; wire key is [UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER].
+ * @property identifier Exact raw or masked login identifier string; wire key is [UserIdentifierFilterValues.IDENTIFIER].
+ * @property displayName Exact display name; wire key is [UserIdentifierFilterValues.DISPLAY_NAME].
+ * @property externalProviderEmail Exact external provider email; wire key is [UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL].
+ * @property isExternalProviderEmailSet Filter by external provider email presence; wire key is [UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET].
+ * @property createdAtFrom Lower bound creation timestamp; wire key is [UserIdentifierFilterValues.CREATED_AT_FROM].
+ * @property createdAtTo Upper bound creation timestamp; wire key is [UserIdentifierFilterValues.CREATED_AT_TO].
+ * @property updatedAtFrom Lower bound update timestamp; wire key is [UserIdentifierFilterValues.UPDATED_AT_FROM].
+ * @property updatedAtTo Upper bound update timestamp; wire key is [UserIdentifierFilterValues.UPDATED_AT_TO].
+ * @property isUpdatedAtSet Filter by update presence; wire key is [UserIdentifierFilterValues.IS_UPDATED_AT_SET].
+ * @property searchQuery Search query targeting identifier fields; wire key is [UserIdentifierFilterValues.SEARCH_QUERY].
  */
 @Serializable
 data class SelfIdentifierListParams(
@@ -32,8 +43,19 @@ data class SelfIdentifierListParams(
     val pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
     val sortBy: UserIdentifierSortBy = UserIdentifierSortBy.DEFAULT,
     val sortOrder: SortOrder = SortOrder.DEFAULT,
+    val identifierIds: List<String> = emptyList(),
     val userAuthProviders: List<UserAuthProvider> = emptyList(),
-    val identifiers: List<String> = emptyList()
+    val excludeUserAuthProviders: List<UserAuthProvider> = emptyList(),
+    val identifier: String? = null,
+    val displayName: String? = null,
+    val externalProviderEmail: String? = null,
+    val isExternalProviderEmailSet: Boolean? = null,
+    val createdAtFrom: String? = null,
+    val createdAtTo: String? = null,
+    val updatedAtFrom: String? = null,
+    val updatedAtTo: String? = null,
+    val isUpdatedAtSet: Boolean? = null,
+    val searchQuery: String? = null
 ) : NavigationScreenParams<SelfIdentifierListParams> {
 
     override val parser: NavigationScreenParamsParser<SelfIdentifierListParams>
@@ -76,13 +98,57 @@ data class SelfIdentifierListParams(
                 ?.let { SortOrder.fromValueOrNull(it) }
                 ?: SortOrder.DEFAULT
 
-            val userAuthProviders = normalized[UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER]
+            val identifierIds = normalized[UserIdentifierFilterValues.IDENTIFIER_ID]
+                ?.filter { it.isNotBlank() }
+                ?: emptyList()
+
+            val userAuthProviders = normalized[UserIdentifierFilterValues.USER_AUTH_PROVIDER]
                 ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
                 ?: emptyList()
 
-            val identifiers = normalized[UserFilterValues.UserIdentifierFilterValues.IDENTIFIER]
-                ?.filter { it.isNotBlank() }
+            val excludeUserAuthProviders = normalized[UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER]
+                ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
                 ?: emptyList()
+
+            val identifier = normalized[UserIdentifierFilterValues.IDENTIFIER]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val displayName = normalized[UserIdentifierFilterValues.DISPLAY_NAME]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val externalProviderEmail = normalized[UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val isExternalProviderEmailSet = normalized[UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET]
+                ?.firstOrNull()
+                ?.toBooleanStrictOrNull()
+
+            val createdAtFrom = normalized[UserIdentifierFilterValues.CREATED_AT_FROM]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val createdAtTo = normalized[UserIdentifierFilterValues.CREATED_AT_TO]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val updatedAtFrom = normalized[UserIdentifierFilterValues.UPDATED_AT_FROM]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val updatedAtTo = normalized[UserIdentifierFilterValues.UPDATED_AT_TO]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val isUpdatedAtSet = normalized[UserIdentifierFilterValues.IS_UPDATED_AT_SET]
+                ?.firstOrNull()
+                ?.toBooleanStrictOrNull()
+
+            val searchQuery = normalized[UserIdentifierFilterValues.SEARCH_QUERY]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
 
             return SelfIdentifierListParams(
                 action = action,
@@ -90,8 +156,19 @@ data class SelfIdentifierListParams(
                 pageSize = pageSize,
                 sortBy = sortBy,
                 sortOrder = sortOrder,
+                identifierIds = identifierIds,
                 userAuthProviders = userAuthProviders,
-                identifiers = identifiers
+                excludeUserAuthProviders = excludeUserAuthProviders,
+                identifier = identifier,
+                displayName = displayName,
+                externalProviderEmail = externalProviderEmail,
+                isExternalProviderEmailSet = isExternalProviderEmailSet,
+                createdAtFrom = createdAtFrom,
+                createdAtTo = createdAtTo,
+                updatedAtFrom = updatedAtFrom,
+                updatedAtTo = updatedAtTo,
+                isUpdatedAtSet = isUpdatedAtSet,
+                searchQuery = searchQuery
             )
         }
 
@@ -119,11 +196,47 @@ data class SelfIdentifierListParams(
             if (params.sortOrder != SortOrder.DEFAULT) {
                 result[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
             }
-            if (params.userAuthProviders.isNotEmpty()) {
-                result[UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER] = params.userAuthProviders.map { it.value }
+            if (params.identifierIds.isNotEmpty()) {
+                result[UserIdentifierFilterValues.IDENTIFIER_ID] = params.identifierIds
             }
-            if (params.identifiers.isNotEmpty()) {
-                result[UserFilterValues.UserIdentifierFilterValues.IDENTIFIER] = params.identifiers
+            if (params.userAuthProviders.isNotEmpty()) {
+                result[UserIdentifierFilterValues.USER_AUTH_PROVIDER] = params.userAuthProviders.map { it.value }
+            }
+            if (params.excludeUserAuthProviders.isNotEmpty()) {
+                result[UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER] =
+                    params.excludeUserAuthProviders.map { it.value }
+            }
+            if (!params.identifier.isNullOrBlank()) {
+                result[UserIdentifierFilterValues.IDENTIFIER] = listOf(params.identifier.trim())
+            }
+            if (!params.displayName.isNullOrBlank()) {
+                result[UserIdentifierFilterValues.DISPLAY_NAME] = listOf(params.displayName.trim())
+            }
+            if (!params.externalProviderEmail.isNullOrBlank()) {
+                result[UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL] =
+                    listOf(params.externalProviderEmail.trim())
+            }
+            if (params.isExternalProviderEmailSet != null) {
+                result[UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET] =
+                    listOf(params.isExternalProviderEmailSet.toString())
+            }
+            if (params.createdAtFrom != null) {
+                result[UserIdentifierFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
+            }
+            if (params.createdAtTo != null) {
+                result[UserIdentifierFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
+            }
+            if (params.updatedAtFrom != null) {
+                result[UserIdentifierFilterValues.UPDATED_AT_FROM] = listOf(params.updatedAtFrom)
+            }
+            if (params.updatedAtTo != null) {
+                result[UserIdentifierFilterValues.UPDATED_AT_TO] = listOf(params.updatedAtTo)
+            }
+            if (params.isUpdatedAtSet != null) {
+                result[UserIdentifierFilterValues.IS_UPDATED_AT_SET] = listOf(params.isUpdatedAtSet.toString())
+            }
+            if (params.searchQuery != null) {
+                result[UserIdentifierFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
             }
 
             return result

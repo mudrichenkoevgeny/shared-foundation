@@ -59,6 +59,8 @@ enum class ClientType(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [ClientType].
          */
         fun fromValueOrThrow(value: String): ClientType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for ClientType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${ClientType::class.simpleName}: '$value'"
+            )
     }
 }

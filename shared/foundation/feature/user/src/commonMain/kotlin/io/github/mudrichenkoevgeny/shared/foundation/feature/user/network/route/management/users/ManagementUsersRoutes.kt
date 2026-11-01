@@ -17,15 +17,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.m
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.ManagementUpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.UpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 
 /**
@@ -45,28 +46,82 @@ object ManagementUsersRoutes {
      * **Pagination & sort** (names from [ListingParamNames]):
      * - [ListingParamNames.Pagination.PAGE_NUMBER] — one-based page index (`1` is the first page).
      * - [ListingParamNames.Pagination.PAGE_SIZE] — page size.
-     * - [ListingParamNames.Sort.SORT_BY] — exactly one of
-     *   [UserSortValues.UserSortBy.LAST_LOGIN_AT],
-     *   [UserSortValues.UserSortBy.LAST_ACTIVE_AT],
-     *   [UserSortValues.UserSortBy.SCHEDULED_PERMANENT_DELETION_AT],
-     *   [UserSortValues.UserSortBy.ACCOUNT_LOCKOUT_TYPE],
-     *   [UserSortValues.UserSortBy.TEMPORARY_LOCKOUT_UNTIL],
-     *   [UserSortValues.UserSortBy.CREATED_AT],
-     *   [UserSortValues.UserSortBy.UPDATED_AT].
-     * - [ListingParamNames.Sort.SORT_ORDER] — [CommonApiFields.SortOrder.ASC] or [CommonApiFields.SortOrder.DESC].
+     * - [ListingParamNames.Sort.SORT_BY] — exactly one of:
+     *   - [UserSortBy.AUTHORITY_LEVEL]
+     *   - [UserSortBy.LAST_LOGIN_AT]
+     *   - [UserSortBy.LAST_ACTIVE_AT]
+     *   - [UserSortBy.SCHEDULED_PERMANENT_DELETION_AT]
+     *   - [UserSortBy.TEMPORARY_LOCKOUT_UNTIL]
+     *   - [UserSortBy.NICKNAME]
+     *   - [UserSortBy.DISPLAY_NAME]
+     *   - [UserSortBy.BIRTHDATE]
+     *   - [UserSortBy.CREATED_AT]
+     *   - [UserSortBy.UPDATED_AT]
+     * - [ListingParamNames.Sort.SORT_ORDER] — exactly one of:
+     *   - [CommonApiFields.SortOrder.ASC]
+     *   - [CommonApiFields.SortOrder.DESC]
      *
-     * - **Filters** ([UserFilterValues.UserFilterValues]): all filters are optional.
-     *   Multi-value filters use repeated query keys with **OR** semantics
-     *   (e.g., `?role=ADMIN&role=STAFF`); different keys combine as **AND**.
-     *   - [UserFilterValues.UserFilterValues.ROLE] — filter by [UserRole] serial name.
-     *   - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS] — filter by [UserAccountStatus] serial name.
-     *   - [UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] — filter by [UserAccountStatus] serial name
-     *     on restore.
-     *   - [UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE] — filter by [AccountLockoutType] serial name.
-     *   - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level.
-     *   - [UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level.
-     *   - [UserFilterValues.UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP status.
-     *   - [UserFilterValues.UserFilterValues.PERMISSION_CODES] — filter by [PermissionCode] string.
+     * - **Filters** ([UserFilterValues]): all filters are optional.
+     *   Multi-value filters use repeated query keys with **OR** semantics; different keys combine as **AND**.
+     *   - **Multi-value Include Filters** (repeated query keys, **OR** semantics):
+     *     - [UserFilterValues.USER_ID] — filter by one or more specific user IDs.
+     *     - [UserFilterValues.ROLE] — filter by one or more [UserRole] serial names.
+     *     - [UserFilterValues.ACCOUNT_STATUS] — filter by one or more [UserAccountStatus] serial names.
+     *     - [UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] — filter by target [UserAccountStatus] serial names.
+     *     - [UserFilterValues.PERMISSION_CODES] — filter by one or more explicit [PermissionCode] strings.
+     *     - [UserFilterValues.ACCOUNT_LOCKOUT_TYPE] — filter by one or more [AccountLockoutType] serial names.
+     *   - **Multi-value Exclude Filters** (repeated query keys, **NOT IN** semantics):
+     *     - [UserFilterValues.EXCLUDE_ROLE] — exclude specific [UserRole] serial names.
+     *     - [UserFilterValues.EXCLUDE_ACCOUNT_STATUS] — exclude specific [UserAccountStatus] serial names.
+     *     - [UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE] — exclude target [UserAccountStatus] serial names.
+     *     - [UserFilterValues.EXCLUDE_PERMISSION_CODES] — exclude specific [PermissionCode] strings.
+     *     - [UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE] — exclude specific [AccountLockoutType] serial names.
+     *   - **Exact Filters**:
+     *     - [UserFilterValues.IS_TOTP_ENABLED] — boolean flag for TOTP 2FA status.
+     *     - [UserFilterValues.NICKNAME] — filter by exact nickname handle.
+     *     - [UserFilterValues.DISPLAY_NAME] — filter by exact display name.
+     *   - **Presence Filters**:
+     *     - [UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET] — filter by whether target status on restore is set.
+     *     - [UserFilterValues.IS_LAST_LOGIN_AT_SET] — filter by whether user has logged in at least once.
+     *     - [UserFilterValues.IS_LAST_ACTIVE_AT_SET] — filter by whether user has recorded activity.
+     *     - [UserFilterValues.IS_UPDATED_AT_SET] — filter by whether user record has been updated.
+     *     - [UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET] — filter by whether deletion is scheduled.
+     *     - [UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET] — filter by whether temporary lockout is active.
+     *     - [UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET] — filter by whether custom storage quota is assigned.
+     *     - [UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET] — filter by whether custom max upload size is assigned.
+     *     - [UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET] — filter by whether custom max pending uploads count is assigned.
+     *     - [UserFilterValues.IS_STORAGE_CONFIGURATION_SET] — filter by whether storage configuration overrides exist.
+     *     - [UserFilterValues.IS_NICKNAME_SET] — filter by whether user has a nickname set.
+     *     - [UserFilterValues.IS_DISPLAY_NAME_SET] — filter by whether user has a display name set.
+     *     - [UserFilterValues.IS_AVATAR_SET] — filter by whether user has an avatar image set.
+     *     - [UserFilterValues.IS_BIRTHDATE_SET] — filter by whether user has a birthdate set.
+     *   - **Range Bounds** (inclusive bounds):
+     *     - [UserFilterValues.AUTHORITY_LEVEL_FROM] — inclusive lower bound for authority level.
+     *     - [UserFilterValues.AUTHORITY_LEVEL_TO] — inclusive upper bound for authority level.
+     *     - [UserFilterValues.LAST_LOGIN_AT_FROM] — inclusive lower bound last login timestamp.
+     *     - [UserFilterValues.LAST_LOGIN_AT_TO] — inclusive upper bound last login timestamp.
+     *     - [UserFilterValues.LAST_ACTIVE_AT_FROM] — inclusive lower bound last active timestamp.
+     *     - [UserFilterValues.LAST_ACTIVE_AT_TO] — inclusive upper bound last active timestamp.
+     *     - [UserFilterValues.CREATED_AT_FROM] — inclusive lower bound creation timestamp.
+     *     - [UserFilterValues.CREATED_AT_TO] — inclusive upper bound creation timestamp.
+     *     - [UserFilterValues.UPDATED_AT_FROM] — inclusive lower bound update timestamp.
+     *     - [UserFilterValues.UPDATED_AT_TO] — inclusive upper bound update timestamp.
+     *     - [UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM] — lower bound scheduled deletion timestamp.
+     *     - [UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO] — upper bound scheduled deletion timestamp.
+     *     - [UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM] — lower bound temporary lockout expiration timestamp.
+     *     - [UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO] — upper bound temporary lockout expiration timestamp.
+     *     - [UserFilterValues.STORAGE_QUOTA_BYTES_FROM] — lower bound custom storage quota in bytes.
+     *     - [UserFilterValues.STORAGE_QUOTA_BYTES_TO] — upper bound custom storage quota in bytes.
+     *     - [UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM] — lower bound custom max upload size in bytes.
+     *     - [UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO] — upper bound custom max upload size in bytes.
+     *     - [UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM] — lower bound custom max pending uploads count.
+     *     - [UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO] — upper bound custom max pending uploads count.
+     *     - [UserFilterValues.BIRTHDATE_FROM] — inclusive lower bound user birthdate.
+     *     - [UserFilterValues.BIRTHDATE_TO] — inclusive upper bound user birthdate.
+     *   - **Free-text Search**:
+     *     - [UserFilterValues.SEARCH_QUERY] — free-text search query string targeting:
+     *       - Nickname handle ([UserPrivate.nickname]).
+     *       - Display name ([UserPrivate.displayName]).
      *
      * Request body: None.
      * Response body: [PagedResult] of [UserSummaryPayload].
@@ -152,25 +207,25 @@ object ManagementUsersRoutes {
      *
      * Path parameter: [UserApiPaths.USER_ID].
      *
-     * Request body: [UpdateUserRequest].
+     * Request body: [ManagementUpdateUserRequest].
      * Response body: [UserPrivatePayload].
      *
      * **Authorization:**
      * - **Public Access:** Denied.
      * - **Allowed Roles:** [UserRole.STAFF], [UserRole.ADMIN] (**OR** semantics).
      * - **Allowed Account Statuses:** [UserAccountStatus.ACTIVE] (**OR** semantics).
-     * - **Required Permissions:** Required permissions depend on the fields provided in [UpdateUserRequest]
+     * - **Required Permissions:** Required permissions depend on the fields provided in [ManagementUpdateUserRequest]
      *   and the target user's role (**AND** semantics for all provided fields):
-     *   - If [UpdateUserRequest.accountStatus] is set:
+     *   - If [ManagementUpdateUserRequest.accountStatus] is set:
      *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target: [UserRole.USER])
      *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target: [UserRole.STAFF])
-     *   - If [UpdateUserRequest.authorityLevel] is set:
+     *   - If [ManagementUpdateUserRequest.authorityLevel] is set:
      *     [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_USER] (target: [UserRole.USER])
      *     [UserPermissionCode.USER_UPDATE_AUTHORITY_FOR_STAFF] (target: [UserRole.STAFF])
-     *   - If [UpdateUserRequest.permissionCodes] is set:
+     *   - If [ManagementUpdateUserRequest.permissionCodes] is set:
      *     [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_USER] (target: [UserRole.USER])
      *     [UserPermissionCode.USER_UPDATE_PERMISSIONS_FOR_STAFF] (target: [UserRole.STAFF])
-     *   - If [UpdateUserRequest.lockoutType] or [UpdateUserRequest.temporaryLockoutUntil] is set:
+     *   - If [ManagementUpdateUserRequest.lockoutType] or [ManagementUpdateUserRequest.temporaryLockoutUntil] is set:
      *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_USER] (target: [UserRole.USER])
      *     [UserPermissionCode.USER_UPDATE_STATUS_FOR_STAFF] (target: [UserRole.STAFF])
      * - **Authority Level:** Actor's level must be strictly greater than the target's level.

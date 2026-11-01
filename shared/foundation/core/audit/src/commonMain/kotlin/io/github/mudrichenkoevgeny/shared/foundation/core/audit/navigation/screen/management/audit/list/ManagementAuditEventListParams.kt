@@ -1,9 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues.AuditEventFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues.AuditEventSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
@@ -20,14 +19,20 @@ import kotlinx.serialization.Serializable
  * @property pageSize Maximum items returned per page; wire key is [ListingParamNames.Pagination.PAGE_SIZE].
  * @property sortBy Field to sort listing results by; wire key is [ListingParamNames.Sort.SORT_BY].
  * @property sortOrder Direction of sorting; wire key is [ListingParamNames.Sort.SORT_ORDER].
- * @property actorIds List of actor IDs to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.ACTOR_ID].
- * @property actorTypes List of [AuditActorType] items to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE].
- * @property actorUserRoles List of actor user roles to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE].
- * @property actions List of audit action names to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.ACTION].
- * @property resources List of audit resource names to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.RESOURCE].
- * @property resourceIds List of resource IDs to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.RESOURCE_ID].
- * @property statuses List of [AuditStatus] items to filter by; wire key is [AuditFilterValues.AuditEventFilterValues.STATUS].
- * @property messages List of free-text message filters; wire key is [AuditFilterValues.AuditEventFilterValues.MESSAGE].
+ * @property eventIds List of specific audit event record IDs to filter by; wire key is [AuditEventFilterValues.EVENT_ID].
+ * @property actorIds List of actor IDs to filter by; wire key is [AuditEventFilterValues.ACTOR_ID].
+ * @property actorTypes List of [AuditActorType] items to filter by; wire key is [AuditEventFilterValues.ACTOR_TYPE].
+ * @property excludeActorTypes List of [AuditActorType] items to exclude; wire key is [AuditEventFilterValues.EXCLUDE_ACTOR_TYPE].
+ * @property actorUserRoles List of actor user roles to filter by; wire key is [AuditEventFilterValues.ACTOR_USER_ROLE].
+ * @property actions List of audit action names to filter by; wire key is [AuditEventFilterValues.ACTION].
+ * @property excludeActions List of audit action names to exclude; wire key is [AuditEventFilterValues.EXCLUDE_ACTION].
+ * @property resources List of audit resource names to filter by; wire key is [AuditEventFilterValues.RESOURCE].
+ * @property resourceIds List of resource IDs to filter by; wire key is [AuditEventFilterValues.RESOURCE_ID].
+ * @property statuses List of [AuditStatus] items to filter by; wire key is [AuditEventFilterValues.STATUS].
+ * @property excludeStatuses List of [AuditStatus] items to exclude; wire key is [AuditEventFilterValues.EXCLUDE_STATUS].
+ * @property createdAtFrom Inclusive lower bound timestamp string; wire key is [AuditEventFilterValues.CREATED_AT_FROM].
+ * @property createdAtTo Inclusive upper bound timestamp string; wire key is [AuditEventFilterValues.CREATED_AT_TO].
+ * @property searchQuery Free-text search query string targeting event messages; wire key is [AuditEventFilterValues.SEARCH_QUERY].
  */
 @Serializable
 data class ManagementAuditEventListParams(
@@ -35,14 +40,20 @@ data class ManagementAuditEventListParams(
     val pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
     val sortBy: AuditEventSortBy = AuditEventSortBy.DEFAULT,
     val sortOrder: SortOrder = SortOrder.DEFAULT,
+    val eventIds: List<String> = emptyList(),
     val actorIds: List<String> = emptyList(),
     val actorTypes: List<AuditActorType> = emptyList(),
+    val excludeActorTypes: List<AuditActorType> = emptyList(),
     val actorUserRoles: List<String> = emptyList(),
     val actions: List<String> = emptyList(),
+    val excludeActions: List<String> = emptyList(),
     val resources: List<String> = emptyList(),
     val resourceIds: List<String> = emptyList(),
     val statuses: List<AuditStatus> = emptyList(),
-    val messages: List<String> = emptyList()
+    val excludeStatuses: List<AuditStatus> = emptyList(),
+    val createdAtFrom: String? = null,
+    val createdAtTo: String? = null,
+    val searchQuery: String? = null
 ) : NavigationScreenParams<ManagementAuditEventListParams> {
 
     override val parser: NavigationScreenParamsParser<ManagementAuditEventListParams>
@@ -84,6 +95,10 @@ data class ManagementAuditEventListParams(
                 ?.let { SortOrder.fromValueOrNull(it) }
                 ?: SortOrder.DEFAULT
 
+            val eventIds = normalized[AuditEventFilterValues.EVENT_ID]
+                ?.filter { it.isNotBlank() }
+                ?: emptyList()
+
             val actorIds = normalized[AuditEventFilterValues.ACTOR_ID]
                 ?.filter { it.isNotBlank() }
                 ?: emptyList()
@@ -92,11 +107,19 @@ data class ManagementAuditEventListParams(
                 ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
                 ?: emptyList()
 
+            val excludeActorTypes = normalized[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE]
+                ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
+                ?: emptyList()
+
             val actorUserRoles = normalized[AuditEventFilterValues.ACTOR_USER_ROLE]
                 ?.filter { it.isNotBlank() }
                 ?: emptyList()
 
             val actions = normalized[AuditEventFilterValues.ACTION]
+                ?.filter { it.isNotBlank() }
+                ?: emptyList()
+
+            val excludeActions = normalized[AuditEventFilterValues.EXCLUDE_ACTION]
                 ?.filter { it.isNotBlank() }
                 ?: emptyList()
 
@@ -112,23 +135,41 @@ data class ManagementAuditEventListParams(
                 ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
                 ?: emptyList()
 
-            val messages = normalized[AuditEventFilterValues.MESSAGE]
-                ?.filter { it.isNotBlank() }
+            val excludeStatuses = normalized[AuditEventFilterValues.EXCLUDE_STATUS]
+                ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
                 ?: emptyList()
+
+            val createdAtFrom = normalized[AuditEventFilterValues.CREATED_AT_FROM]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val createdAtTo = normalized[AuditEventFilterValues.CREATED_AT_TO]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+
+            val searchQuery = normalized[AuditEventFilterValues.SEARCH_QUERY]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
 
             return ManagementAuditEventListParams(
                 pageNumber = pageNumber,
                 pageSize = pageSize,
                 sortBy = sortBy,
                 sortOrder = sortOrder,
+                eventIds = eventIds,
                 actorIds = actorIds,
                 actorTypes = actorTypes,
+                excludeActorTypes = excludeActorTypes,
                 actorUserRoles = actorUserRoles,
                 actions = actions,
+                excludeActions = excludeActions,
                 resources = resources,
                 resourceIds = resourceIds,
                 statuses = statuses,
-                messages = messages
+                excludeStatuses = excludeStatuses,
+                createdAtFrom = createdAtFrom,
+                createdAtTo = createdAtTo,
+                searchQuery = searchQuery
             )
         }
 
@@ -153,17 +194,26 @@ data class ManagementAuditEventListParams(
             if (params.sortOrder != SortOrder.DEFAULT) {
                 result[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
             }
+            if (params.eventIds.isNotEmpty()) {
+                result[AuditEventFilterValues.EVENT_ID] = params.eventIds
+            }
             if (params.actorIds.isNotEmpty()) {
                 result[AuditEventFilterValues.ACTOR_ID] = params.actorIds
             }
             if (params.actorTypes.isNotEmpty()) {
                 result[AuditEventFilterValues.ACTOR_TYPE] = params.actorTypes.map { it.value }
             }
+            if (params.excludeActorTypes.isNotEmpty()) {
+                result[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE] = params.excludeActorTypes.map { it.value }
+            }
             if (params.actorUserRoles.isNotEmpty()) {
                 result[AuditEventFilterValues.ACTOR_USER_ROLE] = params.actorUserRoles
             }
             if (params.actions.isNotEmpty()) {
                 result[AuditEventFilterValues.ACTION] = params.actions
+            }
+            if (params.excludeActions.isNotEmpty()) {
+                result[AuditEventFilterValues.EXCLUDE_ACTION] = params.excludeActions
             }
             if (params.resources.isNotEmpty()) {
                 result[AuditEventFilterValues.RESOURCE] = params.resources
@@ -174,8 +224,17 @@ data class ManagementAuditEventListParams(
             if (params.statuses.isNotEmpty()) {
                 result[AuditEventFilterValues.STATUS] = params.statuses.map { it.value }
             }
-            if (params.messages.isNotEmpty()) {
-                result[AuditEventFilterValues.MESSAGE] = params.messages
+            if (params.excludeStatuses.isNotEmpty()) {
+                result[AuditEventFilterValues.EXCLUDE_STATUS] = params.excludeStatuses.map { it.value }
+            }
+            if (params.createdAtFrom != null) {
+                result[AuditEventFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
+            }
+            if (params.createdAtTo != null) {
+                result[AuditEventFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
+            }
+            if (params.searchQuery != null) {
+                result[AuditEventFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
             }
 
             return result

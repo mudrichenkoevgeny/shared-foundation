@@ -13,15 +13,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
  * @param id Unique user ID ([UserId]).
  * @param role Assigned access role ([UserRole]).
  * @param accountStatus Current account state ([UserAccountStatus]).
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarUrl Direct CDN or presigned GET avatar image URL.
  */
 fun createTestUserSummary(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,
-    accountStatus: UserAccountStatus = UserAccountStatus.ACTIVE
+    accountStatus: UserAccountStatus = UserAccountStatus.ACTIVE,
+    nickname: String? = "testuser",
+    displayName: String? = "Test User",
+    avatarUrl: String? = null
 ) = UserSummary(
     id = id,
     role = role,
-    accountStatus = accountStatus
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )
 
 /**
@@ -34,7 +43,9 @@ fun createTestUserSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSummary = { index ->
         createTestUserSummary(
-            id = createTestUserId(generateTestUuidString(index))
+            id = createTestUserId(generateTestUuidString(index)),
+            nickname = "testuser_${index + 1}",
+            displayName = "Test User ${index + 1}"
         )
     }
 ): List<UserSummary> = createTestList(count, generator)

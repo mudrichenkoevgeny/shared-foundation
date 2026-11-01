@@ -62,6 +62,8 @@ enum class UserAccountStatus(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [UserAccountStatus].
          */
         fun fromValueOrThrow(value: String): UserAccountStatus =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAccountStatus: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserAccountStatus::class.simpleName}: '$value'"
+            )
     }
 }

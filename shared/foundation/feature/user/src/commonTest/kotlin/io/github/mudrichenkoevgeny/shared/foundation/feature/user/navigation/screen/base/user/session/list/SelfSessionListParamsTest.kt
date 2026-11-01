@@ -4,8 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues.UserSessionSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -14,39 +14,71 @@ class SelfSessionListParamsTest {
     @Test
     fun `parse extracts self session list params correctly`() {
         val params = mapOf(
-            ListingParamNames.Pagination.PAGE_NUMBER to "3",
+            ListingParamNames.Pagination.PAGE_NUMBER to "2",
             ListingParamNames.Pagination.PAGE_SIZE to "50",
-            ListingParamNames.Sort.SORT_BY to "updated_at",
+            ListingParamNames.Sort.SORT_BY to "last_accessed_at",
             ListingParamNames.Sort.SORT_ORDER to "asc",
-            UserFilterValues.UserSessionFilterValues.IDENTIFIER to listOf("user@example.com"),
-            UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID to listOf("id_123"),
-            UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER to listOf("email"),
-            UserFilterValues.UserSessionFilterValues.CLIENT_TYPE to listOf("android", "web"),
-            UserFilterValues.UserSessionFilterValues.USER_AGENT to listOf("Mozilla/5.0"),
-            UserFilterValues.UserSessionFilterValues.IP_ADDRESS to listOf("127.0.0.1"),
-            UserFilterValues.UserSessionFilterValues.LANGUAGE to listOf("en-US"),
-            UserFilterValues.UserSessionFilterValues.DEVICE_ID to listOf("dev_456"),
-            UserFilterValues.UserSessionFilterValues.DEVICE_NAME to listOf("Pixel 7"),
-            UserFilterValues.UserSessionFilterValues.APP_VERSION to listOf("1.0.0"),
-            UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION to listOf("Android 13")
+            UserSessionFilterValues.SESSION_ID to listOf("sess_123"),
+            UserSessionFilterValues.IDENTIFIER to "test@example.com",
+            UserSessionFilterValues.IDENTIFIER_ID to listOf("id_123"),
+            UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME to "Test",
+            UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER to listOf("email", "google"),
+            UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER to listOf("phone"),
+            UserSessionFilterValues.CLIENT_TYPE to listOf("android"),
+            UserSessionFilterValues.DEVICE_ID to "dev_123",
+            UserSessionFilterValues.DEVICE_NAME to "Pixel 8",
+            UserSessionFilterValues.APP_VERSION to "1.0.0",
+            UserSessionFilterValues.OPERATION_SYSTEM_VERSION to "Android 14",
+            UserSessionFilterValues.USER_AGENT to "Mozilla/5.0",
+            UserSessionFilterValues.IS_USER_AGENT_SET to "true",
+            UserSessionFilterValues.IP_ADDRESS to "127.0.0.1",
+            UserSessionFilterValues.IS_IP_ADDRESS_SET to "true",
+            UserSessionFilterValues.EXPIRES_AT_FROM to "2026-01-01T00:00:00Z",
+            UserSessionFilterValues.EXPIRES_AT_TO to "2026-03-01T00:00:00Z",
+            UserSessionFilterValues.LAST_ACCESSED_AT_FROM to "2026-01-02T00:00:00Z",
+            UserSessionFilterValues.LAST_ACCESSED_AT_TO to "2026-03-02T00:00:00Z",
+            UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM to "2026-01-03T00:00:00Z",
+            UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO to "2026-03-03T00:00:00Z",
+            UserSessionFilterValues.CREATED_AT_FROM to "2026-01-04T00:00:00Z",
+            UserSessionFilterValues.CREATED_AT_TO to "2026-03-04T00:00:00Z",
+            UserSessionFilterValues.UPDATED_AT_FROM to "2026-01-05T00:00:00Z",
+            UserSessionFilterValues.UPDATED_AT_TO to "2026-03-05T00:00:00Z",
+            UserSessionFilterValues.IS_UPDATED_AT_SET to "true",
+            UserSessionFilterValues.SEARCH_QUERY to "test"
         )
         val parsed = SelfSessionListParams.parse(params)
 
-        assertEquals(3, parsed.pageNumber)
+        assertEquals(2, parsed.pageNumber)
         assertEquals(50, parsed.pageSize)
-        assertEquals(UserSessionSortBy.UPDATED_AT, parsed.sortBy)
+        assertEquals(UserSessionSortBy.LAST_ACCESSED_AT, parsed.sortBy)
         assertEquals(SortOrder.ASC, parsed.sortOrder)
-        assertEquals(listOf("user@example.com"), parsed.identifiers)
+        assertEquals(listOf("sess_123"), parsed.sessionIds)
+        assertEquals("test@example.com", parsed.identifier)
         assertEquals(listOf("id_123"), parsed.identifierIds)
-        assertEquals(listOf(UserAuthProvider.EMAIL), parsed.userAuthProviders)
-        assertEquals(listOf(ClientType.ANDROID, ClientType.WEB), parsed.clientTypes)
-        assertEquals(listOf("Mozilla/5.0"), parsed.userAgents)
-        assertEquals(listOf("127.0.0.1"), parsed.ipAddresses)
-        assertEquals(listOf("en-US"), parsed.languages)
-        assertEquals(listOf("dev_456"), parsed.deviceIds)
-        assertEquals(listOf("Pixel 7"), parsed.deviceNames)
-        assertEquals(listOf("1.0.0"), parsed.appVersions)
-        assertEquals(listOf("Android 13"), parsed.osVersions)
+        assertEquals("Test", parsed.identifierDisplayName)
+        assertEquals(listOf(UserAuthProvider.EMAIL, UserAuthProvider.GOOGLE), parsed.identifierAuthProviders)
+        assertEquals(listOf(UserAuthProvider.PHONE), parsed.excludeIdentifierAuthProviders)
+        assertEquals(listOf(ClientType.ANDROID), parsed.clientTypes)
+        assertEquals("dev_123", parsed.deviceId)
+        assertEquals("Pixel 8", parsed.deviceName)
+        assertEquals("1.0.0", parsed.appVersion)
+        assertEquals("Android 14", parsed.osVersion)
+        assertEquals("Mozilla/5.0", parsed.userAgent)
+        assertEquals(true, parsed.isUserAgentSet)
+        assertEquals("127.0.0.1", parsed.ipAddress)
+        assertEquals(true, parsed.isIpAddressSet)
+        assertEquals("2026-01-01T00:00:00Z", parsed.expiresAtFrom)
+        assertEquals("2026-03-01T00:00:00Z", parsed.expiresAtTo)
+        assertEquals("2026-01-02T00:00:00Z", parsed.lastAccessedAtFrom)
+        assertEquals("2026-03-02T00:00:00Z", parsed.lastAccessedAtTo)
+        assertEquals("2026-01-03T00:00:00Z", parsed.lastReauthenticatedAtFrom)
+        assertEquals("2026-03-03T00:00:00Z", parsed.lastReauthenticatedAtTo)
+        assertEquals("2026-01-04T00:00:00Z", parsed.createdAtFrom)
+        assertEquals("2026-03-04T00:00:00Z", parsed.createdAtTo)
+        assertEquals("2026-01-05T00:00:00Z", parsed.updatedAtFrom)
+        assertEquals("2026-03-05T00:00:00Z", parsed.updatedAtTo)
+        assertEquals(true, parsed.isUpdatedAtSet)
+        assertEquals("test", parsed.searchQuery)
     }
 
     @Test
@@ -56,41 +88,44 @@ class SelfSessionListParamsTest {
     }
 
     @Test
-    fun `serialize and toQueryMap produce correct map`() {
-        val model = SelfSessionListParams(
-            pageNumber = 3,
+    fun `serialize and parse roundtrip maintains equality`() {
+        val original = SelfSessionListParams(
+            pageNumber = 2,
             pageSize = 50,
-            sortBy = UserSessionSortBy.UPDATED_AT,
+            sortBy = UserSessionSortBy.LAST_ACCESSED_AT,
             sortOrder = SortOrder.ASC,
-            identifiers = listOf("user@example.com"),
+            sessionIds = listOf("sess_123"),
+            identifier = "test@example.com",
             identifierIds = listOf("id_123"),
-            userAuthProviders = listOf(UserAuthProvider.EMAIL),
+            identifierDisplayName = "Test",
+            identifierAuthProviders = listOf(UserAuthProvider.EMAIL),
+            excludeIdentifierAuthProviders = listOf(UserAuthProvider.PHONE),
             clientTypes = listOf(ClientType.ANDROID),
-            userAgents = listOf("Mozilla/5.0"),
-            ipAddresses = listOf("127.0.0.1"),
-            languages = listOf("en-US"),
-            deviceIds = listOf("dev_456"),
-            deviceNames = listOf("Pixel 7"),
-            appVersions = listOf("1.0.0"),
-            osVersions = listOf("Android 13")
+            deviceId = "dev_123",
+            deviceName = "Pixel 8",
+            appVersion = "1.0.0",
+            osVersion = "Android 14",
+            userAgent = "Mozilla/5.0",
+            isUserAgentSet = true,
+            ipAddress = "127.0.0.1",
+            isIpAddressSet = true,
+            expiresAtFrom = "2026-01-01T00:00:00Z",
+            expiresAtTo = "2026-03-01T00:00:00Z",
+            lastAccessedAtFrom = "2026-01-02T00:00:00Z",
+            lastAccessedAtTo = "2026-03-02T00:00:00Z",
+            lastReauthenticatedAtFrom = "2026-01-03T00:00:00Z",
+            lastReauthenticatedAtTo = "2026-03-03T00:00:00Z",
+            createdAtFrom = "2026-01-04T00:00:00Z",
+            createdAtTo = "2026-03-04T00:00:00Z",
+            updatedAtFrom = "2026-01-05T00:00:00Z",
+            updatedAtTo = "2026-03-05T00:00:00Z",
+            isUpdatedAtSet = true,
+            searchQuery = "test"
         )
-        val serialized = model.toQueryMap()
 
-        assertEquals(listOf("3"), serialized[ListingParamNames.Pagination.PAGE_NUMBER])
-        assertEquals(listOf("50"), serialized[ListingParamNames.Pagination.PAGE_SIZE])
-        assertEquals(listOf("updated_at"), serialized[ListingParamNames.Sort.SORT_BY])
-        assertEquals(listOf("asc"), serialized[ListingParamNames.Sort.SORT_ORDER])
-        assertEquals(listOf("user@example.com"), serialized[UserFilterValues.UserSessionFilterValues.IDENTIFIER])
-        assertEquals(listOf("id_123"), serialized[UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID])
-        assertEquals(listOf("email"), serialized[UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER])
-        assertEquals(listOf("android"), serialized[UserFilterValues.UserSessionFilterValues.CLIENT_TYPE])
-        assertEquals(listOf("Mozilla/5.0"), serialized[UserFilterValues.UserSessionFilterValues.USER_AGENT])
-        assertEquals(listOf("127.0.0.1"), serialized[UserFilterValues.UserSessionFilterValues.IP_ADDRESS])
-        assertEquals(listOf("en-US"), serialized[UserFilterValues.UserSessionFilterValues.LANGUAGE])
-        assertEquals(listOf("dev_456"), serialized[UserFilterValues.UserSessionFilterValues.DEVICE_ID])
-        assertEquals(listOf("Pixel 7"), serialized[UserFilterValues.UserSessionFilterValues.DEVICE_NAME])
-        assertEquals(listOf("1.0.0"), serialized[UserFilterValues.UserSessionFilterValues.APP_VERSION])
-        assertEquals(listOf("Android 13"), serialized[UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION])
-        assertEquals(serialized, SelfSessionListParams.serialize(model))
+        val serialized = SelfSessionListParams.serialize(original)
+        val restored = SelfSessionListParams.parse(serialized)
+
+        assertEquals(original, restored)
     }
 }

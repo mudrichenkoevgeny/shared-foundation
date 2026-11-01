@@ -1,12 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.generator.route
 
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.ui.UiValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.storage.UserStorageTargetScopes
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.contractClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.errorClasses
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.extractClassStructure
@@ -69,6 +72,9 @@ fun generateContractObjects(): String {
       Sort: {
         SORT_BY: "${ListingParamNames.Sort.SORT_BY}",
         SORT_ORDER: "${ListingParamNames.Sort.SORT_ORDER}"
+      },
+      Search: {
+        SEARCH_QUERY: "${ListingParamNames.Search.SEARCH_QUERY}"
       }
     };
 
@@ -88,63 +94,154 @@ fun generateContractObjects(): String {
       }
     };
 
-    export const AuditFilterValues = {
-      AuditEventFilterValues: {
-        ACTOR_ID: "${AuditFilterValues.AuditEventFilterValues.ACTOR_ID}",
-        ACTOR_TYPE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_TYPE}",
-        ACTOR_USER_ROLE: "${AuditFilterValues.AuditEventFilterValues.ACTOR_USER_ROLE}",
-        ACTION: "${AuditFilterValues.AuditEventFilterValues.ACTION}",
-        RESOURCE: "${AuditFilterValues.AuditEventFilterValues.RESOURCE}",
-        RESOURCE_ID: "${AuditFilterValues.AuditEventFilterValues.RESOURCE_ID}",
-        STATUS: "${AuditFilterValues.AuditEventFilterValues.STATUS}",
-        MESSAGE: "${AuditFilterValues.AuditEventFilterValues.MESSAGE}"
-      }
+// TODO refactor
+    export const AuditEventFilterValues = {
+      EVENT_ID: "${AuditEventFilterValues.EVENT_ID}",
+      ACTOR_ID: "${AuditEventFilterValues.ACTOR_ID}",
+      ACTOR_TYPE: "${AuditEventFilterValues.ACTOR_TYPE}",
+      EXCLUDE_ACTOR_TYPE: "${AuditEventFilterValues.EXCLUDE_ACTOR_TYPE}",
+      ACTOR_USER_ROLE: "${AuditEventFilterValues.ACTOR_USER_ROLE}",
+      ACTION: "${AuditEventFilterValues.ACTION}",
+      EXCLUDE_ACTION: "${AuditEventFilterValues.EXCLUDE_ACTION}",
+      RESOURCE: "${AuditEventFilterValues.RESOURCE}",
+      RESOURCE_ID: "${AuditEventFilterValues.RESOURCE_ID}",
+      STATUS: "${AuditEventFilterValues.STATUS}",
+      EXCLUDE_STATUS: "${AuditEventFilterValues.EXCLUDE_STATUS}",
+      CREATED_AT_FROM: "${AuditEventFilterValues.CREATED_AT_FROM}",
+      CREATED_AT_TO: "${AuditEventFilterValues.CREATED_AT_TO}",
+      SEARCH_QUERY: "${AuditEventFilterValues.SEARCH_QUERY}"
     };
 
     export const UserFilterValues = {
-      UserFilterValues: {
-        ROLE: "${UserFilterValues.UserFilterValues.ROLE}",
-        ACCOUNT_STATUS: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS}",
-        ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}",
-        ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.UserFilterValues.ACCOUNT_LOCKOUT_TYPE}",
-        AUTHORITY_LEVEL_FROM: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_FROM}",
-        AUTHORITY_LEVEL_TO: "${UserFilterValues.UserFilterValues.AUTHORITY_LEVEL_TO}",
-        IS_TOTP_ENABLED: "${UserFilterValues.UserFilterValues.IS_TOTP_ENABLED}",
-        PERMISSION_CODES: "${UserFilterValues.UserFilterValues.PERMISSION_CODES}"
-      },
-      UserIdentifierFilterValues: {
-        USER_ID: "${UserFilterValues.UserIdentifierFilterValues.USER_ID}",
-        USER_AUTH_PROVIDER: "${UserFilterValues.UserIdentifierFilterValues.USER_AUTH_PROVIDER}",
-        IDENTIFIER: "${UserFilterValues.UserIdentifierFilterValues.IDENTIFIER}"
-      },
-      UserSessionFilterValues: {
-        USER_ID: "${UserFilterValues.UserSessionFilterValues.USER_ID}",
-        USER_ROLE: "${UserFilterValues.UserSessionFilterValues.USER_ROLE}",
-        IDENTIFIER_ID: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER_ID}",
-        USER_AUTH_PROVIDER: "${UserFilterValues.UserSessionFilterValues.USER_AUTH_PROVIDER}",
-        CLIENT_TYPE: "${UserFilterValues.UserSessionFilterValues.CLIENT_TYPE}",
-        USER_AGENT: "${UserFilterValues.UserSessionFilterValues.USER_AGENT}",
-        IP_ADDRESS: "${UserFilterValues.UserSessionFilterValues.IP_ADDRESS}",
-        LANGUAGE: "${UserFilterValues.UserSessionFilterValues.LANGUAGE}",
-        DEVICE_ID: "${UserFilterValues.UserSessionFilterValues.DEVICE_ID}",
-        DEVICE_NAME: "${UserFilterValues.UserSessionFilterValues.DEVICE_NAME}",
-        APP_VERSION: "${UserFilterValues.UserSessionFilterValues.APP_VERSION}",
-        OPERATION_SYSTEM_VERSION: "${UserFilterValues.UserSessionFilterValues.OPERATION_SYSTEM_VERSION}",
-        IDENTIFIER: "${UserFilterValues.UserSessionFilterValues.IDENTIFIER}"
-      }
+      USER_ID: "${UserFilterValues.USER_ID}",
+      ROLE: "${UserFilterValues.ROLE}",
+      EXCLUDE_ROLE: "${UserFilterValues.EXCLUDE_ROLE}",
+      ACCOUNT_STATUS: "${UserFilterValues.ACCOUNT_STATUS}",
+      EXCLUDE_ACCOUNT_STATUS: "${UserFilterValues.EXCLUDE_ACCOUNT_STATUS}",
+      ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.ACCOUNT_STATUS_ON_RESTORE}",
+      EXCLUDE_ACCOUNT_STATUS_ON_RESTORE: "${UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE}",
+      IS_ACCOUNT_STATUS_ON_RESTORE_SET: "${UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET}",
+      AUTHORITY_LEVEL_FROM: "${UserFilterValues.AUTHORITY_LEVEL_FROM}",
+      AUTHORITY_LEVEL_TO: "${UserFilterValues.AUTHORITY_LEVEL_TO}",
+      PERMISSION_CODES: "${UserFilterValues.PERMISSION_CODES}",
+      EXCLUDE_PERMISSION_CODES: "${UserFilterValues.EXCLUDE_PERMISSION_CODES}",
+      IS_TOTP_ENABLED: "${UserFilterValues.IS_TOTP_ENABLED}",
+      LAST_LOGIN_AT_FROM: "${UserFilterValues.LAST_LOGIN_AT_FROM}",
+      LAST_LOGIN_AT_TO: "${UserFilterValues.LAST_LOGIN_AT_TO}",
+      IS_LAST_LOGIN_AT_SET: "${UserFilterValues.IS_LAST_LOGIN_AT_SET}",
+      LAST_ACTIVE_AT_FROM: "${UserFilterValues.LAST_ACTIVE_AT_FROM}",
+      LAST_ACTIVE_AT_TO: "${UserFilterValues.LAST_ACTIVE_AT_TO}",
+      IS_LAST_ACTIVE_AT_SET: "${UserFilterValues.IS_LAST_ACTIVE_AT_SET}",
+      CREATED_AT_FROM: "${UserFilterValues.CREATED_AT_FROM}",
+      CREATED_AT_TO: "${UserFilterValues.CREATED_AT_TO}",
+      UPDATED_AT_FROM: "${UserFilterValues.UPDATED_AT_FROM}",
+      UPDATED_AT_TO: "${UserFilterValues.UPDATED_AT_TO}",
+      IS_UPDATED_AT_SET: "${UserFilterValues.IS_UPDATED_AT_SET}",
+      SCHEDULED_PERMANENT_DELETION_AT_FROM: "${UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM}",
+      SCHEDULED_PERMANENT_DELETION_AT_TO: "${UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO}",
+      IS_SCHEDULED_PERMANENT_DELETION_AT_SET: "${UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET}",
+      ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.ACCOUNT_LOCKOUT_TYPE}",
+      EXCLUDE_ACCOUNT_LOCKOUT_TYPE: "${UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE}",
+      TEMPORARY_LOCKOUT_UNTIL_FROM: "${UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM}",
+      TEMPORARY_LOCKOUT_UNTIL_TO: "${UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO}",
+      IS_TEMPORARY_LOCKOUT_UNTIL_SET: "${UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET}",
+      STORAGE_QUOTA_BYTES_FROM: "${UserFilterValues.STORAGE_QUOTA_BYTES_FROM}",
+      STORAGE_QUOTA_BYTES_TO: "${UserFilterValues.STORAGE_QUOTA_BYTES_TO}",
+      IS_STORAGE_QUOTA_BYTES_SET: "${UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET}",
+      STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM: "${UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM}",
+      STORAGE_MAX_UPLOAD_SIZE_BYTES_TO: "${UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO}",
+      IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET: "${UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET}",
+      STORAGE_MAX_PENDING_UPLOADS_FROM: "${UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM}",
+      STORAGE_MAX_PENDING_UPLOADS_TO: "${UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO}",
+      IS_STORAGE_MAX_PENDING_UPLOADS_SET: "${UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET}",
+      IS_STORAGE_CONFIGURATION_SET: "${UserFilterValues.IS_STORAGE_CONFIGURATION_SET}",
+      NICKNAME: "${UserFilterValues.NICKNAME}",
+      IS_NICKNAME_SET: "${UserFilterValues.IS_NICKNAME_SET}",
+      DISPLAY_NAME: "${UserFilterValues.DISPLAY_NAME}",
+      IS_DISPLAY_NAME_SET: "${UserFilterValues.IS_DISPLAY_NAME_SET}",
+      IS_AVATAR_SET: "${UserFilterValues.IS_AVATAR_SET}",
+      BIRTHDATE_FROM: "${UserFilterValues.BIRTHDATE_FROM}",
+      BIRTHDATE_TO: "${UserFilterValues.BIRTHDATE_TO}",
+      IS_BIRTHDATE_SET: "${UserFilterValues.IS_BIRTHDATE_SET}",
+      SEARCH_QUERY: "${UserFilterValues.SEARCH_QUERY}"
     };
 
-    export const StorageFilterValues = {
-      StorageFileFilterValues: {
-        FILE_ID: "${StorageFilterValues.StorageFileFilterValues.FILE_ID}",
-        OWNER_USER_ID: "${StorageFilterValues.StorageFileFilterValues.OWNER_USER_ID}",
-        FILE_NAME: "${StorageFilterValues.StorageFileFilterValues.FILE_NAME}",
-        MIME_TYPE: "${StorageFilterValues.StorageFileFilterValues.MIME_TYPE}",
-        CATEGORY: "${StorageFilterValues.StorageFileFilterValues.CATEGORY}",
-        VISIBILITY: "${StorageFilterValues.StorageFileFilterValues.VISIBILITY}",
-        STATUS: "${StorageFilterValues.StorageFileFilterValues.STATUS}",
-        TARGET_SCOPE: "${StorageFilterValues.StorageFileFilterValues.TARGET_SCOPE}"
-      }
+    export const UserIdentifierFilterValues = {
+      IDENTIFIER_ID: "${UserIdentifierFilterValues.IDENTIFIER_ID}",
+      USER_ID: "${UserIdentifierFilterValues.USER_ID}",
+      USER_AUTH_PROVIDER: "${UserIdentifierFilterValues.USER_AUTH_PROVIDER}",
+      EXCLUDE_USER_AUTH_PROVIDER: "${UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER}",
+      IDENTIFIER: "${UserIdentifierFilterValues.IDENTIFIER}",
+      DISPLAY_NAME: "${UserIdentifierFilterValues.DISPLAY_NAME}",
+      EXTERNAL_PROVIDER_EMAIL: "${UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL}",
+      IS_EXTERNAL_PROVIDER_EMAIL_SET: "${UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET}",
+      CREATED_AT_FROM: "${UserIdentifierFilterValues.CREATED_AT_FROM}",
+      CREATED_AT_TO: "${UserIdentifierFilterValues.CREATED_AT_TO}",
+      UPDATED_AT_FROM: "${UserIdentifierFilterValues.UPDATED_AT_FROM}",
+      UPDATED_AT_TO: "${UserIdentifierFilterValues.UPDATED_AT_TO}",
+      IS_UPDATED_AT_SET: "${UserIdentifierFilterValues.IS_UPDATED_AT_SET}",
+      SEARCH_QUERY: "${UserIdentifierFilterValues.SEARCH_QUERY}"
+    };
+
+    export const UserSessionFilterValues = {
+      SESSION_ID: "${UserSessionFilterValues.SESSION_ID}",
+      USER_ID: "${UserSessionFilterValues.USER_ID}",
+      USER_ROLE: "${UserSessionFilterValues.USER_ROLE}",
+      EXCLUDE_USER_ROLE: "${UserSessionFilterValues.EXCLUDE_USER_ROLE}",
+      IDENTIFIER: "${UserSessionFilterValues.IDENTIFIER}",
+      IDENTIFIER_ID: "${UserSessionFilterValues.IDENTIFIER_ID}",
+      IDENTIFIER_DISPLAY_NAME: "${UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME}",
+      IDENTIFIER_AUTH_PROVIDER: "${UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER}",
+      EXCLUDE_IDENTIFIER_AUTH_PROVIDER: "${UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER}",
+      CLIENT_TYPE: "${UserSessionFilterValues.CLIENT_TYPE}",
+      DEVICE_ID: "${UserSessionFilterValues.DEVICE_ID}",
+      DEVICE_NAME: "${UserSessionFilterValues.DEVICE_NAME}",
+      APP_VERSION: "${UserSessionFilterValues.APP_VERSION}",
+      OPERATION_SYSTEM_VERSION: "${UserSessionFilterValues.OPERATION_SYSTEM_VERSION}",
+      USER_AGENT: "${UserSessionFilterValues.USER_AGENT}",
+      IS_USER_AGENT_SET: "${UserSessionFilterValues.IS_USER_AGENT_SET}",
+      IP_ADDRESS: "${UserSessionFilterValues.IP_ADDRESS}",
+      IS_IP_ADDRESS_SET: "${UserSessionFilterValues.IS_IP_ADDRESS_SET}",
+      EXPIRES_AT_FROM: "${UserSessionFilterValues.EXPIRES_AT_FROM}",
+      EXPIRES_AT_TO: "${UserSessionFilterValues.EXPIRES_AT_TO}",
+      LAST_ACCESSED_AT_FROM: "${UserSessionFilterValues.LAST_ACCESSED_AT_FROM}",
+      LAST_ACCESSED_AT_TO: "${UserSessionFilterValues.LAST_ACCESSED_AT_TO}",
+      LAST_REAUTHENTICATED_AT_FROM: "${UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM}",
+      LAST_REAUTHENTICATED_AT_TO: "${UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO}",
+      CREATED_AT_FROM: "${UserSessionFilterValues.CREATED_AT_FROM}",
+      CREATED_AT_TO: "${UserSessionFilterValues.CREATED_AT_TO}",
+      UPDATED_AT_FROM: "${UserSessionFilterValues.UPDATED_AT_FROM}",
+      UPDATED_AT_TO: "${UserSessionFilterValues.UPDATED_AT_TO}",
+      IS_UPDATED_AT_SET: "${UserSessionFilterValues.IS_UPDATED_AT_SET}",
+      SEARCH_QUERY: "${UserSessionFilterValues.SEARCH_QUERY}"
+    };
+
+    export const StorageFileFilterValues = {
+      FILE_ID: "${StorageFileFilterValues.FILE_ID}",
+      OWNER_USER_ID: "${StorageFileFilterValues.OWNER_USER_ID}",
+      IS_OWNER_USER_ID_SET: "${StorageFileFilterValues.IS_OWNER_USER_ID_SET}",
+      FILE_NAME: "${StorageFileFilterValues.FILE_NAME}",
+      FILE_SIZE_BYTES_FROM: "${StorageFileFilterValues.FILE_SIZE_BYTES_FROM}",
+      FILE_SIZE_BYTES_TO: "${StorageFileFilterValues.FILE_SIZE_BYTES_TO}",
+      MIME_TYPE: "${StorageFileFilterValues.MIME_TYPE}",
+      CATEGORY: "${StorageFileFilterValues.CATEGORY}",
+      EXCLUDE_CATEGORY: "${StorageFileFilterValues.EXCLUDE_CATEGORY}",
+      VISIBILITY: "${StorageFileFilterValues.VISIBILITY}",
+      EXCLUDE_VISIBILITY: "${StorageFileFilterValues.EXCLUDE_VISIBILITY}",
+      STATUS: "${StorageFileFilterValues.STATUS}",
+      EXCLUDE_STATUS: "${StorageFileFilterValues.EXCLUDE_STATUS}",
+      TARGET_SCOPE: "${StorageFileFilterValues.TARGET_SCOPE}",
+      IS_TARGET_SCOPE_SET: "${StorageFileFilterValues.IS_TARGET_SCOPE_SET}",
+      CREATED_AT_FROM: "${StorageFileFilterValues.CREATED_AT_FROM}",
+      CREATED_AT_TO: "${StorageFileFilterValues.CREATED_AT_TO}",
+      UPDATED_AT_FROM: "${StorageFileFilterValues.UPDATED_AT_FROM}",
+      UPDATED_AT_TO: "${StorageFileFilterValues.UPDATED_AT_TO}",
+      IS_UPDATED_AT_SET: "${StorageFileFilterValues.IS_UPDATED_AT_SET}",
+      SEARCH_QUERY: "${StorageFileFilterValues.SEARCH_QUERY}"
+    };
+
+    export const UserStorageTargetScopes = {
+      AVATAR: "${UserStorageTargetScopes.AVATAR}"
     };
     """.trimIndent()
 
@@ -303,22 +400,27 @@ fun generateEnumsJs(): String {
       }
     };
 
-    export const CommonSortValues = {
-      TimestampSortBy
+    export const nicknameValidator = {
+      validate: (nickname, minLength, maxLength, isNicknameChangeAllowed = true, isNicknameChanging = false) => {
+        if (nickname === null || nickname === undefined) return null;
+        if (isNicknameChanging && !isNicknameChangeAllowed) return UserErrorCodes.NICKNAME_CHANGE_DISABLED;
+        const valStr = String(nickname);
+        if (valStr.length < minLength) return UserErrorCodes.NICKNAME_TOO_SHORT;
+        if (valStr.length > maxLength) return UserErrorCodes.NICKNAME_TOO_LONG;
+        if (!/^[a-zA-Z0-9](?:[._]?[a-zA-Z0-9]+)*$/.test(valStr)) return UserErrorCodes.INVALID_NICKNAME_CHARACTERS;
+        return null;
+      }
     };
 
-    export const AuditSortValues = {
-      AuditEventSortBy
-    };
-
-    export const StorageSortValues = {
-      StorageFileSortBy
-    };
-
-    export const UserSortValues = {
-      UserSortBy,
-      UserIdentifierSortBy,
-      UserSessionSortBy
+    export const displayNameValidator = {
+      validate: (displayName, minLength, maxLength) => {
+        if (displayName === null || displayName === undefined) return null;
+        const valStr = String(displayName);
+        if (valStr.length < minLength) return UserErrorCodes.DISPLAY_NAME_TOO_SHORT;
+        if (valStr.length > maxLength) return UserErrorCodes.DISPLAY_NAME_TOO_LONG;
+        if (/[\x00-\x1F\x7F-\x9F]/.test(valStr)) return UserErrorCodes.INVALID_DISPLAY_NAME_CHARACTERS;
+        return null;
+      }
     };
     """.trimIndent()
 

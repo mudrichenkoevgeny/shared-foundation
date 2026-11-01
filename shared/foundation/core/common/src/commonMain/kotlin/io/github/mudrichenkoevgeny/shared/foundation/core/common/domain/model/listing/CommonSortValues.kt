@@ -5,42 +5,41 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Shared **wire values** for list sorting (for example `sort_by` and `sort_order` query parameters or internal
- * representations that must match that contract).
+ * Supported `sort_by` values for common timestamp-based fields.
+ *
+ * @property value Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
  */
-object CommonSortValues {
-    /**
-     * Supported `sort_by` values for timestamp-based fields.
-     *
-     * @property value Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
-     */
-    @Serializable
-    enum class TimestampSortBy(val value: String) {
-        /** Sort by [CommonApiFields.CREATED_AT]. */
-        @SerialName(CommonApiFields.CREATED_AT)
-        CREATED_AT(CommonApiFields.CREATED_AT),
+@Serializable
+enum class CommonSortValues(val value: String) {
+    /** Sort by [CommonApiFields.CREATED_AT]. */
+    @SerialName(CommonApiFields.CREATED_AT)
+    CREATED_AT(CommonApiFields.CREATED_AT),
 
-        /** Sort by [CommonApiFields.UPDATED_AT]. */
-        @SerialName(CommonApiFields.UPDATED_AT)
-        UPDATED_AT(CommonApiFields.UPDATED_AT);
+    /** Sort by [CommonApiFields.UPDATED_AT]. */
+    @SerialName(CommonApiFields.UPDATED_AT)
+    UPDATED_AT(CommonApiFields.UPDATED_AT);
 
-        companion object {
-            /**
-             * Returns [TimestampSortBy] for the given wire value or case-insensitive enum name.
-             */
-            fun fromValueOrNull(value: String): TimestampSortBy? =
-                entries.firstOrNull {
-                    it.value.equals(value, ignoreCase = true) ||
-                            it.name.equals(value, ignoreCase = true)
-                }
+    companion object {
+        /** Default sort field ([CREATED_AT]). */
+        val DEFAULT = CREATED_AT
 
-            /**
-             * Returns [TimestampSortBy] for the given wire or enum-style string.
-             *
-             * @throws IllegalArgumentException if [value] does not match any [TimestampSortBy].
-             */
-            fun fromValueOrThrow(value: String): TimestampSortBy =
-                fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for TimestampSortBy: '$value'")
-        }
+        /**
+         * Returns [CommonSortValues] for the given wire value or case-insensitive enum name.
+         */
+        fun fromValueOrNull(value: String): CommonSortValues? =
+            entries.firstOrNull {
+                it.value.equals(value, ignoreCase = true) ||
+                        it.name.equals(value, ignoreCase = true)
+            }
+
+        /**
+         * Returns [CommonSortValues] for the given wire or enum-style string.
+         *
+         * @throws IllegalArgumentException if [value] does not match any [CommonSortValues].
+         */
+        fun fromValueOrThrow(value: String): CommonSortValues =
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${CommonSortValues::class.simpleName}: '$value'"
+            )
     }
 }

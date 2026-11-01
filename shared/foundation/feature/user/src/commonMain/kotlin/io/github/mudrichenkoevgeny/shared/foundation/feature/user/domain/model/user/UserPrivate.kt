@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
@@ -27,6 +28,11 @@ import kotlin.time.Instant
  * @property lockoutType Category of account lockout ([AccountLockoutType]).
  * @property temporaryLockoutUntil Timestamp until which the account is temporarily locked out ([Instant]), or `null`.
  * @property storageConfiguration Custom user storage configuration overrides and limits ([UserStorageConfiguration]), or `null`.
+ * @property nickname Unique handle or username string (e.g. `@username`), or `null`.
+ * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
+ * @property avatarFileId Avatar image file identifier in storage ([FileId]), or `null`.
+ * @property avatarUrl Direct CDN or presigned GET avatar image URL, or `null`.
+ * @property birthdate User birthdate timestamp ([Instant]), or `null`.
  */
 data class UserPrivate(
     val id: UserId = UserId.generate(),
@@ -43,5 +49,10 @@ data class UserPrivate(
     val scheduledPermanentDeletionAt: Instant?,
     val lockoutType: AccountLockoutType,
     val temporaryLockoutUntil: Instant?,
-    val storageConfiguration: UserStorageConfiguration?
+    val storageConfiguration: UserStorageConfiguration?,
+    val nickname: String?,
+    val displayName: String?,
+    val avatarFileId: FileId?,
+    val avatarUrl: String?,
+    val birthdate: Instant?
 )

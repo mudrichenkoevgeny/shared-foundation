@@ -24,8 +24,7 @@ fun AuditEventInternal.toAuditEventPrivate(): AuditEventPrivate = AuditEventPriv
     status = status,
     metadata = metadata,
     message = message,
-    createdAt = createdAt,
-    updatedAt = updatedAt
+    createdAt = createdAt
 )
 
 /**

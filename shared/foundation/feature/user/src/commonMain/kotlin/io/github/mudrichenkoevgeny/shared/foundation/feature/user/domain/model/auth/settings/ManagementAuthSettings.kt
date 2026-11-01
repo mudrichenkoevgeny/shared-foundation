@@ -18,6 +18,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
  * @property maxPhoneIdentifiers Maximum number of phone-based identifiers allowed per account.
  * @property maxIdentifiersPerExternalProvider Maximum number of identifiers allowed for each
  * unique external provider per account; see [ExternalAuthProvider].
+ * @property userNicknameMinLength Minimum character length for user nicknames.
+ * @property userNicknameMaxLength Maximum character length for user nicknames.
+ * @property userDisplayNameMinLength Minimum character length for user display names.
+ * @property userDisplayNameMaxLength Maximum character length for user display names.
+ * @property isUserNicknameChangeAllowed Flag indicating whether users are permitted to modify their nickname.
  * @property maxActiveSessionsForOpenUser Maximum number of active sessions allowed per open user account.
  * @property maxActiveSessionsForManagementUser Maximum number of active sessions allowed per management user account.
  * @property accessTokenExpirationSeconds Validity window for **new** access tokens, in seconds.
@@ -36,6 +41,11 @@ data class ManagementAuthSettings(
     val maxEmailIdentifiers: Int,
     val maxPhoneIdentifiers: Int,
     val maxIdentifiersPerExternalProvider: Int,
+    val userNicknameMinLength: Int,
+    val userNicknameMaxLength: Int,
+    val userDisplayNameMinLength: Int,
+    val userDisplayNameMaxLength: Int,
+    val isUserNicknameChangeAllowed: Boolean,
     val maxActiveSessionsForOpenUser: Int,
     val maxActiveSessionsForManagementUser: Int,
     val accessTokenExpirationSeconds: Int,

@@ -19,6 +19,11 @@ fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =
         maxEmailIdentifiers = maxEmailIdentifiers,
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+        userNicknameMinLength = userNicknameMinLength,
+        userNicknameMaxLength = userNicknameMaxLength,
+        userDisplayNameMinLength = userDisplayNameMinLength,
+        userDisplayNameMaxLength = userDisplayNameMaxLength,
+        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
         isRegistrationEnabled = isRegistrationEnabled
     )
 
@@ -32,5 +37,10 @@ fun OpenAuthSettings.toOpenAuthSettingsPayload(): OpenAuthSettingsPayload =
         maxEmailIdentifiers = maxEmailIdentifiers,
         maxPhoneIdentifiers = maxPhoneIdentifiers,
         maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+        userNicknameMinLength = userNicknameMinLength,
+        userNicknameMaxLength = userNicknameMaxLength,
+        userDisplayNameMinLength = userDisplayNameMinLength,
+        userDisplayNameMaxLength = userDisplayNameMaxLength,
+        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
         isRegistrationEnabled = isRegistrationEnabled
     )

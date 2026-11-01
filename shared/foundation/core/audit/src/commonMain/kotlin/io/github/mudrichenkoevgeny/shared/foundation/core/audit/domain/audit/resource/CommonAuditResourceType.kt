@@ -39,6 +39,8 @@ enum class CommonAuditResourceType(override val value: String) : AuditResourceTy
          * @throws IllegalArgumentException if [value] does not match any [CommonAuditResourceType].
          */
         fun fromValueOrThrow(value: String): CommonAuditResourceType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for CommonAuditResourceType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${CommonAuditResourceType::class.simpleName}: '$value'"
+            )
     }
 }

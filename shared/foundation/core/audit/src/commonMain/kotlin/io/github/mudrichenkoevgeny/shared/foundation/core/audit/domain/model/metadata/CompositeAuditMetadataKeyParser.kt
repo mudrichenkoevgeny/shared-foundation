@@ -33,7 +33,7 @@ class CompositeAuditMetadataKeyParser(
             }
         }
 
-        throw IllegalArgumentException("Unknown value of AuditMetadataKey: '$value'")
+        throw IllegalArgumentException("Unknown value for ${AuditMetadataKey::class.simpleName}: '$value'")
     }
 
     /**

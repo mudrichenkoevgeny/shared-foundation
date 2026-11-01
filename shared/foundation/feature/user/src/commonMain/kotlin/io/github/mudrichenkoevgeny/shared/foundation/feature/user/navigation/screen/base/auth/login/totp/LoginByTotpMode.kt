@@ -41,7 +41,9 @@ enum class LoginByTotpMode(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any mode.
          */
-        fun fromValueOrThrow(value: String): LoginByTotpMode = fromValueOrNull(value)
-            ?: throw IllegalArgumentException("Unknown value for LoginByTotpMode: '$value'")
+        fun fromValueOrThrow(value: String): LoginByTotpMode =
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${LoginByTotpMode::class.simpleName}: '$value'"
+            )
     }
 }

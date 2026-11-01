@@ -59,6 +59,8 @@ enum class ThemeMode(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [ThemeMode].
          */
         fun fromValueOrThrow(value: String): ThemeMode =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for ThemeMode: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${ThemeMode::class.simpleName}: '$value'"
+            )
     }
 }

@@ -49,7 +49,9 @@ let errorsCount = 0;
 const ignoredObjects = new Set([
     'Companion', 'QueryParamNormalizer', 'PhoneParamNormalizer', 'LocalizationFormatter',
     'LocalizationRegistry', 'PasswordPolicyValidator', 'PasswordPolicyValidatorResult',
-    'PasswordPolicyRule', 'Success', 'ByteSizeFormatter', 'StorageUploadValidator'
+    'PasswordPolicyRule', 'Success', 'ByteSizeFormatter', 'StorageUploadValidator',
+    'NicknameValidator', 'NicknameValidatorResult', 'DisplayNameValidator', 'DisplayNameValidatorResult',
+    'UserStorageTargetScopes'
 ]);
 
 console.log('==================================================');

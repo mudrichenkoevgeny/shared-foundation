@@ -39,6 +39,8 @@ enum class SecurityAuditActionType(override val value: String) : AuditActionType
          * @throws IllegalArgumentException if [value] does not match any [SecurityAuditActionType].
          */
         fun fromValueOrThrow(value: String): SecurityAuditActionType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SecurityAuditActionType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${SecurityAuditActionType::class.simpleName}: '$value'"
+            )
     }
 }

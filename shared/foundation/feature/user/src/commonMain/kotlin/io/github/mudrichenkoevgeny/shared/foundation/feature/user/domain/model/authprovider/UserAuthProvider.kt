@@ -55,6 +55,8 @@ enum class UserAuthProvider(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [UserAuthProvider].
          */
         fun fromValueOrThrow(value: String): UserAuthProvider =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuthProvider: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserAuthProvider::class.simpleName}: '$value'"
+            )
     }
 }

@@ -72,7 +72,7 @@ Every route constant in `feature/*` and `core/*` network route objects must be d
 3. **Request Contract:**
     - **Path parameters:** Reference constants like `[UserApiPaths.USER_ID]`.
     - **Pagination:** Link `[ListingParamNames]`. **Note:** `page` is 1-based.
-    - **Filters:** Link domain-specific query params (e.g., `[AuditFilterValues.AuditEventFilterValues]`).
+    - **Filters:** Link domain-specific query params (e.g., `[EntityFilterValues]`).
     - **Request body:** Link the DTO.
 4. **Response Contract:** Link the response DTO.
 5. **Access Control:**
@@ -164,6 +164,63 @@ To ensure type-safe, multiplatform string localization across Backend (JVM), Web
   - **Bundle Classes:** `CommonErrorsStrings`, `CommonUiStrings`, `SecurityErrorsStrings`, `UserErrorsStrings`, `UserUiStrings`.
   - **Module Facades:** `CommonModuleStrings`, `SecurityModuleStrings`, `UserModuleStrings`.
   - **Root Facade:** `SharedFoundationLocalization`.
+
+## 11. Filtering and Sorting Architecture Standard
+
+To maintain a consistent, predictable, and type-safe API for collection list endpoints across all modules (`core/*` and `feature/*`), the library enforces strict data-type-driven rules for all filtering and sorting parameters.
+
+### 11.1. Nullability and Presence (Selective Business States)
+Presence filters (`IS_*_SET` / `is_*_set`) MUST be provided **selectively**, ONLY for nullable fields where presence/absence represents a distinct business or workflow state (e.g. `is_nickname_set`, `is_temporary_lockout_until_set`, `is_scheduled_permanent_deletion_at_set`, `is_updated_at_set`).
+- **Presence Filter (`IS_*_SET`):**
+  - `true`: Returns records where the value is populated (non-null).
+  - `false`: Returns records where the value is missing (null).
+- **Prohibition on Redundant Flags:** Do NOT blindly generate presence filters for foreign keys or fields whose presence/category is already fully governed by an enum (e.g. `actor_type` in audit events already distinguishes human vs system actors, making `is_actor_id_set` redundant).
+
+### 11.2. Numeric and Temporal Fields (`Int`, `Long`, `Instant`, `Epoch Millis`, `Quotas`, etc.)
+Numeric and timestamp fields are always filtered via ranges, never exact matches (unless specifically required by business logic, such as versions).
+- **Inclusive Bounds (Default):**
+  - `*_FROM` (`*_from`): Inclusive lower bound (`>=`). Includes items matching on or after/greater than the specified value.
+  - `*_TO` (`*_to`): Inclusive upper bound (`<=`). Includes items matching on or before/less than the specified value.
+- **Exclusive Bounds (When explicitly needed):** Use `*_GT` (`>`) and `*_LT` (`<`) suffixes for strict inequalities.
+- **Common Baselines:** Standard creation and modification timestamp filters live in `CommonFilterValues` (`CREATED_AT_FROM`, `CREATED_AT_TO`, `UPDATED_AT_FROM`, `UPDATED_AT_TO`).
+
+### 11.3. String and Text Identity Fields (`Nickname`, `DisplayName`, `Title`, `Description`)
+Exact matching and partial matching MUST be strictly separated to ensure predictable performance (index seeks vs. full table scans) and clear API contracts.
+- **Exact Match:** Exposed as direct property constants (e.g., `NICKNAME = "nickname"`). Matches the entire string strictly (case-sensitivity depends on DB collation).
+- **Partial / Substring Match:** Must use the `*_CONTAINS` or `*_LIKE` suffix (e.g., `NICKNAME_CONTAINS = "nickname_contains"`).
+- **Free-Text Search Query:** Universal cross-cutting search parameter defined in `ListingParamNames.Search.SEARCH_QUERY` (`search_query`).
+- **Documentation Requirement:** Route KDoc and OpenAPI specs for list endpoints MUST explicitly document which specific fields the `SEARCH_QUERY` parameter targets (e.g., searches across `nickname` and `displayName`).
+
+### 11.4. Booleans and State Flags (`isTotpEnabled`, `isVerified`)
+- **Exact Match:** Use the base parameter name expecting a `true` or `false` value (e.g., `is_totp_enabled=true`).
+- **Note:** Do not confuse with Presence Filters (`is_*_set`). A boolean filter checks the actual value, whereas a presence filter checks if the value is null.
+
+### 11.5. Collections, Enums, and Arrays (`Roles`, `Permissions`, `Tags`, `Statuses`)
+List filters must explicitly define their intersection (**AND**) or union (**OR**) semantics.
+- **Include Filters (OR Semantics):** Use the base key name (e.g., `PERMISSION_CODES = "permission_codes"`). Repeated query parameters are treated with **OR** semantics (e.g., `?role=ADMIN&role=STAFF` returns users who are `ADMIN` or `STAFF`).
+- **Include Filters (AND Semantics):** When a client needs entities containing all specified array elements, use the `*_ALL` suffix (e.g., `PERMISSION_CODES_ALL = "permission_codes_all"`).
+- **Exclude Filters:** Use the `EXCLUDE_*` prefix (e.g., `EXCLUDE_PERMISSION_CODES = "exclude_permission_codes"`). Operates with `NOT IN (...)` semantics.
+
+### 11.6. Nested Objects and Embedded Entities
+When filtering by fields inside nested JSON structures or embedded entities (e.g., `storageConfiguration.maxUploadSize`), flatten the dot-notation into URL-safe underscores while preserving type-specific suffixes.
+- **Example:** `storage_configuration_max_upload_size_bytes_from`.
+
+### 11.7. Sorting Configuration
+Sorting architecture requires two dedicated parameters to prevent ambiguity.
+- **Sort Field (`sort_by`):** The field to sort on. Must be exposed in the module's `*SortBy` enum.
+- **Sort Direction (`sort_order`):** The direction of the sort, utilizing the shared `SortOrder` enum (`ASC` or `DESC`).
+- **Defaults:** Temporal fields (dates/timestamps) default to `DESC` (newest first). Alphabetic string fields default to `ASC`. Default fallback is always `CREATED_AT` + `DESC`.
+
+### 11.8. Entity Primary Key Prohibition on Collection List Filters
+- **PROHIBITION:** **NEVER** include an entity's own primary `id` / `[ENTITY]_ID` as a filter parameter in its own collection list `[Entity]FilterValues` class! Getting a single entity by its primary ID is strictly reserved for single-entity GET routes (`GET /entities/{id}`).
+- **Allowed Exception:** Filtering by **Foreign Keys** or parent/related record IDs (e.g., `[PARENT_ENTITY]_ID` or `[FOREIGN_KEY]`) IS valid and required when filtering a sub-collection belonging to or linked to another entity. Batch query parameters accepting multiple IDs (`?id=a&id=b`) are permitted only for explicit batch metadata endpoints.
+
+### 11.9. Property Declaration Order in Filter Classes
+- **Ordering Rule:** Constants in `[Entity]FilterValues` classes **MUST strictly follow the declaration order of properties in the target entity projection** (`[Entity]Private`). Do NOT arbitrarily reorder constants or append nested/computed fields out of order.
+
+### 11.10. Flat Top-Level Structure (No Redundant Object Nesting)
+- **Top-Level Objects:** Filter value objects MUST be top-level Kotlin `object [Entity]FilterValues`. Do NOT wrap them inside redundant outer containers like `object [Entity]FilterValues { object [Entity]FilterValues }`.
+- **Top-Level Enums:** Sort enums MUST be top-level Kotlin `@Serializable enum class [Entity]SortBy(val value: String)`. Do NOT wrap them inside redundant outer `object` containers.
 
 ---
 *Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

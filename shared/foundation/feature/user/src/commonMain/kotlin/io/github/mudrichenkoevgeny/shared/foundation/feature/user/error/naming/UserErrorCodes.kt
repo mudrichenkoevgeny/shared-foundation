@@ -314,4 +314,85 @@ object UserErrorCodes {
      * - `identifier_password_not_set`
      */
     const val USER_IDENTIFIER_PASSWORD_NOT_SET = "USER_IDENTIFIER_PASSWORD_NOT_SET"
+
+    // --- User Details & Nickname Errors ---
+
+    /**
+     * The requested nickname is already taken by another user.
+     *
+     * **Localization keys:**
+     * - `nickname_already_taken`
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.NICKNAME]: The requested nickname string.
+     */
+    const val NICKNAME_ALREADY_TAKEN = "NICKNAME_ALREADY_TAKEN"
+
+    /**
+     * Modifying the nickname is disabled by system configuration.
+     *
+     * **Localization keys:**
+     * - `nickname_change_disabled`
+     */
+    const val NICKNAME_CHANGE_DISABLED = "NICKNAME_CHANGE_DISABLED"
+
+    /**
+     * The provided nickname character length is below the required minimum.
+     *
+     * **Localization keys:**
+     * - `nickname_too_short`
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.NICKNAME_MIN_LENGTH]: Minimum permitted character length (`{minLength}`).
+     */
+    const val NICKNAME_TOO_SHORT = "NICKNAME_TOO_SHORT"
+
+    /**
+     * The provided nickname character length exceeds the allowed maximum.
+     *
+     * **Localization keys:**
+     * - `nickname_too_long`
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.NICKNAME_MAX_LENGTH]: Maximum permitted character length (`{maxLength}`).
+     */
+    const val NICKNAME_TOO_LONG = "NICKNAME_TOO_LONG"
+
+    /**
+     * The provided nickname contains unsupported or illegal characters.
+     *
+     * **Localization keys:**
+     * - `invalid_nickname_characters`
+     */
+    const val INVALID_NICKNAME_CHARACTERS = "INVALID_NICKNAME_CHARACTERS"
+
+    /**
+     * The provided display name character length is below the required minimum.
+     *
+     * **Localization keys:**
+     * - `display_name_too_short`
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.DISPLAY_NAME_MIN_LENGTH]: Minimum permitted character length (`{minLength}`).
+     */
+    const val DISPLAY_NAME_TOO_SHORT = "DISPLAY_NAME_TOO_SHORT"
+
+    /**
+     * The provided display name character length exceeds the allowed maximum.
+     *
+     * **Localization keys:**
+     * - `display_name_too_long`
+     *
+     * **Public arguments:**
+     * - [UserErrorArgs.DISPLAY_NAME_MAX_LENGTH]: Maximum permitted character length (`{maxLength}`).
+     */
+    const val DISPLAY_NAME_TOO_LONG = "DISPLAY_NAME_TOO_LONG"
+
+    /**
+     * The provided display name contains illegal control characters or line breaks.
+     *
+     * **Localization keys:**
+     * - `invalid_display_name_characters`
+     */
+    const val INVALID_DISPLAY_NAME_CHARACTERS = "INVALID_DISPLAY_NAME_CHARACTERS"
 }

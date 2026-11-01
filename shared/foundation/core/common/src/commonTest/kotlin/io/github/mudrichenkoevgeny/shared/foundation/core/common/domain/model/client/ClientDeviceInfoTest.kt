@@ -7,41 +7,18 @@ import kotlin.test.assertNull
 class ClientDeviceInfoTest {
 
     @Test
-    fun `getPrimaryLanguage returns null when language is null`() {
-        val deviceInfo = ClientDeviceInfo(
-            deviceId = null,
-            deviceName = null,
-            clientType = null,
-            language = null,
-            appVersion = null,
-            operationSystemVersion = null
-        )
-        assertNull(deviceInfo.getPrimaryLanguage())
+    fun `parsePrimaryLanguage returns null when header is null or blank`() {
+        assertNull(ClientDeviceInfo.parsePrimaryLanguage(null))
+        assertNull(ClientDeviceInfo.parsePrimaryLanguage(""))
+        assertNull(ClientDeviceInfo.parsePrimaryLanguage("   "))
     }
 
     @Test
-    fun `getPrimaryLanguage extracts primary language from Accept-Language string`() {
-        val deviceInfo1 = createClientDeviceInfo("ru-RU,ru;q=0.9,en-US;q=0.8")
-        assertEquals("ru-RU", deviceInfo1.getPrimaryLanguage())
-
-        val deviceInfo2 = createClientDeviceInfo("en-US;q=0.8, en;q=0.7")
-        assertEquals("en-US", deviceInfo2.getPrimaryLanguage())
-
-        val deviceInfo3 = createClientDeviceInfo("ru-RU")
-        assertEquals("ru-RU", deviceInfo3.getPrimaryLanguage())
-
-        val deviceInfo4 = createClientDeviceInfo("  ru-RU  , ru;q=0.9 ")
-        assertEquals("ru-RU", deviceInfo4.getPrimaryLanguage())
-    }
-
-    private fun createClientDeviceInfo(language: String?): ClientDeviceInfo {
-        return ClientDeviceInfo(
-            deviceId = null,
-            deviceName = null,
-            clientType = null,
-            language = language,
-            appVersion = null,
-            operationSystemVersion = null
-        )
+    fun `parsePrimaryLanguage extracts primary language from Accept-Language string`() {
+        assertEquals("en-US", ClientDeviceInfo.parsePrimaryLanguage("en-US,en;q=0.9,ru;q=0.8"))
+        assertEquals("ru-RU", ClientDeviceInfo.parsePrimaryLanguage("ru-RU,ru;q=0.9,en-US;q=0.8"))
+        assertEquals("en-US", ClientDeviceInfo.parsePrimaryLanguage("en-US;q=0.8, en;q=0.7"))
+        assertEquals("ru-RU", ClientDeviceInfo.parsePrimaryLanguage("ru-RU"))
+        assertEquals("en-US", ClientDeviceInfo.parsePrimaryLanguage("  en-US  , en;q=0.9 "))
     }
 }

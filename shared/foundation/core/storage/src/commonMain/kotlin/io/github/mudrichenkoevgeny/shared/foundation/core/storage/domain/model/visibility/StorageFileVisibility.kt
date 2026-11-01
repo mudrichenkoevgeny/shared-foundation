@@ -41,6 +41,8 @@ enum class StorageFileVisibility(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [StorageFileVisibility].
          */
         fun fromValueOrThrow(value: String): StorageFileVisibility =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for StorageFileVisibility: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${StorageFileVisibility::class.simpleName}: '$value'"
+            )
     }
 }

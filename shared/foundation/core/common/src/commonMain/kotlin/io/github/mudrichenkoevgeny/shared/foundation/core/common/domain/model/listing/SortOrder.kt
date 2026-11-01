@@ -40,6 +40,8 @@ enum class SortOrder(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [SortOrder].
          */
         fun fromValueOrThrow(value: String): SortOrder =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for SortOrder: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${SortOrder::class.simpleName}: '$value'"
+            )
     }
 }

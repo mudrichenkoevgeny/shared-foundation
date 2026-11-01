@@ -89,4 +89,21 @@ class UserErrorResolverTest {
         val totalWithoutArgsRu = userStringsRu.resolveTotalUserIdentifiersLimitReachedMessage(limit = null)
         assertEquals("Достигнут общий лимит способов входа.", totalWithoutArgsRu)
     }
+
+    @Test
+    fun `resolveNicknameAndDisplayNameMessages handles optional arguments correctly`() {
+        assertEquals("Nickname is too short. Minimum length is 3 characters.", userStringsEn.resolveNicknameTooShortMessage(3))
+        assertEquals("Nickname is too short.", userStringsEn.resolveNicknameTooShortMessage(null))
+        assertEquals("Никнейм слишком короткий. Минимальная длина — 3 симв.", userStringsRu.resolveNicknameTooShortMessage(3))
+        assertEquals("Никнейм слишком короткий.", userStringsRu.resolveNicknameTooShortMessage(null))
+
+        assertEquals("Nickname is too long. Maximum length is 20 characters.", userStringsEn.resolveNicknameTooLongMessage(20))
+        assertEquals("Nickname is too long.", userStringsEn.resolveNicknameTooLongMessage(null))
+
+        assertEquals("Display name is too short. Minimum length is 2 characters.", userStringsEn.resolveDisplayNameTooShortMessage(2))
+        assertEquals("Display name is too short.", userStringsEn.resolveDisplayNameTooShortMessage(null))
+
+        assertEquals("Display name is too long. Maximum length is 50 characters.", userStringsEn.resolveDisplayNameTooLongMessage(50))
+        assertEquals("Display name is too long.", userStringsEn.resolveDisplayNameTooLongMessage(null))
+    }
 }

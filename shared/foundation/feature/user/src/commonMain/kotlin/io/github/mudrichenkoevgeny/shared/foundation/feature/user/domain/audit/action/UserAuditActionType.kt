@@ -5,6 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.SelfManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
@@ -50,6 +51,7 @@ private const val ACTION_ADD_IDENTIFIER_EMAIL = "add_identifier_email"
 private const val ACTION_ADD_IDENTIFIER_PHONE = "add_identifier_phone"
 private const val ACTION_ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER = "add_identifier_external_auth_provider"
 private const val ACTION_CHANGE_PASSWORD = "change_password"
+private const val ACTION_SELF_UPDATE_USER = "self_update_user"
 private const val ACTION_SELF_SCHEDULE_USER_DELETION = "self_schedule_user_deletion"
 private const val ACTION_SELF_RESTORE_USER = "self_restore_user"
 private const val ACTION_SELF_SETUP_TOTP_INITIATED = "self_setup_totp_initiated"
@@ -178,6 +180,10 @@ enum class UserAuditActionType(override val value: String) : AuditActionType {
     @SerialName(ACTION_CHANGE_PASSWORD)
     CHANGE_PASSWORD(ACTION_CHANGE_PASSWORD),
 
+    /** Profile or account details self-service update by authenticated user via [OpenUserRoutes.UPDATE_USER] or [SelfManagementUserRoutes.UPDATE_USER]. */
+    @SerialName(ACTION_SELF_UPDATE_USER)
+    SELF_UPDATE_USER(ACTION_SELF_UPDATE_USER),
+
     /** Account deletion request scheduled by the user via [OpenUserRoutes.SCHEDULE_DELETION]. */
     @SerialName(ACTION_SELF_SCHEDULE_USER_DELETION)
     SELF_SCHEDULE_USER_DELETION(ACTION_SELF_SCHEDULE_USER_DELETION),
@@ -226,6 +232,8 @@ enum class UserAuditActionType(override val value: String) : AuditActionType {
          * @throws IllegalArgumentException if [value] does not match any [UserAuditActionType].
          */
         fun fromValueOrThrow(value: String): UserAuditActionType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UserAuditActionType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UserAuditActionType::class.simpleName}: '$value'"
+            )
     }
 }

@@ -41,7 +41,9 @@ enum class AuditActorType(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditActorType].
          */
-        fun fromValueOrThrow(value: String): AuditActorType = fromValueOrNull(value)
-            ?: throw IllegalArgumentException("Unknown value for AuditActorType: '$value'")
+        fun fromValueOrThrow(value: String): AuditActorType =
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${AuditActorType::class.simpleName}: '$value'"
+            )
     }
 }

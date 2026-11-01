@@ -29,8 +29,4 @@ fun AvailableAuthProviders.toAvailableAuthProvidersPayload(): AvailableAuthProvi
         secondary = secondary.map(UserAuthProvider::value)
     )
 
-private fun String.toUserAuthProviderOnWire(): UserAuthProvider {
-    val parsed = UserAuthProvider.fromValueOrNull(this)
-        ?: throw IllegalArgumentException("Unknown UserAuthProvider wire value: $this")
-    return parsed
-}
+private fun String.toUserAuthProviderOnWire(): UserAuthProvider = UserAuthProvider.fromValueOrThrow(this)

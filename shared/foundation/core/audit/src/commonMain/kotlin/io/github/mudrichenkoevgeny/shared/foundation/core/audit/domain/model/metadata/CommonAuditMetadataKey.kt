@@ -147,6 +147,8 @@ enum class CommonAuditMetadataKey(
          * @throws IllegalArgumentException if [value] does not match any [CommonAuditMetadataKey].
          */
         fun fromValueOrThrow(value: String): CommonAuditMetadataKey =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for CommonAuditMetadataKey: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${CommonAuditMetadataKey::class.simpleName}: '$value'"
+            )
     }
 }

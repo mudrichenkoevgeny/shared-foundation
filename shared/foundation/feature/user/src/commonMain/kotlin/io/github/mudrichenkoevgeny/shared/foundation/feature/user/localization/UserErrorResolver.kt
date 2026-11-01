@@ -67,3 +67,59 @@ fun UserModuleStrings.resolveTotalUserIdentifiersLimitReachedMessage(
 } else {
     errors.totalIdentifiersLimitReachedWithoutArgs
 }
+
+/**
+ * Resolves localized message for nickname too short error.
+ *
+ * @param minLength Minimum required nickname length.
+ * @return Localized user-friendly error message.
+ */
+fun UserModuleStrings.resolveNicknameTooShortMessage(
+    minLength: Any? = null
+): String = if (minLength != null) {
+    errors.nicknameTooShort(minLength)
+} else {
+    errors.nicknameTooShortWithoutArgs
+}
+
+/**
+ * Resolves localized message for nickname too long error.
+ *
+ * @param maxLength Maximum allowed nickname length.
+ * @return Localized user-friendly error message.
+ */
+fun UserModuleStrings.resolveNicknameTooLongMessage(
+    maxLength: Any? = null
+): String = if (maxLength != null) {
+    errors.nicknameTooLong(maxLength)
+} else {
+    errors.nicknameTooLongWithoutArgs
+}
+
+/**
+ * Resolves localized message for display name too short error.
+ *
+ * @param minLength Minimum required display name length.
+ * @return Localized user-friendly error message.
+ */
+fun UserModuleStrings.resolveDisplayNameTooShortMessage(
+    minLength: Any? = null
+): String = if (minLength != null) {
+    errors.displayNameTooShort(minLength)
+} else {
+    errors.displayNameTooShortWithoutArgs
+}
+
+/**
+ * Resolves localized message for display name too long error.
+ *
+ * @param maxLength Maximum allowed display name length.
+ * @return Localized user-friendly error message.
+ */
+fun UserModuleStrings.resolveDisplayNameTooLongMessage(
+    maxLength: Any? = null
+): String = if (maxLength != null) {
+    errors.displayNameTooLong(maxLength)
+} else {
+    errors.displayNameTooLongWithoutArgs
+}

@@ -28,6 +28,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param lockoutType Wire string representation of [AccountLockoutType].
  * @param temporaryLockoutUntil Expiration epoch-millisecond timestamp for temporary lockout.
  * @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarFileId Avatar image file identifier string in storage.
+ * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param birthdate User birthdate epoch-millisecond timestamp.
  */
 fun createTestUserPrivatePayload(
     id: String = TEST_USER_ID,
@@ -44,7 +49,12 @@ fun createTestUserPrivatePayload(
     scheduledPermanentDeletionAt: Long? = null,
     lockoutType: String = AccountLockoutType.NONE.value,
     temporaryLockoutUntil: Long? = null,
-    storageConfiguration: UserStorageConfigurationPayload? = null
+    storageConfiguration: UserStorageConfigurationPayload? = null,
+    nickname: String? = "testuser",
+    displayName: String? = "Test User",
+    avatarFileId: String? = null,
+    avatarUrl: String? = null,
+    birthdate: Long? = null
 ) = UserPrivatePayload(
     id = id,
     role = role,
@@ -60,7 +70,12 @@ fun createTestUserPrivatePayload(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    avatarUrl = avatarUrl,
+    birthdate = birthdate
 )
 
 /**
@@ -76,6 +91,8 @@ fun createTestUserPrivatePayloadList(
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestUserPrivatePayload(
             id = generateTestUuidString(index),
+            nickname = "testuser_${index + 1}",
+            displayName = "Test User ${index + 1}",
             createdAt = createdAtMs,
             updatedAt = createdAtMs + 30_000L,
             lastLoginAt = createdAtMs + 15_000L,

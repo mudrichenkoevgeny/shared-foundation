@@ -19,6 +19,9 @@ import kotlinx.serialization.Serializable
  * @property authorityLevel Authority level assigned to the new account.
  * @property permissionCodes Explicit [PermissionCode] values to assign.
  * @property storageConfiguration Custom storage configuration overrides and limits for the new account.
+ * @property nickname Optional requested nickname handle for the new account.
+ * @property displayName Optional human-readable display name for the new account.
+ * @property avatarFileId Optional avatar file identifier for the new account.
  */
 @Serializable
 data class CreateByEmailRequest(
@@ -46,5 +49,14 @@ data class CreateByEmailRequest(
     val permissionCodes: Set<String>,
 
     @SerialName(UserApiFields.STORAGE_CONFIGURATION)
-    val storageConfiguration: UserStorageConfigurationPayload?
+    val storageConfiguration: UserStorageConfigurationPayload?,
+
+    @SerialName(UserApiFields.NICKNAME)
+    val nickname: String? = null,
+
+    @SerialName(UserApiFields.DISPLAY_NAME)
+    val displayName: String? = null,
+
+    @SerialName(UserApiFields.AVATAR_FILE_ID)
+    val avatarFileId: String? = null
 )

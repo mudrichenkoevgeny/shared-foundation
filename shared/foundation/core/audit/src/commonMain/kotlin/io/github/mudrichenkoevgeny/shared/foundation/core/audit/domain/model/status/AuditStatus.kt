@@ -42,6 +42,8 @@ enum class AuditStatus(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [AuditStatus].
          */
         fun fromValueOrThrow(value: String): AuditStatus =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AuditStatus: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${AuditStatus::class.simpleName}: '$value'"
+            )
     }
 }

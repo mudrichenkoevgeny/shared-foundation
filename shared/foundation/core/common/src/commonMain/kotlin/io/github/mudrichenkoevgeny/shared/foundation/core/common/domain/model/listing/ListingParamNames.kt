@@ -1,14 +1,14 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing
 
 /**
- * Stable **keys** for paginated and sorted listings shared by backend, clients, and JSON field names where applicable.
+ * Stable **keys** for paginated, sorted, and searched listings shared by backend, clients, and JSON field names where applicable.
  *
  * Use these constants when building HTTP query strings, parsing list requests, mapping to persistence (for example
  * `LIMIT`/`OFFSET` with **one-based** page index: offset = `(page - 1) * pageSize` when the page size is positive), or
  * any other contract surface that must stay aligned across processes.
  *
  * Allowed **values** for [Sort.SORT_BY] and [Sort.SORT_ORDER] are resource-specific; common baselines live in
- * [CommonSortValues] (for example [CommonSortValues.TimestampSortBy]) and [SortOrder].
+ * [CommonSortValues] and [SortOrder].
  */
 object ListingParamNames {
     /**
@@ -39,5 +39,15 @@ object ListingParamNames {
          * Sort direction (`sort_order`). Allowed wire values match [SortOrder]: [SortOrder.ASC] or [SortOrder.DESC].
          */
         const val SORT_ORDER = "sort_order"
+    }
+
+    /**
+     * Keys for free-text search queries across resource collection listings.
+     */
+    object Search {
+        /**
+         * Free-text search query string (`search_query`).
+         */
+        const val SEARCH_QUERY = "search_query"
     }
 }

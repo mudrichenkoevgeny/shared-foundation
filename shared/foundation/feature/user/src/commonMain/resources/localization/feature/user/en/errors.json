@@ -29,5 +29,17 @@
   "external_auth_cancelled": "Authentication was cancelled.",
   "external_auth_failed": "External authentication failed.",
   "too_many_confirmation_requests": "Too many confirmation requests. Please try again later.",
-  "role_too_high": "You cannot create a user with a role higher than your own."
+  "role_too_high": "You cannot create a user with a role higher than your own.",
+  "nickname_already_taken": "This nickname is already taken by another user.",
+  "nickname_change_disabled": "Changing nickname is disabled.",
+  "nickname_too_short_without_args": "Nickname is too short.",
+  "nickname_too_short_with_args": "Nickname is too short. Minimum length is {minLength} characters.",
+  "nickname_too_long_without_args": "Nickname is too long.",
+  "nickname_too_long_with_args": "Nickname is too long. Maximum length is {maxLength} characters.",
+  "invalid_nickname_characters": "Nickname contains invalid characters. Only letters, numbers, underscores, and dots are allowed.",
+  "display_name_too_short_without_args": "Display name is too short.",
+  "display_name_too_short_with_args": "Display name is too short. Minimum length is {minLength} characters.",
+  "display_name_too_long_without_args": "Display name is too long.",
+  "display_name_too_long_with_args": "Display name is too long. Maximum length is {maxLength} characters.",
+  "invalid_display_name_characters": "Display name contains invalid control characters or line breaks."
 }

@@ -37,6 +37,8 @@ enum class UnlockMethod(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [UnlockMethod].
          */
         fun fromValueOrThrow(value: String): UnlockMethod =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for UnlockMethod: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${UnlockMethod::class.simpleName}: '$value'"
+            )
     }
 }

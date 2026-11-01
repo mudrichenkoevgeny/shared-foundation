@@ -34,7 +34,7 @@ class CompositeAuditActionTypeParser(
             }
         }
 
-        throw IllegalArgumentException("Unknown value of AuditActionType: '$value'")
+        throw IllegalArgumentException("Unknown value for ${AuditActionType::class.simpleName}: '$value'")
     }
 
     /**

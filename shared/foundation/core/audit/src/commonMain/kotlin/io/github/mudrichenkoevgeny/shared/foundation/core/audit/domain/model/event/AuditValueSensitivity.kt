@@ -73,6 +73,8 @@ enum class AuditValueSensitivity(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [AuditValueSensitivity].
          */
         fun fromValueOrThrow(value: String): AuditValueSensitivity =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AuditValueSensitivity: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${AuditValueSensitivity::class.simpleName}: '$value'"
+            )
     }
 }

@@ -36,7 +36,7 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
    - `contractClasses`: Collects field name constants (`UserApiFields`), query params (`UserApiQueryParams`), HTTP headers, and WebSocket close/event constants.
    - `errorClasses`: Collects error code strings (`CommonErrorCodes`, `UserErrorCodes`) and error arguments.
    - `permClasses`: Collects permission code constants (`UserPermissionCode`, `AuditPermissionCode`, etc.).
-   - `enumClasses`: Collects all 28 domain enums across `core/*` and `feature/*`.
+   - `enumClasses`: Collects all domain enums across `core/*` and `feature/*`.
    - `rawDtoClasses`: Collects all DTO payloads, request models, and screen parameter data classes (`*Params`).
    - `rawDomainToDtoClasses`: Maps Domain entity models to DTO payloads.
 

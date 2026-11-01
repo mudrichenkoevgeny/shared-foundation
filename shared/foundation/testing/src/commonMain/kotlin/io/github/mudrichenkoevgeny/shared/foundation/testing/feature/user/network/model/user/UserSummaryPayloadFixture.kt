@@ -13,15 +13,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param id Raw user ID string.
  * @param role Wire string representation of [UserRole].
  * @param accountStatus Wire string representation of [UserAccountStatus].
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarUrl Direct CDN or presigned GET avatar image URL.
  */
 fun createTestUserSummaryPayload(
     id: String = TEST_USER_ID,
     role: String = UserRole.USER.value,
-    accountStatus: String = UserAccountStatus.ACTIVE.value
+    accountStatus: String = UserAccountStatus.ACTIVE.value,
+    nickname: String? = "testuser",
+    displayName: String? = "Test User",
+    avatarUrl: String? = null
 ) = UserSummaryPayload(
     id = id,
     role = role,
-    accountStatus = accountStatus
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrl = avatarUrl
 )
 
 /**
@@ -36,7 +45,9 @@ fun createTestUserSummaryPayloadList(
         createTestUserSummaryPayload(
             id = generateTestUuidString(index),
             role = UserRole.USER.value,
-            accountStatus = UserAccountStatus.ACTIVE.value
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            nickname = "testuser_${index + 1}",
+            displayName = "Test User ${index + 1}"
         )
     }
 ): List<UserSummaryPayload> = createTestList(count, generator)

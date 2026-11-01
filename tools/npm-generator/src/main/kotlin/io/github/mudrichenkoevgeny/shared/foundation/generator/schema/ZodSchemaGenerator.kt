@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventSummary
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event.AuditEventPrivatePayload
@@ -15,6 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonSortValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.patch.PatchField
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.DecryptedString
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt.EncryptedString
@@ -38,7 +39,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortValues
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
@@ -201,11 +204,11 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
         classifier == TotpStep::class -> "totpStepSchema"
         classifier == LoginByTotpMode::class -> "loginByTotpModeSchema"
         classifier == UnlockMethod::class -> "unlockMethodSchema"
-        classifier == UserSortValues.UserSortBy::class -> "userSortBySchema"
-        classifier == UserSortValues.UserIdentifierSortBy::class -> "userIdentifierSortBySchema"
-        classifier == UserSortValues.UserSessionSortBy::class -> "userSessionSortBySchema"
-        classifier == AuditSortValues.AuditEventSortBy::class -> "auditEventSortBySchema"
-        classifier == CommonSortValues.TimestampSortBy::class -> "timestampSortBySchema"
+        classifier == UserSortBy::class -> "userSortBySchema"
+        classifier == UserIdentifierSortBy::class -> "userIdentifierSortBySchema"
+        classifier == UserSessionSortBy::class -> "userSessionSortBySchema"
+        classifier == AuditEventSortBy::class -> "auditEventSortBySchema"
+        classifier == CommonSortValues::class -> "CommonSortValuesSchema"
         classifier == JsonElement::class -> "z.unknown()"
 
         paramName == "totpStep" -> "totpStepSchema"
@@ -266,6 +269,11 @@ fun resolveZodType(paramName: String, type: KType, parentClass: KClass<*>): Stri
             val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
             "z.array($elementZod)"
         }
+        classifier == PatchField::class -> {
+            val innerType = type.arguments.firstOrNull()?.type
+            val innerZod = if (innerType != null) resolveZodType(paramName, innerType, parentClass) else "z.unknown()"
+            "$innerZod.nullable().optional()"
+        }
         classifier == Map::class || classifier.simpleName == "Map" -> {
             val valType = type.arguments.getOrNull(1)?.type
             val valZod = if (valType != null) resolveZodType(paramName, valType, parentClass) else "z.unknown()"
@@ -300,12 +308,17 @@ fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>): Strin
         classifier == TotpStep::class -> "TotpStep"
         classifier == LoginByTotpMode::class -> "LoginByTotpMode"
         classifier == UnlockMethod::class -> "UnlockMethod"
-        classifier == UserSortValues.UserSortBy::class -> "UserSortBy"
-        classifier == UserSortValues.UserIdentifierSortBy::class -> "UserIdentifierSortBy"
-        classifier == UserSortValues.UserSessionSortBy::class -> "UserSessionSortBy"
-        classifier == AuditSortValues.AuditEventSortBy::class -> "AuditEventSortBy"
-        classifier == CommonSortValues.TimestampSortBy::class -> "TimestampSortBy"
+        classifier == UserSortBy::class -> "UserSortBy"
+        classifier == UserIdentifierSortBy::class -> "UserIdentifierSortBy"
+        classifier == UserSessionSortBy::class -> "UserSessionSortBy"
+        classifier == AuditEventSortBy::class -> "AuditEventSortBy"
+        classifier == CommonSortValues::class -> "CommonSortValues"
         classifier == JsonElement::class -> "unknown"
+        classifier == PatchField::class -> {
+            val innerType = type.arguments.firstOrNull()?.type
+            val innerTs = if (innerType != null) resolveTsType(paramName, innerType, parentClass) else "unknown"
+            "$innerTs | null"
+        }
         classifier == Instant::class -> "Instant"
 
         paramName == "totpStep" -> "TotpStep"
@@ -357,6 +370,11 @@ fun resolveTsType(paramName: String, type: KType, parentClass: KClass<*>): Strin
             val elementType = type.arguments.firstOrNull()?.type
             val elementTs = if (elementType != null) resolveTsType(paramName, elementType, parentClass) else "unknown"
             "$elementTs[]"
+        }
+        classifier == PatchField::class -> {
+            val innerType = type.arguments.firstOrNull()?.type
+            val innerZod = if (innerType != null) resolveZodType(paramName, innerType, parentClass) else "z.unknown()"
+            "$innerZod.nullable().optional()"
         }
         classifier == Map::class || classifier.simpleName == "Map" -> {
             val valType = type.arguments.getOrNull(1)?.type

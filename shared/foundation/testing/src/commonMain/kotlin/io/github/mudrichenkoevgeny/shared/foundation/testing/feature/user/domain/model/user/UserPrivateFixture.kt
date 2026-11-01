@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -30,6 +31,11 @@ import kotlin.time.Instant
  * @param lockoutType Category of lockout ([AccountLockoutType]).
  * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
  * @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarFileId Avatar image file identifier in storage ([FileId]).
+ * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param birthdate User birthdate timestamp ([Instant]).
  */
 fun createTestUserPrivate(
     id: UserId = createTestUserId(),
@@ -46,7 +52,12 @@ fun createTestUserPrivate(
     scheduledPermanentDeletionAt: Instant? = null,
     lockoutType: AccountLockoutType = AccountLockoutType.NONE,
     temporaryLockoutUntil: Instant? = null,
-    storageConfiguration: UserStorageConfiguration? = null
+    storageConfiguration: UserStorageConfiguration? = null,
+    nickname: String? = "testuser",
+    displayName: String? = "Test User",
+    avatarFileId: FileId? = null,
+    avatarUrl: String? = null,
+    birthdate: Instant? = null
 ) = UserPrivate(
     id = id,
     role = role,
@@ -62,7 +73,12 @@ fun createTestUserPrivate(
     scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
     lockoutType = lockoutType,
     temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    avatarUrl = avatarUrl,
+    birthdate = birthdate
 )
 
 /**
@@ -78,6 +94,8 @@ fun createTestUserPrivateList(
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         createTestUserPrivate(
             id = createTestUserId(generateTestUuidString(index)),
+            nickname = "testuser_${index + 1}",
+            displayName = "Test User ${index + 1}",
             createdAt = Instant.fromEpochMilliseconds(createdAtMs),
             updatedAt = Instant.fromEpochMilliseconds(createdAtMs + 30_000L),
             lastLoginAt = Instant.fromEpochMilliseconds(createdAtMs + 15_000L),

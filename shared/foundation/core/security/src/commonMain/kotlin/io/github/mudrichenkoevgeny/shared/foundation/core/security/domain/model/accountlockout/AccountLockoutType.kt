@@ -48,6 +48,8 @@ enum class AccountLockoutType(val value: String) {
          * @throws IllegalArgumentException if [value] does not match any [AccountLockoutType].
          */
         fun fromValueOrThrow(value: String): AccountLockoutType =
-            fromValueOrNull(value) ?: throw IllegalArgumentException("Unknown value for AccountLockoutType: '$value'")
+            fromValueOrNull(value) ?: throw IllegalArgumentException(
+                "Unknown value for ${AccountLockoutType::class.simpleName}: '$value'"
+            )
     }
 }
