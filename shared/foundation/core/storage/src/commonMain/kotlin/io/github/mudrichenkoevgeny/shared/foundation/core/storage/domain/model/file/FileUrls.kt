@@ -1,14 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file
 
+import kotlinx.serialization.Serializable
+
 /**
- * Structured URL variants for accessing a storage file, including optional visual previews.
+ * Structured URL variants for accessing a storage file, including preset resolution variants.
  *
  * @property originalUrl Direct CDN URL or presigned GET URL for the original file.
- * @property thumbnailUrl Optional URL for a small visual thumbnail (e.g. for images or document cover pages), or `null`.
- * @property previewUrl Optional URL for a medium visual preview, or `null`.
+ * @property urlPresets Map of preset keys (e.g. [FileUrlPresets.THUMBNAIL]) to resolution variant URLs.
  */
+@Serializable
 data class FileUrls(
     val originalUrl: String,
-    val thumbnailUrl: String?,
-    val previewUrl: String?
+    val urlPresets: Map<String, String> = emptyMap()
 )

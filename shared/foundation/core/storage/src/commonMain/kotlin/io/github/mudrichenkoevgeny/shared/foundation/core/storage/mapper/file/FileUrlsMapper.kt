@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
  */
 fun FileUrlsPayload.toFileUrls(): FileUrls = FileUrls(
     originalUrl = originalUrl,
-    thumbnailUrl = thumbnailUrl,
-    previewUrl = previewUrl
+    urlPresets = urlPresets
 )
 
 /**
@@ -21,6 +20,5 @@ fun FileUrlsPayload.toFileUrls(): FileUrls = FileUrls(
  */
 fun FileUrls.toFileUrlsPayload(): FileUrlsPayload = FileUrlsPayload(
     originalUrl = originalUrl,
-    thumbnailUrl = thumbnailUrl,
-    previewUrl = previewUrl
+    urlPresets = urlPresets
 )

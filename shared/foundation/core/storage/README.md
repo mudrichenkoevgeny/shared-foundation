@@ -11,7 +11,8 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [StorageCategory]: Enum classifying files for server dynamic limits, MIME rules, and processing (`IMAGE`, `VIDEO`, `AUDIO`, `DOCUMENT`, `OTHER`).
   - [StorageFileStatus]: Enum representing file lifecycle states (`PENDING_UPLOAD`, `READY`, `PROCESSING`, `DELETED`).
   - [StorageFileVisibility]: Enum controlling access level (`PUBLIC`, `PRIVATE`).
-  - [FileUrls] & [FileUrlsPayload]: Structured multi-resolution URL variants (original, thumbnail, preview) for files.
+  - [FileUrls] & [FileUrlsPayload]: Structured URL variants (`originalUrl` + `urlPresets` map) for files.
+  - [FileUrlPresets]: Standard preset keys (`THUMBNAIL`, `PREVIEW`, `AVATAR_SM`, `AVATAR_MD`, `AVATAR_LG`) to eliminate magic strings across clients and server.
   - **Entity Projections:**
     - **Storage File Summary:** [StorageFileSummary] / [StorageFileSummaryPayload] for compact list views and embedding cards.
     - **Storage File Private:** [StorageFilePrivate] / [StorageFilePrivatePayload] for authenticated self-service ("My Files") and management inspection.
@@ -62,6 +63,7 @@ This module defines pure KMP contracts and route specifications for direct clien
 [StorageFilePrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate.kt
 [StorageFileInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal.kt
 [FileUrls]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls.kt
+[FileUrlPresets]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrlPresets.kt
 [FileUrlsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload.kt
 [StorageFileDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileDomainMapper.kt
 [StorageFilePrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFilePrivateMapper.kt

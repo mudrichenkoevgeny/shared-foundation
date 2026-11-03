@@ -124,6 +124,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permiss
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrlPresets
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
@@ -451,6 +452,7 @@ val contractClasses = listOf(
     GlobalSettingsApiFields::class,
     UserApiFields::class,
     StorageApiFields::class,
+    FileUrlPresets::class,
     AuditEventFields::class,
     CommonHttpHeaders::class,
     CommonWebSocketCloseReasons::class,
