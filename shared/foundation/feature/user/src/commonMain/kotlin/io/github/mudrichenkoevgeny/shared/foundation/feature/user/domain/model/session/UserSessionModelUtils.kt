@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import kotlin.time.Instant
 
 /**
- * Utility extension functions for client-facing user session domain models ([UserSessionPrivate], [UserSessionSummary]).
+ * Utility extension functions for user session domain models ([UserSessionPrivate], [UserSessionSummary], [UserSessionInternal]).
  */
 
 /**
@@ -17,6 +17,12 @@ fun UserSessionPrivate.isValid(clientDeviceId: ClientDeviceId?, now: Instant): B
  * Returns `true` when [UserSessionSummary] is not expired and matches [clientDeviceId].
  */
 fun UserSessionSummary.isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean =
+    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+
+/**
+ * Returns `true` when [UserSessionInternal] is not expired and matches [clientDeviceId].
+ */
+fun UserSessionInternal.isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean =
     !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 private fun isUserSessionExpired(expiresAt: Instant, now: Instant): Boolean = expiresAt <= now
