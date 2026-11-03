@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domai
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
@@ -20,7 +21,7 @@ fun createTestStorageFilePrivate(
     visibility: StorageFileVisibility = StorageFileVisibility.PUBLIC,
     status: StorageFileStatus = StorageFileStatus.READY,
     targetScope: String? = "avatar",
-    fileUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001",
+    fileUrls: FileUrls = createTestFileUrls(),
     createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L),
     updatedAt: Instant? = null
 ) = StorageFilePrivate(
@@ -33,7 +34,7 @@ fun createTestStorageFilePrivate(
     visibility = visibility,
     status = status,
     targetScope = targetScope,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls,
     createdAt = createdAt,
     updatedAt = updatedAt
 )

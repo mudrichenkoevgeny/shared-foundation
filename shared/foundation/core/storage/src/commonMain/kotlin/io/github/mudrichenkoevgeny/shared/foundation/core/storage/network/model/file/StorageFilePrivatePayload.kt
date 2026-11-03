@@ -17,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property visibility Storage visibility wire value.
  * @property status Storage file status wire value.
  * @property targetScope Optional target scope or feature context string (e.g. "avatar", "attachment").
- * @property fileUrl Direct CDN URL for public files, or short-lived presigned GET read URL for private files generated on-the-fly by the server.
+ * @property fileUrls Structured file URL variants object, or `null`.
  * @property createdAt Timestamp when record was created in Unix epoch milliseconds.
  * @property updatedAt Timestamp when record was last updated in Unix epoch milliseconds, or `null`.
  */
@@ -50,8 +50,8 @@ data class StorageFilePrivatePayload(
     @SerialName(StorageApiFields.TARGET_SCOPE)
     val targetScope: String? = null,
 
-    @SerialName(StorageApiFields.FILE_URL)
-    val fileUrl: String,
+    @SerialName(StorageApiFields.FILE_URLS)
+    val fileUrls: FileUrlsPayload? = null,
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long,

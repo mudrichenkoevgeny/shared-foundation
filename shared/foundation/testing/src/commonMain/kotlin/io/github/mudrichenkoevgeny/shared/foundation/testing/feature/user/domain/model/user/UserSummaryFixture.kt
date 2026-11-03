@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -15,7 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
  * @param accountStatus Current account state ([UserAccountStatus]).
  * @param nickname User handle or username.
  * @param displayName Human-readable display name.
- * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  */
 fun createTestUserSummary(
     id: UserId = createTestUserId(),
@@ -23,14 +24,14 @@ fun createTestUserSummary(
     accountStatus: UserAccountStatus = UserAccountStatus.ACTIVE,
     nickname: String? = "testuser",
     displayName: String? = "Test User",
-    avatarUrl: String? = null
+    avatarUrls: FileUrls? = null
 ) = UserSummary(
     id = id,
     role = role,
     accountStatus = accountStatus,
     nickname = nickname,
     displayName = displayName,
-    avatarUrl = avatarUrl
+    avatarUrls = avatarUrls
 )
 
 /**

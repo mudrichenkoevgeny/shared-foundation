@@ -17,8 +17,7 @@ import kotlin.time.Instant
  * @property category Storage classification ([StorageCategory]).
  * @property visibility Access visibility classification ([StorageFileVisibility]).
  * @property status Current file lifecycle status ([StorageFileStatus]).
- * @property fileUrl Direct CDN URL for public files, or short-lived presigned GET read URL
- *           for private files generated on-the-fly by the server.
+ * @property fileUrls Structured URL variants ([FileUrls]) for public CDN or short-lived presigned GET read URLs, or `null`.
  * @property createdAt Timestamp when the file record was created ([Instant]).
  */
 data class StorageFileSummary(
@@ -29,6 +28,6 @@ data class StorageFileSummary(
     val category: StorageCategory,
     val visibility: StorageFileVisibility,
     val status: StorageFileStatus,
-    val fileUrl: String,
+    val fileUrls: FileUrls?,
     val createdAt: Instant
 )

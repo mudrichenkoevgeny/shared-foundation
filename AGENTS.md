@@ -13,6 +13,7 @@ This document is the entry point for architectural and coding standards. These r
 - **FQN Forbidden:** Do not write fully qualified names (FQN) in expressions, types, or generics. Use imports/typealiases. Minimal FQN only if technically unavoidable (explain why in the commit).
 - **No Implementation Comments (Preserve KDoc):** Do not write inline implementation comments (`//` or `/* ... */`) inside code bodies; logic must be self-documenting. **CRITICAL:** KDoc documentation (`/** ... */`) on classes, interfaces, properties, and functions is structured API documentation, NOT code comments. AI must NEVER delete, strip, wipe, or omit KDoc documentation during code edits or refactorings!
 - **No Trailing Commas:** Do not use trailing commas at the end of argument, parameter, or entry lists.
+- **Null Safety (Strict Prohibition of `!!`):** The non-null assertion operator (`!!`) is strictly forbidden in production code (allowed only in test files). Handle nullability gracefully using safe calls (`?.`), Elvis operators (`?:`), safe casts (`as?`), or explicit smart-casts. Use `requireNotNull(...)` or `checkNotNull(...)` with descriptive messages only when asserting invariants or unrecoverable errors, never as a substitute for business logic error handling.
 - **Route Documentation Parity:** Every API route constant MUST include a complete KDoc section with mandatory **Request body:** (`None.` if absent) and **Response body:** (`None (204 No Content)` if absent), **UI Presentation:** listing associated UI screens (`Screens:`) or flows (`Flow:`), alongside authorization, audit logging, and payload references.
 - **Manual Test Execution:** Test runs must be triggered explicitly. Automated execution on file change is prohibited.
 - **No Redundant Builds:** Do not run Gradle build tasks or attempt compilation after modifying documentation (KDoc), comments, or other non-executable changes that cannot possibly break the build.
@@ -45,7 +46,7 @@ This document is the entry point for architectural and coding standards. These r
 - **`docs-kdoc-basics.md`** — Language standards, link resolution rules, and KDoc Definition of Done.
 - **`docs-kdoc-type-requirements.md`** — Specific KDoc patterns for DTOs, Error Codes, Sealed types, Routes, and Navigation Screen Params.
 - **`ts-npm-package-standard.md`** — TypeScript declarations, Zod schema generation, ESM evaluation order, and Web SDK contract standards.
-- **`kotlin-coding-style.md`** — Naming, `when` subject rules, brace requirements, FQN/Comments ban, Trailing Commas ban, and `.value` usage for wire values.
+- **`kotlin-coding-style.md`** — Naming, `when` subject rules, brace requirements, FQN/Comments ban, Trailing Commas ban, `!!` ban, and `.value` usage for wire values.
 - **`testing-conventions.md`** — Unit and integration test standards, mocking policy, and manual execution rule.
 - **`ai-collaboration-workflow.md`** — AI constraints, dependency management (Version Catalog), and module responsibility mapping.
 

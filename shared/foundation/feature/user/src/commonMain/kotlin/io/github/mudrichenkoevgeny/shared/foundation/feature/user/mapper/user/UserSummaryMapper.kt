@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrls
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
@@ -22,7 +24,7 @@ fun UserSummaryPayload.toUserSummary(): UserSummary = UserSummary(
     accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
     nickname = nickname,
     displayName = displayName,
-    avatarUrl = avatarUrl
+    avatarUrls = avatarUrls?.toFileUrls()
 )
 
 /**
@@ -34,5 +36,5 @@ fun UserSummary.toUserSummaryPayload(): UserSummaryPayload = UserSummaryPayload(
     accountStatus = accountStatus.value,
     nickname = nickname,
     displayName = displayName,
-    avatarUrl = avatarUrl
+    avatarUrls = avatarUrls?.toFileUrlsPayload()
 )

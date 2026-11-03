@@ -25,7 +25,7 @@ fun StorageFilePrivatePayload.toStorageFilePrivate(): StorageFilePrivate = Stora
     visibility = StorageFileVisibility.fromValueOrThrow(visibility),
     status = StorageFileStatus.fromValueOrThrow(status),
     targetScope = targetScope,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls?.toFileUrls(),
     createdAt = Instant.fromEpochMilliseconds(createdAt),
     updatedAt = updatedAt?.let { Instant.fromEpochMilliseconds(it) }
 )
@@ -43,7 +43,7 @@ fun StorageFilePrivate.toStorageFilePrivatePayload(): StorageFilePrivatePayload 
     visibility = visibility.value,
     status = status.value,
     targetScope = targetScope,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls?.toFileUrlsPayload(),
     createdAt = createdAt.toEpochMilliseconds(),
     updatedAt = updatedAt?.toEpochMilliseconds()
 )

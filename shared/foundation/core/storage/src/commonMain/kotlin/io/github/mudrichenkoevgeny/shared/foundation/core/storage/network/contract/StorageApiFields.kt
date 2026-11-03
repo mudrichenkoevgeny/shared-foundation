@@ -34,6 +34,18 @@ object StorageApiFields {
     /** JSON field name for public or presigned download/view file URL. */
     const val FILE_URL = "file_url"
 
+    /** JSON field name for structured file URLs object. */
+    const val FILE_URLS = "file_urls"
+
+    /** JSON field name for original file URL. */
+    const val ORIGINAL_URL = "original_url"
+
+    /** JSON field name for thumbnail preview image URL. */
+    const val THUMBNAIL_URL = "thumbnail_url"
+
+    /** JSON field name for medium preview image URL. */
+    const val PREVIEW_URL = "preview_url"
+
     /** JSON field name for owner user ID. */
     const val OWNER_USER_ID = "owner_user_id"
 

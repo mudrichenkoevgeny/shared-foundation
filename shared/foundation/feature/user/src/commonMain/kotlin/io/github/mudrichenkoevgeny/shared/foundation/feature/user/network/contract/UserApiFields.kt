@@ -141,8 +141,8 @@ object UserApiFields {
     /** JSON field name for the avatar file identifier in core/storage. */
     const val AVATAR_FILE_ID = "avatar_file_id"
 
-    /** JSON field name for the direct CDN or presigned GET avatar image URL. */
-    const val AVATAR_URL = "avatar_url"
+    /** JSON field name for structured avatar image URL variants. */
+    const val AVATAR_URLS = "avatar_urls"
 
     /** JSON field name for user birthdate in Unix epoch milliseconds. */
     const val BIRTHDATE = "birthdate"
@@ -181,9 +181,6 @@ object UserApiFields {
 
     /** JSON field name for the list of deleted session ids. */
     const val DELETED_SESSION_IDS = "deleted_session_ids"
-
-    /** JSON field name for the list of deleted credential identifiers. */
-    const val DELETED_IDENTIFIER_IDS = "deleted_identifier_ids"
 
     /** JSON field name for the maximum total identifiers allowed per account. */
     const val MAX_TOTAL_IDENTIFIERS = "max_total_identifiers"
@@ -233,9 +230,6 @@ object UserApiFields {
      * JSON field name for the global flag indicating whether new user registrations are permitted.
      */
     const val IS_REGISTRATION_ENABLED = "is_registration_enabled"
-
-    /** JSON field name for the email restriction policy object. */
-    const val EMAIL_RESTRICTION_POLICY = "email_restriction_policy"
 
     /** JSON field name for open API email restriction policy object. */
     const val OPEN_EMAIL_RESTRICTION_POLICY = "open_email_restriction_policy"

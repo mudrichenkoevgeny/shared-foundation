@@ -10,11 +10,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
  */
 
 /**
- * Builds public [StorageFilePrivate] domain model from internal [StorageFileInternal] using the provided [fileUrl].
- *
- * @param fileUrl Dynamically generated CDN URL or presigned read URL.
+ * Builds public [StorageFilePrivate] domain model from internal [StorageFileInternal].
  */
-fun StorageFileInternal.toStorageFilePrivate(fileUrl: String): StorageFilePrivate = StorageFilePrivate(
+fun StorageFileInternal.toStorageFilePrivate(): StorageFilePrivate = StorageFilePrivate(
     id = id,
     ownerUserId = ownerUserId,
     fileName = fileName,
@@ -24,17 +22,15 @@ fun StorageFileInternal.toStorageFilePrivate(fileUrl: String): StorageFilePrivat
     visibility = visibility,
     status = status,
     targetScope = targetScope,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls,
     createdAt = createdAt,
     updatedAt = updatedAt
 )
 
 /**
- * Builds public [StorageFileSummary] domain model from internal [StorageFileInternal] using the provided [fileUrl].
- *
- * @param fileUrl Dynamically generated CDN URL or presigned read URL.
+ * Builds public [StorageFileSummary] domain model from internal [StorageFileInternal].
  */
-fun StorageFileInternal.toStorageFileSummary(fileUrl: String): StorageFileSummary = StorageFileSummary(
+fun StorageFileInternal.toStorageFileSummary(): StorageFileSummary = StorageFileSummary(
     id = id,
     fileName = fileName,
     fileSizeBytes = fileSizeBytes,
@@ -42,7 +38,7 @@ fun StorageFileInternal.toStorageFileSummary(fileUrl: String): StorageFileSummar
     category = category,
     visibility = visibility,
     status = status,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls,
     createdAt = createdAt
 )
 
@@ -57,6 +53,6 @@ fun StorageFilePrivate.toStorageFileSummary(): StorageFileSummary = StorageFileS
     category = category,
     visibility = visibility,
     status = status,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls,
     createdAt = createdAt
 )

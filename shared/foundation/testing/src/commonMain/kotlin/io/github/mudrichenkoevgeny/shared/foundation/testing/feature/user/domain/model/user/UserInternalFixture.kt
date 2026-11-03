@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -32,6 +33,7 @@ import kotlin.time.Instant
  * @param nickname User handle or username.
  * @param displayName Human-readable display name.
  * @param avatarFileId Avatar image file identifier in storage ([FileId]).
+ * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  * @param birthdate User birthdate timestamp ([Instant]).
  */
 fun createTestUserInternal(
@@ -53,6 +55,7 @@ fun createTestUserInternal(
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarFileId: FileId? = null,
+    avatarUrls: FileUrls? = null,
     birthdate: Instant? = null
 ) = UserInternal(
     id = id,
@@ -73,5 +76,6 @@ fun createTestUserInternal(
     nickname = nickname,
     displayName = displayName,
     avatarFileId = avatarFileId,
+    avatarUrls = avatarUrls,
     birthdate = birthdate
 )

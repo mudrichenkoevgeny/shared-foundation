@@ -11,6 +11,7 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [StorageCategory]: Enum classifying files for server dynamic limits, MIME rules, and processing (`IMAGE`, `VIDEO`, `AUDIO`, `DOCUMENT`, `OTHER`).
   - [StorageFileStatus]: Enum representing file lifecycle states (`PENDING_UPLOAD`, `READY`, `PROCESSING`, `DELETED`).
   - [StorageFileVisibility]: Enum controlling access level (`PUBLIC`, `PRIVATE`).
+  - [FileUrls] & [FileUrlsPayload]: Structured multi-resolution URL variants (original, thumbnail, preview) for files.
   - **Entity Projections:**
     - **Storage File Summary:** [StorageFileSummary] / [StorageFileSummaryPayload] for compact list views and embedding cards.
     - **Storage File Private:** [StorageFilePrivate] / [StorageFilePrivatePayload] for authenticated self-service ("My Files") and management inspection.
@@ -39,7 +40,7 @@ This module defines pure KMP contracts and route specifications for direct clien
   - [StorageErrorCodes] & [StorageErrorArgs]: Specific codes for file size limits, MIME restrictions, quota limits, presigned URL expiration, and file deletion failures.
   - [StorageAuditActionType] & [StorageAuditResourceType]: Audit action and resource types for administrative storage management and file deletions.
 - **Mappers & Domain Converters:**
-  - [StorageFileDomainMapper]: Converts internal DB models ([StorageFileInternal]) into public domain projections ([StorageFilePrivate], [StorageFileSummary]) with dynamically resolved `fileUrl`.
+  - [StorageFileDomainMapper]: Converts internal DB models ([StorageFileInternal]) into public domain projections ([StorageFilePrivate], [StorageFileSummary]) with structured [FileUrls].
   - [StorageFilePrivateMapper] & [StorageFileSummaryMapper]: Bidirectional conversion between Domain entities and Network DTO payloads ([StorageFilePrivatePayload], [StorageFileSummaryPayload]).
   - [ManagementStorageSettingsMapper] & [OpenStorageSettingsMapper]: Conversion between Storage Settings domain models and network payloads.
 
@@ -60,6 +61,8 @@ This module defines pure KMP contracts and route specifications for direct clien
 [StorageFileSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary.kt
 [StorageFilePrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate.kt
 [StorageFileInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal.kt
+[FileUrls]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls.kt
+[FileUrlsPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload.kt
 [StorageFileDomainMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileDomainMapper.kt
 [StorageFilePrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFilePrivateMapper.kt
 [StorageFileSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileSummaryMapper.kt

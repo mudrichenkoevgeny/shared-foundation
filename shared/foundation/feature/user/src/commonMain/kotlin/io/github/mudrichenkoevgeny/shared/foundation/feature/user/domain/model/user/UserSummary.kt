@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
@@ -14,7 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property accountStatus Current account state ([UserAccountStatus]).
  * @property nickname Unique handle or username string (e.g. `@username`), or `null`.
  * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
- * @property avatarUrl Direct CDN or presigned GET avatar image URL, or `null`.
+ * @property avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  */
 data class UserSummary(
     val id: UserId = UserId.generate(),
@@ -22,5 +23,5 @@ data class UserSummary(
     val accountStatus: UserAccountStatus,
     val nickname: String?,
     val displayName: String?,
-    val avatarUrl: String?
+    val avatarUrls: FileUrls?
 )

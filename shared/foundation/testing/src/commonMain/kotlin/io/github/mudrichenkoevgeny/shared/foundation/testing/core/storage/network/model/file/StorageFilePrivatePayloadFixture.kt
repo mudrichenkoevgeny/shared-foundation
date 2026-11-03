@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 
 /**
@@ -18,7 +19,7 @@ fun createTestStorageFilePrivatePayload(
     visibility: String = StorageFileVisibility.PUBLIC.value,
     status: String = StorageFileStatus.READY.value,
     targetScope: String? = "avatar",
-    fileUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001",
+    fileUrls: FileUrlsPayload? = createTestFileUrlsPayload(),
     createdAt: Long = 1700000000000L,
     updatedAt: Long? = null
 ) = StorageFilePrivatePayload(
@@ -31,7 +32,7 @@ fun createTestStorageFilePrivatePayload(
     visibility = visibility,
     status = status,
     targetScope = targetScope,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls,
     createdAt = createdAt,
     updatedAt = updatedAt
 )

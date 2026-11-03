@@ -23,7 +23,7 @@ fun StorageFileSummaryPayload.toStorageFileSummary(): StorageFileSummary = Stora
     category = StorageCategory.fromValueOrThrow(category),
     visibility = StorageFileVisibility.fromValueOrThrow(visibility),
     status = StorageFileStatus.fromValueOrThrow(status),
-    fileUrl = fileUrl,
+    fileUrls = fileUrls?.toFileUrls(),
     createdAt = Instant.fromEpochMilliseconds(createdAt)
 )
 
@@ -38,6 +38,6 @@ fun StorageFileSummary.toStorageFileSummaryPayload(): StorageFileSummaryPayload 
     category = category.value,
     visibility = visibility.value,
     status = status.value,
-    fileUrl = fileUrl,
+    fileUrls = fileUrls?.toFileUrlsPayload(),
     createdAt = createdAt.toEpochMilliseconds()
 )

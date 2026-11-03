@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
@@ -31,7 +32,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param nickname User handle or username.
  * @param displayName Human-readable display name.
  * @param avatarFileId Avatar image file identifier string in storage.
- * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
  * @param birthdate User birthdate epoch-millisecond timestamp.
  */
 fun createTestUserPrivatePayload(
@@ -53,7 +54,7 @@ fun createTestUserPrivatePayload(
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarFileId: String? = null,
-    avatarUrl: String? = null,
+    avatarUrls: FileUrlsPayload? = null,
     birthdate: Long? = null
 ) = UserPrivatePayload(
     id = id,
@@ -74,7 +75,7 @@ fun createTestUserPrivatePayload(
     nickname = nickname,
     displayName = displayName,
     avatarFileId = avatarFileId,
-    avatarUrl = avatarUrl,
+    avatarUrls = avatarUrls,
     birthdate = birthdate
 )
 

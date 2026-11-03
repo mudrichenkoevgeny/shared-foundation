@@ -124,6 +124,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permiss
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileSummary
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
@@ -160,6 +161,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list.SelfStorageFileListParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.presigned.PresignedReadUrlBatchPayload
@@ -742,6 +744,7 @@ val rawDtoClasses = listOf(
     OpenUserConfigurationPayload::class,
     PresignedUrlPayload::class,
     PresignedReadUrlBatchPayload::class,
+    FileUrlsPayload::class,
     StorageFileSummaryPayload::class,
     StorageFilePrivatePayload::class,
     ManagementStorageSettingsPayload::class,
@@ -855,6 +858,7 @@ val rawDomainToDtoClasses: List<Pair<KClass<*>, KClass<*>?>> = listOf(
     UserSessionPrivate::class to UserSessionPrivatePayload::class,
     PresignedUrl::class to PresignedUrlPayload::class,
     PresignedReadUrlBatch::class to PresignedReadUrlBatchPayload::class,
+    FileUrls::class to FileUrlsPayload::class,
     StorageFileSummary::class to StorageFileSummaryPayload::class,
     StorageFilePrivate::class to StorageFilePrivatePayload::class,
     SessionToken::class to SessionTokenPayload::class,

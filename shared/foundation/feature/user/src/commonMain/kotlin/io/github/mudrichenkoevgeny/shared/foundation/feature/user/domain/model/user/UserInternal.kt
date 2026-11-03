@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import kotlin.time.Instant
@@ -31,6 +32,7 @@ import kotlin.time.Instant
  * @property nickname Unique handle or username string (e.g. `@username`), or `null`.
  * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
  * @property avatarFileId Avatar image file identifier in storage ([FileId]), or `null`.
+ * @property avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  * @property birthdate User birthdate timestamp ([Instant]), or `null`.
  */
 data class UserInternal(
@@ -52,5 +54,6 @@ data class UserInternal(
     val nickname: String?,
     val displayName: String?,
     val avatarFileId: FileId?,
+    val avatarUrls: FileUrls?,
     val birthdate: Instant?
 )

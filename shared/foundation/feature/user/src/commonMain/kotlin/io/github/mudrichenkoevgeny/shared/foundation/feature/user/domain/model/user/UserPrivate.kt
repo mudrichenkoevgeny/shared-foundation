@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
@@ -31,7 +32,7 @@ import kotlin.time.Instant
  * @property nickname Unique handle or username string (e.g. `@username`), or `null`.
  * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
  * @property avatarFileId Avatar image file identifier in storage ([FileId]), or `null`.
- * @property avatarUrl Direct CDN or presigned GET avatar image URL, or `null`.
+ * @property avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  * @property birthdate User birthdate timestamp ([Instant]), or `null`.
  */
 data class UserPrivate(
@@ -53,6 +54,6 @@ data class UserPrivate(
     val nickname: String?,
     val displayName: String?,
     val avatarFileId: FileId?,
-    val avatarUrl: String?,
+    val avatarUrls: FileUrls?,
     val birthdate: Instant?
 )

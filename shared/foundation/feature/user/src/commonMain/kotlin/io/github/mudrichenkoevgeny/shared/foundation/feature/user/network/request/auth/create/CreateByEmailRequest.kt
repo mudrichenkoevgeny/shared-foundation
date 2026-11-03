@@ -22,6 +22,7 @@ import kotlinx.serialization.Serializable
  * @property nickname Optional requested nickname handle for the new account.
  * @property displayName Optional human-readable display name for the new account.
  * @property avatarFileId Optional avatar file identifier for the new account.
+ * @property birthdate Optional user birthdate timestamp in Unix epoch milliseconds, or `null`.
  */
 @Serializable
 data class CreateByEmailRequest(
@@ -58,5 +59,8 @@ data class CreateByEmailRequest(
     val displayName: String? = null,
 
     @SerialName(UserApiFields.AVATAR_FILE_ID)
-    val avatarFileId: String? = null
+    val avatarFileId: String? = null,
+
+    @SerialName(UserApiFields.BIRTHDATE)
+    val birthdate: Long? = null
 )

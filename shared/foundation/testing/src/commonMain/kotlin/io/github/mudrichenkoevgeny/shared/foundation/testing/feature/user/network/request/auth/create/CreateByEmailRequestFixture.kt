@@ -19,6 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
  * @param nickname User nickname handle string.
  * @param displayName User display name string.
  * @param avatarFileId Avatar file identifier string.
+ * @param birthdate User birthdate timestamp in Unix epoch milliseconds, or `null`.
  */
 fun createTestCreateByEmailRequest(
     email: String = TEST_EMAIL,
@@ -30,7 +31,8 @@ fun createTestCreateByEmailRequest(
     storageConfiguration: UserStorageConfigurationPayload? = null,
     nickname: String? = "newuser",
     displayName: String? = "New User",
-    avatarFileId: String? = null
+    avatarFileId: String? = null,
+    birthdate: Long? = null
 ) = CreateByEmailRequest(
     email = email,
     password = password,
@@ -41,5 +43,6 @@ fun createTestCreateByEmailRequest(
     storageConfiguration = storageConfiguration,
     nickname = nickname,
     displayName = displayName,
-    avatarFileId = avatarFileId
+    avatarFileId = avatarFileId,
+    birthdate = birthdate
 )

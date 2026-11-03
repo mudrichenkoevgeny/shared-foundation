@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -34,7 +35,7 @@ import kotlin.time.Instant
  * @property nickname [UserPrivate.nickname] on the wire.
  * @property displayName [UserPrivate.displayName] on the wire.
  * @property avatarFileId [UserPrivate.avatarFileId] on the wire as hex-dash string.
- * @property avatarUrl [UserPrivate.avatarUrl] on the wire.
+ * @property avatarUrls [UserPrivate.avatarUrls] on the wire as [FileUrlsPayload].
  * @property birthdate [UserPrivate.birthdate] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
@@ -93,8 +94,8 @@ data class UserPrivatePayload(
     @SerialName(UserApiFields.AVATAR_FILE_ID)
     val avatarFileId: String? = null,
 
-    @SerialName(UserApiFields.AVATAR_URL)
-    val avatarUrl: String? = null,
+    @SerialName(UserApiFields.AVATAR_URLS)
+    val avatarUrls: FileUrlsPayload? = null,
 
     @SerialName(UserApiFields.BIRTHDATE)
     val birthdate: Long? = null

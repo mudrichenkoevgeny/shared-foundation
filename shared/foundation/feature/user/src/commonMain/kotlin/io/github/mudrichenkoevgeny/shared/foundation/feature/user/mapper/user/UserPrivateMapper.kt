@@ -3,6 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.toFileIdOrNull
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrls
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
@@ -43,7 +45,7 @@ fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     nickname = nickname,
     displayName = displayName,
     avatarFileId = avatarFileId?.toFileIdOrNull(),
-    avatarUrl = avatarUrl,
+    avatarUrls = avatarUrls?.toFileUrls(),
     birthdate = birthdate?.let(Instant::fromEpochMilliseconds)
 )
 
@@ -71,6 +73,6 @@ fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
     nickname = nickname,
     displayName = displayName,
     avatarFileId = avatarFileId?.asHexDashString(),
-    avatarUrl = avatarUrl,
+    avatarUrls = avatarUrls?.toFileUrlsPayload(),
     birthdate = birthdate?.toEpochMilliseconds()
 )

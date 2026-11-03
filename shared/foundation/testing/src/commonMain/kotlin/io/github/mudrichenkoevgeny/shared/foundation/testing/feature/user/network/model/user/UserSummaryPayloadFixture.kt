@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
@@ -15,7 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param accountStatus Wire string representation of [UserAccountStatus].
  * @param nickname User handle or username.
  * @param displayName Human-readable display name.
- * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
  */
 fun createTestUserSummaryPayload(
     id: String = TEST_USER_ID,
@@ -23,14 +24,14 @@ fun createTestUserSummaryPayload(
     accountStatus: String = UserAccountStatus.ACTIVE.value,
     nickname: String? = "testuser",
     displayName: String? = "Test User",
-    avatarUrl: String? = null
+    avatarUrls: FileUrlsPayload? = null
 ) = UserSummaryPayload(
     id = id,
     role = role,
     accountStatus = accountStatus,
     nickname = nickname,
     displayName = displayName,
-    avatarUrl = avatarUrl
+    avatarUrls = avatarUrls
 )
 
 /**

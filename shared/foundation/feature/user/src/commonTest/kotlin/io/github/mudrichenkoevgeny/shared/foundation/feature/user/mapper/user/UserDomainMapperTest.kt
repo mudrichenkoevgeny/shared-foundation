@@ -1,0 +1,97 @@
+package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserInternal
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.time.Instant
+
+class UserDomainMapperTest {
+
+    private val testFileUrls = FileUrls(
+        originalUrl = "https://cdn.example.com/avatar_orig.png",
+        thumbnailUrl = "https://cdn.example.com/avatar_thumb.png",
+        previewUrl = "https://cdn.example.com/avatar_prev.png"
+    )
+
+    private val testCreatedAt = Instant.fromEpochMilliseconds(1700000000000L)
+
+    @Test
+    fun testUserPrivatePayloadMapping() {
+        val payload = UserPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            authorityLevel = 10,
+            permissionCodes = emptySet(),
+            isTotpEnabled = false,
+            createdAt = 1700000000000L,
+            lockoutType = "none",
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarUrls = testFileUrls
+        )
+
+        val domain = payload.toUserPrivate()
+
+        assertEquals(testFileUrls, domain.avatarUrls)
+
+        val mappedPayload = domain.toUserPrivatePayload()
+        assertEquals(testFileUrls, mappedPayload.avatarUrls)
+    }
+
+    @Test
+    fun testUserSummaryPayloadMapping() {
+        val payload = UserSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarUrls = testFileUrls
+        )
+
+        val domain = payload.toUserSummary()
+
+        assertEquals(testFileUrls, domain.avatarUrls)
+
+        val mappedPayload = domain.toUserSummaryPayload()
+        assertEquals(testFileUrls, mappedPayload.avatarUrls)
+    }
+
+    @Test
+    fun testUserInternalToPrivateAndSummaryMapping() {
+        val internalUser = UserInternal(
+            role = UserRole.USER,
+            accountStatus = UserAccountStatus.ACTIVE,
+            accountStatusOnRestore = null,
+            authorityLevel = 10,
+            permissionCodes = emptySet(),
+            isTotpEnabled = false,
+            lastLoginAt = null,
+            lastActiveAt = null,
+            createdAt = testCreatedAt,
+            updatedAt = null,
+            scheduledPermanentDeletionAt = null,
+            lockoutType = AccountLockoutType.NONE,
+            temporaryLockoutUntil = null,
+            storageConfiguration = null,
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarFileId = null,
+            avatarUrls = testFileUrls,
+            birthdate = null
+        )
+
+        val privateModel = internalUser.toUserPrivate()
+        assertEquals(testFileUrls, privateModel.avatarUrls)
+
+        val summaryModel = internalUser.toUserSummary()
+        assertEquals(testFileUrls, summaryModel.avatarUrls)
+    }
+}

@@ -3,6 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -34,7 +35,7 @@ import kotlin.time.Instant
  * @param nickname User handle or username.
  * @param displayName Human-readable display name.
  * @param avatarFileId Avatar image file identifier in storage ([FileId]).
- * @param avatarUrl Direct CDN or presigned GET avatar image URL.
+ * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  * @param birthdate User birthdate timestamp ([Instant]).
  */
 fun createTestUserPrivate(
@@ -56,7 +57,7 @@ fun createTestUserPrivate(
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarFileId: FileId? = null,
-    avatarUrl: String? = null,
+    avatarUrls: FileUrls? = null,
     birthdate: Instant? = null
 ) = UserPrivate(
     id = id,
@@ -77,7 +78,7 @@ fun createTestUserPrivate(
     nickname = nickname,
     displayName = displayName,
     avatarFileId = avatarFileId,
-    avatarUrl = avatarUrl,
+    avatarUrls = avatarUrls,
     birthdate = birthdate
 )
 

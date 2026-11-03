@@ -19,7 +19,7 @@ import kotlin.time.Instant
  * @property visibility Access visibility classification ([StorageFileVisibility]).
  * @property status Current file lifecycle status ([StorageFileStatus]).
  * @property targetScope Optional target scope or feature context string (e.g. "avatar", "attachment").
- * @property fileUrl Direct CDN URL for public files, or short-lived presigned GET read URL for private files generated on-the-fly by the server.
+ * @property fileUrls Structured URL variants ([FileUrls]) for public CDN or short-lived presigned GET read URLs, or `null`.
  * @property createdAt Timestamp when the file record was created ([Instant]).
  * @property updatedAt Timestamp when the file record was last modified ([Instant]), or `null`.
  */
@@ -33,7 +33,7 @@ data class StorageFilePrivate(
     val visibility: StorageFileVisibility,
     val status: StorageFileStatus,
     val targetScope: String?,
-    val fileUrl: String,
+    val fileUrls: FileUrls? = null,
     val createdAt: Instant,
     val updatedAt: Instant?
 )

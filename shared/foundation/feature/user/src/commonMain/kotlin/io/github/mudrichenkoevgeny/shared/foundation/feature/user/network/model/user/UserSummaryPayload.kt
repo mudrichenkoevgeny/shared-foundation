@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
@@ -19,7 +20,7 @@ import kotlinx.serialization.Serializable
  * @property accountStatus [UserSummary.accountStatus]; wire values match [UserAccountStatus.value].
  * @property nickname [UserSummary.nickname] on the wire.
  * @property displayName [UserSummary.displayName] on the wire.
- * @property avatarUrl [UserSummary.avatarUrl] on the wire.
+ * @property avatarUrls [UserSummary.avatarUrls] on the wire as [FileUrlsPayload].
  */
 @Serializable
 data class UserSummaryPayload(
@@ -38,6 +39,6 @@ data class UserSummaryPayload(
     @SerialName(UserApiFields.DISPLAY_NAME)
     val displayName: String? = null,
 
-    @SerialName(UserApiFields.AVATAR_URL)
-    val avatarUrl: String? = null
+    @SerialName(UserApiFields.AVATAR_URLS)
+    val avatarUrls: FileUrlsPayload? = null
 )

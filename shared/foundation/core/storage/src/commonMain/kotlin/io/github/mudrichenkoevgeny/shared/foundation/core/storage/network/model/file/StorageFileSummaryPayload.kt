@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
  * @property category Storage category wire value.
  * @property visibility Access visibility classification wire value.
  * @property status Current file lifecycle status wire value.
- * @property fileUrl Direct CDN URL for public files, or short-lived presigned GET read URL for private files generated on-the-fly by the server.
+ * @property fileUrls Structured file URL variants object, or `null`.
  * @property createdAt Timestamp when record was created in Unix epoch milliseconds.
  */
 @Serializable
@@ -41,8 +41,8 @@ data class StorageFileSummaryPayload(
     @SerialName(StorageApiFields.STATUS)
     val status: String,
 
-    @SerialName(StorageApiFields.FILE_URL)
-    val fileUrl: String,
+    @SerialName(StorageApiFields.FILE_URLS)
+    val fileUrls: FileUrlsPayload? = null,
 
     @SerialName(CommonApiFields.CREATED_AT)
     val createdAt: Long
