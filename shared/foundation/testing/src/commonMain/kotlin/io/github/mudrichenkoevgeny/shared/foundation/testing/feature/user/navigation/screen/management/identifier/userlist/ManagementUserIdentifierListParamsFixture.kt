@@ -31,8 +31,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  */
 fun createTestManagementUserIdentifierListParams(
     userId: String = TEST_USER_ID,
-    pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
-    pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
+    pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     sortBy: UserIdentifierSortBy = UserIdentifierSortBy.DEFAULT,
     sortOrder: SortOrder = SortOrder.DEFAULT,
     identifierIds: List<String> = emptyList(),

@@ -166,8 +166,8 @@ fun generateSingleDtoSchema(kClass: KClass<*>): String {
         if (param.isOptional) {
             zodType = when {
                 zodType.startsWith("z.array(") -> "$zodType.default([])"
-                zodType == "z.number()" && paramName == "pageNumber" -> "$zodType.default(ListingDefaultValues.PAGE_NUMBER)"
-                zodType == "z.number()" && paramName == "pageSize" -> "$zodType.default(ListingDefaultValues.PAGE_SIZE)"
+                zodType == "z.number()" && paramName == "pageNumber" -> "$zodType.default(ListingDefaultValues.INITIAL_PAGE_NUMBER)"
+                zodType == "z.number()" && paramName == "pageSize" -> "$zodType.default(ListingDefaultValues.DEFAULT_PAGE_SIZE)"
                 zodType.contains(".nullable()") -> "$zodType.default(null)"
                 else -> "$zodType.optional()"
             }

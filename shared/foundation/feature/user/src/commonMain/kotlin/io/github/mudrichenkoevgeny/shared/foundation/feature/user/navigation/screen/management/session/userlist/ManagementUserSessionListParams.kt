@@ -66,8 +66,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ManagementUserSessionListParams(
     val userId: String = "",
-    val pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
-    val pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
+    val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     val sortBy: UserSessionSortBy = UserSessionSortBy.DEFAULT,
     val sortOrder: SortOrder = SortOrder.DEFAULT,
     val sessionIds: List<String> = emptyList(),
@@ -137,13 +137,13 @@ data class ManagementUserSessionListParams(
                 ?.firstOrNull()
                 ?.toIntOrNull()
                 ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.PAGE_NUMBER
+                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
             val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
                 ?.firstOrNull()
                 ?.toIntOrNull()
                 ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.PAGE_SIZE
+                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
             val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
                 ?.firstOrNull()
@@ -361,10 +361,10 @@ data class ManagementUserSessionListParams(
         override fun serialize(params: ManagementUserSessionListParams): Map<String, List<String>> {
             val result = mutableMapOf<String, List<String>>()
 
-            if (params.pageNumber != ListingDefaultValues.Pagination.PAGE_NUMBER) {
+            if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {
                 result[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
             }
-            if (params.pageSize != ListingDefaultValues.Pagination.PAGE_SIZE) {
+            if (params.pageSize != ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE) {
                 result[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
             }
             if (params.sortBy != UserSessionSortBy.DEFAULT) {

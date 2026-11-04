@@ -409,11 +409,13 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
     };
 
     export declare const ListingDefaultValues: {
-      readonly PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER};
-      readonly PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE};
+      readonly INITIAL_PAGE_NUMBER: ${ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER};
+      readonly DEFAULT_PAGE_SIZE: ${ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE};
+      readonly LARGE_PAGE_SIZE: ${ListingDefaultValues.Pagination.LARGE_PAGE_SIZE};
       readonly Pagination: {
-        readonly PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER};
-        readonly PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE};
+        readonly INITIAL_PAGE_NUMBER: ${ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER};
+        readonly DEFAULT_PAGE_SIZE: ${ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE};
+        readonly LARGE_PAGE_SIZE: ${ListingDefaultValues.Pagination.LARGE_PAGE_SIZE};
       };
     };
 
@@ -569,6 +571,7 @@ private fun generateDeclarationFile(localizationDtsCode: String, testingDtsCode:
       readonly SEARCH_QUERY: "${StorageFileFilterValues.SEARCH_QUERY}";
     };
 
+    export type UserStorageTargetScopes = '${UserStorageTargetScopes.AVATAR}';
     export declare const UserStorageTargetScopes: {
       readonly AVATAR: "${UserStorageTargetScopes.AVATAR}";
     };

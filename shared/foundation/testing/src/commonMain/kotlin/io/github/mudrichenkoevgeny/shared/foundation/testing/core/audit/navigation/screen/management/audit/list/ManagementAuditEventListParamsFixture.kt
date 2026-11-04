@@ -30,8 +30,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
  * @param searchQuery Free-text search query string.
  */
 fun createTestManagementAuditEventListParams(
-    pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
-    pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
+    pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     sortBy: AuditEventSortBy = AuditEventSortBy.DEFAULT,
     sortOrder: SortOrder = SortOrder.DEFAULT,
     eventIds: List<String> = emptyList(),

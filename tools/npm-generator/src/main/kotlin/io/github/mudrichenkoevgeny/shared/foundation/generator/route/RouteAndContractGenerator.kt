@@ -79,11 +79,13 @@ fun generateContractObjects(): String {
     };
 
     export const ListingDefaultValues = {
-      PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER},
-      PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE},
+      INITIAL_PAGE_NUMBER: ${ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER},
+      DEFAULT_PAGE_SIZE: ${ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE},
+      LARGE_PAGE_SIZE: ${ListingDefaultValues.Pagination.LARGE_PAGE_SIZE},
       Pagination: {
-        PAGE_NUMBER: ${ListingDefaultValues.Pagination.PAGE_NUMBER},
-        PAGE_SIZE: ${ListingDefaultValues.Pagination.PAGE_SIZE}
+        INITIAL_PAGE_NUMBER: ${ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER},
+        DEFAULT_PAGE_SIZE: ${ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE},
+        LARGE_PAGE_SIZE: ${ListingDefaultValues.Pagination.LARGE_PAGE_SIZE}
       }
     };
 

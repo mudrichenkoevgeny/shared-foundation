@@ -15,7 +15,7 @@ class UserModelUtilsTest {
             accountStatus = UserAccountStatus.ACTIVE,
             nickname = "ivan",
             displayName = "Ivan Ivanov",
-            avatarUrl = null
+            avatarUrls = null
         )
         assertEquals("Ivan Ivanov", user.resolveDisplayName("User"))
     }
@@ -28,7 +28,7 @@ class UserModelUtilsTest {
             accountStatus = UserAccountStatus.ACTIVE,
             nickname = "ivan_123",
             displayName = null,
-            avatarUrl = null
+            avatarUrls = null
         )
         assertEquals("@ivan_123", user1.resolveDisplayName("User"))
 
@@ -38,7 +38,7 @@ class UserModelUtilsTest {
             accountStatus = UserAccountStatus.ACTIVE,
             nickname = "ivan_123",
             displayName = "   ",
-            avatarUrl = null
+            avatarUrls = null
         )
         assertEquals("@ivan_123", user2.resolveDisplayName("User"))
     }
@@ -52,7 +52,7 @@ class UserModelUtilsTest {
             accountStatus = UserAccountStatus.ACTIVE,
             nickname = null,
             displayName = null,
-            avatarUrl = null
+            avatarUrls = null
         )
         assertEquals("User 12345678", user.resolveDisplayName("User"))
     }

@@ -68,8 +68,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
  * @param searchQuery Free-text search query string.
  */
 fun createTestManagementUserListParams(
-    pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
-    pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
+    pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     sortBy: UserSortBy = UserSortBy.DEFAULT,
     sortOrder: SortOrder = SortOrder.DEFAULT,
     userIds: List<String> = emptyList(),

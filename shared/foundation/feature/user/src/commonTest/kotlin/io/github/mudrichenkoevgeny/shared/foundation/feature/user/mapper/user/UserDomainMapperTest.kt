@@ -1,7 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrlPresets
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrlsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserInternal
@@ -15,9 +17,13 @@ class UserDomainMapperTest {
 
     private val testFileUrls = FileUrls(
         originalUrl = "https://cdn.example.com/avatar_orig.png",
-        thumbnailUrl = "https://cdn.example.com/avatar_thumb.png",
-        previewUrl = "https://cdn.example.com/avatar_prev.png"
+        urlPresets = mapOf(
+            FileUrlPresets.THUMBNAIL to "https://cdn.example.com/avatar_thumb.png",
+            FileUrlPresets.PREVIEW to "https://cdn.example.com/avatar_prev.png"
+        )
     )
+
+    private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()
 
     private val testCreatedAt = Instant.fromEpochMilliseconds(1700000000000L)
 
@@ -34,7 +40,7 @@ class UserDomainMapperTest {
             lockoutType = "none",
             nickname = "testuser",
             displayName = "Test User",
-            avatarUrls = testFileUrls
+            avatarUrls = testFileUrlsPayload
         )
 
         val domain = payload.toUserPrivate()
@@ -42,7 +48,7 @@ class UserDomainMapperTest {
         assertEquals(testFileUrls, domain.avatarUrls)
 
         val mappedPayload = domain.toUserPrivatePayload()
-        assertEquals(testFileUrls, mappedPayload.avatarUrls)
+        assertEquals(testFileUrlsPayload, mappedPayload.avatarUrls)
     }
 
     @Test
@@ -53,7 +59,7 @@ class UserDomainMapperTest {
             accountStatus = UserAccountStatus.ACTIVE.value,
             nickname = "testuser",
             displayName = "Test User",
-            avatarUrls = testFileUrls
+            avatarUrls = testFileUrlsPayload
         )
 
         val domain = payload.toUserSummary()
@@ -61,7 +67,7 @@ class UserDomainMapperTest {
         assertEquals(testFileUrls, domain.avatarUrls)
 
         val mappedPayload = domain.toUserSummaryPayload()
-        assertEquals(testFileUrls, mappedPayload.avatarUrls)
+        assertEquals(testFileUrlsPayload, mappedPayload.avatarUrls)
     }
 
     @Test

@@ -38,8 +38,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.scr
  * @param searchQuery Free-text search query string.
  */
 fun createTestManagementStorageFileListParams(
-    pageNumber: Int = ListingDefaultValues.Pagination.PAGE_NUMBER,
-    pageSize: Int = ListingDefaultValues.Pagination.PAGE_SIZE,
+    pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     sortBy: StorageFileSortBy = StorageFileSortBy.DEFAULT,
     sortOrder: SortOrder = SortOrder.DEFAULT,
     fileIds: List<String> = emptyList(),

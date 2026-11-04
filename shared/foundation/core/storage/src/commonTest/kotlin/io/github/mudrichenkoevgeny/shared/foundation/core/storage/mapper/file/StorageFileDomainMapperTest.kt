@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrlPresets
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFileInternal
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
@@ -17,9 +18,13 @@ class StorageFileDomainMapperTest {
 
     private val testFileUrls = FileUrls(
         originalUrl = "https://cdn.example.com/orig.png",
-        thumbnailUrl = "https://cdn.example.com/thumb.png",
-        previewUrl = "https://cdn.example.com/prev.png"
+        urlPresets = mapOf(
+            FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.png",
+            FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.png"
+        )
     )
+
+    private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()
 
     private val testFileId = "00000000-0000-4000-8000-000000000001".toFileIdOrThrow()
     private val testCreatedAt = Instant.fromEpochMilliseconds(1700000000000L)
@@ -36,7 +41,7 @@ class StorageFileDomainMapperTest {
             visibility = StorageFileVisibility.PUBLIC.value,
             status = StorageFileStatus.READY.value,
             targetScope = "avatar",
-            fileUrls = testFileUrls,
+            fileUrls = testFileUrlsPayload,
             createdAt = 1700000000000L
         )
 
@@ -45,7 +50,7 @@ class StorageFileDomainMapperTest {
         assertEquals(testFileUrls, domain.fileUrls)
 
         val mappedPayload = domain.toStorageFilePrivatePayload()
-        assertEquals(testFileUrls, mappedPayload.fileUrls)
+        assertEquals(testFileUrlsPayload, mappedPayload.fileUrls)
     }
 
     @Test
@@ -58,7 +63,7 @@ class StorageFileDomainMapperTest {
             category = StorageCategory.IMAGE.value,
             visibility = StorageFileVisibility.PUBLIC.value,
             status = StorageFileStatus.READY.value,
-            fileUrls = testFileUrls,
+            fileUrls = testFileUrlsPayload,
             createdAt = 1700000000000L
         )
 
@@ -67,7 +72,7 @@ class StorageFileDomainMapperTest {
         assertEquals(testFileUrls, domain.fileUrls)
 
         val mappedPayload = domain.toStorageFileSummaryPayload()
-        assertEquals(testFileUrls, mappedPayload.fileUrls)
+        assertEquals(testFileUrlsPayload, mappedPayload.fileUrls)
     }
 
     @Test
@@ -103,6 +108,8 @@ class StorageFileDomainMapperTest {
             category = StorageCategory.IMAGE,
             visibility = StorageFileVisibility.PUBLIC,
             status = StorageFileStatus.READY,
+            targetScope = "avatar",
+            contentHash = null,
             s3Bucket = "my-bucket",
             s3Key = "files/test.png",
             fileUrls = testFileUrls,
