@@ -9,7 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for refresh-token operations in the authentication API.
  */
-object OpenRefreshTokenRoutes {
+public object OpenRefreshTokenRoutes {
     /**
      * **HTTP method:** `POST`
      *
@@ -27,5 +27,5 @@ object OpenRefreshTokenRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val REFRESH_TOKEN = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/refresh"
+    public const val REFRESH_TOKEN: String = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/refresh"
 }

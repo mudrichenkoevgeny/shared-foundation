@@ -22,40 +22,29 @@ import kotlinx.serialization.Serializable
  * @property updatedAt Timestamp when record was last updated in Unix epoch milliseconds, or `null`.
  */
 @Serializable
-data class StorageFilePrivatePayload(
+public data class StorageFilePrivatePayload(
     @SerialName(StorageApiFields.FILE_ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(StorageApiFields.OWNER_USER_ID)
-    val ownerUserId: String? = null,
-
+    public val ownerUserId: String? = null,
     @SerialName(StorageApiFields.FILE_NAME)
-    val fileName: String,
-
+    public val fileName: String,
     @SerialName(StorageApiFields.FILE_SIZE_BYTES)
-    val fileSizeBytes: Long,
-
+    public val fileSizeBytes: Long,
     @SerialName(StorageApiFields.MIME_TYPE)
-    val mimeType: String,
-
+    public val mimeType: String,
     @SerialName(StorageApiFields.CATEGORY)
-    val category: String,
-
+    public val category: String,
     @SerialName(StorageApiFields.VISIBILITY)
-    val visibility: String,
-
+    public val visibility: String,
     @SerialName(StorageApiFields.STATUS)
-    val status: String,
-
+    public val status: String,
     @SerialName(StorageApiFields.TARGET_SCOPE)
-    val targetScope: String? = null,
-
+    public val targetScope: String? = null,
     @SerialName(StorageApiFields.FILE_URLS)
-    val fileUrls: FileUrlsPayload? = null,
-
+    public val fileUrls: FileUrlsPayload? = null,
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long,
-
+    public val createdAt: Long,
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null
+    public val updatedAt: Long? = null
 )

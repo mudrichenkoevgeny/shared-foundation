@@ -16,49 +16,49 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
  * Use these constants when building HTTP query strings, parsing list requests, or mapping filters in services and
  * persistence so clients, servers, and documentation stay aligned.
  */
-object AuditEventFilterValues {
+public object AuditEventFilterValues {
     /** Filter by one or more specific audit event record IDs. */
-    const val EVENT_ID = AuditApiPaths.EVENT_ID
+    public const val EVENT_ID: String = AuditApiPaths.EVENT_ID
 
     /** Filter by one or more actor IDs. */
-    const val ACTOR_ID = AuditEventFields.ACTOR_ID
+    public const val ACTOR_ID: String = AuditEventFields.ACTOR_ID
 
     /** Filter by one or more actor types ([AuditActorType]) (OR semantics). */
-    const val ACTOR_TYPE = AuditEventFields.ACTOR_TYPE
+    public const val ACTOR_TYPE: String = AuditEventFields.ACTOR_TYPE
 
     /** Filter to exclude specific actor types ([AuditActorType]) (NOT IN semantics). */
-    const val EXCLUDE_ACTOR_TYPE = "exclude_actor_type"
+    public const val EXCLUDE_ACTOR_TYPE: String = "exclude_actor_type"
 
     /** Filter by one or more user actor role snapshots (OR semantics). */
-    const val ACTOR_USER_ROLE = AuditEventFields.ACTOR_USER_ROLE
+    public const val ACTOR_USER_ROLE: String = AuditEventFields.ACTOR_USER_ROLE
 
     /** Filter by one or more audit action names (OR semantics). */
-    const val ACTION = AuditEventFields.ACTION
+    public const val ACTION: String = AuditEventFields.ACTION
 
     /** Filter to exclude specific audit action names (NOT IN semantics). */
-    const val EXCLUDE_ACTION = "exclude_action"
+    public const val EXCLUDE_ACTION: String = "exclude_action"
 
     /** Filter by one or more resource types ([AuditResourceType]) (OR semantics). */
-    const val RESOURCE = AuditEventFields.RESOURCE
+    public const val RESOURCE: String = AuditEventFields.RESOURCE
 
     /** Filter by one or more resource instance IDs (OR semantics). */
-    const val RESOURCE_ID = AuditEventFields.RESOURCE_ID
+    public const val RESOURCE_ID: String = AuditEventFields.RESOURCE_ID
 
     /** Filter by one or more outcome statuses ([AuditStatus]) (OR semantics). */
-    const val STATUS = AuditEventFields.STATUS
+    public const val STATUS: String = AuditEventFields.STATUS
 
     /** Filter to exclude specific outcome statuses ([AuditStatus]) (NOT IN semantics). */
-    const val EXCLUDE_STATUS = "exclude_status"
+    public const val EXCLUDE_STATUS: String = "exclude_status"
 
     /** Inclusive lower bound filter key for creation timestamp. */
-    const val CREATED_AT_FROM = CommonFilterValues.CREATED_AT_FROM
+    public const val CREATED_AT_FROM: String = CommonFilterValues.CREATED_AT_FROM
 
     /** Inclusive upper bound filter key for creation timestamp. */
-    const val CREATED_AT_TO = CommonFilterValues.CREATED_AT_TO
+    public const val CREATED_AT_TO: String = CommonFilterValues.CREATED_AT_TO
 
     /**
      * Free-text search query string targeting:
      * - Event human-readable message ([AuditEventPrivate.message]).
      */
-    const val SEARCH_QUERY = ListingParamNames.Search.SEARCH_QUERY
+    public const val SEARCH_QUERY: String = ListingParamNames.Search.SEARCH_QUERY
 }

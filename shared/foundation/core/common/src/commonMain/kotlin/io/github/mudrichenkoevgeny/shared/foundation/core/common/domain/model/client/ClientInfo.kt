@@ -10,11 +10,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.c
  * @property origin HTTP `Origin` header value.
  * @property apiVersion Negotiated API version string.
  */
-data class ClientInfo(
-    val clientDeviceInfo: ClientDeviceInfo,
-    val userAgent: String?,
-    val ipAddress: String?,
-    val host: String?,
-    val origin: String?,
-    val apiVersion: String?
+public data class ClientInfo(
+    public val clientDeviceInfo: ClientDeviceInfo,
+    public val userAgent: String?,
+    public val ipAddress: String?,
+    public val host: String?,
+    public val origin: String?,
+    public val apiVersion: String?
 )

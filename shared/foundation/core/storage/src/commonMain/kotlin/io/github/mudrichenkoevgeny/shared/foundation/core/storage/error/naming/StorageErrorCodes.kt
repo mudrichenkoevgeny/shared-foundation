@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.formatting.Byte
 /**
  * Storage-specific error codes for API responses and backend logging, used to categorize failures.
  */
-object StorageErrorCodes {
+public object StorageErrorCodes {
     // --- Presigned Upload Validation ---
 
     /**
@@ -28,7 +28,7 @@ object StorageErrorCodes {
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
-    const val FILE_SIZE_EXCEEDS_LIMIT = "FILE_SIZE_EXCEEDS_LIMIT"
+    public const val FILE_SIZE_EXCEEDS_LIMIT: String = "FILE_SIZE_EXCEEDS_LIMIT"
 
     /**
      * The requested file size is below the minimum permitted threshold (e.g. empty 0-byte file).
@@ -49,7 +49,7 @@ object StorageErrorCodes {
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
-    const val FILE_SIZE_BELOW_MINIMUM = "FILE_SIZE_BELOW_MINIMUM"
+    public const val FILE_SIZE_BELOW_MINIMUM: String = "FILE_SIZE_BELOW_MINIMUM"
 
     /**
      * The provided MIME type is not supported or forbidden for the target storage category.
@@ -62,7 +62,7 @@ object StorageErrorCodes {
      * - [StorageErrorArgs.CATEGORY] (optional): Storage category identifier.
      * - [StorageErrorArgs.FILE_NAME] (optional): Name of the file being uploaded.
      */
-    const val UNSUPPORTED_MIME_TYPE = "UNSUPPORTED_MIME_TYPE"
+    public const val UNSUPPORTED_MIME_TYPE: String = "UNSUPPORTED_MIME_TYPE"
 
     /**
      * The specified storage category is disabled, unknown, or not supported by the platform configuration.
@@ -73,7 +73,7 @@ object StorageErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [StorageErrorArgs.CATEGORY]: Storage category identifier that was rejected.
      */
-    const val UNSUPPORTED_STORAGE_CATEGORY = "UNSUPPORTED_STORAGE_CATEGORY"
+    public const val UNSUPPORTED_STORAGE_CATEGORY: String = "UNSUPPORTED_STORAGE_CATEGORY"
 
     /**
      * The upload or storage operation failed because the user or tenant has exceeded their total allocated storage quota.
@@ -93,7 +93,7 @@ object StorageErrorCodes {
      * - [StorageErrorArgs.QUOTA_BYTES]: Allocated storage quota in bytes.
      * - [StorageErrorArgs.USED_BYTES]: Current storage space used in bytes.
      */
-    const val STORAGE_QUOTA_EXCEEDED = "STORAGE_QUOTA_EXCEEDED"
+    public const val STORAGE_QUOTA_EXCEEDED: String = "STORAGE_QUOTA_EXCEEDED"
 
     /**
      * The caller has created too many unfinalized presigned upload sessions without completing or canceling them.
@@ -108,7 +108,7 @@ object StorageErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [StorageErrorArgs.MAX_PENDING_UPLOADS]: Maximum permitted active upload sessions.
      */
-    const val TOO_MANY_PENDING_UPLOADS = "TOO_MANY_PENDING_UPLOADS"
+    public const val TOO_MANY_PENDING_UPLOADS: String = "TOO_MANY_PENDING_UPLOADS"
 
     /**
      * The user attempted to select or upload more files in a single batch than permitted by system policy or component configuration.
@@ -123,7 +123,7 @@ object StorageErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [StorageErrorArgs.MAX_BATCH_UPLOAD_COUNT]: Maximum permitted files in a single batch.
      */
-    const val MAX_BATCH_UPLOAD_COUNT_EXCEEDED = "MAX_BATCH_UPLOAD_COUNT_EXCEEDED"
+    public const val MAX_BATCH_UPLOAD_COUNT_EXCEEDED: String = "MAX_BATCH_UPLOAD_COUNT_EXCEEDED"
 
     // --- Upload Session & Finalization ---
 
@@ -133,7 +133,7 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `presigned_url_expired`
      */
-    const val PRESIGNED_URL_EXPIRED = "PRESIGNED_URL_EXPIRED"
+    public const val PRESIGNED_URL_EXPIRED: String = "PRESIGNED_URL_EXPIRED"
 
     /**
      * The upload session token or signature is invalid, malformed, or tampered with.
@@ -141,7 +141,7 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `bad_request`
      */
-    const val INVALID_UPLOAD_TOKEN = "INVALID_UPLOAD_TOKEN"
+    public const val INVALID_UPLOAD_TOKEN: String = "INVALID_UPLOAD_TOKEN"
 
     /**
      * The upload session or presigned URL has already been completed or finalized.
@@ -152,7 +152,7 @@ object StorageErrorCodes {
      * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The identifier of the file whose upload was already completed.
      */
-    const val UPLOAD_ALREADY_COMPLETED = "UPLOAD_ALREADY_COMPLETED"
+    public const val UPLOAD_ALREADY_COMPLETED: String = "UPLOAD_ALREADY_COMPLETED"
 
     /**
      * Verification or processing of an uploaded file failed after transfer (e.g. actual uploaded size mismatch, corrupted upload, or magic bytes check failure).
@@ -164,7 +164,7 @@ object StorageErrorCodes {
      * - [StorageErrorArgs.FILE_ID] (optional): The target file identifier.
      * - [CommonErrorArgs.MESSAGE] (optional): Internal verification error details.
      */
-    const val STORAGE_UPLOAD_FAILED = "STORAGE_UPLOAD_FAILED"
+    public const val STORAGE_UPLOAD_FAILED: String = "STORAGE_UPLOAD_FAILED"
 
     /**
      * Generic unexpected storage infrastructure or metadata error.
@@ -175,7 +175,7 @@ object StorageErrorCodes {
      * **Secret Arguments:**
      * - [CommonErrorArgs.MESSAGE] (optional): Internal error details.
      */
-    const val STORAGE_ERROR = "STORAGE_ERROR"
+    public const val STORAGE_ERROR: String = "STORAGE_ERROR"
 
     // --- File State & Operations ---
 
@@ -191,7 +191,7 @@ object StorageErrorCodes {
      * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The file identifier that was requested.
      */
-    const val FILE_NOT_FOUND = "FILE_NOT_FOUND"
+    public const val FILE_NOT_FOUND: String = "FILE_NOT_FOUND"
 
     /**
      * The requested file is not yet available because it is still being uploaded, scanned, or processed asynchronously.
@@ -202,7 +202,7 @@ object StorageErrorCodes {
      * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The target file identifier.
      */
-    const val FILE_NOT_READY = "FILE_NOT_READY"
+    public const val FILE_NOT_READY: String = "FILE_NOT_READY"
 
     /**
      * A file with the specified identifier or content hash already exists and cannot be overwritten.
@@ -213,7 +213,7 @@ object StorageErrorCodes {
      * **Secret Arguments:**
      * - [StorageErrorArgs.FILE_ID]: The file identifier that already exists.
      */
-    const val FILE_ALREADY_EXISTS = "FILE_ALREADY_EXISTS"
+    public const val FILE_ALREADY_EXISTS: String = "FILE_ALREADY_EXISTS"
 
     /**
      * Failed to remove the file binary from object storage or database metadata.
@@ -221,5 +221,5 @@ object StorageErrorCodes {
      * **Localization keys:**
      * - `file_delete_failed`
      */
-    const val FILE_DELETE_FAILED = "FILE_DELETE_FAILED"
+    public const val FILE_DELETE_FAILED: String = "FILE_DELETE_FAILED"
 }

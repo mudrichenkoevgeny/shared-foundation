@@ -11,18 +11,22 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-val generateLocalization = tasks.register<GenerateLocalizationTask>("generateLocalization") {
-    group = "build"
-    description = "Generates type-safe Kotlin localization strings from JSON resources."
-    resourcesDir.set(file("src/commonMain/resources"))
-    outputDir.set(layout.buildDirectory.dir("generated/sources/localization/kotlin/commonMain"))
-}
+val generateLocalization =
+    tasks.register<GenerateLocalizationTask>("generateLocalization") {
+        group = "build"
+        description = "Generates type-safe Kotlin localization strings from JSON resources."
+        resourcesDir.set(file("src/commonMain/resources"))
+        outputDir.set(layout.buildDirectory.dir("generated/sources/localization/kotlin/commonMain"))
+    }
 
 configure<KotlinMultiplatformExtension> {
     extensions.configure<KotlinMultiplatformAndroidLibraryExtension>("androidLibrary") {
         namespace = "io.github.mudrichenkoevgeny.shared.foundation.feature.user"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
+        optimization {
+            consumerKeepRules.file("consumer-rules.pro")
+        }
     }
 
     jvm()

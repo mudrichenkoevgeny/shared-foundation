@@ -23,20 +23,17 @@ import kotlinx.serialization.Serializable
  * @property birthdate Target birthdate timestamp update ([PatchField]).
  */
 @Serializable
-data class SelfUpdateUserRequest(
+public data class SelfUpdateUserRequest(
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.NICKNAME)
-    val nickname: PatchField<String> = PatchField.Unchanged,
-
+    public val nickname: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: PatchField<String> = PatchField.Unchanged,
-
+    public val displayName: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.AVATAR_FILE_ID)
-    val avatarFileId: PatchField<String> = PatchField.Unchanged,
-
+    public val avatarFileId: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.BIRTHDATE)
-    val birthdate: PatchField<Long> = PatchField.Unchanged
+    public val birthdate: PatchField<Long> = PatchField.Unchanged
 )

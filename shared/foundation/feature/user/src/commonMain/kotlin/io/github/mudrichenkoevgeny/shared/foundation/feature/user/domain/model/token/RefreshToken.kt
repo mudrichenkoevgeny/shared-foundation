@@ -11,4 +11,6 @@ import kotlin.jvm.JvmInline
  * @param value Raw refresh token string; must not be logged or persisted in plain form.
  */
 @JvmInline
-value class RefreshToken(val value: String)
+public value class RefreshToken(
+    public val value: String
+)

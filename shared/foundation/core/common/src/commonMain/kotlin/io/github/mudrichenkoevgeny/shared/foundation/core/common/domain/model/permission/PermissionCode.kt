@@ -12,7 +12,9 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class PermissionCode(val value: String) {
+public value class PermissionCode(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "PermissionCode value must not be blank." }
     }
@@ -25,17 +27,14 @@ value class PermissionCode(val value: String) {
  *
  * Returns `null` if the string is blank.
  */
-fun String.toPermissionCodeOrNull(): PermissionCode? {
-    return if (this.isNotBlank()) {
+public fun String.toPermissionCodeOrNull(): PermissionCode? =
+    if (this.isNotBlank()) {
         PermissionCode(this)
     } else {
         null
     }
-}
 
 /**
  * Creates a [PermissionCode] from this string or throws an exception if the string is blank.
  */
-fun String.toPermissionCodeOrThrow(): PermissionCode {
-    return PermissionCode(this)
-}
+public fun String.toPermissionCodeOrThrow(): PermissionCode = PermissionCode(this)

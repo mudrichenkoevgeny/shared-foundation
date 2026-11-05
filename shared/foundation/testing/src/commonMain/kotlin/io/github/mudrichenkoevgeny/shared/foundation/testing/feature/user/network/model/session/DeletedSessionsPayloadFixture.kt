@@ -4,12 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.TEST_SESSION_ID
 
 /**
- * Creates a test [DeletedSessionsPayload] wire object instance.
- *
- * @param deletedSessionIds List of deleted session ID strings.
- */
-fun createTestDeletedSessionsPayload(
-    deletedSessionIds: List<String> = listOf(TEST_SESSION_ID)
-) = DeletedSessionsPayload(
-    deletedSessionIds = deletedSessionIds
-)
+* Creates a test [DeletedSessionsPayload] wire object instance.
+*
+* @param deletedSessionIds List of deleted session ID strings.
+*/
+public fun createTestDeletedSessionsPayload(deletedSessionIds: List<String> = listOf(TEST_SESSION_ID)): DeletedSessionsPayload =
+    DeletedSessionsPayload(
+        deletedSessionIds = deletedSessionIds
+    )

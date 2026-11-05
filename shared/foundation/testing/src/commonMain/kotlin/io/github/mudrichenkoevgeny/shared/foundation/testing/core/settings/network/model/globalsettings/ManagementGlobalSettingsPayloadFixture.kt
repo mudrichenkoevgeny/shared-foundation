@@ -4,17 +4,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 
 /**
- * Creates a test [ManagementGlobalSettingsPayload] wire object instance.
- *
- * @param privacyPolicyUrl URL of the privacy policy.
- * @param termsOfServiceUrl URL of the terms of service.
- * @param contactSupportEmail Contact support email address.
- * @param minSupportedAppVersions Map of client type wire values to minimum supported app versions.
- * @param isTracingEnabled Flag indicating whether tracing is enabled.
- * @param isMetricsEnabled Flag indicating whether metrics collection is enabled.
- * @param isVerboseLoggingEnabled Flag indicating whether verbose logging is enabled.
- */
-fun createTestManagementGlobalSettingsPayload(
+* Creates a test [ManagementGlobalSettingsPayload] wire object instance.
+*
+* @param privacyPolicyUrl URL of the privacy policy.
+* @param termsOfServiceUrl URL of the terms of service.
+* @param contactSupportEmail Contact support email address.
+* @param minSupportedAppVersions Map of client type wire values to minimum supported app versions.
+* @param isTracingEnabled Flag indicating whether tracing is enabled.
+* @param isMetricsEnabled Flag indicating whether metrics collection is enabled.
+* @param isVerboseLoggingEnabled Flag indicating whether verbose logging is enabled.
+*/
+public fun createTestManagementGlobalSettingsPayload(
     privacyPolicyUrl: String? = "https://example.com/privacy",
     termsOfServiceUrl: String? = "https://example.com/terms",
     contactSupportEmail: String? = "support@example.com",
@@ -22,12 +22,13 @@ fun createTestManagementGlobalSettingsPayload(
     isTracingEnabled: Boolean = true,
     isMetricsEnabled: Boolean = true,
     isVerboseLoggingEnabled: Boolean = false
-) = ManagementGlobalSettingsPayload(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions,
-    isTracingEnabled = isTracingEnabled,
-    isMetricsEnabled = isMetricsEnabled,
-    isVerboseLoggingEnabled = isVerboseLoggingEnabled
-)
+): ManagementGlobalSettingsPayload =
+    ManagementGlobalSettingsPayload(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions,
+        isTracingEnabled = isTracingEnabled,
+        isMetricsEnabled = isMetricsEnabled,
+        isVerboseLoggingEnabled = isVerboseLoggingEnabled
+    )

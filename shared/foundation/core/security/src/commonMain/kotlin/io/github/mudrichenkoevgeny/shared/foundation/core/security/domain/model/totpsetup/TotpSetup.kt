@@ -10,8 +10,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property otpAuthUrl The standard `otpauth://` URI for QR code generation.
  * @property mfaToken A temporary token linking this setup session to a future verification.
  */
-data class TotpSetup(
-    val secretKey: String,
-    val otpAuthUrl: String,
-    val mfaToken: String
+public data class TotpSetup(
+    public val secretKey: String,
+    public val otpAuthUrl: String,
+    public val mfaToken: String
 )

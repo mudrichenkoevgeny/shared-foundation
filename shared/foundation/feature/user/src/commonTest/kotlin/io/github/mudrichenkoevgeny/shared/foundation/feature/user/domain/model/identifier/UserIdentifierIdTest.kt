@@ -7,7 +7,6 @@ import kotlin.test.assertNull
 import kotlin.uuid.Uuid
 
 class UserIdentifierIdTest {
-
     @Test
     fun `parsing roundtrips from dash-hex string`() {
         val uuidString = "00000000-0000-4000-8000-000000000020"

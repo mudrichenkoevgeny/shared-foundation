@@ -5,6 +5,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.ac
  *
  * Other modules can provide their own action type implementations.
  */
-interface AuditActionType {
-    val value: String
+public interface AuditActionType {
+    public val value: String
 }

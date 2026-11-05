@@ -11,22 +11,24 @@ import kotlinx.serialization.Serializable
  * @property value Wire value for `sort_by`.
  */
 @Serializable
-enum class AuditEventSortBy(val value: String) {
+public enum class AuditEventSortBy(
+    public val value: String
+) {
     /** Sort by creation timestamp. */
     @SerialName(CommonApiFields.CREATED_AT)
     CREATED_AT(CommonApiFields.CREATED_AT);
 
-    companion object {
+    public companion object {
         /** Default sort field ([CREATED_AT]). */
-        val DEFAULT = CREATED_AT
+        public val DEFAULT: AuditEventSortBy = CREATED_AT
 
         /**
          * Returns [AuditEventSortBy] for the given wire value or case-insensitive enum name.
          */
-        fun fromValueOrNull(value: String): AuditEventSortBy? =
+        public fun fromValueOrNull(value: String): AuditEventSortBy? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -34,7 +36,7 @@ enum class AuditEventSortBy(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditEventSortBy].
          */
-        fun fromValueOrThrow(value: String): AuditEventSortBy =
+        public fun fromValueOrThrow(value: String): AuditEventSortBy =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${AuditEventSortBy::class.simpleName}: '$value'"
             )

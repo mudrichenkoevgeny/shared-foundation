@@ -9,7 +9,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property mfaToken The temporary unique identifier for the authentication challenge.
  * @property code The verification code provided by the user.
  */
-data class VerifyTotp(
-    val mfaToken: String,
-    val code: String
+public data class VerifyTotp(
+    public val mfaToken: String,
+    public val code: String
 )

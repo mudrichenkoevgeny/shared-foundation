@@ -26,16 +26,16 @@ import kotlin.time.Instant
  * @property message Optional human-readable message or diagnostic details.
  * @property createdAt Timestamp when the audit event occurred ([Instant]).
  */
-data class AuditEventPrivate(
-    val id: AuditEventId = AuditEventId.generate(),
-    val actorId: String?,
-    val actorType: AuditActorType,
-    val actorUserRole: String?,
-    val action: AuditActionType,
-    val resource: AuditResourceType,
-    val resourceId: String?,
-    val status: AuditStatus,
-    val metadata: Set<AuditEventMetadata>,
-    val message: String?,
-    val createdAt: Instant
+public data class AuditEventPrivate(
+    public val id: AuditEventId = AuditEventId.generate(),
+    public val actorId: String?,
+    public val actorType: AuditActorType,
+    public val actorUserRole: String?,
+    public val action: AuditActionType,
+    public val resource: AuditResourceType,
+    public val resourceId: String?,
+    public val status: AuditStatus,
+    public val metadata: Set<AuditEventMetadata>,
+    public val message: String?,
+    public val createdAt: Instant
 )

@@ -13,16 +13,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
  * @property primary Primary enabled auth providers.
  * @property secondary Secondary enabled auth providers.
  */
-data class AvailableAuthProviders(
-    val primary: List<UserAuthProvider>,
-    val secondary: List<UserAuthProvider>
+public data class AvailableAuthProviders(
+    public val primary: List<UserAuthProvider>,
+    public val secondary: List<UserAuthProvider>
 ) {
     /**
      * External providers (OAuth-like) supported by the enabled auth providers.
      *
      * The mapping is currently limited to the subset supported by the shared contract.
      */
-    val supportedExternalProviders: Set<ExternalAuthProvider>
+    public val supportedExternalProviders: Set<ExternalAuthProvider>
         get() {
             val activeTypes = (primary + secondary).toSet()
 

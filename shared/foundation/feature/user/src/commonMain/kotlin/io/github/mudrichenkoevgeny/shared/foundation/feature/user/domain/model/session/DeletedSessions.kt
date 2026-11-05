@@ -5,6 +5,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
  *
  * @property deletedSessionIds List of IDs of the sessions that were revoked.
  */
-data class DeletedSessions(
-    val deletedSessionIds: List<UserSessionId>
+public data class DeletedSessions(
+    public val deletedSessionIds: List<UserSessionId>
 )

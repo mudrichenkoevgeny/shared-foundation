@@ -5,7 +5,6 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class StorageUploadValidatorTest {
-
     @Test
     fun `isFileTypeAccepted accepts any file when filter list is empty`() {
         assertTrue(StorageUploadValidator.isFileTypeAccepted(emptyList(), "avatar.png", "image/png"))
@@ -45,10 +44,23 @@ class StorageUploadValidatorTest {
     }
 
     @Test
+    fun `isFileTypeAccepted matches wildcard filters against various cases`() {
+        val filters = listOf("image/*", "text/*")
+
+        assertTrue(StorageUploadValidator.isFileTypeAccepted(filters, "test.jpg", "image/jpeg"))
+        assertTrue(StorageUploadValidator.isFileTypeAccepted(filters, "test.jpg", "IMAGE/PNG"))
+        assertFalse(StorageUploadValidator.isFileTypeAccepted(filters, "test.txt", null))
+        assertFalse(StorageUploadValidator.isFileTypeAccepted(filters, "test.txt", "application/json"))
+    }
+
+    @Test
     fun `isFileSizeValid checks maximum file size bounds and rejects negative sizes`() {
         assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 1000L, fileSizeBytes = 500L))
         assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 1000L, fileSizeBytes = 1000L))
+        assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 1000L, fileSizeBytes = 0L))
         assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = null, fileSizeBytes = 9999999L))
+        assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = -10L, fileSizeBytes = 9999999L))
+        assertTrue(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 0L, fileSizeBytes = 9999999L))
 
         assertFalse(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 1000L, fileSizeBytes = 1001L))
         assertFalse(StorageUploadValidator.isFileSizeValid(maxFileSizeBytes = 1000L, fileSizeBytes = -1L))
@@ -60,6 +72,8 @@ class StorageUploadValidatorTest {
         assertTrue(StorageUploadValidator.isBatchSizeValid(maxFiles = 5, currentCount = 3))
         assertTrue(StorageUploadValidator.isBatchSizeValid(maxFiles = 5, currentCount = 5))
         assertTrue(StorageUploadValidator.isBatchSizeValid(maxFiles = null, currentCount = 100))
+        assertTrue(StorageUploadValidator.isBatchSizeValid(maxFiles = -1, currentCount = 100))
+        assertTrue(StorageUploadValidator.isBatchSizeValid(maxFiles = 0, currentCount = 100))
 
         assertFalse(StorageUploadValidator.isBatchSizeValid(maxFiles = 5, currentCount = 6))
         assertFalse(StorageUploadValidator.isBatchSizeValid(maxFiles = 5, currentCount = -1))

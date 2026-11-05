@@ -6,7 +6,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.validation
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RequiredField
+public annotation class RequiredField
 
 /**
  * Marks a String field as required and non-blank.
@@ -14,7 +14,7 @@ annotation class RequiredField
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class NotBlankStringField
+public annotation class NotBlankStringField
 
 /**
  * Marks a collection field as required and non-empty.
@@ -22,4 +22,4 @@ annotation class NotBlankStringField
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class NotEmptyCollectionField
+public annotation class NotEmptyCollectionField

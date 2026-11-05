@@ -15,23 +15,21 @@ import kotlinx.serialization.Serializable
  * wire key is [StorageApiPaths.FILE_ID]. May be empty or unvalidated until parsed via [typedFileId].
  */
 @Serializable
-data class StorageFileDetailParams(
-    val fileId: String = ""
+public data class StorageFileDetailParams(
+    public val fileId: String = ""
 ) : NavigationScreenParams<StorageFileDetailParams> {
-
     /**
      * Parsed strongly typed [FileId] representation of [fileId].
      *
      * Returns `null` if [fileId] is blank or does not conform to the canonical UUID format.
      */
-    val typedFileId: FileId?
+    public val typedFileId: FileId?
         get() = fileId.toFileIdOrNull()
 
     override val parser: NavigationScreenParamsParser<StorageFileDetailParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<StorageFileDetailParams> {
-
+    public companion object : NavigationScreenParamsParser<StorageFileDetailParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [StorageFileDetailParams].
          */

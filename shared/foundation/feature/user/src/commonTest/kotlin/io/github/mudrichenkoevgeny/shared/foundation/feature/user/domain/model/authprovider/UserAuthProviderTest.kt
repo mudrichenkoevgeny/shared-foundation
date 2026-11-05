@@ -6,7 +6,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class UserAuthProviderTest {
-
     @Test
     fun `fromValueOrNull accepts case-insensitive enum names`() {
         assertEquals(UserAuthProvider.EMAIL, UserAuthProvider.fromValueOrNull("email"))

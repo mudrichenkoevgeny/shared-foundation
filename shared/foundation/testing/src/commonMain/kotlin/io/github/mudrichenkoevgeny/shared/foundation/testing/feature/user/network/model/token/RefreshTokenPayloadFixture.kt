@@ -3,12 +3,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.RefreshTokenPayload
 
 /**
- * Creates a test [RefreshTokenPayload] wire object instance.
- *
- * @param refreshToken Refresh token string.
- */
-fun createTestRefreshTokenPayload(
-    refreshToken: String = "test_refresh_token"
-) = RefreshTokenPayload(
-    refreshToken = refreshToken
-)
+* Creates a test [RefreshTokenPayload] wire object instance.
+*
+* @param refreshToken Refresh token string.
+*/
+public fun createTestRefreshTokenPayload(refreshToken: String = "test_refresh_token"): RefreshTokenPayload =
+    RefreshTokenPayload(
+        refreshToken = refreshToken
+    )

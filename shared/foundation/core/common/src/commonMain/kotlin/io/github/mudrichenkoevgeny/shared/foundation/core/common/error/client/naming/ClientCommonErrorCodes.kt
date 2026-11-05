@@ -6,15 +6,14 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.client.n
  * Raised by client applications or SDK transport/lifecycle layers before or outside backend API calls.
  * **NOT returned by backend API responses.**
  */
-object ClientCommonErrorCodes {
-
+public object ClientCommonErrorCodes {
     /**
      * Error code indicating no internet connection available on the client device.
      *
      * **Localization keys:**
      * - `no_internet`
      */
-    const val NO_INTERNET_CONNECTION = "NO_INTERNET_CONNECTION"
+    public const val NO_INTERNET_CONNECTION: String = "NO_INTERNET_CONNECTION"
 
     /**
      * Error code indicating generic network transport failure (e.g. timeout, DNS resolution failure).
@@ -22,7 +21,7 @@ object ClientCommonErrorCodes {
      * **Localization keys:**
      * - `network`
      */
-    const val NETWORK = "NETWORK"
+    public const val NETWORK: String = "NETWORK"
 
     /**
      * Error code indicating response payload contract violation (e.g. deserialization failure).
@@ -30,7 +29,7 @@ object ClientCommonErrorCodes {
      * **Localization keys:**
      * - `bad_request`
      */
-    const val CONTRACT_VIOLATION = "CONTRACT_VIOLATION"
+    public const val CONTRACT_VIOLATION: String = "CONTRACT_VIOLATION"
 
     /**
      * Error code indicating component or screen lifecycle state error.
@@ -38,5 +37,5 @@ object ClientCommonErrorCodes {
      * **Localization keys:**
      * - `internal`
      */
-    const val LIFECYCLE_ERROR = "LIFECYCLE_ERROR"
+    public const val LIFECYCLE_ERROR: String = "LIFECYCLE_ERROR"
 }

@@ -12,7 +12,9 @@ private const val VISIBILITY_PRIVATE = "private"
  * @property value String representation of the [StorageFileVisibility].
  */
 @Serializable
-enum class StorageFileVisibility(val value: String) {
+public enum class StorageFileVisibility(
+    public val value: String
+) {
     /**
      * File is publicly accessible via permanent URL or CDN.
      */
@@ -25,14 +27,14 @@ enum class StorageFileVisibility(val value: String) {
     @SerialName(VISIBILITY_PRIVATE)
     PRIVATE(VISIBILITY_PRIVATE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageFileVisibility] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageFileVisibility? =
+        public fun fromValueOrNull(value: String): StorageFileVisibility? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -40,7 +42,7 @@ enum class StorageFileVisibility(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageFileVisibility].
          */
-        fun fromValueOrThrow(value: String): StorageFileVisibility =
+        public fun fromValueOrThrow(value: String): StorageFileVisibility =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageFileVisibility::class.simpleName}: '$value'"
             )

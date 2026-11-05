@@ -8,7 +8,6 @@ import kotlin.test.assertNull
 import kotlin.uuid.Uuid
 
 class StorageFileDetailParamsTest {
-
     @Test
     fun `parse extracts fileId correctly`() {
         val uuidString = "00000000-0000-4000-8000-000000000001"

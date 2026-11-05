@@ -8,7 +8,9 @@ import kotlin.jvm.JvmInline
  * @property value Raw string value; must not be blank.
  */
 @JvmInline
-value class DecryptedString(val value: String) {
+public value class DecryptedString(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "DecryptedString value must not be blank." }
     }
@@ -20,10 +22,9 @@ value class DecryptedString(val value: String) {
  * Attempts to create a [DecryptedString] from this string.
  * Returns `null` if the string is blank.
  */
-fun String.toDecryptedStringOrNull(): DecryptedString? =
-    if (this.isNotBlank()) DecryptedString(this) else null
+public fun String.toDecryptedStringOrNull(): DecryptedString? = if (this.isNotBlank()) DecryptedString(this) else null
 
 /**
  * Creates a [DecryptedString] from this string or throws an exception if the string is blank.
  */
-fun String.toDecryptedStringOrThrow(): DecryptedString = DecryptedString(this)
+public fun String.toDecryptedStringOrThrow(): DecryptedString = DecryptedString(this)

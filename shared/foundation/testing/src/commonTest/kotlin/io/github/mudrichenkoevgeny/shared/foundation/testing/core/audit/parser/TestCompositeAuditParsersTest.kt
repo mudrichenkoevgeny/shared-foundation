@@ -7,7 +7,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TestCompositeAuditParsersTest {
-
     @Test
     fun actionParserAcceptsArbitraryActionString() {
         val parser = createTestCompositeAuditActionTypeParser()

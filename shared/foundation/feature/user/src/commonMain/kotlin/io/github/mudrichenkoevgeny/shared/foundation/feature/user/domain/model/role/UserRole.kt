@@ -13,7 +13,9 @@ private const val ROLE_ADMIN = "admin"
  * @property value String representation of the [UserRole].
  */
 @Serializable
-enum class UserRole(val value: String) {
+public enum class UserRole(
+    public val value: String
+) {
     /**
      * Regular user with standard access to application features.
      */
@@ -33,14 +35,14 @@ enum class UserRole(val value: String) {
     @SerialName(ROLE_ADMIN)
     ADMIN(ROLE_ADMIN);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserRole] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UserRole? =
+        public fun fromValueOrNull(value: String): UserRole? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -48,7 +50,7 @@ enum class UserRole(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserRole].
          */
-        fun fromValueOrThrow(value: String): UserRole =
+        public fun fromValueOrThrow(value: String): UserRole =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserRole::class.simpleName}: '$value'"
             )

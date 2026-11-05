@@ -12,19 +12,19 @@ import kotlin.uuid.Uuid
  * @param value UUID backing the id; use [asHexDashString] for serialization.
  */
 @JvmInline
-value class AuditEventId(val value: Uuid) {
-
+public value class AuditEventId(
+    public val value: Uuid
+) {
     /**
      * Returns the id as a canonical hex string with dashes (e.g. for API or logging).
      */
-    fun asHexDashString(): String = value.toHexDashString()
+    public fun asHexDashString(): String = value.toHexDashString()
 
-    companion object {
-
+    public companion object {
         /**
          * Generates a new random [AuditEventId].
          */
-        fun generate() = AuditEventId(Uuid.random())
+        public fun generate(): AuditEventId = AuditEventId(Uuid.random())
     }
 }
 
@@ -33,10 +33,9 @@ value class AuditEventId(val value: Uuid) {
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-fun String.toAuditEventIdOrNull(): AuditEventId? =
-    Uuid.parseOrNull(this)?.let { AuditEventId(it) }
+public fun String.toAuditEventIdOrNull(): AuditEventId? = Uuid.parseOrNull(this)?.let { AuditEventId(it) }
 
 /**
  * Parses this string into an [AuditEventId] or throws if the value is not a valid UUID.
  */
-fun String.toAuditEventIdOrThrow(): AuditEventId = AuditEventId(Uuid.parse(this))
+public fun String.toAuditEventIdOrThrow(): AuditEventId = AuditEventId(Uuid.parse(this))

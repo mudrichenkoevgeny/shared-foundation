@@ -13,19 +13,21 @@ private const val RESOURCE_GLOBAL_SETTINGS = "global_settings"
  * @property value String representation of the [SettingsAuditResourceType].
  */
 @Serializable
-enum class SettingsAuditResourceType(override val value: String) : AuditResourceType {
+public enum class SettingsAuditResourceType(
+    override val value: String
+) : AuditResourceType {
     /** Global settings resource ([ManagementGlobalSettingsRoutes]). */
     @SerialName(RESOURCE_GLOBAL_SETTINGS)
     GLOBAL_SETTINGS(RESOURCE_GLOBAL_SETTINGS);
 
-    companion object {
+    public companion object {
         /**
          * Returns [SettingsAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): SettingsAuditResourceType? =
+        public fun fromValueOrNull(value: String): SettingsAuditResourceType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -33,7 +35,7 @@ enum class SettingsAuditResourceType(override val value: String) : AuditResource
          *
          * @throws IllegalArgumentException if [value] does not match any [SettingsAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): SettingsAuditResourceType =
+        public fun fromValueOrThrow(value: String): SettingsAuditResourceType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${SettingsAuditResourceType::class.simpleName}: '$value'"
             )

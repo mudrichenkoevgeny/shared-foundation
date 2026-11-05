@@ -15,13 +15,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
  * @property maxFileSizeBytes Maximum file size limit in bytes for this upload context. If null, no maximum size limit is enforced.
  * @property autoSubmit Whether to automatically trigger upload submission upon file selection.
  */
-data class StorageFileUploadUiConfig(
-    val maxFiles: Int? = null,
-    val targetScope: String? = null,
-    val category: StorageCategory? = null,
-    val visibility: StorageFileVisibility? = null,
-    val acceptedFileTypes: List<String> = emptyList(),
-    val minFileSizeBytes: Long? = null,
-    val maxFileSizeBytes: Long? = null,
-    val autoSubmit: Boolean = false
+public data class StorageFileUploadUiConfig(
+    public val maxFiles: Int? = null,
+    public val targetScope: String? = null,
+    public val category: StorageCategory? = null,
+    public val visibility: StorageFileVisibility? = null,
+    public val acceptedFileTypes: List<String> = emptyList(),
+    public val minFileSizeBytes: Long? = null,
+    public val maxFileSizeBytes: Long? = null,
+    public val autoSubmit: Boolean = false
 )

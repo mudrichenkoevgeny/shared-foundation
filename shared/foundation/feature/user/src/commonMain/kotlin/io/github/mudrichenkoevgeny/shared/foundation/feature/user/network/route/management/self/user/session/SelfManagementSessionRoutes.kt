@@ -3,9 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
@@ -14,12 +12,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
@@ -31,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for the current authenticated principal's sessions in the management API (self-service).
  */
-object SelfManagementSessionRoutes {
+public object SelfManagementSessionRoutes {
     /** Base path for self-service session operations in management API. */
     private const val BASE_SELF_SESSIONS_ROUTE =
         "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/sessions"
@@ -61,7 +57,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val LOGOUT = "$BASE_SELF_SESSIONS_ROUTE/logout"
+    public const val LOGOUT: String = "$BASE_SELF_SESSIONS_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -133,7 +129,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val GET_SESSIONS = BASE_SELF_SESSIONS_ROUTE
+    public const val GET_SESSIONS: String = BASE_SELF_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -155,7 +151,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionDetail]
      */
-    const val GET_SESSION = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val GET_SESSION: String = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -188,7 +184,7 @@ object SelfManagementSessionRoutes {
      *   - [ManagementSelfUserNavigation.SessionList]
      *   - [ManagementSelfUserNavigation.SessionDetail]
      */
-    const val DELETE_SESSION = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val DELETE_SESSION: String = "$BASE_SELF_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -217,7 +213,7 @@ object SelfManagementSessionRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.SessionList]
      */
-    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SELF_SESSIONS_ROUTE/others"
+    public const val DELETE_ALL_OTHER_SESSIONS: String = "$BASE_SELF_SESSIONS_ROUTE/others"
 
     /**
      * **HTTP method:** `POST`
@@ -245,5 +241,5 @@ object SelfManagementSessionRoutes {
      * - Screens: None.
      * - Flow: Global re-authentication dialog (no dedicated screen).
      */
-    const val REAUTHENTICATE_SESSION = "$BASE_SELF_SESSIONS_ROUTE/reauthenticate"
+    public const val REAUTHENTICATE_SESSION: String = "$BASE_SELF_SESSIONS_ROUTE/reauthenticate"
 }

@@ -13,15 +13,13 @@ import kotlinx.serialization.Serializable
  * @property totpStep Active step/tab ([TotpStep]); wire key is [UserNavigationPaths.TOTP_STEP].
  */
 @Serializable
-data class TotpMainParams(
-    val totpStep: TotpStep = TotpStep.DEFAULT
+public data class TotpMainParams(
+    public val totpStep: TotpStep = TotpStep.DEFAULT
 ) : NavigationScreenParams<TotpMainParams> {
-
     override val parser: NavigationScreenParamsParser<TotpMainParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<TotpMainParams> {
-
+    public companion object : NavigationScreenParamsParser<TotpMainParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [TotpMainParams].
          *
@@ -30,10 +28,11 @@ data class TotpMainParams(
          */
         override fun parse(params: Map<String, Any?>): TotpMainParams {
             val normalized = params.normalizeQueryParams()
-            val step = normalized[UserNavigationPaths.TOTP_STEP]
-                ?.firstOrNull()
-                ?.let { TotpStep.fromValueOrNull(it) }
-                ?: TotpStep.DEFAULT
+            val step =
+                normalized[UserNavigationPaths.TOTP_STEP]
+                    ?.firstOrNull()
+                    ?.let { TotpStep.fromValueOrNull(it) }
+                    ?: TotpStep.DEFAULT
 
             return TotpMainParams(totpStep = step)
         }

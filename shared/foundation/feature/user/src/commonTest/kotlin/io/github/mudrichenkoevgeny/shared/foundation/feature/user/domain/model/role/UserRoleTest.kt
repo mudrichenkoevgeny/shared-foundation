@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class UserRoleTest {
-
     @Test
     fun `fromValue accepts case-insensitive enum names`() {
         assertEquals(UserRole.USER, UserRole.fromValueOrNull("user"))

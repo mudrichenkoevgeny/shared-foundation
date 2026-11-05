@@ -13,8 +13,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
@@ -29,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for user identifiers in the management API (list, single read, delete).
  */
-object ManagementIdentifiersRoutes {
+public object ManagementIdentifiersRoutes {
     /** Base path for global user identifiers in the management API. */
     private const val BASE_MANAGEMENT_IDENTIFIERS_ROUTE = "$BASE_MANAGEMENT_NETWORK_ROUTE/identifiers"
 
@@ -98,7 +96,7 @@ object ManagementIdentifiersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.GlobalIdentifierList]
      */
-    const val GET_IDENTIFIERS = BASE_MANAGEMENT_IDENTIFIERS_ROUTE
+    public const val GET_IDENTIFIERS: String = BASE_MANAGEMENT_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -162,7 +160,7 @@ object ManagementIdentifiersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserIdentifierList]
      */
-    const val GET_USER_IDENTIFIERS = BASE_MANAGEMENT_USER_IDENTIFIERS_ROUTE
+    public const val GET_USER_IDENTIFIERS: String = BASE_MANAGEMENT_USER_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -189,7 +187,7 @@ object ManagementIdentifiersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.IdentifierDetail]
      */
-    const val GET_IDENTIFIER = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val GET_IDENTIFIER: String = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -231,7 +229,7 @@ object ManagementIdentifiersRoutes {
      *   - [ManagementUsersNavigation.GlobalIdentifierList]
      *   - [ManagementUsersNavigation.IdentifierDetail]
      */
-    const val DELETE_IDENTIFIER = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val DELETE_IDENTIFIER: String = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -271,6 +269,6 @@ object ManagementIdentifiersRoutes {
      *   - [ManagementUsersNavigation.GlobalIdentifierList]
      *   - [ManagementUsersNavigation.IdentifierDetail]
      */
-    const val DELETE_IDENTIFIER_PASSWORD =
+    public const val DELETE_IDENTIFIER_PASSWORD: String =
         "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/password"
 }

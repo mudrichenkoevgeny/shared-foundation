@@ -6,7 +6,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class UserErrorResolverTest {
-
     private val userStringsEn = UserModuleStrings(locale = "en")
     private val userStringsRu = UserModuleStrings(locale = "ru")
     private val commonStringsEn = CommonModuleStrings(locale = "en")
@@ -14,64 +13,73 @@ class UserErrorResolverTest {
 
     @Test
     fun `resolveUserLockedMessage handles temporary and indefinite lockout correctly`() {
-        val tempEn = userStringsEn.resolveUserLockedMessage(
-            lockoutType = AccountLockoutType.TEMPORARY,
-            formattedUntil = "2026-03-12 14:30:00 UTC"
-        )
+        val tempEn =
+            userStringsEn.resolveUserLockedMessage(
+                lockoutType = AccountLockoutType.TEMPORARY,
+                formattedUntil = "2026-03-12 14:30:00 UTC"
+            )
         assertEquals("This account has been locked until 2026-03-12 14:30:00 UTC.", tempEn)
 
-        val tempRu = userStringsRu.resolveUserLockedMessage(
-            lockoutType = AccountLockoutType.TEMPORARY,
-            formattedUntil = "2026-03-12 14:30:00 UTC"
-        )
+        val tempRu =
+            userStringsRu.resolveUserLockedMessage(
+                lockoutType = AccountLockoutType.TEMPORARY,
+                formattedUntil = "2026-03-12 14:30:00 UTC"
+            )
         assertEquals("Этот аккаунт заблокирован до 2026-03-12 14:30:00 UTC.", tempRu)
 
-        val indefEn = userStringsEn.resolveUserLockedMessage(
-            lockoutType = AccountLockoutType.INDEFINITE
-        )
+        val indefEn =
+            userStringsEn.resolveUserLockedMessage(
+                lockoutType = AccountLockoutType.INDEFINITE
+            )
         assertEquals("This account has been locked.", indefEn)
 
-        val indefRu = userStringsRu.resolveUserLockedMessage(
-            lockoutType = AccountLockoutType.INDEFINITE
-        )
+        val indefRu =
+            userStringsRu.resolveUserLockedMessage(
+                lockoutType = AccountLockoutType.INDEFINITE
+            )
         assertEquals("Этот аккаунт заблокирован.", indefRu)
     }
 
     @Test
     fun `resolveUserIdentifierLimitReachedMessage resolves provider display labels`() {
-        val emailMsgEn = userStringsEn.resolveUserIdentifierLimitReachedMessage(
-            commonStrings = commonStringsEn,
-            limit = 2,
-            providerRaw = "email"
-        )
+        val emailMsgEn =
+            userStringsEn.resolveUserIdentifierLimitReachedMessage(
+                commonStrings = commonStringsEn,
+                limit = 2,
+                providerRaw = "email"
+            )
         assertEquals("The limit of 2 sign-in methods for 'Email' has been reached.", emailMsgEn)
 
-        val emailMsgRu = userStringsRu.resolveUserIdentifierLimitReachedMessage(
-            commonStrings = commonStringsRu,
-            limit = 2,
-            providerRaw = "email"
-        )
+        val emailMsgRu =
+            userStringsRu.resolveUserIdentifierLimitReachedMessage(
+                commonStrings = commonStringsRu,
+                limit = 2,
+                providerRaw = "email"
+            )
         assertEquals("Достигнут лимит в 2 способов входа для «Email».", emailMsgRu)
 
-        val phoneMsgEn = userStringsEn.resolveUserIdentifierLimitReachedMessage(
-            commonStrings = commonStringsEn,
-            limit = 1,
-            providerRaw = "phone"
-        )
+        val phoneMsgEn =
+            userStringsEn.resolveUserIdentifierLimitReachedMessage(
+                commonStrings = commonStringsEn,
+                limit = 1,
+                providerRaw = "phone"
+            )
         assertEquals("The limit of 1 sign-in methods for 'Phone' has been reached.", phoneMsgEn)
 
-        val externalMsgEn = userStringsEn.resolveUserIdentifierLimitReachedMessage(
-            commonStrings = commonStringsEn,
-            limit = 2,
-            providerRaw = "google"
-        )
+        val externalMsgEn =
+            userStringsEn.resolveUserIdentifierLimitReachedMessage(
+                commonStrings = commonStringsEn,
+                limit = 2,
+                providerRaw = "google"
+            )
         assertEquals("The limit of 2 sign-in methods for 'External Provider' has been reached.", externalMsgEn)
 
-        val externalMsgRu = userStringsRu.resolveUserIdentifierLimitReachedMessage(
-            commonStrings = commonStringsRu,
-            limit = 2,
-            providerRaw = "google"
-        )
+        val externalMsgRu =
+            userStringsRu.resolveUserIdentifierLimitReachedMessage(
+                commonStrings = commonStringsRu,
+                limit = 2,
+                providerRaw = "google"
+            )
         assertEquals("Достигнут лимит в 2 способов входа для «Внешний провайдер».", externalMsgRu)
     }
 

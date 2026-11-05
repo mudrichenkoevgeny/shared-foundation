@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class LoginByPhoneParamsTest {
-
     @Test
     fun `parse extracts and normalizes phone number correctly`() {
         val params = mapOf(UserApiFields.PHONE_NUMBER to " 12345678900")

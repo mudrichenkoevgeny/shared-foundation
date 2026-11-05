@@ -3,24 +3,24 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 /**
  * Represents an external third-party authentication provider (OAuth-based).
  */
-sealed interface ExternalAuthProvider {
+public sealed interface ExternalAuthProvider {
     /**
      * The corresponding [UserAuthProvider] type for this external provider.
      */
-    val userAuthProvider: UserAuthProvider
+    public val userAuthProvider: UserAuthProvider
 
-    data object Google : ExternalAuthProvider {
-        override val userAuthProvider = UserAuthProvider.GOOGLE
+    public data object Google : ExternalAuthProvider {
+        override val userAuthProvider: UserAuthProvider = UserAuthProvider.GOOGLE
     }
 
-    data object Apple : ExternalAuthProvider {
-        override val userAuthProvider = UserAuthProvider.APPLE
+    public data object Apple : ExternalAuthProvider {
+        override val userAuthProvider: UserAuthProvider = UserAuthProvider.APPLE
     }
 
-    companion object {
+    public companion object {
         /**
          * A list of all supported [ExternalAuthProvider] implementations.
          */
-        val all: List<ExternalAuthProvider> = listOf(Google, Apple)
+        public val all: List<ExternalAuthProvider> = listOf(Google, Apple)
     }
 }

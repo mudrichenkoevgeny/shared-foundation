@@ -8,7 +8,9 @@ import kotlin.jvm.JvmInline
  * @property value Hash value; must not be blank.
  */
 @JvmInline
-value class RefreshTokenHash(val value: String) {
+public value class RefreshTokenHash(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "RefreshTokenHash value must not be blank." }
     }
@@ -20,10 +22,9 @@ value class RefreshTokenHash(val value: String) {
  * Attempts to create a [RefreshTokenHash] from this string.
  * Returns `null` if the string is blank.
  */
-fun String.toRefreshTokenHashOrNull(): RefreshTokenHash? =
-    if (this.isNotBlank()) RefreshTokenHash(this) else null
+public fun String.toRefreshTokenHashOrNull(): RefreshTokenHash? = if (this.isNotBlank()) RefreshTokenHash(this) else null
 
 /**
  * Creates a [RefreshTokenHash] from this string or throws an exception if the string is blank.
  */
-fun String.toRefreshTokenHashOrThrow(): RefreshTokenHash = RefreshTokenHash(this)
+public fun String.toRefreshTokenHashOrThrow(): RefreshTokenHash = RefreshTokenHash(this)

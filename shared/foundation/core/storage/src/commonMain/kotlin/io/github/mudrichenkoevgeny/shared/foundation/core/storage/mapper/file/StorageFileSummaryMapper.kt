@@ -9,35 +9,33 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping summary storage file models between domain and network representations.
- */
-
-/**
  * Builds domain [StorageFileSummary] from [StorageFileSummaryPayload].
  */
-fun StorageFileSummaryPayload.toStorageFileSummary(): StorageFileSummary = StorageFileSummary(
-    id = id.toFileIdOrThrow(),
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = StorageCategory.fromValueOrThrow(category),
-    visibility = StorageFileVisibility.fromValueOrThrow(visibility),
-    status = StorageFileStatus.fromValueOrThrow(status),
-    fileUrls = fileUrls?.toFileUrls(),
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
-)
+public fun StorageFileSummaryPayload.toStorageFileSummary(): StorageFileSummary =
+    StorageFileSummary(
+        id = id.toFileIdOrThrow(),
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = StorageCategory.fromValueOrThrow(category),
+        visibility = StorageFileVisibility.fromValueOrThrow(visibility),
+        status = StorageFileStatus.fromValueOrThrow(status),
+        fileUrls = fileUrls?.toFileUrls(),
+        createdAt = Instant.fromEpochMilliseconds(createdAt)
+    )
 
 /**
  * Builds network [StorageFileSummaryPayload] from domain [StorageFileSummary].
  */
-fun StorageFileSummary.toStorageFileSummaryPayload(): StorageFileSummaryPayload = StorageFileSummaryPayload(
-    id = id.asHexDashString(),
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = category.value,
-    visibility = visibility.value,
-    status = status.value,
-    fileUrls = fileUrls?.toFileUrlsPayload(),
-    createdAt = createdAt.toEpochMilliseconds()
-)
+public fun StorageFileSummary.toStorageFileSummaryPayload(): StorageFileSummaryPayload =
+    StorageFileSummaryPayload(
+        id = id.asHexDashString(),
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = category.value,
+        visibility = visibility.value,
+        status = status.value,
+        fileUrls = fileUrls?.toFileUrlsPayload(),
+        createdAt = createdAt.toEpochMilliseconds()
+    )

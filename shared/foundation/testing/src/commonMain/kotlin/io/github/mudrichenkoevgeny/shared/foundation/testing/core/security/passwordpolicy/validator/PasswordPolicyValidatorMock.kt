@@ -8,19 +8,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.validator.PasswordPolicyValidator
 
 /**
- * Configurable mock implementation of [PasswordPolicyValidator] for testing.
- *
- * @param failReasons List of fail reasons to return when validation fails.
- */
-class PasswordPolicyValidatorMock(
-    var failReasons: List<PasswordPolicyFailReason> = emptyList()
+* Configurable mock implementation of [PasswordPolicyValidator] for testing.
+*
+* @param failReasons List of fail reasons to return when validation fails.
+*/
+public class PasswordPolicyValidatorMock(
+    public var failReasons: List<PasswordPolicyFailReason> = emptyList()
 ) : PasswordPolicyValidator {
-
-    override fun validate(
+    public override fun validate(
         managementPasswordPolicy: ManagementPasswordPolicy,
         password: String
-    ): PasswordPolicyValidatorResult {
-        return if (failReasons.isEmpty()) {
+    ): PasswordPolicyValidatorResult =
+        if (failReasons.isEmpty()) {
             PasswordPolicyValidatorResult.Success
         } else {
             PasswordPolicyValidatorResult.Fail(
@@ -28,13 +27,13 @@ class PasswordPolicyValidatorMock(
                 passwordPolicy = managementPasswordPolicy
             )
         }
-    }
 
-    override fun validate(
+    public override fun validate(
         openPasswordPolicy: OpenPasswordPolicy,
         password: String
-    ): PasswordPolicyValidatorResult = validate(
-        openPasswordPolicy.toManagementPasswordPolicy(),
-        password
-    )
+    ): PasswordPolicyValidatorResult =
+        validate(
+            openPasswordPolicy.toManagementPasswordPolicy(),
+            password
+        )
 }

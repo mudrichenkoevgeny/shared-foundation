@@ -13,10 +13,9 @@ import kotlinx.serialization.Serializable
  * @property otpConfirmation OTP configuration payload; see [OtpConfirmationPayload].
  */
 @Serializable
-data class OpenSecuritySettingsPayload(
+public data class OpenSecuritySettingsPayload(
     @SerialName(SecurityApiFields.OPEN_PASSWORD_POLICY)
-    val passwordPolicy: OpenPasswordPolicyPayload,
-
+    public val passwordPolicy: OpenPasswordPolicyPayload,
     @SerialName(SecurityApiFields.OTP_CONFIRMATION)
-    val otpConfirmation: OtpConfirmationPayload
+    public val otpConfirmation: OtpConfirmationPayload
 )

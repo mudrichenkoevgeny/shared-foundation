@@ -9,7 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
  * @property key Metadata key (e.g. for filtering or analytics).
  * @property value Raw value as stored for the audit record.
  */
-data class AuditEventMetadata(
-    val key: AuditMetadataKey,
-    val value: String
+public data class AuditEventMetadata(
+    public val key: AuditMetadataKey,
+    public val value: String
 )

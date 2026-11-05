@@ -16,8 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route
 /**
  * Route paths for global settings in the management API.
  */
-object ManagementGlobalSettingsRoutes {
-
+public object ManagementGlobalSettingsRoutes {
     /** Base path for management global settings endpoints. */
     private const val BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSettingsNetworkRoutes.BASE_GLOBAL_SETTINGS_NETWORK_ROUTE}"
@@ -40,7 +39,7 @@ object ManagementGlobalSettingsRoutes {
      * - Screens:
      *   - [ManagementSettingsNavigation.GlobalSettings]
      */
-    const val GET_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
+    public const val GET_MANAGEMENT_GLOBAL_SETTINGS: String = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -72,7 +71,7 @@ object ManagementGlobalSettingsRoutes {
      * - Screens:
      *   - [ManagementSettingsNavigation.GlobalSettings]
      */
-    const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
+    public const val UPDATE_MANAGEMENT_GLOBAL_SETTINGS: String = BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -104,7 +103,7 @@ object ManagementGlobalSettingsRoutes {
      * - Screens:
      *   - [ManagementSettingsNavigation.GlobalSettings]
      */
-    const val RESET_MANAGEMENT_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/reset"
+    public const val RESET_MANAGEMENT_GLOBAL_SETTINGS: String = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/reset"
 
     /**
      * **HTTP method:** `GET`
@@ -122,5 +121,5 @@ object ManagementGlobalSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_GLOBAL_SETTINGS = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/open"
+    public const val GET_OPEN_GLOBAL_SETTINGS: String = "$BASE_MANAGEMENT_GLOBAL_SETTINGS_ROUTE/open"
 }

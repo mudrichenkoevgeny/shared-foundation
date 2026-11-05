@@ -15,7 +15,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
  * @param fallbackPrefix Localized fallback string.
  * @return Formatted display name string.
  */
-fun UserSummary.resolveDisplayName(fallbackPrefix: String): String =
+public fun UserSummary.resolveDisplayName(fallbackPrefix: String): String =
     resolveUserDisplayName(id, nickname, displayName, fallbackPrefix)
 
 /**
@@ -29,7 +29,7 @@ fun UserSummary.resolveDisplayName(fallbackPrefix: String): String =
  * @param fallbackPrefix Localized fallback string.
  * @return Formatted display name string.
  */
-fun UserPrivate.resolveDisplayName(fallbackPrefix: String): String =
+public fun UserPrivate.resolveDisplayName(fallbackPrefix: String): String =
     resolveUserDisplayName(id, nickname, displayName, fallbackPrefix)
 
 private fun resolveUserDisplayName(

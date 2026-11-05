@@ -5,18 +5,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.collection.crea
 /**
  * Thread-safe registry holding module localization bundle providers with O(1) lookup.
  */
-object LocalizationRegistry : LocalizationBundleProvider {
-
+public object LocalizationRegistry : LocalizationBundleProvider {
     private val providers: MutableMap<String, LocalizationBundleProvider> = createConcurrentMap()
 
     /**
      * Registers a [LocalizationBundleProvider] for the specified module path.
      */
-    fun register(module: String, provider: LocalizationBundleProvider) {
+    public fun register(
+        module: String,
+        provider: LocalizationBundleProvider
+    ) {
         providers[module] = provider
     }
 
-    override fun get(module: String, file: String, locale: String): Map<String, String>? {
-        return providers[module]?.get(module, file, locale)
-    }
+    override fun get(
+        module: String,
+        file: String,
+        locale: String
+    ): Map<String, String>? = providers[module]?.get(module, file, locale)
 }

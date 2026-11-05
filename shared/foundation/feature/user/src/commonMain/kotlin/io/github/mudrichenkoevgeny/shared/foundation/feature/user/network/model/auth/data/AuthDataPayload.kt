@@ -13,10 +13,9 @@ import kotlinx.serialization.Serializable
  * @property sessionTokenPayload The [SessionTokenPayload] set of tokens issued for the current session.
  */
 @Serializable
-data class AuthDataPayload(
+public data class AuthDataPayload(
     @SerialName(UserApiFields.USER)
-    val userPrivatePayload: UserPrivatePayload,
-
+    public val userPrivatePayload: UserPrivatePayload,
     @SerialName(UserApiFields.SESSION_TOKEN)
-    val sessionTokenPayload: SessionTokenPayload
+    public val sessionTokenPayload: SessionTokenPayload
 )

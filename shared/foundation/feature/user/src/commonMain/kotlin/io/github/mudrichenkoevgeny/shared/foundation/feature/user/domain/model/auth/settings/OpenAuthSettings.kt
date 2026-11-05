@@ -19,16 +19,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
  * @property isUserNicknameChangeAllowed Flag indicating whether users are permitted to modify their nickname.
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
-data class OpenAuthSettings(
-    val availableAuthProviders: AvailableAuthProviders,
-    val maxTotalIdentifiers: Int,
-    val maxEmailIdentifiers: Int,
-    val maxPhoneIdentifiers: Int,
-    val maxIdentifiersPerExternalProvider: Int,
-    val userNicknameMinLength: Int,
-    val userNicknameMaxLength: Int,
-    val userDisplayNameMinLength: Int,
-    val userDisplayNameMaxLength: Int,
-    val isUserNicknameChangeAllowed: Boolean,
-    val isRegistrationEnabled: Boolean
+public data class OpenAuthSettings(
+    public val availableAuthProviders: AvailableAuthProviders,
+    public val maxTotalIdentifiers: Int,
+    public val maxEmailIdentifiers: Int,
+    public val maxPhoneIdentifiers: Int,
+    public val maxIdentifiersPerExternalProvider: Int,
+    public val userNicknameMinLength: Int,
+    public val userNicknameMaxLength: Int,
+    public val userDisplayNameMinLength: Int,
+    public val userDisplayNameMaxLength: Int,
+    public val isUserNicknameChangeAllowed: Boolean,
+    public val isRegistrationEnabled: Boolean
 )

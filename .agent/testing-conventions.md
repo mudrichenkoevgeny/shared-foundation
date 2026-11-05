@@ -35,10 +35,12 @@ This document defines the testing methodology for the `shared-foundation` projec
 - **Isolation:** Tests must be stateless. Do not rely on execution order or shared mutable global state.
 - **Clean Data:** Use `private const val` for repeated test values (IDs, sample JSON strings) to avoid "magic values" in the test body.
 
-## 5. Scope of Testing
-- **Serialization (Critical):** Every DTO in `core/` must have a serialization test ensuring `FoundationJson` produces the expected `snake_case` output.
-- **Contract Integrity:** Feature-API modules should test that route constants and path segments are correctly concatenated.
-- **Logic Validation:** Components like `PasswordPolicyValidator` must be covered by exhaustive unit tests including edge cases (empty strings, maximum length, special characters).
+## 5. Scope of Testing (Mandatory Coverage Rules)
+- **Serialization (Critical):** Every DTO/Payload in `core/` and `feature/` must have a serialization test ensuring `FoundationJson` produces the expected `snake_case` output, handles optional/null fields gracefully, and deserializes without errors.
+- **Domain Projection Mappers:** Every projection mapper (`*DomainMapper`, `*PrivateMapper`, `*SummaryMapper`) converting between projection tiers (`Internal -> Private -> Summary`) must have unit tests verifying 1-step conversion, field preservation, and prevention of secret/internal data leaks into public DTOs.
+- **Validators & Normalizers:** Every validator (`*Validator`) and parameter normalizer (`PhoneParamNormalizer`, `QueryParamNormalizer`) must be covered by exhaustive unit tests including edge cases (empty strings, invalid formats, length limits, special characters).
+- **Navigation Screen Params:** Every `*Params` data class and `NavigationScreenParamsParser` implementation must have bidirectional tests verifying `parse` (from `Map<String, String>` to object) and `serialize` (from object back to `Map<String, String>`).
+- **NPM Code Generator (`tools/npm-generator`):** Code generation logic mapping Kotlin domain classes to TypeScript definitions (`index.d.ts`) and Zod schemas must have unit test coverage.
 
 ## 6. Dependency Rules
 - **Explicit Only:** Declare all test dependencies in `build.gradle.kts` via `commonTest.dependencies`.

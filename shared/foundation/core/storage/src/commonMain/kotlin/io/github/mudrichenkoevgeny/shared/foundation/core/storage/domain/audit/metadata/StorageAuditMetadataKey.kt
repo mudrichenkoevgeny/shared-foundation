@@ -18,11 +18,10 @@ private const val KEY_S3_KEY = "s3_key"
  * @property valueSensitivity Sensitivity level for audit logging.
  */
 @Serializable
-enum class StorageAuditMetadataKey(
+public enum class StorageAuditMetadataKey(
     override val value: String,
     override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
 ) : AuditMetadataKey {
-
     /** Original file name provided at upload. */
     @SerialName(KEY_FILE_NAME)
     FILE_NAME(KEY_FILE_NAME),
@@ -39,11 +38,11 @@ enum class StorageAuditMetadataKey(
     @SerialName(KEY_S3_KEY)
     S3_KEY(KEY_S3_KEY);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageAuditMetadataKey] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageAuditMetadataKey? =
+        public fun fromValueOrNull(value: String): StorageAuditMetadataKey? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
@@ -54,7 +53,7 @@ enum class StorageAuditMetadataKey(
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageAuditMetadataKey].
          */
-        fun fromValueOrThrow(value: String): StorageAuditMetadataKey =
+        public fun fromValueOrThrow(value: String): StorageAuditMetadataKey =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageAuditMetadataKey::class.simpleName}: '$value'"
             )

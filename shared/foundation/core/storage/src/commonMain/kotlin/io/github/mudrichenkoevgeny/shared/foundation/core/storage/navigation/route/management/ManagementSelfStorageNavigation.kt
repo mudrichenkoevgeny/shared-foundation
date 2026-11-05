@@ -17,8 +17,7 @@ import kotlinx.serialization.Serializable
  * Management navigation screen routes for staff member self-service storage operations.
  */
 @Serializable
-sealed interface ManagementSelfStorageNavigation : NavigationRoute {
-
+public sealed interface ManagementSelfStorageNavigation : NavigationRoute {
     /**
      * Virtual entry redirect route forwarding navigation from the storage root to the storage files list.
      *
@@ -27,8 +26,7 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementSelfStorageNavigation, RedirectNavigationRoute {
-
+    public data object Main : ManagementSelfStorageNavigation, RedirectNavigationRoute {
         override val route: String
             get() = BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE
 
@@ -48,18 +46,18 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
      *   - [SelfManagementStorageRoutes.DELETE_FILES_BATCH]
      */
     @Serializable
-    data class FileList(
+    public data class FileList(
         override val params: SelfStorageFileListParams = SelfStorageFileListParams()
-    ) : ManagementSelfStorageNavigation, ParameterizedNavigationRoute<SelfStorageFileListParams> {
-
+    ) : ManagementSelfStorageNavigation,
+        ParameterizedNavigationRoute<SelfStorageFileListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/files"
+        public companion object {
+            public const val ROUTE: String = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/files"
         }
     }
 
@@ -72,24 +70,22 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
      *   - [SelfManagementStorageRoutes.DELETE_FILE]
      */
     @Serializable
-    data class FileDetail(
+    public data class FileDetail(
         override val params: StorageFileDetailParams
-    ) : ManagementSelfStorageNavigation, ParameterizedNavigationRoute<StorageFileDetailParams> {
-
+    ) : ManagementSelfStorageNavigation,
+        ParameterizedNavigationRoute<StorageFileDetailParams> {
         override val route: String
             get() = getPath(params.fileId)
 
         override val parentRoute: String
             get() = FileList.ROUTE
 
-        companion object {
-            const val ROUTE = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
 
-            fun getPath(fileId: FileId): String =
-                ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
+            public fun getPath(fileId: FileId): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
 
-            fun getPath(fileId: String): String =
-                ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
+            public fun getPath(fileId: String): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
         }
     }
 
@@ -102,18 +98,18 @@ sealed interface ManagementSelfStorageNavigation : NavigationRoute {
      *   - [SelfManagementStorageRoutes.CONFIRM_UPLOAD]
      */
     @Serializable
-    data class FileUpload(
+    public data class FileUpload(
         override val params: StorageFileUploadParams = StorageFileUploadParams()
-    ) : ManagementSelfStorageNavigation, ParameterizedNavigationRoute<StorageFileUploadParams> {
-
+    ) : ManagementSelfStorageNavigation,
+        ParameterizedNavigationRoute<StorageFileUploadParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = FileList.ROUTE
 
-        companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/upload"
+        public companion object {
+            public const val ROUTE: String = "${BaseStorageNavigationRoutes.BASE_SELF_STORAGE_NAVIGATION_ROUTE}/upload"
         }
     }
 }

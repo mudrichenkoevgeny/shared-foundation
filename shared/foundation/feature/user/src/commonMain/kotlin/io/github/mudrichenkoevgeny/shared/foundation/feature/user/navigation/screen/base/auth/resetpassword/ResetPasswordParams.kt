@@ -13,16 +13,14 @@ import kotlinx.serialization.Serializable
  * @property code Password reset confirmation code if received from deep link; wire key is [UserApiFields.CONFIRMATION_CODE].
  */
 @Serializable
-data class ResetPasswordParams(
-    val email: String? = null,
-    val code: String? = null
+public data class ResetPasswordParams(
+    public val email: String? = null,
+    public val code: String? = null
 ) : NavigationScreenParams<ResetPasswordParams> {
-
     override val parser: NavigationScreenParamsParser<ResetPasswordParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ResetPasswordParams> {
-
+    public companion object : NavigationScreenParamsParser<ResetPasswordParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [ResetPasswordParams].
          *

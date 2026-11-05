@@ -6,15 +6,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 /**
  * Maps [VerifyTotpPayload] DTO to domain model [VerifyTotp].
  */
-fun VerifyTotpPayload.toVerifyTotp() = VerifyTotp(
-    mfaToken = this.mfaToken,
-    code = this.code
-)
+public fun VerifyTotpPayload.toVerifyTotp(): VerifyTotp =
+    VerifyTotp(
+        mfaToken = this.mfaToken,
+        code = this.code
+    )
 
 /**
  * Maps domain model [VerifyTotp] to [VerifyTotpPayload] DTO.
  */
-fun VerifyTotp.toVerifyTotpPayload() = VerifyTotpPayload(
-    mfaToken = this.mfaToken,
-    code = this.code
-)
+public fun VerifyTotp.toVerifyTotpPayload(): VerifyTotpPayload =
+    VerifyTotpPayload(
+        mfaToken = this.mfaToken,
+        code = this.code
+    )

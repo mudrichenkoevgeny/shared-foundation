@@ -14,7 +14,9 @@ private const val STATUS_DELETED = "deleted"
  * @property value String representation of the [StorageFileStatus].
  */
 @Serializable
-enum class StorageFileStatus(val value: String) {
+public enum class StorageFileStatus(
+    public val value: String
+) {
     /**
      * Presigned upload URL requested, pending binary transfer and confirmation.
      */
@@ -39,14 +41,14 @@ enum class StorageFileStatus(val value: String) {
     @SerialName(STATUS_DELETED)
     DELETED(STATUS_DELETED);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageFileStatus] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageFileStatus? =
+        public fun fromValueOrNull(value: String): StorageFileStatus? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -54,7 +56,7 @@ enum class StorageFileStatus(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageFileStatus].
          */
-        fun fromValueOrThrow(value: String): StorageFileStatus =
+        public fun fromValueOrThrow(value: String): StorageFileStatus =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageFileStatus::class.simpleName}: '$value'"
             )

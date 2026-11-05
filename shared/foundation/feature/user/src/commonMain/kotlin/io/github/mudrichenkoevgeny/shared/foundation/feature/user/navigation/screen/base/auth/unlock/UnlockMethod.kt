@@ -12,7 +12,9 @@ private const val METHOD_EMAIL = "email"
  * @property value String representation of the [UnlockMethod].
  */
 @Serializable
-enum class UnlockMethod(val value: String) {
+public enum class UnlockMethod(
+    public val value: String
+) {
     /** Unlock via SMS OTP ([PHONE]). */
     @SerialName(METHOD_PHONE)
     PHONE(METHOD_PHONE),
@@ -21,14 +23,14 @@ enum class UnlockMethod(val value: String) {
     @SerialName(METHOD_EMAIL)
     EMAIL(METHOD_EMAIL);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UnlockMethod] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UnlockMethod? =
+        public fun fromValueOrNull(value: String): UnlockMethod? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -36,7 +38,7 @@ enum class UnlockMethod(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UnlockMethod].
          */
-        fun fromValueOrThrow(value: String): UnlockMethod =
+        public fun fromValueOrThrow(value: String): UnlockMethod =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UnlockMethod::class.simpleName}: '$value'"
             )

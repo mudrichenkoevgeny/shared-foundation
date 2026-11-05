@@ -1,7 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.verifytotp
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,10 +18,9 @@ import kotlinx.serialization.Serializable
  * (numeric TOTP codes of any length, alphanumeric recovery codes, etc.).
  */
 @Serializable
-data class VerifyTotpPayload(
+public data class VerifyTotpPayload(
     @SerialName(SecurityApiFields.MFA_TOKEN)
-    val mfaToken: String,
-
+    public val mfaToken: String,
     @SerialName(SecurityApiFields.TOTP_CODE)
-    val code: String
+    public val code: String
 )

@@ -13,8 +13,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
@@ -35,7 +33,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for managing user authentication identifiers in the open API.
  */
-object OpenIdentifierRoutes {
+public object OpenIdentifierRoutes {
     /** Base path for managing authentication identifiers linked to the current account. */
     private const val BASE_IDENTIFIERS_ROUTE = "$BASE_USER_ROUTE/identifiers"
 
@@ -107,7 +105,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val GET_IDENTIFIERS = BASE_IDENTIFIERS_ROUTE
+    public const val GET_IDENTIFIERS: String = BASE_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -129,7 +127,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val GET_IDENTIFIER = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val GET_IDENTIFIER: String = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -164,7 +162,7 @@ object OpenIdentifierRoutes {
      *   - [ClientUserNavigation.IdentifierList]
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val DELETE_IDENTIFIER = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val DELETE_IDENTIFIER: String = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -197,7 +195,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val ADD_IDENTIFIER_EMAIL = EMAIL_IDENTIFIER_ROUTE
+    public const val ADD_IDENTIFIER_EMAIL: String = EMAIL_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -230,7 +228,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val ADD_IDENTIFIER_PHONE = PHONE_IDENTIFIER_ROUTE
+    public const val ADD_IDENTIFIER_PHONE: String = PHONE_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -263,7 +261,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER = EXTERNAL_AUTH_PROVIDER_IDENTIFIER_ROUTE
+    public const val ADD_IDENTIFIER_EXTERNAL_AUTH_PROVIDER: String = EXTERNAL_AUTH_PROVIDER_IDENTIFIER_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -283,7 +281,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION =
+    public const val SEND_ADD_EMAIL_IDENTIFIER_CONFIRMATION: String =
         "$BASE_IDENTIFIER_CONFIRMATION_ROUTE/send-to-email"
 
     /**
@@ -304,7 +302,7 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierList]
      */
-    const val SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION =
+    public const val SEND_ADD_PHONE_IDENTIFIER_CONFIRMATION: String =
         "$BASE_IDENTIFIER_CONFIRMATION_ROUTE/send-to-phone"
 
     /**
@@ -340,6 +338,6 @@ object OpenIdentifierRoutes {
      * - Screens:
      *   - [ClientUserNavigation.IdentifierDetail]
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD =
+    public const val IDENTIFIER_EMAIL_CHANGE_PASSWORD: String =
         "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/change-password"
 }

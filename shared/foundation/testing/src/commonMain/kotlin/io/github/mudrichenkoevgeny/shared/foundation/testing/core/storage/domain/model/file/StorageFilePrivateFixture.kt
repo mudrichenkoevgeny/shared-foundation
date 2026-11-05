@@ -9,9 +9,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import kotlin.time.Instant
 
 /**
- * Creates a test [StorageFilePrivate] domain model instance.
- */
-fun createTestStorageFilePrivate(
+* Creates a test [StorageFilePrivate] domain model instance.
+*/
+public fun createTestStorageFilePrivate(
     id: FileId = createTestFileId(),
     ownerUserId: String? = "usr_000000000001",
     fileName: String = "test_image.png",
@@ -24,17 +24,18 @@ fun createTestStorageFilePrivate(
     fileUrls: FileUrls = createTestFileUrls(),
     createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L),
     updatedAt: Instant? = null
-) = StorageFilePrivate(
-    id = id,
-    ownerUserId = ownerUserId,
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = category,
-    visibility = visibility,
-    status = status,
-    targetScope = targetScope,
-    fileUrls = fileUrls,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+): StorageFilePrivate =
+    StorageFilePrivate(
+        id = id,
+        ownerUserId = ownerUserId,
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = category,
+        visibility = visibility,
+        status = status,
+        targetScope = targetScope,
+        fileUrls = fileUrls,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )

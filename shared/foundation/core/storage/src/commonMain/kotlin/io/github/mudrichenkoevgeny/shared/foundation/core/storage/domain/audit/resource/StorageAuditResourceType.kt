@@ -15,7 +15,9 @@ private const val RESOURCE_STORAGE_FILE = "storage_file"
  * @property value String representation of the [StorageAuditResourceType].
  */
 @Serializable
-enum class StorageAuditResourceType(override val value: String) : AuditResourceType {
+public enum class StorageAuditResourceType(
+    override val value: String
+) : AuditResourceType {
     /** Global storage settings resource ([ManagementStorageSettingsRoutes]). */
     @SerialName(RESOURCE_STORAGE_SETTINGS)
     STORAGE_SETTINGS(RESOURCE_STORAGE_SETTINGS),
@@ -24,14 +26,14 @@ enum class StorageAuditResourceType(override val value: String) : AuditResourceT
     @SerialName(RESOURCE_STORAGE_FILE)
     STORAGE_FILE(RESOURCE_STORAGE_FILE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageAuditResourceType? =
+        public fun fromValueOrNull(value: String): StorageAuditResourceType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -39,7 +41,7 @@ enum class StorageAuditResourceType(override val value: String) : AuditResourceT
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): StorageAuditResourceType =
+        public fun fromValueOrThrow(value: String): StorageAuditResourceType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageAuditResourceType::class.simpleName}: '$value'"
             )

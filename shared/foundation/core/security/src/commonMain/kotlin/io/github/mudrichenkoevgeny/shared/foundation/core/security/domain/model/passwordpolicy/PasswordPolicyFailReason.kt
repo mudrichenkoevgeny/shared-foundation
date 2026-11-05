@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
 /**
  * Reasons for password validation failure based on security policy requirements.
  */
-enum class PasswordPolicyFailReason {
+public enum class PasswordPolicyFailReason {
     /** Password length is below [ManagementPasswordPolicy.minLength]. */
     TOO_SHORT,
 

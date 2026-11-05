@@ -14,7 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [AvailableAuthProviders] from [AvailableAuthProvidersPayload].
  */
-fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProviders =
+public fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProviders =
     AvailableAuthProviders(
         primary = primary.map { it.toUserAuthProviderOnWire() },
         secondary = secondary.map { it.toUserAuthProviderOnWire() }
@@ -23,7 +23,7 @@ fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProvi
 /**
  * Builds network [AvailableAuthProvidersPayload] from domain [AvailableAuthProviders].
  */
-fun AvailableAuthProviders.toAvailableAuthProvidersPayload(): AvailableAuthProvidersPayload =
+public fun AvailableAuthProviders.toAvailableAuthProvidersPayload(): AvailableAuthProvidersPayload =
     AvailableAuthProvidersPayload(
         primary = primary.map(UserAuthProvider::value),
         secondary = secondary.map(UserAuthProvider::value)

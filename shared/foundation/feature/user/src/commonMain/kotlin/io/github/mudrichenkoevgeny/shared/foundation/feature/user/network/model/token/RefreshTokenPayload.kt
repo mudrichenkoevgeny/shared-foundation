@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
  * @property refreshToken The token used to obtain a new session without re-authenticating.
  */
 @Serializable
-data class RefreshTokenPayload(
+public data class RefreshTokenPayload(
     @NotBlankStringField
     @SerialName(UserApiFields.REFRESH_TOKEN)
-    val refreshToken: String
+    public val refreshToken: String
 )

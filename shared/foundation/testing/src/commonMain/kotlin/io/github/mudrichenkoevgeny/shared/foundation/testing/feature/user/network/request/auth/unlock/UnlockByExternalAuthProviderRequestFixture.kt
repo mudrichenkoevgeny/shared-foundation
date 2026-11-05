@@ -4,15 +4,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.unlock.UnlockByExternalAuthProviderRequest
 
 /**
- * Creates a test [UnlockByExternalAuthProviderRequest] request object instance.
- *
- * @param authProvider External provider wire string ([UserAuthProvider]).
- * @param externalProviderToken OAuth token string from provider.
- */
-fun createTestUnlockByExternalAuthProviderRequest(
+* Creates a test [UnlockByExternalAuthProviderRequest] request object instance.
+*
+* @param authProvider External provider wire string ([UserAuthProvider]).
+* @param externalProviderToken OAuth token string from provider.
+*/
+public fun createTestUnlockByExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345"
-) = UnlockByExternalAuthProviderRequest(
-    authProvider = authProvider,
-    externalProviderToken = externalProviderToken
-)
+): UnlockByExternalAuthProviderRequest =
+    UnlockByExternalAuthProviderRequest(
+        authProvider = authProvider,
+        externalProviderToken = externalProviderToken
+    )

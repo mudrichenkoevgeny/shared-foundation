@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 /**
  * User-specific error codes for API responses and backend logging, used to categorize failures.
  */
-object UserErrorCodes {
+public object UserErrorCodes {
     // --- Token Errors ---
 
     /**
@@ -15,7 +15,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_session`
      */
-    const val INVALID_ACCESS_TOKEN = "INVALID_ACCESS_TOKEN"
+    public const val INVALID_ACCESS_TOKEN: String = "INVALID_ACCESS_TOKEN"
 
     /**
      * The access token has expired. Refresh is required.
@@ -23,7 +23,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `access_token_expired`
      */
-    const val ACCESS_TOKEN_EXPIRED = "ACCESS_TOKEN_EXPIRED"
+    public const val ACCESS_TOKEN_EXPIRED: String = "ACCESS_TOKEN_EXPIRED"
 
     /**
      * The refresh token is invalid, has been revoked, or does not match the current session.
@@ -31,7 +31,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_session`
      */
-    const val INVALID_REFRESH_TOKEN = "INVALID_REFRESH_TOKEN"
+    public const val INVALID_REFRESH_TOKEN: String = "INVALID_REFRESH_TOKEN"
 
     // --- User Session & Status ---
 
@@ -41,7 +41,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_session`
      */
-    const val INVALID_SESSION = "INVALID_SESSION"
+    public const val INVALID_SESSION: String = "INVALID_SESSION"
 
     /**
      * The user's role does not have permission to access the requested resource.
@@ -52,7 +52,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the user who lacks the role.
      */
-    const val USER_ROLE_NOT_ALLOWED = "USER_ROLE_NOT_ALLOWED"
+    public const val USER_ROLE_NOT_ALLOWED: String = "USER_ROLE_NOT_ALLOWED"
 
     /**
      * The user lacks specific fine-grained permissions required for the operation.
@@ -63,7 +63,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the user missing permissions.
      */
-    const val USER_MISSING_PERMISSIONS = "USER_MISSING_PERMISSIONS"
+    public const val USER_MISSING_PERMISSIONS: String = "USER_MISSING_PERMISSIONS"
 
     /**
      * The operation is denied because the user's authority level is lower than required for the target resource or action.
@@ -74,7 +74,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the user with insufficient authority.
      */
-    const val USER_INSUFFICIENT_AUTHORITY_LEVEL = "USER_INSUFFICIENT_AUTHORITY_LEVEL"
+    public const val USER_INSUFFICIENT_AUTHORITY_LEVEL: String = "USER_INSUFFICIENT_AUTHORITY_LEVEL"
 
     /**
      * The account is in a state that prevents the requested action.
@@ -85,7 +85,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the user with illegal status.
      */
-    const val USER_ILLEGAL_ACCOUNT_STATUS = "USER_ILLEGAL_ACCOUNT_STATUS"
+    public const val USER_ILLEGAL_ACCOUNT_STATUS: String = "USER_ILLEGAL_ACCOUNT_STATUS"
 
     /**
      * The user account has been explicitly banned by an administrator.
@@ -96,7 +96,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the banned user.
      */
-    const val USER_BANNED = "USER_BANNED"
+    public const val USER_BANNED: String = "USER_BANNED"
 
     /**
      * The account is temporarily or indefinitely locked out due to exceeding maximum allowed failed authentication attempts or security policy violations.
@@ -118,7 +118,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the locked user.
      */
-    const val USER_LOCKED = "USER_LOCKED"
+    public const val USER_LOCKED: String = "USER_LOCKED"
 
     /**
      * The account is in read-only mode.
@@ -129,7 +129,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the affected user.
      */
-    const val USER_READ_ONLY = "USER_READ_ONLY"
+    public const val USER_READ_ONLY: String = "USER_READ_ONLY"
 
     /**
      * Access is temporarily restricted due to suspicious activity or security concerns.
@@ -140,7 +140,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the restricted user.
      */
-    const val USER_SECURITY_HOLD = "USER_SECURITY_HOLD"
+    public const val USER_SECURITY_HOLD: String = "USER_SECURITY_HOLD"
 
     /**
      * The account is scheduled for deletion and cannot perform this action.
@@ -148,7 +148,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `pending_deletion`
      */
-    const val USER_PENDING_DELETION = "USER_PENDING_DELETION"
+    public const val USER_PENDING_DELETION: String = "USER_PENDING_DELETION"
 
     /**
      * Access to the resource is forbidden for this user, regardless of authentication.
@@ -159,7 +159,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: Identifier of the forbidden user.
      */
-    const val USER_FORBIDDEN = "USER_FORBIDDEN"
+    public const val USER_FORBIDDEN: String = "USER_FORBIDDEN"
 
     /**
      * No user account was found matching the provided identifier.
@@ -170,7 +170,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [UserErrorArgs.USER_ID]: The identifier value used for lookup.
      */
-    const val USER_NOT_FOUND = "USER_NOT_FOUND"
+    public const val USER_NOT_FOUND: String = "USER_NOT_FOUND"
 
     // --- Identifiers & Credentials ---
 
@@ -180,7 +180,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_credentials`
      */
-    const val INVALID_CREDENTIALS = "INVALID_CREDENTIALS"
+    public const val INVALID_CREDENTIALS: String = "INVALID_CREDENTIALS"
 
     /**
      * The specified identifier cannot be removed from the account.
@@ -188,7 +188,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `can_not_delete_identifier`
      */
-    const val CAN_NOT_DELETE_USER_IDENTIFIER = "CAN_NOT_DELETE_USER_IDENTIFIER"
+    public const val CAN_NOT_DELETE_USER_IDENTIFIER: String = "CAN_NOT_DELETE_USER_IDENTIFIER"
 
     /**
      * Failed to link a new identifier to the account.
@@ -196,7 +196,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `can_not_create_identifier`
      */
-    const val CAN_NOT_CREATE_USER_IDENTIFIER = "CAN_NOT_CREATE_USER_IDENTIFIER"
+    public const val CAN_NOT_CREATE_USER_IDENTIFIER: String = "CAN_NOT_CREATE_USER_IDENTIFIER"
 
     /**
      * The maximum number of identifiers for a specific authentication provider category (`email`, `phone`, or `external_provider`) has been reached.
@@ -216,7 +216,7 @@ object UserErrorCodes {
      * - [UserErrorArgs.MAX_NUMBER_OF_IDENTIFIERS]: The limit allowed for the sign-in method.
      * - [UserErrorArgs.USER_AUTH_PROVIDER]: Localization key of the sign-in method category (`email`, `phone`, or `external_provider`).
      */
-    const val USER_IDENTIFIER_LIMIT_REACHED = "USER_IDENTIFIER_LIMIT_REACHED"
+    public const val USER_IDENTIFIER_LIMIT_REACHED: String = "USER_IDENTIFIER_LIMIT_REACHED"
 
     /**
      * The total number of allowed identifiers for the account has been reached.
@@ -234,7 +234,7 @@ object UserErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [UserErrorArgs.MAX_NUMBER_OF_IDENTIFIERS]: The total overall limit.
      */
-    const val TOTAL_USER_IDENTIFIERS_LIMIT_REACHED = "TOTAL_USER_IDENTIFIERS_LIMIT_REACHED"
+    public const val TOTAL_USER_IDENTIFIERS_LIMIT_REACHED: String = "TOTAL_USER_IDENTIFIERS_LIMIT_REACHED"
 
     // --- Internal Identifiers ---
 
@@ -244,7 +244,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `wrong_password`
      */
-    const val WRONG_PASSWORD = "WRONG_PASSWORD"
+    public const val WRONG_PASSWORD: String = "WRONG_PASSWORD"
 
     /**
      * The verification code is incorrect or has expired.
@@ -252,7 +252,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `wrong_confirmation_code`
      */
-    const val WRONG_CONFIRMATION_CODE = "WRONG_CONFIRMATION_CODE"
+    public const val WRONG_CONFIRMATION_CODE: String = "WRONG_CONFIRMATION_CODE"
 
     // --- External Identifiers ---
 
@@ -265,7 +265,7 @@ object UserErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Cause of the linkage failure.
      */
-    const val EXTERNAL_IDENTIFIER_LINKAGE_FAILED = "EXTERNAL_IDENTIFIER_LINKAGE_FAILED"
+    public const val EXTERNAL_IDENTIFIER_LINKAGE_FAILED: String = "EXTERNAL_IDENTIFIER_LINKAGE_FAILED"
 
     /**
      * Registration is currently disabled by system configuration.
@@ -273,7 +273,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `registration_disabled`
      */
-    const val REGISTRATION_DISABLED = "REGISTRATION_DISABLED"
+    public const val REGISTRATION_DISABLED: String = "REGISTRATION_DISABLED"
 
     /**
      * Self-service unlock is currently disabled by security policy.
@@ -281,7 +281,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `self_service_unlock_disabled`
      */
-    const val SELF_SERVICE_UNLOCK_DISABLED = "SELF_SERVICE_UNLOCK_DISABLED"
+    public const val SELF_SERVICE_UNLOCK_DISABLED: String = "SELF_SERVICE_UNLOCK_DISABLED"
 
     /**
      * The registration, login, or email linkage attempt was rejected because the email address or domain is not permitted by email restriction policy.
@@ -289,7 +289,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `email_not_allowed`
      */
-    const val EMAIL_NOT_ALLOWED = "EMAIL_NOT_ALLOWED"
+    public const val EMAIL_NOT_ALLOWED: String = "EMAIL_NOT_ALLOWED"
 
     /**
      * Authentication or operation failed because the account has no password set or initial password setup is required.
@@ -297,7 +297,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `password_setup_required`
      */
-    const val PASSWORD_SETUP_REQUIRED = "PASSWORD_SETUP_REQUIRED"
+    public const val PASSWORD_SETUP_REQUIRED: String = "PASSWORD_SETUP_REQUIRED"
 
     /**
      * Operation failed because the specified identifier type does not support password credentials.
@@ -305,7 +305,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `identifier_password_not_supported`
      */
-    const val USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED = "USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED"
+    public const val USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED: String = "USER_IDENTIFIER_PASSWORD_NOT_SUPPORTED"
 
     /**
      * Operation failed because no password credential is set on the specified identifier record.
@@ -313,7 +313,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `identifier_password_not_set`
      */
-    const val USER_IDENTIFIER_PASSWORD_NOT_SET = "USER_IDENTIFIER_PASSWORD_NOT_SET"
+    public const val USER_IDENTIFIER_PASSWORD_NOT_SET: String = "USER_IDENTIFIER_PASSWORD_NOT_SET"
 
     // --- User Details & Nickname Errors ---
 
@@ -326,7 +326,7 @@ object UserErrorCodes {
      * **Public arguments:**
      * - [UserErrorArgs.NICKNAME]: The requested nickname string.
      */
-    const val NICKNAME_ALREADY_TAKEN = "NICKNAME_ALREADY_TAKEN"
+    public const val NICKNAME_ALREADY_TAKEN: String = "NICKNAME_ALREADY_TAKEN"
 
     /**
      * Modifying the nickname is disabled by system configuration.
@@ -334,7 +334,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `nickname_change_disabled`
      */
-    const val NICKNAME_CHANGE_DISABLED = "NICKNAME_CHANGE_DISABLED"
+    public const val NICKNAME_CHANGE_DISABLED: String = "NICKNAME_CHANGE_DISABLED"
 
     /**
      * The provided nickname character length is below the required minimum.
@@ -345,7 +345,7 @@ object UserErrorCodes {
      * **Public arguments:**
      * - [UserErrorArgs.NICKNAME_MIN_LENGTH]: Minimum permitted character length (`{minLength}`).
      */
-    const val NICKNAME_TOO_SHORT = "NICKNAME_TOO_SHORT"
+    public const val NICKNAME_TOO_SHORT: String = "NICKNAME_TOO_SHORT"
 
     /**
      * The provided nickname character length exceeds the allowed maximum.
@@ -356,7 +356,7 @@ object UserErrorCodes {
      * **Public arguments:**
      * - [UserErrorArgs.NICKNAME_MAX_LENGTH]: Maximum permitted character length (`{maxLength}`).
      */
-    const val NICKNAME_TOO_LONG = "NICKNAME_TOO_LONG"
+    public const val NICKNAME_TOO_LONG: String = "NICKNAME_TOO_LONG"
 
     /**
      * The provided nickname contains unsupported or illegal characters.
@@ -364,7 +364,7 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_nickname_characters`
      */
-    const val INVALID_NICKNAME_CHARACTERS = "INVALID_NICKNAME_CHARACTERS"
+    public const val INVALID_NICKNAME_CHARACTERS: String = "INVALID_NICKNAME_CHARACTERS"
 
     /**
      * The provided display name character length is below the required minimum.
@@ -375,7 +375,7 @@ object UserErrorCodes {
      * **Public arguments:**
      * - [UserErrorArgs.DISPLAY_NAME_MIN_LENGTH]: Minimum permitted character length (`{minLength}`).
      */
-    const val DISPLAY_NAME_TOO_SHORT = "DISPLAY_NAME_TOO_SHORT"
+    public const val DISPLAY_NAME_TOO_SHORT: String = "DISPLAY_NAME_TOO_SHORT"
 
     /**
      * The provided display name character length exceeds the allowed maximum.
@@ -386,7 +386,7 @@ object UserErrorCodes {
      * **Public arguments:**
      * - [UserErrorArgs.DISPLAY_NAME_MAX_LENGTH]: Maximum permitted character length (`{maxLength}`).
      */
-    const val DISPLAY_NAME_TOO_LONG = "DISPLAY_NAME_TOO_LONG"
+    public const val DISPLAY_NAME_TOO_LONG: String = "DISPLAY_NAME_TOO_LONG"
 
     /**
      * The provided display name contains illegal control characters or line breaks.
@@ -394,5 +394,5 @@ object UserErrorCodes {
      * **Localization keys:**
      * - `invalid_display_name_characters`
      */
-    const val INVALID_DISPLAY_NAME_CHARACTERS = "INVALID_DISPLAY_NAME_CHARACTERS"
+    public const val INVALID_DISPLAY_NAME_CHARACTERS: String = "INVALID_DISPLAY_NAME_CHARACTERS"
 }

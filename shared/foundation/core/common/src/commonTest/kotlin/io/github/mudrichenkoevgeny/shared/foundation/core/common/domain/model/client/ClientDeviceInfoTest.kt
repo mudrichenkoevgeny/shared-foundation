@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class ClientDeviceInfoTest {
-
     @Test
     fun `parsePrimaryLanguage returns null when header is null or blank`() {
         assertNull(ClientDeviceInfo.parsePrimaryLanguage(null))

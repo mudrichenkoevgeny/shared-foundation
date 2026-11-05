@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
  * @property phoneNumber The phone number where the confirmation code will be delivered.
  */
 @Serializable
-data class SendConfirmationToPhoneRequest(
+public data class SendConfirmationToPhoneRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.PHONE_NUMBER)
-    val phoneNumber: String
+    public val phoneNumber: String
 )

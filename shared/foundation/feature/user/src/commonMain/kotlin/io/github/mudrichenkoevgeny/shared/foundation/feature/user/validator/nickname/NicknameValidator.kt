@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.nic
 /**
  * Component for validating user nickname handles against length, character, and change permission rules.
  */
-interface NicknameValidator {
+public interface NicknameValidator {
     /**
      * Validates nickname string against length constraints, character pattern, and permission settings.
      *
@@ -14,7 +14,7 @@ interface NicknameValidator {
      * @param isNicknameChanging Whether this operation modifies an existing nickname.
      * @return [NicknameValidatorResult.Success] if valid, or [NicknameValidatorResult.Fail] with error code.
      */
-    fun validate(
+    public fun validate(
         nickname: String?,
         minLength: Int,
         maxLength: Int,

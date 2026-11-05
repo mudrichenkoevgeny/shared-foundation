@@ -7,8 +7,7 @@ import kotlinx.serialization.Serializable
  * Root navigation route for the staff and management portal.
  */
 @Serializable
-sealed interface ManagementMainNavigation : NavigationRoute {
-
+public sealed interface ManagementMainNavigation : NavigationRoute {
     /**
      * Entry main dashboard/hub screen for management.
      *
@@ -17,8 +16,7 @@ sealed interface ManagementMainNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementMainNavigation {
-
+    public data object Main : ManagementMainNavigation {
         override val route: String
             get() = "/"
 

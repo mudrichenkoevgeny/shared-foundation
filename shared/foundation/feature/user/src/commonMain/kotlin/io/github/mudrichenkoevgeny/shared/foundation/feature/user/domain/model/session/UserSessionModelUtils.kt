@@ -10,24 +10,36 @@ import kotlin.time.Instant
 /**
  * Returns `true` when [UserSessionPrivate] is not expired and matches [clientDeviceId].
  */
-fun UserSessionPrivate.isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean =
-    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+public fun UserSessionPrivate.isValid(
+    clientDeviceId: ClientDeviceId?,
+    now: Instant
+): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 /**
  * Returns `true` when [UserSessionSummary] is not expired and matches [clientDeviceId].
  */
-fun UserSessionSummary.isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean =
-    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+public fun UserSessionSummary.isValid(
+    clientDeviceId: ClientDeviceId?,
+    now: Instant
+): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 /**
  * Returns `true` when [UserSessionInternal] is not expired and matches [clientDeviceId].
  */
-fun UserSessionInternal.isValid(clientDeviceId: ClientDeviceId?, now: Instant): Boolean =
-    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+public fun UserSessionInternal.isValid(
+    clientDeviceId: ClientDeviceId?,
+    now: Instant
+): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
-private fun isUserSessionExpired(expiresAt: Instant, now: Instant): Boolean = expiresAt <= now
+private fun isUserSessionExpired(
+    expiresAt: Instant,
+    now: Instant
+): Boolean = expiresAt <= now
 
-private fun isUserSessionCorrectDevice(sessionDeviceId: ClientDeviceId?, clientDeviceId: ClientDeviceId?): Boolean {
+private fun isUserSessionCorrectDevice(
+    sessionDeviceId: ClientDeviceId?,
+    clientDeviceId: ClientDeviceId?
+): Boolean {
     if (clientDeviceId == null || sessionDeviceId == null) {
         return true
     }

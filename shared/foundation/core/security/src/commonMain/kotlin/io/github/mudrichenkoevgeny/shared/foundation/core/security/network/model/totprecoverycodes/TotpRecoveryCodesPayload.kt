@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @property codes A list of alphanumeric backup recovery codes.
  */
 @Serializable
-data class TotpRecoveryCodesPayload(
+public data class TotpRecoveryCodesPayload(
     @SerialName(SecurityApiFields.TOTP_RECOVERY_CODES)
-    val codes: List<String>
+    public val codes: List<String>
 )

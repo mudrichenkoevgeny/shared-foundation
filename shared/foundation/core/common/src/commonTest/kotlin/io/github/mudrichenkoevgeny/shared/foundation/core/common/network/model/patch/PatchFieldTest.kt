@@ -8,7 +8,6 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class PatchFieldTest {
-
     private val testStringValue = "test_value"
     private val testListValue = listOf("item_1", "item_2")
 

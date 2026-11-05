@@ -16,25 +16,19 @@ import kotlinx.serialization.Serializable
  * @property isVerboseLoggingEnabled Flag controlling logging verbosity; when false, the server disables detailed debug/info logs.
  */
 @Serializable
-data class ManagementGlobalSettingsPayload(
+public data class ManagementGlobalSettingsPayload(
     @SerialName(GlobalSettingsApiFields.PRIVACY_POLICY_URL)
-    val privacyPolicyUrl: String?,
-
+    public val privacyPolicyUrl: String?,
     @SerialName(GlobalSettingsApiFields.TERMS_OF_SERVICE_URL)
-    val termsOfServiceUrl: String?,
-
+    public val termsOfServiceUrl: String?,
     @SerialName(GlobalSettingsApiFields.CONTACT_SUPPORT_EMAIL)
-    val contactSupportEmail: String?,
-
+    public val contactSupportEmail: String?,
     @SerialName(GlobalSettingsApiFields.MIN_SUPPORTED_APP_VERSIONS)
-    val minSupportedAppVersions: Map<String, String>,
-
+    public val minSupportedAppVersions: Map<String, String>,
     @SerialName(GlobalSettingsApiFields.IS_TRACING_ENABLED)
-    val isTracingEnabled: Boolean,
-
+    public val isTracingEnabled: Boolean,
     @SerialName(GlobalSettingsApiFields.IS_METRICS_ENABLED)
-    val isMetricsEnabled: Boolean,
-
+    public val isMetricsEnabled: Boolean,
     @SerialName(GlobalSettingsApiFields.IS_VERBOSE_LOGGING_ENABLED)
-    val isVerboseLoggingEnabled: Boolean
+    public val isVerboseLoggingEnabled: Boolean
 )

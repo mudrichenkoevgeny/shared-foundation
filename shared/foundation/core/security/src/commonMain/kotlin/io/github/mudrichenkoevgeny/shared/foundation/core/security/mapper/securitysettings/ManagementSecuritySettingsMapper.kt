@@ -12,45 +12,43 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.securitysettings.ManagementSecuritySettingsPayload
 
 /**
- * Maps between [ManagementSecuritySettingsPayload] DTO and domain [ManagementSecuritySettings].
- */
-
-/**
  * Builds domain [ManagementSecuritySettings] from [ManagementSecuritySettingsPayload] DTO.
  *
  * @return domain model aligned with [ManagementSecuritySettings] semantics.
  */
-fun ManagementSecuritySettingsPayload.toManagementSecuritySettings(): ManagementSecuritySettings = ManagementSecuritySettings(
-    recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
-    recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
-    passwordPolicy = passwordPolicy.toManagementPasswordPolicy(),
-    otpConfirmation = otpConfirmation.toOtpConfirmation(),
-    accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicy(),
-    accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
-    openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicy(),
-    managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicy(),
-    mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
-    maxRequestsPerPeriod = maxRequestsPerPeriod,
-    rateLimitPeriodSeconds = rateLimitPeriodSeconds,
-    refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
-)
+public fun ManagementSecuritySettingsPayload.toManagementSecuritySettings(): ManagementSecuritySettings =
+    ManagementSecuritySettings(
+        recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
+        recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
+        passwordPolicy = passwordPolicy.toManagementPasswordPolicy(),
+        otpConfirmation = otpConfirmation.toOtpConfirmation(),
+        accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicy(),
+        accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
+        openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicy(),
+        managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicy(),
+        mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
+        maxRequestsPerPeriod = maxRequestsPerPeriod,
+        rateLimitPeriodSeconds = rateLimitPeriodSeconds,
+        refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
+    )
 
 /**
  * Builds network [ManagementSecuritySettingsPayload] DTO from domain [ManagementSecuritySettings].
  *
  * @return payload model aligned with [ManagementSecuritySettingsPayload] contract.
  */
-fun ManagementSecuritySettings.toManagementSecuritySettingsPayload(): ManagementSecuritySettingsPayload = ManagementSecuritySettingsPayload(
-    recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
-    recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
-    passwordPolicy = passwordPolicy.toManagementPasswordPolicyPayload(),
-    otpConfirmation = otpConfirmation.toOtpConfirmationPayload(),
-    accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicyPayload(),
-    accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
-    openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
-    managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
-    mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
-    maxRequestsPerPeriod = maxRequestsPerPeriod,
-    rateLimitPeriodSeconds = rateLimitPeriodSeconds,
-    refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
-)
+public fun ManagementSecuritySettings.toManagementSecuritySettingsPayload(): ManagementSecuritySettingsPayload =
+    ManagementSecuritySettingsPayload(
+        recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
+        recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
+        passwordPolicy = passwordPolicy.toManagementPasswordPolicyPayload(),
+        otpConfirmation = otpConfirmation.toOtpConfirmationPayload(),
+        accountLockoutPolicy = accountLockoutPolicy.toAccountLockoutPolicyPayload(),
+        accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
+        openIpRestrictionPolicy = openIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
+        managementIpRestrictionPolicy = managementIpRestrictionPolicy.toIpRestrictionPolicyPayload(),
+        mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
+        maxRequestsPerPeriod = maxRequestsPerPeriod,
+        rateLimitPeriodSeconds = rateLimitPeriodSeconds,
+        refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
+    )

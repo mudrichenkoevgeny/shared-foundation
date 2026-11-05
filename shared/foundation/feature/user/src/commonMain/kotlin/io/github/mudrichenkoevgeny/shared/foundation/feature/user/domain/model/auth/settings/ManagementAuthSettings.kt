@@ -35,24 +35,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
  * @property openEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for open API endpoints; see [EmailRestrictionPolicy].
  * @property managementEmailRestrictionPolicy Email domain blacklist and whitelist restriction policy for management API endpoints; see [EmailRestrictionPolicy].
  */
-data class ManagementAuthSettings(
-    val availableAuthProviders: AvailableAuthProviders,
-    val maxTotalIdentifiers: Int,
-    val maxEmailIdentifiers: Int,
-    val maxPhoneIdentifiers: Int,
-    val maxIdentifiersPerExternalProvider: Int,
-    val userNicknameMinLength: Int,
-    val userNicknameMaxLength: Int,
-    val userDisplayNameMinLength: Int,
-    val userDisplayNameMaxLength: Int,
-    val isUserNicknameChangeAllowed: Boolean,
-    val maxActiveSessionsForOpenUser: Int,
-    val maxActiveSessionsForManagementUser: Int,
-    val accessTokenExpirationSeconds: Int,
-    val refreshTokenExpirationSeconds: Int,
-    val accountDeletionGracePeriodSeconds: Int,
-    val accountDeletionCheckIntervalSeconds: Int,
-    val isRegistrationEnabled: Boolean,
-    val openEmailRestrictionPolicy: EmailRestrictionPolicy,
-    val managementEmailRestrictionPolicy: EmailRestrictionPolicy
+public data class ManagementAuthSettings(
+    public val availableAuthProviders: AvailableAuthProviders,
+    public val maxTotalIdentifiers: Int,
+    public val maxEmailIdentifiers: Int,
+    public val maxPhoneIdentifiers: Int,
+    public val maxIdentifiersPerExternalProvider: Int,
+    public val userNicknameMinLength: Int,
+    public val userNicknameMaxLength: Int,
+    public val userDisplayNameMinLength: Int,
+    public val userDisplayNameMaxLength: Int,
+    public val isUserNicknameChangeAllowed: Boolean,
+    public val maxActiveSessionsForOpenUser: Int,
+    public val maxActiveSessionsForManagementUser: Int,
+    public val accessTokenExpirationSeconds: Int,
+    public val refreshTokenExpirationSeconds: Int,
+    public val accountDeletionGracePeriodSeconds: Int,
+    public val accountDeletionCheckIntervalSeconds: Int,
+    public val isRegistrationEnabled: Boolean,
+    public val openEmailRestrictionPolicy: EmailRestrictionPolicy,
+    public val managementEmailRestrictionPolicy: EmailRestrictionPolicy
 )

@@ -5,16 +5,16 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class UserDetailParamsTest {
-
     private companion object {
         const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
     }
 
     @Test
     fun `parse extracts userId correctly`() {
-        val params = mapOf(
-            UserApiPaths.USER_ID to TEST_USER_ID
-        )
+        val params =
+            mapOf(
+                UserApiPaths.USER_ID to TEST_USER_ID
+            )
 
         val parsed = UserDetailParams.parse(params)
 

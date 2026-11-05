@@ -16,22 +16,17 @@ import kotlinx.serialization.Serializable
  * @property requireSpecialChar Indicates if at least one special character is required.
  */
 @Serializable
-data class OpenPasswordPolicyPayload(
+public data class OpenPasswordPolicyPayload(
     @SerialName(SecurityApiFields.MIN_LENGTH)
-    val minLength: Int,
-
+    public val minLength: Int,
     @SerialName(SecurityApiFields.REQUIRE_LETTER)
-    val requireLetter: Boolean,
-
+    public val requireLetter: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_UPPER_CASE)
-    val requireUpperCase: Boolean,
-
+    public val requireUpperCase: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_LOWER_CASE)
-    val requireLowerCase: Boolean,
-
+    public val requireLowerCase: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_DIGIT)
-    val requireDigit: Boolean,
-
+    public val requireDigit: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_SPECIAL_CHAR)
-    val requireSpecialChar: Boolean
+    public val requireSpecialChar: Boolean
 )

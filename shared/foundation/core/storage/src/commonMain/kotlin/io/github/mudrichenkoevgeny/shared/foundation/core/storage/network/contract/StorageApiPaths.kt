@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contr
 /**
  * Storage specific path parameters used in API routes.
  */
-object StorageApiPaths {
+public object StorageApiPaths {
     /** Path parameter representing the file ID. */
-    const val FILE_ID = "fileId"
+    public const val FILE_ID: String = "fileId"
 }

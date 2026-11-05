@@ -4,12 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 
 /**
- * Creates a test [DeletedSessions] domain instance.
- *
- * @param deletedSessionIds List of deleted session IDs ([UserSessionId]).
- */
-fun createTestDeletedSessions(
-    deletedSessionIds: List<UserSessionId> = listOf(createTestUserSessionId())
-) = DeletedSessions(
-    deletedSessionIds = deletedSessionIds
-)
+* Creates a test [DeletedSessions] domain instance.
+*
+* @param deletedSessionIds List of deleted session IDs ([UserSessionId]).
+*/
+public fun createTestDeletedSessions(deletedSessionIds: List<UserSessionId> = listOf(createTestUserSessionId())): DeletedSessions =
+    DeletedSessions(
+        deletedSessionIds = deletedSessionIds
+    )

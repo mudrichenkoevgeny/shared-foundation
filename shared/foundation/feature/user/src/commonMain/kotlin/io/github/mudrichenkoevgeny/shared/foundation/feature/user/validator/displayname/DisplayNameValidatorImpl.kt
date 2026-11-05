@@ -5,8 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.U
 /**
  * Default implementation of [DisplayNameValidator].
  */
-class DisplayNameValidatorImpl : DisplayNameValidator {
-
+public class DisplayNameValidatorImpl : DisplayNameValidator {
     override fun validate(
         displayName: String?,
         minLength: Int,

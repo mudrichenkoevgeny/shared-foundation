@@ -39,64 +39,45 @@ import kotlin.time.Instant
  * @property birthdate [UserPrivate.birthdate] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
-data class UserPrivatePayload(
+public data class UserPrivatePayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.ROLE)
-    val role: String,
-
+    public val role: String,
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val accountStatus: String,
-
+    public val accountStatus: String,
     @SerialName(UserApiFields.ACCOUNT_STATUS_ON_RESTORE)
-    val accountStatusOnRestore: String? = null,
-
+    public val accountStatusOnRestore: String? = null,
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
-    val authorityLevel: Int,
-
+    public val authorityLevel: Int,
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: Set<String>,
-
+    public val permissionCodes: Set<String>,
     @SerialName(UserApiFields.IS_TOTP_ENABLED)
-    val isTotpEnabled: Boolean,
-
+    public val isTotpEnabled: Boolean,
     @SerialName(UserApiFields.LAST_LOGIN_AT)
-    val lastLoginAt: Long? = null,
-
+    public val lastLoginAt: Long? = null,
     @SerialName(UserApiFields.LAST_ACTIVE_AT)
-    val lastActiveAt: Long? = null,
-
+    public val lastActiveAt: Long? = null,
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long,
-
+    public val createdAt: Long,
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null,
-
+    public val updatedAt: Long? = null,
     @SerialName(UserApiFields.SCHEDULED_PERMANENT_DELETION_AT)
-    val scheduledPermanentDeletionAt: Long? = null,
-
+    public val scheduledPermanentDeletionAt: Long? = null,
     @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
-    val lockoutType: String,
-
+    public val lockoutType: String,
     @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-    val temporaryLockoutUntil: Long? = null,
-
+    public val temporaryLockoutUntil: Long? = null,
     @SerialName(UserApiFields.STORAGE_CONFIGURATION)
-    val storageConfiguration: UserStorageConfigurationPayload? = null,
-
+    public val storageConfiguration: UserStorageConfigurationPayload? = null,
     @SerialName(UserApiFields.NICKNAME)
-    val nickname: String? = null,
-
+    public val nickname: String? = null,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String? = null,
-
+    public val displayName: String? = null,
     @SerialName(UserApiFields.AVATAR_FILE_ID)
-    val avatarFileId: String? = null,
-
+    public val avatarFileId: String? = null,
     @SerialName(UserApiFields.AVATAR_URLS)
-    val avatarUrls: FileUrlsPayload? = null,
-
+    public val avatarUrls: FileUrlsPayload? = null,
     @SerialName(UserApiFields.BIRTHDATE)
-    val birthdate: Long? = null
+    public val birthdate: Long? = null
 )

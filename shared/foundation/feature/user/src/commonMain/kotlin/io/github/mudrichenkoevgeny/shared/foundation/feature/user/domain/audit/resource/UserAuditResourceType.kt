@@ -4,17 +4,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.res
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -31,7 +31,9 @@ private const val RESOURCE_SESSION = "session"
  * @property value String representation of the [UserAuditResourceType].
  */
 @Serializable
-enum class UserAuditResourceType(override val value: String) : AuditResourceType {
+public enum class UserAuditResourceType(
+    override val value: String
+) : AuditResourceType {
     /**
      * [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS],
      * [ManagementAuthSettingsRoutes.RESET_MANAGEMENT_AUTH_SETTINGS]
@@ -70,11 +72,11 @@ enum class UserAuditResourceType(override val value: String) : AuditResourceType
     @SerialName(RESOURCE_SESSION)
     SESSION(RESOURCE_SESSION);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UserAuditResourceType? =
+        public fun fromValueOrNull(value: String): UserAuditResourceType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
@@ -85,7 +87,7 @@ enum class UserAuditResourceType(override val value: String) : AuditResourceType
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuditResourceType].
          */
-        fun fromValueOrThrow(value: String): UserAuditResourceType =
+        public fun fromValueOrThrow(value: String): UserAuditResourceType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserAuditResourceType::class.simpleName}: '$value'"
             )

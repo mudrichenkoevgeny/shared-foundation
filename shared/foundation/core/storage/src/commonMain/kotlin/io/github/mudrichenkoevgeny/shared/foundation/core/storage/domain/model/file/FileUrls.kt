@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property urlPresets Map of preset keys (e.g. [FileUrlPresets.THUMBNAIL]) to resolution variant URLs.
  */
 @Serializable
-data class FileUrls(
-    val originalUrl: String,
-    val urlPresets: Map<String, String> = emptyMap()
+public data class FileUrls(
+    public val originalUrl: String,
+    public val urlPresets: Map<String, String> = emptyMap()
 )

@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property deletedSessionIds The list of unique identifiers for the sessions that were successfully deleted.
  */
 @Serializable
-data class DeletedSessionsPayload(
+public data class DeletedSessionsPayload(
     @SerialName(UserApiFields.DELETED_SESSION_IDS)
-    val deletedSessionIds: List<String>
+    public val deletedSessionIds: List<String>
 )

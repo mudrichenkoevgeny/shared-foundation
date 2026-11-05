@@ -9,7 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  *
  * Aligns with [AuthDataPayload] on the wire.
  */
-data class AuthData(
-    val userPrivate: UserPrivate,
-    val sessionToken: SessionToken
+public data class AuthData(
+    public val userPrivate: UserPrivate,
+    public val sessionToken: SessionToken
 )

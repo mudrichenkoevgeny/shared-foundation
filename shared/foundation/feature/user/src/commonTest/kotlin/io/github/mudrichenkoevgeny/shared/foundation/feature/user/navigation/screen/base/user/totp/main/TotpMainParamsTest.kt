@@ -6,7 +6,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TotpMainParamsTest {
-
     @Test
     fun `parse extracts totpStep correctly`() {
         val params = mapOf(UserNavigationPaths.TOTP_STEP to "setup")

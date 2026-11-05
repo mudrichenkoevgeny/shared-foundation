@@ -3,9 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domai
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.storagesettings.ManagementStorageSettings
 
 /**
- * Creates a test [ManagementStorageSettings] domain model instance.
- */
-fun createTestManagementStorageSettings(
+* Creates a test [ManagementStorageSettings] domain model instance.
+*/
+public fun createTestManagementStorageSettings(
     minUploadSizeBytes: Long = 1L,
     maxUploadSizeBytes: Long = 52428800L,
     totalStorageQuotaForOpenUserBytes: Long? = 1073741824L,
@@ -15,14 +15,15 @@ fun createTestManagementStorageSettings(
     maxPendingUploadsForManagementUser: Int = 100,
     isDeduplicationEnabled: Boolean = true,
     deletedFilesCleanupIntervalSeconds: Int = 86400
-) = ManagementStorageSettings(
-    minUploadSizeBytes = minUploadSizeBytes,
-    maxUploadSizeBytes = maxUploadSizeBytes,
-    totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
-    totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
-    presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
-    maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
-    maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-    isDeduplicationEnabled = isDeduplicationEnabled,
-    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
-)
+): ManagementStorageSettings =
+    ManagementStorageSettings(
+        minUploadSizeBytes = minUploadSizeBytes,
+        maxUploadSizeBytes = maxUploadSizeBytes,
+        totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
+        totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
+        presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
+        maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
+        maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
+        isDeduplicationEnabled = isDeduplicationEnabled,
+        deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
+    )

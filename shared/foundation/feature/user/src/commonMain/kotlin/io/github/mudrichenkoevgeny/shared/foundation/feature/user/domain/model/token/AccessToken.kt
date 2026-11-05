@@ -8,7 +8,9 @@ import kotlin.jvm.JvmInline
  * @property value Raw token string; must not be blank.
  */
 @JvmInline
-value class AccessToken(val value: String) {
+public value class AccessToken(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "AccessToken value must not be blank." }
     }
@@ -20,10 +22,9 @@ value class AccessToken(val value: String) {
  * Attempts to create an [AccessToken] from this string.
  * Returns `null` if the string is blank.
  */
-fun String.toAccessTokenOrNull(): AccessToken? =
-    if (this.isNotBlank()) AccessToken(this) else null
+public fun String.toAccessTokenOrNull(): AccessToken? = if (this.isNotBlank()) AccessToken(this) else null
 
 /**
  * Creates an [AccessToken] from this string or throws an exception if the string is blank.
  */
-fun String.toAccessTokenOrThrow(): AccessToken = AccessToken(this)
+public fun String.toAccessTokenOrThrow(): AccessToken = AccessToken(this)

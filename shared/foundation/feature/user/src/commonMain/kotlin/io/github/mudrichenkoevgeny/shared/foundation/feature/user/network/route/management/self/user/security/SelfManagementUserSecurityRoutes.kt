@@ -23,7 +23,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * Sensitive operations (disabling TOTP, viewing/regenerating recovery codes) require
  * a recently re-authenticated session.
  */
-object SelfManagementUserSecurityRoutes {
+public object SelfManagementUserSecurityRoutes {
     /** Base path for TOTP-related operations. */
     private const val BASE_SELF_MANAGEMENT_TOTP_ROUTE =
         "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/totp"
@@ -58,7 +58,7 @@ object SelfManagementUserSecurityRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.TotpMain]
      */
-    const val SETUP_TOTP = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/setup"
+    public const val SETUP_TOTP: String = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/setup"
 
     /**
      * **HTTP method:** `POST`
@@ -87,7 +87,7 @@ object SelfManagementUserSecurityRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.TotpMain]
      */
-    const val ENABLE_TOTP = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/enable"
+    public const val ENABLE_TOTP: String = "$BASE_SELF_MANAGEMENT_TOTP_ROUTE/enable"
 
     /**
      * **HTTP method:** `DELETE`
@@ -120,7 +120,7 @@ object SelfManagementUserSecurityRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.TotpMain]
      */
-    const val DISABLE_TOTP = BASE_SELF_MANAGEMENT_TOTP_ROUTE
+    public const val DISABLE_TOTP: String = BASE_SELF_MANAGEMENT_TOTP_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -153,7 +153,7 @@ object SelfManagementUserSecurityRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.TotpRecoveryCodes]
      */
-    const val GET_RECOVERY_CODES = BASE_SELF_RECOVERY_CODES_ROUTE
+    public const val GET_RECOVERY_CODES: String = BASE_SELF_RECOVERY_CODES_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -186,5 +186,5 @@ object SelfManagementUserSecurityRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.TotpRecoveryCodes]
      */
-    const val REGENERATE_RECOVERY_CODES = BASE_SELF_RECOVERY_CODES_ROUTE
+    public const val REGENERATE_RECOVERY_CODES: String = BASE_SELF_RECOVERY_CODES_ROUTE
 }

@@ -20,9 +20,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property openStorageSettings File size upload limits for client-side validation.
  * @property openAuthSettings Which authentication providers are enabled for sign-in.
  */
-data class OpenUserConfiguration(
-    val openGlobalSettings: OpenGlobalSettings,
-    val openSecuritySettings: OpenSecuritySettings,
-    val openStorageSettings: OpenStorageSettings,
-    val openAuthSettings: OpenAuthSettings
+public data class OpenUserConfiguration(
+    public val openGlobalSettings: OpenGlobalSettings,
+    public val openSecuritySettings: OpenSecuritySettings,
+    public val openStorageSettings: OpenStorageSettings,
+    public val openAuthSettings: OpenAuthSettings
 )

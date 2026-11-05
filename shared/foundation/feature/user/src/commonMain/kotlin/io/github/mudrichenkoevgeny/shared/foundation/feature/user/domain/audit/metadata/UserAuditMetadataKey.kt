@@ -27,7 +27,7 @@ private const val KEY_TEMPORARY_LOCKOUT_UNTIL = "temporary_lockout_until"
  * @property valueSensitivity Sensitivity level for audit logging.
  */
 @Serializable
-enum class UserAuditMetadataKey(
+public enum class UserAuditMetadataKey(
     override val value: String,
     override val valueSensitivity: AuditValueSensitivity
 ) : AuditMetadataKey {
@@ -67,12 +67,12 @@ enum class UserAuditMetadataKey(
     @SerialName(KEY_TEMPORARY_LOCKOUT_UNTIL)
     TEMPORARY_LOCKOUT_UNTIL(KEY_TEMPORARY_LOCKOUT_UNTIL, AuditValueSensitivity.NON_SENSITIVE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
          * then by case-insensitive [value] match.
          */
-        fun fromValueOrNull(value: String): UserAuditMetadataKey? =
+        public fun fromValueOrNull(value: String): UserAuditMetadataKey? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
@@ -83,7 +83,7 @@ enum class UserAuditMetadataKey(
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuditMetadataKey].
          */
-        fun fromValueOrThrow(value: String): UserAuditMetadataKey =
+        public fun fromValueOrThrow(value: String): UserAuditMetadataKey =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserAuditMetadataKey::class.simpleName}: '$value'"
             )

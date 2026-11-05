@@ -18,7 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for registration in the open API.
  */
-object OpenRegistrationRoutes {
+public object OpenRegistrationRoutes {
     /** Base path for email registration operations. */
     private const val REGISTRATION_BY_EMAIL_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/registration/email"
 
@@ -49,7 +49,7 @@ object OpenRegistrationRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.Registration]
      */
-    const val REGISTRATION_BY_EMAIL = REGISTRATION_BY_EMAIL_ROUTE
+    public const val REGISTRATION_BY_EMAIL: String = REGISTRATION_BY_EMAIL_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -69,5 +69,5 @@ object OpenRegistrationRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.Registration]
      */
-    const val SEND_REGISTRATION_CONFIRMATION_TO_EMAIL = "$REGISTRATION_BY_EMAIL_ROUTE/send-confirmation"
+    public const val SEND_REGISTRATION_CONFIRMATION_TO_EMAIL: String = "$REGISTRATION_BY_EMAIL_ROUTE/send-confirmation"
 }

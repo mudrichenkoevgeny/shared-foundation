@@ -10,19 +10,19 @@ import kotlin.uuid.Uuid
  * are passed around, logged or serialized.
  */
 @JvmInline
-value class UserId(val value: Uuid) {
-
+public value class UserId(
+    public val value: Uuid
+) {
     /**
      * Returns the underlying [Uuid] as a canonical hex string with dashes.
      */
-    fun asHexDashString(): String = value.toHexDashString()
+    public fun asHexDashString(): String = value.toHexDashString()
 
-    companion object {
-
+    public companion object {
         /**
          * Generates a new random [UserId].
          */
-        fun generate() = UserId(Uuid.random())
+        public fun generate(): UserId = UserId(Uuid.random())
     }
 }
 
@@ -31,10 +31,9 @@ value class UserId(val value: Uuid) {
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-fun String.toUserIdOrNull(): UserId? =
-    Uuid.parseOrNull(this)?.let { UserId(it) }
+public fun String.toUserIdOrNull(): UserId? = Uuid.parseOrNull(this)?.let { UserId(it) }
 
 /**
  * Parses this string into a [UserId] or throws if the value is not a valid UUID.
  */
-fun String.toUserIdOrThrow(): UserId = UserId(Uuid.parse(this))
+public fun String.toUserIdOrThrow(): UserId = UserId(Uuid.parse(this))

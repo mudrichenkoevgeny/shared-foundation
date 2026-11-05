@@ -22,37 +22,27 @@ import kotlinx.serialization.Serializable
  * @property isRegistrationEnabled Global flag indicating whether new user registrations are permitted.
  */
 @Serializable
-data class OpenAuthSettingsPayload(
+public data class OpenAuthSettingsPayload(
     @SerialName(UserApiFields.AVAILABLE_AUTH_PROVIDERS)
-    val availableAuthProviders: AvailableAuthProvidersPayload,
-
+    public val availableAuthProviders: AvailableAuthProvidersPayload,
     @SerialName(UserApiFields.MAX_TOTAL_IDENTIFIERS)
-    val maxTotalIdentifiers: Int,
-
+    public val maxTotalIdentifiers: Int,
     @SerialName(UserApiFields.MAX_EMAIL_IDENTIFIERS)
-    val maxEmailIdentifiers: Int,
-
+    public val maxEmailIdentifiers: Int,
     @SerialName(UserApiFields.MAX_PHONE_IDENTIFIERS)
-    val maxPhoneIdentifiers: Int,
-
+    public val maxPhoneIdentifiers: Int,
     @SerialName(UserApiFields.MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER)
-    val maxIdentifiersPerExternalProvider: Int,
-
+    public val maxIdentifiersPerExternalProvider: Int,
     @SerialName(UserApiFields.USER_NICKNAME_MIN_LENGTH)
-    val userNicknameMinLength: Int,
-
+    public val userNicknameMinLength: Int,
     @SerialName(UserApiFields.USER_NICKNAME_MAX_LENGTH)
-    val userNicknameMaxLength: Int,
-
+    public val userNicknameMaxLength: Int,
     @SerialName(UserApiFields.USER_DISPLAY_NAME_MIN_LENGTH)
-    val userDisplayNameMinLength: Int,
-
+    public val userDisplayNameMinLength: Int,
     @SerialName(UserApiFields.USER_DISPLAY_NAME_MAX_LENGTH)
-    val userDisplayNameMaxLength: Int,
-
+    public val userDisplayNameMaxLength: Int,
     @SerialName(UserApiFields.IS_USER_NICKNAME_CHANGE_ALLOWED)
-    val isUserNicknameChangeAllowed: Boolean,
-
+    public val isUserNicknameChangeAllowed: Boolean,
     @SerialName(UserApiFields.IS_REGISTRATION_ENABLED)
-    val isRegistrationEnabled: Boolean
+    public val isRegistrationEnabled: Boolean
 )

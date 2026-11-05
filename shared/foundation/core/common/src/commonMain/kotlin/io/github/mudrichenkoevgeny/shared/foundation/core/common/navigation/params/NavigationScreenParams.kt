@@ -10,12 +10,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.pars
  *
  * @param T The concrete parameter type implementing this interface.
  */
-interface NavigationScreenParams<T : NavigationScreenParams<T>> {
-
+public interface NavigationScreenParams<T : NavigationScreenParams<T>> {
     /**
      * Reference to the parser implementation for this parameter model type.
      */
-    val parser: NavigationScreenParamsParser<T>
+    public val parser: NavigationScreenParamsParser<T>
 
     /**
      * Serializes this screen parameter object into a map of key-to-value-list parameter entries.
@@ -23,6 +22,5 @@ interface NavigationScreenParams<T : NavigationScreenParams<T>> {
      * @return Map where keys represent parameter names and values represent non-empty list of string values.
      */
     @Suppress("UNCHECKED_CAST")
-    fun toQueryMap(): Map<String, List<String>> =
-        parser.serialize(this as T)
+    public fun toQueryMap(): Map<String, List<String>> = parser.serialize(this as T)
 }

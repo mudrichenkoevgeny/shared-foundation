@@ -7,22 +7,23 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.pe
  *
  * Values are the raw strings stored in [PermissionCode]; servers enforce them on matching operations.
  */
-object StoragePermissionCode {
+public object StoragePermissionCode {
     /** Allows deleting files uploaded by other users, subject to authority level restrictions. */
-    val STORAGE_DELETE_OTHER_USERS_FILES = PermissionCode("storage.delete.other.users.files")
+    public val STORAGE_DELETE_OTHER_USERS_FILES: PermissionCode = PermissionCode("storage.delete.other.users.files")
 
     /** Allows inspecting and retrieving files uploaded by other users, subject to authority level restrictions. */
-    val STORAGE_VIEW_OTHER_USERS_FILES = PermissionCode("storage.view.other.users.files")
+    public val STORAGE_VIEW_OTHER_USERS_FILES: PermissionCode = PermissionCode("storage.view.other.users.files")
 
     /** Allows updating platform-wide storage configuration and limits. */
-    val STORAGE_SETTINGS_UPDATE = PermissionCode("storage.settings.update")
+    public val STORAGE_SETTINGS_UPDATE: PermissionCode = PermissionCode("storage.settings.update")
 
     /**
      * All storage permissions.
      */
-    val ALL: Set<PermissionCode> = setOf(
-        STORAGE_DELETE_OTHER_USERS_FILES,
-        STORAGE_VIEW_OTHER_USERS_FILES,
-        STORAGE_SETTINGS_UPDATE
-    )
+    public val ALL: Set<PermissionCode> =
+        setOf(
+            STORAGE_DELETE_OTHER_USERS_FILES,
+            STORAGE_VIEW_OTHER_USERS_FILES,
+            STORAGE_SETTINGS_UPDATE
+        )
 }

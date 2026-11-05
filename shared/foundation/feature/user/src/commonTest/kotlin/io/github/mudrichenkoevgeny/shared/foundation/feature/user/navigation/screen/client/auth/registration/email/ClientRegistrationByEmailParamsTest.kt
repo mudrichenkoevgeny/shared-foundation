@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class ClientRegistrationByEmailParamsTest {
-
     @Test
     fun `parse extracts email correctly`() {
         val params = mapOf(UserApiFields.EMAIL to "client@example.com")

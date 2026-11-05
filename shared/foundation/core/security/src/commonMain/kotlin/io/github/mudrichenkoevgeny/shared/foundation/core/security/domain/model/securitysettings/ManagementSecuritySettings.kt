@@ -21,17 +21,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
  * @property rateLimitPeriodSeconds Time window in seconds for request rate limiting.
  * @property refreshTokenRotationGracePeriodSeconds Grace period in seconds during refresh token rotation before triggering replay attack protection.
  */
-data class ManagementSecuritySettings(
-    val recentAuthenticationValiditySecondsForOpenUser: Int,
-    val recentAuthenticationValiditySecondsForManagementUser: Int,
-    val passwordPolicy: ManagementPasswordPolicy,
-    val otpConfirmation: OtpConfirmation,
-    val accountLockoutPolicy: AccountLockoutPolicy,
-    val accountLockoutCheckIntervalSeconds: Int,
-    val openIpRestrictionPolicy: IpRestrictionPolicy,
-    val managementIpRestrictionPolicy: IpRestrictionPolicy,
-    val mfaTokenExpirationSeconds: Int,
-    val maxRequestsPerPeriod: Int,
-    val rateLimitPeriodSeconds: Int,
-    val refreshTokenRotationGracePeriodSeconds: Int
+public data class ManagementSecuritySettings(
+    public val recentAuthenticationValiditySecondsForOpenUser: Int,
+    public val recentAuthenticationValiditySecondsForManagementUser: Int,
+    public val passwordPolicy: ManagementPasswordPolicy,
+    public val otpConfirmation: OtpConfirmation,
+    public val accountLockoutPolicy: AccountLockoutPolicy,
+    public val accountLockoutCheckIntervalSeconds: Int,
+    public val openIpRestrictionPolicy: IpRestrictionPolicy,
+    public val managementIpRestrictionPolicy: IpRestrictionPolicy,
+    public val mfaTokenExpirationSeconds: Int,
+    public val maxRequestsPerPeriod: Int,
+    public val rateLimitPeriodSeconds: Int,
+    public val refreshTokenRotationGracePeriodSeconds: Int
 )

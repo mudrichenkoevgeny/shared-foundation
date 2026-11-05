@@ -9,35 +9,35 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.management.list.ManagementStorageFileListParams
 
 /**
- * Creates a test [ManagementStorageFileListParams] instance.
- *
- * @param pageNumber One-based page index.
- * @param pageSize Maximum items per page.
- * @param sortBy Sort field ([StorageFileSortBy]).
- * @param sortOrder Sort direction ([SortOrder]).
- * @param fileIds Specific file IDs filter list.
- * @param ownerUserIds Owner user IDs filter list.
- * @param isOwnerUserIdSet Filter by owner presence.
- * @param fileName Substring match for file name.
- * @param fileSizeBytesFrom Lower bound for file size in bytes.
- * @param fileSizeBytesTo Upper bound for file size in bytes.
- * @param mimeTypes MIME type filter list.
- * @param categories Categories filter list ([StorageCategory]).
- * @param excludeCategories Exclude categories filter list ([StorageCategory]).
- * @param visibilities Visibilities filter list ([StorageFileVisibility]).
- * @param excludeVisibilities Exclude visibilities filter list ([StorageFileVisibility]).
- * @param statuses Statuses filter list ([StorageFileStatus]).
- * @param excludeStatuses Exclude statuses filter list ([StorageFileStatus]).
- * @param targetScopes Target scopes filter list.
- * @param isTargetScopeSet Filter by target scope presence.
- * @param createdAtFrom Lower bound creation timestamp.
- * @param createdAtTo Upper bound creation timestamp.
- * @param updatedAtFrom Lower bound update timestamp.
- * @param updatedAtTo Upper bound update timestamp.
- * @param isUpdatedAtSet Filter by update presence.
- * @param searchQuery Free-text search query string.
- */
-fun createTestManagementStorageFileListParams(
+* Creates a test [ManagementStorageFileListParams] instance.
+*
+* @param pageNumber One-based page index.
+* @param pageSize Maximum items per page.
+* @param sortBy Sort field ([StorageFileSortBy]).
+* @param sortOrder Sort direction ([SortOrder]).
+* @param fileIds Specific file IDs filter list.
+* @param ownerUserIds Owner user IDs filter list.
+* @param isOwnerUserIdSet Filter by owner presence.
+* @param fileName Substring match for file name.
+* @param fileSizeBytesFrom Lower bound for file size in bytes.
+* @param fileSizeBytesTo Upper bound for file size in bytes.
+* @param mimeTypes MIME type filter list.
+* @param categories Categories filter list ([StorageCategory]).
+* @param excludeCategories Exclude categories filter list ([StorageCategory]).
+* @param visibilities Visibilities filter list ([StorageFileVisibility]).
+* @param excludeVisibilities Exclude visibilities filter list ([StorageFileVisibility]).
+* @param statuses Statuses filter list ([StorageFileStatus]).
+* @param excludeStatuses Exclude statuses filter list ([StorageFileStatus]).
+* @param targetScopes Target scopes filter list.
+* @param isTargetScopeSet Filter by target scope presence.
+* @param createdAtFrom Lower bound creation timestamp.
+* @param createdAtTo Upper bound creation timestamp.
+* @param updatedAtFrom Lower bound update timestamp.
+* @param updatedAtTo Upper bound update timestamp.
+* @param isUpdatedAtSet Filter by update presence.
+* @param searchQuery Free-text search query string.
+*/
+public fun createTestManagementStorageFileListParams(
     pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
     pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     sortBy: StorageFileSortBy = StorageFileSortBy.DEFAULT,
@@ -63,30 +63,31 @@ fun createTestManagementStorageFileListParams(
     updatedAtTo: String? = null,
     isUpdatedAtSet: Boolean? = null,
     searchQuery: String? = null
-): ManagementStorageFileListParams = ManagementStorageFileListParams(
-    pageNumber = pageNumber,
-    pageSize = pageSize,
-    sortBy = sortBy,
-    sortOrder = sortOrder,
-    fileIds = fileIds,
-    ownerUserIds = ownerUserIds,
-    isOwnerUserIdSet = isOwnerUserIdSet,
-    fileName = fileName,
-    fileSizeBytesFrom = fileSizeBytesFrom,
-    fileSizeBytesTo = fileSizeBytesTo,
-    mimeTypes = mimeTypes,
-    categories = categories,
-    excludeCategories = excludeCategories,
-    visibilities = visibilities,
-    excludeVisibilities = excludeVisibilities,
-    statuses = statuses,
-    excludeStatuses = excludeStatuses,
-    targetScopes = targetScopes,
-    isTargetScopeSet = isTargetScopeSet,
-    createdAtFrom = createdAtFrom,
-    createdAtTo = createdAtTo,
-    updatedAtFrom = updatedAtFrom,
-    updatedAtTo = updatedAtTo,
-    isUpdatedAtSet = isUpdatedAtSet,
-    searchQuery = searchQuery
-)
+): ManagementStorageFileListParams =
+    ManagementStorageFileListParams(
+        pageNumber = pageNumber,
+        pageSize = pageSize,
+        sortBy = sortBy,
+        sortOrder = sortOrder,
+        fileIds = fileIds,
+        ownerUserIds = ownerUserIds,
+        isOwnerUserIdSet = isOwnerUserIdSet,
+        fileName = fileName,
+        fileSizeBytesFrom = fileSizeBytesFrom,
+        fileSizeBytesTo = fileSizeBytesTo,
+        mimeTypes = mimeTypes,
+        categories = categories,
+        excludeCategories = excludeCategories,
+        visibilities = visibilities,
+        excludeVisibilities = excludeVisibilities,
+        statuses = statuses,
+        excludeStatuses = excludeStatuses,
+        targetScopes = targetScopes,
+        isTargetScopeSet = isTargetScopeSet,
+        createdAtFrom = createdAtFrom,
+        createdAtTo = createdAtTo,
+        updatedAtFrom = updatedAtFrom,
+        updatedAtTo = updatedAtTo,
+        isUpdatedAtSet = isUpdatedAtSet,
+        searchQuery = searchQuery
+    )

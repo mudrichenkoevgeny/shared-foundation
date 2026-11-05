@@ -12,13 +12,11 @@ import kotlinx.serialization.Serializable
  * @property expirationSeconds The time-to-live (TTL) for the code in seconds.
  */
 @Serializable
-data class OtpConfirmationPayload(
+public data class OtpConfirmationPayload(
     @SerialName(SecurityApiFields.RETRY_AFTER_SECONDS)
-    val retryAfterSeconds: Int,
-
+    public val retryAfterSeconds: Int,
     @SerialName(SecurityApiFields.NUMBER_OF_SYMBOLS)
-    val numberOfSymbols: Int,
-
+    public val numberOfSymbols: Int,
     @SerialName(SecurityApiFields.EXPIRATION_SECONDS)
-    val expirationSeconds: Int
+    public val expirationSeconds: Int
 )

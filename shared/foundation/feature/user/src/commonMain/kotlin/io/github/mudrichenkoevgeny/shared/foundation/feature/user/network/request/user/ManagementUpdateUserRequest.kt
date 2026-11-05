@@ -29,44 +29,35 @@ import kotlinx.serialization.Serializable
  * @property birthdate Target birthdate timestamp update ([PatchField]).
  */
 @Serializable
-data class ManagementUpdateUserRequest(
+public data class ManagementUpdateUserRequest(
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val accountStatus: PatchField<String> = PatchField.Unchanged,
-
+    public val accountStatus: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
-    val authorityLevel: PatchField<Int> = PatchField.Unchanged,
-
+    public val authorityLevel: PatchField<Int> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: PatchField<Set<String>> = PatchField.Unchanged,
-
+    public val permissionCodes: PatchField<Set<String>> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.ACCOUNT_LOCKOUT_TYPE)
-    val lockoutType: PatchField<String> = PatchField.Unchanged,
-
+    public val lockoutType: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.TEMPORARY_LOCKOUT_UNTIL)
-    val temporaryLockoutUntil: PatchField<Long> = PatchField.Unchanged,
-
+    public val temporaryLockoutUntil: PatchField<Long> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.STORAGE_CONFIGURATION)
-    val storageConfiguration: PatchField<UserStorageConfigurationPayload> = PatchField.Unchanged,
-
+    public val storageConfiguration: PatchField<UserStorageConfigurationPayload> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.NICKNAME)
-    val nickname: PatchField<String> = PatchField.Unchanged,
-
+    public val nickname: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: PatchField<String> = PatchField.Unchanged,
-
+    public val displayName: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.AVATAR_FILE_ID)
-    val avatarFileId: PatchField<String> = PatchField.Unchanged,
-
+    public val avatarFileId: PatchField<String> = PatchField.Unchanged,
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     @SerialName(UserApiFields.BIRTHDATE)
-    val birthdate: PatchField<Long> = PatchField.Unchanged
+    public val birthdate: PatchField<Long> = PatchField.Unchanged
 )

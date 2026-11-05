@@ -12,13 +12,11 @@ import kotlinx.serialization.Serializable
  * @property mfaToken A temporary challenge token representing this setup session.
  */
 @Serializable
-data class TotpSetupPayload(
+public data class TotpSetupPayload(
     @SerialName(SecurityApiFields.TOTP_SECRET_KEY)
-    val secretKey: String,
-
+    public val secretKey: String,
     @SerialName(SecurityApiFields.TOTP_OTP_AUTH_URL)
-    val otpAuthUrl: String,
-
+    public val otpAuthUrl: String,
     @SerialName(SecurityApiFields.MFA_TOKEN)
-    val mfaToken: String
+    public val mfaToken: String
 )

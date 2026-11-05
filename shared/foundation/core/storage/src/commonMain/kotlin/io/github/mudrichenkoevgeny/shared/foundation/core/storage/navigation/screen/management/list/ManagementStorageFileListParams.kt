@@ -43,39 +43,37 @@ import kotlinx.serialization.Serializable
  * @property searchQuery Search query targeting file name; wire key is [StorageFileFilterValues.SEARCH_QUERY].
  */
 @Serializable
-data class ManagementStorageFileListParams(
-    val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-    val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-    val sortBy: StorageFileSortBy = StorageFileSortBy.DEFAULT,
-    val sortOrder: SortOrder = SortOrder.DEFAULT,
-    val fileIds: List<String> = emptyList(),
-    val ownerUserIds: List<String> = emptyList(),
-    val isOwnerUserIdSet: Boolean? = null,
-    val fileName: String? = null,
-    val fileSizeBytesFrom: Long? = null,
-    val fileSizeBytesTo: Long? = null,
-    val mimeTypes: List<String> = emptyList(),
-    val categories: List<StorageCategory> = emptyList(),
-    val excludeCategories: List<StorageCategory> = emptyList(),
-    val visibilities: List<StorageFileVisibility> = emptyList(),
-    val excludeVisibilities: List<StorageFileVisibility> = emptyList(),
-    val statuses: List<StorageFileStatus> = emptyList(),
-    val excludeStatuses: List<StorageFileStatus> = listOf(StorageFileStatus.DELETED),
-    val targetScopes: List<String> = emptyList(),
-    val isTargetScopeSet: Boolean? = null,
-    val createdAtFrom: String? = null,
-    val createdAtTo: String? = null,
-    val updatedAtFrom: String? = null,
-    val updatedAtTo: String? = null,
-    val isUpdatedAtSet: Boolean? = null,
-    val searchQuery: String? = null
+public data class ManagementStorageFileListParams(
+    public val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    public val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+    public val sortBy: StorageFileSortBy = StorageFileSortBy.DEFAULT,
+    public val sortOrder: SortOrder = SortOrder.DEFAULT,
+    public val fileIds: List<String> = emptyList(),
+    public val ownerUserIds: List<String> = emptyList(),
+    public val isOwnerUserIdSet: Boolean? = null,
+    public val fileName: String? = null,
+    public val fileSizeBytesFrom: Long? = null,
+    public val fileSizeBytesTo: Long? = null,
+    public val mimeTypes: List<String> = emptyList(),
+    public val categories: List<StorageCategory> = emptyList(),
+    public val excludeCategories: List<StorageCategory> = emptyList(),
+    public val visibilities: List<StorageFileVisibility> = emptyList(),
+    public val excludeVisibilities: List<StorageFileVisibility> = emptyList(),
+    public val statuses: List<StorageFileStatus> = emptyList(),
+    public val excludeStatuses: List<StorageFileStatus> = listOf(StorageFileStatus.DELETED),
+    public val targetScopes: List<String> = emptyList(),
+    public val isTargetScopeSet: Boolean? = null,
+    public val createdAtFrom: String? = null,
+    public val createdAtTo: String? = null,
+    public val updatedAtFrom: String? = null,
+    public val updatedAtTo: String? = null,
+    public val isUpdatedAtSet: Boolean? = null,
+    public val searchQuery: String? = null
 ) : NavigationScreenParams<ManagementStorageFileListParams> {
-
     override val parser: NavigationScreenParamsParser<ManagementStorageFileListParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ManagementStorageFileListParams> {
-
+    public companion object : NavigationScreenParamsParser<ManagementStorageFileListParams> {
         /**
          * Parses raw URL query parameters into typed [ManagementStorageFileListParams].
          *
@@ -88,111 +86,136 @@ data class ManagementStorageFileListParams(
         override fun parse(params: Map<String, Any?>): ManagementStorageFileListParams {
             val normalized = params.normalizeQueryParams()
 
-            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber =
+                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize =
+                normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
-                ?.firstOrNull()
-                ?.let { StorageFileSortBy.fromValueOrNull(it) }
-                ?: StorageFileSortBy.DEFAULT
+            val sortBy =
+                normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { StorageFileSortBy.fromValueOrNull(it) }
+                    ?: StorageFileSortBy.DEFAULT
 
-            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
-                ?.firstOrNull()
-                ?.let { SortOrder.fromValueOrNull(it) }
-                ?: SortOrder.DEFAULT
+            val sortOrder =
+                normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT
 
-            val fileIds = normalized[StorageFileFilterValues.FILE_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val fileIds =
+                normalized[StorageFileFilterValues.FILE_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val ownerUserIds = normalized[StorageFileFilterValues.OWNER_USER_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val ownerUserIds =
+                normalized[StorageFileFilterValues.OWNER_USER_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val isOwnerUserIdSet = normalized[StorageFileFilterValues.IS_OWNER_USER_ID_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isOwnerUserIdSet =
+                normalized[StorageFileFilterValues.IS_OWNER_USER_ID_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val fileName = normalized[StorageFileFilterValues.FILE_NAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val fileName =
+                normalized[StorageFileFilterValues.FILE_NAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val fileSizeBytesFrom = normalized[StorageFileFilterValues.FILE_SIZE_BYTES_FROM]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val fileSizeBytesFrom =
+                normalized[StorageFileFilterValues.FILE_SIZE_BYTES_FROM]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val fileSizeBytesTo = normalized[StorageFileFilterValues.FILE_SIZE_BYTES_TO]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val fileSizeBytesTo =
+                normalized[StorageFileFilterValues.FILE_SIZE_BYTES_TO]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val mimeTypes = normalized[StorageFileFilterValues.MIME_TYPE]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val mimeTypes =
+                normalized[StorageFileFilterValues.MIME_TYPE]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val categories = normalized[StorageFileFilterValues.CATEGORY]
-                ?.mapNotNull { StorageCategory.fromValueOrNull(it) }
-                ?: emptyList()
+            val categories =
+                normalized[StorageFileFilterValues.CATEGORY]
+                    ?.mapNotNull { StorageCategory.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeCategories = normalized[StorageFileFilterValues.EXCLUDE_CATEGORY]
-                ?.mapNotNull { StorageCategory.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeCategories =
+                normalized[StorageFileFilterValues.EXCLUDE_CATEGORY]
+                    ?.mapNotNull { StorageCategory.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val visibilities = normalized[StorageFileFilterValues.VISIBILITY]
-                ?.mapNotNull { StorageFileVisibility.fromValueOrNull(it) }
-                ?: emptyList()
+            val visibilities =
+                normalized[StorageFileFilterValues.VISIBILITY]
+                    ?.mapNotNull { StorageFileVisibility.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeVisibilities = normalized[StorageFileFilterValues.EXCLUDE_VISIBILITY]
-                ?.mapNotNull { StorageFileVisibility.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeVisibilities =
+                normalized[StorageFileFilterValues.EXCLUDE_VISIBILITY]
+                    ?.mapNotNull { StorageFileVisibility.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val statuses = normalized[StorageFileFilterValues.STATUS]
-                ?.mapNotNull { StorageFileStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val statuses =
+                normalized[StorageFileFilterValues.STATUS]
+                    ?.mapNotNull { StorageFileStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeStatuses = normalized[StorageFileFilterValues.EXCLUDE_STATUS]
-                ?.mapNotNull { StorageFileStatus.fromValueOrNull(it) }
-                ?: listOf(StorageFileStatus.DELETED)
+            val excludeStatuses =
+                normalized[StorageFileFilterValues.EXCLUDE_STATUS]
+                    ?.mapNotNull { StorageFileStatus.fromValueOrNull(it) }
+                    ?: listOf(StorageFileStatus.DELETED)
 
-            val targetScopes = normalized[StorageFileFilterValues.TARGET_SCOPE]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val targetScopes =
+                normalized[StorageFileFilterValues.TARGET_SCOPE]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val isTargetScopeSet = normalized[StorageFileFilterValues.IS_TARGET_SCOPE_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isTargetScopeSet =
+                normalized[StorageFileFilterValues.IS_TARGET_SCOPE_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val createdAtFrom = normalized[StorageFileFilterValues.CREATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtFrom =
+                normalized[StorageFileFilterValues.CREATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtTo = normalized[StorageFileFilterValues.CREATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtTo =
+                normalized[StorageFileFilterValues.CREATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtFrom = normalized[StorageFileFilterValues.UPDATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtFrom =
+                normalized[StorageFileFilterValues.UPDATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtTo = normalized[StorageFileFilterValues.UPDATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtTo =
+                normalized[StorageFileFilterValues.UPDATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isUpdatedAtSet = normalized[StorageFileFilterValues.IS_UPDATED_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isUpdatedAtSet =
+                normalized[StorageFileFilterValues.IS_UPDATED_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val searchQuery = normalized[StorageFileFilterValues.SEARCH_QUERY]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val searchQuery =
+                normalized[StorageFileFilterValues.SEARCH_QUERY]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
             return ManagementStorageFileListParams(
                 pageNumber = pageNumber,

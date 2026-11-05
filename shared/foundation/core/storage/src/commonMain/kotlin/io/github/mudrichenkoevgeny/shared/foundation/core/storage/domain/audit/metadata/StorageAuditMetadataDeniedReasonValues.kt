@@ -8,17 +8,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming.S
  * Suggested wire values for [AuditEventMetadata.value] when [AuditEventMetadata.key] resolves to
  * [CommonAuditMetadataKey.DENIED_REASON] in storage management audit flows.
  */
-object StorageAuditMetadataDeniedReasonValues {
-
+public object StorageAuditMetadataDeniedReasonValues {
     /**
      * File management operation failed because the requested file was not found.
      * Associated with [StorageErrorCodes.FILE_NOT_FOUND].
      */
-    const val FILE_NOT_FOUND = "file_not_found"
+    public const val FILE_NOT_FOUND: String = "file_not_found"
 
     /**
      * File deletion failed during physical S3 object cleanup or database record modification.
      * Associated with [StorageErrorCodes.FILE_DELETE_FAILED].
      */
-    const val FILE_DELETE_FAILED = "file_delete_failed"
+    public const val FILE_DELETE_FAILED: String = "file_delete_failed"
 }

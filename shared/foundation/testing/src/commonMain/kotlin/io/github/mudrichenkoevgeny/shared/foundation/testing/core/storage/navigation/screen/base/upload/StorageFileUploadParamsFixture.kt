@@ -4,20 +4,21 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 
 /**
- * Creates a test [StorageFileUploadParams] instance.
- */
-fun createTestStorageFileUploadParams(
+* Creates a test [StorageFileUploadParams] instance.
+*/
+public fun createTestStorageFileUploadParams(
     maxFiles: Int? = 5,
     targetScope: String? = "avatar",
     category: StorageCategory? = StorageCategory.IMAGE,
     acceptedFileTypes: List<String> = listOf(".jpg", ".png", "image/*"),
     maxFileSizeBytes: Long? = 2097152L,
     autoSubmit: Boolean = false
-) = StorageFileUploadParams(
-    maxFiles = maxFiles,
-    targetScope = targetScope,
-    category = category,
-    acceptedFileTypes = acceptedFileTypes,
-    maxFileSizeBytes = maxFileSizeBytes,
-    autoSubmit = autoSubmit
-)
+): StorageFileUploadParams =
+    StorageFileUploadParams(
+        maxFiles = maxFiles,
+        targetScope = targetScope,
+        category = category,
+        acceptedFileTypes = acceptedFileTypes,
+        maxFileSizeBytes = maxFileSizeBytes,
+        autoSubmit = autoSubmit
+    )

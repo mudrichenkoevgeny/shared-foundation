@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class ClientTypeTest {
-
     @Test
     fun `fromValue accepts case-insensitive enum names and wire strings`() {
         assertEquals(ClientType.WEB, ClientType.fromValueOrNull("WEB"))

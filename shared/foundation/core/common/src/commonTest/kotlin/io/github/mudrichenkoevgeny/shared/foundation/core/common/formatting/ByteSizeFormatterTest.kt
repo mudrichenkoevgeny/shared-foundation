@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class ByteSizeFormatterTest {
-
     @Test
     fun `format converts bytes to human-readable strings in English`() {
         assertEquals("500 B", ByteSizeFormatter.format(500L, locale = "en"))

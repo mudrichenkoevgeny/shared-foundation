@@ -3,13 +3,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 
 /** Default deterministic permission code string for unit tests. */
-const val TEST_PERMISSION_CODE = "test.permission.read"
+public const val TEST_PERMISSION_CODE: String = "test.permission.read"
 
 /**
- * Creates a test [PermissionCode] instance for unit testing.
- *
- * @param value Permission code string (defaults to [TEST_PERMISSION_CODE]).
- */
-fun createTestPermissionCode(
-    value: String = TEST_PERMISSION_CODE
-): PermissionCode = PermissionCode(value)
+* Creates a test [PermissionCode] instance for unit testing.
+*
+* @param value Permission code string (defaults to [TEST_PERMISSION_CODE]).
+*/
+public fun createTestPermissionCode(value: String = TEST_PERMISSION_CODE): PermissionCode = PermissionCode(value)

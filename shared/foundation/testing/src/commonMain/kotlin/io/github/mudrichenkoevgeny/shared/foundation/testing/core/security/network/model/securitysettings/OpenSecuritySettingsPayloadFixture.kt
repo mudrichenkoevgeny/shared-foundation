@@ -7,15 +7,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.passwordpolicy.createTestOpenPasswordPolicyPayload
 
 /**
- * Creates a test [OpenSecuritySettingsPayload] wire object instance.
- *
- * @param passwordPolicy Password policy payload for open sign-up/password changes.
- * @param otpConfirmation OTP configuration settings payload.
- */
-fun createTestOpenSecuritySettingsPayload(
+* Creates a test [OpenSecuritySettingsPayload] wire object instance.
+*
+* @param passwordPolicy Password policy payload for open sign-up/password changes.
+* @param otpConfirmation OTP configuration settings payload.
+*/
+public fun createTestOpenSecuritySettingsPayload(
     passwordPolicy: OpenPasswordPolicyPayload = createTestOpenPasswordPolicyPayload(),
     otpConfirmation: OtpConfirmationPayload = createTestOtpConfirmationPayload()
-) = OpenSecuritySettingsPayload(
-    passwordPolicy = passwordPolicy,
-    otpConfirmation = otpConfirmation
-)
+): OpenSecuritySettingsPayload =
+    OpenSecuritySettingsPayload(
+        passwordPolicy = passwordPolicy,
+        otpConfirmation = otpConfirmation
+    )

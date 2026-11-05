@@ -19,7 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for the authenticated user's account in the open API.
  */
-object OpenUserRoutes {
+public object OpenUserRoutes {
     /** Base path for open self-service user account operations. */
     internal const val BASE_USER_ROUTE = "/user"
 
@@ -41,7 +41,7 @@ object OpenUserRoutes {
      * - Screens:
      *   - [ClientUserNavigation.Main]
      */
-    const val GET_USER = BASE_USER_ROUTE
+    public const val GET_USER: String = BASE_USER_ROUTE
 
     /**
      * **HTTP method:** `DELETE`
@@ -73,7 +73,7 @@ object OpenUserRoutes {
      * - Screens:
      *   - [ClientUserNavigation.Main]
      */
-    const val SCHEDULE_DELETION = "$BASE_USER_ROUTE/schedule-deletion"
+    public const val SCHEDULE_DELETION: String = "$BASE_USER_ROUTE/schedule-deletion"
 
     /**
      * **HTTP method:** `POST`
@@ -104,7 +104,7 @@ object OpenUserRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.PendingDeletion]
      */
-    const val RESTORE_USER = "$BASE_USER_ROUTE/restore"
+    public const val RESTORE_USER: String = "$BASE_USER_ROUTE/restore"
 
     /**
      * **HTTP method:** `PATCH`
@@ -131,5 +131,5 @@ object OpenUserRoutes {
      * - Screens:
      *   - [ClientUserNavigation.UserEdit]
      */
-    const val UPDATE_USER = BASE_USER_ROUTE
+    public const val UPDATE_USER: String = BASE_USER_ROUTE
 }

@@ -9,9 +9,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import kotlin.time.Instant
 
 /**
- * Creates a test [StorageFileSummary] domain model instance.
- */
-fun createTestStorageFileSummary(
+* Creates a test [StorageFileSummary] domain model instance.
+*/
+public fun createTestStorageFileSummary(
     id: FileId = createTestFileId(),
     fileName: String = "test_image.png",
     fileSizeBytes: Long = 1048576L,
@@ -21,14 +21,15 @@ fun createTestStorageFileSummary(
     status: StorageFileStatus = StorageFileStatus.READY,
     fileUrls: FileUrls = createTestFileUrls(),
     createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
-) = StorageFileSummary(
-    id = id,
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = category,
-    visibility = visibility,
-    status = status,
-    fileUrls = fileUrls,
-    createdAt = createdAt
-)
+): StorageFileSummary =
+    StorageFileSummary(
+        id = id,
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = category,
+        visibility = visibility,
+        status = status,
+        fileUrls = fileUrls,
+        createdAt = createdAt
+    )

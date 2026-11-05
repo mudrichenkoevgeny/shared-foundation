@@ -29,9 +29,9 @@ A documentation task is considered complete ONLY if:
 3. **Unit Returns:** For `Unit` functions, the summary must clearly state the outcome (success/failure behavior).
 
 ## 5. Inline Comments vs. KDoc
-- **No Inline Implementation Comments:** Strictly forbidden to write narrative inline comments (`//` or `/* ... */`) inside code bodies. Logic must be self-documenting.
+- **No Banal / Redundant Inline Comments:** Trivial or redundant inline comments (`//` or `/* ... */`) that explain obvious code logic are forbidden. Decompose complex multi-step logic into private helper functions with self-documenting names.
+- **Allowed Technical Comments:** Technical annotations, TODOs, FIXMEs, workarounds, thread-safety notes, or non-obvious business/KMP constraints (`// TODO:`, `// FIXME:`, `// workaround:`) are permitted when necessary.
 - **MANDATORY KDoc Preservation:** KDoc blocks (`/** ... */`) are structured API documentation, NOT code comments. AI agents must NEVER delete, strip, wipe, or omit KDoc documentation during refactorings, updates, or code edits. All KDoc must be kept and updated.
-- **Constraints Only:** Use inline comments sparingly and only for non-obvious technical constraints, thread-safety notes, or complex external API quirks.
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.dis
 /**
  * Component for validating user display names against length and character rules.
  */
-interface DisplayNameValidator {
+public interface DisplayNameValidator {
     /**
      * Validates display name string against length constraints and control character rules.
      *
@@ -12,7 +12,7 @@ interface DisplayNameValidator {
      * @param maxLength Maximum permitted character length.
      * @return [DisplayNameValidatorResult.Success] if valid, or [DisplayNameValidatorResult.Fail] with error code.
      */
-    fun validate(
+    public fun validate(
         displayName: String?,
         minLength: Int,
         maxLength: Int

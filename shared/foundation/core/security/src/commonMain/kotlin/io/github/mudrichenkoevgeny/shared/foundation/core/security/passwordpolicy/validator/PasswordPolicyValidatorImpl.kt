@@ -9,8 +9,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.mapper.passwo
 /**
  * Default implementation of [PasswordPolicyValidator] that uses [ManagementPasswordPolicy] for validation.
  */
-class PasswordPolicyValidatorImpl : PasswordPolicyValidator {
-    override fun validate(managementPasswordPolicy: ManagementPasswordPolicy, password: String): PasswordPolicyValidatorResult {
+public class PasswordPolicyValidatorImpl : PasswordPolicyValidator {
+    override fun validate(
+        managementPasswordPolicy: ManagementPasswordPolicy,
+        password: String
+    ): PasswordPolicyValidatorResult {
         val reasons = mutableListOf<PasswordPolicyFailReason>()
 
         with(managementPasswordPolicy) {
@@ -44,6 +47,8 @@ class PasswordPolicyValidatorImpl : PasswordPolicyValidator {
         }
     }
 
-    override fun validate(openPasswordPolicy: OpenPasswordPolicy, password: String): PasswordPolicyValidatorResult =
-        validate(openPasswordPolicy.toManagementPasswordPolicy(), password)
+    override fun validate(
+        openPasswordPolicy: OpenPasswordPolicy,
+        password: String
+    ): PasswordPolicyValidatorResult = validate(openPasswordPolicy.toManagementPasswordPolicy(), password)
 }

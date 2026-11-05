@@ -13,7 +13,9 @@ private const val TYPE_SERVICE = "service"
  * @property value String representation of the [AuditActorType].
  */
 @Serializable
-enum class AuditActorType(val value: String) {
+public enum class AuditActorType(
+    public val value: String
+) {
     /** Authenticated user actor. */
     @SerialName(TYPE_USER)
     USER(TYPE_USER),
@@ -26,14 +28,14 @@ enum class AuditActorType(val value: String) {
     @SerialName(TYPE_SERVICE)
     SERVICE(TYPE_SERVICE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [AuditActorType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): AuditActorType? =
+        public fun fromValueOrNull(value: String): AuditActorType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -41,7 +43,7 @@ enum class AuditActorType(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditActorType].
          */
-        fun fromValueOrThrow(value: String): AuditActorType =
+        public fun fromValueOrThrow(value: String): AuditActorType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${AuditActorType::class.simpleName}: '$value'"
             )

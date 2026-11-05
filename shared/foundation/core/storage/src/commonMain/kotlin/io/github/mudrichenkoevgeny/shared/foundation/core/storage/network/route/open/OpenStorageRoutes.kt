@@ -3,12 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.open.OpenStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
@@ -21,8 +17,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 /**
  * Route paths for open storage operations in the open API.
  */
-object OpenStorageRoutes {
-
+public object OpenStorageRoutes {
     /** Base path for open storage file endpoints. */
     private const val BASE_STORAGE_FILES_ROUTE = "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/files"
 
@@ -85,7 +80,7 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileList]
      */
-    const val GET_FILES = BASE_STORAGE_FILES_ROUTE
+    public const val GET_FILES: String = BASE_STORAGE_FILES_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -107,7 +102,7 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileDetail]
      */
-    const val GET_FILE = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val GET_FILE: String = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -127,7 +122,7 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileUpload]
      */
-    const val POST_PRESIGNED_UPLOAD_URL = "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/presigned-url"
+    public const val POST_PRESIGNED_UPLOAD_URL: String = "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/presigned-url"
 
     /**
      * **HTTP method:** `POST`
@@ -150,7 +145,7 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileUpload]
      */
-    const val CONFIRM_UPLOAD = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
+    public const val CONFIRM_UPLOAD: String = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
 
     /**
      * **HTTP method:** `DELETE`
@@ -172,7 +167,7 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileDetail]
      */
-    const val DELETE_FILE = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val DELETE_FILE: String = "$BASE_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -193,5 +188,5 @@ object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileList]
      */
-    const val DELETE_FILES_BATCH = "$BASE_STORAGE_FILES_ROUTE/batch-delete"
+    public const val DELETE_FILES_BATCH: String = "$BASE_STORAGE_FILES_ROUTE/batch-delete"
 }

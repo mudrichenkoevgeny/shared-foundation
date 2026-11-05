@@ -4,12 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
 /**
- * Creates a test [SendConfirmationToEmailRequest] request object instance.
- *
- * @param email Destination email address string.
- */
-fun createTestSendConfirmationToEmailRequest(
-    email: String = TEST_EMAIL
-) = SendConfirmationToEmailRequest(
-    email = email
-)
+* Creates a test [SendConfirmationToEmailRequest] request object instance.
+*
+* @param email Destination email address string.
+*/
+public fun createTestSendConfirmationToEmailRequest(email: String = TEST_EMAIL): SendConfirmationToEmailRequest =
+    SendConfirmationToEmailRequest(
+        email = email
+    )

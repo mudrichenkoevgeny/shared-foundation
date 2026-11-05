@@ -15,16 +15,17 @@ import kotlinx.serialization.Serializable
  * This ensures that [Unchanged] fields are completely omitted from JSON during serialization.
  */
 @Serializable(with = PatchFieldSerializer::class)
-sealed interface PatchField<out T> {
-
+public sealed interface PatchField<out T> {
     /** Indicates the field was omitted in the update request and must remain unchanged in persistence. */
-    data object Unchanged : PatchField<Nothing>
+    public data object Unchanged : PatchField<Nothing>
 
     /** Indicates the field was explicitly provided in the update request, wrapping a value or `null` to clear. */
-    data class Value<out T>(val value: T?) : PatchField<T>
+    public data class Value<out T>(
+        public val value: T?
+    ) : PatchField<T>
 
-    companion object {
+    public companion object {
         /** Helper to wrap a value into [Value]. */
-        fun <T> valueOf(value: T?): PatchField<T> = Value(value)
+        public fun <T> valueOf(value: T?): PatchField<T> = Value(value)
     }
 }

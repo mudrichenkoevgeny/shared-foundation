@@ -11,19 +11,19 @@ import kotlin.uuid.Uuid
  * @property value UUID backing the identifier.
  */
 @JvmInline
-value class FileId(val value: Uuid) {
-
+public value class FileId(
+    public val value: Uuid
+) {
     /**
      * Returns the identifier as a canonical hex string with dashes.
      */
-    fun asHexDashString(): String = value.toHexDashString()
+    public fun asHexDashString(): String = value.toHexDashString()
 
-    companion object {
-
+    public companion object {
         /**
          * Generates a new random [FileId].
          */
-        fun generate() = FileId(Uuid.random())
+        public fun generate(): FileId = FileId(Uuid.random())
     }
 }
 
@@ -32,10 +32,9 @@ value class FileId(val value: Uuid) {
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-fun String.toFileIdOrNull(): FileId? =
-    Uuid.parseOrNull(this)?.let { FileId(it) }
+public fun String.toFileIdOrNull(): FileId? = Uuid.parseOrNull(this)?.let { FileId(it) }
 
 /**
  * Parses this string into a [FileId] or throws if the value is not a valid UUID.
  */
-fun String.toFileIdOrThrow(): FileId = FileId(Uuid.parse(this))
+public fun String.toFileIdOrThrow(): FileId = FileId(Uuid.parse(this))

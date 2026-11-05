@@ -13,12 +13,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
  * @property isMetricsEnabled Global flag indicating whether system and application performance metrics collection is enabled.
  * @property isVerboseLoggingEnabled Flag controlling logging verbosity; when false, the server disables detailed debug/info logs.
  */
-data class ManagementGlobalSettings(
-    val privacyPolicyUrl: String?,
-    val termsOfServiceUrl: String?,
-    val contactSupportEmail: String?,
-    val minSupportedAppVersions: Map<ClientType, String>,
-    val isTracingEnabled: Boolean,
-    val isMetricsEnabled: Boolean,
-    val isVerboseLoggingEnabled: Boolean
+public data class ManagementGlobalSettings(
+    public val privacyPolicyUrl: String?,
+    public val termsOfServiceUrl: String?,
+    public val contactSupportEmail: String?,
+    public val minSupportedAppVersions: Map<ClientType, String>,
+    public val isTracingEnabled: Boolean,
+    public val isMetricsEnabled: Boolean,
+    public val isVerboseLoggingEnabled: Boolean
 )

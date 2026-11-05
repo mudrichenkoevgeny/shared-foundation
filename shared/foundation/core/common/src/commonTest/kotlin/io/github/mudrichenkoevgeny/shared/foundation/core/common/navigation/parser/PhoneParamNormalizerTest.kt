@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class PhoneParamNormalizerTest {
-
     @Test
     fun `normalizePhoneQueryParam handles null receiver and blank strings`() {
         val nullReceiver: String? = null
@@ -33,12 +32,19 @@ class PhoneParamNormalizerTest {
     fun `normalizePhoneQueryParam handles tab prefixes and non-space whitespace without adding plus`() {
         assertEquals("1234567890", "\t1234567890".normalizePhoneQueryParam())
         assertEquals("abc", " abc".normalizePhoneQueryParam())
+        assertEquals("-123", " -123".normalizePhoneQueryParam())
     }
 
     @Test
     fun `normalizePhoneQueryParam restores leading plus while preserving internal formatting spaces`() {
         assertEquals("+1 234 567 890", " 1 234 567 890".normalizePhoneQueryParam())
         assertEquals("1 234 567 890", "1 234 567 890".normalizePhoneQueryParam())
+    }
+
+    @Test
+    fun `normalizePhoneQueryParam handles extremely long valid phone string`() {
+        val longPhone = " " + "1".repeat(100)
+        assertEquals("+" + "1".repeat(100), longPhone.normalizePhoneQueryParam())
     }
 
     @Test

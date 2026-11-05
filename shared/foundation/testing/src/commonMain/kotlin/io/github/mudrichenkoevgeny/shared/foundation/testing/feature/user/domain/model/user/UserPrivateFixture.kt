@@ -15,30 +15,30 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
 import kotlin.time.Instant
 
 /**
- * Creates a test [UserPrivate] instance with default mock properties for unit testing.
- *
- * @param id Unique user ID ([UserId]).
- * @param role Assigned access role ([UserRole]).
- * @param accountStatus Current account state ([UserAccountStatus]).
- * @param accountStatusOnRestore Target account status on restore ([UserAccountStatus]).
- * @param authorityLevel Hierarchical weight (0-100).
- * @param permissionCodes Explicit permission codes assigned.
- * @param isTotpEnabled Whether TOTP 2FA is active.
- * @param lastLoginAt Last authentication timestamp.
- * @param lastActiveAt Last activity timestamp.
- * @param createdAt Creation timestamp.
- * @param updatedAt Modification timestamp.
- * @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
- * @param lockoutType Category of lockout ([AccountLockoutType]).
- * @param temporaryLockoutUntil Timestamp until temporary lockout expires.
- * @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
- * @param nickname User handle or username.
- * @param displayName Human-readable display name.
- * @param avatarFileId Avatar image file identifier in storage ([FileId]).
- * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
- * @param birthdate User birthdate timestamp ([Instant]).
- */
-fun createTestUserPrivate(
+* Creates a test [UserPrivate] instance with default mock properties for unit testing.
+*
+* @param id Unique user ID ([UserId]).
+* @param role Assigned access role ([UserRole]).
+* @param accountStatus Current account state ([UserAccountStatus]).
+* @param accountStatusOnRestore Target account status on restore ([UserAccountStatus]).
+* @param authorityLevel Hierarchical weight (0-100).
+* @param permissionCodes Explicit permission codes assigned.
+* @param isTotpEnabled Whether TOTP 2FA is active.
+* @param lastLoginAt Last authentication timestamp.
+* @param lastActiveAt Last activity timestamp.
+* @param createdAt Creation timestamp.
+* @param updatedAt Modification timestamp.
+* @param scheduledPermanentDeletionAt Scheduled deletion timestamp.
+* @param lockoutType Category of lockout ([AccountLockoutType]).
+* @param temporaryLockoutUntil Timestamp until temporary lockout expires.
+* @param storageConfiguration Custom storage configuration overrides and limits ([UserStorageConfiguration]).
+* @param nickname User handle or username.
+* @param displayName Human-readable display name.
+* @param avatarFileId Avatar image file identifier in storage ([FileId]).
+* @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
+* @param birthdate User birthdate timestamp ([Instant]).
+*/
+public fun createTestUserPrivate(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,
     accountStatus: UserAccountStatus = UserAccountStatus.ACTIVE,
@@ -59,37 +59,38 @@ fun createTestUserPrivate(
     avatarFileId: FileId? = null,
     avatarUrls: FileUrls? = null,
     birthdate: Instant? = null
-) = UserPrivate(
-    id = id,
-    role = role,
-    accountStatus = accountStatus,
-    accountStatusOnRestore = accountStatusOnRestore,
-    authorityLevel = authorityLevel,
-    permissionCodes = permissionCodes,
-    isTotpEnabled = isTotpEnabled,
-    lastLoginAt = lastLoginAt,
-    lastActiveAt = lastActiveAt,
-    createdAt = createdAt,
-    updatedAt = updatedAt,
-    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
-    lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration,
-    nickname = nickname,
-    displayName = displayName,
-    avatarFileId = avatarFileId,
-    avatarUrls = avatarUrls,
-    birthdate = birthdate
-)
+): UserPrivate =
+    UserPrivate(
+        id = id,
+        role = role,
+        accountStatus = accountStatus,
+        accountStatusOnRestore = accountStatusOnRestore,
+        authorityLevel = authorityLevel,
+        permissionCodes = permissionCodes,
+        isTotpEnabled = isTotpEnabled,
+        lastLoginAt = lastLoginAt,
+        lastActiveAt = lastActiveAt,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
+        lockoutType = lockoutType,
+        temporaryLockoutUntil = temporaryLockoutUntil,
+        storageConfiguration = storageConfiguration,
+        nickname = nickname,
+        displayName = displayName,
+        avatarFileId = avatarFileId,
+        avatarUrls = avatarUrls,
+        birthdate = birthdate
+    )
 
 /**
- * Creates a list of test [UserPrivate] instances with deterministic index-based UUIDs
- * and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserPrivateList(
+* Creates a list of test [UserPrivate] instances with deterministic index-based UUIDs
+* and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserPrivateList(
     count: Int = 2,
     generator: (index: Int) -> UserPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

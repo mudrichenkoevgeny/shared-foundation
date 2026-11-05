@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 /**
  * Security-specific error codes for API responses and backend logging, used to categorize failures.
  */
-object SecurityErrorCodes {
+public object SecurityErrorCodes {
     /**
      * Top-level error code when a password fails policy validation ([ManagementPasswordPolicy]).
      *
@@ -34,7 +34,7 @@ object SecurityErrorCodes {
      * - [SecurityErrorArgs.PASSWORD_FAIL_NO_SPECIAL_CHAR] (optional)
      * - [SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON] (optional)
      */
-    const val PASSWORD_TOO_WEAK = "PASSWORD_TOO_WEAK"
+    public const val PASSWORD_TOO_WEAK: String = "PASSWORD_TOO_WEAK"
 
     /**
      * A new OTP request was made before the cooling-off period had elapsed.
@@ -49,7 +49,7 @@ object SecurityErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.RETRY_AFTER_SECONDS]: Remaining wait time in seconds.
      */
-    const val OTP_RETRY_TOO_SOON = "OTP_RETRY_TOO_SOON"
+    public const val OTP_RETRY_TOO_SOON: String = "OTP_RETRY_TOO_SOON"
 
     /**
      * TOTP is already configured and active for this account.
@@ -57,7 +57,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `totp_already_enabled`
      */
-    const val TOTP_ALREADY_ENABLED = "TOTP_ALREADY_ENABLED"
+    public const val TOTP_ALREADY_ENABLED: String = "TOTP_ALREADY_ENABLED"
 
     /**
      * Operation failed because TOTP is not enabled for this account.
@@ -65,7 +65,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `totp_not_enabled`
      */
-    const val TOTP_NOT_ENABLED = "TOTP_NOT_ENABLED"
+    public const val TOTP_NOT_ENABLED: String = "TOTP_NOT_ENABLED"
 
     /**
      * Action requires confirmation via Multi-Factor Authentication (MFA).
@@ -76,7 +76,7 @@ object SecurityErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [SecurityErrorArgs.MFA_TOKEN]: Technical challenge token required for the subsequent verification request.
      */
-    const val MFA_CONFIRMATION_REQUIRED = "MFA_CONFIRMATION_REQUIRED"
+    public const val MFA_CONFIRMATION_REQUIRED: String = "MFA_CONFIRMATION_REQUIRED"
 
     /**
      * The provided MFA challenge token has expired.
@@ -84,7 +84,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `mfa_token_expired`
      */
-    const val MFA_TOKEN_EXPIRED = "MFA_TOKEN_EXPIRED"
+    public const val MFA_TOKEN_EXPIRED: String = "MFA_TOKEN_EXPIRED"
 
     /**
      * The recovery code has already been used and is no longer valid.
@@ -92,7 +92,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `recovery_code_already_used`
      */
-    const val RECOVERY_CODE_ALREADY_USED = "RECOVERY_CODE_ALREADY_USED"
+    public const val RECOVERY_CODE_ALREADY_USED: String = "RECOVERY_CODE_ALREADY_USED"
 
     /**
      * The TOTP or recovery code provided is incorrect.
@@ -100,7 +100,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `invalid_totp_code`
      */
-    const val INVALID_TOTP_CODE = "INVALID_TOTP_CODE"
+    public const val INVALID_TOTP_CODE: String = "INVALID_TOTP_CODE"
 
     /**
      * The provided MFA challenge token is invalid, malformed, or belongs to another session.
@@ -108,7 +108,7 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `mfa_token_expired`
      */
-    const val INVALID_MFA_TOKEN = "INVALID_MFA_TOKEN"
+    public const val INVALID_MFA_TOKEN: String = "INVALID_MFA_TOKEN"
 
     /**
      * Request was rejected because the client IP address is not permitted by IP restriction policy.
@@ -116,5 +116,5 @@ object SecurityErrorCodes {
      * **Localization keys:**
      * - `ip_not_allowed`
      */
-    const val IP_NOT_ALLOWED = "IP_NOT_ALLOWED"
+    public const val IP_NOT_ALLOWED: String = "IP_NOT_ALLOWED"
 }

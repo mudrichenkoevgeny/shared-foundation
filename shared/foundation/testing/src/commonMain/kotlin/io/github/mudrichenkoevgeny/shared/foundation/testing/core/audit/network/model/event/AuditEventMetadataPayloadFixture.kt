@@ -6,18 +6,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP_ADDRESS
 
 /**
- * Creates a test [AuditEventMetadataPayload] wire object instance.
- *
- * @param key Metadata key wire string.
- * @param value Metadata value string.
- * @param valueSensitivity Metadata value sensitivity wire string.
- */
-fun createTestAuditEventMetadataPayload(
+* Creates a test [AuditEventMetadataPayload] wire object instance.
+*
+* @param key Metadata key wire string.
+* @param value Metadata value string.
+* @param valueSensitivity Metadata value sensitivity wire string.
+*/
+public fun createTestAuditEventMetadataPayload(
     key: String = CommonAuditMetadataKey.IP_ADDRESS.value,
     value: String = TEST_IP_ADDRESS,
     valueSensitivity: String = AuditValueSensitivity.NON_SENSITIVE.value
-) = AuditEventMetadataPayload(
-    key = key,
-    value = value,
-    valueSensitivity = valueSensitivity
-)
+): AuditEventMetadataPayload =
+    AuditEventMetadataPayload(
+        key = key,
+        value = value,
+        valueSensitivity = valueSensitivity
+    )

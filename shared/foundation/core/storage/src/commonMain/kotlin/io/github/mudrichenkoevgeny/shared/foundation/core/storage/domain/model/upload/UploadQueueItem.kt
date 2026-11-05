@@ -21,15 +21,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
  * @property error Error details if the upload failed.
  * @property uploadedFile Server file record projection once upload and confirmation succeed.
  */
-data class UploadQueueItem(
-    val id: UploadQueueItemId,
-    val category: StorageCategory,
-    val visibility: StorageFileVisibility = StorageFileVisibility.PRIVATE,
-    val fileName: String,
-    val fileSizeBytes: Long,
-    val mimeType: String? = null,
-    val progressPercent: Int = 0,
-    val status: UploadQueueItemStatus = UploadQueueItemStatus.IDLE,
-    val error: ApiErrorResponse? = null,
-    val uploadedFile: StorageFilePrivate? = null
+public data class UploadQueueItem(
+    public val id: UploadQueueItemId,
+    public val category: StorageCategory,
+    public val visibility: StorageFileVisibility = StorageFileVisibility.PRIVATE,
+    public val fileName: String,
+    public val fileSizeBytes: Long,
+    public val mimeType: String? = null,
+    public val progressPercent: Int = 0,
+    public val status: UploadQueueItemStatus = UploadQueueItemStatus.IDLE,
+    public val error: ApiErrorResponse? = null,
+    public val uploadedFile: StorageFilePrivate? = null
 )

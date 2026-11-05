@@ -13,7 +13,9 @@ private const val TYPE_TEMPORARY = "temporary"
  * @property value String representation of the [AccountLockoutType].
  */
 @Serializable
-enum class AccountLockoutType(val value: String) {
+public enum class AccountLockoutType(
+    public val value: String
+) {
     /**
      * Account is not locked out.
      */
@@ -32,14 +34,14 @@ enum class AccountLockoutType(val value: String) {
     @SerialName(TYPE_TEMPORARY)
     TEMPORARY(TYPE_TEMPORARY);
 
-    companion object {
+    public companion object {
         /**
          * Returns [AccountLockoutType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): AccountLockoutType? =
+        public fun fromValueOrNull(value: String): AccountLockoutType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -47,7 +49,7 @@ enum class AccountLockoutType(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AccountLockoutType].
          */
-        fun fromValueOrThrow(value: String): AccountLockoutType =
+        public fun fromValueOrThrow(value: String): AccountLockoutType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${AccountLockoutType::class.simpleName}: '$value'"
             )

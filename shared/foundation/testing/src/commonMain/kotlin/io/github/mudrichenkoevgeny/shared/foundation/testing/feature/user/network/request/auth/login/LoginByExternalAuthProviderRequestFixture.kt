@@ -4,18 +4,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.login.LoginByExternalAuthProviderRequest
 
 /**
- * Creates a test [LoginByExternalAuthProviderRequest] request object instance.
- *
- * @param authProvider External provider wire string ([UserAuthProvider]).
- * @param externalProviderToken OAuth token string from provider.
- * @param displayName Optional display name string.
- */
-fun createTestLoginByExternalAuthProviderRequest(
+* Creates a test [LoginByExternalAuthProviderRequest] request object instance.
+*
+* @param authProvider External provider wire string ([UserAuthProvider]).
+* @param externalProviderToken OAuth token string from provider.
+* @param displayName Optional display name string.
+*/
+public fun createTestLoginByExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345",
     displayName: String? = null
-) = LoginByExternalAuthProviderRequest(
-    authProvider = authProvider,
-    externalProviderToken = externalProviderToken,
-    displayName = displayName
-)
+): LoginByExternalAuthProviderRequest =
+    LoginByExternalAuthProviderRequest(
+        authProvider = authProvider,
+        externalProviderToken = externalProviderToken,
+        displayName = displayName
+    )

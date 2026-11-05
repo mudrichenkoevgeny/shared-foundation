@@ -13,7 +13,9 @@ private const val STEP_VERIFY = "verify"
  * @property value String representation of the [TotpStep].
  */
 @Serializable
-enum class TotpStep(val value: String) {
+public enum class TotpStep(
+    public val value: String
+) {
     /** Main overview step ([OVERVIEW]). */
     @SerialName(STEP_OVERVIEW)
     OVERVIEW(STEP_OVERVIEW),
@@ -26,17 +28,17 @@ enum class TotpStep(val value: String) {
     @SerialName(STEP_VERIFY)
     VERIFY(STEP_VERIFY);
 
-    companion object {
+    public companion object {
         /** Default TOTP step ([OVERVIEW]). */
-        val DEFAULT = OVERVIEW
+        public val DEFAULT: TotpStep = OVERVIEW
 
         /**
          * Returns [TotpStep] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): TotpStep? =
+        public fun fromValueOrNull(value: String): TotpStep? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -44,7 +46,7 @@ enum class TotpStep(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [TotpStep].
          */
-        fun fromValueOrThrow(value: String): TotpStep =
+        public fun fromValueOrThrow(value: String): TotpStep =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${TotpStep::class.simpleName}: '$value'"
             )

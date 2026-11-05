@@ -19,27 +19,22 @@ import kotlinx.serialization.Serializable
  * @property targetScope Optional target scope or feature context string (e.g. "avatar", "attachment").
  */
 @Serializable
-data class PresignedUrlRequest(
+public data class PresignedUrlRequest(
     @NotBlankStringField
     @SerialName(StorageApiFields.FILE_NAME)
-    val fileName: String,
-
+    public val fileName: String,
     @RequiredField
     @SerialName(StorageApiFields.FILE_SIZE_BYTES)
-    val fileSizeBytes: Long,
-
+    public val fileSizeBytes: Long,
     @NotBlankStringField
     @SerialName(StorageApiFields.MIME_TYPE)
-    val mimeType: String,
-
+    public val mimeType: String,
     @NotBlankStringField
     @SerialName(StorageApiFields.CATEGORY)
-    val category: String,
-
+    public val category: String,
     @NotBlankStringField
     @SerialName(StorageApiFields.VISIBILITY)
-    val visibility: String = StorageFileVisibility.PRIVATE.value,
-
+    public val visibility: String = StorageFileVisibility.PRIVATE.value,
     @SerialName(StorageApiFields.TARGET_SCOPE)
-    val targetScope: String? = null
+    public val targetScope: String? = null
 )

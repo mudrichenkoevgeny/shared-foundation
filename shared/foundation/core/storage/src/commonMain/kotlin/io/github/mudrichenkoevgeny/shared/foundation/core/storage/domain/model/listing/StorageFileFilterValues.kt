@@ -15,70 +15,70 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contra
  * Use these constants when building HTTP query strings, parsing list requests, or mapping filters in services and
  * persistence so clients, servers, and documentation stay aligned.
  */
-object StorageFileFilterValues {
+public object StorageFileFilterValues {
     /** Filter by one or more specific file IDs. */
-    const val FILE_ID = StorageApiFields.FILE_ID
+    public const val FILE_ID: String = StorageApiFields.FILE_ID
 
     /** Filter by one or more owner user IDs. */
-    const val OWNER_USER_ID = StorageApiFields.OWNER_USER_ID
+    public const val OWNER_USER_ID: String = StorageApiFields.OWNER_USER_ID
 
     /** Filter by boolean flag indicating whether the file has an owner (true) or is anonymous/system (false). */
-    const val IS_OWNER_USER_ID_SET = "is_owner_user_id_set"
+    public const val IS_OWNER_USER_ID_SET: String = "is_owner_user_id_set"
 
     /** Filter by exact original file name. */
-    const val FILE_NAME = StorageApiFields.FILE_NAME
+    public const val FILE_NAME: String = StorageApiFields.FILE_NAME
 
     /** Filter by inclusive lower bound for file size in bytes. */
-    const val FILE_SIZE_BYTES_FROM = "file_size_bytes_from"
+    public const val FILE_SIZE_BYTES_FROM: String = "file_size_bytes_from"
 
     /** Filter by inclusive upper bound for file size in bytes. */
-    const val FILE_SIZE_BYTES_TO = "file_size_bytes_to"
+    public const val FILE_SIZE_BYTES_TO: String = "file_size_bytes_to"
 
     /** Filter by exact MIME type (e.g. `image/png`). */
-    const val MIME_TYPE = StorageApiFields.MIME_TYPE
+    public const val MIME_TYPE: String = StorageApiFields.MIME_TYPE
 
     /** Filter by one or more storage category wire values ([StorageCategory.value]) (OR semantics). */
-    const val CATEGORY = StorageApiFields.CATEGORY
+    public const val CATEGORY: String = StorageApiFields.CATEGORY
 
     /** Filter to exclude specific storage categories ([StorageCategory.value]) (NOT IN semantics). */
-    const val EXCLUDE_CATEGORY = "exclude_category"
+    public const val EXCLUDE_CATEGORY: String = "exclude_category"
 
     /** Filter by one or more storage visibility wire values ([StorageFileVisibility.value]) (OR semantics). */
-    const val VISIBILITY = StorageApiFields.VISIBILITY
+    public const val VISIBILITY: String = StorageApiFields.VISIBILITY
 
     /** Filter to exclude specific storage visibilities ([StorageFileVisibility.value]) (NOT IN semantics). */
-    const val EXCLUDE_VISIBILITY = "exclude_visibility"
+    public const val EXCLUDE_VISIBILITY: String = "exclude_visibility"
 
     /** Filter by one or more storage file status wire values ([StorageFileStatus.value]) (OR semantics). */
-    const val STATUS = StorageApiFields.STATUS
+    public const val STATUS: String = StorageApiFields.STATUS
 
     /** Filter to exclude specific storage file statuses ([StorageFileStatus.value]) (NOT IN semantics). */
-    const val EXCLUDE_STATUS = "exclude_status"
+    public const val EXCLUDE_STATUS: String = "exclude_status"
 
     /** Filter by one or more target scope or feature context strings. */
-    const val TARGET_SCOPE = StorageApiFields.TARGET_SCOPE
+    public const val TARGET_SCOPE: String = StorageApiFields.TARGET_SCOPE
 
     /** Filter by boolean flag indicating whether target scope is assigned. */
-    const val IS_TARGET_SCOPE_SET = "is_target_scope_set"
+    public const val IS_TARGET_SCOPE_SET: String = "is_target_scope_set"
 
     /** Inclusive lower bound filter key for creation timestamp. */
-    const val CREATED_AT_FROM = CommonFilterValues.CREATED_AT_FROM
+    public const val CREATED_AT_FROM: String = CommonFilterValues.CREATED_AT_FROM
 
     /** Inclusive upper bound filter key for creation timestamp. */
-    const val CREATED_AT_TO = CommonFilterValues.CREATED_AT_TO
+    public const val CREATED_AT_TO: String = CommonFilterValues.CREATED_AT_TO
 
     /** Inclusive lower bound filter key for update timestamp. */
-    const val UPDATED_AT_FROM = CommonFilterValues.UPDATED_AT_FROM
+    public const val UPDATED_AT_FROM: String = CommonFilterValues.UPDATED_AT_FROM
 
     /** Inclusive upper bound filter key for update timestamp. */
-    const val UPDATED_AT_TO = CommonFilterValues.UPDATED_AT_TO
+    public const val UPDATED_AT_TO: String = CommonFilterValues.UPDATED_AT_TO
 
     /** Filter by boolean flag indicating whether the file record has been modified. */
-    const val IS_UPDATED_AT_SET = "is_updated_at_set"
+    public const val IS_UPDATED_AT_SET: String = "is_updated_at_set"
 
     /**
      * Free-text search query string targeting:
      * - Original file name ([StorageFilePrivate.fileName]).
      */
-    const val SEARCH_QUERY = ListingParamNames.Search.SEARCH_QUERY
+    public const val SEARCH_QUERY: String = ListingParamNames.Search.SEARCH_QUERY
 }

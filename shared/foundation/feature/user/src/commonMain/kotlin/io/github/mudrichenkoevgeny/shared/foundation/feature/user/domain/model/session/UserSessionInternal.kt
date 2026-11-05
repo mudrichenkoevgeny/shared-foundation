@@ -31,21 +31,21 @@ import kotlin.time.Instant
  * @property createdAt Creation timestamp.
  * @property updatedAt Last database row update timestamp, or `null`.
  */
-data class UserSessionInternal(
-    val id: UserSessionId = UserSessionId.generate(),
-    val userId: UserId,
-    val userRole: UserRole,
-    val identifier: String,
-    val identifierId: UserIdentifierId,
-    val identifierDisplayName: String,
-    val identifierAuthProvider: UserAuthProvider,
-    val refreshTokenHash: RefreshTokenHash,
-    val clientDeviceInfo: ClientDeviceInfo,
-    val userAgent: String?,
-    val ipAddress: String?,
-    val expiresAt: Instant,
-    val lastAccessedAt: Instant,
-    val lastReauthenticatedAt: Instant,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+public data class UserSessionInternal(
+    public val id: UserSessionId = UserSessionId.generate(),
+    public val userId: UserId,
+    public val userRole: UserRole,
+    public val identifier: String,
+    public val identifierId: UserIdentifierId,
+    public val identifierDisplayName: String,
+    public val identifierAuthProvider: UserAuthProvider,
+    public val refreshTokenHash: RefreshTokenHash,
+    public val clientDeviceInfo: ClientDeviceInfo,
+    public val userAgent: String?,
+    public val ipAddress: String?,
+    public val expiresAt: Instant,
+    public val lastAccessedAt: Instant,
+    public val lastReauthenticatedAt: Instant,
+    public val createdAt: Instant,
+    public val updatedAt: Instant?
 )

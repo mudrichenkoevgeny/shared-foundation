@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
  * @property email The email address where the confirmation code will be delivered.
  */
 @Serializable
-data class SendConfirmationToEmailRequest(
+public data class SendConfirmationToEmailRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.EMAIL)
-    val email: String
+    public val email: String
 )

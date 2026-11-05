@@ -11,19 +11,19 @@ import kotlin.uuid.Uuid
  * @property value UUID backing the identifier.
  */
 @JvmInline
-value class UploadQueueItemId(val value: Uuid) {
-
+public value class UploadQueueItemId(
+    public val value: Uuid
+) {
     /**
      * Returns the identifier as a canonical hex string with dashes.
      */
-    fun asHexDashString(): String = value.toHexDashString()
+    public fun asHexDashString(): String = value.toHexDashString()
 
-    companion object {
-
+    public companion object {
         /**
          * Generates a new random [UploadQueueItemId].
          */
-        fun generate() = UploadQueueItemId(Uuid.random())
+        public fun generate(): UploadQueueItemId = UploadQueueItemId(Uuid.random())
     }
 }
 
@@ -32,10 +32,9 @@ value class UploadQueueItemId(val value: Uuid) {
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-fun String.toUploadQueueItemIdOrNull(): UploadQueueItemId? =
-    Uuid.parseOrNull(this)?.let { UploadQueueItemId(it) }
+public fun String.toUploadQueueItemIdOrNull(): UploadQueueItemId? = Uuid.parseOrNull(this)?.let { UploadQueueItemId(it) }
 
 /**
  * Parses this string into an [UploadQueueItemId] or throws if the value is not a valid UUID.
  */
-fun String.toUploadQueueItemIdOrThrow(): UploadQueueItemId = UploadQueueItemId(Uuid.parse(this))
+public fun String.toUploadQueueItemIdOrThrow(): UploadQueueItemId = UploadQueueItemId(Uuid.parse(this))

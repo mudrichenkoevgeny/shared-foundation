@@ -3,10 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.ro
 /**
  * Base navigation route path segments for user feature screens.
  */
-object BaseUserNavigationRoutes {
-
+public object BaseUserNavigationRoutes {
     /**
      * Base route path for authentication screens.
      */
-    const val BASE_USER_AUTH_NAVIGATION_ROUTE = "/auth"
+    public const val BASE_USER_AUTH_NAVIGATION_ROUTE: String = "/auth"
 }

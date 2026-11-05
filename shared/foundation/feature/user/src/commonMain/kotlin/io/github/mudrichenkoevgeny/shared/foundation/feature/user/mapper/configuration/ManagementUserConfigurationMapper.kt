@@ -18,7 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [ManagementUserConfiguration] from [ManagementUserConfigurationPayload].
  */
-fun ManagementUserConfigurationPayload.toManagementUserConfiguration(): ManagementUserConfiguration =
+public fun ManagementUserConfigurationPayload.toManagementUserConfiguration(): ManagementUserConfiguration =
     ManagementUserConfiguration(
         managementGlobalSettings = managementGlobalSettings.toManagementGlobalSettings(),
         managementSecuritySettings = managementSecuritySettings.toManagementSecuritySettings(),
@@ -29,7 +29,7 @@ fun ManagementUserConfigurationPayload.toManagementUserConfiguration(): Manageme
 /**
  * Builds network [ManagementUserConfigurationPayload] from domain [ManagementUserConfiguration].
  */
-fun ManagementUserConfiguration.toManagementUserConfigurationPayload(): ManagementUserConfigurationPayload =
+public fun ManagementUserConfiguration.toManagementUserConfigurationPayload(): ManagementUserConfigurationPayload =
     ManagementUserConfigurationPayload(
         managementGlobalSettings = managementGlobalSettings.toManagementGlobalSettingsPayload(),
         managementSecuritySettings = managementSecuritySettings.toManagementSecuritySettingsPayload(),

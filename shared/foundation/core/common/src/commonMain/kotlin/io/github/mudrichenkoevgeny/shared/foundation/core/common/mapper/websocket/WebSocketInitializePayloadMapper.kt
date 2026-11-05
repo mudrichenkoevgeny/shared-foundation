@@ -7,33 +7,29 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 
 /**
- * Mappers and merger functions for [WebSocketInitializePayload].
- */
-
-/**
  * Merges this payload into [existingClientInfo] [ClientInfo] (device fields and [ClientInfo.apiVersion] only).
  *
  * @param existingClientInfo Optional baseline [ClientInfo] to merge fields into.
  * @return merged [ClientInfo] instance.
  */
-fun WebSocketInitializePayload.mergeClientInfo(
-    existingClientInfo: ClientInfo? = null
-): ClientInfo {
-    val currentClientInfo = existingClientInfo ?: ClientInfo(
-        clientDeviceInfo = ClientDeviceInfo(
-            deviceId = null,
-            deviceName = null,
-            clientType = null,
-            language = null,
-            appVersion = null,
-            operationSystemVersion = null
-        ),
-        userAgent = null,
-        ipAddress = null,
-        host = null,
-        origin = null,
-        apiVersion = null
-    )
+public fun WebSocketInitializePayload.mergeClientInfo(existingClientInfo: ClientInfo? = null): ClientInfo {
+    val currentClientInfo =
+        existingClientInfo ?: ClientInfo(
+            clientDeviceInfo =
+                ClientDeviceInfo(
+                    deviceId = null,
+                    deviceName = null,
+                    clientType = null,
+                    language = null,
+                    appVersion = null,
+                    operationSystemVersion = null
+                ),
+            userAgent = null,
+            ipAddress = null,
+            host = null,
+            origin = null,
+            apiVersion = null
+        )
     return currentClientInfo.copy(
         clientDeviceInfo = mergeClientDeviceInfo(currentClientInfo.clientDeviceInfo),
         apiVersion = apiVersion ?: currentClientInfo.apiVersion
@@ -49,17 +45,16 @@ fun WebSocketInitializePayload.mergeClientInfo(
  * @param existingClientDeviceInfo Optional baseline [ClientDeviceInfo] to merge fields into.
  * @return merged [ClientDeviceInfo] instance.
  */
-fun WebSocketInitializePayload.mergeClientDeviceInfo(
-    existingClientDeviceInfo: ClientDeviceInfo? = null
-): ClientDeviceInfo {
-    val currentClientDeviceInfo = existingClientDeviceInfo ?: ClientDeviceInfo(
-        deviceId = null,
-        deviceName = null,
-        clientType = null,
-        language = null,
-        appVersion = null,
-        operationSystemVersion = null
-    )
+public fun WebSocketInitializePayload.mergeClientDeviceInfo(existingClientDeviceInfo: ClientDeviceInfo? = null): ClientDeviceInfo {
+    val currentClientDeviceInfo =
+        existingClientDeviceInfo ?: ClientDeviceInfo(
+            deviceId = null,
+            deviceName = null,
+            clientType = null,
+            language = null,
+            appVersion = null,
+            operationSystemVersion = null
+        )
     return currentClientDeviceInfo.copy(
         clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: currentClientDeviceInfo.clientType,
         language = language ?: currentClientDeviceInfo.language,
@@ -76,12 +71,13 @@ fun WebSocketInitializePayload.mergeClientDeviceInfo(
  * @param apiVersion Optional API version string to include in payload.
  * @return payload model aligned with [WebSocketInitializePayload] contract.
  */
-fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?): WebSocketInitializePayload = WebSocketInitializePayload(
-    clientType = clientType?.value,
-    language = language,
-    deviceId = deviceId?.asHexDashString(),
-    deviceName = deviceName,
-    appVersion = appVersion,
-    operationSystemVersion = operationSystemVersion,
-    apiVersion = apiVersion
-)
+public fun ClientDeviceInfo.toWebSocketInitializePayload(apiVersion: String?): WebSocketInitializePayload =
+    WebSocketInitializePayload(
+        clientType = clientType?.value,
+        language = language,
+        deviceId = deviceId?.asHexDashString(),
+        deviceName = deviceName,
+        appVersion = appVersion,
+        operationSystemVersion = operationSystemVersion,
+        apiVersion = apiVersion
+    )

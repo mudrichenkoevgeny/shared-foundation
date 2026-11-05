@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 /**
  * Route paths for storage settings in the open API.
  */
-object OpenStorageSettingsRoutes {
+public object OpenStorageSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
@@ -24,6 +24,6 @@ object OpenStorageSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_STORAGE_SETTINGS =
+    public const val GET_OPEN_STORAGE_SETTINGS: String =
         "${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}"
 }

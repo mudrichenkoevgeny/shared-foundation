@@ -6,15 +6,14 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.client.
  * Raised by client applications or SDK user auth managers.
  * **NOT returned by backend API responses.**
  */
-object ClientUserErrorCodes {
-
+public object ClientUserErrorCodes {
     /**
      * External authentication (OAuth, Google, Apple) was cancelled by the user.
      *
      * **Localization keys:**
      * - `external_auth_cancelled`
      */
-    const val EXTERNAL_AUTH_CANCELLED = "EXTERNAL_AUTH_CANCELLED"
+    public const val EXTERNAL_AUTH_CANCELLED: String = "EXTERNAL_AUTH_CANCELLED"
 
     /**
      * External authentication (OAuth, Google, Apple) failed on the client side.
@@ -22,7 +21,7 @@ object ClientUserErrorCodes {
      * **Localization keys:**
      * - `external_auth_failed`
      */
-    const val EXTERNAL_AUTH_FAILED = "EXTERNAL_AUTH_FAILED"
+    public const val EXTERNAL_AUTH_FAILED: String = "EXTERNAL_AUTH_FAILED"
 
     /**
      * Client-side throttling error indicating too many confirmation requests initiated locally.
@@ -30,5 +29,5 @@ object ClientUserErrorCodes {
      * **Localization keys:**
      * - `too_many_confirmation_requests`
      */
-    const val TOO_MANY_CONFIRMATION_REQUESTS = "TOO_MANY_CONFIRMATION_REQUESTS"
+    public const val TOO_MANY_CONFIRMATION_REQUESTS: String = "TOO_MANY_CONFIRMATION_REQUESTS"
 }

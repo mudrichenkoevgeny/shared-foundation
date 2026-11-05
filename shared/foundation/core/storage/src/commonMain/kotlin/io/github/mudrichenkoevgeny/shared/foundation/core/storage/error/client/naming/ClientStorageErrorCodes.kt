@@ -6,15 +6,14 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.client.
  * Raised by client applications or SDK storage upload managers.
  * **NOT returned by backend API responses.**
  */
-object ClientStorageErrorCodes {
-
+public object ClientStorageErrorCodes {
     /**
      * Direct S3 / Object Storage upload failed due to network error, CORS issue, or S3 error response.
      *
      * **Localization keys:**
      * - `storage_upload_failed`
      */
-    const val S3_UPLOAD_FAILED = "S3_UPLOAD_FAILED"
+    public const val S3_UPLOAD_FAILED: String = "S3_UPLOAD_FAILED"
 
     /**
      * Direct S3 / Object Storage upload was cancelled by the user or client application.
@@ -22,5 +21,5 @@ object ClientStorageErrorCodes {
      * **Localization keys:**
      * - `upload_cancelled`
      */
-    const val DIRECT_UPLOAD_CANCELLED = "DIRECT_UPLOAD_CANCELLED"
+    public const val DIRECT_UPLOAD_CANCELLED: String = "DIRECT_UPLOAD_CANCELLED"
 }

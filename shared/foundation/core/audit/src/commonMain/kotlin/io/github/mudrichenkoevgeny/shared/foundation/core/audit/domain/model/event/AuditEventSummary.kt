@@ -20,11 +20,11 @@ import kotlin.time.Instant
  * @property status Outcome status of the action ([AuditStatus]).
  * @property createdAt Timestamp when the audit event occurred ([Instant]).
  */
-data class AuditEventSummary(
-    val id: AuditEventId = AuditEventId.generate(),
-    val actorType: AuditActorType,
-    val action: AuditActionType,
-    val resource: AuditResourceType,
-    val status: AuditStatus,
-    val createdAt: Instant
+public data class AuditEventSummary(
+    public val id: AuditEventId = AuditEventId.generate(),
+    public val actorType: AuditActorType,
+    public val action: AuditActionType,
+    public val resource: AuditResourceType,
+    public val status: AuditStatus,
+    public val createdAt: Instant
 )

@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class StorageFileVisibilityTest {
-
     @Test
     fun `fromValue accepts case-insensitive wire values`() {
         assertEquals(StorageFileVisibility.PUBLIC, StorageFileVisibility.fromValueOrNull("public"))

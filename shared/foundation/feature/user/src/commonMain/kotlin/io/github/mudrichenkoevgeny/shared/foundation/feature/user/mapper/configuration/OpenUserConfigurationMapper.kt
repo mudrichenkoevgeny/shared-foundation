@@ -18,7 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [OpenUserConfiguration] from [OpenUserConfigurationPayload].
  */
-fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguration =
+public fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguration =
     OpenUserConfiguration(
         openGlobalSettings = openGlobalSettings.toOpenGlobalSettings(),
         openSecuritySettings = openSecuritySettings.toOpenSecuritySettings(),
@@ -29,7 +29,7 @@ fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguratio
 /**
  * Builds network [OpenUserConfigurationPayload] from domain [OpenUserConfiguration].
  */
-fun OpenUserConfiguration.toOpenUserConfigurationPayload(): OpenUserConfigurationPayload =
+public fun OpenUserConfiguration.toOpenUserConfigurationPayload(): OpenUserConfigurationPayload =
     OpenUserConfigurationPayload(
         openGlobalSettings = openGlobalSettings.toOpenGlobalSettingsPayload(),
         openSecuritySettings = openSecuritySettings.toOpenSecuritySettingsPayload(),

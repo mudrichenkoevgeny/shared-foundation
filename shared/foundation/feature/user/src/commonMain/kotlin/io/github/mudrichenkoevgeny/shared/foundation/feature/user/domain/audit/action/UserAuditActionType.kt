@@ -4,22 +4,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.login.SelfManagementLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.resetpassword.SelfManagementResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.auth.settings.ManagementAuthSettingsRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.SelfManagementUserRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier.SelfManagementIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.ManagementUsersRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.identifiers.ManagementIdentifiersRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.security.ManagementUsersSecurityRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.security.SelfManagementUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.users.sessions.ManagementSessionsRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.resetpassword.OpenResetPasswordRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.unlock.OpenUnlockRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.OpenUserRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.identifier.OpenIdentifierRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.security.OpenUserSecurityRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -67,7 +67,9 @@ private const val ACTION_REFRESH_TOKEN_REUSE_DETECTED = "refresh_token_reuse_det
  * @property value String representation of the [UserAuditActionType].
  */
 @Serializable
-enum class UserAuditActionType(override val value: String) : AuditActionType {
+public enum class UserAuditActionType(
+    override val value: String
+) : AuditActionType {
     /** Administrative update of platform-wide authentication settings via [ManagementAuthSettingsRoutes.UPDATE_MANAGEMENT_AUTH_SETTINGS]. */
     @SerialName(ACTION_MANAGEMENT_UPDATE_AUTH_SETTINGS)
     MANAGEMENT_UPDATE_AUTH_SETTINGS(ACTION_MANAGEMENT_UPDATE_AUTH_SETTINGS),
@@ -216,11 +218,11 @@ enum class UserAuditActionType(override val value: String) : AuditActionType {
     @SerialName(ACTION_REFRESH_TOKEN_REUSE_DETECTED)
     REFRESH_TOKEN_REUSE_DETECTED(ACTION_REFRESH_TOKEN_REUSE_DETECTED);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UserAuditActionType? =
+        public fun fromValueOrNull(value: String): UserAuditActionType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
                     it.name.equals(value, ignoreCase = true)
@@ -231,7 +233,7 @@ enum class UserAuditActionType(override val value: String) : AuditActionType {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuditActionType].
          */
-        fun fromValueOrThrow(value: String): UserAuditActionType =
+        public fun fromValueOrThrow(value: String): UserAuditActionType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserAuditActionType::class.simpleName}: '$value'"
             )

@@ -14,7 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [AuthData] from [AuthDataPayload].
  */
-fun AuthDataPayload.toAuthData(): AuthData =
+public fun AuthDataPayload.toAuthData(): AuthData =
     AuthData(
         userPrivate = userPrivatePayload.toUserPrivate(),
         sessionToken = sessionTokenPayload.toSessionToken()
@@ -23,7 +23,7 @@ fun AuthDataPayload.toAuthData(): AuthData =
 /**
  * Builds network [AuthDataPayload] from domain [AuthData].
  */
-fun AuthData.toAuthDataPayload(): AuthDataPayload =
+public fun AuthData.toAuthDataPayload(): AuthDataPayload =
     AuthDataPayload(
         userPrivatePayload = userPrivate.toUserPrivatePayload(),
         sessionTokenPayload = sessionToken.toSessionTokenPayload()

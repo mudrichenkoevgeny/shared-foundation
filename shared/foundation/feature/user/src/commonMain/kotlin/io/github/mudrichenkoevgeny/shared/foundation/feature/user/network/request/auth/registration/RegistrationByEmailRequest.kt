@@ -13,16 +13,14 @@ import kotlinx.serialization.Serializable
  * @property confirmationCode The verification code sent to the email to confirm ownership.
  */
 @Serializable
-data class RegistrationByEmailRequest(
+public data class RegistrationByEmailRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.EMAIL)
-    val email: String,
-
+    public val email: String,
     @NotBlankStringField
     @SerialName(UserApiFields.PASSWORD)
-    val password: String,
-
+    public val password: String,
     @NotBlankStringField
     @SerialName(UserApiFields.CONFIRMATION_CODE)
-    val confirmationCode: String
+    public val confirmationCode: String
 )

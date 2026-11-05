@@ -21,7 +21,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for login in the management API.
  */
-object SelfManagementLoginRoutes {
+public object SelfManagementLoginRoutes {
     /** Base path for management login operations. */
     private const val BASE_MANAGEMENT_LOGIN_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/login"
@@ -62,7 +62,7 @@ object SelfManagementLoginRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.LoginByEmail]
      */
-    const val LOGIN_BY_EMAIL = "$BASE_MANAGEMENT_LOGIN_ROUTE/email"
+    public const val LOGIN_BY_EMAIL: String = "$BASE_MANAGEMENT_LOGIN_ROUTE/email"
 
     /**
      * **HTTP method:** `POST`
@@ -94,7 +94,7 @@ object SelfManagementLoginRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp"
+    public const val LOGIN_BY_TOTP: String = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp"
 
     /**
      * **HTTP method:** `POST`
@@ -126,5 +126,5 @@ object SelfManagementLoginRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp/recovery-code"
+    public const val LOGIN_BY_TOTP_RECOVERY_CODE: String = "$BASE_MANAGEMENT_LOGIN_ROUTE/totp/recovery-code"
 }

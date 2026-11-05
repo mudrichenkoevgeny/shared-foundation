@@ -20,7 +20,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for password recovery and initial password setup in the management API.
  */
-object SelfManagementResetPasswordRoutes {
+public object SelfManagementResetPasswordRoutes {
     /** Base path for management password reset operations. */
     private const val BASE_MANAGEMENT_RESET_PASSWORD_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/reset-password"
@@ -55,7 +55,7 @@ object SelfManagementResetPasswordRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.ResetPassword]
      */
-    const val RESET_PASSWORD = BASE_MANAGEMENT_RESET_PASSWORD_ROUTE
+    public const val RESET_PASSWORD: String = BASE_MANAGEMENT_RESET_PASSWORD_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -78,6 +78,6 @@ object SelfManagementResetPasswordRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.ResetPassword]
      */
-    const val SEND_RESET_PASSWORD_CONFIRMATION =
+    public const val SEND_RESET_PASSWORD_CONFIRMATION: String =
         "$BASE_MANAGEMENT_RESET_PASSWORD_ROUTE/send-confirmation"
 }

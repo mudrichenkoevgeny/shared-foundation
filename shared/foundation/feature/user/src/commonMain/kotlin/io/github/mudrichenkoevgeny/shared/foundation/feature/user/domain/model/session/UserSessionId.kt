@@ -10,19 +10,19 @@ import kotlin.uuid.Uuid
  * can be deleted, audited and correlated in logs independently.
  */
 @JvmInline
-value class UserSessionId(val value: Uuid) {
-
+public value class UserSessionId(
+    public val value: Uuid
+) {
     /**
      * Returns the underlying [Uuid] as a canonical hex string with dashes.
      */
-    fun asHexDashString(): String = value.toHexDashString()
+    public fun asHexDashString(): String = value.toHexDashString()
 
-    companion object {
-
+    public companion object {
         /**
          * Generates a new random [UserSessionId].
          */
-        fun generate() = UserSessionId(Uuid.random())
+        public fun generate(): UserSessionId = UserSessionId(Uuid.random())
     }
 }
 
@@ -31,10 +31,9 @@ value class UserSessionId(val value: Uuid) {
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-fun String.toUserSessionIdOrNull(): UserSessionId? =
-    Uuid.parseOrNull(this)?.let { UserSessionId(it) }
+public fun String.toUserSessionIdOrNull(): UserSessionId? = Uuid.parseOrNull(this)?.let { UserSessionId(it) }
 
 /**
  * Parses this string into a [UserSessionId] or throws if the value is not a valid UUID.
  */
-fun String.toUserSessionIdOrThrow(): UserSessionId = UserSessionId(Uuid.parse(this))
+public fun String.toUserSessionIdOrThrow(): UserSessionId = UserSessionId(Uuid.parse(this))

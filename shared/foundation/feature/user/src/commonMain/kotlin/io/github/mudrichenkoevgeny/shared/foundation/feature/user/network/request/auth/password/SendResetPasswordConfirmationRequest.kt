@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
  * @property email The email address where the confirmation code will be delivered.
  */
 @Serializable
-data class SendResetPasswordConfirmationRequest(
+public data class SendResetPasswordConfirmationRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.EMAIL)
-    val email: String
+    public val email: String
 )

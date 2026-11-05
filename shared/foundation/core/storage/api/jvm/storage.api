@@ -1,0 +1,1734 @@
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType$Companion;
+	public static final field MANAGEMENT_DELETE_FILE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public static final field MANAGEMENT_RESET_STORAGE_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public static final field MANAGEMENT_UPDATE_STORAGE_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/action/StorageAuditActionType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataDeniedReasonValues {
+	public static final field FILE_DELETE_FAILED Ljava/lang/String;
+	public static final field FILE_NOT_FOUND Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataDeniedReasonValues;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey {
+	public static final field CATEGORY Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey$Companion;
+	public static final field FILE_NAME Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public static final field FILE_SIZE_BYTES Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public static final field S3_KEY Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public fun getValueSensitivity ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/metadata/StorageAuditMetadataKey;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType$Companion;
+	public static final field STORAGE_FILE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+	public static final field STORAGE_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/audit/resource/StorageAuditResourceType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory : java/lang/Enum {
+	public static final field AUDIO Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory$Companion;
+	public static final field DOCUMENT Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static final field IMAGE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static final field OTHER Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static final field VIDEO Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileId {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileId$Companion;
+	public static final fun asHexDashString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public static final synthetic fun box-impl (Lkotlin/uuid/Uuid;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileId;
+	public static fun constructor-impl (Lkotlin/uuid/Uuid;)Lkotlin/uuid/Uuid;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lkotlin/uuid/Uuid;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lkotlin/uuid/Uuid;Lkotlin/uuid/Uuid;)Z
+	public final fun getValue ()Lkotlin/uuid/Uuid;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lkotlin/uuid/Uuid;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileId$Companion {
+	public final fun generate-B_QEdiY ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileIdKt {
+	public static final fun toFileIdOrNull (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+	public static final fun toFileIdOrThrow (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrlPresets {
+	public static final field AVATAR_LG Ljava/lang/String;
+	public static final field AVATAR_MD Ljava/lang/String;
+	public static final field AVATAR_SM Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrlPresets;
+	public static final field PREVIEW Ljava/lang/String;
+	public static final field THUMBNAIL Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getUrlPresets ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun component14 ()Lkotlin/time/Instant;
+	public final fun component15 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()J
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component7 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy-j-YvfV4 (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal;
+	public static synthetic fun copy-j-YvfV4$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal;Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getContentHash ()Ljava/lang/String;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getFileUrls ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun getId-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getOwnerUserId ()Ljava/lang/String;
+	public final fun getS3Bucket ()Ljava/lang/String;
+	public final fun getS3Key ()Ljava/lang/String;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun component10 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun component11 ()Lkotlin/time/Instant;
+	public final fun component12 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()J
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component7 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy-N8b_bhQ (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public static synthetic fun copy-N8b_bhQ$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getFileUrls ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun getId-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getOwnerUserId ()Ljava/lang/String;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()J
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component6 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component7 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun component9 ()Lkotlin/time/Instant;
+	public final fun copy-YudnRHM (Lkotlin/uuid/Uuid;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;
+	public static synthetic fun copy-YudnRHM$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;Lkotlin/uuid/Uuid;Ljava/lang/String;JLjava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getFileUrls ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public final fun getId-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileFilterValues {
+	public static final field CATEGORY Ljava/lang/String;
+	public static final field CREATED_AT_FROM Ljava/lang/String;
+	public static final field CREATED_AT_TO Ljava/lang/String;
+	public static final field EXCLUDE_CATEGORY Ljava/lang/String;
+	public static final field EXCLUDE_STATUS Ljava/lang/String;
+	public static final field EXCLUDE_VISIBILITY Ljava/lang/String;
+	public static final field FILE_ID Ljava/lang/String;
+	public static final field FILE_NAME Ljava/lang/String;
+	public static final field FILE_SIZE_BYTES_FROM Ljava/lang/String;
+	public static final field FILE_SIZE_BYTES_TO Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileFilterValues;
+	public static final field IS_OWNER_USER_ID_SET Ljava/lang/String;
+	public static final field IS_TARGET_SCOPE_SET Ljava/lang/String;
+	public static final field IS_UPDATED_AT_SET Ljava/lang/String;
+	public static final field MIME_TYPE Ljava/lang/String;
+	public static final field OWNER_USER_ID Ljava/lang/String;
+	public static final field SEARCH_QUERY Ljava/lang/String;
+	public static final field STATUS Ljava/lang/String;
+	public static final field TARGET_SCOPE Ljava/lang/String;
+	public static final field UPDATED_AT_FROM Ljava/lang/String;
+	public static final field UPDATED_AT_TO Ljava/lang/String;
+	public static final field VISIBILITY Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy : java/lang/Enum {
+	public static final field CREATED_AT Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy$Companion;
+	public static final field FILE_NAME Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public static final field FILE_SIZE_BYTES Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public static final field UPDATED_AT Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun getDEFAULT ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch {
+	public fun <init> (Ljava/util/Map;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun copy (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUrls ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lkotlin/time/Instant;
+	public final fun copy-dYz6isU (Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl;
+	public static synthetic fun copy-dYz6isU$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl;Lkotlin/uuid/Uuid;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getFileId-B_QEdiY ()Lkotlin/uuid/Uuid;
+	public final fun getFileUrl ()Ljava/lang/String;
+	public final fun getUploadUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus$Companion;
+	public static final field DELETED Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public static final field PENDING_UPLOAD Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public static final field PROCESSING Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public static final field READY Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/status/StorageFileStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings {
+	public fun <init> (JJLjava/lang/Long;Ljava/lang/Long;IIIZI)V
+	public final fun component1 ()J
+	public final fun component2 ()J
+	public final fun component3 ()Ljava/lang/Long;
+	public final fun component4 ()Ljava/lang/Long;
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun component8 ()Z
+	public final fun component9 ()I
+	public final fun copy (JJLjava/lang/Long;Ljava/lang/Long;IIIZI)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings;JJLjava/lang/Long;Ljava/lang/Long;IIIZIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeletedFilesCleanupIntervalSeconds ()I
+	public final fun getMaxPendingUploadsForManagementUser ()I
+	public final fun getMaxPendingUploadsForOpenUser ()I
+	public final fun getMaxUploadSizeBytes ()J
+	public final fun getMinUploadSizeBytes ()J
+	public final fun getPresignedUrlExpirationSeconds ()I
+	public final fun getTotalStorageQuotaForManagementUserBytes ()Ljava/lang/Long;
+	public final fun getTotalStorageQuotaForOpenUserBytes ()Ljava/lang/Long;
+	public fun hashCode ()I
+	public final fun isDeduplicationEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings {
+	public fun <init> (JJ)V
+	public final fun component1 ()J
+	public final fun component2 ()J
+	public final fun copy (JJ)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings;JJILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxUploadSizeBytes ()J
+	public final fun getMinUploadSizeBytes ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItem {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/lang/String;JLjava/lang/String;ILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/lang/String;JLjava/lang/String;ILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-rJxeu-Y ()Lkotlin/uuid/Uuid;
+	public final fun component10 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public final fun component2 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()J
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()I
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public final fun component9 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;
+	public final fun copy-Dd6XG18 (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/lang/String;JLjava/lang/String;ILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItem;
+	public static synthetic fun copy-Dd6XG18$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItem;Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/lang/String;JLjava/lang/String;ILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItem;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getError ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getId-rJxeu-Y ()Lkotlin/uuid/Uuid;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getProgressPercent ()I
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public final fun getUploadedFile ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemId {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemId$Companion;
+	public static final fun asHexDashString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public static final synthetic fun box-impl (Lkotlin/uuid/Uuid;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemId;
+	public static fun constructor-impl (Lkotlin/uuid/Uuid;)Lkotlin/uuid/Uuid;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lkotlin/uuid/Uuid;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lkotlin/uuid/Uuid;Lkotlin/uuid/Uuid;)Z
+	public final fun getValue ()Lkotlin/uuid/Uuid;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lkotlin/uuid/Uuid;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemId$Companion {
+	public final fun generate-rJxeu-Y ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemIdKt {
+	public static final fun toUploadQueueItemIdOrNull (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+	public static final fun toUploadQueueItemIdOrThrow (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus : java/lang/Enum {
+	public static final field COMPLETED Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus$Companion;
+	public static final field FAILED Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public static final field IDLE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public static final field UPLOADING Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/upload/UploadQueueItemStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility$Companion;
+	public static final field PRIVATE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public static final field PUBLIC Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/permission/StoragePermissionCode {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/permission/StoragePermissionCode;
+	public final fun getALL ()Ljava/util/Set;
+	public final fun getSTORAGE_DELETE_OTHER_USERS_FILES-VF5cZrs ()Ljava/lang/String;
+	public final fun getSTORAGE_SETTINGS_UPDATE-VF5cZrs ()Ljava/lang/String;
+	public final fun getSTORAGE_VIEW_OTHER_USERS_FILES-VF5cZrs ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/validation/StorageUploadValidator {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/validation/StorageUploadValidator;
+	public final fun isBatchSizeValid (Ljava/lang/Integer;I)Z
+	public final fun isFileSizeValid (Ljava/lang/Long;J)Z
+	public final fun isFileTypeAccepted (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;)Z
+	public static synthetic fun isFileTypeAccepted$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/validation/StorageUploadValidator;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Z
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/error/client/naming/ClientStorageErrorCodes {
+	public static final field DIRECT_UPLOAD_CANCELLED Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/error/client/naming/ClientStorageErrorCodes;
+	public static final field S3_UPLOAD_FAILED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorArgs {
+	public static final field CATEGORY Ljava/lang/String;
+	public static final field FILE_ID Ljava/lang/String;
+	public static final field FILE_NAME Ljava/lang/String;
+	public static final field FILE_SIZE_BYTES Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorArgs;
+	public static final field MAX_BATCH_UPLOAD_COUNT Ljava/lang/String;
+	public static final field MAX_FILE_SIZE_BYTES Ljava/lang/String;
+	public static final field MAX_PENDING_UPLOADS Ljava/lang/String;
+	public static final field MIME_TYPE Ljava/lang/String;
+	public static final field MIN_FILE_SIZE_BYTES Ljava/lang/String;
+	public static final field QUOTA_BYTES Ljava/lang/String;
+	public static final field USED_BYTES Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorCodes {
+	public static final field FILE_ALREADY_EXISTS Ljava/lang/String;
+	public static final field FILE_DELETE_FAILED Ljava/lang/String;
+	public static final field FILE_NOT_FOUND Ljava/lang/String;
+	public static final field FILE_NOT_READY Ljava/lang/String;
+	public static final field FILE_SIZE_BELOW_MINIMUM Ljava/lang/String;
+	public static final field FILE_SIZE_EXCEEDS_LIMIT Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/error/naming/StorageErrorCodes;
+	public static final field INVALID_UPLOAD_TOKEN Ljava/lang/String;
+	public static final field MAX_BATCH_UPLOAD_COUNT_EXCEEDED Ljava/lang/String;
+	public static final field PRESIGNED_URL_EXPIRED Ljava/lang/String;
+	public static final field STORAGE_ERROR Ljava/lang/String;
+	public static final field STORAGE_QUOTA_EXCEEDED Ljava/lang/String;
+	public static final field STORAGE_UPLOAD_FAILED Ljava/lang/String;
+	public static final field TOO_MANY_PENDING_UPLOADS Ljava/lang/String;
+	public static final field UNSUPPORTED_MIME_TYPE Ljava/lang/String;
+	public static final field UNSUPPORTED_STORAGE_CATEGORY Ljava/lang/String;
+	public static final field UPLOAD_ALREADY_COMPLETED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/localization/ErrorsStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun fileSizeBelowMinimum (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun fileSizeExceedsLimit (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun getFileAlreadyExists ()Ljava/lang/String;
+	public final fun getFileDeleteFailed ()Ljava/lang/String;
+	public final fun getFileNotFound ()Ljava/lang/String;
+	public final fun getFileNotReady ()Ljava/lang/String;
+	public final fun getFileSizeBelowMinimumWithoutArgs ()Ljava/lang/String;
+	public final fun getFileSizeExceedsLimitWithoutArgs ()Ljava/lang/String;
+	public final fun getMaxBatchUploadCountExceededWithoutArgs ()Ljava/lang/String;
+	public final fun getPresignedUrlExpired ()Ljava/lang/String;
+	public final fun getStorageError ()Ljava/lang/String;
+	public final fun getStorageQuotaExceededWithoutArgs ()Ljava/lang/String;
+	public final fun getStorageUploadFailed ()Ljava/lang/String;
+	public final fun getTooManyPendingUploadsWithoutArgs ()Ljava/lang/String;
+	public final fun getUnsupportedMimeType ()Ljava/lang/String;
+	public final fun getUnsupportedStorageCategory ()Ljava/lang/String;
+	public final fun getUploadAlreadyCompleted ()Ljava/lang/String;
+	public final fun getUploadCancelled ()Ljava/lang/String;
+	public final fun getUploadFailed ()Ljava/lang/String;
+	public final fun maxBatchUploadCountExceeded (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun storageQuotaExceeded (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/String;
+	public final fun tooManyPendingUploads (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/localization/StorageModuleStrings {
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getErrors ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/localization/ErrorsStrings;
+	public final fun getUi ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/localization/UiStrings;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/localization/UiStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun deleteFilesBatchConfirm (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun fileUploadingProgress (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun getCategory ()Ljava/lang/String;
+	public final fun getCategoryAudio ()Ljava/lang/String;
+	public final fun getCategoryDocument ()Ljava/lang/String;
+	public final fun getCategoryImage ()Ljava/lang/String;
+	public final fun getCategoryOther ()Ljava/lang/String;
+	public final fun getCategoryVideo ()Ljava/lang/String;
+	public final fun getCopyFileUrl ()Ljava/lang/String;
+	public final fun getCustomStorageConfiguration ()Ljava/lang/String;
+	public final fun getDefaultNull ()Ljava/lang/String;
+	public final fun getDefaultNullPlaceholder ()Ljava/lang/String;
+	public final fun getDeleteFile ()Ljava/lang/String;
+	public final fun getDeleteFileAction ()Ljava/lang/String;
+	public final fun getDeleteFileConfirm ()Ljava/lang/String;
+	public final fun getDeleteSelected ()Ljava/lang/String;
+	public final fun getDeletedFilesCleanupIntervalSeconds ()Ljava/lang/String;
+	public final fun getDownloadFile ()Ljava/lang/String;
+	public final fun getDragAndDropHint ()Ljava/lang/String;
+	public final fun getEnableDeduplication ()Ljava/lang/String;
+	public final fun getFileDetailTitle ()Ljava/lang/String;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSize ()Ljava/lang/String;
+	public final fun getFileUploadDropzonePrompt ()Ljava/lang/String;
+	public final fun getFileUploadTitle ()Ljava/lang/String;
+	public final fun getFileUrl ()Ljava/lang/String;
+	public final fun getGlobalStorageFilesTitle ()Ljava/lang/String;
+	public final fun getMaxPendingUploadsForManagementUser ()Ljava/lang/String;
+	public final fun getMaxPendingUploadsForOpenUser ()Ljava/lang/String;
+	public final fun getMaxPendingUploadsManagement ()Ljava/lang/String;
+	public final fun getMaxPendingUploadsOpen ()Ljava/lang/String;
+	public final fun getMaxUploadSize ()Ljava/lang/String;
+	public final fun getMaxUploadSizeBytes ()Ljava/lang/String;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getMinUploadSize ()Ljava/lang/String;
+	public final fun getMinUploadSizeBytes ()Ljava/lang/String;
+	public final fun getMyFilesTitle ()Ljava/lang/String;
+	public final fun getOpenFile ()Ljava/lang/String;
+	public final fun getOpenInNewTab ()Ljava/lang/String;
+	public final fun getOwnerAnonymous ()Ljava/lang/String;
+	public final fun getOwnerUserId ()Ljava/lang/String;
+	public final fun getPresignedUrlExpirationSeconds ()Ljava/lang/String;
+	public final fun getPresignedUrlTtl ()Ljava/lang/String;
+	public final fun getPreviewError ()Ljava/lang/String;
+	public final fun getPreviewNotSupported ()Ljava/lang/String;
+	public final fun getPreviewProcessing ()Ljava/lang/String;
+	public final fun getPrivateLinkWarning ()Ljava/lang/String;
+	public final fun getSelectFile ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public final fun getStatusDeleted ()Ljava/lang/String;
+	public final fun getStatusFailed ()Ljava/lang/String;
+	public final fun getStatusPendingUpload ()Ljava/lang/String;
+	public final fun getStatusProcessing ()Ljava/lang/String;
+	public final fun getStatusReady ()Ljava/lang/String;
+	public final fun getStorageFileListTitle ()Ljava/lang/String;
+	public final fun getStorageMaxPendingUploads ()Ljava/lang/String;
+	public final fun getStorageMaxUploadSizeBytes ()Ljava/lang/String;
+	public final fun getStorageQuotaBytes ()Ljava/lang/String;
+	public final fun getStorageSettingsTitle ()Ljava/lang/String;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getTotalStorageQuotaForManagementUserBytes ()Ljava/lang/String;
+	public final fun getTotalStorageQuotaForOpenUserBytes ()Ljava/lang/String;
+	public final fun getUnlimitedQuota ()Ljava/lang/String;
+	public final fun getUploadFileAction ()Ljava/lang/String;
+	public final fun getUploadSuccess ()Ljava/lang/String;
+	public final fun getUploadedAt ()Ljava/lang/String;
+	public final fun getUrlCopied ()Ljava/lang/String;
+	public final fun getUserMaxPendingUploadsOptional ()Ljava/lang/String;
+	public final fun getUserMaxUploadSizeOptional ()Ljava/lang/String;
+	public final fun getUserStorageQuotaManagement ()Ljava/lang/String;
+	public final fun getUserStorageQuotaOpen ()Ljava/lang/String;
+	public final fun getUserStorageQuotaOptional ()Ljava/lang/String;
+	public final fun getVisibility ()Ljava/lang/String;
+	public final fun getVisibilityPrivate ()Ljava/lang/String;
+	public final fun getVisibilityPublic ()Ljava/lang/String;
+	public final fun isDeduplicationEnabled ()Ljava/lang/String;
+	public final fun uploadProgress (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun uploadedAtLabel (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun uploadedBy (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/FileUrlsMapperKt {
+	public static final fun toFileUrls (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;
+	public static final fun toFileUrlsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/FileUrls;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileDomainMapperKt {
+	public static final fun toStorageFilePrivate (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public static final fun toStorageFileSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileInternal;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;
+	public static final fun toStorageFileSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFilePrivateMapperKt {
+	public static final fun toStorageFilePrivate (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;
+	public static final fun toStorageFilePrivatePayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFilePrivate;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/file/StorageFileSummaryMapperKt {
+	public static final fun toStorageFileSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;
+	public static final fun toStorageFileSummaryPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/file/StorageFileSummary;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/presigned/PresignedReadUrlBatchMapperKt {
+	public static final fun toPresignedReadUrlBatch (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch;
+	public static final fun toPresignedReadUrlBatchPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedReadUrlBatch;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/presigned/PresignedUrlMapperKt {
+	public static final fun toPresignedUrl (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl;
+	public static final fun toPresignedUrlPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/presigned/PresignedUrl;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/storagesettings/ManagementStorageSettingsMapperKt {
+	public static final fun toManagementStorageSettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings;
+	public static final fun toManagementStorageSettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/ManagementStorageSettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/mapper/storagesettings/OpenStorageSettingsMapperKt {
+	public static final fun toOpenStorageSettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings;
+	public static final fun toOpenStorageSettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/storagesettings/OpenStorageSettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/contract/StorageNavigationPaths {
+	public static final field ACCEPTED_FILE_TYPES Ljava/lang/String;
+	public static final field AUTO_SUBMIT Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/contract/StorageNavigationPaths;
+	public static final field MAX_FILES Ljava/lang/String;
+	public static final field MAX_FILE_SIZE_BYTES Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/BaseStorageNavigationRoutes {
+	public static final field BASE_SELF_STORAGE_NAVIGATION_ROUTE Ljava/lang/String;
+	public static final field BASE_STORAGE_NAVIGATION_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/BaseStorageNavigationRoutes;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileDetail$Companion {
+	public final fun getPath (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getPath-OXd_6H8 (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileList$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$FileUpload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementSelfStorageNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun getTargetRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileDetail$Companion {
+	public final fun getPath (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getPath-OXd_6H8 (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$FileList$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun getTargetRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation$StorageSettings : io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/management/ManagementStorageSettingsNavigation$StorageSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileDetail$Companion {
+	public final fun getPath (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getPath-OXd_6H8 (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileList$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$FileUpload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute, io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/route/open/OpenStorageNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun getTargetRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFileId ()Ljava/lang/String;
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public final fun getTypedFileId-CBpRXG8 ()Lkotlin/uuid/Uuid;
+	public fun hashCode ()I
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/detail/StorageFileDetailParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Z)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Integer;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/lang/Long;
+	public final fun component7 ()Z
+	public final fun copy (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Z)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;ZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAcceptedFileTypes ()Ljava/util/List;
+	public final fun getAutoSubmit ()Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getMaxFileSizeBytes ()Ljava/lang/Long;
+	public final fun getMaxFiles ()Ljava/lang/Integer;
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/base/upload/StorageFileUploadParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams$Companion;
+	public fun <init> ()V
+	public fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)V
+	public synthetic fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/lang/Long;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component16 ()Ljava/util/List;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component18 ()Ljava/util/List;
+	public final fun component19 ()Ljava/lang/Boolean;
+	public final fun component2 ()I
+	public final fun component20 ()Ljava/lang/String;
+	public final fun component21 ()Ljava/lang/String;
+	public final fun component22 ()Ljava/lang/String;
+	public final fun component23 ()Ljava/lang/String;
+	public final fun component24 ()Ljava/lang/Boolean;
+	public final fun component25 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/lang/Boolean;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/Long;
+	public final fun copy (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategories ()Ljava/util/List;
+	public final fun getCreatedAtFrom ()Ljava/lang/String;
+	public final fun getCreatedAtTo ()Ljava/lang/String;
+	public final fun getExcludeCategories ()Ljava/util/List;
+	public final fun getExcludeStatuses ()Ljava/util/List;
+	public final fun getExcludeVisibilities ()Ljava/util/List;
+	public final fun getFileIds ()Ljava/util/List;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytesFrom ()Ljava/lang/Long;
+	public final fun getFileSizeBytesTo ()Ljava/lang/Long;
+	public final fun getMimeTypes ()Ljava/util/List;
+	public final fun getOwnerUserIds ()Ljava/util/List;
+	public final fun getPageNumber ()I
+	public final fun getPageSize ()I
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public final fun getSearchQuery ()Ljava/lang/String;
+	public final fun getSortBy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun getSortOrder ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun getStatuses ()Ljava/util/List;
+	public final fun getTargetScopes ()Ljava/util/List;
+	public final fun getUpdatedAtFrom ()Ljava/lang/String;
+	public final fun getUpdatedAtTo ()Ljava/lang/String;
+	public final fun getVisibilities ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isOwnerUserIdSet ()Ljava/lang/Boolean;
+	public final fun isTargetScopeSet ()Ljava/lang/Boolean;
+	public final fun isUpdatedAtSet ()Ljava/lang/Boolean;
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/management/list/ManagementStorageFileListParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams$Companion;
+	public fun <init> ()V
+	public fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)V
+	public synthetic fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component16 ()Ljava/util/List;
+	public final fun component17 ()Ljava/lang/Boolean;
+	public final fun component18 ()Ljava/lang/String;
+	public final fun component19 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component20 ()Ljava/lang/String;
+	public final fun component21 ()Ljava/lang/String;
+	public final fun component22 ()Ljava/lang/Boolean;
+	public final fun component23 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/Long;
+	public final fun component8 ()Ljava/lang/Long;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;IILio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategories ()Ljava/util/List;
+	public final fun getCreatedAtFrom ()Ljava/lang/String;
+	public final fun getCreatedAtTo ()Ljava/lang/String;
+	public final fun getExcludeCategories ()Ljava/util/List;
+	public final fun getExcludeStatuses ()Ljava/util/List;
+	public final fun getExcludeVisibilities ()Ljava/util/List;
+	public final fun getFileIds ()Ljava/util/List;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytesFrom ()Ljava/lang/Long;
+	public final fun getFileSizeBytesTo ()Ljava/lang/Long;
+	public final fun getMimeTypes ()Ljava/util/List;
+	public final fun getPageNumber ()I
+	public final fun getPageSize ()I
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public final fun getSearchQuery ()Ljava/lang/String;
+	public final fun getSortBy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/listing/StorageFileSortBy;
+	public final fun getSortOrder ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun getStatuses ()Ljava/util/List;
+	public final fun getTargetScopes ()Ljava/util/List;
+	public final fun getUpdatedAtFrom ()Ljava/lang/String;
+	public final fun getUpdatedAtTo ()Ljava/lang/String;
+	public final fun getVisibilities ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isTargetScopeSet ()Ljava/lang/Boolean;
+	public final fun isUpdatedAtSet ()Ljava/lang/Boolean;
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/navigation/screen/open/list/SelfStorageFileListParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageApiFields {
+	public static final field CATEGORY Ljava/lang/String;
+	public static final field DELETED_FILES_CLEANUP_INTERVAL_SECONDS Ljava/lang/String;
+	public static final field EXPIRES_AT Ljava/lang/String;
+	public static final field FILE_ID Ljava/lang/String;
+	public static final field FILE_NAME Ljava/lang/String;
+	public static final field FILE_SIZE_BYTES Ljava/lang/String;
+	public static final field FILE_URL Ljava/lang/String;
+	public static final field FILE_URLS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageApiFields;
+	public static final field IS_DEDUPLICATION_ENABLED Ljava/lang/String;
+	public static final field MAX_PENDING_UPLOADS_FOR_MANAGEMENT_USER Ljava/lang/String;
+	public static final field MAX_PENDING_UPLOADS_FOR_OPEN_USER Ljava/lang/String;
+	public static final field MAX_UPLOAD_SIZE_BYTES Ljava/lang/String;
+	public static final field MIME_TYPE Ljava/lang/String;
+	public static final field MIN_UPLOAD_SIZE_BYTES Ljava/lang/String;
+	public static final field ORIGINAL_URL Ljava/lang/String;
+	public static final field OWNER_USER_ID Ljava/lang/String;
+	public static final field PRESIGNED_URL_EXPIRATION_SECONDS Ljava/lang/String;
+	public static final field STATUS Ljava/lang/String;
+	public static final field TARGET_SCOPE Ljava/lang/String;
+	public static final field TOTAL_STORAGE_QUOTA_FOR_MANAGEMENT_USER_BYTES Ljava/lang/String;
+	public static final field TOTAL_STORAGE_QUOTA_FOR_OPEN_USER_BYTES Ljava/lang/String;
+	public static final field UPLOAD_URL Ljava/lang/String;
+	public static final field URL_PRESETS Ljava/lang/String;
+	public static final field VISIBILITY Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageApiPaths {
+	public static final field FILE_ID Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageApiPaths;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageWebSocketEventTypes {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/contract/StorageWebSocketEventTypes;
+	public static final field MANAGEMENT_STORAGE_SETTINGS_UPDATED Ljava/lang/String;
+	public static final field OPEN_STORAGE_SETTINGS_UPDATED Ljava/lang/String;
+	public static final field STORAGE_FILE_UPDATED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getUrlPresets ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JLjava/lang/Long;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JLjava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public final fun component11 ()J
+	public final fun component12 ()Ljava/lang/Long;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()J
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JLjava/lang/Long;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JLjava/lang/Long;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Ljava/lang/String;
+	public final fun getCreatedAt ()J
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getFileUrls ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getOwnerUserId ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getUpdatedAt ()Ljava/lang/Long;
+	public final fun getVisibility ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFilePrivatePayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;J)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()J
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public final fun component9 ()J
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;J)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;JILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Ljava/lang/String;
+	public final fun getCreatedAt ()J
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getFileUrls ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/FileUrlsPayload;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public final fun getVisibility ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/file/StorageFileSummaryPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun copy (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUrls ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedReadUrlBatchPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()J
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpiresAt ()J
+	public final fun getFileId ()Ljava/lang/String;
+	public final fun getFileUrl ()Ljava/lang/String;
+	public final fun getUploadUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/presigned/PresignedUrlPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload$Companion;
+	public fun <init> (JJLjava/lang/Long;Ljava/lang/Long;IIIZI)V
+	public final fun component1 ()J
+	public final fun component2 ()J
+	public final fun component3 ()Ljava/lang/Long;
+	public final fun component4 ()Ljava/lang/Long;
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun component8 ()Z
+	public final fun component9 ()I
+	public final fun copy (JJLjava/lang/Long;Ljava/lang/Long;IIIZI)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;JJLjava/lang/Long;Ljava/lang/Long;IIIZIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeletedFilesCleanupIntervalSeconds ()I
+	public final fun getMaxPendingUploadsForManagementUser ()I
+	public final fun getMaxPendingUploadsForOpenUser ()I
+	public final fun getMaxUploadSizeBytes ()J
+	public final fun getMinUploadSizeBytes ()J
+	public final fun getPresignedUrlExpirationSeconds ()I
+	public final fun getTotalStorageQuotaForManagementUserBytes ()Ljava/lang/Long;
+	public final fun getTotalStorageQuotaForOpenUserBytes ()Ljava/lang/Long;
+	public fun hashCode ()I
+	public final fun isDeduplicationEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/ManagementStorageSettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload$Companion;
+	public fun <init> (JJ)V
+	public final fun component1 ()J
+	public final fun component2 ()J
+	public final fun copy (JJ)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;JJILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxUploadSizeBytes ()J
+	public final fun getMinUploadSizeBytes ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/model/storagesettings/OpenStorageSettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest;Ljava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFileIds ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/file/DeleteFilesBatchRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest;Ljava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFileIds ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedReadUrlBatchRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest$Companion;
+	public fun <init> (Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()J
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCategory ()Ljava/lang/String;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getFileSizeBytes ()J
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getVisibility ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/request/presigned/PresignedUrlRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/BaseStorageNetworkRoutes {
+	public static final field BASE_STORAGE_NETWORK_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/BaseStorageNetworkRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageRoutes {
+	public static final field DELETE_FILE Ljava/lang/String;
+	public static final field DELETE_FILES_BATCH Ljava/lang/String;
+	public static final field GET_FILE Ljava/lang/String;
+	public static final field GET_FILES Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageSettingsRoutes {
+	public static final field GET_MANAGEMENT_STORAGE_SETTINGS Ljava/lang/String;
+	public static final field GET_OPEN_STORAGE_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/ManagementStorageSettingsRoutes;
+	public static final field RESET_MANAGEMENT_STORAGE_SETTINGS Ljava/lang/String;
+	public static final field UPDATE_MANAGEMENT_STORAGE_SETTINGS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/self/SelfManagementStorageRoutes {
+	public static final field CONFIRM_UPLOAD Ljava/lang/String;
+	public static final field DELETE_FILE Ljava/lang/String;
+	public static final field DELETE_FILES_BATCH Ljava/lang/String;
+	public static final field GET_FILE Ljava/lang/String;
+	public static final field GET_FILES Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/management/self/SelfManagementStorageRoutes;
+	public static final field POST_PRESIGNED_UPLOAD_URL Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageRoutes {
+	public static final field CONFIRM_UPLOAD Ljava/lang/String;
+	public static final field DELETE_FILE Ljava/lang/String;
+	public static final field DELETE_FILES_BATCH Ljava/lang/String;
+	public static final field GET_FILE Ljava/lang/String;
+	public static final field GET_FILES Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageRoutes;
+	public static final field POST_PRESIGNED_UPLOAD_URL Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageSettingsRoutes {
+	public static final field GET_OPEN_STORAGE_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/network/route/open/OpenStorageSettingsRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/storage/ui/component/fileupload/StorageFileUploadUiConfig {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Ljava/lang/Long;Z)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Ljava/lang/Long;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Integer;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/lang/Long;
+	public final fun component7 ()Ljava/lang/Long;
+	public final fun component8 ()Z
+	public final fun copy (Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Ljava/lang/Long;Z)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/ui/component/fileupload/StorageFileUploadUiConfig;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/ui/component/fileupload/StorageFileUploadUiConfig;Ljava/lang/Integer;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;Ljava/util/List;Ljava/lang/Long;Ljava/lang/Long;ZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/ui/component/fileupload/StorageFileUploadUiConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAcceptedFileTypes ()Ljava/util/List;
+	public final fun getAutoSubmit ()Z
+	public final fun getCategory ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/category/StorageCategory;
+	public final fun getMaxFileSizeBytes ()Ljava/lang/Long;
+	public final fun getMaxFiles ()Ljava/lang/Integer;
+	public final fun getMinFileSizeBytes ()Ljava/lang/Long;
+	public final fun getTargetScope ()Ljava/lang/String;
+	public final fun getVisibility ()Lio/github/mudrichenkoevgeny/shared/foundation/core/storage/domain/model/visibility/StorageFileVisibility;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

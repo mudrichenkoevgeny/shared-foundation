@@ -18,16 +18,13 @@ import kotlinx.serialization.Serializable
  * @property managementAuthSettings Management authentication settings payload ([ManagementAuthSettingsPayload]).
  */
 @Serializable
-data class ManagementUserConfigurationPayload(
+public data class ManagementUserConfigurationPayload(
     @SerialName(UserApiFields.MANAGEMENT_GLOBAL_SETTINGS)
-    val managementGlobalSettings: ManagementGlobalSettingsPayload,
-
+    public val managementGlobalSettings: ManagementGlobalSettingsPayload,
     @SerialName(UserApiFields.MANAGEMENT_SECURITY_SETTINGS)
-    val managementSecuritySettings: ManagementSecuritySettingsPayload,
-
+    public val managementSecuritySettings: ManagementSecuritySettingsPayload,
     @SerialName(UserApiFields.MANAGEMENT_STORAGE_SETTINGS)
-    val managementStorageSettings: ManagementStorageSettingsPayload,
-
+    public val managementStorageSettings: ManagementStorageSettingsPayload,
     @SerialName(UserApiFields.MANAGEMENT_AUTH_SETTINGS)
-    val managementAuthSettings: ManagementAuthSettingsPayload
+    public val managementAuthSettings: ManagementAuthSettingsPayload
 )

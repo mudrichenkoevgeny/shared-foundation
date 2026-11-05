@@ -21,14 +21,14 @@ import kotlin.time.Instant
  * @property createdAt Timestamp when the identifier was created ([Instant]).
  * @property updatedAt Timestamp when the identifier was last modified ([Instant]), or `null` if unchanged.
  */
-data class UserIdentifierInternal(
-    val id: UserIdentifierId = UserIdentifierId.generate(),
-    val userId: UserId,
-    val userAuthProvider: UserAuthProvider,
-    val identifier: String,
-    val displayName: String,
-    val externalProviderEmail: String?,
-    val passwordHash: PasswordHash?,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+public data class UserIdentifierInternal(
+    public val id: UserIdentifierId = UserIdentifierId.generate(),
+    public val userId: UserId,
+    public val userAuthProvider: UserAuthProvider,
+    public val identifier: String,
+    public val displayName: String,
+    public val externalProviderEmail: String?,
+    public val passwordHash: PasswordHash?,
+    public val createdAt: Instant,
+    public val updatedAt: Instant?
 )

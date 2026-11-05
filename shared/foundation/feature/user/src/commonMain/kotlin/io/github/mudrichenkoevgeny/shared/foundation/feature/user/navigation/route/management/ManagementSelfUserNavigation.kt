@@ -25,8 +25,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for manager account self-service management.
  */
 @Serializable
-sealed interface ManagementSelfUserNavigation : NavigationRoute {
-
+public sealed interface ManagementSelfUserNavigation : NavigationRoute {
     /**
      * Main staff user dashboard screen.
      *
@@ -35,8 +34,7 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementSelfUserNavigation {
-
+    public data object Main : ManagementSelfUserNavigation {
         override val route: String
             get() = BASE_USER_ROUTE
 
@@ -51,8 +49,7 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      * - **Primary API:** [SelfManagementUserRoutes.UPDATE_USER]
      */
     @Serializable
-    data object UserEdit : ManagementSelfUserNavigation {
-
+    public data object UserEdit : ManagementSelfUserNavigation {
         override val route: String
             get() = "$BASE_USER_ROUTE/edit"
 
@@ -68,18 +65,18 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class IdentifierList(
+    public data class IdentifierList(
         override val params: SelfIdentifierListParams = SelfIdentifierListParams()
-    ) : ManagementSelfUserNavigation, ParameterizedNavigationRoute<SelfIdentifierListParams> {
-
+    ) : ManagementSelfUserNavigation,
+        ParameterizedNavigationRoute<SelfIdentifierListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = "$BASE_USER_ROUTE/identifiers"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USER_ROUTE/identifiers"
         }
     }
 
@@ -92,24 +89,23 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      *   - [SelfManagementIdentifierRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD]
      */
     @Serializable
-    data class IdentifierDetail(
+    public data class IdentifierDetail(
         override val params: IdentifierDetailParams
-    ) : ManagementSelfUserNavigation, ParameterizedNavigationRoute<IdentifierDetailParams> {
-
+    ) : ManagementSelfUserNavigation,
+        ParameterizedNavigationRoute<IdentifierDetailParams> {
         override val route: String
             get() = getPath(params.identifierId)
 
         override val parentRoute: String
             get() = IdentifierList.ROUTE
 
-        companion object {
-            const val ROUTE = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
-            fun getPath(identifierId: UserIdentifierId): String =
+            public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
-            fun getPath(identifierId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
+            public fun getPath(identifierId: String): String = ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
     }
 
@@ -124,18 +120,18 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      *   - [SelfManagementSessionRoutes.LOGOUT]
      */
     @Serializable
-    data class SessionList(
+    public data class SessionList(
         override val params: SelfSessionListParams = SelfSessionListParams()
-    ) : ManagementSelfUserNavigation, ParameterizedNavigationRoute<SelfSessionListParams> {
-
+    ) : ManagementSelfUserNavigation,
+        ParameterizedNavigationRoute<SelfSessionListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = "$BASE_USER_ROUTE/sessions"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USER_ROUTE/sessions"
         }
     }
 
@@ -148,24 +144,23 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      *   - [SelfManagementSessionRoutes.DELETE_SESSION]
      */
     @Serializable
-    data class SessionDetail(
+    public data class SessionDetail(
         override val params: SessionDetailParams
-    ) : ManagementSelfUserNavigation, ParameterizedNavigationRoute<SessionDetailParams> {
-
+    ) : ManagementSelfUserNavigation,
+        ParameterizedNavigationRoute<SessionDetailParams> {
         override val route: String
             get() = getPath(params.sessionId)
 
         override val parentRoute: String
             get() = SessionList.ROUTE
 
-        companion object {
-            const val ROUTE = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
 
-            fun getPath(sessionId: UserSessionId): String =
+            public fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
-            fun getPath(sessionId: String): String =
-                ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
+            public fun getPath(sessionId: String): String = ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
     }
 
@@ -179,18 +174,18 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      *   - [SelfManagementUserSecurityRoutes.DISABLE_TOTP]
      */
     @Serializable
-    data class TotpMain(
+    public data class TotpMain(
         override val params: TotpMainParams = TotpMainParams()
-    ) : ManagementSelfUserNavigation, ParameterizedNavigationRoute<TotpMainParams> {
-
+    ) : ManagementSelfUserNavigation,
+        ParameterizedNavigationRoute<TotpMainParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = BASE_TOTP_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_TOTP_ROUTE
         }
     }
 
@@ -203,8 +198,7 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
      *   - [SelfManagementUserSecurityRoutes.REGENERATE_RECOVERY_CODES]
      */
     @Serializable
-    data object TotpRecoveryCodes : ManagementSelfUserNavigation {
-
+    public data object TotpRecoveryCodes : ManagementSelfUserNavigation {
         override val route: String
             get() = "$BASE_TOTP_ROUTE/recovery-codes"
 
@@ -212,8 +206,8 @@ sealed interface ManagementSelfUserNavigation : NavigationRoute {
             get() = TotpMain.ROUTE
     }
 
-    companion object {
-        const val BASE_USER_ROUTE = "/user"
-        const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/totp"
+    public companion object {
+        public const val BASE_USER_ROUTE: String = "/user"
+        public const val BASE_TOTP_ROUTE: String = "$BASE_USER_ROUTE/totp"
     }
 }

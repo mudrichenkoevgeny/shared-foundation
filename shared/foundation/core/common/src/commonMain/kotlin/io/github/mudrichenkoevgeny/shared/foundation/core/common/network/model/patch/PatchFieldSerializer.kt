@@ -13,14 +13,16 @@ import kotlinx.serialization.encoding.Encoder
  * Designed to work together with `@EncodeDefault(EncodeDefault.Mode.NEVER)` on DTO properties
  * so [PatchField.Unchanged] default values are completely omitted from JSON during serialization.
  */
-class PatchFieldSerializer<T>(
+public class PatchFieldSerializer<T>(
     private val elementSerializer: KSerializer<T>
 ) : KSerializer<PatchField<T>> {
-
     override val descriptor: SerialDescriptor = elementSerializer.descriptor.nullable
 
     @OptIn(ExperimentalSerializationApi::class)
-    override fun serialize(encoder: Encoder, value: PatchField<T>) {
+    override fun serialize(
+        encoder: Encoder,
+        value: PatchField<T>
+    ) {
         when (value) {
             is PatchField.Unchanged -> {}
             is PatchField.Value -> {
@@ -34,12 +36,11 @@ class PatchFieldSerializer<T>(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override fun deserialize(decoder: Decoder): PatchField<T> {
-        return if (decoder.decodeNotNullMark()) {
+    override fun deserialize(decoder: Decoder): PatchField<T> =
+        if (decoder.decodeNotNullMark()) {
             PatchField.Value(decoder.decodeSerializableValue(elementSerializer))
         } else {
             decoder.decodeNull()
             PatchField.Value(null)
         }
-    }
 }

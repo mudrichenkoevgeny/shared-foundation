@@ -4,22 +4,24 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 
-fun ManagementGlobalSettingsPayload.toManagementGlobalSettings(): ManagementGlobalSettings = ManagementGlobalSettings(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) },
-    isTracingEnabled = isTracingEnabled,
-    isMetricsEnabled = isMetricsEnabled,
-    isVerboseLoggingEnabled = isVerboseLoggingEnabled
-)
+public fun ManagementGlobalSettingsPayload.toManagementGlobalSettings(): ManagementGlobalSettings =
+    ManagementGlobalSettings(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) },
+        isTracingEnabled = isTracingEnabled,
+        isMetricsEnabled = isMetricsEnabled,
+        isVerboseLoggingEnabled = isVerboseLoggingEnabled
+    )
 
-fun ManagementGlobalSettings.toManagementGlobalSettingsPayload(): ManagementGlobalSettingsPayload = ManagementGlobalSettingsPayload(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value },
-    isTracingEnabled = isTracingEnabled,
-    isMetricsEnabled = isMetricsEnabled,
-    isVerboseLoggingEnabled = isVerboseLoggingEnabled
-)
+public fun ManagementGlobalSettings.toManagementGlobalSettingsPayload(): ManagementGlobalSettingsPayload =
+    ManagementGlobalSettingsPayload(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value },
+        isTracingEnabled = isTracingEnabled,
+        isMetricsEnabled = isMetricsEnabled,
+        isVerboseLoggingEnabled = isVerboseLoggingEnabled
+    )

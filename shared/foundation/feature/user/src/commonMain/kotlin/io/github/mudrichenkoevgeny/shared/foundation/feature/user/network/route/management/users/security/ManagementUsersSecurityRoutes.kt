@@ -19,7 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for administrative security management of users.
  */
-object ManagementUsersSecurityRoutes {
+public object ManagementUsersSecurityRoutes {
     /**
      * **HTTP method:** `DELETE`
      *
@@ -56,6 +56,6 @@ object ManagementUsersSecurityRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserDetail]
      */
-    const val DISABLE_TOTP =
+    public const val DISABLE_TOTP: String =
         "${ManagementUsersRoutes.BASE_MANAGEMENT_USERS_ROUTE}/{${UserApiPaths.USER_ID}}/totp"
 }

@@ -12,7 +12,9 @@ import kotlinx.serialization.Serializable
  * @property value Wire value for `sort_by`.
  */
 @Serializable
-enum class UserSortBy(val value: String) {
+public enum class UserSortBy(
+    public val value: String
+) {
     /** Sort by authority level. */
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
     AUTHORITY_LEVEL(UserApiFields.AUTHORITY_LEVEL),
@@ -53,17 +55,17 @@ enum class UserSortBy(val value: String) {
     @SerialName(CommonApiFields.UPDATED_AT)
     UPDATED_AT(CommonApiFields.UPDATED_AT);
 
-    companion object {
+    public companion object {
         /** Default sort field ([CREATED_AT]). */
-        val DEFAULT = CREATED_AT
+        public val DEFAULT: UserSortBy = CREATED_AT
 
         /**
          * Returns [UserSortBy] for the given wire value or case-insensitive enum name.
          */
-        fun fromValueOrNull(value: String): UserSortBy? =
+        public fun fromValueOrNull(value: String): UserSortBy? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -71,7 +73,7 @@ enum class UserSortBy(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserSortBy].
          */
-        fun fromValueOrThrow(value: String): UserSortBy =
+        public fun fromValueOrThrow(value: String): UserSortBy =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserSortBy::class.simpleName}: '$value'"
             )

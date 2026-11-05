@@ -20,19 +20,15 @@ import kotlinx.serialization.Serializable
  * @property displayName [UserIdentifierSummary.displayName].
  */
 @Serializable
-data class UserIdentifierSummaryPayload(
+public data class UserIdentifierSummaryPayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.USER_ID)
-    val userId: String,
-
+    public val userId: String,
     @SerialName(UserApiFields.USER_AUTH_PROVIDER)
-    val userAuthProvider: String,
-
+    public val userAuthProvider: String,
     @SerialName(UserApiFields.IDENTIFIER)
-    val identifier: String,
-
+    public val identifier: String,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String
+    public val displayName: String
 )

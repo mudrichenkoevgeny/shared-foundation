@@ -7,15 +7,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.networ
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user.createTestUserPrivatePayload
 
 /**
- * Creates a test [AuthDataPayload] wire object instance.
- *
- * @param userPrivatePayload Authenticated user details wire payload ([UserPrivatePayload]).
- * @param sessionTokenPayload Active session security tokens wire payload ([SessionTokenPayload]).
- */
-fun createTestAuthDataPayload(
+* Creates a test [AuthDataPayload] wire object instance.
+*
+* @param userPrivatePayload Authenticated user details wire payload ([UserPrivatePayload]).
+* @param sessionTokenPayload Active session security tokens wire payload ([SessionTokenPayload]).
+*/
+public fun createTestAuthDataPayload(
     userPrivatePayload: UserPrivatePayload = createTestUserPrivatePayload(),
     sessionTokenPayload: SessionTokenPayload = createTestSessionTokenPayload()
-) = AuthDataPayload(
-    userPrivatePayload = userPrivatePayload,
-    sessionTokenPayload = sessionTokenPayload
-)
+): AuthDataPayload =
+    AuthDataPayload(
+        userPrivatePayload = userPrivatePayload,
+        sessionTokenPayload = sessionTokenPayload
+    )

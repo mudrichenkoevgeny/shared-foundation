@@ -3,30 +3,29 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.co
 /**
  * User-specific naming conventions for navigation route path and query parameters.
  */
-object UserNavigationPaths {
-
+public object UserNavigationPaths {
     /**
      * Query parameter key for triggering contextual modal dialogs or sub-flows over a screen.
      */
-    const val ACTION = "action"
+    public const val ACTION: String = "action"
 
     /**
      * Query parameter key specifying the return destination URL after authentication.
      */
-    const val REDIRECT_URL = "redirect_url"
+    public const val REDIRECT_URL: String = "redirect_url"
 
     /**
      * Query parameter key for the active TOTP step on 2FA screens.
      */
-    const val TOTP_STEP = "totp_step"
+    public const val TOTP_STEP: String = "totp_step"
 
     /**
      * Query parameter key for the selected account unlock method.
      */
-    const val UNLOCK_METHOD = "unlock_method"
+    public const val UNLOCK_METHOD: String = "unlock_method"
 
     /**
      * Query parameter key for the verification input mode on TOTP authentication screens.
      */
-    const val LOGIN_BY_TOTP_MODE = "login_by_totp_mode"
+    public const val LOGIN_BY_TOTP_MODE: String = "login_by_totp_mode"
 }

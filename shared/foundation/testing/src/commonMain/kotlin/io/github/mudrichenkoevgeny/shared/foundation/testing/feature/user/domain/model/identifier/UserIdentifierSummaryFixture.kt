@@ -10,36 +10,37 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 
 /**
- * Creates a test [UserIdentifierSummary] instance with default mock properties for unit testing.
- *
- * @param id Unique identifier ID ([UserIdentifierId]).
- * @param userId Owning user ID ([UserId]).
- * @param userAuthProvider Provider category ([UserAuthProvider]).
- * @param identifier Raw or masked credential identifier.
- * @param displayName Non-null display name.
- */
-fun createTestUserIdentifierSummary(
+* Creates a test [UserIdentifierSummary] instance with default mock properties for unit testing.
+*
+* @param id Unique identifier ID ([UserIdentifierId]).
+* @param userId Owning user ID ([UserId]).
+* @param userAuthProvider Provider category ([UserAuthProvider]).
+* @param identifier Raw or masked credential identifier.
+* @param displayName Non-null display name.
+*/
+public fun createTestUserIdentifierSummary(
     id: UserIdentifierId = createTestUserIdentifierId(),
     userId: UserId = createTestUserId(),
     userAuthProvider: UserAuthProvider = UserAuthProvider.EMAIL,
     identifier: String = TEST_EMAIL,
     displayName: String = "Test User"
-) = UserIdentifierSummary(
-    id = id,
-    userId = userId,
-    userAuthProvider = userAuthProvider,
-    identifier = identifier,
-    displayName = displayName
-)
+): UserIdentifierSummary =
+    UserIdentifierSummary(
+        id = id,
+        userId = userId,
+        userAuthProvider = userAuthProvider,
+        identifier = identifier,
+        displayName = displayName
+    )
 
 /**
- * Creates a list of test [UserIdentifierSummary] instances with deterministic index-based UUIDs,
- * and alternating auth providers.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserIdentifierSummaryList(
+* Creates a list of test [UserIdentifierSummary] instances with deterministic index-based UUIDs,
+* and alternating auth providers.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserIdentifierSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserIdentifierSummary = { index ->
         val isEmail = index % 2 == 0

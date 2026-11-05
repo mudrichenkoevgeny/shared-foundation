@@ -11,31 +11,32 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property requireSpecialChar If true, password must contain at least one special character.
  * @property commonPasswords A set of forbidden passwords that are considered too easy to guess.
  */
-data class ManagementPasswordPolicy(
-    val minLength: Int,
-    val requireLetter: Boolean,
-    val requireUpperCase: Boolean,
-    val requireLowerCase: Boolean,
-    val requireDigit: Boolean,
-    val requireSpecialChar: Boolean,
-    val commonPasswords: Set<String>
+public data class ManagementPasswordPolicy(
+    public val minLength: Int,
+    public val requireLetter: Boolean,
+    public val requireUpperCase: Boolean,
+    public val requireLowerCase: Boolean,
+    public val requireDigit: Boolean,
+    public val requireSpecialChar: Boolean,
+    public val commonPasswords: Set<String>
 ) {
-    companion object {
+    public companion object {
         /** Default [minLength] value for password policies. */
-        const val DEFAULT_MIN_LENGTH = 8
+        public const val DEFAULT_MIN_LENGTH: Int = 8
 
         /** Default banned-password list. */
-        val DEFAULT_COMMON_PASSWORDS = setOf(
-            "12345678",
-            "password",
-            "123456789",
-            "qwertyui",
-            "abc12345",
-            "11111111",
-            "12312312",
-            "password1",
-            "iloveyou",
-            "letmein1"
-        )
+        public val DEFAULT_COMMON_PASSWORDS: Set<String> =
+            setOf(
+                "12345678",
+                "password",
+                "123456789",
+                "qwertyui",
+                "abc12345",
+                "11111111",
+                "12312312",
+                "password1",
+                "iloveyou",
+                "letmein1"
+            )
     }
 }

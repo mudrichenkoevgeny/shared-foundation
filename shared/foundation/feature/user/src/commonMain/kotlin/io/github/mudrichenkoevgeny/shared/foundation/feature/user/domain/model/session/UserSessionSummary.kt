@@ -19,12 +19,12 @@ import kotlin.time.Instant
  * @property lastAccessedAt Timestamp of last session activity.
  * @property expiresAt Session expiration timestamp.
  */
-data class UserSessionSummary(
-    val id: UserSessionId = UserSessionId.generate(),
-    val userId: UserId,
-    val clientDeviceInfo: ClientDeviceInfo,
-    val identifierDisplayName: String,
-    val identifierAuthProvider: UserAuthProvider,
-    val lastAccessedAt: Instant,
-    val expiresAt: Instant
+public data class UserSessionSummary(
+    public val id: UserSessionId = UserSessionId.generate(),
+    public val userId: UserId,
+    public val clientDeviceInfo: ClientDeviceInfo,
+    public val identifierDisplayName: String,
+    public val identifierAuthProvider: UserAuthProvider,
+    public val lastAccessedAt: Instant,
+    public val expiresAt: Instant
 )

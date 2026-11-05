@@ -12,8 +12,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
@@ -29,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for managing the current authenticated principal's identifiers in the management API (self-service).
  */
-object SelfManagementIdentifierRoutes {
+public object SelfManagementIdentifierRoutes {
     /** Base path for self-service identifier operations in management API. */
     private const val BASE_SELF_IDENTIFIERS_ROUTE =
         "${SelfManagementUserRoutes.BASE_SELF_MANAGEMENT_USER_ROUTE}/identifiers"
@@ -89,7 +87,7 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierList]
      */
-    const val GET_IDENTIFIERS = BASE_SELF_IDENTIFIERS_ROUTE
+    public const val GET_IDENTIFIERS: String = BASE_SELF_IDENTIFIERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -111,7 +109,7 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierDetail]
      */
-    const val GET_IDENTIFIER = "$BASE_SELF_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val GET_IDENTIFIER: String = "$BASE_SELF_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -147,6 +145,6 @@ object SelfManagementIdentifierRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.IdentifierDetail]
      */
-    const val IDENTIFIER_EMAIL_CHANGE_PASSWORD =
+    public const val IDENTIFIER_EMAIL_CHANGE_PASSWORD: String =
         "$BASE_SELF_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}/change-password"
 }

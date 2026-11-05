@@ -12,19 +12,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
- * Creates a test [UserIdentifierPrivate] instance with default mock properties for unit testing.
- *
- * @param id Unique identifier ID ([UserIdentifierId]).
- * @param userId Owning user ID ([UserId]).
- * @param userAuthProvider Provider category ([UserAuthProvider]).
- * @param identifier Raw or masked credential identifier.
- * @param displayName Non-null display name.
- * @param externalProviderEmail External email address if available.
- * @param isSensitiveValuesMasked Whether sensitive fields are masked.
- * @param createdAt Creation timestamp.
- * @param updatedAt Modification timestamp.
- */
-fun createTestUserIdentifierPrivate(
+* Creates a test [UserIdentifierPrivate] instance with default mock properties for unit testing.
+*
+* @param id Unique identifier ID ([UserIdentifierId]).
+* @param userId Owning user ID ([UserId]).
+* @param userAuthProvider Provider category ([UserAuthProvider]).
+* @param identifier Raw or masked credential identifier.
+* @param displayName Non-null display name.
+* @param externalProviderEmail External email address if available.
+* @param isSensitiveValuesMasked Whether sensitive fields are masked.
+* @param createdAt Creation timestamp.
+* @param updatedAt Modification timestamp.
+*/
+public fun createTestUserIdentifierPrivate(
     id: UserIdentifierId = createTestUserIdentifierId(),
     userId: UserId = createTestUserId(),
     userAuthProvider: UserAuthProvider = UserAuthProvider.EMAIL,
@@ -34,26 +34,27 @@ fun createTestUserIdentifierPrivate(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-) = UserIdentifierPrivate(
-    id = id,
-    userId = userId,
-    userAuthProvider = userAuthProvider,
-    identifier = identifier,
-    displayName = displayName,
-    externalProviderEmail = externalProviderEmail,
-    isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+): UserIdentifierPrivate =
+    UserIdentifierPrivate(
+        id = id,
+        userId = userId,
+        userAuthProvider = userAuthProvider,
+        identifier = identifier,
+        displayName = displayName,
+        externalProviderEmail = externalProviderEmail,
+        isSensitiveValuesMasked = isSensitiveValuesMasked,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )
 
 /**
- * Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,
- * alternating providers, and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserIdentifierPrivateList(
+* Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,
+* alternating providers, and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserIdentifierPrivateList(
     count: Int = 2,
     generator: (index: Int) -> UserIdentifierPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

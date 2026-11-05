@@ -14,7 +14,9 @@ private const val ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS = "management_reset_
  * @property value String representation of the [SecurityAuditActionType].
  */
 @Serializable
-enum class SecurityAuditActionType(override val value: String) : AuditActionType {
+public enum class SecurityAuditActionType(
+    override val value: String
+) : AuditActionType {
     /** Administrative update of platform-wide security policy settings via [ManagementSecuritySettingsRoutes.UPDATE_MANAGEMENT_SECURITY_SETTINGS]. */
     @SerialName(ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS)
     MANAGEMENT_UPDATE_SECURITY_SETTINGS(ACTION_MANAGEMENT_UPDATE_SECURITY_SETTINGS),
@@ -23,14 +25,14 @@ enum class SecurityAuditActionType(override val value: String) : AuditActionType
     @SerialName(ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS)
     MANAGEMENT_RESET_SECURITY_SETTINGS(ACTION_MANAGEMENT_RESET_SECURITY_SETTINGS);
 
-    companion object {
+    public companion object {
         /**
          * Returns [SecurityAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): SecurityAuditActionType? =
+        public fun fromValueOrNull(value: String): SecurityAuditActionType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -38,7 +40,7 @@ enum class SecurityAuditActionType(override val value: String) : AuditActionType
          *
          * @throws IllegalArgumentException if [value] does not match any [SecurityAuditActionType].
          */
-        fun fromValueOrThrow(value: String): SecurityAuditActionType =
+        public fun fromValueOrThrow(value: String): SecurityAuditActionType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${SecurityAuditActionType::class.simpleName}: '$value'"
             )

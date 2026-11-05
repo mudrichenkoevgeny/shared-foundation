@@ -35,25 +35,25 @@ import kotlin.time.Instant
  * @property avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  * @property birthdate User birthdate timestamp ([Instant]), or `null`.
  */
-data class UserInternal(
-    val id: UserId = UserId.generate(),
-    val role: UserRole,
-    val accountStatus: UserAccountStatus,
-    val accountStatusOnRestore: UserAccountStatus?,
-    val authorityLevel: Int,
-    val permissionCodes: Set<PermissionCode>,
-    val isTotpEnabled: Boolean,
-    val lastLoginAt: Instant?,
-    val lastActiveAt: Instant?,
-    val createdAt: Instant,
-    val updatedAt: Instant?,
-    val scheduledPermanentDeletionAt: Instant?,
-    val lockoutType: AccountLockoutType,
-    val temporaryLockoutUntil: Instant?,
-    val storageConfiguration: UserStorageConfiguration?,
-    val nickname: String?,
-    val displayName: String?,
+public data class UserInternal(
+    public val id: UserId = UserId.generate(),
+    public val role: UserRole,
+    public val accountStatus: UserAccountStatus,
+    public val accountStatusOnRestore: UserAccountStatus?,
+    public val authorityLevel: Int,
+    public val permissionCodes: Set<PermissionCode>,
+    public val isTotpEnabled: Boolean,
+    public val lastLoginAt: Instant?,
+    public val lastActiveAt: Instant?,
+    public val createdAt: Instant,
+    public val updatedAt: Instant?,
+    public val scheduledPermanentDeletionAt: Instant?,
+    public val lockoutType: AccountLockoutType,
+    public val temporaryLockoutUntil: Instant?,
+    public val storageConfiguration: UserStorageConfiguration?,
+    public val nickname: String?,
+    public val displayName: String?,
     val avatarFileId: FileId?,
     val avatarUrls: FileUrls?,
-    val birthdate: Instant?
+    public val birthdate: Instant?
 )

@@ -11,9 +11,9 @@ import kotlin.time.Instant
  * @property fileUrl Final URL where the file will be accessible after upload.
  * @property expiresAt Expiration timestamp of the upload URL ([Instant]).
  */
-data class PresignedUrl(
-    val fileId: FileId,
-    val uploadUrl: String,
-    val fileUrl: String,
-    val expiresAt: Instant
+public data class PresignedUrl(
+    public val fileId: FileId,
+    public val uploadUrl: String,
+    public val fileUrl: String,
+    public val expiresAt: Instant
 )

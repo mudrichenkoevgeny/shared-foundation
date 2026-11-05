@@ -17,6 +17,7 @@ This document is the entry point for architectural and coding standards. These r
 - **Route Documentation Parity:** Every API route constant MUST include a complete KDoc section with mandatory **Request body:** (`None.` if absent) and **Response body:** (`None (204 No Content)` if absent), **UI Presentation:** listing associated UI screens (`Screens:`) or flows (`Flow:`), alongside authorization, audit logging, and payload references.
 - **Manual Test Execution:** Test runs must be triggered explicitly. Automated execution on file change is prohibited.
 - **No Redundant Builds:** Do not run Gradle build tasks or attempt compilation after modifying documentation (KDoc), comments, or other non-executable changes that cannot possibly break the build.
+- **Mandatory Sub-Agent Audit (Dual-Agent Review):** After implementing non-trivial code changes, new features, or complex refactorings, the AI agent MUST automatically invoke an independent reviewer sub-agent via the `task` tool to audit modified files against `AGENTS.md` guidelines, type safety, edge cases, and error handling before presenting the final result.
 - **Git Ban (Strict Prohibition):** NEVER run git commands (`git add`, `git commit`, `git push`, etc.) via shell. Version control, staging, and committing are strictly the developer's responsibility. Do not attempt to save or document changes into git history.
 
 ## Module Map

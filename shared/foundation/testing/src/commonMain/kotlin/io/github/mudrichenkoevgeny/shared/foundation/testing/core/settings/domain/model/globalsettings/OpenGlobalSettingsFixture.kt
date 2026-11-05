@@ -4,21 +4,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.OpenGlobalSettings
 
 /**
- * Creates a test [OpenGlobalSettings] domain instance.
- *
- * @param privacyPolicyUrl URL of the privacy policy.
- * @param termsOfServiceUrl URL of the terms of service.
- * @param contactSupportEmail Contact support email address.
- * @param minSupportedAppVersions Map of client types to minimum supported app versions.
- */
-fun createTestOpenGlobalSettings(
+* Creates a test [OpenGlobalSettings] domain instance.
+*
+* @param privacyPolicyUrl URL of the privacy policy.
+* @param termsOfServiceUrl URL of the terms of service.
+* @param contactSupportEmail Contact support email address.
+* @param minSupportedAppVersions Map of client types to minimum supported app versions.
+*/
+public fun createTestOpenGlobalSettings(
     privacyPolicyUrl: String? = "https://example.com/privacy",
     termsOfServiceUrl: String? = "https://example.com/terms",
     contactSupportEmail: String? = "support@example.com",
     minSupportedAppVersions: Map<ClientType, String> = mapOf(ClientType.ANDROID to "1.0.0")
-) = OpenGlobalSettings(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions
-)
+): OpenGlobalSettings =
+    OpenGlobalSettings(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions
+    )

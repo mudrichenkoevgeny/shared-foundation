@@ -24,7 +24,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  * `GET` and `PUT` share the same path; the management prefix distinguishes them from the open
  * read-only auth-settings route (no management prefix, open slice).
  */
-object ManagementAuthSettingsRoutes {
+public object ManagementAuthSettingsRoutes {
     /** Base path for management authentication settings operations. */
     private const val BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}"
@@ -48,7 +48,7 @@ object ManagementAuthSettingsRoutes {
      * - Screens:
      *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
-    const val GET_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
+    public const val GET_MANAGEMENT_AUTH_SETTINGS: String = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -80,7 +80,7 @@ object ManagementAuthSettingsRoutes {
      * - Screens:
      *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
-    const val UPDATE_MANAGEMENT_AUTH_SETTINGS = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
+    public const val UPDATE_MANAGEMENT_AUTH_SETTINGS: String = BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -112,7 +112,7 @@ object ManagementAuthSettingsRoutes {
      * - Screens:
      *   - [ManagementAuthSettingsNavigation.AuthSettings]
      */
-    const val RESET_MANAGEMENT_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
+    public const val RESET_MANAGEMENT_AUTH_SETTINGS: String = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/reset"
 
     /**
      * **HTTP method:** `GET`
@@ -130,5 +130,5 @@ object ManagementAuthSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_AUTH_SETTINGS = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/open"
+    public const val GET_OPEN_AUTH_SETTINGS: String = "$BASE_MANAGEMENT_AUTH_SETTINGS_ROUTE/open"
 }

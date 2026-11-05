@@ -3,12 +3,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contrac
 /**
  * Audit-specific naming conventions for API path parameters.
  */
-object AuditApiPaths {
+public object AuditApiPaths {
     /**
      * Path parameter for a single audit event identifier.
      *
      * Wire format is a UUID string (hex with dashes).
      */
-    const val EVENT_ID = "event_id"
+    public const val EVENT_ID: String = "event_id"
 }
-

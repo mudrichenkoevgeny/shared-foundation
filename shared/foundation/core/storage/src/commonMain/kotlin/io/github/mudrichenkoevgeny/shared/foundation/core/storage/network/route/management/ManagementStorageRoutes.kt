@@ -11,12 +11,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.C
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action.StorageAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.permission.StoragePermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
@@ -28,7 +24,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 /**
  * Route paths for storage administrative management in the management API.
  */
-object ManagementStorageRoutes {
+public object ManagementStorageRoutes {
     /** Base path for management storage endpoints. */
     private const val BASE_MANAGEMENT_STORAGE_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}"
@@ -98,7 +94,7 @@ object ManagementStorageRoutes {
      * - Screens:
      *   - [ManagementStorageNavigation.FileList]
      */
-    const val GET_FILES = BASE_MANAGEMENT_STORAGE_FILES_ROUTE
+    public const val GET_FILES: String = BASE_MANAGEMENT_STORAGE_FILES_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -121,7 +117,7 @@ object ManagementStorageRoutes {
      * - Screens:
      *   - [ManagementStorageNavigation.FileDetail]
      */
-    const val GET_FILE = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val GET_FILE: String = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -153,7 +149,7 @@ object ManagementStorageRoutes {
      * - Screens:
      *   - [ManagementStorageNavigation.FileList]
      */
-    const val DELETE_FILES_BATCH = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
+    public const val DELETE_FILES_BATCH: String = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
 
     /**
      * **HTTP method:** `DELETE`
@@ -187,5 +183,5 @@ object ManagementStorageRoutes {
      * - Screens:
      *   - [ManagementStorageNavigation.FileDetail]
      */
-    const val DELETE_FILE = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val DELETE_FILE: String = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 }

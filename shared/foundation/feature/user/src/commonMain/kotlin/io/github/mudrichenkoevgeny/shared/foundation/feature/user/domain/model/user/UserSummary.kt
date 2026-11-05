@@ -17,11 +17,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property displayName Human-readable display name string (e.g. `"Ivan Ivanov"`), or `null`.
  * @property avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
  */
-data class UserSummary(
-    val id: UserId = UserId.generate(),
-    val role: UserRole,
-    val accountStatus: UserAccountStatus,
-    val nickname: String?,
-    val displayName: String?,
-    val avatarUrls: FileUrls?
+public data class UserSummary(
+    public val id: UserId = UserId.generate(),
+    public val role: UserRole,
+    public val accountStatus: UserAccountStatus,
+    public val nickname: String?,
+    public val displayName: String?,
+    public val avatarUrls: FileUrls?
 )

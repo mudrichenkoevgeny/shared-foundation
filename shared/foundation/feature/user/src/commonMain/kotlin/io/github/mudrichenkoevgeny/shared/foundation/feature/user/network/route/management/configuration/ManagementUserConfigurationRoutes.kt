@@ -9,7 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Route paths for management-specific user configuration settings.
  */
-object ManagementUserConfigurationRoutes {
+public object ManagementUserConfigurationRoutes {
     /** Base path for management user configuration endpoints. */
     private const val BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE = "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}/user-configuration"
 
@@ -30,7 +30,7 @@ object ManagementUserConfigurationRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_MANAGEMENT_USER_CONFIGURATION = BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE
+    public const val GET_MANAGEMENT_USER_CONFIGURATION: String = BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -48,5 +48,5 @@ object ManagementUserConfigurationRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_USER_CONFIGURATION = "$BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE/open"
+    public const val GET_OPEN_USER_CONFIGURATION: String = "$BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE/open"
 }

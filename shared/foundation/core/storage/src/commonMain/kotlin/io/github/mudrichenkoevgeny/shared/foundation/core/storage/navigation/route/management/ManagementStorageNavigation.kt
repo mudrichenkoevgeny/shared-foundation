@@ -16,8 +16,7 @@ import kotlinx.serialization.Serializable
  * Management navigation screen routes for global storage files operations.
  */
 @Serializable
-sealed interface ManagementStorageNavigation : NavigationRoute {
-
+public sealed interface ManagementStorageNavigation : NavigationRoute {
     /**
      * Virtual entry redirect route forwarding navigation from the storage root to the storage files list.
      *
@@ -26,8 +25,7 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementStorageNavigation, RedirectNavigationRoute {
-
+    public data object Main : ManagementStorageNavigation, RedirectNavigationRoute {
         override val route: String
             get() = BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE
 
@@ -46,18 +44,18 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class FileList(
+    public data class FileList(
         override val params: ManagementStorageFileListParams = ManagementStorageFileListParams()
-    ) : ManagementStorageNavigation, ParameterizedNavigationRoute<ManagementStorageFileListParams> {
-
+    ) : ManagementStorageNavigation,
+        ParameterizedNavigationRoute<ManagementStorageFileListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/files"
+        public companion object {
+            public const val ROUTE: String = "${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}/files"
         }
     }
 
@@ -70,24 +68,22 @@ sealed interface ManagementStorageNavigation : NavigationRoute {
      *   - [ManagementStorageRoutes.DELETE_FILE]
      */
     @Serializable
-    data class FileDetail(
+    public data class FileDetail(
         override val params: StorageFileDetailParams
-    ) : ManagementStorageNavigation, ParameterizedNavigationRoute<StorageFileDetailParams> {
-
+    ) : ManagementStorageNavigation,
+        ParameterizedNavigationRoute<StorageFileDetailParams> {
         override val route: String
             get() = getPath(params.fileId)
 
         override val parentRoute: String
             get() = FileList.ROUTE
 
-        companion object {
-            const val ROUTE = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
 
-            fun getPath(fileId: FileId): String =
-                ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
+            public fun getPath(fileId: FileId): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
 
-            fun getPath(fileId: String): String =
-                ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
+            public fun getPath(fileId: String): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
         }
     }
 }

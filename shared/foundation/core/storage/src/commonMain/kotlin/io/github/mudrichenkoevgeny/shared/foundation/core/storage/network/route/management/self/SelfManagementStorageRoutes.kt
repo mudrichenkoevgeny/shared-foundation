@@ -4,12 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
-import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementSelfStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
@@ -22,8 +18,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 /**
  * Route paths for managing the current authenticated staff member's storage files in the management API (self-service).
  */
-object SelfManagementStorageRoutes {
-
+public object SelfManagementStorageRoutes {
     /** Base path for self-service staff storage operations. */
     private const val BASE_SELF_MANAGEMENT_STORAGE_ROUTE =
         "${CommonNetworkRoutes.BASE_SELF_MANAGEMENT_NETWORK_ROUTE}${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}"
@@ -90,7 +85,7 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileList]
      */
-    const val GET_FILES = BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE
+    public const val GET_FILES: String = BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -112,7 +107,7 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileDetail]
      */
-    const val GET_FILE = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val GET_FILE: String = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -132,7 +127,7 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileUpload]
      */
-    const val POST_PRESIGNED_UPLOAD_URL = "$BASE_SELF_MANAGEMENT_STORAGE_ROUTE/presigned-url"
+    public const val POST_PRESIGNED_UPLOAD_URL: String = "$BASE_SELF_MANAGEMENT_STORAGE_ROUTE/presigned-url"
 
     /**
      * **HTTP method:** `POST`
@@ -155,7 +150,7 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileUpload]
      */
-    const val CONFIRM_UPLOAD = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
+    public const val CONFIRM_UPLOAD: String = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
 
     /**
      * **HTTP method:** `DELETE`
@@ -177,7 +172,7 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileDetail]
      */
-    const val DELETE_FILE = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
+    public const val DELETE_FILE: String = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}"
 
     /**
      * **HTTP method:** `POST`
@@ -198,5 +193,5 @@ object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileList]
      */
-    const val DELETE_FILES_BATCH = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
+    public const val DELETE_FILES_BATCH: String = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
 }

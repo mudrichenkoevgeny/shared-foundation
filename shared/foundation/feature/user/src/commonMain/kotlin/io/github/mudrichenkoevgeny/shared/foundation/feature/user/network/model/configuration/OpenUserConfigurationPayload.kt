@@ -17,16 +17,13 @@ import kotlinx.serialization.Serializable
  * @property openAuthSettings Authentication settings.
  */
 @Serializable
-data class OpenUserConfigurationPayload(
+public data class OpenUserConfigurationPayload(
     @SerialName(UserApiFields.OPEN_GLOBAL_SETTINGS)
-    val openGlobalSettings: OpenGlobalSettingsPayload,
-
+    public val openGlobalSettings: OpenGlobalSettingsPayload,
     @SerialName(UserApiFields.OPEN_SECURITY_SETTINGS)
-    val openSecuritySettings: OpenSecuritySettingsPayload,
-
+    public val openSecuritySettings: OpenSecuritySettingsPayload,
     @SerialName(UserApiFields.OPEN_STORAGE_SETTINGS)
-    val openStorageSettings: OpenStorageSettingsPayload,
-
+    public val openStorageSettings: OpenStorageSettingsPayload,
     @SerialName(UserApiFields.OPEN_AUTH_SETTINGS)
-    val openAuthSettings: OpenAuthSettingsPayload
+    public val openAuthSettings: OpenAuthSettingsPayload
 )

@@ -15,16 +15,13 @@ import kotlinx.serialization.Serializable
  * @property args Dynamic metadata providing additional context for the failure (e.g. [CommonErrorArgs]).
  */
 @Serializable
-data class ApiErrorResponse(
+public data class ApiErrorResponse(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(CommonApiFields.CODE)
-    val code: String,
-
+    public val code: String,
     @SerialName(CommonApiFields.MESSAGE)
-    val message: String,
-
+    public val message: String,
     @SerialName(CommonApiFields.ARGS)
-    val args: Map<String, String>
+    public val args: Map<String, String>
 )

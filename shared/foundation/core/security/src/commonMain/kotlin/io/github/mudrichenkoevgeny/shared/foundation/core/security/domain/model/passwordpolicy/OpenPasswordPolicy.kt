@@ -10,11 +10,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property requireDigit If true, password must contain at least one numerical digit.
  * @property requireSpecialChar If true, password must contain at least one special character.
  */
-data class OpenPasswordPolicy(
-    val minLength: Int,
-    val requireLetter: Boolean,
-    val requireUpperCase: Boolean,
-    val requireLowerCase: Boolean,
-    val requireDigit: Boolean,
-    val requireSpecialChar: Boolean
+public data class OpenPasswordPolicy(
+    public val minLength: Int,
+    public val requireLetter: Boolean,
+    public val requireUpperCase: Boolean,
+    public val requireLowerCase: Boolean,
+    public val requireDigit: Boolean,
+    public val requireSpecialChar: Boolean
 )

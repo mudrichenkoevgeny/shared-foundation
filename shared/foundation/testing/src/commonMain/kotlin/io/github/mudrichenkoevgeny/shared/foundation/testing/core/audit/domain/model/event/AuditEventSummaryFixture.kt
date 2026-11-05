@@ -14,39 +14,40 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
 import kotlin.time.Instant
 
 /**
- * Creates a test [AuditEventSummary] instance with default mock properties for unit testing.
- *
- * @param id Unique audit event ID ([AuditEventId]).
- * @param actorType Actor category ([AuditActorType]).
- * @param action Executed action ([AuditActionType]).
- * @param resource Target resource category ([AuditResourceType]).
- * @param status Outcome status ([AuditStatus]).
- * @param createdAt Event timestamp.
- */
-fun createTestAuditEventSummary(
+* Creates a test [AuditEventSummary] instance with default mock properties for unit testing.
+*
+* @param id Unique audit event ID ([AuditEventId]).
+* @param actorType Actor category ([AuditActorType]).
+* @param action Executed action ([AuditActionType]).
+* @param resource Target resource category ([AuditResourceType]).
+* @param status Outcome status ([AuditStatus]).
+* @param createdAt Event timestamp.
+*/
+public fun createTestAuditEventSummary(
     id: AuditEventId = createTestAuditEventId(),
     actorType: AuditActorType = AuditActorType.USER,
     action: AuditActionType = UserAuditActionType.LOGIN_BY_EMAIL,
     resource: AuditResourceType = CommonAuditResourceType.AUDIT_EVENT,
     status: AuditStatus = AuditStatus.SUCCESS,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-) = AuditEventSummary(
-    id = id,
-    actorType = actorType,
-    action = action,
-    resource = resource,
-    status = status,
-    createdAt = createdAt
-)
+): AuditEventSummary =
+    AuditEventSummary(
+        id = id,
+        actorType = actorType,
+        action = action,
+        resource = resource,
+        status = status,
+        createdAt = createdAt
+    )
 
 /**
- * Creates a list of test [AuditEventSummary] instances with deterministic index-based IDs,
- * alternating status, and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestAuditEventSummaryList(
+* Creates a list of test [AuditEventSummary] instances with deterministic index-based IDs,
+* alternating status, and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestAuditEventSummaryList(
     count: Int = 2,
     generator: (index: Int) -> AuditEventSummary = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

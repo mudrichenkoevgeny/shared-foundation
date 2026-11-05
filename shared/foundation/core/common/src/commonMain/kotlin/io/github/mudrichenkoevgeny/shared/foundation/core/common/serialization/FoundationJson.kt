@@ -5,9 +5,10 @@ import kotlinx.serialization.json.Json
 /**
  * Default [Json] settings for cross-platform data serialization.
  */
-val FoundationJson = Json {
-    ignoreUnknownKeys = true
-    isLenient = true
-    encodeDefaults = true
-    coerceInputValues = true
-}
+public val FoundationJson: Json =
+    Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        encodeDefaults = true
+        coerceInputValues = true
+    }

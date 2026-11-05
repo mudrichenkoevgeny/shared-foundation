@@ -15,7 +15,9 @@ private const val STATUS_PENDING_DELETION = "pending_deletion"
  * @property value String representation of the [UserAccountStatus].
  */
 @Serializable
-enum class UserAccountStatus(val value: String) {
+public enum class UserAccountStatus(
+    public val value: String
+) {
     /**
      * Account is fully functional with no restrictions.
      */
@@ -46,14 +48,14 @@ enum class UserAccountStatus(val value: String) {
     @SerialName(STATUS_PENDING_DELETION)
     PENDING_DELETION(STATUS_PENDING_DELETION);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserAccountStatus] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UserAccountStatus? =
+        public fun fromValueOrNull(value: String): UserAccountStatus? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -61,7 +63,7 @@ enum class UserAccountStatus(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAccountStatus].
          */
-        fun fromValueOrThrow(value: String): UserAccountStatus =
+        public fun fromValueOrThrow(value: String): UserAccountStatus =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserAccountStatus::class.simpleName}: '$value'"
             )

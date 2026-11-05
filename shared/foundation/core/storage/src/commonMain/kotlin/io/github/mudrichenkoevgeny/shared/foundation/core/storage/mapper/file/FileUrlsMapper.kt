@@ -4,21 +4,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 
 /**
- * Extension functions mapping file URL variants between domain and network representations.
- */
-
-/**
  * Builds domain [FileUrls] from [FileUrlsPayload].
  */
-fun FileUrlsPayload.toFileUrls(): FileUrls = FileUrls(
-    originalUrl = originalUrl,
-    urlPresets = urlPresets
-)
+public fun FileUrlsPayload.toFileUrls(): FileUrls =
+    FileUrls(
+        originalUrl = originalUrl,
+        urlPresets = urlPresets
+    )
 
 /**
  * Builds network [FileUrlsPayload] from domain [FileUrls].
  */
-fun FileUrls.toFileUrlsPayload(): FileUrlsPayload = FileUrlsPayload(
-    originalUrl = originalUrl,
-    urlPresets = urlPresets
-)
+public fun FileUrls.toFileUrlsPayload(): FileUrlsPayload =
+    FileUrlsPayload(
+        originalUrl = originalUrl,
+        urlPresets = urlPresets
+    )

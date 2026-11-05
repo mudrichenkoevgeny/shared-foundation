@@ -4,15 +4,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.nick
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.nickname.NicknameValidatorResult
 
 /**
- * Configurable mock implementation of [NicknameValidator] for testing.
- *
- * @property errorCode Error code to return when validation fails, or `null` for success.
- */
-class NicknameValidatorMock(
-    var errorCode: String? = null
+* Configurable mock implementation of [NicknameValidator] for testing.
+*
+* @property errorCode Error code to return when validation fails, or `null` for success.
+*/
+public class NicknameValidatorMock(
+    public var errorCode: String? = null
 ) : NicknameValidator {
-
-    override fun validate(
+    public override fun validate(
         nickname: String?,
         minLength: Int,
         maxLength: Int,

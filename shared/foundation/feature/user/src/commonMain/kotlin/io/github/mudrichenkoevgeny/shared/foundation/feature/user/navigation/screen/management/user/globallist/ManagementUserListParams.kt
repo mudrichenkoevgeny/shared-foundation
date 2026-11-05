@@ -73,69 +73,67 @@ import kotlinx.serialization.Serializable
  * @property searchQuery Search query targeting nickname and display name; wire key is [UserFilterValues.SEARCH_QUERY].
  */
 @Serializable
-data class ManagementUserListParams(
-    val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-    val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-    val sortBy: UserSortBy = UserSortBy.DEFAULT,
-    val sortOrder: SortOrder = SortOrder.DEFAULT,
-    val userIds: List<String> = emptyList(),
-    val userRoles: List<UserRole> = emptyList(),
-    val excludeUserRoles: List<UserRole> = emptyList(),
-    val accountStatuses: List<UserAccountStatus> = emptyList(),
-    val excludeAccountStatuses: List<UserAccountStatus> = emptyList(),
-    val accountStatusesOnRestore: List<UserAccountStatus> = emptyList(),
-    val excludeAccountStatusesOnRestore: List<UserAccountStatus> = emptyList(),
-    val isAccountStatusOnRestoreSet: Boolean? = null,
-    val authorityLevelFrom: Int? = null,
-    val authorityLevelTo: Int? = null,
-    val permissionCodes: List<String> = emptyList(),
-    val excludePermissionCodes: List<String> = emptyList(),
-    val isTotpEnabled: Boolean? = null,
-    val lastLoginAtFrom: String? = null,
-    val lastLoginAtTo: String? = null,
-    val isLastLoginAtSet: Boolean? = null,
-    val lastActiveAtFrom: String? = null,
-    val lastActiveAtTo: String? = null,
-    val isLastActiveAtSet: Boolean? = null,
-    val createdAtFrom: String? = null,
-    val createdAtTo: String? = null,
-    val updatedAtFrom: String? = null,
-    val updatedAtTo: String? = null,
-    val isUpdatedAtSet: Boolean? = null,
-    val scheduledPermanentDeletionAtFrom: String? = null,
-    val scheduledPermanentDeletionAtTo: String? = null,
-    val isScheduledPermanentDeletionAtSet: Boolean? = null,
-    val accountLockoutTypes: List<AccountLockoutType> = emptyList(),
-    val excludeAccountLockoutTypes: List<AccountLockoutType> = emptyList(),
-    val temporaryLockoutUntilFrom: String? = null,
-    val temporaryLockoutUntilTo: String? = null,
-    val isTemporaryLockoutUntilSet: Boolean? = null,
-    val storageQuotaBytesFrom: Long? = null,
-    val storageQuotaBytesTo: Long? = null,
-    val isStorageQuotaBytesSet: Boolean? = null,
-    val storageMaxUploadSizeBytesFrom: Long? = null,
-    val storageMaxUploadSizeBytesTo: Long? = null,
-    val isStorageMaxUploadSizeBytesSet: Boolean? = null,
-    val storageMaxPendingUploadsFrom: Long? = null,
-    val storageMaxPendingUploadsTo: Long? = null,
-    val isStorageMaxPendingUploadsSet: Boolean? = null,
-    val isStorageConfigurationSet: Boolean? = null,
-    val nickname: String? = null,
-    val isNicknameSet: Boolean? = null,
-    val displayName: String? = null,
-    val isDisplayNameSet: Boolean? = null,
-    val isAvatarSet: Boolean? = null,
-    val birthdateFrom: String? = null,
-    val birthdateTo: String? = null,
-    val isBirthdateSet: Boolean? = null,
-    val searchQuery: String? = null
+public data class ManagementUserListParams(
+    public val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    public val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+    public val sortBy: UserSortBy = UserSortBy.DEFAULT,
+    public val sortOrder: SortOrder = SortOrder.DEFAULT,
+    public val userIds: List<String> = emptyList(),
+    public val userRoles: List<UserRole> = emptyList(),
+    public val excludeUserRoles: List<UserRole> = emptyList(),
+    public val accountStatuses: List<UserAccountStatus> = emptyList(),
+    public val excludeAccountStatuses: List<UserAccountStatus> = emptyList(),
+    public val accountStatusesOnRestore: List<UserAccountStatus> = emptyList(),
+    public val excludeAccountStatusesOnRestore: List<UserAccountStatus> = emptyList(),
+    public val isAccountStatusOnRestoreSet: Boolean? = null,
+    public val authorityLevelFrom: Int? = null,
+    public val authorityLevelTo: Int? = null,
+    public val permissionCodes: List<String> = emptyList(),
+    public val excludePermissionCodes: List<String> = emptyList(),
+    public val isTotpEnabled: Boolean? = null,
+    public val lastLoginAtFrom: String? = null,
+    public val lastLoginAtTo: String? = null,
+    public val isLastLoginAtSet: Boolean? = null,
+    public val lastActiveAtFrom: String? = null,
+    public val lastActiveAtTo: String? = null,
+    public val isLastActiveAtSet: Boolean? = null,
+    public val createdAtFrom: String? = null,
+    public val createdAtTo: String? = null,
+    public val updatedAtFrom: String? = null,
+    public val updatedAtTo: String? = null,
+    public val isUpdatedAtSet: Boolean? = null,
+    public val scheduledPermanentDeletionAtFrom: String? = null,
+    public val scheduledPermanentDeletionAtTo: String? = null,
+    public val isScheduledPermanentDeletionAtSet: Boolean? = null,
+    public val accountLockoutTypes: List<AccountLockoutType> = emptyList(),
+    public val excludeAccountLockoutTypes: List<AccountLockoutType> = emptyList(),
+    public val temporaryLockoutUntilFrom: String? = null,
+    public val temporaryLockoutUntilTo: String? = null,
+    public val isTemporaryLockoutUntilSet: Boolean? = null,
+    public val storageQuotaBytesFrom: Long? = null,
+    public val storageQuotaBytesTo: Long? = null,
+    public val isStorageQuotaBytesSet: Boolean? = null,
+    public val storageMaxUploadSizeBytesFrom: Long? = null,
+    public val storageMaxUploadSizeBytesTo: Long? = null,
+    public val isStorageMaxUploadSizeBytesSet: Boolean? = null,
+    public val storageMaxPendingUploadsFrom: Long? = null,
+    public val storageMaxPendingUploadsTo: Long? = null,
+    public val isStorageMaxPendingUploadsSet: Boolean? = null,
+    public val isStorageConfigurationSet: Boolean? = null,
+    public val nickname: String? = null,
+    public val isNicknameSet: Boolean? = null,
+    public val displayName: String? = null,
+    public val isDisplayNameSet: Boolean? = null,
+    public val isAvatarSet: Boolean? = null,
+    public val birthdateFrom: String? = null,
+    public val birthdateTo: String? = null,
+    public val isBirthdateSet: Boolean? = null,
+    public val searchQuery: String? = null
 ) : NavigationScreenParams<ManagementUserListParams> {
-
     override val parser: NavigationScreenParamsParser<ManagementUserListParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ManagementUserListParams> {
-
+    public companion object : NavigationScreenParamsParser<ManagementUserListParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [ManagementUserListParams].
          *
@@ -145,231 +143,286 @@ data class ManagementUserListParams(
         override fun parse(params: Map<String, Any?>): ManagementUserListParams {
             val normalized = params.normalizeQueryParams()
 
-            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber =
+                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize =
+                normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
-                ?.firstOrNull()
-                ?.let { UserSortBy.fromValueOrNull(it) }
-                ?: UserSortBy.DEFAULT
+            val sortBy =
+                normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { UserSortBy.fromValueOrNull(it) }
+                    ?: UserSortBy.DEFAULT
 
-            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
-                ?.firstOrNull()
-                ?.let { SortOrder.fromValueOrNull(it) }
-                ?: SortOrder.DEFAULT
+            val sortOrder =
+                normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT
 
-            val userIds = normalized[UserFilterValues.USER_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val userIds =
+                normalized[UserFilterValues.USER_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val userRoles = normalized[UserFilterValues.ROLE]
-                ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                ?: emptyList()
+            val userRoles =
+                normalized[UserFilterValues.ROLE]
+                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeUserRoles = normalized[UserFilterValues.EXCLUDE_ROLE]
-                ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeUserRoles =
+                normalized[UserFilterValues.EXCLUDE_ROLE]
+                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val accountStatuses = normalized[UserFilterValues.ACCOUNT_STATUS]
-                ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val accountStatuses =
+                normalized[UserFilterValues.ACCOUNT_STATUS]
+                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeAccountStatuses = normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS]
-                ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeAccountStatuses =
+                normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS]
+                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val accountStatusesOnRestore = normalized[UserFilterValues.ACCOUNT_STATUS_ON_RESTORE]
-                ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val accountStatusesOnRestore =
+                normalized[UserFilterValues.ACCOUNT_STATUS_ON_RESTORE]
+                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeAccountStatusesOnRestore = normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE]
-                ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeAccountStatusesOnRestore =
+                normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE]
+                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val isAccountStatusOnRestoreSet = normalized[UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isAccountStatusOnRestoreSet =
+                normalized[UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val authorityLevelFrom = normalized[UserFilterValues.AUTHORITY_LEVEL_FROM]
-                ?.firstOrNull()
-                ?.toIntOrNull()
+            val authorityLevelFrom =
+                normalized[UserFilterValues.AUTHORITY_LEVEL_FROM]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
 
-            val authorityLevelTo = normalized[UserFilterValues.AUTHORITY_LEVEL_TO]
-                ?.firstOrNull()
-                ?.toIntOrNull()
+            val authorityLevelTo =
+                normalized[UserFilterValues.AUTHORITY_LEVEL_TO]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
 
-            val permissionCodes = normalized[UserFilterValues.PERMISSION_CODES]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val permissionCodes =
+                normalized[UserFilterValues.PERMISSION_CODES]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val excludePermissionCodes = normalized[UserFilterValues.EXCLUDE_PERMISSION_CODES]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val excludePermissionCodes =
+                normalized[UserFilterValues.EXCLUDE_PERMISSION_CODES]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val isTotpEnabled = normalized[UserFilterValues.IS_TOTP_ENABLED]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isTotpEnabled =
+                normalized[UserFilterValues.IS_TOTP_ENABLED]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val lastLoginAtFrom = normalized[UserFilterValues.LAST_LOGIN_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastLoginAtFrom =
+                normalized[UserFilterValues.LAST_LOGIN_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastLoginAtTo = normalized[UserFilterValues.LAST_LOGIN_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastLoginAtTo =
+                normalized[UserFilterValues.LAST_LOGIN_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isLastLoginAtSet = normalized[UserFilterValues.IS_LAST_LOGIN_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isLastLoginAtSet =
+                normalized[UserFilterValues.IS_LAST_LOGIN_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val lastActiveAtFrom = normalized[UserFilterValues.LAST_ACTIVE_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastActiveAtFrom =
+                normalized[UserFilterValues.LAST_ACTIVE_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastActiveAtTo = normalized[UserFilterValues.LAST_ACTIVE_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastActiveAtTo =
+                normalized[UserFilterValues.LAST_ACTIVE_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isLastActiveAtSet = normalized[UserFilterValues.IS_LAST_ACTIVE_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isLastActiveAtSet =
+                normalized[UserFilterValues.IS_LAST_ACTIVE_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val createdAtFrom = normalized[UserFilterValues.CREATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtFrom =
+                normalized[UserFilterValues.CREATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtTo = normalized[UserFilterValues.CREATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtTo =
+                normalized[UserFilterValues.CREATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtFrom = normalized[UserFilterValues.UPDATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtFrom =
+                normalized[UserFilterValues.UPDATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtTo = normalized[UserFilterValues.UPDATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtTo =
+                normalized[UserFilterValues.UPDATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isUpdatedAtSet = normalized[UserFilterValues.IS_UPDATED_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isUpdatedAtSet =
+                normalized[UserFilterValues.IS_UPDATED_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val scheduledPermanentDeletionAtFrom = normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val scheduledPermanentDeletionAtFrom =
+                normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val scheduledPermanentDeletionAtTo = normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val scheduledPermanentDeletionAtTo =
+                normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isScheduledPermanentDeletionAtSet = normalized[UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isScheduledPermanentDeletionAtSet =
+                normalized[UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val accountLockoutTypes = normalized[UserFilterValues.ACCOUNT_LOCKOUT_TYPE]
-                ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
-                ?: emptyList()
+            val accountLockoutTypes =
+                normalized[UserFilterValues.ACCOUNT_LOCKOUT_TYPE]
+                    ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeAccountLockoutTypes = normalized[UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE]
-                ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeAccountLockoutTypes =
+                normalized[UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE]
+                    ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val temporaryLockoutUntilFrom = normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val temporaryLockoutUntilFrom =
+                normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val temporaryLockoutUntilTo = normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val temporaryLockoutUntilTo =
+                normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isTemporaryLockoutUntilSet = normalized[UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isTemporaryLockoutUntilSet =
+                normalized[UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val storageQuotaBytesFrom = normalized[UserFilterValues.STORAGE_QUOTA_BYTES_FROM]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageQuotaBytesFrom =
+                normalized[UserFilterValues.STORAGE_QUOTA_BYTES_FROM]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val storageQuotaBytesTo = normalized[UserFilterValues.STORAGE_QUOTA_BYTES_TO]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageQuotaBytesTo =
+                normalized[UserFilterValues.STORAGE_QUOTA_BYTES_TO]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val isStorageQuotaBytesSet = normalized[UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isStorageQuotaBytesSet =
+                normalized[UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val storageMaxUploadSizeBytesFrom = normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageMaxUploadSizeBytesFrom =
+                normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val storageMaxUploadSizeBytesTo = normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageMaxUploadSizeBytesTo =
+                normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val isStorageMaxUploadSizeBytesSet = normalized[UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isStorageMaxUploadSizeBytesSet =
+                normalized[UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val storageMaxPendingUploadsFrom = normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageMaxPendingUploadsFrom =
+                normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val storageMaxPendingUploadsTo = normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO]
-                ?.firstOrNull()
-                ?.toLongOrNull()
+            val storageMaxPendingUploadsTo =
+                normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
 
-            val isStorageMaxPendingUploadsSet = normalized[UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isStorageMaxPendingUploadsSet =
+                normalized[UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val isStorageConfigurationSet = normalized[UserFilterValues.IS_STORAGE_CONFIGURATION_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isStorageConfigurationSet =
+                normalized[UserFilterValues.IS_STORAGE_CONFIGURATION_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val nickname = normalized[UserFilterValues.NICKNAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val nickname =
+                normalized[UserFilterValues.NICKNAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isNicknameSet = normalized[UserFilterValues.IS_NICKNAME_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isNicknameSet =
+                normalized[UserFilterValues.IS_NICKNAME_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val displayName = normalized[UserFilterValues.DISPLAY_NAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val displayName =
+                normalized[UserFilterValues.DISPLAY_NAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isDisplayNameSet = normalized[UserFilterValues.IS_DISPLAY_NAME_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isDisplayNameSet =
+                normalized[UserFilterValues.IS_DISPLAY_NAME_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val isAvatarSet = normalized[UserFilterValues.IS_AVATAR_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isAvatarSet =
+                normalized[UserFilterValues.IS_AVATAR_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val birthdateFrom = normalized[UserFilterValues.BIRTHDATE_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val birthdateFrom =
+                normalized[UserFilterValues.BIRTHDATE_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val birthdateTo = normalized[UserFilterValues.BIRTHDATE_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val birthdateTo =
+                normalized[UserFilterValues.BIRTHDATE_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isBirthdateSet = normalized[UserFilterValues.IS_BIRTHDATE_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isBirthdateSet =
+                normalized[UserFilterValues.IS_BIRTHDATE_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val searchQuery = normalized[UserFilterValues.SEARCH_QUERY]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val searchQuery =
+                normalized[UserFilterValues.SEARCH_QUERY]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
             return ManagementUserListParams(
                 pageNumber = pageNumber,

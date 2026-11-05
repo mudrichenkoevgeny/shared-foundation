@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,13 +14,11 @@ import kotlinx.serialization.Serializable
  * @property valueSensitivity Wire string matching [AuditValueSensitivity.value].
  */
 @Serializable
-data class AuditEventMetadataPayload(
+public data class AuditEventMetadataPayload(
     @SerialName(AuditEventFields.METADATA_KEY)
-    val key: String,
-
+    public val key: String,
     @SerialName(AuditEventFields.METADATA_VALUE)
-    val value: String,
-
+    public val value: String,
     @SerialName(AuditEventFields.METADATA_VALUE_SENSITIVITY)
-    val valueSensitivity: String
+    public val valueSensitivity: String
 )

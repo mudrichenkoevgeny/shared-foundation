@@ -24,25 +24,19 @@ import kotlin.time.Instant
  * @property expiresAt [UserSessionSummary.expiresAt] as Unix epoch milliseconds ([Instant]).
  */
 @Serializable
-data class UserSessionSummaryPayload(
+public data class UserSessionSummaryPayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.USER_ID)
-    val userId: String,
-
+    public val userId: String,
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val clientDeviceInfo: ClientDeviceInfoPayload,
-
+    public val clientDeviceInfo: ClientDeviceInfoPayload,
     @SerialName(UserApiFields.IDENTIFIER_DISPLAY_NAME)
-    val identifierDisplayName: String,
-
+    public val identifierDisplayName: String,
     @SerialName(UserApiFields.IDENTIFIER_AUTH_PROVIDER)
-    val identifierAuthProvider: String,
-
+    public val identifierAuthProvider: String,
     @SerialName(UserApiFields.LAST_ACCESSED_AT)
-    val lastAccessedAt: Long,
-
+    public val lastAccessedAt: Long,
     @SerialName(UserApiFields.EXPIRES_AT)
-    val expiresAt: Long
+    public val expiresAt: Long
 )

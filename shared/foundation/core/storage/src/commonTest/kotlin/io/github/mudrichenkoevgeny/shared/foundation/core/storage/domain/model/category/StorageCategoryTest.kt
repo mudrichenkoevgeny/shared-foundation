@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class StorageCategoryTest {
-
     @Test
     fun `fromValue accepts case-insensitive enum names and wire values`() {
         assertEquals(StorageCategory.IMAGE, StorageCategory.fromValueOrNull("image"))

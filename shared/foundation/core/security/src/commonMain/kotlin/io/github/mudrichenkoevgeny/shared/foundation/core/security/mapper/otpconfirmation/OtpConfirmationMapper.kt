@@ -6,17 +6,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 /**
  * Maps [OtpConfirmationPayload] DTO to domain model [OtpConfirmation].
  */
-fun OtpConfirmationPayload.toOtpConfirmation() = OtpConfirmation(
-    retryAfterSeconds = this.retryAfterSeconds,
-    numberOfSymbols = this.numberOfSymbols,
-    expirationSeconds = this.expirationSeconds
-)
+public fun OtpConfirmationPayload.toOtpConfirmation(): OtpConfirmation =
+    OtpConfirmation(
+        retryAfterSeconds = this.retryAfterSeconds,
+        numberOfSymbols = this.numberOfSymbols,
+        expirationSeconds = this.expirationSeconds
+    )
 
 /**
  * Maps domain model [OtpConfirmation] to [OtpConfirmationPayload] DTO.
  */
-fun OtpConfirmation.toOtpConfirmationPayload() = OtpConfirmationPayload(
-    retryAfterSeconds = this.retryAfterSeconds,
-    numberOfSymbols = this.numberOfSymbols,
-    expirationSeconds = this.expirationSeconds
-)
+public fun OtpConfirmation.toOtpConfirmationPayload(): OtpConfirmationPayload =
+    OtpConfirmationPayload(
+        retryAfterSeconds = this.retryAfterSeconds,
+        numberOfSymbols = this.numberOfSymbols,
+        expirationSeconds = this.expirationSeconds
+    )

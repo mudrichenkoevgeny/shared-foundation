@@ -23,22 +23,17 @@ import kotlinx.serialization.Serializable
  * @property avatarUrls [UserSummary.avatarUrls] on the wire as [FileUrlsPayload].
  */
 @Serializable
-data class UserSummaryPayload(
+public data class UserSummaryPayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.ROLE)
-    val role: String,
-
+    public val role: String,
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val accountStatus: String,
-
+    public val accountStatus: String,
     @SerialName(UserApiFields.NICKNAME)
-    val nickname: String? = null,
-
+    public val nickname: String? = null,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String? = null,
-
+    public val displayName: String? = null,
     @SerialName(UserApiFields.AVATAR_URLS)
-    val avatarUrls: FileUrlsPayload? = null
+    public val avatarUrls: FileUrlsPayload? = null
 )

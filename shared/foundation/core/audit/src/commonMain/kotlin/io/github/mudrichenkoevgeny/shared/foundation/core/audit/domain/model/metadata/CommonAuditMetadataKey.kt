@@ -35,7 +35,7 @@ private const val KEY_ERROR_CODE = "error_code"
  * @property valueSensitivity Sensitivity level for audit logging.
  */
 @Serializable
-enum class CommonAuditMetadataKey(
+public enum class CommonAuditMetadataKey(
     override val value: String,
     override val valueSensitivity: AuditValueSensitivity
 ) : AuditMetadataKey {
@@ -130,15 +130,15 @@ enum class CommonAuditMetadataKey(
     @SerialName(KEY_ERROR_CODE)
     ERROR_CODE(KEY_ERROR_CODE, AuditValueSensitivity.NON_SENSITIVE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [CommonAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
          * then by case-insensitive [value] match.
          */
-        fun fromValueOrNull(value: String): CommonAuditMetadataKey? =
+        public fun fromValueOrNull(value: String): CommonAuditMetadataKey? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -146,7 +146,7 @@ enum class CommonAuditMetadataKey(
          *
          * @throws IllegalArgumentException if [value] does not match any [CommonAuditMetadataKey].
          */
-        fun fromValueOrThrow(value: String): CommonAuditMetadataKey =
+        public fun fromValueOrThrow(value: String): CommonAuditMetadataKey =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${CommonAuditMetadataKey::class.simpleName}: '$value'"
             )

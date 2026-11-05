@@ -17,7 +17,9 @@ private const val CATEGORY_OTHER = "other"
  * @property value String representation of the [StorageCategory].
  */
 @Serializable
-enum class StorageCategory(val value: String) {
+public enum class StorageCategory(
+    public val value: String
+) {
     /**
      * Image assets (e.g. PNG, JPEG, WEBP, SVG).
      */
@@ -48,14 +50,14 @@ enum class StorageCategory(val value: String) {
     @SerialName(CATEGORY_OTHER)
     OTHER(CATEGORY_OTHER);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageCategory] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageCategory? =
+        public fun fromValueOrNull(value: String): StorageCategory? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -63,7 +65,7 @@ enum class StorageCategory(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageCategory].
          */
-        fun fromValueOrThrow(value: String): StorageCategory =
+        public fun fromValueOrThrow(value: String): StorageCategory =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageCategory::class.simpleName}: '$value'"
             )

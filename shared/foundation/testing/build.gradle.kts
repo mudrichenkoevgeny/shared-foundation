@@ -11,6 +11,8 @@ plugins {
 }
 
 configure<KotlinMultiplatformExtension> {
+    explicitApi()
+
     extensions.configure<KotlinMultiplatformAndroidLibraryExtension>("androidLibrary") {
         namespace = "io.github.mudrichenkoevgeny.shared.foundation.testing"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -43,6 +45,12 @@ configure<KotlinMultiplatformExtension> {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        jvmTest.dependencies {
+            implementation(libs.konsist)
+            implementation(libs.pact.consumer.junit5)
+            implementation(libs.pact.consumer.kotlin)
         }
     }
 }

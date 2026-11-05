@@ -13,51 +13,52 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
  *
  * Excludes `refreshTokenHash`.
  */
-fun UserSessionInternal.toUserSessionPrivate(
-    isSensitiveValuesMasked: Boolean = false
-): UserSessionPrivate = UserSessionPrivate(
-    id = id,
-    userId = userId,
-    userRole = userRole,
-    identifier = identifier,
-    identifierId = identifierId,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    clientDeviceInfo = clientDeviceInfo,
-    userAgent = userAgent,
-    ipAddress = ipAddress,
-    expiresAt = expiresAt,
-    lastAccessedAt = lastAccessedAt,
-    lastReauthenticatedAt = lastReauthenticatedAt,
-    isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+public fun UserSessionInternal.toUserSessionPrivate(isSensitiveValuesMasked: Boolean = false): UserSessionPrivate =
+    UserSessionPrivate(
+        id = id,
+        userId = userId,
+        userRole = userRole,
+        identifier = identifier,
+        identifierId = identifierId,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        clientDeviceInfo = clientDeviceInfo,
+        userAgent = userAgent,
+        ipAddress = ipAddress,
+        expiresAt = expiresAt,
+        lastAccessedAt = lastAccessedAt,
+        lastReauthenticatedAt = lastReauthenticatedAt,
+        isSensitiveValuesMasked = isSensitiveValuesMasked,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )
 
 /**
  * Converts a [UserSessionPrivate] into a condensed [UserSessionSummary].
  */
-fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
-    id = id,
-    userId = userId,
-    clientDeviceInfo = clientDeviceInfo,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    lastAccessedAt = lastAccessedAt,
-    expiresAt = expiresAt
-)
+public fun UserSessionPrivate.toUserSessionSummary(): UserSessionSummary =
+    UserSessionSummary(
+        id = id,
+        userId = userId,
+        clientDeviceInfo = clientDeviceInfo,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        lastAccessedAt = lastAccessedAt,
+        expiresAt = expiresAt
+    )
 
 /**
  * Converts a [UserSessionInternal] directly into a condensed [UserSessionSummary].
  *
  * Maps fields directly without allocating an intermediate [UserSessionPrivate] instance.
  */
-fun UserSessionInternal.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
-    id = id,
-    userId = userId,
-    clientDeviceInfo = clientDeviceInfo,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    lastAccessedAt = lastAccessedAt,
-    expiresAt = expiresAt
-)
+public fun UserSessionInternal.toUserSessionSummary(): UserSessionSummary =
+    UserSessionSummary(
+        id = id,
+        userId = userId,
+        clientDeviceInfo = clientDeviceInfo,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        lastAccessedAt = lastAccessedAt,
+        expiresAt = expiresAt
+    )

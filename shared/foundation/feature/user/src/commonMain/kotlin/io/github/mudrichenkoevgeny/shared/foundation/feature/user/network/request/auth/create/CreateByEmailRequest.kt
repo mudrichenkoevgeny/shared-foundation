@@ -25,42 +25,32 @@ import kotlinx.serialization.Serializable
  * @property birthdate Optional user birthdate timestamp in Unix epoch milliseconds, or `null`.
  */
 @Serializable
-data class CreateByEmailRequest(
+public data class CreateByEmailRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.EMAIL)
-    val email: String,
-
+    public val email: String,
     @SerialName(UserApiFields.PASSWORD)
-    val password: String? = null,
-
+    public val password: String? = null,
     @NotBlankStringField
     @SerialName(UserApiFields.ROLE)
-    val role: String,
-
+    public val role: String,
     @NotBlankStringField
     @SerialName(UserApiFields.ACCOUNT_STATUS)
-    val status: String,
-
+    public val status: String,
     @RequiredField
     @SerialName(UserApiFields.AUTHORITY_LEVEL)
-    val authorityLevel: Int,
-
+    public val authorityLevel: Int,
     @RequiredField
     @SerialName(UserApiFields.PERMISSION_CODES)
-    val permissionCodes: Set<String>,
-
+    public val permissionCodes: Set<String>,
     @SerialName(UserApiFields.STORAGE_CONFIGURATION)
-    val storageConfiguration: UserStorageConfigurationPayload?,
-
+    public val storageConfiguration: UserStorageConfigurationPayload?,
     @SerialName(UserApiFields.NICKNAME)
-    val nickname: String? = null,
-
+    public val nickname: String? = null,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String? = null,
-
+    public val displayName: String? = null,
     @SerialName(UserApiFields.AVATAR_FILE_ID)
-    val avatarFileId: String? = null,
-
+    public val avatarFileId: String? = null,
     @SerialName(UserApiFields.BIRTHDATE)
-    val birthdate: Long? = null
+    public val birthdate: Long? = null
 )

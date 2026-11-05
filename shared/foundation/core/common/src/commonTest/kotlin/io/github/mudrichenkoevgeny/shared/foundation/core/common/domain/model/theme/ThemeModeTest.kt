@@ -6,7 +6,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class ThemeModeTest {
-
     @Test
     fun testFromValueOrNull() {
         assertEquals(ThemeMode.LIGHT, ThemeMode.fromValueOrNull("light"))

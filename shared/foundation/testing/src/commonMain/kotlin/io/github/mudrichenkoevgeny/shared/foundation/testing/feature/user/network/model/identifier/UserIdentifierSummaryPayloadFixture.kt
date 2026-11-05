@@ -9,36 +9,37 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
- * Creates a test [UserIdentifierSummaryPayload] wire object for unit testing mapper logic.
- *
- * @param id Raw identifier ID string.
- * @param userId Raw user ID string.
- * @param userAuthProvider Wire string representation of [UserAuthProvider].
- * @param identifier Raw credential string.
- * @param displayName Non-null display name string.
- */
-fun createTestUserIdentifierSummaryPayload(
+* Creates a test [UserIdentifierSummaryPayload] wire object for unit testing mapper logic.
+*
+* @param id Raw identifier ID string.
+* @param userId Raw user ID string.
+* @param userAuthProvider Wire string representation of [UserAuthProvider].
+* @param identifier Raw credential string.
+* @param displayName Non-null display name string.
+*/
+public fun createTestUserIdentifierSummaryPayload(
     id: String = TEST_IDENTIFIER_ID,
     userId: String = TEST_USER_ID,
     userAuthProvider: String = UserAuthProvider.EMAIL.value,
     identifier: String = TEST_EMAIL,
     displayName: String = "Test User"
-) = UserIdentifierSummaryPayload(
-    id = id,
-    userId = userId,
-    userAuthProvider = userAuthProvider,
-    identifier = identifier,
-    displayName = displayName
-)
+): UserIdentifierSummaryPayload =
+    UserIdentifierSummaryPayload(
+        id = id,
+        userId = userId,
+        userAuthProvider = userAuthProvider,
+        identifier = identifier,
+        displayName = displayName
+    )
 
 /**
- * Creates a list of test [UserIdentifierSummaryPayload] wire objects with deterministic raw UUIDs,
- * and alternating auth providers.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserIdentifierSummaryPayloadList(
+* Creates a list of test [UserIdentifierSummaryPayload] wire objects with deterministic raw UUIDs,
+* and alternating auth providers.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserIdentifierSummaryPayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserIdentifierSummaryPayload = { index ->
         val isEmail = index % 2 == 0

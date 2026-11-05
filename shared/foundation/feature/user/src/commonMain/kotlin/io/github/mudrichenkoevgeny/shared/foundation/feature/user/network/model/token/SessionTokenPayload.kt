@@ -17,22 +17,17 @@ import kotlinx.serialization.Serializable
  * @property identifierId The [UserIdentifierId] on the wire as a hex-dash string.
  */
 @Serializable
-data class SessionTokenPayload(
+public data class SessionTokenPayload(
     @SerialName(UserApiFields.ACCESS_TOKEN)
-    val accessToken: String,
-
+    public val accessToken: String,
     @SerialName(UserApiFields.REFRESH_TOKEN)
-    val refreshToken: String,
-
+    public val refreshToken: String,
     @SerialName(UserApiFields.EXPIRES_AT)
-    val expiresAt: Long,
-
+    public val expiresAt: Long,
     @SerialName(UserApiFields.TOKEN_TYPE)
-    val tokenType: String,
-
+    public val tokenType: String,
     @SerialName(UserApiFields.SESSION_ID)
-    val sessionId: String,
-
+    public val sessionId: String,
     @SerialName(UserApiFields.IDENTIFIER_ID)
-    val identifierId: String
+    public val identifierId: String
 )

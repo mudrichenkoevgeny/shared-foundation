@@ -15,11 +15,11 @@ import kotlin.time.Instant
  * @property sessionId Unique identifier of the authenticated session.
  * @property identifierId Unique identifier of the credential record used for login.
  */
-data class SessionToken(
-    val accessToken: AccessToken,
-    val refreshToken: RefreshToken,
-    val expiresAt: Instant,
-    val tokenType: String = UserAuthSpec.TOKEN_TYPE_BEARER,
-    val sessionId: UserSessionId,
-    val identifierId: UserIdentifierId
+public data class SessionToken(
+    public val accessToken: AccessToken,
+    public val refreshToken: RefreshToken,
+    public val expiresAt: Instant,
+    public val tokenType: String = UserAuthSpec.TOKEN_TYPE_BEARER,
+    public val sessionId: UserSessionId,
+    public val identifierId: UserIdentifierId
 )

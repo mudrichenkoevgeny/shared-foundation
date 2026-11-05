@@ -12,7 +12,9 @@ import kotlinx.serialization.Serializable
  * @property value Wire value for `sort_by`.
  */
 @Serializable
-enum class UserSessionSortBy(val value: String) {
+public enum class UserSessionSortBy(
+    public val value: String
+) {
     /** Sort by session expiration timestamp. */
     @SerialName(UserApiFields.EXPIRES_AT)
     EXPIRES_AT(UserApiFields.EXPIRES_AT),
@@ -33,17 +35,17 @@ enum class UserSessionSortBy(val value: String) {
     @SerialName(CommonApiFields.UPDATED_AT)
     UPDATED_AT(CommonApiFields.UPDATED_AT);
 
-    companion object {
+    public companion object {
         /** Default sort field ([CREATED_AT]). */
-        val DEFAULT = CREATED_AT
+        public val DEFAULT: UserSessionSortBy = CREATED_AT
 
         /**
          * Returns [UserSessionSortBy] for the given wire value or case-insensitive enum name.
          */
-        fun fromValueOrNull(value: String): UserSessionSortBy? =
+        public fun fromValueOrNull(value: String): UserSessionSortBy? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -51,7 +53,7 @@ enum class UserSessionSortBy(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserSessionSortBy].
          */
-        fun fromValueOrThrow(value: String): UserSessionSortBy =
+        public fun fromValueOrThrow(value: String): UserSessionSortBy =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserSessionSortBy::class.simpleName}: '$value'"
             )

@@ -1,10 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
@@ -18,7 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.C
 /**
  * Route paths for audit management in the management API.
  */
-object ManagementAuditRoutes {
+public object ManagementAuditRoutes {
     /** Base path for management audit events endpoints. */
     private const val BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}/audit/events"
@@ -82,7 +80,7 @@ object ManagementAuditRoutes {
      * - Screens:
      *   - [ManagementAuditNavigation.AuditEventList]
      */
-    const val GET_AUDIT_EVENTS = BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE
+    public const val GET_AUDIT_EVENTS: String = BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -114,5 +112,5 @@ object ManagementAuditRoutes {
      * - Screens:
      *   - [ManagementAuditNavigation.AuditEventDetail]
      */
-    const val GET_AUDIT_EVENT = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/{${AuditApiPaths.EVENT_ID}}"
+    public const val GET_AUDIT_EVENT: String = "$BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE/{${AuditApiPaths.EVENT_ID}}"
 }

@@ -14,16 +14,14 @@ import kotlinx.serialization.Serializable
  * @property redirectUrl Target URL to navigate to upon successful authentication; wire key is [UserNavigationPaths.REDIRECT_URL].
  */
 @Serializable
-data class LoginByEmailParams(
+public data class LoginByEmailParams(
     val email: String? = null,
     val redirectUrl: String? = null
 ) : NavigationScreenParams<LoginByEmailParams> {
-
     override val parser: NavigationScreenParamsParser<LoginByEmailParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<LoginByEmailParams> {
-
+    public companion object : NavigationScreenParamsParser<LoginByEmailParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [LoginByEmailParams].
          *

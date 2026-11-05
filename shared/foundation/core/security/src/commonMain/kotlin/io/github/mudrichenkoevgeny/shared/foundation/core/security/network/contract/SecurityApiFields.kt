@@ -3,125 +3,125 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.cont
 /**
  * Security settings specific naming conventions for API request parameters and response fields.
  */
-object SecurityApiFields {
-
+public object SecurityApiFields {
     /**
      * JSON field name for how long a recent step-up or re-authentication remains valid
      * for open user actions, in seconds.
      */
-    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER = "recent_authentication_validity_seconds_for_open_user"
+    public const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER: String = "recent_authentication_validity_seconds_for_open_user"
 
     /**
      * JSON field name for how long a recent re-authentication remains valid
      * for management user actions, in seconds.
      */
-    const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT_USER = "recent_authentication_validity_seconds_for_management_user"
+    public const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT_USER: String =
+        "recent_authentication_validity_seconds_for_management_user"
 
     /** JSON field name for the temporary MFA challenge token used during multifactor authentication flows. */
-    const val MFA_TOKEN = "mfa_token"
+    public const val MFA_TOKEN: String = "mfa_token"
 
     /** JSON field name for the Time-based One-Time Password (TOTP) code. */
-    const val TOTP_CODE = "totp_code"
+    public const val TOTP_CODE: String = "totp_code"
 
     /** JSON field name for the shared secret key (Base32) used for TOTP generation. */
-    const val TOTP_SECRET_KEY = "totp_secret_key"
+    public const val TOTP_SECRET_KEY: String = "totp_secret_key"
 
     /** JSON field name for the standard `otpauth://` URI for provisioning TOTP. */
-    const val TOTP_OTP_AUTH_URL = "totp_otp_auth_url"
+    public const val TOTP_OTP_AUTH_URL: String = "totp_otp_auth_url"
 
     /** JSON field name for the list of backup recovery codes. */
-    const val TOTP_RECOVERY_CODES = "totp_recovery_codes"
+    public const val TOTP_RECOVERY_CODES: String = "totp_recovery_codes"
 
     /** JSON field name for the open password policy object. */
-    const val OPEN_PASSWORD_POLICY = "open_password_policy"
+    public const val OPEN_PASSWORD_POLICY: String = "open_password_policy"
 
     /** JSON field name for the management password policy object. */
-    const val MANAGEMENT_PASSWORD_POLICY = "management_password_policy"
+    public const val MANAGEMENT_PASSWORD_POLICY: String = "management_password_policy"
 
     /** JSON field name for minimum password length. */
-    const val MIN_LENGTH = "min_length"
+    public const val MIN_LENGTH: String = "min_length"
 
     /** JSON field name for the “at least one letter” requirement flag. */
-    const val REQUIRE_LETTER = "require_letter"
+    public const val REQUIRE_LETTER: String = "require_letter"
 
     /** JSON field name for the “at least one uppercase letter” requirement flag. */
-    const val REQUIRE_UPPER_CASE = "require_upper_case"
+    public const val REQUIRE_UPPER_CASE: String = "require_upper_case"
 
     /** JSON field name for the “at least one lowercase letter” requirement flag. */
-    const val REQUIRE_LOWER_CASE = "require_lower_case"
+    public const val REQUIRE_LOWER_CASE: String = "require_lower_case"
 
     /** JSON field name for the “at least one digit” requirement flag. */
-    const val REQUIRE_DIGIT = "require_digit"
+    public const val REQUIRE_DIGIT: String = "require_digit"
 
     /** JSON field name for the “at least one special character” requirement flag. */
-    const val REQUIRE_SPECIAL_CHAR = "require_special_char"
+    public const val REQUIRE_SPECIAL_CHAR: String = "require_special_char"
 
     /** JSON field name for the list (encoded as JSON array) of forbidden common passwords. */
-    const val COMMON_PASSWORDS = "common_passwords"
+    public const val COMMON_PASSWORDS: String = "common_passwords"
 
     /** JSON field name for the nested OTP confirmation object. */
-    const val OTP_CONFIRMATION = "otp_confirmation"
+    public const val OTP_CONFIRMATION: String = "otp_confirmation"
 
     /** JSON field name for the cooling-off period in seconds before a new OTP can be requested. */
-    const val RETRY_AFTER_SECONDS = "retry_after_seconds"
+    public const val RETRY_AFTER_SECONDS: String = "retry_after_seconds"
 
     /** JSON field name for the required length of the generated OTP code. */
-    const val NUMBER_OF_SYMBOLS = "number_of_symbols"
+    public const val NUMBER_OF_SYMBOLS: String = "number_of_symbols"
 
     /** JSON field name for the time-to-live (TTL) in seconds for the generated OTP. */
-    const val EXPIRATION_SECONDS = "expiration_seconds"
+    public const val EXPIRATION_SECONDS: String = "expiration_seconds"
 
     /** JSON field name for the maximum number of requests allowed per time unit. */
-    const val MAX_REQUESTS_PER_PERIOD = "max_requests_per_period"
+    public const val MAX_REQUESTS_PER_PERIOD: String = "max_requests_per_period"
 
     /** JSON field name for the rate limiting time window in seconds. */
-    const val RATE_LIMIT_PERIOD_SECONDS = "rate_limit_period_seconds"
+    public const val RATE_LIMIT_PERIOD_SECONDS: String = "rate_limit_period_seconds"
 
     /** JSON field name for the refresh token rotation grace period in seconds (used for replay attack detection). */
-    const val REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS = "refresh_token_rotation_grace_period_seconds"
+    public const val REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS: String = "refresh_token_rotation_grace_period_seconds"
 
     /** JSON field name for the nested account lockout policy object. */
-    const val ACCOUNT_LOCKOUT_POLICY = "account_lockout_policy"
+    public const val ACCOUNT_LOCKOUT_POLICY: String = "account_lockout_policy"
 
     /** JSON field name for the background worker check interval (in seconds) for expiring account lockouts. */
-    const val ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS = "account_lockout_check_interval_seconds"
+    public const val ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS: String = "account_lockout_check_interval_seconds"
 
     /** JSON field name for maximum consecutive wrong password attempts. */
-    const val MAX_FAILED_PASSWORD_ATTEMPTS = "max_failed_password_attempts"
+    public const val MAX_FAILED_PASSWORD_ATTEMPTS: String = "max_failed_password_attempts"
 
     /** JSON field name for maximum consecutive wrong OTP code attempts. */
-    const val MAX_FAILED_OTP_ATTEMPTS = "max_failed_otp_attempts"
+    public const val MAX_FAILED_OTP_ATTEMPTS: String = "max_failed_otp_attempts"
 
     /** JSON field name for maximum consecutive wrong TOTP attempts. */
-    const val MAX_FAILED_TOTP_ATTEMPTS = "max_failed_totp_attempts"
+    public const val MAX_FAILED_TOTP_ATTEMPTS: String = "max_failed_totp_attempts"
 
     /** JSON field name for the failed attempts accumulation time window in seconds. */
-    const val FAILED_ATTEMPTS_WINDOW_SECONDS = "failed_attempts_window_seconds"
+    public const val FAILED_ATTEMPTS_WINDOW_SECONDS: String = "failed_attempts_window_seconds"
 
     /** JSON field name for temporary lockout duration in seconds. */
-    const val LOCKOUT_DURATION_SECONDS = "lockout_duration_seconds"
+    public const val LOCKOUT_DURATION_SECONDS: String = "lockout_duration_seconds"
 
     /** JSON field name for the indefinite lockout threshold count. */
-    const val INDEFINITE_LOCKOUT_THRESHOLD = "indefinite_lockout_threshold"
+    public const val INDEFINITE_LOCKOUT_THRESHOLD: String = "indefinite_lockout_threshold"
 
     /** JSON field name for the self-service unlock enablement flag. */
-    const val IS_SELF_SERVICE_UNLOCK_ENABLED = "is_self_service_unlock_enabled"
+    public const val IS_SELF_SERVICE_UNLOCK_ENABLED: String = "is_self_service_unlock_enabled"
 
     /** JSON field name for open API IP restriction policy object. */
-    const val OPEN_IP_RESTRICTION_POLICY = "open_ip_restriction_policy"
+    public const val OPEN_IP_RESTRICTION_POLICY: String = "open_ip_restriction_policy"
 
     /** JSON field name for management API IP restriction policy object. */
-    const val MANAGEMENT_IP_RESTRICTION_POLICY = "management_ip_restriction_policy"
+    public const val MANAGEMENT_IP_RESTRICTION_POLICY: String = "management_ip_restriction_policy"
 
     /** JSON field name for the blacklist enablement flag. */
-    const val IS_BLACKLIST_ENABLED = "is_blacklist_enabled"
+    public const val IS_BLACKLIST_ENABLED: String = "is_blacklist_enabled"
 
     /** JSON field name for the blacklist items array. */
-    const val BLACKLIST = "blacklist"
+    public const val BLACKLIST: String = "blacklist"
 
     /** JSON field name for the whitelist enablement flag. */
-    const val IS_WHITELIST_ENABLED = "is_whitelist_enabled"
+    public const val IS_WHITELIST_ENABLED: String = "is_whitelist_enabled"
 
     /** JSON field name for the whitelist items array. */
-    const val WHITELIST = "whitelist"
+    public const val WHITELIST: String = "whitelist"
 }

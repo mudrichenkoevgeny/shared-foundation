@@ -14,7 +14,9 @@ private const val SORT_BY_FILE_SIZE_BYTES = "file_size_bytes"
  * @property value Wire value for `sort_by`.
  */
 @Serializable
-enum class StorageFileSortBy(val value: String) {
+public enum class StorageFileSortBy(
+    public val value: String
+) {
     /** Sort by creation timestamp. */
     @SerialName(CommonApiFields.CREATED_AT)
     CREATED_AT(CommonApiFields.CREATED_AT),
@@ -31,17 +33,17 @@ enum class StorageFileSortBy(val value: String) {
     @SerialName(SORT_BY_FILE_SIZE_BYTES)
     FILE_SIZE_BYTES(SORT_BY_FILE_SIZE_BYTES);
 
-    companion object {
+    public companion object {
         /** Default sort field ([CREATED_AT]). */
-        val DEFAULT = CREATED_AT
+        public val DEFAULT: StorageFileSortBy = CREATED_AT
 
         /**
          * Returns [StorageFileSortBy] for the given wire value or case-insensitive enum name.
          */
-        fun fromValueOrNull(value: String): StorageFileSortBy? =
+        public fun fromValueOrNull(value: String): StorageFileSortBy? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -49,7 +51,7 @@ enum class StorageFileSortBy(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageFileSortBy].
          */
-        fun fromValueOrThrow(value: String): StorageFileSortBy =
+        public fun fromValueOrThrow(value: String): StorageFileSortBy =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageFileSortBy::class.simpleName}: '$value'"
             )

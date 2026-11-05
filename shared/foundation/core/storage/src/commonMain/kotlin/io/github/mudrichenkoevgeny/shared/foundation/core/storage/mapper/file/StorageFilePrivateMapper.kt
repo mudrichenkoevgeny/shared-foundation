@@ -9,41 +9,39 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping detailed private storage file models between domain and network representations.
- */
-
-/**
  * Builds domain [StorageFilePrivate] from [StorageFilePrivatePayload].
  */
-fun StorageFilePrivatePayload.toStorageFilePrivate(): StorageFilePrivate = StorageFilePrivate(
-    id = id.toFileIdOrThrow(),
-    ownerUserId = ownerUserId,
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = StorageCategory.fromValueOrThrow(category),
-    visibility = StorageFileVisibility.fromValueOrThrow(visibility),
-    status = StorageFileStatus.fromValueOrThrow(status),
-    targetScope = targetScope,
-    fileUrls = fileUrls?.toFileUrls(),
-    createdAt = Instant.fromEpochMilliseconds(createdAt),
-    updatedAt = updatedAt?.let { Instant.fromEpochMilliseconds(it) }
-)
+public fun StorageFilePrivatePayload.toStorageFilePrivate(): StorageFilePrivate =
+    StorageFilePrivate(
+        id = id.toFileIdOrThrow(),
+        ownerUserId = ownerUserId,
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = StorageCategory.fromValueOrThrow(category),
+        visibility = StorageFileVisibility.fromValueOrThrow(visibility),
+        status = StorageFileStatus.fromValueOrThrow(status),
+        targetScope = targetScope,
+        fileUrls = fileUrls?.toFileUrls(),
+        createdAt = Instant.fromEpochMilliseconds(createdAt),
+        updatedAt = updatedAt?.let { Instant.fromEpochMilliseconds(it) }
+    )
 
 /**
  * Builds network [StorageFilePrivatePayload] from domain [StorageFilePrivate].
  */
-fun StorageFilePrivate.toStorageFilePrivatePayload(): StorageFilePrivatePayload = StorageFilePrivatePayload(
-    id = id.asHexDashString(),
-    ownerUserId = ownerUserId,
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = category.value,
-    visibility = visibility.value,
-    status = status.value,
-    targetScope = targetScope,
-    fileUrls = fileUrls?.toFileUrlsPayload(),
-    createdAt = createdAt.toEpochMilliseconds(),
-    updatedAt = updatedAt?.toEpochMilliseconds()
-)
+public fun StorageFilePrivate.toStorageFilePrivatePayload(): StorageFilePrivatePayload =
+    StorageFilePrivatePayload(
+        id = id.asHexDashString(),
+        ownerUserId = ownerUserId,
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = category.value,
+        visibility = visibility.value,
+        status = status.value,
+        targetScope = targetScope,
+        fileUrls = fileUrls?.toFileUrlsPayload(),
+        createdAt = createdAt.toEpochMilliseconds(),
+        updatedAt = updatedAt?.toEpochMilliseconds()
+    )

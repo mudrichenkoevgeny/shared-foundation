@@ -4,12 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.success.UnlockSuccessParams
 
 /**
- * Creates a test [UnlockSuccessParams] navigation params instance.
- *
- * @param unlockMethod Unlock method completed ([UnlockMethod]).
- */
-fun createTestUnlockSuccessParams(
-    unlockMethod: UnlockMethod? = UnlockMethod.EMAIL
-): UnlockSuccessParams = UnlockSuccessParams(
-    unlockMethod = unlockMethod
-)
+* Creates a test [UnlockSuccessParams] navigation params instance.
+*
+* @param unlockMethod Unlock method completed ([UnlockMethod]).
+*/
+public fun createTestUnlockSuccessParams(unlockMethod: UnlockMethod? = UnlockMethod.EMAIL): UnlockSuccessParams =
+    UnlockSuccessParams(
+        unlockMethod = unlockMethod
+    )

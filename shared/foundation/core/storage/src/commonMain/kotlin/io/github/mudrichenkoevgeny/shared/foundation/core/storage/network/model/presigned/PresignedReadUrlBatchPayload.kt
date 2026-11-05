@@ -9,6 +9,6 @@ import kotlinx.serialization.Serializable
  * or `null` if the file does not exist or access was denied.
  */
 @Serializable
-data class PresignedReadUrlBatchPayload(
-    val urls: Map<String, String?>
+public data class PresignedReadUrlBatchPayload(
+    public val urls: Map<String, String?>
 )

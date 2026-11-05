@@ -12,12 +12,11 @@ import kotlinx.serialization.Serializable
  * @property confirmationCode The verification code sent to the user's phone.
  */
 @Serializable
-data class UnlockByPhoneConfirmationRequest(
+public data class UnlockByPhoneConfirmationRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.PHONE_NUMBER)
-    val phoneNumber: String,
-
+    public val phoneNumber: String,
     @NotBlankStringField
     @SerialName(UserApiFields.CONFIRMATION_CODE)
-    val confirmationCode: String
+    public val confirmationCode: String
 )

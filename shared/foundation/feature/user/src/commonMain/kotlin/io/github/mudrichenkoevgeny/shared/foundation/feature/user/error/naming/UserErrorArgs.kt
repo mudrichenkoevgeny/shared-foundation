@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 /**
  * User-specific keys for error arguments used in API responses and backend logging.
  */
-object UserErrorArgs {
+public object UserErrorArgs {
     /**
      * Key for the unique identifier of the user related to the error.
      * Mostly used as a **secret argument** for internal logging.
@@ -16,7 +16,7 @@ object UserErrorArgs {
      * [UserErrorCodes.USER_READ_ONLY], [UserErrorCodes.USER_SECURITY_HOLD],
      * [UserErrorCodes.USER_PENDING_DELETION], [UserErrorCodes.USER_FORBIDDEN], [UserErrorCodes.USER_NOT_FOUND].
      */
-    const val USER_ID = "userId"
+    public const val USER_ID: String = "userId"
 
     /**
      * Key for the maximum number of identifiers allowed for the specific request context.
@@ -25,7 +25,7 @@ object UserErrorArgs {
      * Associated with [UserErrorCodes.USER_IDENTIFIER_LIMIT_REACHED],
      * [UserErrorCodes.TOTAL_USER_IDENTIFIERS_LIMIT_REACHED].
      */
-    const val MAX_NUMBER_OF_IDENTIFIERS = "maxNumberOfIdentifiers"
+    public const val MAX_NUMBER_OF_IDENTIFIERS: String = "maxNumberOfIdentifiers"
 
     /**
      * Key for the specific UserAuthProvider (see [UserAuthProvider]).
@@ -33,7 +33,7 @@ object UserErrorArgs {
      *
      * Associated with [UserErrorCodes.USER_IDENTIFIER_LIMIT_REACHED].
      */
-    const val USER_AUTH_PROVIDER = "userAuthProvider"
+    public const val USER_AUTH_PROVIDER: String = "userAuthProvider"
 
     /**
      * Key for the lockout category ([AccountLockoutType]: `NONE`, `INDEFINITE`, `TEMPORARY`).
@@ -41,7 +41,7 @@ object UserErrorArgs {
      *
      * Associated with [UserErrorCodes.USER_LOCKED].
      */
-    const val ACCOUNT_LOCKOUT_TYPE = "accountLockoutType"
+    public const val ACCOUNT_LOCKOUT_TYPE: String = "accountLockoutType"
 
     /**
      * Key for the temporary account lockout expiration timestamp in epoch milliseconds.
@@ -50,40 +50,40 @@ object UserErrorArgs {
      * Associated with [UserErrorCodes.USER_LOCKED].
      * Present only during temporary lockouts with the expiration timestamp; absent for indefinite lockouts.
      */
-    const val TEMPORARY_LOCKOUT_UNTIL = "temporaryLockoutUntil"
+    public const val TEMPORARY_LOCKOUT_UNTIL: String = "temporaryLockoutUntil"
 
     /**
      * Key for user nickname string.
      * Associated with [UserErrorCodes.NICKNAME_ALREADY_TAKEN].
      */
-    const val NICKNAME = "nickname"
+    public const val NICKNAME: String = "nickname"
 
     /**
      * Key for minimum allowed nickname character length.
      * Associated with [UserErrorCodes.NICKNAME_TOO_SHORT].
      */
-    const val NICKNAME_MIN_LENGTH = "nicknameMinLength"
+    public const val NICKNAME_MIN_LENGTH: String = "nicknameMinLength"
 
     /**
      * Key for maximum allowed nickname character length.
      * Associated with [UserErrorCodes.NICKNAME_TOO_LONG].
      */
-    const val NICKNAME_MAX_LENGTH = "nicknameMaxLength"
+    public const val NICKNAME_MAX_LENGTH: String = "nicknameMaxLength"
 
     /**
      * Key for user display name string.
      */
-    const val DISPLAY_NAME = "displayName"
+    public const val DISPLAY_NAME: String = "displayName"
 
     /**
      * Key for minimum allowed display name character length.
      * Associated with [UserErrorCodes.DISPLAY_NAME_TOO_SHORT].
      */
-    const val DISPLAY_NAME_MIN_LENGTH = "displayNameMinLength"
+    public const val DISPLAY_NAME_MIN_LENGTH: String = "displayNameMinLength"
 
     /**
      * Key for maximum allowed display name character length.
      * Associated with [UserErrorCodes.DISPLAY_NAME_TOO_LONG].
      */
-    const val DISPLAY_NAME_MAX_LENGTH = "displayNameMaxLength"
+    public const val DISPLAY_NAME_MAX_LENGTH: String = "displayNameMaxLength"
 }

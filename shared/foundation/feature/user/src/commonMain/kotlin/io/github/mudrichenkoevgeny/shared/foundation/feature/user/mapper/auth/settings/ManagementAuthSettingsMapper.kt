@@ -16,7 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [ManagementAuthSettings] from [ManagementAuthSettingsPayload].
  */
-fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSettings =
+public fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSettings =
     ManagementAuthSettings(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
         maxTotalIdentifiers = maxTotalIdentifiers,
@@ -42,7 +42,7 @@ fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSett
 /**
  * Builds network [ManagementAuthSettingsPayload] from domain [ManagementAuthSettings].
  */
-fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSettingsPayload =
+public fun ManagementAuthSettings.toManagementAuthSettingsPayload(): ManagementAuthSettingsPayload =
     ManagementAuthSettingsPayload(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
         maxTotalIdentifiers = maxTotalIdentifiers,

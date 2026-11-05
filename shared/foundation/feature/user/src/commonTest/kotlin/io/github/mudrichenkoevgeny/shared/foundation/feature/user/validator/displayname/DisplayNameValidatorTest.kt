@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class DisplayNameValidatorTest {
-
     private val validator: DisplayNameValidator = DisplayNameValidatorImpl()
 
     @Test
@@ -19,6 +18,16 @@ class DisplayNameValidatorTest {
     fun testValidate_Valid_ReturnsSuccess() {
         assertTrue(validator.validate("Ivan Ivanov", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
         assertTrue(validator.validate("A", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
+        assertTrue(validator.validate("John Doe 😎", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
+        assertTrue(validator.validate("      ", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
+    }
+
+    @Test
+    fun testValidate_ExactBoundaryLengths_ReturnsSuccess() {
+        val minName = "a".repeat(3)
+        val maxName = "a".repeat(50)
+        assertTrue(validator.validate(minName, minLength = 3, maxLength = 50) is DisplayNameValidatorResult.Success)
+        assertTrue(validator.validate(maxName, minLength = 3, maxLength = 50) is DisplayNameValidatorResult.Success)
     }
 
     @Test
@@ -26,6 +35,10 @@ class DisplayNameValidatorTest {
         assertEquals(
             DisplayNameValidatorResult.Fail(UserErrorCodes.DISPLAY_NAME_TOO_SHORT),
             validator.validate("", minLength = 1, maxLength = 50)
+        )
+        assertEquals(
+            DisplayNameValidatorResult.Fail(UserErrorCodes.DISPLAY_NAME_TOO_SHORT),
+            validator.validate("ab", minLength = 3, maxLength = 50)
         )
         assertEquals(
             DisplayNameValidatorResult.Fail(UserErrorCodes.DISPLAY_NAME_TOO_LONG),
@@ -42,6 +55,14 @@ class DisplayNameValidatorTest {
         assertEquals(
             DisplayNameValidatorResult.Fail(UserErrorCodes.INVALID_DISPLAY_NAME_CHARACTERS),
             validator.validate("Ivan\tIvanov", minLength = 1, maxLength = 50)
+        )
+        assertEquals(
+            DisplayNameValidatorResult.Fail(UserErrorCodes.INVALID_DISPLAY_NAME_CHARACTERS),
+            validator.validate("Ivan\rIvanov", minLength = 1, maxLength = 50)
+        )
+        assertEquals(
+            DisplayNameValidatorResult.Fail(UserErrorCodes.INVALID_DISPLAY_NAME_CHARACTERS),
+            validator.validate("Ivan\u0000Ivanov", minLength = 1, maxLength = 50)
         )
     }
 }

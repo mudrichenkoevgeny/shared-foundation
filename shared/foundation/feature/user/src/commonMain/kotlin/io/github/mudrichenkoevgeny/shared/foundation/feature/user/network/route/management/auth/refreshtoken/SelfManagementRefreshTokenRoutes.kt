@@ -10,7 +10,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for refresh-token operations in the management authentication API.
  */
-object SelfManagementRefreshTokenRoutes {
+public object SelfManagementRefreshTokenRoutes {
     /**
      * **HTTP method:** `POST`
      *
@@ -30,6 +30,6 @@ object SelfManagementRefreshTokenRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val REFRESH_TOKEN =
+    public const val REFRESH_TOKEN: String =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/refresh"
 }

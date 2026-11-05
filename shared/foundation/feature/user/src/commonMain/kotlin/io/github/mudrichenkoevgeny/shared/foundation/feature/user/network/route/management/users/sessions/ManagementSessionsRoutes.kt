@@ -3,9 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
@@ -15,11 +13,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.SessionPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
@@ -31,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for user sessions in the management API (list, single read, revocation).
  */
-object ManagementSessionsRoutes {
+public object ManagementSessionsRoutes {
     /** Base path for global sessions management in the management API. */
     private const val BASE_MANAGEMENT_SESSIONS_ROUTE = "$BASE_MANAGEMENT_NETWORK_ROUTE/sessions"
 
@@ -117,7 +113,7 @@ object ManagementSessionsRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.GlobalSessionList]
      */
-    const val GET_SESSIONS = BASE_MANAGEMENT_SESSIONS_ROUTE
+    public const val GET_SESSIONS: String = BASE_MANAGEMENT_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -196,7 +192,7 @@ object ManagementSessionsRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserSessionList]
      */
-    const val GET_USER_SESSIONS = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
+    public const val GET_USER_SESSIONS: String = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -223,7 +219,7 @@ object ManagementSessionsRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.SessionDetail]
      */
-    const val GET_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val GET_SESSION: String = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -263,7 +259,7 @@ object ManagementSessionsRoutes {
      *   - [ManagementUsersNavigation.GlobalSessionList]
      *   - [ManagementUsersNavigation.SessionDetail]
      */
-    const val DELETE_SESSION = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val DELETE_SESSION: String = "$BASE_MANAGEMENT_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -301,5 +297,5 @@ object ManagementSessionsRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserSessionList]
      */
-    const val DELETE_ALL_USER_SESSIONS = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
+    public const val DELETE_ALL_USER_SESSIONS: String = BASE_MANAGEMENT_USER_SESSIONS_ROUTE
 }

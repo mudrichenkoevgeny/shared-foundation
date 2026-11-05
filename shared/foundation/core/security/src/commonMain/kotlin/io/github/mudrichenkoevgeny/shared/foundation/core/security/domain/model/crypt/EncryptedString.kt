@@ -8,7 +8,9 @@ import kotlin.jvm.JvmInline
  * @property value Encrypted string (usually Base64 encoded); must not be blank.
  */
 @JvmInline
-value class EncryptedString(val value: String) {
+public value class EncryptedString(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "EncryptedString value must not be blank." }
     }
@@ -20,10 +22,9 @@ value class EncryptedString(val value: String) {
  * Attempts to create an [EncryptedString] from this string.
  * Returns `null` if the string is blank.
  */
-fun String.toEncryptedStringOrNull(): EncryptedString? =
-    if (this.isNotBlank()) EncryptedString(this) else null
+public fun String.toEncryptedStringOrNull(): EncryptedString? = if (this.isNotBlank()) EncryptedString(this) else null
 
 /**
  * Creates an [EncryptedString] from this string or throws an exception if the string is blank.
  */
-fun String.toEncryptedStringOrThrow(): EncryptedString = EncryptedString(this)
+public fun String.toEncryptedStringOrThrow(): EncryptedString = EncryptedString(this)

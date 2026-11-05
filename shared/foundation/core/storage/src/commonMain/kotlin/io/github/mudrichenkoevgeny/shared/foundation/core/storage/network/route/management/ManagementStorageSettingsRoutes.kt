@@ -16,7 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route.
 /**
  * Route paths for storage settings in the management API.
  */
-object ManagementStorageSettingsRoutes {
+public object ManagementStorageSettingsRoutes {
     /** Base path for management storage settings endpoints. */
     private const val BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}"
@@ -39,7 +39,7 @@ object ManagementStorageSettingsRoutes {
      * - Screens:
      *   - [ManagementStorageSettingsNavigation.StorageSettings]
      */
-    const val GET_MANAGEMENT_STORAGE_SETTINGS = BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE
+    public const val GET_MANAGEMENT_STORAGE_SETTINGS: String = BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -66,7 +66,7 @@ object ManagementStorageSettingsRoutes {
      * - Screens:
      *   - [ManagementStorageSettingsNavigation.StorageSettings]
      */
-    const val UPDATE_MANAGEMENT_STORAGE_SETTINGS = BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE
+    public const val UPDATE_MANAGEMENT_STORAGE_SETTINGS: String = BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -93,7 +93,7 @@ object ManagementStorageSettingsRoutes {
      * - Screens:
      *   - [ManagementStorageSettingsNavigation.StorageSettings]
      */
-    const val RESET_MANAGEMENT_STORAGE_SETTINGS = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/reset"
+    public const val RESET_MANAGEMENT_STORAGE_SETTINGS: String = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/reset"
 
     /**
      * **HTTP method:** `GET`
@@ -111,5 +111,5 @@ object ManagementStorageSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_STORAGE_SETTINGS = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/open"
+    public const val GET_OPEN_STORAGE_SETTINGS: String = "$BASE_MANAGEMENT_STORAGE_SETTINGS_ROUTE/open"
 }

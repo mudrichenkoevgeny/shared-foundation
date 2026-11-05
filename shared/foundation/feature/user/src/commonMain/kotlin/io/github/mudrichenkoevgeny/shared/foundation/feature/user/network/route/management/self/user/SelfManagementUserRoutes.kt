@@ -17,7 +17,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 /**
  * Route paths for the current authenticated principal's account in the management API (self-service).
  */
-object SelfManagementUserRoutes {
+public object SelfManagementUserRoutes {
     /** Base path for self-service user operations in the management API. */
     internal const val BASE_SELF_MANAGEMENT_USER_ROUTE = "${CommonNetworkRoutes.BASE_SELF_MANAGEMENT_NETWORK_ROUTE}/user"
 
@@ -40,7 +40,7 @@ object SelfManagementUserRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.Main]
      */
-    const val GET_USER = BASE_SELF_MANAGEMENT_USER_ROUTE
+    public const val GET_USER: String = BASE_SELF_MANAGEMENT_USER_ROUTE
 
     /**
      * **HTTP method:** `PATCH`
@@ -67,5 +67,5 @@ object SelfManagementUserRoutes {
      * - Screens:
      *   - [ManagementSelfUserNavigation.UserEdit]
      */
-    const val UPDATE_USER = BASE_SELF_MANAGEMENT_USER_ROUTE
+    public const val UPDATE_USER: String = BASE_SELF_MANAGEMENT_USER_ROUTE
 }

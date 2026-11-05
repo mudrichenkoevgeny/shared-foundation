@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming
 /**
  * Common error codes for API responses and backend logging, used to categorize failures.
  */
-object CommonErrorCodes {
+public object CommonErrorCodes {
     /**
      * Failure that does not match a more specific code.
      *
@@ -13,7 +13,7 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Internal description of the unknown error.
      */
-    const val UNKNOWN = "UNKNOWN"
+    public const val UNKNOWN: String = "UNKNOWN"
 
     /**
      * Internal error caused by an unhandled exception.
@@ -24,7 +24,7 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: The exception message.
      */
-    const val INTERNAL = "INTERNAL"
+    public const val INTERNAL: String = "INTERNAL"
 
     /**
      * Requested object was not found.
@@ -42,7 +42,7 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.IDENTIFIER]: The specific ID that was not found.
      */
-    const val NOT_FOUND = "NOT_FOUND"
+    public const val NOT_FOUND: String = "NOT_FOUND"
 
     /**
      * Service or dependency temporarily unavailable.
@@ -53,7 +53,7 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Details about the unavailable service.
      */
-    const val SERVICE_UNAVAILABLE = "SERVICE_UNAVAILABLE"
+    public const val SERVICE_UNAVAILABLE: String = "SERVICE_UNAVAILABLE"
 
     /**
      * Client exceeded a rate limit for a specific action.
@@ -73,7 +73,7 @@ object CommonErrorCodes {
      * - [CommonErrorArgs.LIMIT]: The threshold that was exceeded.
      * - [CommonErrorArgs.IDENTIFIER]: Client or user identifier.
      */
-    const val TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
+    public const val TOO_MANY_REQUESTS: String = "TOO_MANY_REQUESTS"
 
     /**
      * A required query or path parameter was absent.
@@ -88,7 +88,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.PARAMETER_NAME]: Name of the missing parameter.
      */
-    const val MISSING_REQUIRED_PARAMETER = "MISSING_REQUIRED_PARAMETER"
+    public const val MISSING_REQUIRED_PARAMETER: String = "MISSING_REQUIRED_PARAMETER"
 
     /**
      * A parameter was present but its value was invalid.
@@ -103,7 +103,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.PARAMETER_NAME]: Name of the invalid parameter.
      */
-    const val INVALID_PARAMETER_VALUE = "INVALID_PARAMETER_VALUE"
+    public const val INVALID_PARAMETER_VALUE: String = "INVALID_PARAMETER_VALUE"
 
     /**
      * A required JSON field was absent from the request body.
@@ -118,7 +118,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.FIELD_NAME]: Name of the missing field.
      */
-    const val MISSING_REQUIRED_FIELD = "MISSING_REQUIRED_FIELD"
+    public const val MISSING_REQUIRED_FIELD: String = "MISSING_REQUIRED_FIELD"
 
     /**
      * A string field was present but blank or whitespace-only.
@@ -133,7 +133,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.FIELD_NAME]: Name of the blank field.
      */
-    const val BLANK_STRING_FIELD = "BLANK_STRING_FIELD"
+    public const val BLANK_STRING_FIELD: String = "BLANK_STRING_FIELD"
 
     /**
      * A collection field was present but empty.
@@ -148,7 +148,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.FIELD_NAME]: Name of the empty collection field.
      */
-    const val EMPTY_COLLECTION_FIELD = "EMPTY_COLLECTION_FIELD"
+    public const val EMPTY_COLLECTION_FIELD: String = "EMPTY_COLLECTION_FIELD"
 
     /**
      * A field value fails validation (format, range, or business rule).
@@ -163,7 +163,7 @@ object CommonErrorCodes {
      * **Public arguments (Programmatic API payload):**
      * - [CommonErrorArgs.FIELD_NAME]: Name of the invalid field.
      */
-    const val INVALID_FIELD_VALUE = "INVALID_FIELD_VALUE"
+    public const val INVALID_FIELD_VALUE: String = "INVALID_FIELD_VALUE"
 
     /**
      * Generic client error that does not fit a more specific code.
@@ -174,7 +174,7 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Internal description of the bad request.
      */
-    const val BAD_REQUEST = "BAD_REQUEST"
+    public const val BAD_REQUEST: String = "BAD_REQUEST"
 
     /**
      * Request body was not valid JSON or could not be parsed as expected.
@@ -185,5 +185,5 @@ object CommonErrorCodes {
      * **Secret arguments:**
      * - [CommonErrorArgs.MESSAGE]: Parse or schema error details.
      */
-    const val INVALID_JSON_BODY = "INVALID_JSON_BODY"
+    public const val INVALID_JSON_BODY: String = "INVALID_JSON_BODY"
 }

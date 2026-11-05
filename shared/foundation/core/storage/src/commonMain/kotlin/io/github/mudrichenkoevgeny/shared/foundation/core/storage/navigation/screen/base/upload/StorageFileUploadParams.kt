@@ -21,57 +21,62 @@ import kotlinx.serialization.Serializable
  * @property autoSubmit Whether to automatically trigger upload submission upon file selection; wire key is [StorageNavigationPaths.AUTO_SUBMIT].
  */
 @Serializable
-data class StorageFileUploadParams(
-    val maxFiles: Int? = null,
-    val targetScope: String? = null,
-    val category: StorageCategory? = null,
-    val visibility: StorageFileVisibility? = null,
-    val acceptedFileTypes: List<String> = emptyList(),
-    val maxFileSizeBytes: Long? = null,
-    val autoSubmit: Boolean = false
+public data class StorageFileUploadParams(
+    public val maxFiles: Int? = null,
+    public val targetScope: String? = null,
+    public val category: StorageCategory? = null,
+    public val visibility: StorageFileVisibility? = null,
+    public val acceptedFileTypes: List<String> = emptyList(),
+    public val maxFileSizeBytes: Long? = null,
+    public val autoSubmit: Boolean = false
 ) : NavigationScreenParams<StorageFileUploadParams> {
-
     override val parser: NavigationScreenParamsParser<StorageFileUploadParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<StorageFileUploadParams> {
-
+    public companion object : NavigationScreenParamsParser<StorageFileUploadParams> {
         override fun parse(params: Map<String, Any?>): StorageFileUploadParams {
             val normalized = params.normalizeQueryParams()
 
-            val maxFiles = normalized[StorageNavigationPaths.MAX_FILES]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
+            val maxFiles =
+                normalized[StorageNavigationPaths.MAX_FILES]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
 
-            val targetScope = normalized[StorageApiFields.TARGET_SCOPE]
-                ?.firstOrNull()
-                ?.trim()
-                ?.takeIf { it.isNotBlank() }
+            val targetScope =
+                normalized[StorageApiFields.TARGET_SCOPE]
+                    ?.firstOrNull()
+                    ?.trim()
+                    ?.takeIf { it.isNotBlank() }
 
-            val category = normalized[StorageApiFields.CATEGORY]
-                ?.firstOrNull()
-                ?.let { StorageCategory.fromValueOrNull(it) }
+            val category =
+                normalized[StorageApiFields.CATEGORY]
+                    ?.firstOrNull()
+                    ?.let { StorageCategory.fromValueOrNull(it) }
 
-            val visibility = normalized[StorageApiFields.VISIBILITY]
-                ?.firstOrNull()
-                ?.let { StorageFileVisibility.fromValueOrNull(it) }
+            val visibility =
+                normalized[StorageApiFields.VISIBILITY]
+                    ?.firstOrNull()
+                    ?.let { StorageFileVisibility.fromValueOrNull(it) }
 
-            val acceptedFileTypes = normalized[StorageNavigationPaths.ACCEPTED_FILE_TYPES]
-                ?.flatMap { it.split(",") }
-                ?.map { it.trim() }
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val acceptedFileTypes =
+                normalized[StorageNavigationPaths.ACCEPTED_FILE_TYPES]
+                    ?.flatMap { it.split(",") }
+                    ?.map { it.trim() }
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val maxFileSizeBytes = normalized[StorageNavigationPaths.MAX_FILE_SIZE_BYTES]
-                ?.firstOrNull()
-                ?.toLongOrNull()
-                ?.takeIf { it > 0 }
+            val maxFileSizeBytes =
+                normalized[StorageNavigationPaths.MAX_FILE_SIZE_BYTES]
+                    ?.firstOrNull()
+                    ?.toLongOrNull()
+                    ?.takeIf { it > 0 }
 
-            val autoSubmit = normalized[StorageNavigationPaths.AUTO_SUBMIT]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
-                ?: false
+            val autoSubmit =
+                normalized[StorageNavigationPaths.AUTO_SUBMIT]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
+                    ?: false
 
             return StorageFileUploadParams(
                 maxFiles = maxFiles,

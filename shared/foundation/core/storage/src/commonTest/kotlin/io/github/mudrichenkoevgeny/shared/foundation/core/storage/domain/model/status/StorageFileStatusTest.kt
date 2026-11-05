@@ -5,7 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class StorageFileStatusTest {
-
     @Test
     fun `fromValue accepts case-insensitive wire values`() {
         assertEquals(StorageFileStatus.PENDING_UPLOAD, StorageFileStatus.fromValueOrNull("pending_upload"))

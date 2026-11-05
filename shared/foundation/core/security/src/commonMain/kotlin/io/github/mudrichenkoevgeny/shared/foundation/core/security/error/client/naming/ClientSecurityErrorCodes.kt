@@ -6,13 +6,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.error.client
  * Raised by client applications or SDK security managers.
  * **NOT returned by backend API responses.**
  */
-object ClientSecurityErrorCodes {
-
+public object ClientSecurityErrorCodes {
     /**
      * Password policy is missing, corrupted, or cannot be fetched from the backend.
      *
      * **Localization keys:**
      * - `password_policy_unavailable`
      */
-    const val PASSWORD_POLICY_UNAVAILABLE = "PASSWORD_POLICY_UNAVAILABLE"
+    public const val PASSWORD_POLICY_UNAVAILABLE: String = "PASSWORD_POLICY_UNAVAILABLE"
 }

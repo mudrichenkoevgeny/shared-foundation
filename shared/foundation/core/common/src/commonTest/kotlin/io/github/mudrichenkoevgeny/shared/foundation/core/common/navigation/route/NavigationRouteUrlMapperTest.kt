@@ -6,9 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class NavigationRouteUrlMapperTest {
-
     private object MockNavigationRoute : NavigationRoute {
-
         override val route: String
             get() = "/test/path"
 
@@ -20,20 +18,19 @@ class NavigationRouteUrlMapperTest {
         val email: String = "test+1@example.com",
         val search: String = "hello world"
     ) : NavigationScreenParams<MockNavigationParams> {
-
         override val parser: NavigationScreenParamsParser<MockNavigationParams>
             get() = throw UnsupportedOperationException()
 
-        override fun toQueryMap(): Map<String, List<String>> = mapOf(
-            "email" to listOf(email),
-            "search" to listOf(search)
-        )
+        override fun toQueryMap(): Map<String, List<String>> =
+            mapOf(
+                "email" to listOf(email),
+                "search" to listOf(search)
+            )
     }
 
     private class MockParameterizedNavigationRoute(
         override val params: MockNavigationParams = MockNavigationParams()
     ) : ParameterizedNavigationRoute<MockNavigationParams> {
-
         override val route: String
             get() = "/test/search"
 

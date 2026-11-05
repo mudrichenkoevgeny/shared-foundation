@@ -19,17 +19,16 @@ import kotlinx.serialization.Serializable
  * wire key is [UserApiPaths.USER_ID]. May be null or unvalidated until parsed via [typedUserId].
  */
 @Serializable
-data class SessionDetailParams(
-    val sessionId: String = "",
-    val userId: String? = null
+public data class SessionDetailParams(
+    public val sessionId: String = "",
+    public val userId: String? = null
 ) : NavigationScreenParams<SessionDetailParams> {
-
     /**
      * Parsed strongly typed [UserSessionId] representation of [sessionId].
      *
      * Returns `null` if [sessionId] is blank or does not conform to the canonical UUID format.
      */
-    val typedSessionId: UserSessionId?
+    public val typedSessionId: UserSessionId?
         get() = sessionId.toUserSessionIdOrNull()
 
     /**
@@ -37,14 +36,13 @@ data class SessionDetailParams(
      *
      * Returns `null` if [userId] is null, blank, or does not conform to the canonical UUID format.
      */
-    val typedUserId: UserId?
+    public val typedUserId: UserId?
         get() = userId?.toUserIdOrNull()
 
     override val parser: NavigationScreenParamsParser<SessionDetailParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<SessionDetailParams> {
-
+    public companion object : NavigationScreenParamsParser<SessionDetailParams> {
         /**
          * Parses raw Deep Link or Web Router query/path parameters into typed [SessionDetailParams].
          *

@@ -3,25 +3,25 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.cont
 /**
  * Global settings specific naming conventions for API request parameters and response fields.
  */
-object GlobalSettingsApiFields {
+public object GlobalSettingsApiFields {
     /** JSON field name for the privacy policy document URL. */
-    const val PRIVACY_POLICY_URL = "privacy_policy_url"
+    public const val PRIVACY_POLICY_URL: String = "privacy_policy_url"
 
     /** JSON field name for the terms of service document URL. */
-    const val TERMS_OF_SERVICE_URL = "terms_of_service_url"
+    public const val TERMS_OF_SERVICE_URL: String = "terms_of_service_url"
 
     /** JSON field name for the official support contact email. */
-    const val CONTACT_SUPPORT_EMAIL = "contact_support_email"
+    public const val CONTACT_SUPPORT_EMAIL: String = "contact_support_email"
 
     /** JSON field name for the global tracing enablement flag. */
-    const val IS_TRACING_ENABLED = "is_tracing_enabled"
+    public const val IS_TRACING_ENABLED: String = "is_tracing_enabled"
 
     /** JSON field name for the global metrics collection enablement flag. */
-    const val IS_METRICS_ENABLED = "is_metrics_enabled"
+    public const val IS_METRICS_ENABLED: String = "is_metrics_enabled"
 
     /** JSON field name for the verbose logging enablement flag. */
-    const val IS_VERBOSE_LOGGING_ENABLED = "is_verbose_logging_enabled"
+    public const val IS_VERBOSE_LOGGING_ENABLED: String = "is_verbose_logging_enabled"
 
     /** JSON field name for the minimum supported application versions dictionary. */
-    const val MIN_SUPPORTED_APP_VERSIONS = "min_supported_app_versions"
+    public const val MIN_SUPPORTED_APP_VERSIONS: String = "min_supported_app_versions"
 }

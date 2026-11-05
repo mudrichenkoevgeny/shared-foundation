@@ -16,9 +16,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property managementStorageSettings Management storage settings.
  * @property managementAuthSettings Management authentication settings.
  */
-data class ManagementUserConfiguration(
-    val managementGlobalSettings: ManagementGlobalSettings,
-    val managementSecuritySettings: ManagementSecuritySettings,
-    val managementStorageSettings: ManagementStorageSettings,
-    val managementAuthSettings: ManagementAuthSettings
+public data class ManagementUserConfiguration(
+    public val managementGlobalSettings: ManagementGlobalSettings,
+    public val managementSecuritySettings: ManagementSecuritySettings,
+    public val managementStorageSettings: ManagementStorageSettings,
+    public val managementAuthSettings: ManagementAuthSettings
 )

@@ -7,34 +7,34 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * WebSocket event types related to user functionality.
  */
-object UserWebSocketEventTypes {
+public object UserWebSocketEventTypes {
     /**
      * Sent when the current access token expires or becomes invalid.
      * The client should refresh the token and reconnect.
      */
-    const val UNAUTHORIZED = "UNAUTHORIZED"
+    public const val UNAUTHORIZED: String = "UNAUTHORIZED"
 
     /**
      * Triggered when auth settings are updated in the open scope.
      * Payload: [OpenAuthSettingsPayload]
      */
-    const val OPEN_AUTH_SETTINGS_UPDATED = "OPEN_AUTH_SETTINGS_UPDATED"
+    public const val OPEN_AUTH_SETTINGS_UPDATED: String = "OPEN_AUTH_SETTINGS_UPDATED"
 
     /**
      * Triggered when auth settings are updated in the management scope.
      * Payload: [ManagementAuthSettingsPayload]
      */
-    const val MANAGEMENT_AUTH_SETTINGS_UPDATED = "MANAGEMENT_AUTH_SETTINGS_UPDATED"
+    public const val MANAGEMENT_AUTH_SETTINGS_UPDATED: String = "MANAGEMENT_AUTH_SETTINGS_UPDATED"
 
     /**
      * Sent when the user's data (user, role, account status, or permissions) is updated.
      * Use this to synchronize the local state of the current user.
      * Payload: [UserPrivatePayload]
      */
-    const val USER_UPDATED = "USER_UPDATED"
+    public const val USER_UPDATED: String = "USER_UPDATED"
 
     /**
      * Forced deletion of the current session. The client must clear local data and logout.
      */
-    const val SESSION_DELETED = "SESSION_DELETED"
+    public const val SESSION_DELETED: String = "SESSION_DELETED"
 }

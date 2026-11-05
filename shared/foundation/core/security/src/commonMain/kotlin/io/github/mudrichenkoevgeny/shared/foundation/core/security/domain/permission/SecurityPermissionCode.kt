@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.pe
  *
  * Values are the raw strings stored in [PermissionCode]; servers enforce them on the matching operations.
  */
-object SecurityPermissionCode {
+public object SecurityPermissionCode {
     /** Allows updating platform-wide security configuration (e.g. password policy and related limits). */
-    val SECURITY_SETTINGS_UPDATE = PermissionCode("security.settings.update")
+    public val SECURITY_SETTINGS_UPDATE: PermissionCode = PermissionCode("security.settings.update")
 }

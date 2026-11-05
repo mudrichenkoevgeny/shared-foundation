@@ -6,18 +6,19 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class FileUrlsTest {
-
     @Test
     fun testSerializationWithPresets() {
-        val presetsMap = mapOf(
-            FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.jpg",
-            FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.jpg",
-            FileUrlPresets.AVATAR_SM to "https://cdn.example.com/avatar_sm.jpg"
-        )
-        val fileUrls = FileUrls(
-            originalUrl = "https://cdn.example.com/orig.jpg",
-            urlPresets = presetsMap
-        )
+        val presetsMap =
+            mapOf(
+                FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.jpg",
+                FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.jpg",
+                FileUrlPresets.AVATAR_SM to "https://cdn.example.com/avatar_sm.jpg"
+            )
+        val fileUrls =
+            FileUrls(
+                originalUrl = "https://cdn.example.com/orig.jpg",
+                urlPresets = presetsMap
+            )
 
         val json = FoundationJson.encodeToString(fileUrls)
         val decoded = FoundationJson.decodeFromString<FileUrls>(json)
@@ -31,9 +32,10 @@ class FileUrlsTest {
 
     @Test
     fun testSerializationWithEmptyPresets() {
-        val fileUrls = FileUrls(
-            originalUrl = "https://cdn.example.com/orig.jpg"
-        )
+        val fileUrls =
+            FileUrls(
+                originalUrl = "https://cdn.example.com/orig.jpg"
+            )
 
         val json = FoundationJson.encodeToString(fileUrls)
         val decoded = FoundationJson.decodeFromString<FileUrls>(json)

@@ -237,10 +237,10 @@ $privateFunctions}"""
                 cls.removeSuffix("Strings")
             }
             val fieldName = if (cls.endsWith("EmailTemplates")) "emailTemplates" else rawName.replaceFirstChar { it.lowercase() }
-            "    val $fieldName: $cls = $cls(resolver, locale)"
+            "    public val $fieldName: $cls = $cls(resolver, locale)"
         }
 
-        val classDeclaration = """class $facadeName(
+        val classDeclaration = """public class $facadeName(
     resolver: LocalizedStringResolver = DefaultLocalizedStringResolver(),
     locale: String = CommonLocales.DEFAULT
 ) {
@@ -281,7 +281,7 @@ $declarations
                 val propName = if (entry.templateKey.endsWith("_without_args")) "${propertyName}WithoutArgs" else propertyName
                 members.append(
                     """
-    val $propName: EmailTemplate
+    public val $propName: EmailTemplate
         get() = get("${entry.templateKey}")
 
 """
@@ -293,7 +293,7 @@ $declarations
 
                 members.append(
                     """
-    fun $fnName($paramsSignature): EmailTemplate {
+    public fun $fnName($paramsSignature): EmailTemplate {
         val raw = get("${entry.templateKey}")
         val args = mapOf($mapEntries)
         return EmailTemplate(
@@ -323,7 +323,7 @@ $declarations
             "\n\n"
         }
 
-        val classDeclaration = """class $className(
+        val classDeclaration = """public class $className(
     private val resolver: LocalizedStringResolver = DefaultLocalizedStringResolver(),
     private val locale: String = CommonLocales.DEFAULT
 ) {
@@ -366,7 +366,7 @@ $members}"""
                 val propName = if (rawKey.endsWith("_without_args")) "${propertyName}WithoutArgs" else propertyName
                 members.append(
                     """
-    val $propName: String
+    public val $propName: String
         get() = get("$rawKey")
 
 """
@@ -379,7 +379,7 @@ $members}"""
 
                 members.append(
                     """
-    fun $fnName($paramsSignature): String {
+    public fun $fnName($paramsSignature): String {
         val template = get("$rawKey")
         return LocalizationFormatter.format(template, mapOf($mapEntries))
     }
@@ -404,7 +404,7 @@ $members}"""
             "\n\n"
         }
 
-        val classDeclaration = """class $className(
+        val classDeclaration = """public class $className(
     private val resolver: LocalizedStringResolver,
     private val locale: String
 ) {

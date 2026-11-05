@@ -12,12 +12,11 @@ import kotlinx.serialization.Serializable
  * @property externalProviderToken The opaque token provided by the external identity provider.
  */
 @Serializable
-data class UnlockByExternalAuthProviderRequest(
+public data class UnlockByExternalAuthProviderRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.AUTH_PROVIDER)
-    val authProvider: String,
-
+    public val authProvider: String,
     @NotBlankStringField
     @SerialName(UserApiFields.EXTERNAL_PROVIDER_TOKEN)
-    val externalProviderToken: String
+    public val externalProviderToken: String
 )

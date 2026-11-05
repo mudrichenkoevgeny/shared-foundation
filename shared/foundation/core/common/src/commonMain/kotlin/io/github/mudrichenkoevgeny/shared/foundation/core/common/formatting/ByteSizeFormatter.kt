@@ -12,8 +12,7 @@ import kotlin.math.roundToLong
  * Utility object for formatting raw byte numbers into localized human-readable byte size strings
  * (e.g. `100 B`, `500 KB`, `12.5 MB`, `1.2 GB`, `2 TB`).
  */
-object ByteSizeFormatter {
-
+public object ByteSizeFormatter {
     private const val ONE_KB = 1024L
     private const val ONE_MB = 1024L * 1024L
     private const val ONE_GB = 1024L * 1024L * 1024L
@@ -28,7 +27,7 @@ object ByteSizeFormatter {
      * @param decimals Number of decimal places to show for KB and above (defaults to 0 for whole numbers).
      * @return Localized byte size string (e.g. `"50 MB"`, `"1.5 GB"`), or raw string if parsing fails.
      */
-    fun format(
+    public fun format(
         bytesRaw: Any?,
         resolver: LocalizedStringResolver = DefaultLocalizedStringResolver(),
         locale: String = CommonLocales.DEFAULT,
@@ -52,15 +51,18 @@ object ByteSizeFormatter {
         }
     }
 
-    private fun parseBytes(raw: Any): Long? {
-        return when (raw) {
+    private fun parseBytes(raw: Any): Long? =
+        when (raw) {
             is Number -> raw.toLong()
             is String -> raw.toLongOrNull() ?: raw.toDoubleOrNull()?.toLong()
             else -> raw.toString().toLongOrNull() ?: raw.toString().toDoubleOrNull()?.toLong()
         }
-    }
 
-    private fun formatValue(bytes: Long, divisor: Long, decimals: Int): String {
+    private fun formatValue(
+        bytes: Long,
+        divisor: Long,
+        decimals: Int
+    ): String {
         if (decimals <= 0) {
             return (bytes / divisor).toString()
         }
@@ -75,9 +77,11 @@ object ByteSizeFormatter {
             return integerPart.toString()
         }
 
-        val fractionalStr = fractionalPart.toString()
-            .padStart(decimals, '0')
-            .trimEnd('0')
+        val fractionalStr =
+            fractionalPart
+                .toString()
+                .padStart(decimals, '0')
+                .trimEnd('0')
 
         return if (fractionalStr.isEmpty()) {
             integerPart.toString()

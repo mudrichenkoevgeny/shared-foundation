@@ -1,0 +1,226 @@
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType$Companion;
+	public static final field MANAGEMENT_RESET_GLOBAL_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+	public static final field MANAGEMENT_UPDATE_GLOBAL_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/action/SettingsAuditActionType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType$Companion;
+	public static final field GLOBAL_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/audit/resource/SettingsAuditResourceType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZ)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Z
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContactSupportEmail ()Ljava/lang/String;
+	public final fun getMinSupportedAppVersions ()Ljava/util/Map;
+	public final fun getPrivacyPolicyUrl ()Ljava/lang/String;
+	public final fun getTermsOfServiceUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isMetricsEnabled ()Z
+	public final fun isTracingEnabled ()Z
+	public final fun isVerboseLoggingEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContactSupportEmail ()Ljava/lang/String;
+	public final fun getMinSupportedAppVersions ()Ljava/util/Map;
+	public final fun getPrivacyPolicyUrl ()Ljava/lang/String;
+	public final fun getTermsOfServiceUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/permission/SettingsPermissionCode {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/permission/SettingsPermissionCode;
+	public final fun getGLOBAL_SETTINGS_UPDATE-VF5cZrs ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/mapper/globalsettings/ManagementGlobalSettingsMapperKt {
+	public static final fun toManagementGlobalSettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings;
+	public static final fun toManagementGlobalSettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/ManagementGlobalSettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/mapper/globalsettings/OpenGlobalSettingsMapperKt {
+	public static final fun toOpenGlobalSettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings;
+	public static final fun toOpenGlobalSettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/domain/model/globalsettings/OpenGlobalSettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/BaseSettingsNavigationRoutes {
+	public static final field BASE_GLOBAL_SETTINGS_NAVIGATION_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/BaseSettingsNavigationRoutes;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$GlobalSettings : io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$GlobalSettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/navigation/route/management/ManagementSettingsNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/GlobalSettingsApiFields {
+	public static final field CONTACT_SUPPORT_EMAIL Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/GlobalSettingsApiFields;
+	public static final field IS_METRICS_ENABLED Ljava/lang/String;
+	public static final field IS_TRACING_ENABLED Ljava/lang/String;
+	public static final field IS_VERBOSE_LOGGING_ENABLED Ljava/lang/String;
+	public static final field MIN_SUPPORTED_APP_VERSIONS Ljava/lang/String;
+	public static final field PRIVACY_POLICY_URL Ljava/lang/String;
+	public static final field TERMS_OF_SERVICE_URL Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/SettingsWebSocketEventTypes {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/contract/SettingsWebSocketEventTypes;
+	public static final field MANAGEMENT_GLOBAL_SETTINGS_UPDATED Ljava/lang/String;
+	public static final field OPEN_GLOBAL_SETTINGS_UPDATED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZ)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Z
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZZZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContactSupportEmail ()Ljava/lang/String;
+	public final fun getMinSupportedAppVersions ()Ljava/util/Map;
+	public final fun getPrivacyPolicyUrl ()Ljava/lang/String;
+	public final fun getTermsOfServiceUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isMetricsEnabled ()Z
+	public final fun isTracingEnabled ()Z
+	public final fun isVerboseLoggingEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/ManagementGlobalSettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContactSupportEmail ()Ljava/lang/String;
+	public final fun getMinSupportedAppVersions ()Ljava/util/Map;
+	public final fun getPrivacyPolicyUrl ()Ljava/lang/String;
+	public final fun getTermsOfServiceUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/model/globalsettings/OpenGlobalSettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/BaseSettingsNetworkRoutes {
+	public static final field BASE_GLOBAL_SETTINGS_NETWORK_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/BaseSettingsNetworkRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/management/globalsettings/ManagementGlobalSettingsRoutes {
+	public static final field GET_MANAGEMENT_GLOBAL_SETTINGS Ljava/lang/String;
+	public static final field GET_OPEN_GLOBAL_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/management/globalsettings/ManagementGlobalSettingsRoutes;
+	public static final field RESET_MANAGEMENT_GLOBAL_SETTINGS Ljava/lang/String;
+	public static final field UPDATE_MANAGEMENT_GLOBAL_SETTINGS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/open/globalsettings/OpenGlobalSettingsRoutes {
+	public static final field GET_OPEN_GLOBAL_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/settings/network/route/open/globalsettings/OpenGlobalSettingsRoutes;
+}
+

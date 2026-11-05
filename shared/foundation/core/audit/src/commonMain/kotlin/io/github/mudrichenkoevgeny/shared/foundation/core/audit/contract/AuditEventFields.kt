@@ -8,34 +8,34 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contrac
 /**
  * Key strings for audit **event** payloads and any matching contract surface.
  */
-object AuditEventFields {
+public object AuditEventFields {
     /** Actor who performed the action: user or system id (UUID string, hex with dashes). */
-    const val ACTOR_ID = "actor_id"
+    public const val ACTOR_ID: String = "actor_id"
 
     /** Actor type; values follow [AuditActorType]. */
-    const val ACTOR_TYPE = "actor_type"
+    public const val ACTOR_TYPE: String = "actor_type"
 
     /** Role snapshot for user actor when [ACTOR_TYPE] is `user` (server-defined role key). */
-    const val ACTOR_USER_ROLE = "actor_user_role"
+    public const val ACTOR_USER_ROLE: String = "actor_user_role"
 
     /** Action discriminator (e.g. `login`, `order.create`). */
-    const val ACTION = "action"
+    public const val ACTION: String = "action"
 
     /** Resource kind affected (e.g. `user`, `order`). */
-    const val RESOURCE = "resource"
+    public const val RESOURCE: String = "resource"
 
     /** Target instance id for that resource type, when applicable (opaque string per resource semantics). */
-    const val RESOURCE_ID = "resource_id"
+    public const val RESOURCE_ID: String = "resource_id"
 
     /** Outcome of the attempt; wire values are [AuditStatus] serial names. */
-    const val STATUS = "status"
+    public const val STATUS: String = "status"
 
     /** Key for one entry in the audit event metadata array ([CommonApiFields.METADATA]). */
-    const val METADATA_KEY = "key"
+    public const val METADATA_KEY: String = "key"
 
     /** Value inside each metadata array object. */
-    const val METADATA_VALUE = "value"
+    public const val METADATA_VALUE: String = "value"
 
     /** Sensitivity hint for [METADATA_VALUE]; wire values are [AuditValueSensitivity] serial names. */
-    const val METADATA_VALUE_SENSITIVITY = "value_sensitivity"
+    public const val METADATA_VALUE_SENSITIVITY: String = "value_sensitivity"
 }

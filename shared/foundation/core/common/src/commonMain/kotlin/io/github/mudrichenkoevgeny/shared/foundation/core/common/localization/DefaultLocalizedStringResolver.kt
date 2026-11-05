@@ -17,16 +17,20 @@ import kotlinx.serialization.json.jsonPrimitive
  * @param defaultLocale Fallback locale code when requested locale is unavailable.
  * @param bundleProvider Provider supplying embedded or registered localization bundles.
  */
-class DefaultLocalizedStringResolver(
+public class DefaultLocalizedStringResolver(
     private val resourceLoader: ((path: String) -> String?)? = null,
     private val defaultLocale: String = CommonLocales.DEFAULT,
     private val bundleProvider: LocalizationBundleProvider = LocalizationRegistry
 ) : LocalizedStringResolver {
-
     private val cache: MutableMap<String, Map<String, String>> = createConcurrentMap()
     private val normalizedDefaultLocale = defaultLocale.lowercase()
 
-    override fun resolve(module: String, file: String, key: String, locale: String): String? {
+    override fun resolve(
+        module: String,
+        file: String,
+        key: String,
+        locale: String
+    ): String? {
         val normalizedLocale = locale.lowercase()
         val languageOnly = normalizedLocale.substringBefore('-').substringBefore('_')
 
@@ -35,27 +39,38 @@ class DefaultLocalizedStringResolver(
             ?: getString(module, file, normalizedDefaultLocale, key)
     }
 
-    private fun getString(module: String, file: String, locale: String, key: String): String? {
+    private fun getString(
+        module: String,
+        file: String,
+        locale: String,
+        key: String
+    ): String? {
         val cacheKey = "$module/$file/$locale"
-        val bundle = cache.getOrPut(cacheKey) {
-            loadBundle(module, file, locale)
-        }
+        val bundle =
+            cache.getOrPut(cacheKey) {
+                loadBundle(module, file, locale)
+            }
         return bundle[key]
     }
 
-    private fun loadBundle(module: String, file: String, locale: String): Map<String, String> {
+    private fun loadBundle(
+        module: String,
+        file: String,
+        locale: String
+    ): Map<String, String> {
         val embedded = bundleProvider.get(module, file, locale) ?: emptyMap()
         val loader = resourceLoader ?: return embedded
 
         val path = "localization/$module/$locale/$file.json"
         val customContent = loader(path) ?: return embedded
 
-        val customMap = try {
-            val jsonObject = FoundationJson.decodeFromString<JsonObject>(customContent)
-            jsonObject.mapValues { it.value.jsonPrimitive.content }
-        } catch (e: Exception) {
-            throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
-        }
+        val customMap =
+            try {
+                val jsonObject = FoundationJson.decodeFromString<JsonObject>(customContent)
+                jsonObject.mapValues { it.value.jsonPrimitive.content }
+            } catch (e: Exception) {
+                throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
+            }
 
         return if (embedded.isEmpty()) customMap else embedded + customMap
     }

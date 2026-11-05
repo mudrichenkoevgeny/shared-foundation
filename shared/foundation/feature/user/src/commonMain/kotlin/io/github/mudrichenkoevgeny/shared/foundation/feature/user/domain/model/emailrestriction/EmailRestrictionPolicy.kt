@@ -8,9 +8,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
  * @property isWhitelistEnabled Whether email domain whitelist validation is active.
  * @property whitelist List of explicitly allowed email domain names or patterns.
  */
-data class EmailRestrictionPolicy(
-    val isBlacklistEnabled: Boolean,
-    val blacklist: List<String>,
-    val isWhitelistEnabled: Boolean,
-    val whitelist: List<String>
+public data class EmailRestrictionPolicy(
+    public val isBlacklistEnabled: Boolean,
+    public val blacklist: List<String>,
+    public val isWhitelistEnabled: Boolean,
+    public val whitelist: List<String>
 )

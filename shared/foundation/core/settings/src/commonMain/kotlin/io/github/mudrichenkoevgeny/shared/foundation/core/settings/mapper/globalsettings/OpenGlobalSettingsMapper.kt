@@ -4,16 +4,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.OpenGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.OpenGlobalSettingsPayload
 
-fun OpenGlobalSettingsPayload.toOpenGlobalSettings(): OpenGlobalSettings = OpenGlobalSettings(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) }
-)
+public fun OpenGlobalSettingsPayload.toOpenGlobalSettings(): OpenGlobalSettings =
+    OpenGlobalSettings(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) }
+    )
 
-fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload = OpenGlobalSettingsPayload(
-    privacyPolicyUrl = privacyPolicyUrl,
-    termsOfServiceUrl = termsOfServiceUrl,
-    contactSupportEmail = contactSupportEmail,
-    minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value }
-)
+public fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload =
+    OpenGlobalSettingsPayload(
+        privacyPolicyUrl = privacyPolicyUrl,
+        termsOfServiceUrl = termsOfServiceUrl,
+        contactSupportEmail = contactSupportEmail,
+        minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value }
+    )

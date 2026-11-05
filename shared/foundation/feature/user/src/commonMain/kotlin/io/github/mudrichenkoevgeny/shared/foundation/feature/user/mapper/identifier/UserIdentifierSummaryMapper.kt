@@ -13,21 +13,23 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [UserIdentifierSummary] from [UserIdentifierSummaryPayload].
  */
-fun UserIdentifierSummaryPayload.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
-    id = id.toUserIdentifierIdOrThrow(),
-    userId = userId.toUserIdOrThrow(),
-    userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
-    identifier = identifier,
-    displayName = displayName
-)
+public fun UserIdentifierSummaryPayload.toUserIdentifierSummary(): UserIdentifierSummary =
+    UserIdentifierSummary(
+        id = id.toUserIdentifierIdOrThrow(),
+        userId = userId.toUserIdOrThrow(),
+        userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
+        identifier = identifier,
+        displayName = displayName
+    )
 
 /**
  * Builds network [UserIdentifierSummaryPayload] from domain [UserIdentifierSummary].
  */
-fun UserIdentifierSummary.toUserIdentifierSummaryPayload(): UserIdentifierSummaryPayload = UserIdentifierSummaryPayload(
-    id = id.asHexDashString(),
-    userId = userId.asHexDashString(),
-    userAuthProvider = userAuthProvider.value,
-    identifier = identifier,
-    displayName = displayName
-)
+public fun UserIdentifierSummary.toUserIdentifierSummaryPayload(): UserIdentifierSummaryPayload =
+    UserIdentifierSummaryPayload(
+        id = id.asHexDashString(),
+        userId = userId.asHexDashString(),
+        userAuthProvider = userAuthProvider.value,
+        identifier = identifier,
+        displayName = displayName
+    )

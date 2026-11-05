@@ -7,16 +7,17 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.par
  * @receiver Raw phone query parameter string, which may be null, blank, or space-prefixed.
  * @return Cleaned phone string with leading '+' restored if space-prefixed before digits, or null if blank/null.
  */
-fun String?.normalizePhoneQueryParam(): String? {
+public fun String?.normalizePhoneQueryParam(): String? {
     if (this.isNullOrBlank()) return null
     val trimmed = this.trim()
     if (trimmed.isEmpty()) return null
 
-    val restored = if (this.startsWith(' ') && !trimmed.startsWith('+') && trimmed.first().isDigit()) {
-        "+$trimmed"
-    } else {
-        trimmed
-    }
+    val restored =
+        if (this.startsWith(' ') && !trimmed.startsWith('+') && trimmed.first().isDigit()) {
+            "+$trimmed"
+        } else {
+            trimmed
+        }
     return restored
 }
 
@@ -26,7 +27,7 @@ fun String?.normalizePhoneQueryParam(): String? {
  * @receiver List of raw phone query parameter strings, which may be null or empty.
  * @return List of cleaned phone strings with restored leading '+'.
  */
-fun List<String>?.normalizePhoneQueryParams(): List<String> {
+public fun List<String>?.normalizePhoneQueryParams(): List<String> {
     if (this.isNullOrEmpty()) return emptyList()
     return this.mapNotNull { it.normalizePhoneQueryParam() }
 }

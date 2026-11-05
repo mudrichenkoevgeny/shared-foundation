@@ -12,13 +12,11 @@ import kotlinx.serialization.Serializable
  * @property newPassword The new password to be set for the account.
  */
 @Serializable
-data class EmailPasswordChangeRequest(
-
+public data class EmailPasswordChangeRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.OLD_PASSWORD)
-    val oldPassword: String,
-
+    public val oldPassword: String,
     @NotBlankStringField
     @SerialName(UserApiFields.NEW_PASSWORD)
-    val newPassword: String
+    public val newPassword: String
 )

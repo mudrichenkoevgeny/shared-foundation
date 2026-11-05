@@ -16,16 +16,15 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.me
  *
  * @param parsers Delegates tried in iteration order.
  */
-class CompositeAuditMetadataKeyParser(
+public class CompositeAuditMetadataKeyParser(
     private val parsers: List<(String) -> AuditMetadataKey?>
 ) {
-
     /**
      * @param value Raw metadata `key` wire string (for example from an audit event payload).
      * @return The first non-null [AuditMetadataKey] returned by a delegate.
      * @throws IllegalArgumentException if no delegate recognizes [value].
      */
-    fun fromValueOrThrow(value: String): AuditMetadataKey {
+    public fun fromValueOrThrow(value: String): AuditMetadataKey {
         for (parser in parsers) {
             val parsed = parser(value)
             if (parsed != null) {
@@ -40,7 +39,7 @@ class CompositeAuditMetadataKeyParser(
      * @param value Raw metadata `key` wire string.
      * @return The first non-null [AuditMetadataKey] returned by a delegate, or `null`.
      */
-    fun fromValueOrNull(value: String): AuditMetadataKey? {
+    public fun fromValueOrNull(value: String): AuditMetadataKey? {
         for (parser in parsers) {
             val parsed = parser(value)
             if (parsed != null) {

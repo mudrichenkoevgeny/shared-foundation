@@ -5,25 +5,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 /**
  * Common HTTP header names used for network communication and request tracing.
  */
-object CommonHttpHeaders {
+public object CommonHttpHeaders {
     /** Request or response header carrying a distributed trace identifier. */
-    const val TRACE_HEADER_NAME = "X-Trace-Id"
+    public const val TRACE_HEADER_NAME: String = "X-Trace-Id"
 
     /** Header for the client type (aligned with [ClientType] wire values). */
-    const val CLIENT_TYPE_HEADER_NAME = "X-Client-Type"
+    public const val CLIENT_TYPE_HEADER_NAME: String = "X-Client-Type"
 
     /** Header for a stable device identifier. */
-    const val DEVICE_ID_HEADER_NAME = "X-Device-Id"
+    public const val DEVICE_ID_HEADER_NAME: String = "X-Device-Id"
 
     /** Header for a human-readable device name. */
-    const val DEVICE_NAME_HEADER_NAME = "X-Device-Name"
+    public const val DEVICE_NAME_HEADER_NAME: String = "X-Device-Name"
 
     /** Header for the client application version. */
-    const val APP_VERSION_HEADER_NAME = "X-App-Version"
+    public const val APP_VERSION_HEADER_NAME: String = "X-App-Version"
 
     /** Header for the client operating system version. */
-    const val OPERATION_SYSTEM_VERSION_HEADER_NAME = "X-OS-Version"
+    public const val OPERATION_SYSTEM_VERSION_HEADER_NAME: String = "X-OS-Version"
 
     /** Header for the negotiated client API version. */
-    const val API_VERSION_HEADER_NAME = "X-Api-Version"
+    public const val API_VERSION_HEADER_NAME: String = "X-Api-Version"
 }

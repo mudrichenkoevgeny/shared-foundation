@@ -11,21 +11,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestManagementAuthSettings
 
 /**
- * Creates a test [ManagementUserConfiguration] domain instance.
- *
- * @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
- * @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
- * @param managementStorageSettings Storage settings for management ([ManagementStorageSettings]).
- * @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
- */
-fun createTestManagementUserConfiguration(
+* Creates a test [ManagementUserConfiguration] domain instance.
+*
+* @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
+* @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
+* @param managementStorageSettings Storage settings for management ([ManagementStorageSettings]).
+* @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
+*/
+public fun createTestManagementUserConfiguration(
     managementGlobalSettings: ManagementGlobalSettings = createTestManagementGlobalSettings(),
     managementSecuritySettings: ManagementSecuritySettings = createTestManagementSecuritySettings(),
     managementStorageSettings: ManagementStorageSettings = createTestManagementStorageSettings(),
     managementAuthSettings: ManagementAuthSettings = createTestManagementAuthSettings()
-) = ManagementUserConfiguration(
-    managementGlobalSettings = managementGlobalSettings,
-    managementSecuritySettings = managementSecuritySettings,
-    managementStorageSettings = managementStorageSettings,
-    managementAuthSettings = managementAuthSettings
-)
+): ManagementUserConfiguration =
+    ManagementUserConfiguration(
+        managementGlobalSettings = managementGlobalSettings,
+        managementSecuritySettings = managementSecuritySettings,
+        managementStorageSettings = managementStorageSettings,
+        managementAuthSettings = managementAuthSettings
+    )

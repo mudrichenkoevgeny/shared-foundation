@@ -1,0 +1,658 @@
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/contract/AuditEventFields {
+	public static final field ACTION Ljava/lang/String;
+	public static final field ACTOR_ID Ljava/lang/String;
+	public static final field ACTOR_TYPE Ljava/lang/String;
+	public static final field ACTOR_USER_ROLE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/contract/AuditEventFields;
+	public static final field METADATA_KEY Ljava/lang/String;
+	public static final field METADATA_VALUE Ljava/lang/String;
+	public static final field METADATA_VALUE_SENSITIVITY Ljava/lang/String;
+	public static final field RESOURCE Ljava/lang/String;
+	public static final field RESOURCE_ID Ljava/lang/String;
+	public static final field STATUS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType {
+	public static final field AUDIT_EVENT Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+	public static final field AUDIT_EVENTS Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType$Companion;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/audit/resource/CommonAuditResourceType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType {
+	public abstract fun getValue ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/CompositeAuditActionTypeParser {
+	public fun <init> (Ljava/util/List;)V
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType$Companion;
+	public static final field SERVICE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public static final field SYSTEM Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public static final field USER Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventId {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventId$Companion;
+	public static final fun asHexDashString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public static final synthetic fun box-impl (Lkotlin/uuid/Uuid;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventId;
+	public static fun constructor-impl (Lkotlin/uuid/Uuid;)Lkotlin/uuid/Uuid;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lkotlin/uuid/Uuid;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lkotlin/uuid/Uuid;Lkotlin/uuid/Uuid;)Z
+	public final fun getValue ()Lkotlin/uuid/Uuid;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lkotlin/uuid/Uuid;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventId$Companion {
+	public final fun generate-k_kfdQw ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventIdKt {
+	public static final fun toAuditEventIdOrNull (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+	public static final fun toAuditEventIdOrThrow (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun component10 ()Ljava/util/Set;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun component6 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public final fun component9 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public final fun copy-BkGkTqY (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal;
+	public static synthetic fun copy-BkGkTqY$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal;Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun getActorId ()Ljava/lang/String;
+	public final fun getActorType ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun getActorUserRole ()Ljava/lang/String;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getId-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getMetadata ()Ljava/util/Set;
+	public final fun getResource ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun getResourceId ()Ljava/lang/String;
+	public final fun getResourceValueSensitivity ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun component6 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public final fun component9 ()Ljava/util/Set;
+	public final fun copy-AMgneCg (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;
+	public static synthetic fun copy-AMgneCg$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Ljava/util/Set;Ljava/lang/String;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun getActorId ()Ljava/lang/String;
+	public final fun getActorType ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun getActorUserRole ()Ljava/lang/String;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getId-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getMetadata ()Ljava/util/Set;
+	public final fun getResource ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun getResourceId ()Ljava/lang/String;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary {
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Lkotlin/time/Instant;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun component2 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public final fun component6 ()Lkotlin/time/Instant;
+	public final fun copy-3xJbRM4 (Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Lkotlin/time/Instant;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;
+	public static synthetic fun copy-3xJbRM4$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;Lkotlin/uuid/Uuid;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;Lkotlin/time/Instant;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType;
+	public final fun getActorType ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/actor/AuditActorType;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getId-k_kfdQw ()Lkotlin/uuid/Uuid;
+	public final fun getResource ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun getStatus ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity$Companion;
+	public static final field EMAIL Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static final field FULL_VALUE_MASK Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static final field IP_ADDRESS Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static final field NON_SENSITIVE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static final field PARTIAL_VALUE_MASK Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static final field PHONE_NUMBER Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventFilterValues {
+	public static final field ACTION Ljava/lang/String;
+	public static final field ACTOR_ID Ljava/lang/String;
+	public static final field ACTOR_TYPE Ljava/lang/String;
+	public static final field ACTOR_USER_ROLE Ljava/lang/String;
+	public static final field CREATED_AT_FROM Ljava/lang/String;
+	public static final field CREATED_AT_TO Ljava/lang/String;
+	public static final field EVENT_ID Ljava/lang/String;
+	public static final field EXCLUDE_ACTION Ljava/lang/String;
+	public static final field EXCLUDE_ACTOR_TYPE Ljava/lang/String;
+	public static final field EXCLUDE_STATUS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventFilterValues;
+	public static final field RESOURCE Ljava/lang/String;
+	public static final field RESOURCE_ID Ljava/lang/String;
+	public static final field SEARCH_QUERY Ljava/lang/String;
+	public static final field STATUS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy : java/lang/Enum {
+	public static final field CREATED_AT Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy$Companion;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public final fun getDEFAULT ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;Ljava/lang/String;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey {
+	public abstract fun getValue ()Ljava/lang/String;
+	public abstract fun getValueSensitivity ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey {
+	public static final field API_VERSION Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field APP_VERSION Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field CLIENT_TYPE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey$Companion;
+	public static final field DENIED_REASON Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field DEVICE_ID Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field DEVICE_NAME Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field ERROR_CODE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field ERROR_ID Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field HOST Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field IP_ADDRESS Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field LANGUAGE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field ORIGIN Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field OS_VERSION Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field TRACE_ID Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static final field USER_AGENT Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public fun getValueSensitivity ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditValueSensitivity;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CommonAuditMetadataKey;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CompositeAuditMetadataKeyParser {
+	public fun <init> (Ljava/util/List;)V
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditMetadataKey;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType {
+	public abstract fun getValue ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/CompositeAuditResourceTypeParser {
+	public fun <init> (Ljava/util/List;)V
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus$Companion;
+	public static final field DENIED Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public static final field FAILED Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public static final field SUCCESS Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/status/AuditStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/permissions/AuditPermissionCode {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/permissions/AuditPermissionCode;
+	public final fun getALL ()Ljava/util/Set;
+	public final fun getAUDIT_GET_FOR_ADMIN_ACTOR_MASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_SERVICE_ACTOR_MASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_STAFF_ACTOR_MASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_STAFF_ACTOR_UNMASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_SYSTEM_ACTOR_MASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_USER_ACTOR_MASKED-VF5cZrs ()Ljava/lang/String;
+	public final fun getAUDIT_GET_FOR_USER_ACTOR_UNMASKED-VF5cZrs ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventDomainMapperKt {
+	public static final fun toAuditEventPrivate (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;
+	public static final fun toAuditEventSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventInternal;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;
+	public static final fun toAuditEventSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventMetadataMapperKt {
+	public static final fun toAuditEventMetadata (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CompositeAuditMetadataKeyParser;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata;
+	public static final fun toAuditEventMetadataPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/AuditEventMetadata;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventPrivateMapperKt {
+	public static final fun toAuditEventPrivate (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/CompositeAuditActionTypeParser;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/CompositeAuditResourceTypeParser;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/metadata/CompositeAuditMetadataKeyParser;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;
+	public static final fun toAuditEventPrivatePayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventPrivate;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventSummaryMapperKt {
+	public static final fun toAuditEventSummary (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/CompositeAuditActionTypeParser;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/CompositeAuditResourceTypeParser;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;
+	public static final fun toAuditEventSummaryPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/event/AuditEventSummary;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/ClientInfoAuditMapperKt {
+	public static final fun toAuditMetadata (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;)Ljava/util/Set;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail : io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation, io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventDetail$Companion {
+	public final fun getPath (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getPath-Bo1lQ7A (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList : io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation, io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList$Companion;
+	public static final field ROUTE Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public synthetic fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$AuditEventList$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation, io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun getTargetRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEventId ()Ljava/lang/String;
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public fun hashCode ()I
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams;)Ljava/util/Map;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams$Companion;
+	public fun <init> ()V
+	public fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/util/List;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/lang/String;
+	public final fun component18 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (IILio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;IILio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getActions ()Ljava/util/List;
+	public final fun getActorIds ()Ljava/util/List;
+	public final fun getActorTypes ()Ljava/util/List;
+	public final fun getActorUserRoles ()Ljava/util/List;
+	public final fun getCreatedAtFrom ()Ljava/lang/String;
+	public final fun getCreatedAtTo ()Ljava/lang/String;
+	public final fun getEventIds ()Ljava/util/List;
+	public final fun getExcludeActions ()Ljava/util/List;
+	public final fun getExcludeActorTypes ()Ljava/util/List;
+	public final fun getExcludeStatuses ()Ljava/util/List;
+	public final fun getPageNumber ()I
+	public final fun getPageSize ()I
+	public fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public final fun getResourceIds ()Ljava/util/List;
+	public final fun getResources ()Ljava/util/List;
+	public final fun getSearchQuery ()Ljava/lang/String;
+	public final fun getSortBy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy;
+	public final fun getSortOrder ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun getStatuses ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toQueryMap ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams$Companion : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;
+	public synthetic fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams;)Ljava/util/Map;
+	public synthetic fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/contract/AuditApiPaths {
+	public static final field EVENT_ID Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/contract/AuditApiPaths;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public final fun getValueSensitivity ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()J
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;J)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;JILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Ljava/lang/String;
+	public final fun getActorId ()Ljava/lang/String;
+	public final fun getActorType ()Ljava/lang/String;
+	public final fun getActorUserRole ()Ljava/lang/String;
+	public final fun getCreatedAt ()J
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getMetadata ()Ljava/util/List;
+	public final fun getResource ()Ljava/lang/String;
+	public final fun getResourceId ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()J
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Ljava/lang/String;
+	public final fun getActorType ()Ljava/lang/String;
+	public final fun getCreatedAt ()J
+	public final fun getId ()Ljava/lang/String;
+	public final fun getResource ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventSummaryPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/route/management/ManagementAuditRoutes {
+	public static final field GET_AUDIT_EVENT Ljava/lang/String;
+	public static final field GET_AUDIT_EVENTS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/audit/network/route/management/ManagementAuditRoutes;
+}
+

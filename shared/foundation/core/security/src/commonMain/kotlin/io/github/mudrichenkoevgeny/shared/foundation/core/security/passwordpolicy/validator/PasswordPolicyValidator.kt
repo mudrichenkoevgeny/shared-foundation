@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 /**
  * Component for validating passwords against security policies.
  */
-interface PasswordPolicyValidator {
+public interface PasswordPolicyValidator {
     /**
      * Validates the [password] against [ManagementPasswordPolicy] and returns a [PasswordPolicyValidatorResult].
      *
@@ -16,7 +16,10 @@ interface PasswordPolicyValidator {
      * @return [PasswordPolicyValidatorResult.Success] if the password is valid,
      * or [PasswordPolicyValidatorResult.Fail] with a list of reasons.
      */
-    fun validate(managementPasswordPolicy: ManagementPasswordPolicy, password: String): PasswordPolicyValidatorResult
+    public fun validate(
+        managementPasswordPolicy: ManagementPasswordPolicy,
+        password: String
+    ): PasswordPolicyValidatorResult
 
     /**
      * Validates the [password] against [OpenPasswordPolicy] and returns a [PasswordPolicyValidatorResult].
@@ -26,5 +29,8 @@ interface PasswordPolicyValidator {
      * @return [PasswordPolicyValidatorResult.Success] if the password is valid,
      * or [PasswordPolicyValidatorResult.Fail] with a list of reasons.
      */
-    fun validate(openPasswordPolicy: OpenPasswordPolicy, password: String): PasswordPolicyValidatorResult
+    public fun validate(
+        openPasswordPolicy: OpenPasswordPolicy,
+        password: String
+    ): PasswordPolicyValidatorResult
 }

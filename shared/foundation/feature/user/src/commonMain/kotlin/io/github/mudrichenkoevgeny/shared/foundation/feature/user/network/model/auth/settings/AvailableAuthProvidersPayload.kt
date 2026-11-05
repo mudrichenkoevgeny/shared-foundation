@@ -12,10 +12,9 @@ import kotlinx.serialization.Serializable
  * @property secondary A list of alternative authentication methods. Values correspond to [UserAuthProvider.value].
  */
 @Serializable
-data class AvailableAuthProvidersPayload(
+public data class AvailableAuthProvidersPayload(
     @SerialName(UserApiFields.PRIMARY)
-    val primary: List<String>,
-
+    public val primary: List<String>,
     @SerialName(UserApiFields.SECONDARY)
-    val secondary: List<String>
+    public val secondary: List<String>
 )

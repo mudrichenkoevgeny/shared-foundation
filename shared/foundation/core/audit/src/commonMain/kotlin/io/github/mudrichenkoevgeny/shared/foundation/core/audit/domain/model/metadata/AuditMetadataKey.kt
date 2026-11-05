@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 /**
  * Base audit metadata key contract.
  */
-interface AuditMetadataKey {
-    val value: String
-    val valueSensitivity: AuditValueSensitivity
+public interface AuditMetadataKey {
+    public val value: String
+    public val valueSensitivity: AuditValueSensitivity
 }

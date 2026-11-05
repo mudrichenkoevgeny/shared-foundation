@@ -17,22 +17,17 @@ import kotlinx.serialization.Serializable
  * @property operationSystemVersion Operating system version of the device.
  */
 @Serializable
-data class ClientDeviceInfoPayload(
+public data class ClientDeviceInfoPayload(
     @SerialName(CommonApiFields.CLIENT_TYPE)
-    val clientType: String?,
-
+    public val clientType: String?,
     @SerialName(CommonApiFields.LANGUAGE)
-    val language: String?,
-
+    public val language: String?,
     @SerialName(CommonApiFields.DEVICE_ID)
-    val deviceId: String?,
-
+    public val deviceId: String?,
     @SerialName(CommonApiFields.DEVICE_NAME)
-    val deviceName: String?,
-
+    public val deviceName: String?,
     @SerialName(CommonApiFields.APP_VERSION)
-    val appVersion: String?,
-
+    public val appVersion: String?,
     @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
-    val operationSystemVersion: String?
+    public val operationSystemVersion: String?
 )

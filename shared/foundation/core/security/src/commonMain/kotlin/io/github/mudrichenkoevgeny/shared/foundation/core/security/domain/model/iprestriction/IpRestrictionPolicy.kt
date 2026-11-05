@@ -8,9 +8,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property isWhitelistEnabled Whether IP whitelist filtering is active.
  * @property whitelist List of explicitly allowed IP addresses or CIDR ranges.
  */
-data class IpRestrictionPolicy(
-    val isBlacklistEnabled: Boolean,
-    val blacklist: List<String>,
-    val isWhitelistEnabled: Boolean,
-    val whitelist: List<String>
+public data class IpRestrictionPolicy(
+    public val isBlacklistEnabled: Boolean,
+    public val blacklist: List<String>,
+    public val isWhitelistEnabled: Boolean,
+    public val whitelist: List<String>
 )

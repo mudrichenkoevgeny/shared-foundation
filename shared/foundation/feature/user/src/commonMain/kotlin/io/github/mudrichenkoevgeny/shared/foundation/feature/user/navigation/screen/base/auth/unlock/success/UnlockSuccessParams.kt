@@ -3,8 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.sc
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,15 +13,13 @@ import kotlinx.serialization.Serializable
  * @property unlockMethod Method used to complete unlock ([UnlockMethod]); wire key is [UserNavigationPaths.UNLOCK_METHOD].
  */
 @Serializable
-data class UnlockSuccessParams(
-    val unlockMethod: UnlockMethod? = null
+public data class UnlockSuccessParams(
+    public val unlockMethod: UnlockMethod? = null
 ) : NavigationScreenParams<UnlockSuccessParams> {
-
     override val parser: NavigationScreenParamsParser<UnlockSuccessParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<UnlockSuccessParams> {
-
+    public companion object : NavigationScreenParamsParser<UnlockSuccessParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [UnlockSuccessParams].
          *
@@ -30,9 +28,10 @@ data class UnlockSuccessParams(
          */
         override fun parse(params: Map<String, Any?>): UnlockSuccessParams {
             val normalized = params.normalizeQueryParams()
-            val method = normalized[UserNavigationPaths.UNLOCK_METHOD]
-                ?.firstOrNull()
-                ?.let { UnlockMethod.fromValueOrNull(it) }
+            val method =
+                normalized[UserNavigationPaths.UNLOCK_METHOD]
+                    ?.firstOrNull()
+                    ?.let { UnlockMethod.fromValueOrNull(it) }
 
             return UnlockSuccessParams(unlockMethod = method)
         }

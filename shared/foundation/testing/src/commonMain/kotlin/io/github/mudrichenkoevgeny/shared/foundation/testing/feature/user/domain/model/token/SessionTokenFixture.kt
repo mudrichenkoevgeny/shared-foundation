@@ -12,27 +12,28 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
- * Creates a test [SessionToken] domain instance.
- *
- * @param accessToken Access token ([AccessToken]).
- * @param refreshToken Refresh token ([RefreshToken]).
- * @param expiresAt Access token expiration timestamp.
- * @param tokenType Authorization header token type string.
- * @param sessionId Associated session ID ([UserSessionId]).
- * @param identifierId Associated identifier ID ([UserIdentifierId]).
- */
-fun createTestSessionToken(
+* Creates a test [SessionToken] domain instance.
+*
+* @param accessToken Access token ([AccessToken]).
+* @param refreshToken Refresh token ([RefreshToken]).
+* @param expiresAt Access token expiration timestamp.
+* @param tokenType Authorization header token type string.
+* @param sessionId Associated session ID ([UserSessionId]).
+* @param identifierId Associated identifier ID ([UserIdentifierId]).
+*/
+public fun createTestSessionToken(
     accessToken: AccessToken = createTestAccessToken(),
     refreshToken: RefreshToken = createTestRefreshToken(),
     expiresAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS + 3600000L),
     tokenType: String = UserAuthSpec.TOKEN_TYPE_BEARER,
     sessionId: UserSessionId = createTestUserSessionId(),
     identifierId: UserIdentifierId = createTestUserIdentifierId()
-) = SessionToken(
-    accessToken = accessToken,
-    refreshToken = refreshToken,
-    expiresAt = expiresAt,
-    tokenType = tokenType,
-    sessionId = sessionId,
-    identifierId = identifierId
-)
+): SessionToken =
+    SessionToken(
+        accessToken = accessToken,
+        refreshToken = refreshToken,
+        expiresAt = expiresAt,
+        tokenType = tokenType,
+        sessionId = sessionId,
+        identifierId = identifierId
+    )

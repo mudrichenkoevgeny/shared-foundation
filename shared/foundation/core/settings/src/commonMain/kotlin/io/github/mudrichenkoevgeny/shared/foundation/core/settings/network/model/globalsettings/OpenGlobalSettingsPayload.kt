@@ -13,16 +13,13 @@ import kotlinx.serialization.Serializable
  * @property minSupportedAppVersions Minimum supported application versions mapped by client type string.
  */
 @Serializable
-data class OpenGlobalSettingsPayload(
+public data class OpenGlobalSettingsPayload(
     @SerialName(GlobalSettingsApiFields.PRIVACY_POLICY_URL)
-    val privacyPolicyUrl: String?,
-
+    public val privacyPolicyUrl: String?,
     @SerialName(GlobalSettingsApiFields.TERMS_OF_SERVICE_URL)
-    val termsOfServiceUrl: String?,
-
+    public val termsOfServiceUrl: String?,
     @SerialName(GlobalSettingsApiFields.CONTACT_SUPPORT_EMAIL)
-    val contactSupportEmail: String?,
-
+    public val contactSupportEmail: String?,
     @SerialName(GlobalSettingsApiFields.MIN_SUPPORTED_APP_VERSIONS)
-    val minSupportedAppVersions: Map<String, String>
+    public val minSupportedAppVersions: Map<String, String>
 )

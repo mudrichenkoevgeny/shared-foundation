@@ -8,7 +8,9 @@ import kotlin.jvm.JvmInline
  * @property value Raw hash value; must not be blank.
  */
 @JvmInline
-value class PasswordHash(val value: String) {
+public value class PasswordHash(
+    public val value: String
+) {
     init {
         require(value.isNotBlank()) { "PasswordHash value must not be blank." }
     }
@@ -20,10 +22,9 @@ value class PasswordHash(val value: String) {
  * Attempts to create a [PasswordHash] from this string.
  * Returns `null` if the string is blank.
  */
-fun String.toPasswordHashOrNull(): PasswordHash? =
-    if (this.isNotBlank()) PasswordHash(this) else null
+public fun String.toPasswordHashOrNull(): PasswordHash? = if (this.isNotBlank()) PasswordHash(this) else null
 
 /**
  * Creates a [PasswordHash] from this string or throws an exception if the string is blank.
  */
-fun String.toPasswordHashOrThrow(): PasswordHash = PasswordHash(this)
+public fun String.toPasswordHashOrThrow(): PasswordHash = PasswordHash(this)

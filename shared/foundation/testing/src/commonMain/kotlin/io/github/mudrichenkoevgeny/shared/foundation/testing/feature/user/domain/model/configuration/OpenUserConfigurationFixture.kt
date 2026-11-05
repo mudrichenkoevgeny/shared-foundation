@@ -11,21 +11,22 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestOpenAuthSettings
 
 /**
- * Creates a test [OpenUserConfiguration] domain instance.
- *
- * @param openGlobalSettings Global application settings for open clients ([OpenGlobalSettings]).
- * @param openSecuritySettings Security settings for open clients ([OpenSecuritySettings]).
- * @param openStorageSettings Storage settings for open clients ([OpenStorageSettings]).
- * @param openAuthSettings Authentication settings for open clients ([OpenAuthSettings]).
- */
-fun createTestOpenUserConfiguration(
+* Creates a test [OpenUserConfiguration] domain instance.
+*
+* @param openGlobalSettings Global application settings for open clients ([OpenGlobalSettings]).
+* @param openSecuritySettings Security settings for open clients ([OpenSecuritySettings]).
+* @param openStorageSettings Storage settings for open clients ([OpenStorageSettings]).
+* @param openAuthSettings Authentication settings for open clients ([OpenAuthSettings]).
+*/
+public fun createTestOpenUserConfiguration(
     openGlobalSettings: OpenGlobalSettings = createTestOpenGlobalSettings(),
     openSecuritySettings: OpenSecuritySettings = createTestOpenSecuritySettings(),
     openStorageSettings: OpenStorageSettings = createTestOpenStorageSettings(),
     openAuthSettings: OpenAuthSettings = createTestOpenAuthSettings()
-) = OpenUserConfiguration(
-    openGlobalSettings = openGlobalSettings,
-    openSecuritySettings = openSecuritySettings,
-    openStorageSettings = openStorageSettings,
-    openAuthSettings = openAuthSettings
-)
+): OpenUserConfiguration =
+    OpenUserConfiguration(
+        openGlobalSettings = openGlobalSettings,
+        openSecuritySettings = openSecuritySettings,
+        openStorageSettings = openStorageSettings,
+        openAuthSettings = openAuthSettings
+    )

@@ -16,25 +16,19 @@ import kotlinx.serialization.Serializable
  * @property commonPasswords Set of forbidden common passwords.
  */
 @Serializable
-data class ManagementPasswordPolicyPayload(
+public data class ManagementPasswordPolicyPayload(
     @SerialName(SecurityApiFields.MIN_LENGTH)
-    val minLength: Int,
-
+    public val minLength: Int,
     @SerialName(SecurityApiFields.REQUIRE_LETTER)
-    val requireLetter: Boolean,
-
+    public val requireLetter: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_UPPER_CASE)
-    val requireUpperCase: Boolean,
-
+    public val requireUpperCase: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_LOWER_CASE)
-    val requireLowerCase: Boolean,
-
+    public val requireLowerCase: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_DIGIT)
-    val requireDigit: Boolean,
-
+    public val requireDigit: Boolean,
     @SerialName(SecurityApiFields.REQUIRE_SPECIAL_CHAR)
-    val requireSpecialChar: Boolean,
-
+    public val requireSpecialChar: Boolean,
     @SerialName(SecurityApiFields.COMMON_PASSWORDS)
-    val commonPasswords: Set<String>
+    public val commonPasswords: Set<String>
 )

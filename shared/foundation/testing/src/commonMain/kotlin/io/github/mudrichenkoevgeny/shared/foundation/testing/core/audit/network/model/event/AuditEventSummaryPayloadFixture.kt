@@ -11,39 +11,40 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 
 /**
- * Creates a test [AuditEventSummaryPayload] wire object for unit testing mapper logic.
- *
- * @param id Raw audit event ID string.
- * @param actorType Wire string representation of [AuditActorType].
- * @param action Executed action wire string.
- * @param resource Resource category wire string.
- * @param status Wire string representation of [AuditStatus].
- * @param createdAt Event epoch-millisecond timestamp.
- */
-fun createTestAuditEventSummaryPayload(
+* Creates a test [AuditEventSummaryPayload] wire object for unit testing mapper logic.
+*
+* @param id Raw audit event ID string.
+* @param actorType Wire string representation of [AuditActorType].
+* @param action Executed action wire string.
+* @param resource Resource category wire string.
+* @param status Wire string representation of [AuditStatus].
+* @param createdAt Event epoch-millisecond timestamp.
+*/
+public fun createTestAuditEventSummaryPayload(
     id: String = TEST_AUDIT_EVENT_ID,
     actorType: String = AuditActorType.USER.value,
     action: String = UserAuditActionType.LOGIN_BY_EMAIL.value,
     resource: String = CommonAuditResourceType.AUDIT_EVENT.value,
     status: String = AuditStatus.SUCCESS.value,
     createdAt: Long = TEST_TIME_MILLIS
-) = AuditEventSummaryPayload(
-    id = id,
-    actorType = actorType,
-    action = action,
-    resource = resource,
-    status = status,
-    createdAt = createdAt
-)
+): AuditEventSummaryPayload =
+    AuditEventSummaryPayload(
+        id = id,
+        actorType = actorType,
+        action = action,
+        resource = resource,
+        status = status,
+        createdAt = createdAt
+    )
 
 /**
- * Creates a list of test [AuditEventSummaryPayload] wire objects with deterministic raw IDs,
- * alternating status, and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestAuditEventSummaryPayloadList(
+* Creates a list of test [AuditEventSummaryPayload] wire objects with deterministic raw IDs,
+* alternating status, and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestAuditEventSummaryPayloadList(
     count: Int = 2,
     generator: (index: Int) -> AuditEventSummaryPayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

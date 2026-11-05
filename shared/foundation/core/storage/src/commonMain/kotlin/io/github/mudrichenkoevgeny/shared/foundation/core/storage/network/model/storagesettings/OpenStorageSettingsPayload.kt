@@ -11,10 +11,9 @@ import kotlinx.serialization.Serializable
  * @property maxUploadSizeBytes The maximum permitted file size in bytes for a single upload across the entire platform.
  */
 @Serializable
-data class OpenStorageSettingsPayload(
+public data class OpenStorageSettingsPayload(
     @SerialName(StorageApiFields.MIN_UPLOAD_SIZE_BYTES)
-    val minUploadSizeBytes: Long,
-
+    public val minUploadSizeBytes: Long,
     @SerialName(StorageApiFields.MAX_UPLOAD_SIZE_BYTES)
-    val maxUploadSizeBytes: Long
+    public val maxUploadSizeBytes: Long
 )

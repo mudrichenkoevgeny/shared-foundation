@@ -20,14 +20,14 @@ import kotlin.time.Instant
  * @property fileUrls Structured URL variants ([FileUrls]) for public CDN or short-lived presigned GET read URLs, or `null`.
  * @property createdAt Timestamp when the file record was created ([Instant]).
  */
-data class StorageFileSummary(
-    val id: FileId,
-    val fileName: String,
-    val fileSizeBytes: Long,
-    val mimeType: String,
-    val category: StorageCategory,
-    val visibility: StorageFileVisibility,
-    val status: StorageFileStatus,
-    val fileUrls: FileUrls?,
-    val createdAt: Instant
+public data class StorageFileSummary(
+    public val id: FileId,
+    public val fileName: String,
+    public val fileSizeBytes: Long,
+    public val mimeType: String,
+    public val category: StorageCategory,
+    public val visibility: StorageFileVisibility,
+    public val status: StorageFileStatus,
+    public val fileUrls: FileUrls?,
+    public val createdAt: Instant
 )

@@ -5,8 +5,7 @@ private const val WILDCARD_SUFFIX = "/" + "*"
 /**
  * Pure Kotlin Multiplatform validation utilities for client file upload rules and filters.
  */
-object StorageUploadValidator {
-
+public object StorageUploadValidator {
     /**
      * Checks if a file matches the specified accepted file types filter list.
      *
@@ -18,7 +17,7 @@ object StorageUploadValidator {
      * @param mimeType Optional MIME type of the file (e.g., `"image/png"`).
      * @return `true` if the file matches at least one accepted type filter or if filters are empty.
      */
-    fun isFileTypeAccepted(
+    public fun isFileTypeAccepted(
         acceptedFileTypes: List<String>,
         fileName: String,
         mimeType: String? = null
@@ -26,9 +25,10 @@ object StorageUploadValidator {
         if (acceptedFileTypes.isEmpty()) return true
 
         val lowerFileName = fileName.lowercase()
-        val extension = lowerFileName.substringAfterLast('.', "").let {
-            if (it.isNotEmpty()) ".$it" else ""
-        }
+        val extension =
+            lowerFileName.substringAfterLast('.', "").let {
+                if (it.isNotEmpty()) ".$it" else ""
+            }
         val normalizedMimeType = mimeType?.lowercase()?.trim()
 
         return acceptedFileTypes.any { rawFilter ->
@@ -67,7 +67,10 @@ object StorageUploadValidator {
      * @param fileSizeBytes Actual size of the target file in bytes.
      * @return `true` if file size is within limits.
      */
-    fun isFileSizeValid(maxFileSizeBytes: Long?, fileSizeBytes: Long): Boolean {
+    public fun isFileSizeValid(
+        maxFileSizeBytes: Long?,
+        fileSizeBytes: Long
+    ): Boolean {
         if (maxFileSizeBytes == null || maxFileSizeBytes <= 0) return true
         return fileSizeBytes in 0..maxFileSizeBytes
     }
@@ -79,7 +82,10 @@ object StorageUploadValidator {
      * @param currentCount Target file count to check.
      * @return `true` if file count is within limits.
      */
-    fun isBatchSizeValid(maxFiles: Int?, currentCount: Int): Boolean {
+    public fun isBatchSizeValid(
+        maxFiles: Int?,
+        currentCount: Int
+    ): Boolean {
         if (maxFiles == null || maxFiles <= 0) return currentCount >= 0
         return currentCount in 0..maxFiles
     }

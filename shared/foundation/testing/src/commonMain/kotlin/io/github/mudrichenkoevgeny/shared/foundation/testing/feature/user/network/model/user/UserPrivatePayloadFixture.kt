@@ -12,30 +12,30 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
- * Creates a test [UserPrivatePayload] wire object for unit testing mapper logic.
- *
- * @param id Raw user ID string.
- * @param role Wire string representation of [UserRole].
- * @param accountStatus Wire string representation of [UserAccountStatus].
- * @param accountStatusOnRestore Target account status wire string on restore.
- * @param authorityLevel Hierarchical weight (0-100).
- * @param permissionCodes Assigned permission code wire strings.
- * @param isTotpEnabled Whether TOTP 2FA is active.
- * @param lastLoginAt Last login epoch-millisecond timestamp.
- * @param lastActiveAt Last activity epoch-millisecond timestamp.
- * @param createdAt Creation epoch-millisecond timestamp.
- * @param updatedAt Modification epoch-millisecond timestamp.
- * @param scheduledPermanentDeletionAt Scheduled deletion epoch-millisecond timestamp.
- * @param lockoutType Wire string representation of [AccountLockoutType].
- * @param temporaryLockoutUntil Expiration epoch-millisecond timestamp for temporary lockout.
- * @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
- * @param nickname User handle or username.
- * @param displayName Human-readable display name.
- * @param avatarFileId Avatar image file identifier string in storage.
- * @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
- * @param birthdate User birthdate epoch-millisecond timestamp.
- */
-fun createTestUserPrivatePayload(
+* Creates a test [UserPrivatePayload] wire object for unit testing mapper logic.
+*
+* @param id Raw user ID string.
+* @param role Wire string representation of [UserRole].
+* @param accountStatus Wire string representation of [UserAccountStatus].
+* @param accountStatusOnRestore Target account status wire string on restore.
+* @param authorityLevel Hierarchical weight (0-100).
+* @param permissionCodes Assigned permission code wire strings.
+* @param isTotpEnabled Whether TOTP 2FA is active.
+* @param lastLoginAt Last login epoch-millisecond timestamp.
+* @param lastActiveAt Last activity epoch-millisecond timestamp.
+* @param createdAt Creation epoch-millisecond timestamp.
+* @param updatedAt Modification epoch-millisecond timestamp.
+* @param scheduledPermanentDeletionAt Scheduled deletion epoch-millisecond timestamp.
+* @param lockoutType Wire string representation of [AccountLockoutType].
+* @param temporaryLockoutUntil Expiration epoch-millisecond timestamp for temporary lockout.
+* @param storageConfiguration Custom storage configuration wire object ([UserStorageConfigurationPayload]).
+* @param nickname User handle or username.
+* @param displayName Human-readable display name.
+* @param avatarFileId Avatar image file identifier string in storage.
+* @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
+* @param birthdate User birthdate epoch-millisecond timestamp.
+*/
+public fun createTestUserPrivatePayload(
     id: String = TEST_USER_ID,
     role: String = UserRole.USER.value,
     accountStatus: String = UserAccountStatus.ACTIVE.value,
@@ -56,37 +56,38 @@ fun createTestUserPrivatePayload(
     avatarFileId: String? = null,
     avatarUrls: FileUrlsPayload? = null,
     birthdate: Long? = null
-) = UserPrivatePayload(
-    id = id,
-    role = role,
-    accountStatus = accountStatus,
-    accountStatusOnRestore = accountStatusOnRestore,
-    authorityLevel = authorityLevel,
-    permissionCodes = permissionCodes,
-    isTotpEnabled = isTotpEnabled,
-    lastLoginAt = lastLoginAt,
-    lastActiveAt = lastActiveAt,
-    createdAt = createdAt,
-    updatedAt = updatedAt,
-    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
-    lockoutType = lockoutType,
-    temporaryLockoutUntil = temporaryLockoutUntil,
-    storageConfiguration = storageConfiguration,
-    nickname = nickname,
-    displayName = displayName,
-    avatarFileId = avatarFileId,
-    avatarUrls = avatarUrls,
-    birthdate = birthdate
-)
+): UserPrivatePayload =
+    UserPrivatePayload(
+        id = id,
+        role = role,
+        accountStatus = accountStatus,
+        accountStatusOnRestore = accountStatusOnRestore,
+        authorityLevel = authorityLevel,
+        permissionCodes = permissionCodes,
+        isTotpEnabled = isTotpEnabled,
+        lastLoginAt = lastLoginAt,
+        lastActiveAt = lastActiveAt,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
+        lockoutType = lockoutType,
+        temporaryLockoutUntil = temporaryLockoutUntil,
+        storageConfiguration = storageConfiguration,
+        nickname = nickname,
+        displayName = displayName,
+        avatarFileId = avatarFileId,
+        avatarUrls = avatarUrls,
+        birthdate = birthdate
+    )
 
 /**
- * Creates a list of test [UserPrivatePayload] wire objects with deterministic raw UUIDs
- * and epoch-millisecond time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserPrivatePayloadList(
+* Creates a list of test [UserPrivatePayload] wire objects with deterministic raw UUIDs
+* and epoch-millisecond time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserPrivatePayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserPrivatePayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

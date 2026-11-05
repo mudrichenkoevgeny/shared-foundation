@@ -5,8 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.U
 /**
  * Default implementation of [NicknameValidator].
  */
-class NicknameValidatorImpl : NicknameValidator {
-
+public class NicknameValidatorImpl : NicknameValidator {
     private companion object {
         val NICKNAME_REGEX = Regex("^[a-zA-Z0-9](?:[._]?[a-zA-Z0-9]+)*$")
     }

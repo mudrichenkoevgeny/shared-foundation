@@ -6,7 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for user configuration in the open API.
  */
-object OpenUserConfigurationRoutes {
+public object OpenUserConfigurationRoutes {
     /**
      * **HTTP method:** `GET`
      *
@@ -23,5 +23,5 @@ object OpenUserConfigurationRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_USER_CONFIGURATION = "$BASE_USER_ROUTE/configuration"
+    public const val GET_OPEN_USER_CONFIGURATION: String = "$BASE_USER_ROUTE/configuration"
 }

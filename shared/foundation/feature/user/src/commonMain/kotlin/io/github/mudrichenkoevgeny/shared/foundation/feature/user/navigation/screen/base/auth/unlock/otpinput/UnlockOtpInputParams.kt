@@ -5,8 +5,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.pars
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizePhoneQueryParam
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.contract.SecurityApiFields
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.Serializable
 
@@ -19,18 +19,16 @@ import kotlinx.serialization.Serializable
  * @property code Pre-filled verification code from deep link; wire key is [UserApiFields.CONFIRMATION_CODE].
  */
 @Serializable
-data class UnlockOtpInputParams(
-    val unlockMethod: UnlockMethod? = null,
-    val identifier: String? = null,
-    val retryAfterSeconds: Int? = null,
-    val code: String? = null
+public data class UnlockOtpInputParams(
+    public val unlockMethod: UnlockMethod? = null,
+    public val identifier: String? = null,
+    public val retryAfterSeconds: Int? = null,
+    public val code: String? = null
 ) : NavigationScreenParams<UnlockOtpInputParams> {
-
     override val parser: NavigationScreenParamsParser<UnlockOtpInputParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<UnlockOtpInputParams> {
-
+    public companion object : NavigationScreenParamsParser<UnlockOtpInputParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [UnlockOtpInputParams].
          *
@@ -40,26 +38,30 @@ data class UnlockOtpInputParams(
         override fun parse(params: Map<String, Any?>): UnlockOtpInputParams {
             val normalized = params.normalizeQueryParams()
 
-            val unlockMethod = normalized[UserNavigationPaths.UNLOCK_METHOD]
-                ?.firstOrNull()
-                ?.let { UnlockMethod.fromValueOrNull(it) }
+            val unlockMethod =
+                normalized[UserNavigationPaths.UNLOCK_METHOD]
+                    ?.firstOrNull()
+                    ?.let { UnlockMethod.fromValueOrNull(it) }
 
             val rawIdentifier = normalized[UserApiFields.IDENTIFIER]?.firstOrNull()?.trim()
-            val identifier = if (unlockMethod == UnlockMethod.PHONE) {
-                rawIdentifier.normalizePhoneQueryParam()
-            } else {
-                rawIdentifier?.takeIf { it.isNotBlank() }
-            }
+            val identifier =
+                if (unlockMethod == UnlockMethod.PHONE) {
+                    rawIdentifier.normalizePhoneQueryParam()
+                } else {
+                    rawIdentifier?.takeIf { it.isNotBlank() }
+                }
 
-            val retryAfterSeconds = normalized[SecurityApiFields.RETRY_AFTER_SECONDS]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it >= 0 }
+            val retryAfterSeconds =
+                normalized[SecurityApiFields.RETRY_AFTER_SECONDS]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it >= 0 }
 
-            val code = normalized[UserApiFields.CONFIRMATION_CODE]
-                ?.firstOrNull()
-                ?.trim()
-                ?.takeIf { it.isNotBlank() }
+            val code =
+                normalized[UserApiFields.CONFIRMATION_CODE]
+                    ?.firstOrNull()
+                    ?.trim()
+                    ?.takeIf { it.isNotBlank() }
 
             return UnlockOtpInputParams(
                 unlockMethod = unlockMethod,

@@ -11,8 +11,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for storage settings in management operations.
  */
 @Serializable
-sealed interface ManagementStorageSettingsNavigation : NavigationRoute {
-
+public sealed interface ManagementStorageSettingsNavigation : NavigationRoute {
     /**
      * Navigation screen for viewing and editing [ManagementStorageSettings].
      *
@@ -22,8 +21,7 @@ sealed interface ManagementStorageSettingsNavigation : NavigationRoute {
      *   - [ManagementStorageSettingsRoutes.UPDATE_MANAGEMENT_STORAGE_SETTINGS]
      */
     @Serializable
-    data object StorageSettings : ManagementStorageSettingsNavigation {
-
+    public data object StorageSettings : ManagementStorageSettingsNavigation {
         override val route: String
             get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}"
 

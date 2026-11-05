@@ -31,7 +31,7 @@ import kotlin.time.Instant
  * @param message Human-readable log message.
  * @param createdAt Event timestamp.
  */
-fun createTestAuditEventPrivate(
+public fun createTestAuditEventPrivate(
     id: AuditEventId = createTestAuditEventId(),
     actorId: String? = TEST_USER_ID,
     actorType: AuditActorType = AuditActorType.USER,
@@ -43,19 +43,20 @@ fun createTestAuditEventPrivate(
     metadata: Set<AuditEventMetadata> = setOf(createTestAuditEventMetadata()),
     message: String? = "User logged in successfully",
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-) = AuditEventPrivate(
-    id = id,
-    actorId = actorId,
-    actorType = actorType,
-    actorUserRole = actorUserRole,
-    action = action,
-    resource = resource,
-    resourceId = resourceId,
-    status = status,
-    metadata = metadata,
-    message = message,
-    createdAt = createdAt
-)
+): AuditEventPrivate =
+    AuditEventPrivate(
+        id = id,
+        actorId = actorId,
+        actorType = actorType,
+        actorUserRole = actorUserRole,
+        action = action,
+        resource = resource,
+        resourceId = resourceId,
+        status = status,
+        metadata = metadata,
+        message = message,
+        createdAt = createdAt
+    )
 
 /**
  * Creates a list of test [AuditEventPrivate] instances with deterministic index-based UUIDs,
@@ -64,7 +65,7 @@ fun createTestAuditEventPrivate(
  * @param count Number of elements to generate (defaults to 2).
  * @param generator Custom item builder receiving 0-based element index.
  */
-fun createTestAuditEventPrivateList(
+public fun createTestAuditEventPrivateList(
     count: Int = 2,
     generator: (index: Int) -> AuditEventPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

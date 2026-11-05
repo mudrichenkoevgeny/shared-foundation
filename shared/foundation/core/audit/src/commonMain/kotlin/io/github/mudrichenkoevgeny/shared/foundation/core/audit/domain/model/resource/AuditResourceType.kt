@@ -5,6 +5,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  *
  * Other modules can provide their own resource type implementations.
  */
-interface AuditResourceType {
-    val value: String
+public interface AuditResourceType {
+    public val value: String
 }

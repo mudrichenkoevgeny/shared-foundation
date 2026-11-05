@@ -5,16 +5,16 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ManagementAuditEventDetailParamsTest {
-
     private companion object {
         const val TEST_EVENT_ID = "00000000-0000-4000-8000-000000000099"
     }
 
     @Test
     fun `parse extracts eventId correctly`() {
-        val paramsMap = mapOf(
-            AuditApiPaths.EVENT_ID to TEST_EVENT_ID
-        )
+        val paramsMap =
+            mapOf(
+                AuditApiPaths.EVENT_ID to TEST_EVENT_ID
+            )
 
         val parsed = ManagementAuditEventDetailParams.parse(paramsMap)
 
@@ -30,9 +30,10 @@ class ManagementAuditEventDetailParamsTest {
 
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
-        val params = ManagementAuditEventDetailParams(
-            eventId = TEST_EVENT_ID
-        )
+        val params =
+            ManagementAuditEventDetailParams(
+                eventId = TEST_EVENT_ID
+            )
 
         val serialized = params.toQueryMap()
 

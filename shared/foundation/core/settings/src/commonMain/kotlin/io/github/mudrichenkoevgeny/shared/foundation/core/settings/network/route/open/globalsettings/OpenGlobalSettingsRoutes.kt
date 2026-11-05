@@ -7,8 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route
 /**
  * Route paths for global settings in the open API.
  */
-object OpenGlobalSettingsRoutes {
-
+public object OpenGlobalSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
@@ -25,6 +24,6 @@ object OpenGlobalSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_GLOBAL_SETTINGS =
+    public const val GET_OPEN_GLOBAL_SETTINGS: String =
         "${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSettingsNetworkRoutes.BASE_GLOBAL_SETTINGS_NETWORK_ROUTE}"
 }

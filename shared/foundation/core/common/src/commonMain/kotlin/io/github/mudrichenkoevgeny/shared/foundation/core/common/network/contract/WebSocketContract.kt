@@ -6,7 +6,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contra
  * @property WS_OPEN_REALTIME_PATH The relative URL path for the open real-time communication endpoint.
  * @property WS_MANAGEMENT_REALTIME_PATH The relative URL path for the management real-time communication endpoint.
  */
-object WebSocketContract {
-    const val WS_OPEN_REALTIME_PATH = "/ws/realtime"
-    const val WS_MANAGEMENT_REALTIME_PATH = "/management/ws/realtime"
+public object WebSocketContract {
+    public const val WS_OPEN_REALTIME_PATH: String = "/ws/realtime"
+    public const val WS_MANAGEMENT_REALTIME_PATH: String = "/management/ws/realtime"
 }

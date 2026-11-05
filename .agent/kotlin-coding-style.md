@@ -16,7 +16,8 @@ This document defines the mandatory Kotlin syntax and formatting standards for t
 - **Exception:** Minimal FQN is allowed only when imports are technically impossible or cause unresolvable ambiguity (justify in the task summary).
 
 ### Implementation Comments vs. KDoc Documentation
-- **Strict Ban on Inline Comments:** Do not write inline implementation comments (`//` or `/* ... */`) inside method bodies or code blocks. Logic must be self-documenting through expressive naming and clean structure.
+- **No Banal / Redundant Inline Comments:** Do not write trivial or redundant inline comments (`//` or `/* ... */`) that explain obvious code logic (e.g., `// increment counter`, `// return result`). Logic must be self-documenting through expressive naming and clean decomposition of complex steps into private helper functions.
+- **Allowed Technical Comments:** Technical annotations, TODOs, FIXMEs, workarounds, or non-obvious business/KMP constraints (`// TODO:`, `// FIXME:`, `// workaround:`) are permitted when necessary.
 - **MANDATORY KDoc Preservation:** KDoc blocks (`/** ... */`) are structured API documentation and are strictly MANDATORY. AI agents must **NEVER** delete, strip, wipe, or omit existing KDoc documentation blocks during refactoring, updates, or code edits. All public interfaces, classes, functions, and properties must retain and maintain their KDoc documentation.
 
 ### Trailing Commas

@@ -13,16 +13,13 @@ import kotlinx.serialization.Serializable
  * @property whitelist List of explicitly allowed IP addresses or CIDR ranges.
  */
 @Serializable
-data class IpRestrictionPolicyPayload(
+public data class IpRestrictionPolicyPayload(
     @SerialName(SecurityApiFields.IS_BLACKLIST_ENABLED)
-    val isBlacklistEnabled: Boolean,
-
+    public val isBlacklistEnabled: Boolean,
     @SerialName(SecurityApiFields.BLACKLIST)
-    val blacklist: List<String>,
-
+    public val blacklist: List<String>,
     @SerialName(SecurityApiFields.IS_WHITELIST_ENABLED)
-    val isWhitelistEnabled: Boolean,
-
+    public val isWhitelistEnabled: Boolean,
     @SerialName(SecurityApiFields.WHITELIST)
-    val whitelist: List<String>
+    public val whitelist: List<String>
 )

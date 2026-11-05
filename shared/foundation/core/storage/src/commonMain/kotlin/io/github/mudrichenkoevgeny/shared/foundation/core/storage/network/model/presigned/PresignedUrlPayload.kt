@@ -13,16 +13,13 @@ import kotlinx.serialization.Serializable
  * @property expiresAt Expiration timestamp in Unix epoch milliseconds.
  */
 @Serializable
-data class PresignedUrlPayload(
+public data class PresignedUrlPayload(
     @SerialName(StorageApiFields.FILE_ID)
-    val fileId: String,
-
+    public val fileId: String,
     @SerialName(StorageApiFields.UPLOAD_URL)
-    val uploadUrl: String,
-
+    public val uploadUrl: String,
     @SerialName(StorageApiFields.FILE_URL)
-    val fileUrl: String,
-
+    public val fileUrl: String,
     @SerialName(StorageApiFields.EXPIRES_AT)
-    val expiresAt: Long
+    public val expiresAt: Long
 )

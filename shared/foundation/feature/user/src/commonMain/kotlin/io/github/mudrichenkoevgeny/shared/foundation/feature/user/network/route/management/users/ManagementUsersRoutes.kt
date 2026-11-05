@@ -6,11 +6,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.met
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE
-import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
@@ -19,20 +17,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.permission.UserPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementUsersNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.ManagementUpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.ManagementUpdateUserRequest
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.session.SelfManagementSessionRoutes
 
 /**
  * Route paths for user management in the management API.
  */
-object ManagementUsersRoutes {
+public object ManagementUsersRoutes {
     /**
      * Base path for user management operations under [CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE].
      */
@@ -138,7 +135,7 @@ object ManagementUsersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserList]
      */
-    const val GET_USERS = BASE_MANAGEMENT_USERS_ROUTE
+    public const val GET_USERS: String = BASE_MANAGEMENT_USERS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -174,7 +171,7 @@ object ManagementUsersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.CreateUser]
      */
-    const val CREATE_USER = BASE_MANAGEMENT_USERS_ROUTE
+    public const val CREATE_USER: String = BASE_MANAGEMENT_USERS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -198,7 +195,7 @@ object ManagementUsersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserDetail]
      */
-    const val GET_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+    public const val GET_USER: String = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
     /**
      * **HTTP method:** `PATCH`
@@ -247,7 +244,7 @@ object ManagementUsersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserDetail]
      */
-    const val UPDATE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+    public const val UPDATE_USER: String = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -284,5 +281,5 @@ object ManagementUsersRoutes {
      * - Screens:
      *   - [ManagementUsersNavigation.UserDetail]
      */
-    const val DELETE_USER = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+    public const val DELETE_USER: String = "$BASE_MANAGEMENT_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 }

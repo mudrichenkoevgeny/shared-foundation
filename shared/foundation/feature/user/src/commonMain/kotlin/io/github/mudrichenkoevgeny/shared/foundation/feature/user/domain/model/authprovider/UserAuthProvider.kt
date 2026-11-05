@@ -14,7 +14,9 @@ private const val PROVIDER_APPLE = "apple"
  * @property value String representation of the [UserAuthProvider].
  */
 @Serializable
-enum class UserAuthProvider(val value: String) {
+public enum class UserAuthProvider(
+    public val value: String
+) {
     /**
      * Authentication using email and password.
      */
@@ -39,14 +41,14 @@ enum class UserAuthProvider(val value: String) {
     @SerialName(PROVIDER_APPLE)
     APPLE(PROVIDER_APPLE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UserAuthProvider] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): UserAuthProvider? =
+        public fun fromValueOrNull(value: String): UserAuthProvider? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -54,7 +56,7 @@ enum class UserAuthProvider(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [UserAuthProvider].
          */
-        fun fromValueOrThrow(value: String): UserAuthProvider =
+        public fun fromValueOrThrow(value: String): UserAuthProvider =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UserAuthProvider::class.simpleName}: '$value'"
             )

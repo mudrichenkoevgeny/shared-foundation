@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class UserEmailTemplatesTest {
-
     @Test
     fun testGeneratesAndFormatsEmailTemplatesEn() {
         val userStrings = UserModuleStrings(locale = CommonLocales.ENGLISH)

@@ -21,20 +21,20 @@ import kotlin.time.Instant
  *
  * @throws IllegalArgumentException when `sessionId` or `identifierId` is not a valid UUID string.
  */
-fun SessionTokenPayload.toSessionToken(): SessionToken =
+public fun SessionTokenPayload.toSessionToken(): SessionToken =
     SessionToken(
         accessToken = AccessToken(accessToken),
         refreshToken = RefreshToken(refreshToken),
         expiresAt = Instant.fromEpochMilliseconds(expiresAt),
         tokenType = tokenType,
         sessionId = sessionId.toUserSessionIdOrThrow(),
-        identifierId = identifierId.toUserIdentifierIdOrThrow(),
+        identifierId = identifierId.toUserIdentifierIdOrThrow()
     )
 
 /**
  * Builds network [SessionTokenPayload] from domain [SessionToken].
  */
-fun SessionToken.toSessionTokenPayload(): SessionTokenPayload =
+public fun SessionToken.toSessionTokenPayload(): SessionTokenPayload =
     SessionTokenPayload(
         accessToken = accessToken.value,
         refreshToken = refreshToken.value,

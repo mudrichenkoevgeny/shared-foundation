@@ -8,7 +8,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.
  * @property minUploadSizeBytes The minimum permitted file size in bytes for a single upload.
  * @property maxUploadSizeBytes The maximum permitted file size in bytes for a single upload across the entire platform.
  */
-data class OpenStorageSettings(
-    val minUploadSizeBytes: Long,
-    val maxUploadSizeBytes: Long
+public data class OpenStorageSettings(
+    public val minUploadSizeBytes: Long,
+    public val maxUploadSizeBytes: Long
 )

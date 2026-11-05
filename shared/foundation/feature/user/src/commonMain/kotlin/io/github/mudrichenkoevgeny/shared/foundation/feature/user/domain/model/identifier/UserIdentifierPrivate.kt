@@ -20,14 +20,14 @@ import kotlin.time.Instant
  * @property createdAt Creation timestamp.
  * @property updatedAt Last credential record modification timestamp, or `null`.
  */
-data class UserIdentifierPrivate(
-    val id: UserIdentifierId = UserIdentifierId.generate(),
-    val userId: UserId,
-    val userAuthProvider: UserAuthProvider,
-    val identifier: String,
-    val displayName: String,
-    val externalProviderEmail: String?,
-    val isSensitiveValuesMasked: Boolean,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+public data class UserIdentifierPrivate(
+    public val id: UserIdentifierId = UserIdentifierId.generate(),
+    public val userId: UserId,
+    public val userAuthProvider: UserAuthProvider,
+    public val identifier: String,
+    public val displayName: String,
+    public val externalProviderEmail: String?,
+    public val isSensitiveValuesMasked: Boolean,
+    public val createdAt: Instant,
+    public val updatedAt: Instant?
 )

@@ -36,52 +36,37 @@ import kotlin.time.Instant
  * @property updatedAt [UserSessionPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
-data class UserSessionPrivatePayload(
+public data class UserSessionPrivatePayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.USER_ID)
-    val userId: String,
-
+    public val userId: String,
     @SerialName(UserApiFields.USER_ROLE)
-    val userRole: String,
-
+    public val userRole: String,
     @SerialName(UserApiFields.IDENTIFIER)
-    val identifier: String,
-
+    public val identifier: String,
     @SerialName(UserApiFields.IDENTIFIER_ID)
-    val identifierId: String,
-
+    public val identifierId: String,
     @SerialName(UserApiFields.IDENTIFIER_DISPLAY_NAME)
-    val identifierDisplayName: String,
-
+    public val identifierDisplayName: String,
     @SerialName(UserApiFields.IDENTIFIER_AUTH_PROVIDER)
-    val identifierAuthProvider: String,
-
+    public val identifierAuthProvider: String,
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val clientDeviceInfo: ClientDeviceInfoPayload,
-
+    public val clientDeviceInfo: ClientDeviceInfoPayload,
     @SerialName(CommonApiFields.USER_AGENT)
-    val userAgent: String? = null,
-
+    public val userAgent: String? = null,
     @SerialName(CommonApiFields.IP_ADDRESS)
-    val ipAddress: String? = null,
-
+    public val ipAddress: String? = null,
     @SerialName(UserApiFields.EXPIRES_AT)
-    val expiresAt: Long,
-
+    public val expiresAt: Long,
     @SerialName(UserApiFields.LAST_ACCESSED_AT)
-    val lastAccessedAt: Long,
-
+    public val lastAccessedAt: Long,
     @SerialName(UserApiFields.LAST_REAUTHENTICATED_AT)
-    val lastReauthenticatedAt: Long,
-
+    public val lastReauthenticatedAt: Long,
     @SerialName(CommonApiFields.IS_SENSITIVE_VALUES_MASKED)
-    val isSensitiveValuesMasked: Boolean,
-
+    public val isSensitiveValuesMasked: Boolean,
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long,
-
+    public val createdAt: Long,
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null
+    public val updatedAt: Long? = null
 )

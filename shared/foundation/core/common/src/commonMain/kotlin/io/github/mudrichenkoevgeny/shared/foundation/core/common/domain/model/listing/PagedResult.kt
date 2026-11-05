@@ -22,29 +22,26 @@ import kotlinx.serialization.Serializable
  * @property totalPages Number of pages for [totalCount] and [pageSize]; `0` when [pageSize] is not positive.
  */
 @Serializable
-data class PagedResult<T>(
+public data class PagedResult<T>(
     @SerialName(CommonApiFields.ITEMS)
-    val items: List<T>,
-
+    public val items: List<T>,
     @SerialName(CommonApiFields.TOTAL_COUNT)
-    val totalCount: Long,
-
+    public val totalCount: Long,
     @SerialName(ListingParamNames.Pagination.PAGE_NUMBER)
-    val pageNumber: Int,
-
+    public val pageNumber: Int,
     @SerialName(ListingParamNames.Pagination.PAGE_SIZE)
-    val pageSize: Int,
-
+    public val pageSize: Int,
     @SerialName(CommonApiFields.TOTAL_PAGES)
-    val totalPages: Long
+    public val totalPages: Long
 ) {
-    companion object {
-        fun <T> empty() = PagedResult<T>(
-            items = emptyList(),
-            totalCount = 0,
-            pageNumber = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-            pageSize = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-            totalPages = 0
-        )
+    public companion object {
+        public fun <T> empty(): PagedResult<T> =
+            PagedResult<T>(
+                items = emptyList(),
+                totalCount = 0,
+                pageNumber = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                totalPages = 0
+            )
     }
 }

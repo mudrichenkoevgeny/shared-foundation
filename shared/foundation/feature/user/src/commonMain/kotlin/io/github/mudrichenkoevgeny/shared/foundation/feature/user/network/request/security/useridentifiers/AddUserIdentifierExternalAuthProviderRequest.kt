@@ -13,12 +13,11 @@ import kotlinx.serialization.Serializable
  * @property externalProviderToken The authentication token provided by the external service to verify the identity.
  */
 @Serializable
-data class AddUserIdentifierExternalAuthProviderRequest(
+public data class AddUserIdentifierExternalAuthProviderRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.AUTH_PROVIDER)
-    val authProvider: String,
-
+    public val authProvider: String,
     @NotBlankStringField
     @SerialName(UserApiFields.EXTERNAL_PROVIDER_TOKEN)
-    val externalProviderToken: String
+    public val externalProviderToken: String
 )

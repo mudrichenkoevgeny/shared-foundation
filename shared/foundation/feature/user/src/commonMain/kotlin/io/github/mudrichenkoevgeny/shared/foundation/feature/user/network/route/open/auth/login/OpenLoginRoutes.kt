@@ -24,7 +24,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for login in the open API.
  */
-object OpenLoginRoutes {
+public object OpenLoginRoutes {
     /** Base path for open login operations. */
     private const val BASE_LOGIN_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/login"
 
@@ -63,7 +63,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByEmail]
      */
-    const val LOGIN_BY_EMAIL = "$BASE_LOGIN_ROUTE/email"
+    public const val LOGIN_BY_EMAIL: String = "$BASE_LOGIN_ROUTE/email"
 
     /**
      * **HTTP method:** `POST`
@@ -97,7 +97,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByPhone]
      */
-    const val LOGIN_BY_PHONE = BASE_LOGIN_PHONE_ROUTE
+    public const val LOGIN_BY_PHONE: String = BASE_LOGIN_PHONE_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -133,7 +133,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.Main]
      */
-    const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER = "$BASE_LOGIN_ROUTE/external-auth-provider"
+    public const val LOGIN_BY_EXTERNAL_AUTH_PROVIDER: String = "$BASE_LOGIN_ROUTE/external-auth-provider"
 
     /**
      * **HTTP method:** `POST`
@@ -162,7 +162,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP = "$BASE_LOGIN_ROUTE/totp"
+    public const val LOGIN_BY_TOTP: String = "$BASE_LOGIN_ROUTE/totp"
 
     /**
      * **HTTP method:** `POST`
@@ -192,7 +192,7 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByTotp]
      */
-    const val LOGIN_BY_TOTP_RECOVERY_CODE = "$BASE_LOGIN_ROUTE/totp/recovery-code"
+    public const val LOGIN_BY_TOTP_RECOVERY_CODE: String = "$BASE_LOGIN_ROUTE/totp/recovery-code"
 
     /**
      * **HTTP method:** `POST`
@@ -213,5 +213,5 @@ object OpenLoginRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.LoginByPhone]
      */
-    const val SEND_LOGIN_CONFIRMATION_TO_PHONE = "$BASE_LOGIN_PHONE_ROUTE/send-confirmation"
+    public const val SEND_LOGIN_CONFIRMATION_TO_PHONE: String = "$BASE_LOGIN_PHONE_ROUTE/send-confirmation"
 }

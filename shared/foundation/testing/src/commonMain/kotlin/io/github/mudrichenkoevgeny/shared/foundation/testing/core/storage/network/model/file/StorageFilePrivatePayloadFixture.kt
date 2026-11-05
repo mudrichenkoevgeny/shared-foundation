@@ -7,9 +7,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 
 /**
- * Creates a test [StorageFilePrivatePayload] wire object instance.
- */
-fun createTestStorageFilePrivatePayload(
+* Creates a test [StorageFilePrivatePayload] wire object instance.
+*/
+public fun createTestStorageFilePrivatePayload(
     id: String = "00000000-0000-4000-8000-000000000001",
     ownerUserId: String? = "usr_000000000001",
     fileName: String = "test_image.png",
@@ -22,17 +22,18 @@ fun createTestStorageFilePrivatePayload(
     fileUrls: FileUrlsPayload? = createTestFileUrlsPayload(),
     createdAt: Long = 1700000000000L,
     updatedAt: Long? = null
-) = StorageFilePrivatePayload(
-    id = id,
-    ownerUserId = ownerUserId,
-    fileName = fileName,
-    fileSizeBytes = fileSizeBytes,
-    mimeType = mimeType,
-    category = category,
-    visibility = visibility,
-    status = status,
-    targetScope = targetScope,
-    fileUrls = fileUrls,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+): StorageFilePrivatePayload =
+    StorageFilePrivatePayload(
+        id = id,
+        ownerUserId = ownerUserId,
+        fileName = fileName,
+        fileSizeBytes = fileSizeBytes,
+        mimeType = mimeType,
+        category = category,
+        visibility = visibility,
+        status = status,
+        targetScope = targetScope,
+        fileUrls = fileUrls,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )

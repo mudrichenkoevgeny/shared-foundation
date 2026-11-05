@@ -7,8 +7,7 @@ import kotlinx.serialization.Serializable
  * Root navigation route for the client application.
  */
 @Serializable
-sealed interface ClientMainNavigation : NavigationRoute {
-
+public sealed interface ClientMainNavigation : NavigationRoute {
     /**
      * Entry home/main screen for clients.
      *
@@ -17,8 +16,7 @@ sealed interface ClientMainNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ClientMainNavigation {
-
+    public data object Main : ClientMainNavigation {
         override val route: String
             get() = "/"
 

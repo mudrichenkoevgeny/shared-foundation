@@ -19,26 +19,26 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
- * Creates a test [UserSessionInternal] domain instance.
- *
- * @param id Unique session ID ([UserSessionId]).
- * @param userId Owning user ID ([UserId]).
- * @param userRole Access role ([UserRole]).
- * @param identifier Credential string.
- * @param identifierId Credential ID ([UserIdentifierId]).
- * @param identifierDisplayName Display name of identifier.
- * @param identifierAuthProvider Provider category ([UserAuthProvider]).
- * @param clientDeviceInfo Client device info ([ClientDeviceInfo]).
- * @param userAgent User agent string.
- * @param ipAddress IP address.
- * @param refreshTokenHash Refresh token hash ([RefreshTokenHash]).
- * @param expiresAt Expiration timestamp.
- * @param lastAccessedAt Last activity timestamp.
- * @param lastReauthenticatedAt Last re-authentication timestamp.
- * @param createdAt Creation timestamp.
- * @param updatedAt Modification timestamp.
- */
-fun createTestUserSessionInternal(
+* Creates a test [UserSessionInternal] domain instance.
+*
+* @param id Unique session ID ([UserSessionId]).
+* @param userId Owning user ID ([UserId]).
+* @param userRole Access role ([UserRole]).
+* @param identifier Credential string.
+* @param identifierId Credential ID ([UserIdentifierId]).
+* @param identifierDisplayName Display name of identifier.
+* @param identifierAuthProvider Provider category ([UserAuthProvider]).
+* @param clientDeviceInfo Client device info ([ClientDeviceInfo]).
+* @param userAgent User agent string.
+* @param ipAddress IP address.
+* @param refreshTokenHash Refresh token hash ([RefreshTokenHash]).
+* @param expiresAt Expiration timestamp.
+* @param lastAccessedAt Last activity timestamp.
+* @param lastReauthenticatedAt Last re-authentication timestamp.
+* @param createdAt Creation timestamp.
+* @param updatedAt Modification timestamp.
+*/
+public fun createTestUserSessionInternal(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),
     userRole: UserRole = UserRole.USER,
@@ -55,21 +55,22 @@ fun createTestUserSessionInternal(
     lastReauthenticatedAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-) = UserSessionInternal(
-    id = id,
-    userId = userId,
-    userRole = userRole,
-    identifier = identifier,
-    identifierId = identifierId,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    clientDeviceInfo = clientDeviceInfo,
-    userAgent = userAgent,
-    ipAddress = ipAddress,
-    refreshTokenHash = refreshTokenHash,
-    expiresAt = expiresAt,
-    lastAccessedAt = lastAccessedAt,
-    lastReauthenticatedAt = lastReauthenticatedAt,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+): UserSessionInternal =
+    UserSessionInternal(
+        id = id,
+        userId = userId,
+        userRole = userRole,
+        identifier = identifier,
+        identifierId = identifierId,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        clientDeviceInfo = clientDeviceInfo,
+        userAgent = userAgent,
+        ipAddress = ipAddress,
+        refreshTokenHash = refreshTokenHash,
+        expiresAt = expiresAt,
+        lastAccessedAt = lastAccessedAt,
+        lastReauthenticatedAt = lastReauthenticatedAt,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )

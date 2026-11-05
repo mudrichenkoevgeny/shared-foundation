@@ -9,38 +9,39 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 
 /**
- * Creates a test [UserSummary] instance with default mock properties for unit testing.
- *
- * @param id Unique user ID ([UserId]).
- * @param role Assigned access role ([UserRole]).
- * @param accountStatus Current account state ([UserAccountStatus]).
- * @param nickname User handle or username.
- * @param displayName Human-readable display name.
- * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
- */
-fun createTestUserSummary(
+* Creates a test [UserSummary] instance with default mock properties for unit testing.
+*
+* @param id Unique user ID ([UserId]).
+* @param role Assigned access role ([UserRole]).
+* @param accountStatus Current account state ([UserAccountStatus]).
+* @param nickname User handle or username.
+* @param displayName Human-readable display name.
+* @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
+*/
+public fun createTestUserSummary(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,
     accountStatus: UserAccountStatus = UserAccountStatus.ACTIVE,
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarUrls: FileUrls? = null
-) = UserSummary(
-    id = id,
-    role = role,
-    accountStatus = accountStatus,
-    nickname = nickname,
-    displayName = displayName,
-    avatarUrls = avatarUrls
-)
+): UserSummary =
+    UserSummary(
+        id = id,
+        role = role,
+        accountStatus = accountStatus,
+        nickname = nickname,
+        displayName = displayName,
+        avatarUrls = avatarUrls
+    )
 
 /**
- * Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserSummaryList(
+* Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSummary = { index ->
         createTestUserSummary(

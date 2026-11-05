@@ -12,10 +12,9 @@ import kotlinx.serialization.Serializable
  * @property urlPresets Map of preset keys (e.g. [FileUrlPresets.THUMBNAIL]) to resolution variant URLs.
  */
 @Serializable
-data class FileUrlsPayload(
+public data class FileUrlsPayload(
     @SerialName(StorageApiFields.ORIGINAL_URL)
-    val originalUrl: String,
-
+    public val originalUrl: String,
     @SerialName(StorageApiFields.URL_PRESETS)
-    val urlPresets: Map<String, String> = emptyMap()
+    public val urlPresets: Map<String, String> = emptyMap()
 )

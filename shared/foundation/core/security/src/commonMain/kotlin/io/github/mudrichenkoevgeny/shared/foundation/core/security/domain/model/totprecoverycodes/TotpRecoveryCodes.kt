@@ -8,6 +8,6 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  *
  * @property codes A list of available backup codes.
  */
-data class TotpRecoveryCodes(
-    val codes: List<String>
+public data class TotpRecoveryCodes(
+    public val codes: List<String>
 )

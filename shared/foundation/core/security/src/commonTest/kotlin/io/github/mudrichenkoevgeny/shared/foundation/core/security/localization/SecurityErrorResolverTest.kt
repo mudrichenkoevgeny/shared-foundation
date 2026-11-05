@@ -5,18 +5,18 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class SecurityErrorResolverTest {
-
     private val securityStringsEn = SecurityModuleStrings(locale = "en")
     private val securityStringsRu = SecurityModuleStrings(locale = "ru")
 
     @Test
     fun `resolvePasswordTooWeakReasons parses error args map correctly`() {
-        val args = mapOf<String, Any?>(
-            SecurityErrorArgs.PASSWORD_MIN_LENGTH to 12,
-            SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT to true,
-            SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE to true,
-            SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON to true
-        )
+        val args =
+            mapOf<String, Any?>(
+                SecurityErrorArgs.PASSWORD_MIN_LENGTH to 12,
+                SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT to true,
+                SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE to true,
+                SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON to true
+            )
 
         val reasonsEn = securityStringsEn.resolvePasswordTooWeakReasons(args)
         assertEquals(

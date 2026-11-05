@@ -10,26 +10,30 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.c
  * @property appVersion Version of the client application.
  * @property operationSystemVersion Operating system version of the device.
  */
-data class ClientDeviceInfo(
-    val deviceId: ClientDeviceId?,
-    val deviceName: String?,
-    val clientType: ClientType?,
-    val language: String?,
-    val appVersion: String?,
-    val operationSystemVersion: String?
+public data class ClientDeviceInfo(
+    public val deviceId: ClientDeviceId?,
+    public val deviceName: String?,
+    public val clientType: ClientType?,
+    public val language: String?,
+    public val appVersion: String?,
+    public val operationSystemVersion: String?
 ) {
+    public fun isMobileClient(): Boolean = clientType?.isMobileClient() == true
 
-    fun isMobileClient(): Boolean = clientType?.isMobileClient() == true
-
-    companion object {
+    public companion object {
         /**
          * Extracts the primary locale code from a raw `Accept-Language` header string.
          * For example: `"en-US,en;q=0.9,ru;q=0.8"` -> `"en-US"`.
          */
-        fun parsePrimaryLanguage(rawAcceptLanguageHeader: String?): String? {
+        public fun parsePrimaryLanguage(rawAcceptLanguageHeader: String?): String? {
             val raw = rawAcceptLanguageHeader?.trim() ?: return null
             if (raw.isBlank()) return null
-            return raw.split(',').firstOrNull()?.substringBefore(';')?.trim()?.takeIf { it.isNotBlank() }
+            return raw
+                .split(',')
+                .firstOrNull()
+                ?.substringBefore(';')
+                ?.trim()
+                ?.takeIf { it.isNotBlank() }
         }
     }
 }

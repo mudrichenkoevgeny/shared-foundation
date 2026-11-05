@@ -9,18 +9,19 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rou
  * @param baseUrl Base URL string including protocol and domain.
  * @return Fully formatted and URL-encoded URL string with query parameters if present.
  */
-fun NavigationRoute.toFullUrl(baseUrl: String): String {
+public fun NavigationRoute.toFullUrl(baseUrl: String): String {
     val cleanBaseUrl = baseUrl.trimEnd('/')
     val cleanRoute = route.trim('/')
     val fullPathUrl = if (cleanRoute.isNotEmpty()) "$cleanBaseUrl/$cleanRoute" else cleanBaseUrl
 
     if (this !is ParameterizedNavigationRoute<*>) return fullPathUrl
 
-    val queryParams = params.toQueryMap().flatMap { (key, values) ->
-        values.filter { it.isNotBlank() }.map { value ->
-            "${key.encodeUriQueryComponent()}=${value.encodeUriQueryComponent()}"
+    val queryParams =
+        params.toQueryMap().flatMap { (key, values) ->
+            values.filter { it.isNotBlank() }.map { value ->
+                "${key.encodeUriQueryComponent()}=${value.encodeUriQueryComponent()}"
+            }
         }
-    }
     if (queryParams.isEmpty()) return fullPathUrl
 
     return "$fullPathUrl?${queryParams.joinToString("&")}"
@@ -34,14 +35,12 @@ private fun String.encodeUriQueryComponent(): String {
     val sb = StringBuilder()
     val bytes = this.encodeToByteArray()
     for (b in bytes) {
-        val c = b.toInt().and(0xFF).toChar()
+        val c = (b.toInt() and 0xFF).toChar()
         if (c in allowed) {
             sb.append(c)
         } else {
-            val hex = b.toInt().and(0xFF).toString(16).uppercase()
-            sb.append('%')
-            if (hex.length == 1) sb.append('0')
-            sb.append(hex)
+            val hex = (b.toInt() and 0xFF).toString(16).padStart(2, '0').uppercase()
+            sb.append('%').append(hex)
         }
     }
     return sb.toString()

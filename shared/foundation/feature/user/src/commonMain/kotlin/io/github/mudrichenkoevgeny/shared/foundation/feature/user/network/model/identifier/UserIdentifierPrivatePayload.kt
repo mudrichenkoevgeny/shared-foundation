@@ -26,31 +26,23 @@ import kotlin.time.Instant
  * @property updatedAt [UserIdentifierPrivate.updatedAt] as Unix epoch milliseconds ([Instant]), or `null`.
  */
 @Serializable
-data class UserIdentifierPrivatePayload(
+public data class UserIdentifierPrivatePayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(UserApiFields.USER_ID)
-    val userId: String,
-
+    public val userId: String,
     @SerialName(UserApiFields.USER_AUTH_PROVIDER)
-    val userAuthProvider: String,
-
+    public val userAuthProvider: String,
     @SerialName(UserApiFields.IDENTIFIER)
-    val identifier: String,
-
+    public val identifier: String,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String,
-
+    public val displayName: String,
     @SerialName(UserApiFields.EXTERNAL_PROVIDER_EMAIL)
-    val externalProviderEmail: String? = null,
-
+    public val externalProviderEmail: String? = null,
     @SerialName(CommonApiFields.IS_SENSITIVE_VALUES_MASKED)
-    val isSensitiveValuesMasked: Boolean,
-
+    public val isSensitiveValuesMasked: Boolean,
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long,
-
+    public val createdAt: Long,
     @SerialName(CommonApiFields.UPDATED_AT)
-    val updatedAt: Long? = null
+    public val updatedAt: Long? = null
 )

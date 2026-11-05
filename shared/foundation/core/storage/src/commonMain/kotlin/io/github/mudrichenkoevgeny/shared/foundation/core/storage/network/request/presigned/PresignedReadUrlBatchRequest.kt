@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property fileIds List of internal file identifier strings (hex-dash UUIDs) to request access to.
  */
 @Serializable
-data class PresignedReadUrlBatchRequest(
+public data class PresignedReadUrlBatchRequest(
     @RequiredField
-    val fileIds: List<String>
+    public val fileIds: List<String>
 )

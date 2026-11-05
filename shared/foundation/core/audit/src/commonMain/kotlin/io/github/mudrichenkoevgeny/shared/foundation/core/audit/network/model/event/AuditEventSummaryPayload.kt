@@ -25,22 +25,17 @@ import kotlin.time.Instant
  * @property createdAt [AuditEventSummary.createdAt] as Unix epoch milliseconds ([Instant]).
  */
 @Serializable
-data class AuditEventSummaryPayload(
+public data class AuditEventSummaryPayload(
     @SerialName(CommonApiFields.ID)
-    val id: String,
-
+    public val id: String,
     @SerialName(AuditEventFields.ACTOR_TYPE)
-    val actorType: String,
-
+    public val actorType: String,
     @SerialName(AuditEventFields.ACTION)
-    val action: String,
-
+    public val action: String,
     @SerialName(AuditEventFields.RESOURCE)
-    val resource: String,
-
+    public val resource: String,
     @SerialName(AuditEventFields.STATUS)
-    val status: String,
-
+    public val status: String,
     @SerialName(CommonApiFields.CREATED_AT)
-    val createdAt: Long
+    public val createdAt: Long
 )

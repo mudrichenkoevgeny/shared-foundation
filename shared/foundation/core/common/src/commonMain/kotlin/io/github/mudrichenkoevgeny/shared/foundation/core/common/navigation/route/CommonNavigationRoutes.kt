@@ -3,10 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rou
 /**
  * Common base navigation route path segments shared across application platforms.
  */
-object CommonNavigationRoutes {
-
+public object CommonNavigationRoutes {
     /**
      * Base route path for settings screens.
      */
-    const val BASE_SETTINGS_NAVIGATION_ROUTE = "/settings"
+    public const val BASE_SETTINGS_NAVIGATION_ROUTE: String = "/settings"
 }

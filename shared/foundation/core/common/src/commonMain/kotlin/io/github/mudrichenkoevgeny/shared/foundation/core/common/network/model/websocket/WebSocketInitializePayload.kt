@@ -17,25 +17,19 @@ import kotlinx.serialization.Serializable
  * @property apiVersion Negotiated client API version so the server can align response and WebSocket message formats with this SDK build.
  */
 @Serializable
-data class WebSocketInitializePayload(
+public data class WebSocketInitializePayload(
     @SerialName(CommonApiFields.CLIENT_TYPE)
-    val clientType: String?,
-
+    public val clientType: String?,
     @SerialName(CommonApiFields.LANGUAGE)
-    val language: String?,
-
+    public val language: String?,
     @SerialName(CommonApiFields.DEVICE_ID)
-    val deviceId: String?,
-
+    public val deviceId: String?,
     @SerialName(CommonApiFields.DEVICE_NAME)
-    val deviceName: String?,
-
+    public val deviceName: String?,
     @SerialName(CommonApiFields.APP_VERSION)
-    val appVersion: String?,
-
+    public val appVersion: String?,
     @SerialName(CommonApiFields.OPERATION_SYSTEM_VERSION)
-    val operationSystemVersion: String?,
-
+    public val operationSystemVersion: String?,
     @SerialName(CommonApiFields.API_VERSION)
-    val apiVersion: String?
+    public val apiVersion: String?
 )

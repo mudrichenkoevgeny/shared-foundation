@@ -9,7 +9,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
  *
  * @return set of populated audit metadata key-value pairs derived from client and device info.
  */
-fun ClientInfo.toAuditMetadata(): Set<AuditEventMetadata> {
+public fun ClientInfo.toAuditMetadata(): Set<AuditEventMetadata> {
     val clientInfo = this
     val clientDeviceInfo = clientInfo.clientDeviceInfo
 

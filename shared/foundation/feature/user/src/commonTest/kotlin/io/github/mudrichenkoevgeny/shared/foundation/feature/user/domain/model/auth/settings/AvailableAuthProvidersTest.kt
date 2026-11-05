@@ -7,23 +7,24 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class AvailableAuthProvidersTest {
-
     @Test
     fun `supportedExternalProviders is empty when no external providers are enabled`() {
-        val providers = AvailableAuthProviders(
-            primary = listOf(UserAuthProvider.EMAIL),
-            secondary = listOf(UserAuthProvider.PHONE)
-        )
+        val providers =
+            AvailableAuthProviders(
+                primary = listOf(UserAuthProvider.EMAIL),
+                secondary = listOf(UserAuthProvider.PHONE)
+            )
 
         assertTrue(providers.supportedExternalProviders.isEmpty())
     }
 
     @Test
     fun `supportedExternalProviders maps enabled auth providers to external providers`() {
-        val providers = AvailableAuthProviders(
-            primary = listOf(UserAuthProvider.GOOGLE),
-            secondary = listOf(UserAuthProvider.APPLE)
-        )
+        val providers =
+            AvailableAuthProviders(
+                primary = listOf(UserAuthProvider.GOOGLE),
+                secondary = listOf(UserAuthProvider.APPLE)
+            )
 
         assertEquals(
             setOf(ExternalAuthProvider.Google, ExternalAuthProvider.Apple),

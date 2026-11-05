@@ -5,18 +5,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.error.naming.U
 /**
  * Represents the outcome of a nickname validation check.
  */
-sealed class NicknameValidatorResult {
+public sealed class NicknameValidatorResult {
     /**
      * Indicates the nickname meets all validation requirements.
      */
-    object Success : NicknameValidatorResult()
+    public object Success : NicknameValidatorResult()
 
     /**
      * Indicates validation failure, providing the specific error code.
      *
      * @property errorCode Error code string ([UserErrorCodes]).
      */
-    data class Fail(
-        val errorCode: String
+    public data class Fail(
+        public val errorCode: String
     ) : NicknameValidatorResult()
 }

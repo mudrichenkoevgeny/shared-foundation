@@ -15,13 +15,11 @@ import kotlinx.serialization.Serializable
  * @property maxPendingUploads [UserStorageConfiguration.maxPendingUploads].
  */
 @Serializable
-data class UserStorageConfigurationPayload(
+public data class UserStorageConfigurationPayload(
     @SerialName(UserApiFields.QUOTA_BYTES)
-    val quotaBytes: Long?,
-
+    public val quotaBytes: Long?,
     @SerialName(UserApiFields.MAX_UPLOAD_SIZE_BYTES)
-    val maxUploadSizeBytes: Long?,
-
+    public val maxUploadSizeBytes: Long?,
     @SerialName(UserApiFields.MAX_PENDING_UPLOADS)
-    val maxPendingUploads: Int?
+    public val maxPendingUploads: Int?
 )

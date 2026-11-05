@@ -11,50 +11,51 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.pe
  * The actor segment in each code (`user`, `staff`, `admin`, `system`, `service`) selects which actor scope the caller may inspect.
  */
 
-object AuditPermissionCode {
+public object AuditPermissionCode {
     /** Read audit events in the user actor scope ([AuditActorType.USER]); masked sensitive fields. */
-    val AUDIT_GET_FOR_USER_ACTOR_MASKED = PermissionCode("audit.get.for.user.actor.masked")
+    public val AUDIT_GET_FOR_USER_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.user.actor.masked")
 
     /** Read audit events in the user actor scope ([AuditActorType.USER]); unmasked sensitive fields. */
-    val AUDIT_GET_FOR_USER_ACTOR_UNMASKED = PermissionCode("audit.get.for.user.actor.unmasked")
+    public val AUDIT_GET_FOR_USER_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.user.actor.unmasked")
 
     /** Read audit events in the staff actor scope; masked sensitive fields. */
-    val AUDIT_GET_FOR_STAFF_ACTOR_MASKED = PermissionCode("audit.get.for.staff.actor.masked")
+    public val AUDIT_GET_FOR_STAFF_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.staff.actor.masked")
 
     /** Read audit events in the staff actor scope; unmasked sensitive fields. */
-    val AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED = PermissionCode("audit.get.for.staff.actor.unmasked")
+    public val AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.staff.actor.unmasked")
 
     /** Read audit events in the admin actor scope; masked sensitive fields. */
-    val AUDIT_GET_FOR_ADMIN_ACTOR_MASKED = PermissionCode("audit.get.for.admin.actor.masked")
+    public val AUDIT_GET_FOR_ADMIN_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.admin.actor.masked")
 
     /** Read audit events in the admin actor scope; unmasked sensitive fields. */
-    val AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED = PermissionCode("audit.get.for.admin.actor.unmasked")
+    public val AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.admin.actor.unmasked")
 
     /** Read audit events in the system actor scope ([AuditActorType.SYSTEM]); masked sensitive fields. */
-    val AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED = PermissionCode("audit.get.for.system.actor.masked")
+    public val AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.system.actor.masked")
 
     /** Read audit events in the system actor scope ([AuditActorType.SYSTEM]); unmasked sensitive fields. */
-    val AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED = PermissionCode("audit.get.for.system.actor.unmasked")
+    public val AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.system.actor.unmasked")
 
     /** Read audit events in the service actor scope ([AuditActorType.SERVICE]); masked sensitive fields. */
-    val AUDIT_GET_FOR_SERVICE_ACTOR_MASKED = PermissionCode("audit.get.for.service.actor.masked")
+    public val AUDIT_GET_FOR_SERVICE_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.service.actor.masked")
 
     /** Read audit events in the service actor scope ([AuditActorType.SERVICE]); unmasked sensitive fields. */
-    val AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED = PermissionCode("audit.get.for.service.actor.unmasked")
+    public val AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.service.actor.unmasked")
 
     /**
      * All audit permissions.
      */
-    val ALL: Set<PermissionCode> = setOf(
-        AUDIT_GET_FOR_USER_ACTOR_MASKED,
-        AUDIT_GET_FOR_USER_ACTOR_UNMASKED,
-        AUDIT_GET_FOR_STAFF_ACTOR_MASKED,
-        AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED,
-        AUDIT_GET_FOR_ADMIN_ACTOR_MASKED,
-        AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED,
-        AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED,
-        AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED,
-        AUDIT_GET_FOR_SERVICE_ACTOR_MASKED,
-        AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED
-    )
+    public val ALL: Set<PermissionCode> =
+        setOf(
+            AUDIT_GET_FOR_USER_ACTOR_MASKED,
+            AUDIT_GET_FOR_USER_ACTOR_UNMASKED,
+            AUDIT_GET_FOR_STAFF_ACTOR_MASKED,
+            AUDIT_GET_FOR_STAFF_ACTOR_UNMASKED,
+            AUDIT_GET_FOR_ADMIN_ACTOR_MASKED,
+            AUDIT_GET_FOR_ADMIN_ACTOR_UNMASKED,
+            AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED,
+            AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED,
+            AUDIT_GET_FOR_SERVICE_ACTOR_MASKED,
+            AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED
+        )
 }

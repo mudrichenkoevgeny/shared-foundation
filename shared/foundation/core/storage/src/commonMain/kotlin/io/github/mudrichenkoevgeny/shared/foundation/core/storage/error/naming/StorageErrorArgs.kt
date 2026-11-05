@@ -3,7 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming
 /**
  * Storage-specific keys for error arguments used in API responses and backend logging.
  */
-object StorageErrorArgs {
+public object StorageErrorArgs {
     /**
      * Key for the unique identifier of the target storage file.
      * Used as a **secret argument** for backend logging and auditing, or **public argument** when referencing missing files.
@@ -12,7 +12,7 @@ object StorageErrorArgs {
      * [StorageErrorCodes.FILE_DELETE_FAILED], [StorageErrorCodes.FILE_ALREADY_EXISTS],
      * [StorageErrorCodes.UPLOAD_ALREADY_COMPLETED].
      */
-    const val FILE_ID = "fileId"
+    public const val FILE_ID: String = "fileId"
 
     /**
      * Key for the original or requested file name string.
@@ -21,7 +21,7 @@ object StorageErrorArgs {
      * Associated with [StorageErrorCodes.FILE_SIZE_EXCEEDS_LIMIT], [StorageErrorCodes.FILE_SIZE_BELOW_MINIMUM],
      * [StorageErrorCodes.UNSUPPORTED_MIME_TYPE].
      */
-    const val FILE_NAME = "fileName"
+    public const val FILE_NAME: String = "fileName"
 
     /**
      * Key for the actual file size in bytes.
@@ -29,7 +29,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.FILE_SIZE_EXCEEDS_LIMIT], [StorageErrorCodes.FILE_SIZE_BELOW_MINIMUM].
      */
-    const val FILE_SIZE_BYTES = "fileSizeBytes"
+    public const val FILE_SIZE_BYTES: String = "fileSizeBytes"
 
     /**
      * Key for the minimum permitted file size in bytes for the requested operation or category.
@@ -37,7 +37,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.FILE_SIZE_BELOW_MINIMUM].
      */
-    const val MIN_FILE_SIZE_BYTES = "minFileSizeBytes"
+    public const val MIN_FILE_SIZE_BYTES: String = "minFileSizeBytes"
 
     /**
      * Key for the maximum permitted file size in bytes for the requested operation or category.
@@ -45,7 +45,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.FILE_SIZE_EXCEEDS_LIMIT].
      */
-    const val MAX_FILE_SIZE_BYTES = "maxFileSizeBytes"
+    public const val MAX_FILE_SIZE_BYTES: String = "maxFileSizeBytes"
 
     /**
      * Key for the requested or actual MIME type string (e.g. `image/png`, `application/pdf`).
@@ -53,7 +53,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.UNSUPPORTED_MIME_TYPE].
      */
-    const val MIME_TYPE = "mimeType"
+    public const val MIME_TYPE: String = "mimeType"
 
     /**
      * Key for the storage category code.
@@ -62,7 +62,7 @@ object StorageErrorArgs {
      * Associated with [StorageErrorCodes.FILE_SIZE_EXCEEDS_LIMIT], [StorageErrorCodes.FILE_SIZE_BELOW_MINIMUM],
      * [StorageErrorCodes.UNSUPPORTED_MIME_TYPE], [StorageErrorCodes.UNSUPPORTED_STORAGE_CATEGORY].
      */
-    const val CATEGORY = "category"
+    public const val CATEGORY: String = "category"
 
     /**
      * Key for the total storage quota limit in bytes allocated to the user or organization.
@@ -70,7 +70,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.STORAGE_QUOTA_EXCEEDED].
      */
-    const val QUOTA_BYTES = "quotaBytes"
+    public const val QUOTA_BYTES: String = "quotaBytes"
 
     /**
      * Key for the currently used storage space in bytes.
@@ -78,7 +78,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.STORAGE_QUOTA_EXCEEDED].
      */
-    const val USED_BYTES = "usedBytes"
+    public const val USED_BYTES: String = "usedBytes"
 
     /**
      * Key for the maximum allowed uncompleted presigned upload sessions per user.
@@ -86,7 +86,7 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.TOO_MANY_PENDING_UPLOADS].
      */
-    const val MAX_PENDING_UPLOADS = "maxPendingUploads"
+    public const val MAX_PENDING_UPLOADS: String = "maxPendingUploads"
 
     /**
      * Key for the maximum permitted file count in a single batch upload selection.
@@ -94,5 +94,5 @@ object StorageErrorArgs {
      *
      * Associated with [StorageErrorCodes.MAX_BATCH_UPLOAD_COUNT_EXCEEDED].
      */
-    const val MAX_BATCH_UPLOAD_COUNT = "maxBatchUploadCount"
+    public const val MAX_BATCH_UPLOAD_COUNT: String = "maxBatchUploadCount"
 }

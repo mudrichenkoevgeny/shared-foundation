@@ -15,10 +15,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping private audit event models between domain and network representations.
- */
-
-/**
  * Builds a domain [AuditEventPrivate] from [AuditEventPrivatePayload].
  *
  * Parses [AuditEventPrivatePayload.status] wire string value into [AuditStatus] (throws if invalid).
@@ -30,23 +26,24 @@ import kotlin.time.Instant
  * @param compositeMetadataKeyParser Resolves each metadata entry `key` string to [AuditMetadataKey].
  * @return domain model with strongly typed [AuditEventPrivate.id], [AuditEventPrivate.action], and [AuditEventPrivate.resource].
  */
-fun AuditEventPrivatePayload.toAuditEventPrivate(
+public fun AuditEventPrivatePayload.toAuditEventPrivate(
     compositeActionTypeParser: CompositeAuditActionTypeParser,
     compositeResourceTypeParser: CompositeAuditResourceTypeParser,
     compositeMetadataKeyParser: CompositeAuditMetadataKeyParser
-): AuditEventPrivate = AuditEventPrivate(
-    id = id.toAuditEventIdOrThrow(),
-    actorId = actorId,
-    actorType = AuditActorType.fromValueOrThrow(actorType),
-    actorUserRole = actorUserRole,
-    action = compositeActionTypeParser.fromValueOrThrow(action),
-    resource = compositeResourceTypeParser.fromValueOrThrow(resource),
-    resourceId = resourceId,
-    status = AuditStatus.fromValueOrThrow(status),
-    metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
-    message = message,
-    createdAt = Instant.fromEpochMilliseconds(createdAt)
-)
+): AuditEventPrivate =
+    AuditEventPrivate(
+        id = id.toAuditEventIdOrThrow(),
+        actorId = actorId,
+        actorType = AuditActorType.fromValueOrThrow(actorType),
+        actorUserRole = actorUserRole,
+        action = compositeActionTypeParser.fromValueOrThrow(action),
+        resource = compositeResourceTypeParser.fromValueOrThrow(resource),
+        resourceId = resourceId,
+        status = AuditStatus.fromValueOrThrow(status),
+        metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
+        message = message,
+        createdAt = Instant.fromEpochMilliseconds(createdAt)
+    )
 
 /**
  * Builds a network [AuditEventPrivatePayload] from a domain [AuditEventPrivate].
@@ -57,16 +54,17 @@ fun AuditEventPrivatePayload.toAuditEventPrivate(
  *
  * @return payload DTO aligned with the shared [AuditEventPrivatePayload] contract (`snake_case` keys, epoch millis timestamps).
  */
-fun AuditEventPrivate.toAuditEventPrivatePayload(): AuditEventPrivatePayload = AuditEventPrivatePayload(
-    id = id.asHexDashString(),
-    actorId = actorId,
-    actorType = actorType.value,
-    actorUserRole = actorUserRole,
-    action = action.value,
-    resource = resource.value,
-    resourceId = resourceId,
-    status = status.value,
-    metadata = metadata.map { it.toAuditEventMetadataPayload() },
-    message = message,
-    createdAt = createdAt.toEpochMilliseconds()
-)
+public fun AuditEventPrivate.toAuditEventPrivatePayload(): AuditEventPrivatePayload =
+    AuditEventPrivatePayload(
+        id = id.asHexDashString(),
+        actorId = actorId,
+        actorType = actorType.value,
+        actorUserRole = actorUserRole,
+        action = action.value,
+        resource = resource.value,
+        resourceId = resourceId,
+        status = status.value,
+        metadata = metadata.map { it.toAuditEventMetadataPayload() },
+        message = message,
+        createdAt = createdAt.toEpochMilliseconds()
+    )

@@ -13,17 +13,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
- * Creates a test [UserSessionSummary] instance with default mock properties for unit testing.
- *
- * @param id Unique session ID ([UserSessionId]).
- * @param userId Owning user ID ([UserId]).
- * @param clientDeviceInfo Hardware and device info ([ClientDeviceInfo]).
- * @param identifierDisplayName Identifier display name.
- * @param identifierAuthProvider Auth provider category ([UserAuthProvider]).
- * @param lastAccessedAt Timestamp of last activity.
- * @param expiresAt Expiration timestamp.
- */
-fun createTestUserSessionSummary(
+* Creates a test [UserSessionSummary] instance with default mock properties for unit testing.
+*
+* @param id Unique session ID ([UserSessionId]).
+* @param userId Owning user ID ([UserId]).
+* @param clientDeviceInfo Hardware and device info ([ClientDeviceInfo]).
+* @param identifierDisplayName Identifier display name.
+* @param identifierAuthProvider Auth provider category ([UserAuthProvider]).
+* @param lastAccessedAt Timestamp of last activity.
+* @param expiresAt Expiration timestamp.
+*/
+public fun createTestUserSessionSummary(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),
     clientDeviceInfo: ClientDeviceInfo = createTestClientDeviceInfo(),
@@ -31,36 +31,39 @@ fun createTestUserSessionSummary(
     identifierAuthProvider: UserAuthProvider = UserAuthProvider.EMAIL,
     lastAccessedAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     expiresAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS + 86400000L)
-) = UserSessionSummary(
-    id = id,
-    userId = userId,
-    clientDeviceInfo = clientDeviceInfo,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    lastAccessedAt = lastAccessedAt,
-    expiresAt = expiresAt
-)
+): UserSessionSummary =
+    UserSessionSummary(
+        id = id,
+        userId = userId,
+        clientDeviceInfo = clientDeviceInfo,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        lastAccessedAt = lastAccessedAt,
+        expiresAt = expiresAt
+    )
 
 /**
- * Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,
- * alternating devices, and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserSessionSummaryList(
+* Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,
+* alternating devices, and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserSessionSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionSummary = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEven = index % 2 == 0
-        val winDevice = createTestClientDeviceInfo(
-            deviceName = "Windows PC",
-            operationSystemVersion = "Windows 10"
-        )
-        val macDevice = createTestClientDeviceInfo(
-            deviceName = "MacBook Pro",
-            operationSystemVersion = "macOS 14.0"
-        )
+        val winDevice =
+            createTestClientDeviceInfo(
+                deviceName = "Windows PC",
+                operationSystemVersion = "Windows 10"
+            )
+        val macDevice =
+            createTestClientDeviceInfo(
+                deviceName = "MacBook Pro",
+                operationSystemVersion = "macOS 14.0"
+            )
         createTestUserSessionSummary(
             id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
             userId = createTestUserId(generateTestUuidString(index = index, group = 2)),

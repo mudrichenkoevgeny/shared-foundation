@@ -15,17 +15,15 @@ import kotlinx.serialization.Serializable
  * @property redirectUrl Target URL to navigate to upon successful verification; wire key is [UserNavigationPaths.REDIRECT_URL].
  */
 @Serializable
-data class LoginByTotpParams(
-    val mfaToken: String? = null,
-    val loginByTotpMode: LoginByTotpMode = LoginByTotpMode.DEFAULT,
-    val redirectUrl: String? = null
+public data class LoginByTotpParams(
+    public val mfaToken: String? = null,
+    public val loginByTotpMode: LoginByTotpMode = LoginByTotpMode.DEFAULT,
+    public val redirectUrl: String? = null
 ) : NavigationScreenParams<LoginByTotpParams> {
-
     override val parser: NavigationScreenParamsParser<LoginByTotpParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<LoginByTotpParams> {
-
+    public companion object : NavigationScreenParamsParser<LoginByTotpParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [LoginByTotpParams].
          *
@@ -35,10 +33,11 @@ data class LoginByTotpParams(
         override fun parse(params: Map<String, Any?>): LoginByTotpParams {
             val normalized = params.normalizeQueryParams()
             val mfaToken = normalized[SecurityApiFields.MFA_TOKEN]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
-            val loginByTotpMode = normalized[UserNavigationPaths.LOGIN_BY_TOTP_MODE]
-                ?.firstOrNull()
-                ?.let { LoginByTotpMode.fromValueOrNull(it) }
-                ?: LoginByTotpMode.DEFAULT
+            val loginByTotpMode =
+                normalized[UserNavigationPaths.LOGIN_BY_TOTP_MODE]
+                    ?.firstOrNull()
+                    ?.let { LoginByTotpMode.fromValueOrNull(it) }
+                    ?: LoginByTotpMode.DEFAULT
             val redirectUrl = normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
 
             return LoginByTotpParams(

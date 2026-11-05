@@ -25,8 +25,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for client account self-service management.
  */
 @Serializable
-sealed interface ClientUserNavigation : NavigationRoute {
-
+public sealed interface ClientUserNavigation : NavigationRoute {
     /**
      * Main user dashboard screen.
      *
@@ -36,8 +35,7 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenUserRoutes.SCHEDULE_DELETION]
      */
     @Serializable
-    data object Main : ClientUserNavigation {
-
+    public data object Main : ClientUserNavigation {
         override val route: String
             get() = BASE_USER_ROUTE
 
@@ -52,8 +50,7 @@ sealed interface ClientUserNavigation : NavigationRoute {
      * - **Primary API:** [OpenUserRoutes.UPDATE_USER]
      */
     @Serializable
-    data object UserEdit : ClientUserNavigation {
-
+    public data object UserEdit : ClientUserNavigation {
         override val route: String
             get() = "$BASE_USER_ROUTE/edit"
 
@@ -75,18 +72,18 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenIdentifierRoutes.DELETE_IDENTIFIER]
      */
     @Serializable
-    data class IdentifierList(
+    public data class IdentifierList(
         override val params: SelfIdentifierListParams = SelfIdentifierListParams()
-    ) : ClientUserNavigation, ParameterizedNavigationRoute<SelfIdentifierListParams> {
-
+    ) : ClientUserNavigation,
+        ParameterizedNavigationRoute<SelfIdentifierListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = "$BASE_USER_ROUTE/identifiers"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USER_ROUTE/identifiers"
         }
     }
 
@@ -100,24 +97,23 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenIdentifierRoutes.IDENTIFIER_EMAIL_CHANGE_PASSWORD]
      */
     @Serializable
-    data class IdentifierDetail(
+    public data class IdentifierDetail(
         override val params: IdentifierDetailParams
-    ) : ClientUserNavigation, ParameterizedNavigationRoute<IdentifierDetailParams> {
-
+    ) : ClientUserNavigation,
+        ParameterizedNavigationRoute<IdentifierDetailParams> {
         override val route: String
             get() = getPath(params.identifierId)
 
         override val parentRoute: String
             get() = IdentifierList.ROUTE
 
-        companion object {
-            const val ROUTE = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
-            fun getPath(identifierId: UserIdentifierId): String =
+            public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
-            fun getPath(identifierId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
+            public fun getPath(identifierId: String): String = ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
     }
 
@@ -132,18 +128,18 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenSessionRoutes.LOGOUT]
      */
     @Serializable
-    data class SessionList(
+    public data class SessionList(
         override val params: SelfSessionListParams = SelfSessionListParams()
-    ) : ClientUserNavigation, ParameterizedNavigationRoute<SelfSessionListParams> {
-
+    ) : ClientUserNavigation,
+        ParameterizedNavigationRoute<SelfSessionListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = "$BASE_USER_ROUTE/sessions"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USER_ROUTE/sessions"
         }
     }
 
@@ -156,24 +152,23 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenSessionRoutes.DELETE_SESSION]
      */
     @Serializable
-    data class SessionDetail(
+    public data class SessionDetail(
         override val params: SessionDetailParams
-    ) : ClientUserNavigation, ParameterizedNavigationRoute<SessionDetailParams> {
-
+    ) : ClientUserNavigation,
+        ParameterizedNavigationRoute<SessionDetailParams> {
         override val route: String
             get() = getPath(params.sessionId)
 
         override val parentRoute: String
             get() = SessionList.ROUTE
 
-        companion object {
-            const val ROUTE = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
 
-            fun getPath(sessionId: UserSessionId): String =
+            public fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
-            fun getPath(sessionId: String): String =
-                ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
+            public fun getPath(sessionId: String): String = ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
     }
 
@@ -187,18 +182,18 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenUserSecurityRoutes.DISABLE_TOTP]
      */
     @Serializable
-    data class TotpMain(
+    public data class TotpMain(
         override val params: TotpMainParams = TotpMainParams()
-    ) : ClientUserNavigation, ParameterizedNavigationRoute<TotpMainParams> {
-
+    ) : ClientUserNavigation,
+        ParameterizedNavigationRoute<TotpMainParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.route
 
-        companion object {
-            const val ROUTE = BASE_TOTP_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_TOTP_ROUTE
         }
     }
 
@@ -211,8 +206,7 @@ sealed interface ClientUserNavigation : NavigationRoute {
      *   - [OpenUserSecurityRoutes.REGENERATE_RECOVERY_CODES]
      */
     @Serializable
-    data object TotpRecoveryCodes : ClientUserNavigation {
-
+    public data object TotpRecoveryCodes : ClientUserNavigation {
         override val route: String
             get() = "$BASE_TOTP_ROUTE/recovery-codes"
 
@@ -220,8 +214,8 @@ sealed interface ClientUserNavigation : NavigationRoute {
             get() = TotpMain.ROUTE
     }
 
-    companion object {
-        const val BASE_USER_ROUTE = "/user"
-        const val BASE_TOTP_ROUTE = "$BASE_USER_ROUTE/totp"
+    public companion object {
+        public const val BASE_USER_ROUTE: String = "/user"
+        public const val BASE_TOTP_ROUTE: String = "$BASE_USER_ROUTE/totp"
     }
 }

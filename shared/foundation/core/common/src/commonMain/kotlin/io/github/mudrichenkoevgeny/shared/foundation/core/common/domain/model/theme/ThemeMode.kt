@@ -13,8 +13,9 @@ private const val MODE_SYSTEM = "system"
  * @property value String representation of [ThemeMode].
  */
 @Serializable
-enum class ThemeMode(val value: String) {
-
+public enum class ThemeMode(
+    public val value: String
+) {
     /**
      * Explicit light theme mode.
      */
@@ -33,23 +34,22 @@ enum class ThemeMode(val value: String) {
     @SerialName(MODE_SYSTEM)
     SYSTEM(MODE_SYSTEM);
 
-    companion object {
-
+    public companion object {
         /**
          * Default theme mode preference ([SYSTEM]).
          */
-        val DEFAULT: ThemeMode = SYSTEM
+        public val DEFAULT: ThemeMode = SYSTEM
 
         /**
          * Returns [ThemeMode] for the given wire string or enum-style string, or null if value is unmapped.
          *
          * @param value Case-insensitive enum name (e.g. `LIGHT`) or a wire string such as [MODE_LIGHT].
          */
-        fun fromValueOrNull(value: String?): ThemeMode? {
+        public fun fromValueOrNull(value: String?): ThemeMode? {
             if (value.isNullOrBlank()) return null
             return entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
         }
 
@@ -58,7 +58,7 @@ enum class ThemeMode(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [ThemeMode].
          */
-        fun fromValueOrThrow(value: String): ThemeMode =
+        public fun fromValueOrThrow(value: String): ThemeMode =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${ThemeMode::class.simpleName}: '$value'"
             )

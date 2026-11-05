@@ -3,16 +3,16 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contr
 /**
  * User-level reasons for closing a WebSocket connection.
  */
-object UserWebSocketCloseReasons {
+public object UserWebSocketCloseReasons {
     /** Failed to authenticate the provided token or token is missing. */
-    const val AUTH_FAILED = "Auth failed"
+    public const val AUTH_FAILED: String = "Auth failed"
 
     /** The session or access token has reached its expiration time. */
-    const val SESSION_EXPIRED = "Session expired"
+    public const val SESSION_EXPIRED: String = "Session expired"
 
     /** The session was manually deleted. */
-    const val SESSION_DELETED = "Session deleted"
+    public const val SESSION_DELETED: String = "Session deleted"
 
     /** The user account has been banned or deactivated. */
-    const val USER_BANNED = "User banned"
+    public const val USER_BANNED: String = "User banned"
 }

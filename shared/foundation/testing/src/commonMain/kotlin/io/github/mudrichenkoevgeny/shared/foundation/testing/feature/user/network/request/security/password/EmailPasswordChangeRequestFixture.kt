@@ -3,15 +3,16 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.password.EmailPasswordChangeRequest
 
 /**
- * Creates a test [EmailPasswordChangeRequest] request object instance.
- *
- * @param oldPassword Current password string.
- * @param newPassword New password string.
- */
-fun createTestEmailPasswordChangeRequest(
+* Creates a test [EmailPasswordChangeRequest] request object instance.
+*
+* @param oldPassword Current password string.
+* @param newPassword New password string.
+*/
+public fun createTestEmailPasswordChangeRequest(
     oldPassword: String = "OldSecret123!",
     newPassword: String = "NewSecret123!"
-) = EmailPasswordChangeRequest(
-    oldPassword = oldPassword,
-    newPassword = newPassword
-)
+): EmailPasswordChangeRequest =
+    EmailPasswordChangeRequest(
+        oldPassword = oldPassword,
+        newPassword = newPassword
+    )

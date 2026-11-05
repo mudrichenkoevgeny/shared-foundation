@@ -11,12 +11,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
  * @property indefiniteLockoutThreshold Number of consecutive temporary lockouts before shifting account status to security hold (0 = disabled).
  * @property isSelfServiceUnlockEnabled Whether users are allowed to self-unlock via OTP or OAuth re-authentication before the lockout timer expires.
  */
-data class AccountLockoutPolicy(
-    val maxFailedPasswordAttempts: Int,
-    val maxFailedOtpAttempts: Int,
-    val maxFailedTotpAttempts: Int,
-    val failedAttemptsWindowSeconds: Int,
-    val lockoutDurationSeconds: Int,
-    val indefiniteLockoutThreshold: Int,
-    val isSelfServiceUnlockEnabled: Boolean
+public data class AccountLockoutPolicy(
+    public val maxFailedPasswordAttempts: Int,
+    public val maxFailedOtpAttempts: Int,
+    public val maxFailedTotpAttempts: Int,
+    public val failedAttemptsWindowSeconds: Int,
+    public val lockoutDurationSeconds: Int,
+    public val indefiniteLockoutThreshold: Int,
+    public val isSelfServiceUnlockEnabled: Boolean
 )

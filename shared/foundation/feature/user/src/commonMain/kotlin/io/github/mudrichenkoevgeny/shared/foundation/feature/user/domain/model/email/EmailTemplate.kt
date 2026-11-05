@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property body Email HTML body template.
  */
 @Serializable
-data class EmailTemplate(
-    @SerialName("subject") val subject: String,
-    @SerialName("body") val body: String
+public data class EmailTemplate(
+    @SerialName("subject") public val subject: String,
+    @SerialName("body") public val body: String
 )

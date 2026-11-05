@@ -3,10 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.network.rout
 /**
  * Base network route path segments for security endpoints.
  */
-object BaseSecurityNetworkRoutes {
-
+public object BaseSecurityNetworkRoutes {
     /**
      * Base network route path segment for security operations.
      */
-    const val BASE_SECURITY_NETWORK_ROUTE = "/security"
+    public const val BASE_SECURITY_NETWORK_ROUTE: String = "/security"
 }

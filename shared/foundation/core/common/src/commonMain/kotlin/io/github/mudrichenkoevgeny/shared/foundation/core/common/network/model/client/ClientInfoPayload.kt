@@ -14,16 +14,13 @@ import kotlinx.serialization.Serializable
  * @property apiVersion Negotiated API version string.
  */
 @Serializable
-data class ClientInfoPayload(
+public data class ClientInfoPayload(
     @SerialName(CommonApiFields.CLIENT_DEVICE_INFO)
-    val clientDeviceInfo: ClientDeviceInfoPayload,
-
+    public val clientDeviceInfo: ClientDeviceInfoPayload,
     @SerialName(CommonApiFields.USER_AGENT)
-    val userAgent: String?,
-
+    public val userAgent: String?,
     @SerialName(CommonApiFields.IP_ADDRESS)
-    val ipAddress: String?,
-
+    public val ipAddress: String?,
     @SerialName(CommonApiFields.API_VERSION)
-    val apiVersion: String?
+    public val apiVersion: String?
 )

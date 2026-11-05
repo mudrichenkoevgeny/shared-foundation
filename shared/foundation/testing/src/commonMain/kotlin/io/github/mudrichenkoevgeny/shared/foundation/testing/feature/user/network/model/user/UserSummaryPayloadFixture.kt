@@ -9,38 +9,39 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generat
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
- * Creates a test [UserSummaryPayload] wire object for unit testing mapper logic.
- *
- * @param id Raw user ID string.
- * @param role Wire string representation of [UserRole].
- * @param accountStatus Wire string representation of [UserAccountStatus].
- * @param nickname User handle or username.
- * @param displayName Human-readable display name.
- * @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
- */
-fun createTestUserSummaryPayload(
+* Creates a test [UserSummaryPayload] wire object for unit testing mapper logic.
+*
+* @param id Raw user ID string.
+* @param role Wire string representation of [UserRole].
+* @param accountStatus Wire string representation of [UserAccountStatus].
+* @param nickname User handle or username.
+* @param displayName Human-readable display name.
+* @param avatarUrls Structured avatar image URL variants ([FileUrlsPayload]), or `null`.
+*/
+public fun createTestUserSummaryPayload(
     id: String = TEST_USER_ID,
     role: String = UserRole.USER.value,
     accountStatus: String = UserAccountStatus.ACTIVE.value,
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarUrls: FileUrlsPayload? = null
-) = UserSummaryPayload(
-    id = id,
-    role = role,
-    accountStatus = accountStatus,
-    nickname = nickname,
-    displayName = displayName,
-    avatarUrls = avatarUrls
-)
+): UserSummaryPayload =
+    UserSummaryPayload(
+        id = id,
+        role = role,
+        accountStatus = accountStatus,
+        nickname = nickname,
+        displayName = displayName,
+        avatarUrls = avatarUrls
+    )
 
 /**
- * Creates a list of test [UserSummaryPayload] wire objects with deterministic raw UUIDs.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserSummaryPayloadList(
+* Creates a list of test [UserSummaryPayload] wire objects with deterministic raw UUIDs.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserSummaryPayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserSummaryPayload = { index ->
         createTestUserSummaryPayload(

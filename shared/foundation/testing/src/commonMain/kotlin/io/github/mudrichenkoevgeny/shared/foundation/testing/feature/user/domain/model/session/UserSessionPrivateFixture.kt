@@ -19,26 +19,26 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
- * Creates a test [UserSessionPrivate] instance with default mock properties for unit testing.
- *
- * @param id Unique session ID ([UserSessionId]).
- * @param userId Owning user ID ([UserId]).
- * @param userRole User access level ([UserRole]).
- * @param identifier Login credential identifier string.
- * @param identifierId Credential ID ([UserIdentifierId]).
- * @param identifierDisplayName Display name of the identifier.
- * @param identifierAuthProvider Provider category ([UserAuthProvider]).
- * @param clientDeviceInfo Device info ([ClientDeviceInfo]).
- * @param userAgent HTTP User-Agent header string.
- * @param ipAddress Client IP address.
- * @param expiresAt Expiration timestamp.
- * @param lastAccessedAt Last activity timestamp.
- * @param lastReauthenticatedAt Last re-authentication timestamp.
- * @param isSensitiveValuesMasked Whether sensitive values are masked.
- * @param createdAt Creation timestamp.
- * @param updatedAt Modification timestamp.
- */
-fun createTestUserSessionPrivate(
+* Creates a test [UserSessionPrivate] instance with default mock properties for unit testing.
+*
+* @param id Unique session ID ([UserSessionId]).
+* @param userId Owning user ID ([UserId]).
+* @param userRole User access level ([UserRole]).
+* @param identifier Login credential identifier string.
+* @param identifierId Credential ID ([UserIdentifierId]).
+* @param identifierDisplayName Display name of the identifier.
+* @param identifierAuthProvider Provider category ([UserAuthProvider]).
+* @param clientDeviceInfo Device info ([ClientDeviceInfo]).
+* @param userAgent HTTP User-Agent header string.
+* @param ipAddress Client IP address.
+* @param expiresAt Expiration timestamp.
+* @param lastAccessedAt Last activity timestamp.
+* @param lastReauthenticatedAt Last re-authentication timestamp.
+* @param isSensitiveValuesMasked Whether sensitive values are masked.
+* @param createdAt Creation timestamp.
+* @param updatedAt Modification timestamp.
+*/
+public fun createTestUserSessionPrivate(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),
     userRole: UserRole = UserRole.USER,
@@ -55,47 +55,50 @@ fun createTestUserSessionPrivate(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-) = UserSessionPrivate(
-    id = id,
-    userId = userId,
-    userRole = userRole,
-    identifier = identifier,
-    identifierId = identifierId,
-    identifierDisplayName = identifierDisplayName,
-    identifierAuthProvider = identifierAuthProvider,
-    clientDeviceInfo = clientDeviceInfo,
-    userAgent = userAgent,
-    ipAddress = ipAddress,
-    expiresAt = expiresAt,
-    lastAccessedAt = lastAccessedAt,
-    lastReauthenticatedAt = lastReauthenticatedAt,
-    isSensitiveValuesMasked = isSensitiveValuesMasked,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
+): UserSessionPrivate =
+    UserSessionPrivate(
+        id = id,
+        userId = userId,
+        userRole = userRole,
+        identifier = identifier,
+        identifierId = identifierId,
+        identifierDisplayName = identifierDisplayName,
+        identifierAuthProvider = identifierAuthProvider,
+        clientDeviceInfo = clientDeviceInfo,
+        userAgent = userAgent,
+        ipAddress = ipAddress,
+        expiresAt = expiresAt,
+        lastAccessedAt = lastAccessedAt,
+        lastReauthenticatedAt = lastReauthenticatedAt,
+        isSensitiveValuesMasked = isSensitiveValuesMasked,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )
 
 /**
- * Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,
- * alternating devices, and time shifts.
- *
- * @param count Number of elements to generate (defaults to 2).
- * @param generator Custom item builder receiving 0-based element index.
- */
-fun createTestUserSessionPrivateList(
+* Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,
+* alternating devices, and time shifts.
+*
+* @param count Number of elements to generate (defaults to 2).
+* @param generator Custom item builder receiving 0-based element index.
+*/
+public fun createTestUserSessionPrivateList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionPrivate = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEven = index % 2 == 0
         val winAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36"
         val macAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15"
-        val winDevice = createTestClientDeviceInfo(
-            deviceName = "Windows PC",
-            operationSystemVersion = "Windows 10"
-        )
-        val macDevice = createTestClientDeviceInfo(
-            deviceName = "MacBook Pro",
-            operationSystemVersion = "macOS 14.0"
-        )
+        val winDevice =
+            createTestClientDeviceInfo(
+                deviceName = "Windows PC",
+                operationSystemVersion = "Windows 10"
+            )
+        val macDevice =
+            createTestClientDeviceInfo(
+                deviceName = "MacBook Pro",
+                operationSystemVersion = "macOS 14.0"
+            )
         createTestUserSessionPrivate(
             id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
             userId = createTestUserId(generateTestUuidString(index = index, group = 2)),

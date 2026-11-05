@@ -14,15 +14,13 @@ import kotlinx.serialization.Serializable
  * @property displayName Optional display name captured during initial provider sign-in.
  */
 @Serializable
-data class LoginByExternalAuthProviderRequest(
+public data class LoginByExternalAuthProviderRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.AUTH_PROVIDER)
-    val authProvider: String,
-
+    public val authProvider: String,
     @NotBlankStringField
     @SerialName(UserApiFields.EXTERNAL_PROVIDER_TOKEN)
-    val externalProviderToken: String,
-
+    public val externalProviderToken: String,
     @SerialName(UserApiFields.DISPLAY_NAME)
-    val displayName: String? = null
+    public val displayName: String? = null
 )

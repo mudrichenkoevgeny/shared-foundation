@@ -6,13 +6,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.route.client.ClientMainNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.BaseUserNavigationRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.email.LoginByEmailParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.login.phone.LoginByPhoneParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.resetpassword.ResetPasswordParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.methodselection.UnlockMethodSelectionParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.otpinput.UnlockOtpInputParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.success.UnlockSuccessParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.targetinput.UnlockTargetInputParams
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.login.phone.LoginByPhoneParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.client.auth.registration.email.ClientRegistrationByEmailParams
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.login.OpenLoginRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.auth.registration.OpenRegistrationRoutes
@@ -26,8 +26,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for client authentication and registration flows.
  */
 @Serializable
-sealed interface ClientAuthNavigation : NavigationRoute {
-
+public sealed interface ClientAuthNavigation : NavigationRoute {
     /**
      * Virtual entry redirect route forwarding navigation from the auth root to the auth login.
      *
@@ -36,8 +35,7 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Auth : ClientAuthNavigation, RedirectNavigationRoute {
-
+    public data object Auth : ClientAuthNavigation, RedirectNavigationRoute {
         override val route: String
             get() = BASE_AUTH_ROUTE
 
@@ -57,15 +55,14 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenLoginRoutes.LOGIN_BY_EXTERNAL_AUTH_PROVIDER]
      */
     @Serializable
-    data object Main : ClientAuthNavigation {
-
+    public data object Main : ClientAuthNavigation {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ClientMainNavigation.Main.route
 
-        const val ROUTE = BASE_LOGIN_ROUTE
+        public const val ROUTE: String = BASE_LOGIN_ROUTE
     }
 
     /**
@@ -76,18 +73,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class LoginByEmail(
+    public data class LoginByEmail(
         override val params: LoginByEmailParams = LoginByEmailParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByEmailParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<LoginByEmailParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_LOGIN_ROUTE/email"
+        public companion object {
+            public const val ROUTE: String = "$BASE_LOGIN_ROUTE/email"
         }
     }
 
@@ -100,18 +97,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenLoginRoutes.SEND_LOGIN_CONFIRMATION_TO_PHONE]
      */
     @Serializable
-    data class LoginByPhone(
+    public data class LoginByPhone(
         override val params: LoginByPhoneParams = LoginByPhoneParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByPhoneParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<LoginByPhoneParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_LOGIN_ROUTE/phone"
+        public companion object {
+            public const val ROUTE: String = "$BASE_LOGIN_ROUTE/phone"
         }
     }
 
@@ -124,18 +121,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenLoginRoutes.LOGIN_BY_TOTP_RECOVERY_CODE]
      */
     @Serializable
-    data class LoginByTotp(
+    public data class LoginByTotp(
         override val params: LoginByTotpParams = LoginByTotpParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<LoginByTotpParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<LoginByTotpParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_LOGIN_ROUTE/totp"
+        public companion object {
+            public const val ROUTE: String = "$BASE_LOGIN_ROUTE/totp"
         }
     }
 
@@ -148,18 +145,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenRegistrationRoutes.SEND_REGISTRATION_CONFIRMATION_TO_EMAIL]
      */
     @Serializable
-    data class Registration(
+    public data class Registration(
         override val params: ClientRegistrationByEmailParams = ClientRegistrationByEmailParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<ClientRegistrationByEmailParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<ClientRegistrationByEmailParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_AUTH_ROUTE/registration"
+        public companion object {
+            public const val ROUTE: String = "$BASE_AUTH_ROUTE/registration"
         }
     }
 
@@ -172,18 +169,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenResetPasswordRoutes.SEND_RESET_EMAIL_PASSWORD_CONFIRMATION]
      */
     @Serializable
-    data class ResetPassword(
+    public data class ResetPassword(
         override val params: ResetPasswordParams = ResetPasswordParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<ResetPasswordParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<ResetPasswordParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_AUTH_ROUTE/reset-password"
+        public companion object {
+            public const val ROUTE: String = "$BASE_AUTH_ROUTE/reset-password"
         }
     }
 
@@ -197,15 +194,14 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenSessionRoutes.LOGOUT]
      */
     @Serializable
-    data object PendingDeletion : ClientAuthNavigation {
-
+    public data object PendingDeletion : ClientAuthNavigation {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        const val ROUTE = "$BASE_LOGIN_ROUTE/pending-deletion"
+        public const val ROUTE: String = "$BASE_LOGIN_ROUTE/pending-deletion"
     }
 
     /**
@@ -217,18 +213,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenUnlockRoutes.UNLOCK_BY_EXTERNAL_PROVIDER]
      */
     @Serializable
-    data class UnlockMethodSelection(
+    public data class UnlockMethodSelection(
         override val params: UnlockMethodSelectionParams = UnlockMethodSelectionParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockMethodSelectionParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<UnlockMethodSelectionParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = BASE_UNLOCK_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_UNLOCK_ROUTE
         }
     }
 
@@ -242,18 +238,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class UnlockTargetInput(
+    public data class UnlockTargetInput(
         override val params: UnlockTargetInputParams = UnlockTargetInputParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockTargetInputParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<UnlockTargetInputParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = UnlockMethodSelection.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_UNLOCK_ROUTE/input"
+        public companion object {
+            public const val ROUTE: String = "$BASE_UNLOCK_ROUTE/input"
         }
     }
 
@@ -269,18 +265,18 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      *   - [OpenUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      */
     @Serializable
-    data class UnlockOtpInput(
+    public data class UnlockOtpInput(
         override val params: UnlockOtpInputParams = UnlockOtpInputParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockOtpInputParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<UnlockOtpInputParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = UnlockTargetInput.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_UNLOCK_ROUTE/otp"
+        public companion object {
+            public const val ROUTE: String = "$BASE_UNLOCK_ROUTE/otp"
         }
     }
 
@@ -292,24 +288,24 @@ sealed interface ClientAuthNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class UnlockSuccess(
+    public data class UnlockSuccess(
         override val params: UnlockSuccessParams = UnlockSuccessParams()
-    ) : ClientAuthNavigation, ParameterizedNavigationRoute<UnlockSuccessParams> {
-
+    ) : ClientAuthNavigation,
+        ParameterizedNavigationRoute<UnlockSuccessParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = Main.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_UNLOCK_ROUTE/success"
+        public companion object {
+            public const val ROUTE: String = "$BASE_UNLOCK_ROUTE/success"
         }
     }
 
-    companion object {
-        const val BASE_AUTH_ROUTE = BaseUserNavigationRoutes.BASE_USER_AUTH_NAVIGATION_ROUTE
-        const val BASE_LOGIN_ROUTE = "$BASE_AUTH_ROUTE/login"
-        const val BASE_UNLOCK_ROUTE = "$BASE_AUTH_ROUTE/unlock"
+    public companion object {
+        public const val BASE_AUTH_ROUTE: String = BaseUserNavigationRoutes.BASE_USER_AUTH_NAVIGATION_ROUTE
+        public const val BASE_LOGIN_ROUTE: String = "$BASE_AUTH_ROUTE/login"
+        public const val BASE_UNLOCK_ROUTE: String = "$BASE_AUTH_ROUTE/unlock"
     }
 }

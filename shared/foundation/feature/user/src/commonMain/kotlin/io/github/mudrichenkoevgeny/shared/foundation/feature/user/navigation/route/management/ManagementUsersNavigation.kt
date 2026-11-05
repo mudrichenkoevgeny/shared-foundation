@@ -27,8 +27,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for global management and administrative operations.
  */
 @Serializable
-sealed interface ManagementUsersNavigation : NavigationRoute {
-
+public sealed interface ManagementUsersNavigation : NavigationRoute {
     /**
      * Global user list management screen.
      *
@@ -37,18 +36,18 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class UserList(
+    public data class UserList(
         override val params: ManagementUserListParams = ManagementUserListParams()
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<ManagementUserListParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<ManagementUserListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = BASE_USERS_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_USERS_ROUTE
         }
     }
 
@@ -60,8 +59,7 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object CreateUser : ManagementUsersNavigation {
-
+    public data object CreateUser : ManagementUsersNavigation {
         override val route: String
             get() = "$BASE_USERS_ROUTE/create"
 
@@ -80,24 +78,22 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementUsersSecurityRoutes.DISABLE_TOTP]
      */
     @Serializable
-    data class UserDetail(
+    public data class UserDetail(
         override val params: UserDetailParams
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<UserDetailParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<UserDetailParams> {
         override val route: String
             get() = getPath(params.userId)
 
         override val parentRoute: String
             get() = UserList.ROUTE
 
-        companion object {
-            const val ROUTE = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
-            fun getPath(userId: UserId): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
+            public fun getPath(userId: UserId): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
-            fun getPath(userId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
+            public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
 
@@ -111,28 +107,27 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementSessionsRoutes.DELETE_ALL_USER_SESSIONS]
      */
     @Serializable
-    data class UserSessionList(
+    public data class UserSessionList(
         override val params: ManagementUserSessionListParams = ManagementUserSessionListParams()
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<ManagementUserSessionListParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<ManagementUserSessionListParams> {
         override val route: String
             get() = getPath(params.userId)
 
         override val parentRoute: String
-            get() = if (params.userId.isNotBlank()) {
-                UserDetail.getPath(params.userId)
-            } else {
-                UserList.ROUTE
-            }
+            get() =
+                if (params.userId.isNotBlank()) {
+                    UserDetail.getPath(params.userId)
+                } else {
+                    UserList.ROUTE
+                }
 
-        companion object {
-            const val ROUTE = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/sessions"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/sessions"
 
-            fun getPath(userId: UserId): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
+            public fun getPath(userId: UserId): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
-            fun getPath(userId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
+            public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
 
@@ -146,28 +141,27 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementIdentifiersRoutes.DELETE_IDENTIFIER_PASSWORD]
      */
     @Serializable
-    data class UserIdentifierList(
+    public data class UserIdentifierList(
         override val params: ManagementUserIdentifierListParams = ManagementUserIdentifierListParams()
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<ManagementUserIdentifierListParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<ManagementUserIdentifierListParams> {
         override val route: String
             get() = getPath(params.userId)
 
         override val parentRoute: String
-            get() = if (params.userId.isNotBlank()) {
-                UserDetail.getPath(params.userId)
-            } else {
-                UserList.ROUTE
-            }
+            get() =
+                if (params.userId.isNotBlank()) {
+                    UserDetail.getPath(params.userId)
+                } else {
+                    UserList.ROUTE
+                }
 
-        companion object {
-            const val ROUTE = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/identifiers"
+        public companion object {
+            public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/identifiers"
 
-            fun getPath(userId: UserId): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
+            public fun getPath(userId: UserId): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
-            fun getPath(userId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
+            public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
 
@@ -180,18 +174,18 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementSessionsRoutes.DELETE_SESSION]
      */
     @Serializable
-    data class GlobalSessionList(
+    public data class GlobalSessionList(
         override val params: ManagementGlobalSessionListParams = ManagementGlobalSessionListParams()
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<ManagementGlobalSessionListParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<ManagementGlobalSessionListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = BASE_SESSIONS_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_SESSIONS_ROUTE
         }
     }
 
@@ -205,18 +199,18 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementIdentifiersRoutes.DELETE_IDENTIFIER_PASSWORD]
      */
     @Serializable
-    data class GlobalIdentifierList(
+    public data class GlobalIdentifierList(
         override val params: ManagementGlobalIdentifierListParams = ManagementGlobalIdentifierListParams()
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<ManagementGlobalIdentifierListParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<ManagementGlobalIdentifierListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = BASE_IDENTIFIERS_ROUTE
+        public companion object {
+            public const val ROUTE: String = BASE_IDENTIFIERS_ROUTE
         }
     }
 
@@ -230,28 +224,28 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementIdentifiersRoutes.DELETE_IDENTIFIER_PASSWORD]
      */
     @Serializable
-    data class IdentifierDetail(
+    public data class IdentifierDetail(
         override val params: IdentifierDetailParams
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<IdentifierDetailParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<IdentifierDetailParams> {
         override val route: String
             get() = getPath(params.identifierId)
 
         override val parentRoute: String
-            get() = if (!params.userId.isNullOrBlank()) {
-                UserIdentifierList.getPath(params.userId)
-            } else {
-                GlobalIdentifierList.ROUTE
-            }
+            get() =
+                if (!params.userId.isNullOrBlank()) {
+                    UserIdentifierList.getPath(params.userId)
+                } else {
+                    GlobalIdentifierList.ROUTE
+                }
 
-        companion object {
-            const val ROUTE = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+        public companion object {
+            public const val ROUTE: String = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
-            fun getPath(identifierId: UserIdentifierId): String =
+            public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
-            fun getPath(identifierId: String): String =
-                ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
+            public fun getPath(identifierId: String): String = ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
     }
 
@@ -264,34 +258,34 @@ sealed interface ManagementUsersNavigation : NavigationRoute {
      *   - [ManagementSessionsRoutes.DELETE_SESSION]
      */
     @Serializable
-    data class SessionDetail(
+    public data class SessionDetail(
         override val params: SessionDetailParams
-    ) : ManagementUsersNavigation, ParameterizedNavigationRoute<SessionDetailParams> {
-
+    ) : ManagementUsersNavigation,
+        ParameterizedNavigationRoute<SessionDetailParams> {
         override val route: String
             get() = getPath(params.sessionId)
 
         override val parentRoute: String
-            get() = if (!params.userId.isNullOrBlank()) {
-                UserSessionList.getPath(params.userId)
-            } else {
-                GlobalSessionList.ROUTE
-            }
+            get() =
+                if (!params.userId.isNullOrBlank()) {
+                    UserSessionList.getPath(params.userId)
+                } else {
+                    GlobalSessionList.ROUTE
+                }
 
-        companion object {
-            const val ROUTE = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+        public companion object {
+            public const val ROUTE: String = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
-            fun getPath(sessionId: UserSessionId): String =
+            public fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
-            fun getPath(sessionId: String): String =
-                ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
+            public fun getPath(sessionId: String): String = ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
     }
 
-    companion object {
-        const val BASE_USERS_ROUTE = "/users"
-        const val BASE_SESSIONS_ROUTE = "/sessions"
-        const val BASE_IDENTIFIERS_ROUTE = "/identifiers"
+    public companion object {
+        public const val BASE_USERS_ROUTE: String = "/users"
+        public const val BASE_SESSIONS_ROUTE: String = "/sessions"
+        public const val BASE_IDENTIFIERS_ROUTE: String = "/identifiers"
     }
 }

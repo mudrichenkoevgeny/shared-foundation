@@ -3,9 +3,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
@@ -14,12 +12,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientAuthNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.client.ClientUserNavigation
@@ -32,7 +28,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for session management in the open API.
  */
-object OpenSessionRoutes {
+public object OpenSessionRoutes {
     /** Base path for open session management operations. */
     private const val BASE_SESSIONS_ROUTE = "$BASE_USER_ROUTE/sessions"
 
@@ -62,7 +58,7 @@ object OpenSessionRoutes {
      *   - [ClientAuthNavigation.PendingDeletion]
      *   - [ClientUserNavigation.SessionList]
      */
-    const val LOGOUT = "$BASE_SESSIONS_ROUTE/logout"
+    public const val LOGOUT: String = "$BASE_SESSIONS_ROUTE/logout"
 
     /**
      * **HTTP method:** `GET`
@@ -134,7 +130,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionList]
      */
-    const val GET_SESSIONS = BASE_SESSIONS_ROUTE
+    public const val GET_SESSIONS: String = BASE_SESSIONS_ROUTE
 
     /**
      * **HTTP method:** `GET`
@@ -156,7 +152,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionDetail]
      */
-    const val GET_SESSION = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val GET_SESSION: String = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -188,7 +184,7 @@ object OpenSessionRoutes {
      *   - [ClientUserNavigation.SessionList]
      *   - [ClientUserNavigation.SessionDetail]
      */
-    const val DELETE_SESSION = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
+    public const val DELETE_SESSION: String = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
     /**
      * **HTTP method:** `DELETE`
@@ -216,7 +212,7 @@ object OpenSessionRoutes {
      * - Screens:
      *   - [ClientUserNavigation.SessionList]
      */
-    const val DELETE_ALL_OTHER_SESSIONS = "$BASE_SESSIONS_ROUTE/others"
+    public const val DELETE_ALL_OTHER_SESSIONS: String = "$BASE_SESSIONS_ROUTE/others"
 
     /**
      * **HTTP method:** `POST`
@@ -243,5 +239,5 @@ object OpenSessionRoutes {
      * - Screens: None.
      * - Flow: Global re-authentication dialog (no dedicated screen).
      */
-    const val REAUTHENTICATE_SESSION = "$BASE_SESSIONS_ROUTE/reauthenticate"
+    public const val REAUTHENTICATE_SESSION: String = "$BASE_SESSIONS_ROUTE/reauthenticate"
 }

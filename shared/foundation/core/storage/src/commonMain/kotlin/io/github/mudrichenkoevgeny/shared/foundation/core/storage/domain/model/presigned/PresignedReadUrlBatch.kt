@@ -7,6 +7,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
  *
  * @property urls Map linking a specific [FileId] to its temporary access URL, or `null` if the file could not be accessed.
  */
-data class PresignedReadUrlBatch(
-    val urls: Map<FileId, String?>
+public data class PresignedReadUrlBatch(
+    public val urls: Map<FileId, String?>
 )

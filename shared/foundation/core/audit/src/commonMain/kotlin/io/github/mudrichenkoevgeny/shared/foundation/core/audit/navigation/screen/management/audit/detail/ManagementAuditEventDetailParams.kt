@@ -12,15 +12,13 @@ import kotlinx.serialization.Serializable
  * @property eventId Hex dash string representation of the target audit event ID; wire key is [AuditApiPaths.EVENT_ID].
  */
 @Serializable
-data class ManagementAuditEventDetailParams(
+public data class ManagementAuditEventDetailParams(
     val eventId: String
 ) : NavigationScreenParams<ManagementAuditEventDetailParams> {
-
-    override val parser: NavigationScreenParamsParser<ManagementAuditEventDetailParams>
+    public override val parser: NavigationScreenParamsParser<ManagementAuditEventDetailParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ManagementAuditEventDetailParams> {
-
+    public companion object : NavigationScreenParamsParser<ManagementAuditEventDetailParams> {
         /**
          * Parses raw URL query or path parameters into typed [ManagementAuditEventDetailParams].
          *
@@ -32,10 +30,11 @@ data class ManagementAuditEventDetailParams(
          */
         override fun parse(params: Map<String, Any?>): ManagementAuditEventDetailParams {
             val normalized = params.normalizeQueryParams()
-            val eventId = normalized[AuditApiPaths.EVENT_ID]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
-                ?: ""
+            val eventId =
+                normalized[AuditApiPaths.EVENT_ID]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
+                    ?: ""
             return ManagementAuditEventDetailParams(eventId = eventId)
         }
 
@@ -48,8 +47,6 @@ data class ManagementAuditEventDetailParams(
          * @param params Typed [ManagementAuditEventDetailParams] to serialize.
          * @return Empty map as no query parameters are associated with this screen.
          */
-        override fun serialize(
-            params: ManagementAuditEventDetailParams
-        ): Map<String, List<String>> = emptyMap()
+        override fun serialize(params: ManagementAuditEventDetailParams): Map<String, List<String>> = emptyMap()
     }
 }

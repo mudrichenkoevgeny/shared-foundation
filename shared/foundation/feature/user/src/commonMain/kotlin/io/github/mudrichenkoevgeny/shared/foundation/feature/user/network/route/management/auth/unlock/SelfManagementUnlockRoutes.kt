@@ -20,7 +20,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for authenticated self-service account unlocking in the management API.
  */
-object SelfManagementUnlockRoutes {
+public object SelfManagementUnlockRoutes {
     /** Base path for management self-unlock operations. */
     private const val BASE_SELF_MANAGEMENT_UNLOCK_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/unlock"
@@ -47,7 +47,7 @@ object SelfManagementUnlockRoutes {
      *   - [ManagementAuthNavigation.UnlockTargetInput]
      *   - [ManagementAuthNavigation.UnlockOtpInput]
      */
-    const val SEND_UNLOCK_EMAIL_CONFIRMATION = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
+    public const val SEND_UNLOCK_EMAIL_CONFIRMATION: String = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -75,5 +75,5 @@ object SelfManagementUnlockRoutes {
      * - Screens:
      *   - [ManagementAuthNavigation.UnlockOtpInput]
      */
-    const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
+    public const val UNLOCK_BY_EMAIL: String = UNLOCK_BY_EMAIL_ROUTE
 }

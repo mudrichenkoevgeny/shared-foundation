@@ -11,22 +11,23 @@ private const val ACTION_ADD = "add"
  * @property value String wire representation of the [SelfIdentifierListAction].
  */
 @Serializable
-enum class SelfIdentifierListAction(val value: String) {
+public enum class SelfIdentifierListAction(
+    public val value: String
+) {
     /** Opens the modal wizard for adding a new authentication identifier ([ACTION_ADD]). */
     @SerialName(ACTION_ADD)
     ADD(ACTION_ADD);
 
-    companion object {
-
+    public companion object {
         /**
          * Resolves [SelfIdentifierListAction] matching the given [value], or `null` if no match is found.
          *
          * Compares against both wire [value] and enum [name] case-insensitively.
          */
-        fun fromValueOrNull(value: String): SelfIdentifierListAction? =
+        public fun fromValueOrNull(value: String): SelfIdentifierListAction? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -34,7 +35,7 @@ enum class SelfIdentifierListAction(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any action.
          */
-        fun fromValueOrThrow(value: String): SelfIdentifierListAction =
+        public fun fromValueOrThrow(value: String): SelfIdentifierListAction =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${SelfIdentifierListAction::class.simpleName}: '$value'"
             )

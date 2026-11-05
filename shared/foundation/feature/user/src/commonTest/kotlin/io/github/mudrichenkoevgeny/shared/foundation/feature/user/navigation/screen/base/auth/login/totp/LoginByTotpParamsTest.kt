@@ -7,13 +7,13 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class LoginByTotpParamsTest {
-
     @Test
     fun `parse extracts mfaToken and loginByTotpMode correctly`() {
-        val params = mapOf(
-            SecurityApiFields.MFA_TOKEN to "mfa_123",
-            UserNavigationPaths.LOGIN_BY_TOTP_MODE to "recovery_code"
-        )
+        val params =
+            mapOf(
+                SecurityApiFields.MFA_TOKEN to "mfa_123",
+                UserNavigationPaths.LOGIN_BY_TOTP_MODE to "recovery_code"
+            )
         val parsed = LoginByTotpParams.parse(params)
 
         assertEquals("mfa_123", parsed.mfaToken)

@@ -3,20 +3,19 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.
 /**
  * Standard preset keys for [FileUrls.urlPresets] to avoid magic strings across clients and backend.
  */
-object FileUrlPresets {
-
+public object FileUrlPresets {
     /** Small thumbnail variant key (e.g. 150x150). */
-    const val THUMBNAIL = "thumbnail"
+    public const val THUMBNAIL: String = "thumbnail"
 
     /** Medium preview variant key (e.g. 600x600). */
-    const val PREVIEW = "preview"
+    public const val PREVIEW: String = "preview"
 
     /** Small avatar image preset key. */
-    const val AVATAR_SM = "avatar_sm"
+    public const val AVATAR_SM: String = "avatar_sm"
 
     /** Medium avatar image preset key. */
-    const val AVATAR_MD = "avatar_md"
+    public const val AVATAR_MD: String = "avatar_md"
 
     /** Large avatar image preset key. */
-    const val AVATAR_LG = "avatar_lg"
+    public const val AVATAR_LG: String = "avatar_lg"
 }

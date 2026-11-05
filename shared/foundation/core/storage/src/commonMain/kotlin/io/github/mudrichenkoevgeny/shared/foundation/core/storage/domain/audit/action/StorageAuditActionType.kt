@@ -16,7 +16,9 @@ private const val ACTION_MANAGEMENT_DELETE_FILE = "management_delete_file"
  * @property value String representation of the [StorageAuditActionType].
  */
 @Serializable
-enum class StorageAuditActionType(override val value: String) : AuditActionType {
+public enum class StorageAuditActionType(
+    override val value: String
+) : AuditActionType {
     /** Administrative update of platform-wide storage configuration limits via [ManagementStorageSettingsRoutes.UPDATE_MANAGEMENT_STORAGE_SETTINGS]. */
     @SerialName(ACTION_MANAGEMENT_UPDATE_STORAGE_SETTINGS)
     MANAGEMENT_UPDATE_STORAGE_SETTINGS(ACTION_MANAGEMENT_UPDATE_STORAGE_SETTINGS),
@@ -29,14 +31,14 @@ enum class StorageAuditActionType(override val value: String) : AuditActionType 
     @SerialName(ACTION_MANAGEMENT_DELETE_FILE)
     MANAGEMENT_DELETE_FILE(ACTION_MANAGEMENT_DELETE_FILE);
 
-    companion object {
+    public companion object {
         /**
          * Returns [StorageAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): StorageAuditActionType? =
+        public fun fromValueOrNull(value: String): StorageAuditActionType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -44,7 +46,7 @@ enum class StorageAuditActionType(override val value: String) : AuditActionType 
          *
          * @throws IllegalArgumentException if [value] does not match any [StorageAuditActionType].
          */
-        fun fromValueOrThrow(value: String): StorageAuditActionType =
+        public fun fromValueOrThrow(value: String): StorageAuditActionType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${StorageAuditActionType::class.simpleName}: '$value'"
             )

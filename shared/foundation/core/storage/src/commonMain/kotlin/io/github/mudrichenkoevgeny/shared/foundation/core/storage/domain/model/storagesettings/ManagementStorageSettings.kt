@@ -13,14 +13,14 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.
  * @property isDeduplicationEnabled Toggle for enabling content-addressable file deduplication by SHA-256 hash.
  * @property deletedFilesCleanupIntervalSeconds The background worker execution interval in seconds for permanently deleting marked files from S3 and database records.
  */
-data class ManagementStorageSettings(
-    val minUploadSizeBytes: Long,
-    val maxUploadSizeBytes: Long,
-    val totalStorageQuotaForOpenUserBytes: Long?,
-    val totalStorageQuotaForManagementUserBytes: Long?,
-    val presignedUrlExpirationSeconds: Int,
-    val maxPendingUploadsForOpenUser: Int,
-    val maxPendingUploadsForManagementUser: Int,
-    val isDeduplicationEnabled: Boolean,
-    val deletedFilesCleanupIntervalSeconds: Int
+public data class ManagementStorageSettings(
+    public val minUploadSizeBytes: Long,
+    public val maxUploadSizeBytes: Long,
+    public val totalStorageQuotaForOpenUserBytes: Long?,
+    public val totalStorageQuotaForManagementUserBytes: Long?,
+    public val presignedUrlExpirationSeconds: Int,
+    public val maxPendingUploadsForOpenUser: Int,
+    public val maxPendingUploadsForManagementUser: Int,
+    public val isDeduplicationEnabled: Boolean,
+    public val deletedFilesCleanupIntervalSeconds: Int
 )

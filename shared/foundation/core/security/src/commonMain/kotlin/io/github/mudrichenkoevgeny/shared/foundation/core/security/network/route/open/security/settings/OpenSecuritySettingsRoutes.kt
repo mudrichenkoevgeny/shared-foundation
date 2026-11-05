@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
 /**
  * Route paths for security settings in the open API.
  */
-object OpenSecuritySettingsRoutes {
+public object OpenSecuritySettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
@@ -24,5 +24,6 @@ object OpenSecuritySettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_SECURITY_SETTINGS = "${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSecurityNetworkRoutes.BASE_SECURITY_NETWORK_ROUTE}"
+    public const val GET_OPEN_SECURITY_SETTINGS: String =
+        "${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSecurityNetworkRoutes.BASE_SECURITY_NETWORK_ROUTE}"
 }

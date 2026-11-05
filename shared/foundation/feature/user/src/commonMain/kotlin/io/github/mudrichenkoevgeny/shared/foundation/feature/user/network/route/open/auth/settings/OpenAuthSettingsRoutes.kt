@@ -7,7 +7,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for authentication settings in the open API.
  */
-object OpenAuthSettingsRoutes {
+public object OpenAuthSettingsRoutes {
     /**
      * **HTTP method:** `GET`
      *
@@ -24,6 +24,6 @@ object OpenAuthSettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_AUTH_SETTINGS =
+    public const val GET_OPEN_AUTH_SETTINGS: String =
         "${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}"
 }

@@ -25,40 +25,29 @@ import kotlinx.serialization.Serializable
  * @property refreshTokenRotationGracePeriodSeconds Grace period in seconds during refresh token rotation before triggering replay attack protection.
  */
 @Serializable
-data class ManagementSecuritySettingsPayload(
+public data class ManagementSecuritySettingsPayload(
     @SerialName(SecurityApiFields.RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER)
-    val recentAuthenticationValiditySecondsForOpenUser: Int,
-
+    public val recentAuthenticationValiditySecondsForOpenUser: Int,
     @SerialName(SecurityApiFields.RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT_USER)
-    val recentAuthenticationValiditySecondsForManagementUser: Int,
-
+    public val recentAuthenticationValiditySecondsForManagementUser: Int,
     @SerialName(SecurityApiFields.MANAGEMENT_PASSWORD_POLICY)
-    val passwordPolicy: ManagementPasswordPolicyPayload,
-
+    public val passwordPolicy: ManagementPasswordPolicyPayload,
     @SerialName(SecurityApiFields.OTP_CONFIRMATION)
-    val otpConfirmation: OtpConfirmationPayload,
-
+    public val otpConfirmation: OtpConfirmationPayload,
     @SerialName(SecurityApiFields.ACCOUNT_LOCKOUT_POLICY)
-    val accountLockoutPolicy: AccountLockoutPolicyPayload,
-
+    public val accountLockoutPolicy: AccountLockoutPolicyPayload,
     @SerialName(SecurityApiFields.ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS)
-    val accountLockoutCheckIntervalSeconds: Int,
-
+    public val accountLockoutCheckIntervalSeconds: Int,
     @SerialName(SecurityApiFields.OPEN_IP_RESTRICTION_POLICY)
-    val openIpRestrictionPolicy: IpRestrictionPolicyPayload,
-
+    public val openIpRestrictionPolicy: IpRestrictionPolicyPayload,
     @SerialName(SecurityApiFields.MANAGEMENT_IP_RESTRICTION_POLICY)
-    val managementIpRestrictionPolicy: IpRestrictionPolicyPayload,
-
+    public val managementIpRestrictionPolicy: IpRestrictionPolicyPayload,
     @SerialName(SecurityApiFields.EXPIRATION_SECONDS)
-    val mfaTokenExpirationSeconds: Int,
-
+    public val mfaTokenExpirationSeconds: Int,
     @SerialName(SecurityApiFields.MAX_REQUESTS_PER_PERIOD)
-    val maxRequestsPerPeriod: Int,
-
+    public val maxRequestsPerPeriod: Int,
     @SerialName(SecurityApiFields.RATE_LIMIT_PERIOD_SECONDS)
-    val rateLimitPeriodSeconds: Int,
-
+    public val rateLimitPeriodSeconds: Int,
     @SerialName(SecurityApiFields.REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS)
-    val refreshTokenRotationGracePeriodSeconds: Int
+    public val refreshTokenRotationGracePeriodSeconds: Int
 )

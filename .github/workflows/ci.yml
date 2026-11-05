@@ -1,0 +1,45 @@
+name: CI / Build & Validate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate-and-test:
+    name: Build, Lint & Test (Multiplatform)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run Build, Detekt, Ktlint & Unit Tests
+        run: ./gradlew check
+
+      - name: Verify Binary Compatibility API Dumps
+        run: ./gradlew apiCheck
+
+      - name: Verify Binary Budgets (AAR/JAR Size Limits)
+        run: ./gradlew checkBinarySize
+
+      - name: Generate & Verify NPM Package
+        run: |
+          ./gradlew generateNpmPackage
+          cd build/npm-package
+          npm install typescript --no-save
+          npx tsc --noEmit index.d.ts

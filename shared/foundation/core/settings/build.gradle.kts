@@ -15,6 +15,9 @@ configure<KotlinMultiplatformExtension> {
         namespace = "io.github.mudrichenkoevgeny.shared.foundation.core.settings"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
+        optimization {
+            consumerKeepRules.file("consumer-rules.pro")
+        }
     }
 
     jvm()

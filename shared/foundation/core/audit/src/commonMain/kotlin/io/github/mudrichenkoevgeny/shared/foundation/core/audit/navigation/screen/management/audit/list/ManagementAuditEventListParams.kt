@@ -35,7 +35,7 @@ import kotlinx.serialization.Serializable
  * @property searchQuery Free-text search query string targeting event messages; wire key is [AuditEventFilterValues.SEARCH_QUERY].
  */
 @Serializable
-data class ManagementAuditEventListParams(
+public data class ManagementAuditEventListParams(
     val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
     val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     val sortBy: AuditEventSortBy = AuditEventSortBy.DEFAULT,
@@ -55,12 +55,10 @@ data class ManagementAuditEventListParams(
     val createdAtTo: String? = null,
     val searchQuery: String? = null
 ) : NavigationScreenParams<ManagementAuditEventListParams> {
-
-    override val parser: NavigationScreenParamsParser<ManagementAuditEventListParams>
+    public override val parser: NavigationScreenParamsParser<ManagementAuditEventListParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ManagementAuditEventListParams> {
-
+    public companion object : NavigationScreenParamsParser<ManagementAuditEventListParams> {
         /**
          * Parses raw URL query parameters into typed [ManagementAuditEventListParams].
          *
@@ -70,86 +68,104 @@ data class ManagementAuditEventListParams(
          * @param params Map of query parameter keys to raw parameter values (single strings, lists, arrays, or nulls).
          * @return Validated [ManagementAuditEventListParams] instance with defaults applied.
          */
-        override fun parse(params: Map<String, Any?>): ManagementAuditEventListParams {
+        public override fun parse(params: Map<String, Any?>): ManagementAuditEventListParams {
             val normalized = params.normalizeQueryParams()
 
-            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber =
+                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize =
+                normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
-                ?.firstOrNull()
-                ?.let { AuditEventSortBy.fromValueOrNull(it) }
-                ?: AuditEventSortBy.DEFAULT
+            val sortBy =
+                normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { AuditEventSortBy.fromValueOrNull(it) }
+                    ?: AuditEventSortBy.DEFAULT
 
-            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
-                ?.firstOrNull()
-                ?.let { SortOrder.fromValueOrNull(it) }
-                ?: SortOrder.DEFAULT
+            val sortOrder =
+                normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT
 
-            val eventIds = normalized[AuditEventFilterValues.EVENT_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val eventIds =
+                normalized[AuditEventFilterValues.EVENT_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val actorIds = normalized[AuditEventFilterValues.ACTOR_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val actorIds =
+                normalized[AuditEventFilterValues.ACTOR_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val actorTypes = normalized[AuditEventFilterValues.ACTOR_TYPE]
-                ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
-                ?: emptyList()
+            val actorTypes =
+                normalized[AuditEventFilterValues.ACTOR_TYPE]
+                    ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeActorTypes = normalized[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE]
-                ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeActorTypes =
+                normalized[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE]
+                    ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val actorUserRoles = normalized[AuditEventFilterValues.ACTOR_USER_ROLE]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val actorUserRoles =
+                normalized[AuditEventFilterValues.ACTOR_USER_ROLE]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val actions = normalized[AuditEventFilterValues.ACTION]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val actions =
+                normalized[AuditEventFilterValues.ACTION]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val excludeActions = normalized[AuditEventFilterValues.EXCLUDE_ACTION]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val excludeActions =
+                normalized[AuditEventFilterValues.EXCLUDE_ACTION]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val resources = normalized[AuditEventFilterValues.RESOURCE]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val resources =
+                normalized[AuditEventFilterValues.RESOURCE]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val resourceIds = normalized[AuditEventFilterValues.RESOURCE_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val resourceIds =
+                normalized[AuditEventFilterValues.RESOURCE_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val statuses = normalized[AuditEventFilterValues.STATUS]
-                ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val statuses =
+                normalized[AuditEventFilterValues.STATUS]
+                    ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeStatuses = normalized[AuditEventFilterValues.EXCLUDE_STATUS]
-                ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeStatuses =
+                normalized[AuditEventFilterValues.EXCLUDE_STATUS]
+                    ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val createdAtFrom = normalized[AuditEventFilterValues.CREATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtFrom =
+                normalized[AuditEventFilterValues.CREATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtTo = normalized[AuditEventFilterValues.CREATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtTo =
+                normalized[AuditEventFilterValues.CREATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val searchQuery = normalized[AuditEventFilterValues.SEARCH_QUERY]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val searchQuery =
+                normalized[AuditEventFilterValues.SEARCH_QUERY]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
             return ManagementAuditEventListParams(
                 pageNumber = pageNumber,
@@ -179,7 +195,7 @@ data class ManagementAuditEventListParams(
          * @param params Typed [ManagementAuditEventListParams] to serialize.
          * @return Map of query parameter names to string lists suitable for building URL search strings.
          */
-        override fun serialize(params: ManagementAuditEventListParams): Map<String, List<String>> {
+        public override fun serialize(params: ManagementAuditEventListParams): Map<String, List<String>> {
             val result = mutableMapOf<String, List<String>>()
 
             if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {

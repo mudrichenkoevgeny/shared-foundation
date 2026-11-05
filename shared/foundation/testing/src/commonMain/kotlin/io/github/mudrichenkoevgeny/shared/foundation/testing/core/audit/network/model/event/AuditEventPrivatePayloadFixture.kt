@@ -27,7 +27,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  * @param message Human-readable message string.
  * @param createdAt Event epoch-millisecond timestamp.
  */
-fun createTestAuditEventPrivatePayload(
+public fun createTestAuditEventPrivatePayload(
     id: String = TEST_AUDIT_EVENT_ID,
     actorId: String? = TEST_USER_ID,
     actorType: String = AuditActorType.USER.value,
@@ -39,19 +39,20 @@ fun createTestAuditEventPrivatePayload(
     metadata: List<AuditEventMetadataPayload> = listOf(createTestAuditEventMetadataPayload()),
     message: String? = "User logged in successfully",
     createdAt: Long = TEST_TIME_MILLIS
-) = AuditEventPrivatePayload(
-    id = id,
-    actorId = actorId,
-    actorType = actorType,
-    actorUserRole = actorUserRole,
-    action = action,
-    resource = resource,
-    resourceId = resourceId,
-    status = status,
-    metadata = metadata,
-    message = message,
-    createdAt = createdAt
-)
+): AuditEventPrivatePayload =
+    AuditEventPrivatePayload(
+        id = id,
+        actorId = actorId,
+        actorType = actorType,
+        actorUserRole = actorUserRole,
+        action = action,
+        resource = resource,
+        resourceId = resourceId,
+        status = status,
+        metadata = metadata,
+        message = message,
+        createdAt = createdAt
+    )
 
 /**
  * Creates a list of test [AuditEventPrivatePayload] wire objects with deterministic raw UUIDs,
@@ -60,7 +61,7 @@ fun createTestAuditEventPrivatePayload(
  * @param count Number of elements to generate (defaults to 2).
  * @param generator Custom item builder receiving 0-based element index.
  */
-fun createTestAuditEventPrivatePayloadList(
+public fun createTestAuditEventPrivatePayloadList(
     count: Int = 2,
     generator: (index: Int) -> AuditEventPrivatePayload = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)

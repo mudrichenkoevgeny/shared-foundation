@@ -38,40 +38,38 @@ import kotlinx.serialization.Serializable
  * @property searchQuery Search query targeting identifier fields; wire key is [UserIdentifierFilterValues.SEARCH_QUERY].
  */
 @Serializable
-data class ManagementUserIdentifierListParams(
-    val userId: String = "",
-    val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-    val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-    val sortBy: UserIdentifierSortBy = UserIdentifierSortBy.DEFAULT,
-    val sortOrder: SortOrder = SortOrder.DEFAULT,
-    val identifierIds: List<String> = emptyList(),
-    val userAuthProviders: List<UserAuthProvider> = emptyList(),
-    val excludeUserAuthProviders: List<UserAuthProvider> = emptyList(),
-    val identifier: String? = null,
-    val displayName: String? = null,
-    val externalProviderEmail: String? = null,
-    val isExternalProviderEmailSet: Boolean? = null,
-    val createdAtFrom: String? = null,
-    val createdAtTo: String? = null,
-    val updatedAtFrom: String? = null,
-    val updatedAtTo: String? = null,
-    val isUpdatedAtSet: Boolean? = null,
-    val searchQuery: String? = null
+public data class ManagementUserIdentifierListParams(
+    public val userId: String = "",
+    public val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    public val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+    public val sortBy: UserIdentifierSortBy = UserIdentifierSortBy.DEFAULT,
+    public val sortOrder: SortOrder = SortOrder.DEFAULT,
+    public val identifierIds: List<String> = emptyList(),
+    public val userAuthProviders: List<UserAuthProvider> = emptyList(),
+    public val excludeUserAuthProviders: List<UserAuthProvider> = emptyList(),
+    public val identifier: String? = null,
+    public val displayName: String? = null,
+    public val externalProviderEmail: String? = null,
+    public val isExternalProviderEmailSet: Boolean? = null,
+    public val createdAtFrom: String? = null,
+    public val createdAtTo: String? = null,
+    public val updatedAtFrom: String? = null,
+    public val updatedAtTo: String? = null,
+    public val isUpdatedAtSet: Boolean? = null,
+    public val searchQuery: String? = null
 ) : NavigationScreenParams<ManagementUserIdentifierListParams> {
-
     /**
      * Parsed strongly typed [UserId] representation of [userId].
      *
      * Returns `null` if [userId] is blank or does not conform to the canonical UUID format.
      */
-    val typedUserId: UserId?
+    public val typedUserId: UserId?
         get() = userId.toUserIdOrNull()
 
     override val parser: NavigationScreenParamsParser<ManagementUserIdentifierListParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ManagementUserIdentifierListParams> {
-
+    public companion object : NavigationScreenParamsParser<ManagementUserIdentifierListParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [ManagementUserIdentifierListParams].
          *
@@ -83,79 +81,96 @@ data class ManagementUserIdentifierListParams(
 
             val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.trim() ?: ""
 
-            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber =
+                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize =
+                normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
-                ?.firstOrNull()
-                ?.let { UserIdentifierSortBy.fromValueOrNull(it) }
-                ?: UserIdentifierSortBy.DEFAULT
+            val sortBy =
+                normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { UserIdentifierSortBy.fromValueOrNull(it) }
+                    ?: UserIdentifierSortBy.DEFAULT
 
-            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
-                ?.firstOrNull()
-                ?.let { SortOrder.fromValueOrNull(it) }
-                ?: SortOrder.DEFAULT
+            val sortOrder =
+                normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT
 
-            val identifierIds = normalized[UserIdentifierFilterValues.IDENTIFIER_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val identifierIds =
+                normalized[UserIdentifierFilterValues.IDENTIFIER_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val userAuthProviders = normalized[UserIdentifierFilterValues.USER_AUTH_PROVIDER]
-                ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                ?: emptyList()
+            val userAuthProviders =
+                normalized[UserIdentifierFilterValues.USER_AUTH_PROVIDER]
+                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeUserAuthProviders = normalized[UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER]
-                ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeUserAuthProviders =
+                normalized[UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER]
+                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val identifier = normalized[UserIdentifierFilterValues.IDENTIFIER]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val identifier =
+                normalized[UserIdentifierFilterValues.IDENTIFIER]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val displayName = normalized[UserIdentifierFilterValues.DISPLAY_NAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val displayName =
+                normalized[UserIdentifierFilterValues.DISPLAY_NAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val externalProviderEmail = normalized[UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val externalProviderEmail =
+                normalized[UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isExternalProviderEmailSet = normalized[UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isExternalProviderEmailSet =
+                normalized[UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val createdAtFrom = normalized[UserIdentifierFilterValues.CREATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtFrom =
+                normalized[UserIdentifierFilterValues.CREATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtTo = normalized[UserIdentifierFilterValues.CREATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtTo =
+                normalized[UserIdentifierFilterValues.CREATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtFrom = normalized[UserIdentifierFilterValues.UPDATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtFrom =
+                normalized[UserIdentifierFilterValues.UPDATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtTo = normalized[UserIdentifierFilterValues.UPDATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtTo =
+                normalized[UserIdentifierFilterValues.UPDATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isUpdatedAtSet = normalized[UserIdentifierFilterValues.IS_UPDATED_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isUpdatedAtSet =
+                normalized[UserIdentifierFilterValues.IS_UPDATED_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val searchQuery = normalized[UserIdentifierFilterValues.SEARCH_QUERY]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val searchQuery =
+                normalized[UserIdentifierFilterValues.SEARCH_QUERY]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
             return ManagementUserIdentifierListParams(
                 userId = userId,

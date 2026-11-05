@@ -12,7 +12,9 @@ private const val MODE_RECOVERY_CODE = "recovery_code"
  * @property value String wire representation of the [LoginByTotpMode].
  */
 @Serializable
-enum class LoginByTotpMode(val value: String) {
+public enum class LoginByTotpMode(
+    public val value: String
+) {
     /** Standard authenticator application TOTP code entry mode ([MODE_TOTP]). */
     @SerialName(MODE_TOTP)
     TOTP(MODE_TOTP),
@@ -21,19 +23,19 @@ enum class LoginByTotpMode(val value: String) {
     @SerialName(MODE_RECOVERY_CODE)
     RECOVERY_CODE(MODE_RECOVERY_CODE);
 
-    companion object {
+    public companion object {
         /** Default TOTP verification mode ([TOTP]). */
-        val DEFAULT = TOTP
+        public val DEFAULT: LoginByTotpMode = TOTP
 
         /**
          * Resolves [LoginByTotpMode] matching the given [value], or `null` if no match is found.
          *
          * Compares against both wire [value] and enum [name] case-insensitively.
          */
-        fun fromValueOrNull(value: String): LoginByTotpMode? =
+        public fun fromValueOrNull(value: String): LoginByTotpMode? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -41,7 +43,7 @@ enum class LoginByTotpMode(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any mode.
          */
-        fun fromValueOrThrow(value: String): LoginByTotpMode =
+        public fun fromValueOrThrow(value: String): LoginByTotpMode =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${LoginByTotpMode::class.simpleName}: '$value'"
             )

@@ -16,19 +16,15 @@ import kotlin.uuid.Uuid
  * @property timestamp The time the message was generated, in milliseconds.
  */
 @Serializable
-data class SocketFrame(
+public data class SocketFrame(
     @SerialName(CommonApiFields.ID)
-    val id: String = Uuid.random().toHexDashString(),
-
+    public val id: String = Uuid.random().toHexDashString(),
     @SerialName(CommonApiFields.TYPE)
-    val type: String,
-
+    public val type: String,
     @SerialName(CommonApiFields.PAYLOAD)
-    val payload: JsonElement?,
-
+    public val payload: JsonElement?,
     @SerialName(CommonApiFields.METADATA)
-    val metadata: Map<String, String>,
-
+    public val metadata: Map<String, String>,
     @SerialName(CommonApiFields.TIMESTAMP)
-    val timestamp: Long
+    public val timestamp: Long
 )

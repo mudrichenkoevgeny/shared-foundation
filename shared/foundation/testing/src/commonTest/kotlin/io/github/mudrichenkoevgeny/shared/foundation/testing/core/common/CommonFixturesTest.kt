@@ -6,7 +6,6 @@ import kotlin.test.assertFailsWith
 import kotlin.uuid.Uuid
 
 class CommonFixturesTest {
-
     @Test
     fun generatesDeterministicValidUuidV4Strings() {
         val uuid0 = generateTestUuidString(0)

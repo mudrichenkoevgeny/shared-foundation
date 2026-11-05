@@ -1,0 +1,908 @@
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/action/AuditActionType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType$Companion;
+	public static final field MANAGEMENT_RESET_SECURITY_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+	public static final field MANAGEMENT_UPDATE_SECURITY_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/action/SecurityAuditActionType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/metadata/SecurityAuditMetadataDeniedReasonValues {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/metadata/SecurityAuditMetadataDeniedReasonValues;
+	public static final field INVALID_MFA_TOKEN Ljava/lang/String;
+	public static final field INVALID_TOTP_CODE Ljava/lang/String;
+	public static final field IP_NOT_ALLOWED Ljava/lang/String;
+	public static final field MFA_REQUIRED Ljava/lang/String;
+	public static final field MFA_TOKEN_EXPIRED Ljava/lang/String;
+	public static final field PASSWORD_TOO_WEAK Ljava/lang/String;
+	public static final field RATE_LIMIT Ljava/lang/String;
+	public static final field RECOVERY_CODE_ALREADY_USED Ljava/lang/String;
+	public static final field TOTP_ALREADY_ENABLED Ljava/lang/String;
+	public static final field TOTP_NOT_ENABLED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType : java/lang/Enum, io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/resource/AuditResourceType {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType$Companion;
+	public static final field SECURITY_SETTINGS Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/audit/resource/SecurityAuditResourceType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy {
+	public fun <init> (IIIIIIZ)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()Z
+	public final fun copy (IIIIIIZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;IIIIIIZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFailedAttemptsWindowSeconds ()I
+	public final fun getIndefiniteLockoutThreshold ()I
+	public final fun getLockoutDurationSeconds ()I
+	public final fun getMaxFailedOtpAttempts ()I
+	public final fun getMaxFailedPasswordAttempts ()I
+	public final fun getMaxFailedTotpAttempts ()I
+	public fun hashCode ()I
+	public final fun isSelfServiceUnlockEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType$Companion;
+	public static final field INDEFINITE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public static final field NONE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public static final field TEMPORARY Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/DecryptedString {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/DecryptedString;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/DecryptedStringKt {
+	public static final fun toDecryptedStringOrNull (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toDecryptedStringOrThrow (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/EncryptedString {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/EncryptedString;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/crypt/EncryptedStringKt {
+	public static final fun toEncryptedStringOrNull (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toEncryptedStringOrThrow (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy {
+	public fun <init> (ZLjava/util/List;ZLjava/util/List;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ZLjava/util/List;ZLjava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;ZLjava/util/List;ZLjava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBlacklist ()Ljava/util/List;
+	public final fun getWhitelist ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isBlacklistEnabled ()Z
+	public final fun isWhitelistEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation {
+	public fun <init> (III)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy (III)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;IIIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpirationSeconds ()I
+	public final fun getNumberOfSymbols ()I
+	public final fun getRetryAfterSeconds ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordhash/PasswordHash {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordhash/PasswordHash;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordhash/PasswordHashKt {
+	public static final fun toPasswordHashOrNull (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toPasswordHashOrThrow (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy$Companion;
+	public static final field DEFAULT_MIN_LENGTH I
+	public fun <init> (IZZZZZLjava/util/Set;)V
+	public final fun component1 ()I
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Ljava/util/Set;
+	public final fun copy (IZZZZZLjava/util/Set;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;IZZZZZLjava/util/Set;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommonPasswords ()Ljava/util/Set;
+	public final fun getMinLength ()I
+	public final fun getRequireDigit ()Z
+	public final fun getRequireLetter ()Z
+	public final fun getRequireLowerCase ()Z
+	public final fun getRequireSpecialChar ()Z
+	public final fun getRequireUpperCase ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy$Companion {
+	public final fun getDEFAULT_COMMON_PASSWORDS ()Ljava/util/Set;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy {
+	public fun <init> (IZZZZZ)V
+	public final fun component1 ()I
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun copy (IZZZZZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;IZZZZZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMinLength ()I
+	public final fun getRequireDigit ()Z
+	public final fun getRequireLetter ()Z
+	public final fun getRequireLowerCase ()Z
+	public final fun getRequireSpecialChar ()Z
+	public final fun getRequireUpperCase ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason : java/lang/Enum {
+	public static final field NO_DIGIT Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field NO_LETTER Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field NO_LOWERCASE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field NO_SPECIAL_CHAR Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field NO_UPPERCASE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field TOO_COMMON Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static final field TOO_SHORT Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyFailReason;
+}
+
+public abstract class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult {
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Fail : io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult {
+	public fun <init> (Ljava/util/List;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public final fun copy (Ljava/util/List;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Fail;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Fail;Ljava/util/List;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Fail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPasswordPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public final fun getReasons ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Success : io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult$Success;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings {
+	public fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;IIII)V
+	public final fun component1 ()I
+	public final fun component10 ()I
+	public final fun component11 ()I
+	public final fun component12 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;
+	public final fun component6 ()I
+	public final fun component7 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public final fun component9 ()I
+	public final fun copy (IILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;IIII)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings;IILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;IIIIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountLockoutCheckIntervalSeconds ()I
+	public final fun getAccountLockoutPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;
+	public final fun getManagementIpRestrictionPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public final fun getMaxRequestsPerPeriod ()I
+	public final fun getMfaTokenExpirationSeconds ()I
+	public final fun getOpenIpRestrictionPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public final fun getOtpConfirmation ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public final fun getPasswordPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public final fun getRateLimitPeriodSeconds ()I
+	public final fun getRecentAuthenticationValiditySecondsForManagementUser ()I
+	public final fun getRecentAuthenticationValiditySecondsForOpenUser ()I
+	public final fun getRefreshTokenRotationGracePeriodSeconds ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;
+	public final fun component2 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOtpConfirmation ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public final fun getPasswordPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes {
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes;Ljava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCodes ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMfaToken ()Ljava/lang/String;
+	public final fun getOtpAuthUrl ()Ljava/lang/String;
+	public final fun getSecretKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getMfaToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/permission/SecurityPermissionCode {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/permission/SecurityPermissionCode;
+	public final fun getSECURITY_SETTINGS_UPDATE-VF5cZrs ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/error/client/naming/ClientSecurityErrorCodes {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/error/client/naming/ClientSecurityErrorCodes;
+	public static final field PASSWORD_POLICY_UNAVAILABLE Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorArgs {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorArgs;
+	public static final field MFA_TOKEN Ljava/lang/String;
+	public static final field PASSWORD_FAIL_NO_DIGIT Ljava/lang/String;
+	public static final field PASSWORD_FAIL_NO_LETTER Ljava/lang/String;
+	public static final field PASSWORD_FAIL_NO_LOWERCASE Ljava/lang/String;
+	public static final field PASSWORD_FAIL_NO_SPECIAL_CHAR Ljava/lang/String;
+	public static final field PASSWORD_FAIL_NO_UPPERCASE Ljava/lang/String;
+	public static final field PASSWORD_FAIL_TOO_COMMON Ljava/lang/String;
+	public static final field PASSWORD_FAIL_TOO_SHORT Ljava/lang/String;
+	public static final field PASSWORD_MIN_LENGTH Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorCodes {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/error/naming/SecurityErrorCodes;
+	public static final field INVALID_MFA_TOKEN Ljava/lang/String;
+	public static final field INVALID_TOTP_CODE Ljava/lang/String;
+	public static final field IP_NOT_ALLOWED Ljava/lang/String;
+	public static final field MFA_CONFIRMATION_REQUIRED Ljava/lang/String;
+	public static final field MFA_TOKEN_EXPIRED Ljava/lang/String;
+	public static final field OTP_RETRY_TOO_SOON Ljava/lang/String;
+	public static final field PASSWORD_TOO_WEAK Ljava/lang/String;
+	public static final field RECOVERY_CODE_ALREADY_USED Ljava/lang/String;
+	public static final field TOTP_ALREADY_ENABLED Ljava/lang/String;
+	public static final field TOTP_NOT_ENABLED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/localization/ErrorsStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun getInvalidTotpCode ()Ljava/lang/String;
+	public final fun getIpNotAllowed ()Ljava/lang/String;
+	public final fun getMfaConfirmationRequired ()Ljava/lang/String;
+	public final fun getMfaTokenExpired ()Ljava/lang/String;
+	public final fun getOtpRetryTooSoonWithoutArgs ()Ljava/lang/String;
+	public final fun getPasswordNoDigit ()Ljava/lang/String;
+	public final fun getPasswordNoLetter ()Ljava/lang/String;
+	public final fun getPasswordNoLowercase ()Ljava/lang/String;
+	public final fun getPasswordNoSpecialChar ()Ljava/lang/String;
+	public final fun getPasswordNoUppercase ()Ljava/lang/String;
+	public final fun getPasswordPolicyUnavailable ()Ljava/lang/String;
+	public final fun getPasswordTooCommon ()Ljava/lang/String;
+	public final fun getPasswordTooShortWithoutArgs ()Ljava/lang/String;
+	public final fun getPasswordTooWeak ()Ljava/lang/String;
+	public final fun getRecoveryCodeAlreadyUsed ()Ljava/lang/String;
+	public final fun getTotpAlreadyEnabled ()Ljava/lang/String;
+	public final fun getTotpNotEnabled ()Ljava/lang/String;
+	public final fun otpRetryTooSoon (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun passwordTooShort (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/localization/SecurityErrorResolverKt {
+	public static final fun resolvePasswordTooWeakReasons (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/localization/SecurityModuleStrings;Ljava/util/Map;)Ljava/util/List;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/localization/SecurityModuleStrings {
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getErrors ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/localization/ErrorsStrings;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/accountlockout/AccountLockoutPolicyMapperKt {
+	public static final fun toAccountLockoutPolicy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;
+	public static final fun toAccountLockoutPolicyPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/iprestriction/IpRestrictionPolicyMapperKt {
+	public static final fun toIpRestrictionPolicy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;
+	public static final fun toIpRestrictionPolicyPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/iprestriction/IpRestrictionPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/otpconfirmation/OtpConfirmationMapperKt {
+	public static final fun toOtpConfirmation (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;
+	public static final fun toOtpConfirmationPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/otpconfirmation/OtpConfirmation;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/passwordpolicy/ManagementPasswordPolicyMapperKt {
+	public static final fun toManagementPasswordPolicy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public static final fun toManagementPasswordPolicyPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/passwordpolicy/OpenPasswordPolicyMapperKt {
+	public static final fun toManagementPasswordPolicy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;
+	public static final fun toOpenPasswordPolicy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;
+	public static final fun toOpenPasswordPolicyPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/securitysettings/ManagementSecuritySettingsMapperKt {
+	public static final fun toManagementSecuritySettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings;
+	public static final fun toManagementSecuritySettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/ManagementSecuritySettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/securitysettings/OpenSecuritySettingsMapperKt {
+	public static final fun toOpenSecuritySettings (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings;
+	public static final fun toOpenSecuritySettingsPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/securitysettings/OpenSecuritySettings;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/totprecoverycodes/TotpRecoveryCodesMapperKt {
+	public static final fun toTotpRecoveryCodes (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes;
+	public static final fun toTotpRecoveryCodesPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totprecoverycodes/TotpRecoveryCodes;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/totpsetup/TotpSetupMapperKt {
+	public static final fun toTotpSetup (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup;
+	public static final fun toTotpSetupPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/totpsetup/TotpSetup;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/mapper/verifytotp/VerifyTotpMapperKt {
+	public static final fun toVerifyTotp (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp;
+	public static final fun toVerifyTotpPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/verifytotp/VerifyTotp;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/BaseSecurityNavigationRoutes {
+	public static final field BASE_SECURITY_NAVIGATION_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/BaseSecurityNavigationRoutes;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation$SecuritySettings : io/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/navigation/route/management/ManagementSecurityNavigation$SecuritySettings;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/contract/SecurityApiFields {
+	public static final field ACCOUNT_LOCKOUT_CHECK_INTERVAL_SECONDS Ljava/lang/String;
+	public static final field ACCOUNT_LOCKOUT_POLICY Ljava/lang/String;
+	public static final field BLACKLIST Ljava/lang/String;
+	public static final field COMMON_PASSWORDS Ljava/lang/String;
+	public static final field EXPIRATION_SECONDS Ljava/lang/String;
+	public static final field FAILED_ATTEMPTS_WINDOW_SECONDS Ljava/lang/String;
+	public static final field INDEFINITE_LOCKOUT_THRESHOLD Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/contract/SecurityApiFields;
+	public static final field IS_BLACKLIST_ENABLED Ljava/lang/String;
+	public static final field IS_SELF_SERVICE_UNLOCK_ENABLED Ljava/lang/String;
+	public static final field IS_WHITELIST_ENABLED Ljava/lang/String;
+	public static final field LOCKOUT_DURATION_SECONDS Ljava/lang/String;
+	public static final field MANAGEMENT_IP_RESTRICTION_POLICY Ljava/lang/String;
+	public static final field MANAGEMENT_PASSWORD_POLICY Ljava/lang/String;
+	public static final field MAX_FAILED_OTP_ATTEMPTS Ljava/lang/String;
+	public static final field MAX_FAILED_PASSWORD_ATTEMPTS Ljava/lang/String;
+	public static final field MAX_FAILED_TOTP_ATTEMPTS Ljava/lang/String;
+	public static final field MAX_REQUESTS_PER_PERIOD Ljava/lang/String;
+	public static final field MFA_TOKEN Ljava/lang/String;
+	public static final field MIN_LENGTH Ljava/lang/String;
+	public static final field NUMBER_OF_SYMBOLS Ljava/lang/String;
+	public static final field OPEN_IP_RESTRICTION_POLICY Ljava/lang/String;
+	public static final field OPEN_PASSWORD_POLICY Ljava/lang/String;
+	public static final field OTP_CONFIRMATION Ljava/lang/String;
+	public static final field RATE_LIMIT_PERIOD_SECONDS Ljava/lang/String;
+	public static final field RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_MANAGEMENT_USER Ljava/lang/String;
+	public static final field RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER Ljava/lang/String;
+	public static final field REFRESH_TOKEN_ROTATION_GRACE_PERIOD_SECONDS Ljava/lang/String;
+	public static final field REQUIRE_DIGIT Ljava/lang/String;
+	public static final field REQUIRE_LETTER Ljava/lang/String;
+	public static final field REQUIRE_LOWER_CASE Ljava/lang/String;
+	public static final field REQUIRE_SPECIAL_CHAR Ljava/lang/String;
+	public static final field REQUIRE_UPPER_CASE Ljava/lang/String;
+	public static final field RETRY_AFTER_SECONDS Ljava/lang/String;
+	public static final field TOTP_CODE Ljava/lang/String;
+	public static final field TOTP_OTP_AUTH_URL Ljava/lang/String;
+	public static final field TOTP_RECOVERY_CODES Ljava/lang/String;
+	public static final field TOTP_SECRET_KEY Ljava/lang/String;
+	public static final field WHITELIST Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/contract/SecurityWebSocketEventTypes {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/contract/SecurityWebSocketEventTypes;
+	public static final field MANAGEMENT_SECURITY_SETTINGS_UPDATED Ljava/lang/String;
+	public static final field OPEN_SECURITY_SETTINGS_UPDATED Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload$Companion;
+	public fun <init> (IIIIIIZ)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()Z
+	public final fun copy (IIIIIIZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;IIIIIIZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFailedAttemptsWindowSeconds ()I
+	public final fun getIndefiniteLockoutThreshold ()I
+	public final fun getLockoutDurationSeconds ()I
+	public final fun getMaxFailedOtpAttempts ()I
+	public final fun getMaxFailedPasswordAttempts ()I
+	public final fun getMaxFailedTotpAttempts ()I
+	public fun hashCode ()I
+	public final fun isSelfServiceUnlockEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload$Companion;
+	public fun <init> (ZLjava/util/List;ZLjava/util/List;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (ZLjava/util/List;ZLjava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;ZLjava/util/List;ZLjava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBlacklist ()Ljava/util/List;
+	public final fun getWhitelist ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isBlacklistEnabled ()Z
+	public final fun isWhitelistEnabled ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload$Companion;
+	public fun <init> (III)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy (III)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;IIIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpirationSeconds ()I
+	public final fun getNumberOfSymbols ()I
+	public final fun getRetryAfterSeconds ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload$Companion;
+	public fun <init> (IZZZZZLjava/util/Set;)V
+	public final fun component1 ()I
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Ljava/util/Set;
+	public final fun copy (IZZZZZLjava/util/Set;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;IZZZZZLjava/util/Set;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommonPasswords ()Ljava/util/Set;
+	public final fun getMinLength ()I
+	public final fun getRequireDigit ()Z
+	public final fun getRequireLetter ()Z
+	public final fun getRequireLowerCase ()Z
+	public final fun getRequireSpecialChar ()Z
+	public final fun getRequireUpperCase ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload$Companion;
+	public fun <init> (IZZZZZ)V
+	public final fun component1 ()I
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun copy (IZZZZZ)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;IZZZZZILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMinLength ()I
+	public final fun getRequireDigit ()Z
+	public final fun getRequireLetter ()Z
+	public final fun getRequireLowerCase ()Z
+	public final fun getRequireSpecialChar ()Z
+	public final fun getRequireUpperCase ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload$Companion;
+	public fun <init> (IILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;IIII)V
+	public final fun component1 ()I
+	public final fun component10 ()I
+	public final fun component11 ()I
+	public final fun component12 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+	public final fun component4 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public final fun component5 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+	public final fun component6 ()I
+	public final fun component7 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public final fun component8 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public final fun component9 ()I
+	public final fun copy (IILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;IIII)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;IILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;ILio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;IIIIILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountLockoutCheckIntervalSeconds ()I
+	public final fun getAccountLockoutPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/accountlockout/AccountLockoutPolicyPayload;
+	public final fun getManagementIpRestrictionPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public final fun getMaxRequestsPerPeriod ()I
+	public final fun getMfaTokenExpirationSeconds ()I
+	public final fun getOpenIpRestrictionPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/iprestriction/IpRestrictionPolicyPayload;
+	public final fun getOtpConfirmation ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public final fun getPasswordPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/ManagementPasswordPolicyPayload;
+	public final fun getRateLimitPeriodSeconds ()I
+	public final fun getRecentAuthenticationValiditySecondsForManagementUser ()I
+	public final fun getRecentAuthenticationValiditySecondsForOpenUser ()I
+	public final fun getRefreshTokenRotationGracePeriodSeconds ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/ManagementSecuritySettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload$Companion;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+	public final fun component2 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOtpConfirmation ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/otpconfirmation/OtpConfirmationPayload;
+	public final fun getPasswordPolicy ()Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/passwordpolicy/OpenPasswordPolicyPayload;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/securitysettings/OpenSecuritySettingsPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;Ljava/util/List;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCodes ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totprecoverycodes/TotpRecoveryCodesPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMfaToken ()Ljava/lang/String;
+	public final fun getOtpAuthUrl ()Ljava/lang/String;
+	public final fun getSecretKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/totpsetup/TotpSetupPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getMfaToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/model/verifytotp/VerifyTotpPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/BaseSecurityNetworkRoutes {
+	public static final field BASE_SECURITY_NETWORK_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/BaseSecurityNetworkRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/management/security/settings/ManagementSecuritySettingsRoutes {
+	public static final field GET_MANAGEMENT_SECURITY_SETTINGS Ljava/lang/String;
+	public static final field GET_OPEN_SECURITY_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/management/security/settings/ManagementSecuritySettingsRoutes;
+	public static final field RESET_MANAGEMENT_SECURITY_SETTINGS Ljava/lang/String;
+	public static final field UPDATE_MANAGEMENT_SECURITY_SETTINGS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/open/security/settings/OpenSecuritySettingsRoutes {
+	public static final field GET_OPEN_SECURITY_SETTINGS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/security/network/route/open/security/settings/OpenSecuritySettingsRoutes;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/security/passwordpolicy/validator/PasswordPolicyValidator {
+	public abstract fun validate (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult;
+	public abstract fun validate (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/security/passwordpolicy/validator/PasswordPolicyValidatorImpl : io/github/mudrichenkoevgeny/shared/foundation/core/security/passwordpolicy/validator/PasswordPolicyValidator {
+	public fun <init> ()V
+	public fun validate (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/ManagementPasswordPolicy;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult;
+	public fun validate (Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/OpenPasswordPolicy;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/passwordpolicy/PasswordPolicyValidatorResult;
+}
+

@@ -13,7 +13,9 @@ private const val STATUS_DENIED = "denied"
  * @property value String representation of the [AuditStatus].
  */
 @Serializable
-enum class AuditStatus(val value: String) {
+public enum class AuditStatus(
+    public val value: String
+) {
     /** Action completed successfully. */
     @SerialName(STATUS_SUCCESS)
     SUCCESS(STATUS_SUCCESS),
@@ -26,14 +28,14 @@ enum class AuditStatus(val value: String) {
     @SerialName(STATUS_DENIED)
     DENIED(STATUS_DENIED);
 
-    companion object {
+    public companion object {
         /**
          * Returns [AuditStatus] based on the provided wire value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): AuditStatus? =
+        public fun fromValueOrNull(value: String): AuditStatus? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -41,7 +43,7 @@ enum class AuditStatus(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditStatus].
          */
-        fun fromValueOrThrow(value: String): AuditStatus =
+        public fun fromValueOrThrow(value: String): AuditStatus =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${AuditStatus::class.simpleName}: '$value'"
             )

@@ -13,15 +13,13 @@ import kotlinx.serialization.Serializable
  * @property phone Prefilled phone number for login; wire key is [UserApiFields.PHONE_NUMBER].
  */
 @Serializable
-data class LoginByPhoneParams(
-    val phone: String? = null
+public data class LoginByPhoneParams(
+    public val phone: String? = null
 ) : NavigationScreenParams<LoginByPhoneParams> {
-
     override val parser: NavigationScreenParamsParser<LoginByPhoneParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<LoginByPhoneParams> {
-
+    public companion object : NavigationScreenParamsParser<LoginByPhoneParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [LoginByPhoneParams].
          *

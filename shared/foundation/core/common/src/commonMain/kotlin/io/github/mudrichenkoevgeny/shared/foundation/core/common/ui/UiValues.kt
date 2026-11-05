@@ -3,20 +3,19 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.ui
 /**
  * Non-localized UI values, including input field placeholders and static format hints.
  */
-object UiValues {
-
+public object UiValues {
     /**
      * Non-localized input field sample placeholders.
      */
-    object Placeholder {
+    public object Placeholder {
         /**
          * Default placeholder for email input fields.
          */
-        const val EMAIL = "user@example.com"
+        public const val EMAIL: String = "user@example.com"
 
         /**
          * Default placeholder for 6-digit TOTP confirmation code input fields.
          */
-        const val TOTP_CODE = "000000"
+        public const val TOTP_CODE: String = "000000"
     }
 }

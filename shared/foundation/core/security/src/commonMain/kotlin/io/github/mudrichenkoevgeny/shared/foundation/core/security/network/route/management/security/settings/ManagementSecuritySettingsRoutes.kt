@@ -17,7 +17,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
 /**
  * Route paths for security settings in the management API.
  */
-object ManagementSecuritySettingsRoutes {
+public object ManagementSecuritySettingsRoutes {
     /** Base path for management security settings endpoints. */
     private const val BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE =
         "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}${CommonNetworkRoutes.BASE_SETTINGS_NETWORK_ROUTE}${BaseSecurityNetworkRoutes.BASE_SECURITY_NETWORK_ROUTE}"
@@ -41,7 +41,7 @@ object ManagementSecuritySettingsRoutes {
      * - Screens:
      *   - [ManagementSecurityNavigation.SecuritySettings]
      */
-    const val GET_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
+    public const val GET_MANAGEMENT_SECURITY_SETTINGS: String = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `PUT`
@@ -73,7 +73,7 @@ object ManagementSecuritySettingsRoutes {
      * - Screens:
      *   - [ManagementSecurityNavigation.SecuritySettings]
      */
-    const val UPDATE_MANAGEMENT_SECURITY_SETTINGS = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
+    public const val UPDATE_MANAGEMENT_SECURITY_SETTINGS: String = BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -105,7 +105,7 @@ object ManagementSecuritySettingsRoutes {
      * - Screens:
      *   - [ManagementSecurityNavigation.SecuritySettings]
      */
-    const val RESET_MANAGEMENT_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
+    public const val RESET_MANAGEMENT_SECURITY_SETTINGS: String = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/reset"
 
     /**
      * **HTTP method:** `GET`
@@ -123,5 +123,5 @@ object ManagementSecuritySettingsRoutes {
      *
      * **UI Presentation:** None.
      */
-    const val GET_OPEN_SECURITY_SETTINGS = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/open"
+    public const val GET_OPEN_SECURITY_SETTINGS: String = "$BASE_MANAGEMENT_SECURITY_SETTINGS_ROUTE/open"
 }

@@ -8,34 +8,35 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.r
  *
  * No permission in this object grants read access to admin sessions.
  */
-object SessionPermissionCode {
+public object SessionPermissionCode {
     /** Delete sessions of accounts with [UserRole.USER]. */
-    val SESSION_DELETE_FOR_USER = PermissionCode("session.delete.for.user")
+    public val SESSION_DELETE_FOR_USER: PermissionCode = PermissionCode("session.delete.for.user")
 
     /** Delete sessions of accounts with [UserRole.STAFF]. */
-    val SESSION_DELETE_FOR_STAFF = PermissionCode("session.delete.for.staff")
+    public val SESSION_DELETE_FOR_STAFF: PermissionCode = PermissionCode("session.delete.for.staff")
 
     /** Read session list of [UserRole.USER] accounts with masked sensitive data. */
-    val SESSION_GET_OF_USER_MASKED = PermissionCode("session.get.of.user.masked")
+    public val SESSION_GET_OF_USER_MASKED: PermissionCode = PermissionCode("session.get.of.user.masked")
 
     /** Read session list of [UserRole.USER] accounts with unmasked sensitive data. */
-    val SESSION_GET_OF_USER_UNMASKED = PermissionCode("session.get.of.user.unmasked")
+    public val SESSION_GET_OF_USER_UNMASKED: PermissionCode = PermissionCode("session.get.of.user.unmasked")
 
     /** Read session list of [UserRole.STAFF] accounts with masked sensitive data. */
-    val SESSION_GET_OF_STAFF_MASKED = PermissionCode("session.get.of.staff.masked")
+    public val SESSION_GET_OF_STAFF_MASKED: PermissionCode = PermissionCode("session.get.of.staff.masked")
 
     /** Read session list of [UserRole.STAFF] accounts with unmasked sensitive data. */
-    val SESSION_GET_OF_STAFF_UNMASKED = PermissionCode("session.get.of.staff.unmasked")
+    public val SESSION_GET_OF_STAFF_UNMASKED: PermissionCode = PermissionCode("session.get.of.staff.unmasked")
 
     /**
      * All session permissions.
      */
-    val ALL: Set<PermissionCode> = setOf(
-        SESSION_DELETE_FOR_USER,
-        SESSION_DELETE_FOR_STAFF,
-        SESSION_GET_OF_USER_MASKED,
-        SESSION_GET_OF_USER_UNMASKED,
-        SESSION_GET_OF_STAFF_MASKED,
-        SESSION_GET_OF_STAFF_UNMASKED
-    )
+    public val ALL: Set<PermissionCode> =
+        setOf(
+            SESSION_DELETE_FOR_USER,
+            SESSION_DELETE_FOR_STAFF,
+            SESSION_GET_OF_USER_MASKED,
+            SESSION_GET_OF_USER_UNMASKED,
+            SESSION_GET_OF_STAFF_MASKED,
+            SESSION_GET_OF_STAFF_UNMASKED
+        )
 }

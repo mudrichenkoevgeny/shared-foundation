@@ -22,7 +22,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for self-service account unlocking in the open API.
  */
-object OpenUnlockRoutes {
+public object OpenUnlockRoutes {
     /** Base path for open unlock operations. */
     private const val BASE_OPEN_UNLOCK_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/unlock"
 
@@ -52,7 +52,7 @@ object OpenUnlockRoutes {
      *   - [ClientAuthNavigation.UnlockTargetInput]
      *   - [ClientAuthNavigation.UnlockOtpInput]
      */
-    const val SEND_UNLOCK_EMAIL_CONFIRMATION = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
+    public const val SEND_UNLOCK_EMAIL_CONFIRMATION: String = "$UNLOCK_BY_EMAIL_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -81,7 +81,7 @@ object OpenUnlockRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.UnlockOtpInput]
      */
-    const val UNLOCK_BY_EMAIL = UNLOCK_BY_EMAIL_ROUTE
+    public const val UNLOCK_BY_EMAIL: String = UNLOCK_BY_EMAIL_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -103,7 +103,7 @@ object OpenUnlockRoutes {
      *   - [ClientAuthNavigation.UnlockTargetInput]
      *   - [ClientAuthNavigation.UnlockOtpInput]
      */
-    const val SEND_UNLOCK_PHONE_CONFIRMATION = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
+    public const val SEND_UNLOCK_PHONE_CONFIRMATION: String = "$UNLOCK_BY_PHONE_ROUTE/send-confirmation"
 
     /**
      * **HTTP method:** `POST`
@@ -132,7 +132,7 @@ object OpenUnlockRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.UnlockOtpInput]
      */
-    const val UNLOCK_BY_PHONE = UNLOCK_BY_PHONE_ROUTE
+    public const val UNLOCK_BY_PHONE: String = UNLOCK_BY_PHONE_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -161,5 +161,5 @@ object OpenUnlockRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.UnlockMethodSelection]
      */
-    const val UNLOCK_BY_EXTERNAL_PROVIDER = "$BASE_OPEN_UNLOCK_ROUTE/external-provider"
+    public const val UNLOCK_BY_EXTERNAL_PROVIDER: String = "$BASE_OPEN_UNLOCK_ROUTE/external-provider"
 }

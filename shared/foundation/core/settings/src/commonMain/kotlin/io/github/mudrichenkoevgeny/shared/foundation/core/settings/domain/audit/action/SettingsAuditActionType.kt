@@ -14,7 +14,9 @@ private const val ACTION_MANAGEMENT_RESET_GLOBAL_SETTINGS = "management_reset_gl
  * @property value String representation of the [SettingsAuditActionType].
  */
 @Serializable
-enum class SettingsAuditActionType(override val value: String) : AuditActionType {
+public enum class SettingsAuditActionType(
+    override val value: String
+) : AuditActionType {
     /** Administrative update of platform-wide global configuration settings via [ManagementGlobalSettingsRoutes.UPDATE_MANAGEMENT_GLOBAL_SETTINGS]. */
     @SerialName(ACTION_MANAGEMENT_UPDATE_GLOBAL_SETTINGS)
     MANAGEMENT_UPDATE_GLOBAL_SETTINGS(ACTION_MANAGEMENT_UPDATE_GLOBAL_SETTINGS),
@@ -23,14 +25,14 @@ enum class SettingsAuditActionType(override val value: String) : AuditActionType
     @SerialName(ACTION_MANAGEMENT_RESET_GLOBAL_SETTINGS)
     MANAGEMENT_RESET_GLOBAL_SETTINGS(ACTION_MANAGEMENT_RESET_GLOBAL_SETTINGS);
 
-    companion object {
+    public companion object {
         /**
          * Returns [SettingsAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): SettingsAuditActionType? =
+        public fun fromValueOrNull(value: String): SettingsAuditActionType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -38,7 +40,7 @@ enum class SettingsAuditActionType(override val value: String) : AuditActionType
          *
          * @throws IllegalArgumentException if [value] does not match any [SettingsAuditActionType].
          */
-        fun fromValueOrThrow(value: String): SettingsAuditActionType =
+        public fun fromValueOrThrow(value: String): SettingsAuditActionType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${SettingsAuditActionType::class.simpleName}: '$value'"
             )

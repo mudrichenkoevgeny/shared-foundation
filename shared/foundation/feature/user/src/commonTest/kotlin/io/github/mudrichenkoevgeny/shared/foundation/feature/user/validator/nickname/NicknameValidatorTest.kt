@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class NicknameValidatorTest {
-
     private val validator: NicknameValidator = NicknameValidatorImpl()
 
     @Test
@@ -21,22 +20,37 @@ class NicknameValidatorTest {
         assertTrue(validator.validate("valid_user", minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
         assertTrue(validator.validate("user.123", minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
         assertTrue(validator.validate("abc", minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
+        assertTrue(validator.validate("UPPER_case", minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
+        assertTrue(validator.validate("a.b_c", minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
+    }
+
+    @Test
+    fun testValidate_ExactBoundaryLengths_ReturnsSuccess() {
+        val minNick = "abc"
+        val maxNick = "a".repeat(30)
+        assertTrue(validator.validate(minNick, minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
+        assertTrue(validator.validate(maxNick, minLength = 3, maxLength = 30) is NicknameValidatorResult.Success)
     }
 
     @Test
     fun testValidate_DisabledChange_ReturnsDisabledError() {
-        val result = validator.validate(
-            nickname = "new_nick",
-            minLength = 3,
-            maxLength = 30,
-            isNicknameChangeAllowed = false,
-            isNicknameChanging = true
-        )
+        val result =
+            validator.validate(
+                nickname = "new_nick",
+                minLength = 3,
+                maxLength = 30,
+                isNicknameChangeAllowed = false,
+                isNicknameChanging = true
+            )
         assertEquals(NicknameValidatorResult.Fail(UserErrorCodes.NICKNAME_CHANGE_DISABLED), result)
     }
 
     @Test
     fun testValidate_TooShortOrLong_ReturnsSpecificError() {
+        assertEquals(
+            NicknameValidatorResult.Fail(UserErrorCodes.NICKNAME_TOO_SHORT),
+            validator.validate("", minLength = 3, maxLength = 30)
+        )
         assertEquals(
             NicknameValidatorResult.Fail(UserErrorCodes.NICKNAME_TOO_SHORT),
             validator.validate("ab", minLength = 3, maxLength = 30)
@@ -67,11 +81,27 @@ class NicknameValidatorTest {
         )
         assertEquals(
             NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
+            validator.validate(".username", minLength = 3, maxLength = 30)
+        )
+        assertEquals(
+            NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
+            validator.validate("username.", minLength = 3, maxLength = 30)
+        )
+        assertEquals(
+            NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
             validator.validate("john..doe", minLength = 3, maxLength = 30)
         )
         assertEquals(
             NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
             validator.validate("alex__smith", minLength = 3, maxLength = 30)
+        )
+        assertEquals(
+            NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
+            validator.validate("john._doe", minLength = 3, maxLength = 30)
+        )
+        assertEquals(
+            NicknameValidatorResult.Fail(UserErrorCodes.INVALID_NICKNAME_CHARACTERS),
+            validator.validate("cool😎dude", minLength = 3, maxLength = 30)
         )
     }
 }

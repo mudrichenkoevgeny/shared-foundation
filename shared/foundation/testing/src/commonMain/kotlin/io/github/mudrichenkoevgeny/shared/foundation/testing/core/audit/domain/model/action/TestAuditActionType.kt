@@ -4,17 +4,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.act
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action.CompositeAuditActionTypeParser
 
 /**
- * Test implementation of [AuditActionType] that wraps any arbitrary string.
- */
-data class TestAuditActionType(
-    override val value: String
+* Test implementation of [AuditActionType] that wraps any arbitrary string.
+*/
+public data class TestAuditActionType(
+    public override val value: String
 ) : AuditActionType
 
 /**
- * Creates a permissive [CompositeAuditActionTypeParser] for testing, accepting any string action.
- *
- * @param parser Function mapping raw action strings to [AuditActionType].
- */
-fun createTestCompositeAuditActionTypeParser(
+* Creates a permissive [CompositeAuditActionTypeParser] for testing, accepting any string action.
+*
+* @param parser Function mapping raw action strings to [AuditActionType].
+*/
+public fun createTestCompositeAuditActionTypeParser(
     parser: (String) -> AuditActionType? = { TestAuditActionType(it) }
 ): CompositeAuditActionTypeParser = CompositeAuditActionTypeParser(listOf(parser))

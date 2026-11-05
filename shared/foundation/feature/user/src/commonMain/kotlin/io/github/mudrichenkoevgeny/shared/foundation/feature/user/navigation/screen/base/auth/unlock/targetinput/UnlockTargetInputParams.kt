@@ -3,8 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.sc
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.contract.UserNavigationPaths
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,15 +13,13 @@ import kotlinx.serialization.Serializable
  * @property unlockMethod Selected unlock method ([UnlockMethod]); wire key is [UserNavigationPaths.UNLOCK_METHOD].
  */
 @Serializable
-data class UnlockTargetInputParams(
-    val unlockMethod: UnlockMethod? = null
+public data class UnlockTargetInputParams(
+    public val unlockMethod: UnlockMethod? = null
 ) : NavigationScreenParams<UnlockTargetInputParams> {
-
     override val parser: NavigationScreenParamsParser<UnlockTargetInputParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<UnlockTargetInputParams> {
-
+    public companion object : NavigationScreenParamsParser<UnlockTargetInputParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [UnlockTargetInputParams].
          *
@@ -30,9 +28,10 @@ data class UnlockTargetInputParams(
          */
         override fun parse(params: Map<String, Any?>): UnlockTargetInputParams {
             val normalized = params.normalizeQueryParams()
-            val unlockMethod = normalized[UserNavigationPaths.UNLOCK_METHOD]
-                ?.firstOrNull()
-                ?.let { UnlockMethod.fromValueOrNull(it) }
+            val unlockMethod =
+                normalized[UserNavigationPaths.UNLOCK_METHOD]
+                    ?.firstOrNull()
+                    ?.let { UnlockMethod.fromValueOrNull(it) }
 
             return UnlockTargetInputParams(unlockMethod = unlockMethod)
         }

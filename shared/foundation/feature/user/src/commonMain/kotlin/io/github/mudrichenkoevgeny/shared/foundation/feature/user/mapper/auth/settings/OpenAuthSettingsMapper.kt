@@ -12,7 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [OpenAuthSettings] from [OpenAuthSettingsPayload].
  */
-fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =
+public fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =
     OpenAuthSettings(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
         maxTotalIdentifiers = maxTotalIdentifiers,
@@ -30,7 +30,7 @@ fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =
 /**
  * Builds network [OpenAuthSettingsPayload] from domain [OpenAuthSettings].
  */
-fun OpenAuthSettings.toOpenAuthSettingsPayload(): OpenAuthSettingsPayload =
+public fun OpenAuthSettings.toOpenAuthSettingsPayload(): OpenAuthSettingsPayload =
     OpenAuthSettingsPayload(
         availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
         maxTotalIdentifiers = maxTotalIdentifiers,

@@ -19,7 +19,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 /**
  * Route paths for password recovery and initial password setup in the open API.
  */
-object OpenResetPasswordRoutes {
+public object OpenResetPasswordRoutes {
     /** Base path for open password reset operations. */
     private const val BASE_RESET_PASSWORD_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/reset-password"
 
@@ -52,7 +52,7 @@ object OpenResetPasswordRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.ResetPassword]
      */
-    const val RESET_EMAIL_PASSWORD = BASE_RESET_PASSWORD_ROUTE
+    public const val RESET_EMAIL_PASSWORD: String = BASE_RESET_PASSWORD_ROUTE
 
     /**
      * **HTTP method:** `POST`
@@ -74,5 +74,5 @@ object OpenResetPasswordRoutes {
      * - Screens:
      *   - [ClientAuthNavigation.ResetPassword]
      */
-    const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION = "$BASE_RESET_PASSWORD_ROUTE/send-confirmation"
+    public const val SEND_RESET_EMAIL_PASSWORD_CONFIRMATION: String = "$BASE_RESET_PASSWORD_ROUTE/send-confirmation"
 }

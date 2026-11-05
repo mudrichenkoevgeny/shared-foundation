@@ -27,20 +27,20 @@ import kotlin.time.Instant
  * @property createdAt Timestamp when the file record was created ([Instant]).
  * @property updatedAt Timestamp when the file record was last modified ([Instant]), or `null`.
  */
-data class StorageFileInternal(
-    val id: FileId,
-    val ownerUserId: String?,
-    val fileName: String,
-    val fileSizeBytes: Long,
-    val mimeType: String,
-    val category: StorageCategory,
-    val visibility: StorageFileVisibility,
-    val status: StorageFileStatus,
-    val targetScope: String?,
-    val contentHash: String?,
-    val s3Bucket: String,
-    val s3Key: String,
-    val fileUrls: FileUrls?,
-    val createdAt: Instant,
-    val updatedAt: Instant?
+public data class StorageFileInternal(
+    public val id: FileId,
+    public val ownerUserId: String?,
+    public val fileName: String,
+    public val fileSizeBytes: Long,
+    public val mimeType: String,
+    public val category: StorageCategory,
+    public val visibility: StorageFileVisibility,
+    public val status: StorageFileStatus,
+    public val targetScope: String?,
+    public val contentHash: String?,
+    public val s3Bucket: String,
+    public val s3Key: String,
+    public val fileUrls: FileUrls?,
+    public val createdAt: Instant,
+    public val updatedAt: Instant?
 )

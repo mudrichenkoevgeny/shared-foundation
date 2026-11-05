@@ -4,15 +4,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PHONE
 
 /**
- * Creates a test [AddUserIdentifierPhoneRequest] request object instance.
- *
- * @param phoneNumber New phone number string.
- * @param confirmationCode SMS confirmation code string.
- */
-fun createTestAddUserIdentifierPhoneRequest(
+* Creates a test [AddUserIdentifierPhoneRequest] request object instance.
+*
+* @param phoneNumber New phone number string.
+* @param confirmationCode SMS confirmation code string.
+*/
+public fun createTestAddUserIdentifierPhoneRequest(
     phoneNumber: String = TEST_PHONE,
     confirmationCode: String = "123456"
-) = AddUserIdentifierPhoneRequest(
-    phoneNumber = phoneNumber,
-    confirmationCode = confirmationCode
-)
+): AddUserIdentifierPhoneRequest =
+    AddUserIdentifierPhoneRequest(
+        phoneNumber = phoneNumber,
+        confirmationCode = confirmationCode
+    )

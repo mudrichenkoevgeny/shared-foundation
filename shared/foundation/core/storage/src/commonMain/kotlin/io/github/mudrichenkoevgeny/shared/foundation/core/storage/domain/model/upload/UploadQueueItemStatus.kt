@@ -14,7 +14,9 @@ private const val STATUS_FAILED = "failed"
  * @property value String representation of the [UploadQueueItemStatus].
  */
 @Serializable
-enum class UploadQueueItemStatus(val value: String) {
+public enum class UploadQueueItemStatus(
+    public val value: String
+) {
     /**
      * Item is waiting in the queue to be uploaded.
      */
@@ -39,20 +41,20 @@ enum class UploadQueueItemStatus(val value: String) {
     @SerialName(STATUS_FAILED)
     FAILED(STATUS_FAILED);
 
-    companion object {
+    public companion object {
         /**
          * Returns [UploadQueueItemStatus] for the given string value, or null if unmapped.
          */
-        fun fromValueOrNull(value: String): UploadQueueItemStatus? =
+        public fun fromValueOrNull(value: String): UploadQueueItemStatus? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
          * Returns [UploadQueueItemStatus] for the given string value, or throws [IllegalArgumentException].
          */
-        fun fromValueOrThrow(value: String): UploadQueueItemStatus =
+        public fun fromValueOrThrow(value: String): UploadQueueItemStatus =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${UploadQueueItemStatus::class.simpleName}: '$value'"
             )

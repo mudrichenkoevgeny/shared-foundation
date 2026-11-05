@@ -7,15 +7,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordpolicy.createTestOpenPasswordPolicy
 
 /**
- * Creates a test [OpenSecuritySettings] domain instance.
- *
- * @param passwordPolicy Password policy for open sign-up/password changes.
- * @param otpConfirmation OTP configuration settings.
- */
-fun createTestOpenSecuritySettings(
+* Creates a test [OpenSecuritySettings] domain instance.
+*
+* @param passwordPolicy Password policy for open sign-up/password changes.
+* @param otpConfirmation OTP configuration settings.
+*/
+public fun createTestOpenSecuritySettings(
     passwordPolicy: OpenPasswordPolicy = createTestOpenPasswordPolicy(),
     otpConfirmation: OtpConfirmation = createTestOtpConfirmation()
-) = OpenSecuritySettings(
-    passwordPolicy = passwordPolicy,
-    otpConfirmation = otpConfirmation
-)
+): OpenSecuritySettings =
+    OpenSecuritySettings(
+        passwordPolicy = passwordPolicy,
+        otpConfirmation = otpConfirmation
+    )

@@ -1,0 +1,907 @@
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceId {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceId$Companion;
+	public static final fun asHexDashString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public static final synthetic fun box-impl (Lkotlin/uuid/Uuid;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceId;
+	public static fun constructor-impl (Lkotlin/uuid/Uuid;)Lkotlin/uuid/Uuid;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lkotlin/uuid/Uuid;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lkotlin/uuid/Uuid;Lkotlin/uuid/Uuid;)Z
+	public final fun getValue ()Lkotlin/uuid/Uuid;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lkotlin/uuid/Uuid;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lkotlin/uuid/Uuid;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceId$Companion {
+	public final fun generate-zmS_a6k ()Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceIdKt {
+	public static final fun toClientDeviceIdOrNull (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+	public static final fun toClientDeviceIdOrThrow (Ljava/lang/String;)Lkotlin/uuid/Uuid;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo$Companion;
+	public synthetic fun <init> (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-k5KmSig ()Lkotlin/uuid/Uuid;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy-zeCHDuk (Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public static synthetic fun copy-zeCHDuk$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;Lkotlin/uuid/Uuid;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getClientType ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public final fun getDeviceId-k5KmSig ()Lkotlin/uuid/Uuid;
+	public final fun getDeviceName ()Ljava/lang/String;
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getOperationSystemVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isMobileClient ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo$Companion {
+	public final fun parsePrimaryLanguage (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getApiVersion ()Ljava/lang/String;
+	public final fun getClientDeviceInfo ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public final fun getHost ()Ljava/lang/String;
+	public final fun getIpAddress ()Ljava/lang/String;
+	public final fun getOrigin ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType : java/lang/Enum {
+	public static final field ANDROID Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType$Companion;
+	public static final field DESKTOP Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public static final field IOS Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public static final field WEB Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public final fun isMobileClient ()Z
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientType;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonFilterValues {
+	public static final field CREATED_AT_FROM Ljava/lang/String;
+	public static final field CREATED_AT_TO Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonFilterValues;
+	public static final field UPDATED_AT_FROM Ljava/lang/String;
+	public static final field UPDATED_AT_TO Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues : java/lang/Enum {
+	public static final field CREATED_AT Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues$Companion;
+	public static final field UPDATED_AT Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public final fun getDEFAULT ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/CommonSortValues;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingDefaultValues {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingDefaultValues;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingDefaultValues$Pagination {
+	public static final field DEFAULT_PAGE_SIZE I
+	public static final field INITIAL_PAGE_NUMBER I
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingDefaultValues$Pagination;
+	public static final field LARGE_PAGE_SIZE I
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Pagination {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Pagination;
+	public static final field PAGE_NUMBER Ljava/lang/String;
+	public static final field PAGE_SIZE Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Search {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Search;
+	public static final field SEARCH_QUERY Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Sort {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/ListingParamNames$Sort;
+	public static final field SORT_BY Ljava/lang/String;
+	public static final field SORT_ORDER Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult$Companion;
+	public fun <init> (Ljava/util/List;JIIJ)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()J
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()J
+	public final fun copy (Ljava/util/List;JIIJ)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;Ljava/util/List;JIIJILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItems ()Ljava/util/List;
+	public final fun getPageNumber ()I
+	public final fun getPageSize ()I
+	public final fun getTotalCount ()J
+	public final fun getTotalPages ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult$Companion {
+	public final fun empty ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;
+	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder : java/lang/Enum {
+	public static final field ASC Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder$Companion;
+	public static final field DESC Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun getDEFAULT ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/SortOrder;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-R3M1vfk (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize-aHJ-uA0 (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCode$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/permission/PermissionCodeKt {
+	public static final fun toPermissionCodeOrNull (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toPermissionCodeOrThrow (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode : java/lang/Enum {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode$Companion;
+	public static final field DARK Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public static final field LIGHT Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public static final field SYSTEM Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public static fun values ()[Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode$Companion {
+	public final fun fromValueOrNull (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public final fun fromValueOrThrow (Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public final fun getDEFAULT ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/theme/ThemeMode;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/client/naming/ClientCommonErrorCodes {
+	public static final field CONTRACT_VIOLATION Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/client/naming/ClientCommonErrorCodes;
+	public static final field LIFECYCLE_ERROR Ljava/lang/String;
+	public static final field NETWORK Ljava/lang/String;
+	public static final field NO_INTERNET_CONNECTION Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArgs ()Ljava/util/Map;
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/model/ApiErrorResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/naming/CommonErrorArgs {
+	public static final field FIELD_NAME Ljava/lang/String;
+	public static final field IDENTIFIER Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/naming/CommonErrorArgs;
+	public static final field LIMIT Ljava/lang/String;
+	public static final field MESSAGE Ljava/lang/String;
+	public static final field PARAMETER_NAME Ljava/lang/String;
+	public static final field RATE_LIMIT_ACTION_CODE Ljava/lang/String;
+	public static final field RESOURCE Ljava/lang/String;
+	public static final field RETRY_AFTER_SECONDS Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/error/naming/CommonErrorCodes {
+	public static final field BAD_REQUEST Ljava/lang/String;
+	public static final field BLANK_STRING_FIELD Ljava/lang/String;
+	public static final field EMPTY_COLLECTION_FIELD Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/error/naming/CommonErrorCodes;
+	public static final field INTERNAL Ljava/lang/String;
+	public static final field INVALID_FIELD_VALUE Ljava/lang/String;
+	public static final field INVALID_JSON_BODY Ljava/lang/String;
+	public static final field INVALID_PARAMETER_VALUE Ljava/lang/String;
+	public static final field MISSING_REQUIRED_FIELD Ljava/lang/String;
+	public static final field MISSING_REQUIRED_PARAMETER Ljava/lang/String;
+	public static final field NOT_FOUND Ljava/lang/String;
+	public static final field SERVICE_UNAVAILABLE Ljava/lang/String;
+	public static final field TOO_MANY_REQUESTS Ljava/lang/String;
+	public static final field UNKNOWN Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/formatting/ByteSizeFormatter {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/formatting/ByteSizeFormatter;
+	public final fun format (Ljava/lang/Object;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;I)Ljava/lang/String;
+	public static synthetic fun format$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/formatting/ByteSizeFormatter;Ljava/lang/Object;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;IILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/CommonLocales {
+	public static final field DEFAULT Ljava/lang/String;
+	public static final field ENGLISH Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/CommonLocales;
+	public static final field RUSSIAN Ljava/lang/String;
+	public final fun getSUPPORTED ()Ljava/util/Set;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/CommonModuleStrings {
+	public fun <init> ()V
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public synthetic fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getErrors ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/ErrorsStrings;
+	public final fun getGeneral ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/GeneralStrings;
+	public final fun getUi ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/UiStrings;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/DefaultLocalizedStringResolver : io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationBundleProvider;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationBundleProvider;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun resolve (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/ErrorsStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun blankField (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun getBadRequest ()Ljava/lang/String;
+	public final fun getBlankFieldWithoutArgs ()Ljava/lang/String;
+	public final fun getInternal ()Ljava/lang/String;
+	public final fun getInvalidFieldWithoutArgs ()Ljava/lang/String;
+	public final fun getMissingFieldWithoutArgs ()Ljava/lang/String;
+	public final fun getNetwork ()Ljava/lang/String;
+	public final fun getNoInternet ()Ljava/lang/String;
+	public final fun getNotFoundWithoutArgs ()Ljava/lang/String;
+	public final fun getServiceUnavailable ()Ljava/lang/String;
+	public final fun getTooManyRequestsWithoutArgs ()Ljava/lang/String;
+	public final fun getUnknown ()Ljava/lang/String;
+	public final fun invalidField (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun missingField (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun notFound (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun tooManyRequests (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/GeneralStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun getActive ()Ljava/lang/String;
+	public final fun getAdmin ()Ljava/lang/String;
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getApple ()Ljava/lang/String;
+	public final fun getAuthProvider ()Ljava/lang/String;
+	public final fun getBanned ()Ljava/lang/String;
+	public final fun getByteUnitB ()Ljava/lang/String;
+	public final fun getByteUnitGb ()Ljava/lang/String;
+	public final fun getByteUnitKb ()Ljava/lang/String;
+	public final fun getByteUnitMb ()Ljava/lang/String;
+	public final fun getByteUnitTb ()Ljava/lang/String;
+	public final fun getClientType ()Ljava/lang/String;
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getDeviceName ()Ljava/lang/String;
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getExternalAuthProvider ()Ljava/lang/String;
+	public final fun getExternalProvider ()Ljava/lang/String;
+	public final fun getGoogle ()Ljava/lang/String;
+	public final fun getIpAddress ()Ljava/lang/String;
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getOsVersion ()Ljava/lang/String;
+	public final fun getPendingDeletion ()Ljava/lang/String;
+	public final fun getPhone ()Ljava/lang/String;
+	public final fun getReadOnly ()Ljava/lang/String;
+	public final fun getSecurityHold ()Ljava/lang/String;
+	public final fun getService ()Ljava/lang/String;
+	public final fun getStaff ()Ljava/lang/String;
+	public final fun getSystem ()Ljava/lang/String;
+	public final fun getUser ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationBundleProvider {
+	public abstract fun get (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationFormatter {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationFormatter;
+	public final fun format (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationRegistry : io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationBundleProvider {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationRegistry;
+	public fun get (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+	public final fun register (Ljava/lang/String;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizationBundleProvider;)V
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver {
+	public abstract fun resolve (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/localization/UiStrings {
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/localization/LocalizedStringResolver;Ljava/lang/String;)V
+	public final fun getAction ()Ljava/lang/String;
+	public final fun getActive ()Ljava/lang/String;
+	public final fun getActorId ()Ljava/lang/String;
+	public final fun getActorType ()Ljava/lang/String;
+	public final fun getAdmin ()Ljava/lang/String;
+	public final fun getAll ()Ljava/lang/String;
+	public final fun getAndroid ()Ljava/lang/String;
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getApple ()Ljava/lang/String;
+	public final fun getApply ()Ljava/lang/String;
+	public final fun getAuthProvider ()Ljava/lang/String;
+	public final fun getAuthorityLevelFrom ()Ljava/lang/String;
+	public final fun getAuthorityLevelTo ()Ljava/lang/String;
+	public final fun getBack ()Ljava/lang/String;
+	public final fun getBanned ()Ljava/lang/String;
+	public final fun getClearAll ()Ljava/lang/String;
+	public final fun getClientType ()Ljava/lang/String;
+	public final fun getCreatedAt ()Ljava/lang/String;
+	public final fun getDefaultNullPlaceholder ()Ljava/lang/String;
+	public final fun getDenied ()Ljava/lang/String;
+	public final fun getDesktop ()Ljava/lang/String;
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getDeviceName ()Ljava/lang/String;
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getEmptyList ()Ljava/lang/String;
+	public final fun getExclude ()Ljava/lang/String;
+	public final fun getExpiresAt ()Ljava/lang/String;
+	public final fun getExternalAuthProvider ()Ljava/lang/String;
+	public final fun getExternalProvider ()Ljava/lang/String;
+	public final fun getFailed ()Ljava/lang/String;
+	public final fun getFilterModeExclude ()Ljava/lang/String;
+	public final fun getFilterModeInclude ()Ljava/lang/String;
+	public final fun getFilters ()Ljava/lang/String;
+	public final fun getFrom ()Ljava/lang/String;
+	public final fun getGoogle ()Ljava/lang/String;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun getIdentifierId ()Ljava/lang/String;
+	public final fun getInclude ()Ljava/lang/String;
+	public final fun getIos ()Ljava/lang/String;
+	public final fun getIpAddress ()Ljava/lang/String;
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getLastAccessedAt ()Ljava/lang/String;
+	public final fun getLastActiveAt ()Ljava/lang/String;
+	public final fun getLastLoginAt ()Ljava/lang/String;
+	public final fun getLastReauthenticatedAt ()Ljava/lang/String;
+	public final fun getLoading ()Ljava/lang/String;
+	public final fun getLockoutIndefinite ()Ljava/lang/String;
+	public final fun getLockoutNone ()Ljava/lang/String;
+	public final fun getLockoutTemporary ()Ljava/lang/String;
+	public final fun getLockoutType ()Ljava/lang/String;
+	public final fun getLockoutUntil ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getNextPage ()Ljava/lang/String;
+	public final fun getNo ()Ljava/lang/String;
+	public final fun getOsVersion ()Ljava/lang/String;
+	public final fun getPendingDeletion ()Ljava/lang/String;
+	public final fun getPhone ()Ljava/lang/String;
+	public final fun getPreviousPage ()Ljava/lang/String;
+	public final fun getReadOnly ()Ljava/lang/String;
+	public final fun getRefresh ()Ljava/lang/String;
+	public final fun getReset ()Ljava/lang/String;
+	public final fun getResource ()Ljava/lang/String;
+	public final fun getResourceId ()Ljava/lang/String;
+	public final fun getRetry ()Ljava/lang/String;
+	public final fun getRole ()Ljava/lang/String;
+	public final fun getSave ()Ljava/lang/String;
+	public final fun getScheduledPermanentDeletionAt ()Ljava/lang/String;
+	public final fun getSearchPlaceholder ()Ljava/lang/String;
+	public final fun getSecurityHold ()Ljava/lang/String;
+	public final fun getSelectAll ()Ljava/lang/String;
+	public final fun getService ()Ljava/lang/String;
+	public final fun getSortAsc ()Ljava/lang/String;
+	public final fun getSortBy ()Ljava/lang/String;
+	public final fun getSortDesc ()Ljava/lang/String;
+	public final fun getStaff ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public final fun getSuccess ()Ljava/lang/String;
+	public final fun getSystem ()Ljava/lang/String;
+	public final fun getTo ()Ljava/lang/String;
+	public final fun getTotpEnabled ()Ljava/lang/String;
+	public final fun getUpdatedAt ()Ljava/lang/String;
+	public final fun getUser ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public final fun getUserId ()Ljava/lang/String;
+	public final fun getWeb ()Ljava/lang/String;
+	public final fun getYes ()Ljava/lang/String;
+	public final fun isNotSet ()Ljava/lang/String;
+	public final fun isSet ()Ljava/lang/String;
+	public final fun pageInfo (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/String;
+	public final fun selectedCount (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun totalCount (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/mapper/client/ClientInfoPayloadMapperKt {
+	public static final fun toClientDeviceInfo (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public static final fun toClientDeviceInfoPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public static final fun toClientInfo (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;
+	public static final fun toClientInfoPayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/mapper/pagedresult/PagedResultMapperKt {
+	public static final fun mapItems (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;Lkotlin/jvm/functions/Function1;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/listing/PagedResult;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/mapper/websocket/WebSocketInitializePayloadMapperKt {
+	public static final fun mergeClientDeviceInfo (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public static synthetic fun mergeClientDeviceInfo$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;
+	public static final fun mergeClientInfo (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;
+	public static synthetic fun mergeClientInfo$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientInfo;
+	public static final fun toWebSocketInitializePayload (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/domain/model/client/ClientDeviceInfo;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams {
+	public abstract fun getParser ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser;
+	public fun toQueryMap ()Ljava/util/Map;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams$DefaultImpls {
+	public static fun toQueryMap (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/NavigationScreenParamsParser {
+	public abstract fun parse (Ljava/util/Map;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+	public abstract fun serialize (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;)Ljava/util/Map;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/PhoneParamNormalizerKt {
+	public static final fun normalizePhoneQueryParam (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun normalizePhoneQueryParams (Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/QueryParamNormalizer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/QueryParamNormalizer;
+	public final fun normalize (Ljava/util/Map;)Ljava/util/Map;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/parser/QueryParamNormalizerKt {
+	public static final fun normalizeQueryParams (Ljava/util/Map;)Ljava/util/Map;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/CommonNavigationRoutes {
+	public static final field BASE_SETTINGS_NAVIGATION_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/CommonNavigationRoutes;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public abstract fun getParentRoute ()Ljava/lang/String;
+	public abstract fun getRoute ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRouteUrlMapperKt {
+	public static final fun toFullUrl (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/ParameterizedNavigationRoute : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public abstract fun getParams ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/params/NavigationScreenParams;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/RedirectNavigationRoute : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public abstract fun getTargetRoute ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/client/ClientMainNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/NavigationRoute {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation$Main : io/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/navigation/route/management/ManagementMainNavigation$Main;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getParentRoute ()Ljava/lang/String;
+	public fun getRoute ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields {
+	public static final field API_VERSION Ljava/lang/String;
+	public static final field APP_VERSION Ljava/lang/String;
+	public static final field ARGS Ljava/lang/String;
+	public static final field CLIENT_DEVICE_INFO Ljava/lang/String;
+	public static final field CLIENT_INFO Ljava/lang/String;
+	public static final field CLIENT_TYPE Ljava/lang/String;
+	public static final field CODE Ljava/lang/String;
+	public static final field CREATED_AT Ljava/lang/String;
+	public static final field DEVICE_ID Ljava/lang/String;
+	public static final field DEVICE_NAME Ljava/lang/String;
+	public static final field ID Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields;
+	public static final field IP_ADDRESS Ljava/lang/String;
+	public static final field IS_SENSITIVE_VALUES_MASKED Ljava/lang/String;
+	public static final field ITEMS Ljava/lang/String;
+	public static final field LANGUAGE Ljava/lang/String;
+	public static final field MASKED_IP_ADDRESS Ljava/lang/String;
+	public static final field MESSAGE Ljava/lang/String;
+	public static final field METADATA Ljava/lang/String;
+	public static final field OPERATION_SYSTEM_VERSION Ljava/lang/String;
+	public static final field PAYLOAD Ljava/lang/String;
+	public static final field TIMESTAMP Ljava/lang/String;
+	public static final field TOTAL_COUNT Ljava/lang/String;
+	public static final field TOTAL_PAGES Ljava/lang/String;
+	public static final field TYPE Ljava/lang/String;
+	public static final field UPDATED_AT Ljava/lang/String;
+	public static final field USER_AGENT Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields$SortOrder {
+	public static final field ASC Ljava/lang/String;
+	public static final field DESC Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields$SortOrder;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonHttpHeaders {
+	public static final field API_VERSION_HEADER_NAME Ljava/lang/String;
+	public static final field APP_VERSION_HEADER_NAME Ljava/lang/String;
+	public static final field CLIENT_TYPE_HEADER_NAME Ljava/lang/String;
+	public static final field DEVICE_ID_HEADER_NAME Ljava/lang/String;
+	public static final field DEVICE_NAME_HEADER_NAME Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonHttpHeaders;
+	public static final field OPERATION_SYSTEM_VERSION_HEADER_NAME Ljava/lang/String;
+	public static final field TRACE_HEADER_NAME Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonWebSocketCloseReasons {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonWebSocketCloseReasons;
+	public static final field INTERNAL_SERVER_ERROR Ljava/lang/String;
+	public static final field NORMAL Ljava/lang/String;
+	public static final field SERVER_RESTART Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonWebSocketEventTypes {
+	public static final field INITIALIZE Ljava/lang/String;
+	public static final field INITIALIZED_SUCCESS Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonWebSocketEventTypes;
+	public static final field PING Ljava/lang/String;
+	public static final field PONG Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/WebSocketContract {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/WebSocketContract;
+	public static final field WS_MANAGEMENT_REALTIME_PATH Ljava/lang/String;
+	public static final field WS_OPEN_REALTIME_PATH Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getClientType ()Ljava/lang/String;
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getDeviceName ()Ljava/lang/String;
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getOperationSystemVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload$Companion;
+	public fun <init> (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getApiVersion ()Ljava/lang/String;
+	public final fun getClientDeviceInfo ()Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientDeviceInfoPayload;
+	public final fun getIpAddress ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/client/ClientInfoPayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Companion;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+	public final fun valueOf (Ljava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Unchanged : io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Unchanged;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Value : io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Value;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Value;Ljava/lang/Object;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField$Value;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchFieldSerializer : kotlinx/serialization/KSerializer {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/patch/PatchField;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;J)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun component5 ()J
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;J)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;JILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMetadata ()Ljava/util/Map;
+	public final fun getPayload ()Lkotlinx/serialization/json/JsonElement;
+	public final fun getTimestamp ()J
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload {
+	public static final field Companion Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;
+	public static synthetic fun copy$default (Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getApiVersion ()Ljava/lang/String;
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getClientType ()Ljava/lang/String;
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getDeviceName ()Ljava/lang/String;
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getOperationSystemVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/CommonNetworkRoutes {
+	public static final field BASE_MANAGEMENT_NETWORK_ROUTE Ljava/lang/String;
+	public static final field BASE_SELF_MANAGEMENT_NETWORK_ROUTE Ljava/lang/String;
+	public static final field BASE_SETTINGS_NETWORK_ROUTE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/CommonNetworkRoutes;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/serialization/FoundationJsonKt {
+	public static final fun getFoundationJson ()Lkotlinx/serialization/json/Json;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/ui/UiValues {
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/ui/UiValues;
+}
+
+public final class io/github/mudrichenkoevgeny/shared/foundation/core/common/ui/UiValues$Placeholder {
+	public static final field EMAIL Ljava/lang/String;
+	public static final field INSTANCE Lio/github/mudrichenkoevgeny/shared/foundation/core/common/ui/UiValues$Placeholder;
+	public static final field TOTP_CODE Ljava/lang/String;
+}
+
+public abstract interface annotation class io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NotBlankStringField : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/NotEmptyCollectionField : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class io/github/mudrichenkoevgeny/shared/foundation/core/common/validation/RequiredField : java/lang/annotation/Annotation {
+}
+

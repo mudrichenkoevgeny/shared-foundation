@@ -3,11 +3,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model
 /**
  * Represents the outcome of a password validation check.
  */
-sealed class PasswordPolicyValidatorResult {
+public sealed class PasswordPolicyValidatorResult {
     /**
      * Indicates the password meets all security requirements.
      */
-    object Success : PasswordPolicyValidatorResult()
+    public object Success : PasswordPolicyValidatorResult()
 
     /**
      * Indicates validation failure, providing specific reasons and the policy used.
@@ -15,8 +15,8 @@ sealed class PasswordPolicyValidatorResult {
      * @property reasons List of specific criteria that the password failed to meet (e.g. [PasswordPolicyFailReason]).
      * @property passwordPolicy The policy configuration against which the password was validated.
      */
-    data class Fail(
-        val reasons: List<PasswordPolicyFailReason>,
-        val passwordPolicy: ManagementPasswordPolicy
+    public data class Fail(
+        public val reasons: List<PasswordPolicyFailReason>,
+        public val passwordPolicy: ManagementPasswordPolicy
     ) : PasswordPolicyValidatorResult()
 }

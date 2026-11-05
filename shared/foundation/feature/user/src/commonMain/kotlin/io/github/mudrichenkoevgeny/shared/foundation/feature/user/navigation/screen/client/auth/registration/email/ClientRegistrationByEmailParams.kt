@@ -14,16 +14,14 @@ import kotlinx.serialization.Serializable
  * @property redirectUrl Target URL to navigate to upon successful registration; wire key is [UserNavigationPaths.REDIRECT_URL].
  */
 @Serializable
-data class ClientRegistrationByEmailParams(
-    val email: String? = null,
-    val redirectUrl: String? = null
+public data class ClientRegistrationByEmailParams(
+    public val email: String? = null,
+    public val redirectUrl: String? = null
 ) : NavigationScreenParams<ClientRegistrationByEmailParams> {
-
     override val parser: NavigationScreenParamsParser<ClientRegistrationByEmailParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<ClientRegistrationByEmailParams> {
-
+    public companion object : NavigationScreenParamsParser<ClientRegistrationByEmailParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [ClientRegistrationByEmailParams].
          *

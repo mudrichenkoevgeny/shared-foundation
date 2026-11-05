@@ -12,8 +12,7 @@ import kotlinx.serialization.Serializable
  * Navigation screen routes for global settings in management operations.
  */
 @Serializable
-sealed interface ManagementSettingsNavigation : NavigationRoute {
-
+public sealed interface ManagementSettingsNavigation : NavigationRoute {
     /**
      * Entry main screen for settings.
      *
@@ -22,8 +21,7 @@ sealed interface ManagementSettingsNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementSettingsNavigation {
-
+    public data object Main : ManagementSettingsNavigation {
         override val route: String
             get() = CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE
 
@@ -41,10 +39,11 @@ sealed interface ManagementSettingsNavigation : NavigationRoute {
      *   - [ManagementGlobalSettingsRoutes.RESET_MANAGEMENT_GLOBAL_SETTINGS]
      */
     @Serializable
-    data object GlobalSettings : ManagementSettingsNavigation {
-
+    public data object GlobalSettings : ManagementSettingsNavigation {
         override val route: String
-            get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseSettingsNavigationRoutes.BASE_GLOBAL_SETTINGS_NAVIGATION_ROUTE}"
+            get() =
+                CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE +
+                    BaseSettingsNavigationRoutes.BASE_GLOBAL_SETTINGS_NAVIGATION_ROUTE
 
         override val parentRoute: String
             get() = Main.route

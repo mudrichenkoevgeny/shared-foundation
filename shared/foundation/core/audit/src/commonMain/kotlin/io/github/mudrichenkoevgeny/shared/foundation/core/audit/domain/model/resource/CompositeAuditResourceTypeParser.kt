@@ -18,16 +18,15 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.re
  *
  * @param parsers Delegates tried in iteration order.
  */
-class CompositeAuditResourceTypeParser(
+public class CompositeAuditResourceTypeParser(
     private val parsers: List<(String) -> AuditResourceType?>
 ) {
-
     /**
      * @param value Raw `resource` wire string (for example from an audit event payload).
      * @return The first non-null [AuditResourceType] returned by a delegate.
      * @throws IllegalArgumentException if no delegate recognizes [value].
      */
-    fun fromValueOrThrow(value: String): AuditResourceType {
+    public fun fromValueOrThrow(value: String): AuditResourceType {
         for (parser in parsers) {
             val parsed = parser(value)
             if (parsed != null) {
@@ -42,7 +41,7 @@ class CompositeAuditResourceTypeParser(
      * @param value Raw `resource` wire string.
      * @return The first non-null [AuditResourceType] returned by a delegate, or `null`.
      */
-    fun fromValueOrNull(value: String): AuditResourceType? {
+    public fun fromValueOrNull(value: String): AuditResourceType? {
         for (parser in parsers) {
             val parsed = parser(value)
             if (parsed != null) {

@@ -17,7 +17,9 @@ private const val SENSITIVITY_FULL_VALUE_MASK = "full_value_mask"
  * @property value String representation of the [AuditValueSensitivity] for API wire values (snake_case).
  */
 @Serializable
-enum class AuditValueSensitivity(val value: String) {
+public enum class AuditValueSensitivity(
+    public val value: String
+) {
     /**
      * Value is not sensitive; consumers may show or persist it as provided.
      */
@@ -57,14 +59,14 @@ enum class AuditValueSensitivity(val value: String) {
     @SerialName(SENSITIVITY_FULL_VALUE_MASK)
     FULL_VALUE_MASK(SENSITIVITY_FULL_VALUE_MASK);
 
-    companion object {
+    public companion object {
         /**
          * Returns [AuditValueSensitivity] based on the provided string value, or null if the value is invalid.
          */
-        fun fromValueOrNull(value: String): AuditValueSensitivity? =
+        public fun fromValueOrNull(value: String): AuditValueSensitivity? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -72,7 +74,7 @@ enum class AuditValueSensitivity(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [AuditValueSensitivity].
          */
-        fun fromValueOrThrow(value: String): AuditValueSensitivity =
+        public fun fromValueOrThrow(value: String): AuditValueSensitivity =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${AuditValueSensitivity::class.simpleName}: '$value'"
             )

@@ -10,7 +10,9 @@ import kotlinx.serialization.Serializable
  * @property value Wire value for `sort_by` (matches [CommonApiFields] timestamp field names).
  */
 @Serializable
-enum class CommonSortValues(val value: String) {
+public enum class CommonSortValues(
+    public val value: String
+) {
     /** Sort by [CommonApiFields.CREATED_AT]. */
     @SerialName(CommonApiFields.CREATED_AT)
     CREATED_AT(CommonApiFields.CREATED_AT),
@@ -19,17 +21,17 @@ enum class CommonSortValues(val value: String) {
     @SerialName(CommonApiFields.UPDATED_AT)
     UPDATED_AT(CommonApiFields.UPDATED_AT);
 
-    companion object {
+    public companion object {
         /** Default sort field ([CREATED_AT]). */
-        val DEFAULT = CREATED_AT
+        public val DEFAULT: CommonSortValues = CREATED_AT
 
         /**
          * Returns [CommonSortValues] for the given wire value or case-insensitive enum name.
          */
-        fun fromValueOrNull(value: String): CommonSortValues? =
+        public fun fromValueOrNull(value: String): CommonSortValues? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -37,7 +39,7 @@ enum class CommonSortValues(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [CommonSortValues].
          */
-        fun fromValueOrThrow(value: String): CommonSortValues =
+        public fun fromValueOrThrow(value: String): CommonSortValues =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${CommonSortValues::class.simpleName}: '$value'"
             )

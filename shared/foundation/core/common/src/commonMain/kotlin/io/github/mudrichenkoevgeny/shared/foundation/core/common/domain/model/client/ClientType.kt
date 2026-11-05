@@ -14,7 +14,9 @@ private const val CLIENT_DESKTOP = "desktop"
  * @property value String representation of the [ClientType].
  */
 @Serializable
-enum class ClientType(val value: String) {
+public enum class ClientType(
+    public val value: String
+) {
     /**
      * Web browser based client.
      */
@@ -39,18 +41,18 @@ enum class ClientType(val value: String) {
     @SerialName(CLIENT_DESKTOP)
     DESKTOP(CLIENT_DESKTOP);
 
-    fun isMobileClient(): Boolean = this == ANDROID || this == IOS
+    public fun isMobileClient(): Boolean = this == ANDROID || this == IOS
 
-    companion object {
+    public companion object {
         /**
          * Returns [ClientType] based on the provided string value, or null if the value is invalid.
          *
          * @param value Case-insensitive enum name (e.g. `WEB`) or a wire string such as [CLIENT_WEB].
          */
-        fun fromValueOrNull(value: String): ClientType? =
+        public fun fromValueOrNull(value: String): ClientType? =
             entries.firstOrNull {
                 it.value.equals(value, ignoreCase = true) ||
-                        it.name.equals(value, ignoreCase = true)
+                    it.name.equals(value, ignoreCase = true)
             }
 
         /**
@@ -58,7 +60,7 @@ enum class ClientType(val value: String) {
          *
          * @throws IllegalArgumentException if [value] does not match any [ClientType].
          */
-        fun fromValueOrThrow(value: String): ClientType =
+        public fun fromValueOrThrow(value: String): ClientType =
             fromValueOrNull(value) ?: throw IllegalArgumentException(
                 "Unknown value for ${ClientType::class.simpleName}: '$value'"
             )

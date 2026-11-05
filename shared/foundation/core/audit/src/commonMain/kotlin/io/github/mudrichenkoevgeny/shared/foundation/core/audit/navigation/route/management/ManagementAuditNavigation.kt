@@ -17,8 +17,7 @@ import kotlinx.serialization.Serializable
  * Management navigation screen routes for audit events and event details.
  */
 @Serializable
-sealed interface ManagementAuditNavigation : NavigationRoute {
-
+public sealed interface ManagementAuditNavigation : NavigationRoute {
     /**
      * Virtual entry redirect route forwarding navigation from the audit root to the audit events list.
      *
@@ -27,8 +26,7 @@ sealed interface ManagementAuditNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data object Main : ManagementAuditNavigation, RedirectNavigationRoute {
-
+    public data object Main : ManagementAuditNavigation, RedirectNavigationRoute {
         override val route: String
             get() = BASE_AUDIT_ROUTE
 
@@ -47,18 +45,18 @@ sealed interface ManagementAuditNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class AuditEventList(
+    public data class AuditEventList(
         override val params: ManagementAuditEventListParams = ManagementAuditEventListParams()
-    ) : ManagementAuditNavigation, ParameterizedNavigationRoute<ManagementAuditEventListParams> {
-
+    ) : ManagementAuditNavigation,
+        ParameterizedNavigationRoute<ManagementAuditEventListParams> {
         override val route: String
             get() = ROUTE
 
         override val parentRoute: String
             get() = ManagementMainNavigation.Main.route
 
-        companion object {
-            const val ROUTE = "$BASE_AUDIT_ROUTE/events"
+        public companion object {
+            public const val ROUTE: String = "$BASE_AUDIT_ROUTE/events"
         }
     }
 
@@ -70,28 +68,26 @@ sealed interface ManagementAuditNavigation : NavigationRoute {
      * - **Secondary Action APIs:** None.
      */
     @Serializable
-    data class AuditEventDetail(
+    public data class AuditEventDetail(
         override val params: ManagementAuditEventDetailParams
-    ) : ManagementAuditNavigation, ParameterizedNavigationRoute<ManagementAuditEventDetailParams> {
-
+    ) : ManagementAuditNavigation,
+        ParameterizedNavigationRoute<ManagementAuditEventDetailParams> {
         override val route: String
             get() = getPath(params.eventId)
 
         override val parentRoute: String
             get() = AuditEventList.ROUTE
 
-        companion object {
-            const val ROUTE = "${AuditEventList.ROUTE}/{${AuditApiPaths.EVENT_ID}}"
+        public companion object {
+            public const val ROUTE: String = "${AuditEventList.ROUTE}/{${AuditApiPaths.EVENT_ID}}"
 
-            fun getPath(eventId: AuditEventId): String =
-                ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId.asHexDashString())
+            public fun getPath(eventId: AuditEventId): String = ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId.asHexDashString())
 
-            fun getPath(eventId: String): String =
-                ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId)
+            public fun getPath(eventId: String): String = ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId)
         }
     }
 
-    companion object {
+    public companion object {
         private const val BASE_AUDIT_ROUTE = "/audit"
     }
 }

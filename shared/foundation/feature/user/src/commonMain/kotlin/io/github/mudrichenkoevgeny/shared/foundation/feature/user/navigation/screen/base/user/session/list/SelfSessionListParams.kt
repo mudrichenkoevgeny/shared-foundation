@@ -58,53 +58,51 @@ import kotlinx.serialization.Serializable
  * @property searchQuery Search query targeting identifier and device name; wire key is [UserSessionFilterValues.SEARCH_QUERY].
  */
 @Serializable
-data class SelfSessionListParams(
-    val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-    val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-    val sortBy: UserSessionSortBy = UserSessionSortBy.DEFAULT,
-    val sortOrder: SortOrder = SortOrder.DEFAULT,
-    val sessionIds: List<String> = emptyList(),
-    val identifier: String? = null,
-    val identifierIds: List<String> = emptyList(),
-    val identifierDisplayName: String? = null,
-    val identifierAuthProviders: List<UserAuthProvider> = emptyList(),
-    val excludeIdentifierAuthProviders: List<UserAuthProvider> = emptyList(),
-    val clientTypes: List<ClientType> = emptyList(),
-    val excludeClientTypes: List<ClientType> = emptyList(),
-    val isClientTypeSet: Boolean? = null,
-    val deviceId: String? = null,
-    val isDeviceIdSet: Boolean? = null,
-    val deviceName: String? = null,
-    val isDeviceNameSet: Boolean? = null,
-    val language: String? = null,
-    val isLanguageSet: Boolean? = null,
-    val appVersion: String? = null,
-    val isAppVersionSet: Boolean? = null,
-    val osVersion: String? = null,
-    val isOperationSystemVersionSet: Boolean? = null,
-    val userAgent: String? = null,
-    val isUserAgentSet: Boolean? = null,
-    val ipAddress: String? = null,
-    val isIpAddressSet: Boolean? = null,
-    val expiresAtFrom: String? = null,
-    val expiresAtTo: String? = null,
-    val lastAccessedAtFrom: String? = null,
-    val lastAccessedAtTo: String? = null,
-    val lastReauthenticatedAtFrom: String? = null,
-    val lastReauthenticatedAtTo: String? = null,
-    val createdAtFrom: String? = null,
-    val createdAtTo: String? = null,
-    val updatedAtFrom: String? = null,
-    val updatedAtTo: String? = null,
-    val isUpdatedAtSet: Boolean? = null,
-    val searchQuery: String? = null
+public data class SelfSessionListParams(
+    public val pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+    public val pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+    public val sortBy: UserSessionSortBy = UserSessionSortBy.DEFAULT,
+    public val sortOrder: SortOrder = SortOrder.DEFAULT,
+    public val sessionIds: List<String> = emptyList(),
+    public val identifier: String? = null,
+    public val identifierIds: List<String> = emptyList(),
+    public val identifierDisplayName: String? = null,
+    public val identifierAuthProviders: List<UserAuthProvider> = emptyList(),
+    public val excludeIdentifierAuthProviders: List<UserAuthProvider> = emptyList(),
+    public val clientTypes: List<ClientType> = emptyList(),
+    public val excludeClientTypes: List<ClientType> = emptyList(),
+    public val isClientTypeSet: Boolean? = null,
+    public val deviceId: String? = null,
+    public val isDeviceIdSet: Boolean? = null,
+    public val deviceName: String? = null,
+    public val isDeviceNameSet: Boolean? = null,
+    public val language: String? = null,
+    public val isLanguageSet: Boolean? = null,
+    public val appVersion: String? = null,
+    public val isAppVersionSet: Boolean? = null,
+    public val osVersion: String? = null,
+    public val isOperationSystemVersionSet: Boolean? = null,
+    public val userAgent: String? = null,
+    public val isUserAgentSet: Boolean? = null,
+    public val ipAddress: String? = null,
+    public val isIpAddressSet: Boolean? = null,
+    public val expiresAtFrom: String? = null,
+    public val expiresAtTo: String? = null,
+    public val lastAccessedAtFrom: String? = null,
+    public val lastAccessedAtTo: String? = null,
+    public val lastReauthenticatedAtFrom: String? = null,
+    public val lastReauthenticatedAtTo: String? = null,
+    public val createdAtFrom: String? = null,
+    public val createdAtTo: String? = null,
+    public val updatedAtFrom: String? = null,
+    public val updatedAtTo: String? = null,
+    public val isUpdatedAtSet: Boolean? = null,
+    public val searchQuery: String? = null
 ) : NavigationScreenParams<SelfSessionListParams> {
-
     override val parser: NavigationScreenParamsParser<SelfSessionListParams>
         get() = Companion
 
-    companion object : NavigationScreenParamsParser<SelfSessionListParams> {
-
+    public companion object : NavigationScreenParamsParser<SelfSessionListParams> {
         /**
          * Parses raw Deep Link or Web Router query parameters into typed [SelfSessionListParams].
          *
@@ -114,167 +112,206 @@ data class SelfSessionListParams(
         override fun parse(params: Map<String, Any?>): SelfSessionListParams {
             val normalized = params.normalizeQueryParams()
 
-            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber =
+                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                ?.firstOrNull()
-                ?.toIntOrNull()
-                ?.takeIf { it > 0 }
-                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize =
+                normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
-                ?.firstOrNull()
-                ?.let { UserSessionSortBy.fromValueOrNull(it) }
-                ?: UserSessionSortBy.DEFAULT
+            val sortBy =
+                normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { UserSessionSortBy.fromValueOrNull(it) }
+                    ?: UserSessionSortBy.DEFAULT
 
-            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
-                ?.firstOrNull()
-                ?.let { SortOrder.fromValueOrNull(it) }
-                ?: SortOrder.DEFAULT
+            val sortOrder =
+                normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT
 
-            val sessionIds = normalized[UserSessionFilterValues.SESSION_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val sessionIds =
+                normalized[UserSessionFilterValues.SESSION_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val identifier = normalized[UserSessionFilterValues.IDENTIFIER]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val identifier =
+                normalized[UserSessionFilterValues.IDENTIFIER]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val identifierIds = normalized[UserSessionFilterValues.IDENTIFIER_ID]
-                ?.filter { it.isNotBlank() }
-                ?: emptyList()
+            val identifierIds =
+                normalized[UserSessionFilterValues.IDENTIFIER_ID]
+                    ?.filter { it.isNotBlank() }
+                    ?: emptyList()
 
-            val identifierDisplayName = normalized[UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val identifierDisplayName =
+                normalized[UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val identifierAuthProviders = normalized[UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER]
-                ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                ?: emptyList()
+            val identifierAuthProviders =
+                normalized[UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER]
+                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeIdentifierAuthProviders = normalized[UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER]
-                ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeIdentifierAuthProviders =
+                normalized[UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER]
+                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val clientTypes = normalized[UserSessionFilterValues.CLIENT_TYPE]
-                ?.mapNotNull { ClientType.fromValueOrNull(it) }
-                ?: emptyList()
+            val clientTypes =
+                normalized[UserSessionFilterValues.CLIENT_TYPE]
+                    ?.mapNotNull { ClientType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val excludeClientTypes = normalized[UserSessionFilterValues.EXCLUDE_CLIENT_TYPE]
-                ?.mapNotNull { ClientType.fromValueOrNull(it) }
-                ?: emptyList()
+            val excludeClientTypes =
+                normalized[UserSessionFilterValues.EXCLUDE_CLIENT_TYPE]
+                    ?.mapNotNull { ClientType.fromValueOrNull(it) }
+                    ?: emptyList()
 
-            val isClientTypeSet = normalized[UserSessionFilterValues.IS_CLIENT_TYPE_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isClientTypeSet =
+                normalized[UserSessionFilterValues.IS_CLIENT_TYPE_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val deviceId = normalized[UserSessionFilterValues.DEVICE_ID]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val deviceId =
+                normalized[UserSessionFilterValues.DEVICE_ID]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isDeviceIdSet = normalized[UserSessionFilterValues.IS_DEVICE_ID_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isDeviceIdSet =
+                normalized[UserSessionFilterValues.IS_DEVICE_ID_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val deviceName = normalized[UserSessionFilterValues.DEVICE_NAME]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val deviceName =
+                normalized[UserSessionFilterValues.DEVICE_NAME]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isDeviceNameSet = normalized[UserSessionFilterValues.IS_DEVICE_NAME_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isDeviceNameSet =
+                normalized[UserSessionFilterValues.IS_DEVICE_NAME_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val language = normalized[UserSessionFilterValues.LANGUAGE]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val language =
+                normalized[UserSessionFilterValues.LANGUAGE]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isLanguageSet = normalized[UserSessionFilterValues.IS_LANGUAGE_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isLanguageSet =
+                normalized[UserSessionFilterValues.IS_LANGUAGE_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val appVersion = normalized[UserSessionFilterValues.APP_VERSION]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val appVersion =
+                normalized[UserSessionFilterValues.APP_VERSION]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isAppVersionSet = normalized[UserSessionFilterValues.IS_APP_VERSION_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isAppVersionSet =
+                normalized[UserSessionFilterValues.IS_APP_VERSION_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val osVersion = normalized[UserSessionFilterValues.OPERATION_SYSTEM_VERSION]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val osVersion =
+                normalized[UserSessionFilterValues.OPERATION_SYSTEM_VERSION]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isOperationSystemVersionSet = normalized[UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isOperationSystemVersionSet =
+                normalized[UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val userAgent = normalized[UserSessionFilterValues.USER_AGENT]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val userAgent =
+                normalized[UserSessionFilterValues.USER_AGENT]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isUserAgentSet = normalized[UserSessionFilterValues.IS_USER_AGENT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isUserAgentSet =
+                normalized[UserSessionFilterValues.IS_USER_AGENT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val ipAddress = normalized[UserSessionFilterValues.IP_ADDRESS]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val ipAddress =
+                normalized[UserSessionFilterValues.IP_ADDRESS]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isIpAddressSet = normalized[UserSessionFilterValues.IS_IP_ADDRESS_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isIpAddressSet =
+                normalized[UserSessionFilterValues.IS_IP_ADDRESS_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val expiresAtFrom = normalized[UserSessionFilterValues.EXPIRES_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val expiresAtFrom =
+                normalized[UserSessionFilterValues.EXPIRES_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val expiresAtTo = normalized[UserSessionFilterValues.EXPIRES_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val expiresAtTo =
+                normalized[UserSessionFilterValues.EXPIRES_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastAccessedAtFrom = normalized[UserSessionFilterValues.LAST_ACCESSED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastAccessedAtFrom =
+                normalized[UserSessionFilterValues.LAST_ACCESSED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastAccessedAtTo = normalized[UserSessionFilterValues.LAST_ACCESSED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastAccessedAtTo =
+                normalized[UserSessionFilterValues.LAST_ACCESSED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastReauthenticatedAtFrom = normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastReauthenticatedAtFrom =
+                normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val lastReauthenticatedAtTo = normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val lastReauthenticatedAtTo =
+                normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtFrom = normalized[UserSessionFilterValues.CREATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtFrom =
+                normalized[UserSessionFilterValues.CREATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val createdAtTo = normalized[UserSessionFilterValues.CREATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val createdAtTo =
+                normalized[UserSessionFilterValues.CREATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtFrom = normalized[UserSessionFilterValues.UPDATED_AT_FROM]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtFrom =
+                normalized[UserSessionFilterValues.UPDATED_AT_FROM]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val updatedAtTo = normalized[UserSessionFilterValues.UPDATED_AT_TO]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val updatedAtTo =
+                normalized[UserSessionFilterValues.UPDATED_AT_TO]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
-            val isUpdatedAtSet = normalized[UserSessionFilterValues.IS_UPDATED_AT_SET]
-                ?.firstOrNull()
-                ?.toBooleanStrictOrNull()
+            val isUpdatedAtSet =
+                normalized[UserSessionFilterValues.IS_UPDATED_AT_SET]
+                    ?.firstOrNull()
+                    ?.toBooleanStrictOrNull()
 
-            val searchQuery = normalized[UserSessionFilterValues.SEARCH_QUERY]
-                ?.firstOrNull()
-                ?.takeIf { it.isNotBlank() }
+            val searchQuery =
+                normalized[UserSessionFilterValues.SEARCH_QUERY]
+                    ?.firstOrNull()
+                    ?.takeIf { it.isNotBlank() }
 
             return SelfSessionListParams(
                 pageNumber = pageNumber,

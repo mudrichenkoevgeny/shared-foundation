@@ -15,10 +15,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * @property identifier Raw or masked login identifier string.
  * @property displayName Non-null display name for the identifier.
  */
-data class UserIdentifierSummary(
-    val id: UserIdentifierId = UserIdentifierId.generate(),
-    val userId: UserId,
-    val userAuthProvider: UserAuthProvider,
-    val identifier: String,
-    val displayName: String
+public data class UserIdentifierSummary(
+    public val id: UserIdentifierId = UserIdentifierId.generate(),
+    public val userId: UserId,
+    public val userAuthProvider: UserAuthProvider,
+    public val identifier: String,
+    public val displayName: String
 )

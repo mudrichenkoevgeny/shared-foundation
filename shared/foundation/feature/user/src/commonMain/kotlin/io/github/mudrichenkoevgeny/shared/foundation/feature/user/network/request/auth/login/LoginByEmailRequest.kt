@@ -12,12 +12,11 @@ import kotlinx.serialization.Serializable
  * @property password The user's account password.
  */
 @Serializable
-data class LoginByEmailRequest(
+public data class LoginByEmailRequest(
     @NotBlankStringField
     @SerialName(UserApiFields.EMAIL)
-    val email: String,
-
+    public val email: String,
     @NotBlankStringField
     @SerialName(UserApiFields.PASSWORD)
-    val password: String
+    public val password: String
 )

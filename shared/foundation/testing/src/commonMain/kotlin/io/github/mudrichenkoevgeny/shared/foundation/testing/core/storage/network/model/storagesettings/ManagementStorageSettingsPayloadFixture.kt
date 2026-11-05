@@ -3,9 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.ManagementStorageSettingsPayload
 
 /**
- * Creates a test [ManagementStorageSettingsPayload] wire object instance.
- */
-fun createTestManagementStorageSettingsPayload(
+* Creates a test [ManagementStorageSettingsPayload] wire object instance.
+*/
+public fun createTestManagementStorageSettingsPayload(
     minUploadSizeBytes: Long = 1L,
     maxUploadSizeBytes: Long = 52428800L,
     totalStorageQuotaForOpenUserBytes: Long? = 1073741824L,
@@ -15,14 +15,15 @@ fun createTestManagementStorageSettingsPayload(
     maxPendingUploadsForManagementUser: Int = 100,
     isDeduplicationEnabled: Boolean = true,
     deletedFilesCleanupIntervalSeconds: Int = 86400
-) = ManagementStorageSettingsPayload(
-    minUploadSizeBytes = minUploadSizeBytes,
-    maxUploadSizeBytes = maxUploadSizeBytes,
-    totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
-    totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
-    presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
-    maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
-    maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-    isDeduplicationEnabled = isDeduplicationEnabled,
-    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
-)
+): ManagementStorageSettingsPayload =
+    ManagementStorageSettingsPayload(
+        minUploadSizeBytes = minUploadSizeBytes,
+        maxUploadSizeBytes = maxUploadSizeBytes,
+        totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
+        totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
+        presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
+        maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
+        maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
+        isDeduplicationEnabled = isDeduplicationEnabled,
+        deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
+    )

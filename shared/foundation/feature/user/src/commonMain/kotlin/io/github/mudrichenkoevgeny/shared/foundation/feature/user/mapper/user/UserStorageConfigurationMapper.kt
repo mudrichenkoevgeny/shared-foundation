@@ -10,17 +10,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [UserStorageConfiguration] from [UserStorageConfigurationPayload].
  */
-fun UserStorageConfigurationPayload.toUserStorageConfiguration(): UserStorageConfiguration = UserStorageConfiguration(
-    quotaBytes = quotaBytes,
-    maxUploadSizeBytes = maxUploadSizeBytes,
-    maxPendingUploads = maxPendingUploads
-)
+public fun UserStorageConfigurationPayload.toUserStorageConfiguration(): UserStorageConfiguration =
+    UserStorageConfiguration(
+        quotaBytes = quotaBytes,
+        maxUploadSizeBytes = maxUploadSizeBytes,
+        maxPendingUploads = maxPendingUploads
+    )
 
 /**
  * Builds network [UserStorageConfigurationPayload] from domain [UserStorageConfiguration].
  */
-fun UserStorageConfiguration.toUserStorageConfigurationPayload(): UserStorageConfigurationPayload = UserStorageConfigurationPayload(
-    quotaBytes = quotaBytes,
-    maxUploadSizeBytes = maxUploadSizeBytes,
-    maxPendingUploads = maxPendingUploads
-)
+public fun UserStorageConfiguration.toUserStorageConfigurationPayload(): UserStorageConfigurationPayload =
+    UserStorageConfigurationPayload(
+        quotaBytes = quotaBytes,
+        maxUploadSizeBytes = maxUploadSizeBytes,
+        maxPendingUploads = maxPendingUploads
+    )
