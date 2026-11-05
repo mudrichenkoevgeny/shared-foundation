@@ -49,8 +49,6 @@ configure<KotlinMultiplatformExtension> {
 
         jvmTest.dependencies {
             implementation(libs.konsist)
-            implementation(libs.pact.consumer.junit5)
-            implementation(libs.pact.consumer.kotlin)
         }
     }
 }

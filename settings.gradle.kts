@@ -91,6 +91,3 @@ project(":tools:npm-generator").projectDir = file("tools/npm-generator")
 
 include(":tools:detekt-rules")
 project(":tools:detekt-rules").projectDir = file("tools/detekt-rules")
-
-include(":tools:scaffolder")
-project(":tools:scaffolder").projectDir = file("tools/scaffolder")

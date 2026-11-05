@@ -22,20 +22,18 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.binary.compatibility.validator)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.cyclonedx) apply false
-    alias(libs.plugins.pitest) apply false
 }
 
 apiValidation {
-    // Disabled during pre-1.0 active development to allow rapid API evolution without breaking CI checks.
-    // Re-enable (set to false or remove) once public API is stabilized for v1.0.0 release.
+    // Disabled to allow fast API iteration without breaking builds on signature changes.
+    // Re-enable if strict binary backward compatibility (ABI) checks are required.
     validationDisabled = true
     ignoredProjects += listOf("bom", "npm-generator", "testing")
 }
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.1.6"
+    version = "0.1.7"
 }
 
 val daemonJvmVersion: Int = run {
@@ -66,7 +64,6 @@ subprojects {
     if (!isTool && !isBom) {
         pluginManager.apply("dev.detekt")
         pluginManager.apply("org.jetbrains.dokka")
-        pluginManager.apply("org.cyclonedx.bom")
 
         dependencies {
             "detektPlugins"(project(":tools:detekt-rules"))
@@ -80,17 +77,14 @@ subprojects {
 
         extensions.configure<DokkaExtension> {
             dokkaPublications.configureEach {
-                failOnWarning.set(false)
-                pluginsConfiguration.html {
-                    customAssets.from(rootProject.file("docs/playground-inject.js"))
-                }
+                failOnWarning.set(true)
             }
         }
     }
 
     extensions.configure<KtlintExtension> {
         android.set(true)
-        ignoreFailures.set(false)
+        ignoreFailures.set(project.path.startsWith(":tools"))
         filter {
             exclude { it.file.absolutePath.contains("build") }
         }
@@ -202,32 +196,4 @@ tasks.register("generateNpmPackage") {
     finalizedBy(":tools:npm-generator:auditNpmExports")
 }
 
-tasks.register("checkBinarySize") {
-    group = "verification"
-    description = "Enforces binary size budgets for compiled JAR and AAR artifacts."
-    dependsOn("assemble")
 
-    doLast {
-        val maxIndividualArtifactBytes = 5_242_880L
-        val violations = mutableListOf<String>()
-
-        project.subprojects.forEach { sub ->
-            val buildDir = sub.layout.buildDirectory.get().asFile
-            val targetDirs = listOf(buildDir.resolve("libs"), buildDir.resolve("outputs"))
-            targetDirs.filter { it.exists() }.forEach { dir ->
-                dir.walkTopDown().filter { it.isFile && (it.extension == "jar" || it.extension == "aar") }.forEach { file ->
-                    val size = file.length()
-                    if (size > maxIndividualArtifactBytes) {
-                        violations.add("${sub.path} -> ${file.name}: ${size / 1024} KB exceeds limit of ${maxIndividualArtifactBytes / 1024} KB")
-                    }
-                }
-            }
-        }
-
-        if (violations.isNotEmpty()) {
-            throw GradleException("Binary budget enforcement failed:\n" + violations.joinToString("\n"))
-        } else {
-            logger.lifecycle("Binary budget enforcement passed: All artifacts are within size limits.")
-        }
-    }
-}

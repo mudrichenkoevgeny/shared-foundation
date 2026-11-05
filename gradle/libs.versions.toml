@@ -19,10 +19,6 @@ ktlint = "14.2.0"
 konsist = "0.18.1"
 binary-compatibility-validator = "0.18.2"
 dokka = "2.2.0"
-cyclonedx = "3.5.1"
-kotlinpoet = "2.4.0"
-pitest = "1.19.0"
-pact = "4.7.7"
 
 # Kotlin
 kotlinx-serialization = "1.12.0"
@@ -34,9 +30,6 @@ kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 detekt-api = { group = "io.gitlab.arturbosch.detekt", name = "detekt-api", version.ref = "detektApi" }
-kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
-pact-consumer-junit5 = { module = "au.com.dius.pact.consumer:junit5", version.ref = "pact" }
-pact-consumer-kotlin = { module = "au.com.dius.pact.consumer:kotlin", version.ref = "pact" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -49,5 +42,3 @@ detekt = { id = "dev.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
-pitest = { id = "info.solidsoft.pitest", version.ref = "pitest" }
