@@ -1,5 +1,10 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
+template: |
+  $CHANGES
+
+  ## New Contributors
+  $CONTRIBUTORS
 categories:
   - title: 'Breaking Changes'
     labels:
