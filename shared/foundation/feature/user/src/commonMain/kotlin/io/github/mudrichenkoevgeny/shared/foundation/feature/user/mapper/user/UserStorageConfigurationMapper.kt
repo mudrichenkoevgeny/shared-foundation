@@ -4,10 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 
 /**
- * Extension functions mapping user storage configuration between domain and network representations.
- */
-
-/**
  * Builds domain [UserStorageConfiguration] from [UserStorageConfigurationPayload].
  */
 public fun UserStorageConfigurationPayload.toUserStorageConfiguration(): UserStorageConfiguration =

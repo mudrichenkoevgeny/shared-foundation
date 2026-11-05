@@ -12,10 +12,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.auth.se
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.ManagementUserConfigurationPayload
 
 /**
- * Maps between [ManagementUserConfigurationPayload] and domain [ManagementUserConfiguration].
- */
-
-/**
  * Builds domain [ManagementUserConfiguration] from [ManagementUserConfigurationPayload].
  */
 public fun ManagementUserConfigurationPayload.toManagementUserConfiguration(): ManagementUserConfiguration =

@@ -7,3 +7,11 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
+
+[**/build/**]
+generated = true
+ktlint_standard = disabled
+
+[**/generated/**]
+generated = true
+ktlint_standard = disabled

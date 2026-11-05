@@ -1,10 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user
 
 /**
- * Utility extension functions for public and private user domain models ([UserSummary], [UserPrivate]).
- */
-
-/**
  * Resolves the best available human-readable display name for [UserSummary].
  *
  * Fallback resolution order:

@@ -4,11 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.localization.Co
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 
 /**
- * Extension functions providing smart, contextual resolution of localized error messages
- * for user domain errors.
- */
-
-/**
  * Resolves localized message for account lockout failures.
  *
  * @param lockoutType Account lockout category ([AccountLockoutType]: `TEMPORARY`, `INDEFINITE`, `NONE`).

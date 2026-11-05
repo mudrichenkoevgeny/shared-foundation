@@ -4,10 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import kotlin.time.Instant
 
 /**
- * Utility extension functions for user session domain models ([UserSessionPrivate], [UserSessionSummary], [UserSessionInternal]).
- */
-
-/**
  * Returns `true` when [UserSessionPrivate] is not expired and matches [clientDeviceId].
  */
 public fun UserSessionPrivate.isValid(

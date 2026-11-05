@@ -4,12 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.OpenAuthSettingsPayload
 
 /**
- * Maps between [OpenAuthSettingsPayload] and domain [OpenAuthSettings].
- *
- * Nested [OpenAuthSettings.availableAuthProviders] uses [toAvailableAuthProviders] and [toAvailableAuthProvidersPayload].
- */
-
-/**
  * Builds domain [OpenAuthSettings] from [OpenAuthSettingsPayload].
  */
 public fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =

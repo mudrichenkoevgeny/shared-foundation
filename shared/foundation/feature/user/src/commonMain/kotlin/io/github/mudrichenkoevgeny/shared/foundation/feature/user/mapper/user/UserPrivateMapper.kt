@@ -13,10 +13,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping private user models between domain and network representations.
- */
-
-/**
  * Builds domain [UserPrivate] from [UserPrivatePayload].
  *
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value

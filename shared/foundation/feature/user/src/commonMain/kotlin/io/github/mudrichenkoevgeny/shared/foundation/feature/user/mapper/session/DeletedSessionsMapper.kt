@@ -5,10 +5,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
 
 /**
- * Maps between [DeletedSessionsPayload] and domain [DeletedSessions].
- */
-
-/**
  * Builds domain [DeletedSessions] from [DeletedSessionsPayload].
  * * @throws IllegalArgumentException when any of the session IDs is not a valid UUID string.
  */

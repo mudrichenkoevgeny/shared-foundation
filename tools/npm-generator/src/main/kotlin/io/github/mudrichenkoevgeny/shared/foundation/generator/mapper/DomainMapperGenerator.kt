@@ -309,9 +309,9 @@ public fun buildToPayloadFields(
                     domainClassifier == Set::class || domainClassifier == List::class -> {
                         val typeArg =
                             domainParam
-                                ?.type
-                                ?.arguments
-                                ?.firstOrNull()
+                                .type
+                                .arguments
+                                .firstOrNull()
                                 ?.type
                                 ?.classifier as? KClass<*>
                         if (domainToDtoClasses.any { it.first == typeArg }) {

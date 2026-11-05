@@ -5,10 +5,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 
 /**
- * Extension functions mapping between domain user representations.
- */
-
-/**
  * Converts a [UserInternal] into a client-facing [UserPrivate].
  */
 public fun UserInternal.toUserPrivate(): UserPrivate =

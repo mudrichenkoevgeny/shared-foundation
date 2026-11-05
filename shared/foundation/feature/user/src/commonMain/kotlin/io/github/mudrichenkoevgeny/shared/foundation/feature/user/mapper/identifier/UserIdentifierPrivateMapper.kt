@@ -8,10 +8,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping private identifier models between domain and network representations.
- */
-
-/**
  * Builds domain [UserIdentifierPrivate] from [UserIdentifierPrivatePayload].
  */
 public fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivate =

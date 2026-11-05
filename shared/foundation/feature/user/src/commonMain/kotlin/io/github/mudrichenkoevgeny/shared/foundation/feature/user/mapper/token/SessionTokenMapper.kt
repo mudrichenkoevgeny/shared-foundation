@@ -9,14 +9,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * Maps between wire [SessionTokenPayload] and domain [SessionToken].
- *
- * [SessionTokenPayload.expiresAt] is epoch milliseconds on the wire and maps to [SessionToken.expiresAt]
- * via [Instant.fromEpochMilliseconds]. [AccessToken] and [RefreshToken] wrap the raw access and
- * refresh strings from the payload.
- */
-
-/**
  * Builds domain [SessionToken] from [SessionTokenPayload].
  *
  * @throws IllegalArgumentException when `sessionId` or `identifierId` is not a valid UUID string.

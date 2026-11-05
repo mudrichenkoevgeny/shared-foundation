@@ -9,10 +9,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 
 /**
- * Extension functions mapping summary user models between domain and network representations.
- */
-
-/**
  * Builds domain [UserSummary] from [UserSummaryPayload].
  *
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value

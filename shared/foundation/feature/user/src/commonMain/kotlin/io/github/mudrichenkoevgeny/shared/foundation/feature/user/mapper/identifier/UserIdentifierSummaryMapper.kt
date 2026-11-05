@@ -7,10 +7,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierSummaryPayload
 
 /**
- * Extension functions mapping summary identifier models between domain and network representations.
- */
-
-/**
  * Builds domain [UserIdentifierSummary] from [UserIdentifierSummaryPayload].
  */
 public fun UserIdentifierSummaryPayload.toUserIdentifierSummary(): UserIdentifierSummary =

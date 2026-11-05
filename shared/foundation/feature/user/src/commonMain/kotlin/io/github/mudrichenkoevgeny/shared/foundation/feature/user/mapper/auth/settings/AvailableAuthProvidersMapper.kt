@@ -5,13 +5,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.AvailableAuthProvidersPayload
 
 /**
- * Maps between [AvailableAuthProvidersPayload] and domain [AvailableAuthProviders].
- *
- * Wire list entries use [UserAuthProvider.value]; [UserAuthProvider.fromValueOrNull] parses them.
- * Unknown wire values fail mapping with [IllegalArgumentException].
- */
-
-/**
  * Builds domain [AvailableAuthProviders] from [AvailableAuthProvidersPayload].
  */
 public fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProviders =

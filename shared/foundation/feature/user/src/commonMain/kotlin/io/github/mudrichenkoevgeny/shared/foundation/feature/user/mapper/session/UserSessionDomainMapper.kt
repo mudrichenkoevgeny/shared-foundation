@@ -5,10 +5,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
 
 /**
- * Extension functions mapping between domain session representations.
- */
-
-/**
  * Converts a [UserSessionInternal] into a client-facing [UserSessionPrivate].
  *
  * Excludes `refreshTokenHash`.

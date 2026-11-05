@@ -4,10 +4,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.emailrestriction.EmailRestrictionPolicyPayload
 
 /**
- * Maps between [EmailRestrictionPolicyPayload] DTO and domain [EmailRestrictionPolicy].
- */
-
-/**
  * Builds domain [EmailRestrictionPolicy] from [EmailRestrictionPolicyPayload] DTO.
  *
  * @return domain model aligned with [EmailRestrictionPolicy] semantics.

@@ -6,14 +6,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.emailre
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.settings.ManagementAuthSettingsPayload
 
 /**
- * Maps between [ManagementAuthSettingsPayload] and domain [ManagementAuthSettings].
- *
- * Nested [ManagementAuthSettings.availableAuthProviders] uses [toAvailableAuthProviders] and [toAvailableAuthProvidersPayload].
- * Nested [ManagementAuthSettings.openEmailRestrictionPolicy] and [ManagementAuthSettings.managementEmailRestrictionPolicy]
- * use [toEmailRestrictionPolicy] and [toEmailRestrictionPolicyPayload].
- */
-
-/**
  * Builds domain [ManagementAuthSettings] from [ManagementAuthSettingsPayload].
  */
 public fun ManagementAuthSettingsPayload.toManagementAuthSettings(): ManagementAuthSettings =

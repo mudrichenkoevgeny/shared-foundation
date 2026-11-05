@@ -86,7 +86,16 @@ subprojects {
         android.set(true)
         ignoreFailures.set(project.path.startsWith(":tools"))
         filter {
-            exclude { it.file.absolutePath.contains("build") }
+            exclude {
+                val path = it.file.absolutePath
+                path.contains("build") || path.contains("generated")
+            }
+        }
+    }
+
+    tasks.matching { it.name.startsWith("ktlint") }.configureEach {
+        if (this is SourceTask) {
+            exclude { it.file.absolutePath.contains("build") || it.file.absolutePath.contains("generated") }
         }
     }
 

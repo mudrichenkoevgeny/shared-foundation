@@ -10,10 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import kotlin.time.Instant
 
 /**
- * Extension functions mapping summary session models between domain and network representations.
- */
-
-/**
  * Builds domain [UserSessionSummary] from [UserSessionSummaryPayload].
  */
 public fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary =

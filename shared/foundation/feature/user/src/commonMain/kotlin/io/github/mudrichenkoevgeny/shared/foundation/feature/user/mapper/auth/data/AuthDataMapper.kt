@@ -8,10 +8,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user.to
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.auth.data.AuthDataPayload
 
 /**
- * Maps between [AuthDataPayload] and domain [AuthData].
- */
-
-/**
  * Builds domain [AuthData] from [AuthDataPayload].
  */
 public fun AuthDataPayload.toAuthData(): AuthData =

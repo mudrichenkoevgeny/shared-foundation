@@ -12,10 +12,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.auth.se
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.configuration.OpenUserConfigurationPayload
 
 /**
- * Maps between [OpenUserConfigurationPayload] and domain [OpenUserConfiguration].
- */
-
-/**
  * Builds domain [OpenUserConfiguration] from [OpenUserConfigurationPayload].
  */
 public fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguration =

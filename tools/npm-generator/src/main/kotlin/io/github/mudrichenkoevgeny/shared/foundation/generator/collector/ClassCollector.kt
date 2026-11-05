@@ -328,7 +328,7 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
         }
     if (companionInstance != null) {
         val companionFields =
-            (companionInstance as Any)
+            companionInstance
                 .javaClass.declaredFields
                 .filter { it.type == String::class.java }
                 .mapNotNull { field ->
