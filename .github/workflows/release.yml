@@ -69,10 +69,7 @@ jobs:
         run: ./gradlew generateNpmPackage
 
       - name: Publish to npmjs.com
-        run: |
-          cp -r .git build/npm-package/
-          cd build/npm-package
-          npm publish --access public --provenance
+        run: npm publish ./build/npm-package --access public --provenance
 
   publish-docs:
     name: Publish Dokka API Reference to GitHub Pages
