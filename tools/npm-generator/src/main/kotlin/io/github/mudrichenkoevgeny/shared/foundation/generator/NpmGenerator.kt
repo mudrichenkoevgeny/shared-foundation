@@ -74,7 +74,7 @@ public fun main() {
   "author": "Evgeny Mudrichenko <evgeny.mudrichenko@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mudrichenkoevgeny/shared-foundation.git"
+    "url": "git+https://github.com/mudrichenkoevgeny/shared-foundation.git"
   },
   "bugs": {
     "url": "https://github.com/mudrichenkoevgeny/shared-foundation/issues"
