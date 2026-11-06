@@ -73,9 +73,7 @@ jobs:
       - name: Publish to npmjs.com
         run: |
           cd build/npm-package
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm publish --access public --provenance
 
   publish-docs:
     name: Publish Dokka API Reference to GitHub Pages
