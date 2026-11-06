@@ -67,22 +67,32 @@ public fun main() {
         val packageJson =
 """
 {
-"name": "@mudrichenkoevgeny/shared-foundation",
-"version": "$packageVersion",
-"description": "Shared Foundation - TypeScript & Zod contracts and routes",
-"main": "index.js",
-"module": "index.mjs",
-"types": "index.d.ts",
-"exports": {
-".": {
-"types": "./index.d.ts",
-"import": "./index.mjs",
-"require": "./index.js"
-}
-},
-"dependencies": {
-"zod": "^3.23.0"
-}
+  "name": "@mudrichenkoevgeny/shared-foundation",
+  "version": "$packageVersion",
+  "description": "Shared Foundation - TypeScript & Zod contracts and routes",
+  "license": "Apache-2.0",
+  "author": "Evgeny Mudrichenko <evgeny.mudrichenko@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mudrichenkoevgeny/shared-foundation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mudrichenkoevgeny/shared-foundation/issues"
+  },
+  "homepage": "https://github.com/mudrichenkoevgeny/shared-foundation#readme",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  }
 }
 """.trimIndent()
 
