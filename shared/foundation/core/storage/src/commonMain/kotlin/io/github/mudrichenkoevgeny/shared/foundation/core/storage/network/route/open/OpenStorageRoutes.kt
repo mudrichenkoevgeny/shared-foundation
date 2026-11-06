@@ -3,8 +3,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.route
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.open.OpenStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
@@ -79,6 +83,11 @@ public object OpenStorageRoutes {
      * **UI Presentation:**
      * - Screens:
      *   - [OpenStorageNavigation.FileList]
+     *
+     * @see StorageCategory
+     * @see StorageFilePrivate
+     * @see StorageFileStatus
+     * @see StorageFileVisibility
      */
     public const val GET_FILES: String = BASE_STORAGE_FILES_ROUTE
 

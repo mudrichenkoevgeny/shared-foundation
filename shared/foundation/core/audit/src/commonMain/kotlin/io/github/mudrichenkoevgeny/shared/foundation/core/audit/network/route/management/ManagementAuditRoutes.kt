@@ -1,8 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.permissions.AuditPermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.route.management.ManagementAuditNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract.AuditApiPaths
@@ -79,6 +81,9 @@ public object ManagementAuditRoutes {
      * **UI Presentation:**
      * - Screens:
      *   - [ManagementAuditNavigation.AuditEventList]
+     *
+     * @see AuditStatus
+     * @see AuditEventPrivate
      */
     public const val GET_AUDIT_EVENTS: String = BASE_MANAGEMENT_AUDIT_EVENTS_ROUTE
 

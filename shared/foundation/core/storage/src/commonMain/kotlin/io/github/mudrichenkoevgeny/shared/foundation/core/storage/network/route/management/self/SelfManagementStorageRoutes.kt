@@ -4,8 +4,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.CommonNetworkRoutes
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementSelfStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
@@ -84,6 +88,11 @@ public object SelfManagementStorageRoutes {
      * **UI Presentation:**
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileList]
+     *
+     * @see StorageCategory
+     * @see StorageFilePrivate
+     * @see StorageFileStatus
+     * @see StorageFileVisibility
      */
     public const val GET_FILES: String = BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE
 

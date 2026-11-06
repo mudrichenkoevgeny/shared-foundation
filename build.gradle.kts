@@ -57,7 +57,9 @@ subprojects {
         return@subprojects
     }
 
-    pluginManager.apply("com.vanniktech.maven.publish")
+    if (!isTool) {
+        pluginManager.apply("com.vanniktech.maven.publish")
+    }
     pluginManager.apply("com.autonomousapps.dependency-analysis")
     pluginManager.apply("org.jlleitschuh.gradle.ktlint")
 
@@ -144,55 +146,57 @@ subprojects {
         }
     }
 
-    extensions.configure<MavenPublishBaseExtension> {
-        val projectPathName = project.path
-            .removePrefix(":")
-            .replace(":", "-")
+    if (!isTool) {
+        extensions.configure<MavenPublishBaseExtension> {
+            val projectPathName = project.path
+                .removePrefix(":")
+                .replace(":", "-")
 
-        val newArtifactId = if (projectPathName.startsWith(rootProject.name)) {
-            projectPathName
-        } else {
-            "${rootProject.name}-$projectPathName"
-        }
+            val newArtifactId = if (projectPathName.startsWith(rootProject.name)) {
+                projectPathName
+            } else {
+                "${rootProject.name}-$projectPathName"
+            }
 
-        coordinates(
-            project.group.toString(),
-            newArtifactId,
-            project.version.toString()
-        )
-
-        publishToMavenCentral()
-        signAllPublications()
-
-        plugins.withId("org.jetbrains.kotlin.multiplatform") {
-            configure(
-                KotlinMultiplatform(
-                    javadocJar = JavadocJar.Empty()
-                )
+            coordinates(
+                project.group.toString(),
+                newArtifactId,
+                project.version.toString()
             )
-        }
 
-        pom {
-            name.set("Cross-platform Shared Foundation - ${project.name}")
-            description.set("Shared Foundation")
-            url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
-            licenses {
-                license {
-                    name.set("The Apache License, Version 2.0")
-                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                }
+            publishToMavenCentral()
+            signAllPublications()
+
+            plugins.withId("org.jetbrains.kotlin.multiplatform") {
+                configure(
+                    KotlinMultiplatform(
+                        javadocJar = JavadocJar.Empty()
+                    )
+                )
             }
-            developers {
-                developer {
-                    id.set("mudrichenkoevgeny")
-                    name.set("Evgeny Mudrichenko")
-                    email.set("evgeny.mudrichenko@gmail.com")
-                }
-            }
-            scm {
-                connection.set("scm:git:git://github.com/mudrichenkoevgeny/shared-foundation.git")
-                developerConnection.set("scm:git:ssh://github.com/mudrichenkoevgeny/shared-foundation.git")
+
+            pom {
+                name.set("Cross-platform Shared Foundation - ${project.name}")
+                description.set("Shared Foundation")
                 url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("mudrichenkoevgeny")
+                        name.set("Evgeny Mudrichenko")
+                        email.set("evgeny.mudrichenko@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/mudrichenkoevgeny/shared-foundation.git")
+                    developerConnection.set("scm:git:ssh://github.com/mudrichenkoevgeny/shared-foundation.git")
+                    url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+                }
             }
         }
     }

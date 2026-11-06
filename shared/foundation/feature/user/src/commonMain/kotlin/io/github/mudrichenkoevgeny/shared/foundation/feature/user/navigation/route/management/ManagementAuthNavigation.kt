@@ -136,7 +136,7 @@ public sealed interface ManagementAuthNavigation : NavigationRoute {
      * - **Screen Parameters:** [UnlockMethodSelectionParams]
      * - **Primary API:** None.
      * - **Secondary Action APIs:**
-     *   - [SelfManagementUnlockRoutes.UNLOCK_BY_EXTERNAL_PROVIDER]
+     *   - [SelfManagementUnlockRoutes.UNLOCK_BY_EMAIL]
      */
     @Serializable
     public data class UnlockMethodSelection(
@@ -160,7 +160,6 @@ public sealed interface ManagementAuthNavigation : NavigationRoute {
      * - **Screen Parameters:** [UnlockTargetInputParams]
      * - **Primary API:**
      *   - [SelfManagementUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION]
-     *   - [SelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      * - **Secondary Action APIs:** None.
      */
     @Serializable
@@ -185,10 +184,8 @@ public sealed interface ManagementAuthNavigation : NavigationRoute {
      * - **Screen Parameters:** [UnlockOtpInputParams]
      * - **Primary API:**
      *   - [SelfManagementUnlockRoutes.UNLOCK_BY_EMAIL]
-     *   - [SelfManagementUnlockRoutes.UNLOCK_BY_PHONE]
      * - **Secondary Action APIs:**
      *   - [SelfManagementUnlockRoutes.SEND_UNLOCK_EMAIL_CONFIRMATION]
-     *   - [SelfManagementUnlockRoutes.SEND_UNLOCK_PHONE_CONFIRMATION]
      */
     @Serializable
     public data class UnlockOtpInput(

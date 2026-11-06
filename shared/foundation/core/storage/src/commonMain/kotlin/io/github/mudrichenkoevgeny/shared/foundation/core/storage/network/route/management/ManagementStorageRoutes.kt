@@ -11,8 +11,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route.C
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action.StorageAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata.StorageAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource.StorageAuditResourceType
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.permission.StoragePermissionCode
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.route.management.ManagementStorageNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.contract.StorageApiPaths
@@ -93,6 +97,11 @@ public object ManagementStorageRoutes {
      * **UI Presentation:**
      * - Screens:
      *   - [ManagementStorageNavigation.FileList]
+     *
+     * @see StorageCategory
+     * @see StorageFilePrivate
+     * @see StorageFileStatus
+     * @see StorageFileVisibility
      */
     public const val GET_FILES: String = BASE_MANAGEMENT_STORAGE_FILES_ROUTE
 
@@ -148,6 +157,11 @@ public object ManagementStorageRoutes {
      * **UI Presentation:**
      * - Screens:
      *   - [ManagementStorageNavigation.FileList]
+     *
+     * @see StorageCategory
+     * @see StorageFilePrivate
+     * @see StorageFileStatus
+     * @see StorageFileVisibility
      */
     public const val DELETE_FILES_BATCH: String = "$BASE_MANAGEMENT_STORAGE_FILES_ROUTE/batch-delete"
 
