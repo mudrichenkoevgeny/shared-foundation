@@ -60,7 +60,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
+
+      - name: Update npm to latest (for OIDC Trusted Publishing)
+        run: npm install -g npm@latest
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
