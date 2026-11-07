@@ -1,6 +1,16 @@
 # shared-foundation Architecture
 
-This document provides a visual representation of the static structure, taxonomy of contracts, and module dependencies within the `shared-foundation` project. As a shared contracts library containing wire types (DTOs, constants, error codes, Zod schemas, and routes), it does not include execution flows or engine wiring.
+This document describes the high-level architecture, module dependency graph, and contract taxonomy of `shared-foundation`.
+
+`shared-foundation` is a **shared contracts library** defining wire types, DTOs, REST/WS routes, Zod schemas, permissions, error codes, navigation screen parameters, screen param parsers, non-localized UI values (`UiValues`), and UI component configurations (`*UiConfig`) published for **Backend (JVM), Web (TypeScript/NPM), Mobile, and Desktop** applications.
+
+For detailed domain models and entity projection taxonomies of specific subsystems, please refer to the specialized documentation in the `docs/architecture` directory:
+
+- **[Identity & Access Domain Contracts](docs/architecture/identity_and_access.md)** — Core models: Roles (`UserRole`), Granular Permissions (`PermissionCode`), Account Statuses (`UserAccountStatus` State Machine), Identifiers (`UserIdentifier`), Sessions, and 4-tier Projection Taxonomy (`Summary`, `Private`, `Internal`).
+- **[Storage & Presigned Upload Contracts](docs/architecture/storage_and_presigned_urls.md)** — Storage categories (`StorageCategory`), File visibilities/statuses, Direct-to-S3 presigned upload sequence diagram, and file projection tiers.
+- **[Audit Logging & Redaction Contracts](docs/architecture/audit_logging.md)** — Structured audit event taxonomy, actor scopes (`AuditActorType`), outcome statuses (`AuditStatus`), and metadata redaction tiers (`AuditValueSensitivity`).
+
+---
 
 ## 1. Module Dependency Graph
 
@@ -170,6 +180,7 @@ classDiagram
         +String OPEN_AUTH_SETTINGS_UPDATED
         +String MANAGEMENT_AUTH_SETTINGS_UPDATED
         +String USER_UPDATED
+        +String SESSION_DELETED
     }
     
     SocketFrame --> CommonWebSocketEventTypes : "Mapped via type"
@@ -218,13 +229,13 @@ classDiagram
 
 ## 5. Navigation Architecture & UI Presentation Traceability
 
-This diagram illustrates how Network Routes, Navigation Screen Routes, and Navigation Screen Parameter Parsers link together to form a type-safe bridge between network endpoints and client UI screens.
+This diagram illustrates how Network Routes, Navigation Screen Routes, and Navigation Screen Parameter Parsers link together to form a type-safe bridge between network endpoints and client UI screens across platforms (Web, Mobile, Desktop).
 
 ```mermaid
 flowchart LR
     subgraph NetworkLayer ["Network Layer"]
         NetworkRoute["Network Route Constant\n(e.g., ManagementUsersRoutes.GET_USERS)"]
-        BaseNetworkRoute["Base Network Routes\n(e.g., BaseManagementRoutes, BaseSettingsRoutes)"]
+        BaseNetworkRoute["Base Network Routes\n(e.g., CommonNetworkRoutes, BaseSettingsNetworkRoutes)"]
     end
 
     subgraph NavigationLayer ["Navigation Layer"]
@@ -256,12 +267,12 @@ flowchart LR
 - **`NavigationScreenParams`**: Marker interface for typed screen parameter data classes.
 - **`NavigationScreenParamsParser<T>`**: Contract for bidirectional parameter serialization (`parse(params: Map<String, Any?>): T` and `serialize(params: T): Map<String, List<String>>`).
 - **`NavigationRouteUrlMapper`**: Utility object for formatting path strings, appending query maps, and building parameterized URLs.
-- **`CommonNavigationRoutes`**: Common base navigation route path segments shared across platforms (`BASE_SETTINGS_ROUTE = "/settings"`).
+- **`CommonNavigationRoutes`**: Common base navigation route path segments shared across platforms (`BASE_SETTINGS_NAVIGATION_ROUTE = "/settings"`).
 
 #### 2. Base Network Routes & Navigation Paths
-- **`CommonNetworkRoutes`** (`core/common`): Base network route segments for management operations (`BASE_MANAGEMENT_ROUTE = "/management"`, `BASE_SELF_MANAGEMENT_ROUTE = "/management/self"`).
-- **`BaseSettingsNetworkRoutes`** (`core/common`): Base network route segment for settings endpoints (`BASE_SETTINGS_ROUTE = "/settings"`).
-- **`BaseUserNavigationRoutes`** (`feature/user`): Base navigation route segment for user feature screens (`BASE_AUTH_ROUTE = "/auth"`).
+- **`CommonNetworkRoutes`** (`core/common`): Base network route segments for management and settings operations (`BASE_MANAGEMENT_NETWORK_ROUTE = "/management"`, `BASE_SELF_MANAGEMENT_NETWORK_ROUTE = "/management/self"`, `BASE_SETTINGS_NETWORK_ROUTE = "/settings"`).
+- **`BaseSettingsNetworkRoutes`** (`core/settings`): Base network route segment for global settings endpoints (`BASE_GLOBAL_SETTINGS_NETWORK_ROUTE = "/global"`).
+- **`BaseUserNavigationRoutes`** (`feature/user`): Base navigation route segment for user feature screens (`BASE_USER_AUTH_NAVIGATION_ROUTE = "/auth"`).
 - **`UserNavigationPaths`** (`feature/user`): Naming conventions for user navigation query parameters (`ACTION`, `REDIRECT_URL`, `TOTP_STEP`, `UNLOCK_METHOD`, `LOGIN_BY_TOTP_MODE`).
 
 ### Complete Navigation Classes Index
@@ -305,7 +316,7 @@ flowchart TD
         CustomLoader["Optional Custom resourceLoader\n(Partial Key Overrides)"]
     end
 
-    JsonFiles -->|Scanned by| GradleTask
+    JsonFiles["JSON Bundles"] -->|Scanned by| GradleTask
     GradleTask -->|Generates| BundleClasses
     GradleTask -->|Embeds String Maps into| EmbeddedResources
     BundleClasses -->|Auto-Registers in init| Registry
@@ -331,8 +342,3 @@ flowchart TD
 To maintain a consistent, predictable, and type-safe API for collection list endpoints across all modules (`core/*` and `feature/*`), the library enforces a strict data-type-driven standard for all filtering and sorting parameters covering Nullability/Presence (`IS_*_SET`), Range Bounds (`*_FROM`/`*_TO`), Text Matching (`*_CONTAINS`, `search_query`), Collections (`EXCLUDE_*`, `*_ALL`), Nested Objects, and Sorting (`sort_by`, `sort_order`).
 
 For the complete rule specifications and examples, refer to Section 11 of [.agent/architecture-patterns.md](.agent/architecture-patterns.md#11-filtering-and-sorting-architecture-standard).
-
-
-
-
-

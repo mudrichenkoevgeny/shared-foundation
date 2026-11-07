@@ -1,0 +1,26 @@
+name: 'Setup Environment & KMP Toolchains'
+description: 'Checks out code, makes gradlew executable, sets up Java 25, Node.js 24, and Gradle cache'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Make Gradlew Executable
+      shell: bash
+      run: chmod +x gradlew
+
+    - name: Setup Java 25
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '25'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
