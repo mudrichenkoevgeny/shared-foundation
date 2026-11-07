@@ -5,11 +5,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
-* Creates a test [SessionDetailParams] navigation params instance.
-*
-* @param sessionId Unique session ID string.
-* @param userId Target user ID string.
-*/
+ * Creates a test [SessionDetailParams] navigation params instance.
+ *
+ * @param sessionId Unique session ID string.
+ * @param userId Target user ID string.
+ */
 public fun createTestSessionDetailParams(
     sessionId: String = TEST_SESSION_ID,
     userId: String? = TEST_USER_ID

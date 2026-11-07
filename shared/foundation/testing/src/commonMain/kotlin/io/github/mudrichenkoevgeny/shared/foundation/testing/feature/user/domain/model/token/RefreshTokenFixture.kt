@@ -6,8 +6,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.t
 public const val TEST_REFRESH_TOKEN: String = "test_refresh_token"
 
 /**
-* Creates a test [RefreshToken] instance for unit testing.
-*
-* @param value Token string (defaults to [TEST_REFRESH_TOKEN]).
-*/
+ * Creates a test [RefreshToken] instance for unit testing.
+ *
+ * @param value Token string (defaults to [TEST_REFRESH_TOKEN]).
+ */
 public fun createTestRefreshToken(value: String = TEST_REFRESH_TOKEN): RefreshToken = RefreshToken(value)

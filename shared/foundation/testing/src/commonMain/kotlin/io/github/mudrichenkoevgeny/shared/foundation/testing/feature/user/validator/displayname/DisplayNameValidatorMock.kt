@@ -4,10 +4,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.disp
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.displayname.DisplayNameValidatorResult
 
 /**
-* Configurable mock implementation of [DisplayNameValidator] for testing.
-*
-* @property errorCode Error code to return when validation fails, or `null` for success.
-*/
+ * Configurable mock implementation of [DisplayNameValidator] for testing.
+ *
+ * @property errorCode Error code to return when validation fails, or `null` for success.
+ */
 public class DisplayNameValidatorMock(
     public var errorCode: String? = null
 ) : DisplayNameValidator {

@@ -3,12 +3,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.netw
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model.totpsetup.TotpSetupPayload
 
 /**
-* Creates a test [TotpSetupPayload] wire object instance.
-*
-* @param secretKey TOTP secret key string.
-* @param otpAuthUrl Complete OTP Auth URI string.
-* @param mfaToken MFA setup session token string.
-*/
+ * Creates a test [TotpSetupPayload] wire object instance.
+ *
+ * @param secretKey TOTP secret key string.
+ * @param otpAuthUrl Complete OTP Auth URI string.
+ * @param mfaToken MFA setup session token string.
+ */
 public fun createTestTotpSetupPayload(
     secretKey: String = "JBSWY3DPEHPK3PXP",
     otpAuthUrl: String = "otpauth://totp/Test:user@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Test",

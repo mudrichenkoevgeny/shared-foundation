@@ -7,8 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFilePrivatePayload
 
 /**
-* Creates a test [StorageFilePrivatePayload] wire object instance.
-*/
+ * Creates a test [StorageFilePrivatePayload] wire object instance.
+ */
 public fun createTestStorageFilePrivatePayload(
     id: String = "00000000-0000-4000-8000-000000000001",
     ownerUserId: String? = "usr_000000000001",

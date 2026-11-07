@@ -16,25 +16,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
-* Creates a test [UserSessionPrivatePayload] wire object for unit testing mapper logic.
-*
-* @param id Raw session ID string.
-* @param userId Raw user ID string.
-* @param userRole Wire string representation of [UserRole].
-* @param identifier Raw credential string.
-* @param identifierId Raw credential ID string.
-* @param identifierDisplayName Display name string.
-* @param identifierAuthProvider Wire string representation of [UserAuthProvider].
-* @param clientDeviceInfo Hardware device info wire payload ([ClientDeviceInfoPayload]).
-* @param userAgent HTTP User-Agent header string.
-* @param ipAddress Client IP address.
-* @param expiresAt Expiration epoch-millisecond timestamp.
-* @param lastAccessedAt Last activity epoch-millisecond timestamp.
-* @param lastReauthenticatedAt Last re-authentication epoch-millisecond timestamp.
-* @param isSensitiveValuesMasked Whether sensitive values are masked.
-* @param createdAt Creation epoch-millisecond timestamp.
-* @param updatedAt Modification epoch-millisecond timestamp.
-*/
+ * Creates a test [UserSessionPrivatePayload] wire object for unit testing mapper logic.
+ *
+ * @param id Raw session ID string.
+ * @param userId Raw user ID string.
+ * @param userRole Wire string representation of [UserRole].
+ * @param identifier Raw credential string.
+ * @param identifierId Raw credential ID string.
+ * @param identifierDisplayName Display name string.
+ * @param identifierAuthProvider Wire string representation of [UserAuthProvider].
+ * @param clientDeviceInfo Hardware device info wire payload ([ClientDeviceInfoPayload]).
+ * @param userAgent HTTP User-Agent header string.
+ * @param ipAddress Client IP address.
+ * @param expiresAt Expiration epoch-millisecond timestamp.
+ * @param lastAccessedAt Last activity epoch-millisecond timestamp.
+ * @param lastReauthenticatedAt Last re-authentication epoch-millisecond timestamp.
+ * @param isSensitiveValuesMasked Whether sensitive values are masked.
+ * @param createdAt Creation epoch-millisecond timestamp.
+ * @param updatedAt Modification epoch-millisecond timestamp.
+ */
 public fun createTestUserSessionPrivatePayload(
     id: String = TEST_SESSION_ID,
     userId: String = TEST_USER_ID,
@@ -73,12 +73,12 @@ public fun createTestUserSessionPrivatePayload(
     )
 
 /**
-* Creates a list of test [UserSessionPrivatePayload] wire objects with deterministic raw UUIDs,
-* alternating devices, and time shifts.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserSessionPrivatePayload] wire objects with deterministic raw UUIDs,
+ * alternating devices, and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserSessionPrivatePayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionPrivatePayload = { index ->

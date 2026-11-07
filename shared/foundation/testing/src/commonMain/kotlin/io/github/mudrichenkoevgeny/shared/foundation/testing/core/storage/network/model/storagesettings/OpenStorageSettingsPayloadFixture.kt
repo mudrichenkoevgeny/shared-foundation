@@ -3,8 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.storagesettings.OpenStorageSettingsPayload
 
 /**
-* Creates a test [OpenStorageSettingsPayload] wire object instance.
-*/
+ * Creates a test [OpenStorageSettingsPayload] wire object instance.
+ */
 public fun createTestOpenStorageSettingsPayload(
     minUploadSizeBytes: Long = 1L,
     maxUploadSizeBytes: Long = 52428800L

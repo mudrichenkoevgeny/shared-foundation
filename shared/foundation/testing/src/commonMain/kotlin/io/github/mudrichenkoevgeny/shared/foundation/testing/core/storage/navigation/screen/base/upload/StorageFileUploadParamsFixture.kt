@@ -4,8 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.c
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.base.upload.StorageFileUploadParams
 
 /**
-* Creates a test [StorageFileUploadParams] instance.
-*/
+ * Creates a test [StorageFileUploadParams] instance.
+ */
 public fun createTestStorageFileUploadParams(
     maxFiles: Int? = 5,
     targetScope: String? = "avatar",

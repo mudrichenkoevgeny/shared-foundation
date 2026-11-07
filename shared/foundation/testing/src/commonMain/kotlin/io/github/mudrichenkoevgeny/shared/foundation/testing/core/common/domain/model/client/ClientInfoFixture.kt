@@ -6,15 +6,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 
 /**
-* Creates a test [ClientInfo] domain instance.
-*
-* @param clientDeviceInfo Client device information.
-* @param userAgent User agent string.
-* @param ipAddress IP address string.
-* @param host Request host header string.
-* @param origin Request origin header string.
-* @param apiVersion Version of the API being called.
-*/
+ * Creates a test [ClientInfo] domain instance.
+ *
+ * @param clientDeviceInfo Client device information.
+ * @param userAgent User agent string.
+ * @param ipAddress IP address string.
+ * @param host Request host header string.
+ * @param origin Request origin header string.
+ * @param apiVersion Version of the API being called.
+ */
 public fun createTestClientInfo(
     clientDeviceInfo: ClientDeviceInfo = createTestClientDeviceInfo(),
     userAgent: String? = TEST_USER_AGENT,

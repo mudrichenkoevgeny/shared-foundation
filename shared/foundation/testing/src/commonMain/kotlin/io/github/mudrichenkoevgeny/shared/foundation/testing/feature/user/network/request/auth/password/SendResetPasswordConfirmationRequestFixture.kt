@@ -4,10 +4,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
 /**
-* Creates a test [SendResetPasswordConfirmationRequest] request object instance.
-*
-* @param email Target email address string.
-*/
+ * Creates a test [SendResetPasswordConfirmationRequest] request object instance.
+ *
+ * @param email Target email address string.
+ */
 public fun createTestSendResetPasswordConfirmationRequest(email: String = TEST_EMAIL): SendResetPasswordConfirmationRequest =
     SendResetPasswordConfirmationRequest(
         email = email

@@ -4,8 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.f
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
 
 /**
-* Creates a test [FileUrlsPayload] wire object instance.
-*/
+ * Creates a test [FileUrlsPayload] wire object instance.
+ */
 public fun createTestFileUrlsPayload(
     originalUrl: String = "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001",
     presets: Map<String, String> =

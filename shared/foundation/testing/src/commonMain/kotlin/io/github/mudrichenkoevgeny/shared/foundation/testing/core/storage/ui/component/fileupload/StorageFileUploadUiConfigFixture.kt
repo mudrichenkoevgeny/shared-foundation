@@ -5,8 +5,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.ui.component.fileupload.StorageFileUploadUiConfig
 
 /**
-* Creates a test [StorageFileUploadUiConfig] instance.
-*/
+ * Creates a test [StorageFileUploadUiConfig] instance.
+ */
 public fun createTestStorageFileUploadUiConfig(
     maxFiles: Int? = 5,
     targetScope: String? = "avatar",

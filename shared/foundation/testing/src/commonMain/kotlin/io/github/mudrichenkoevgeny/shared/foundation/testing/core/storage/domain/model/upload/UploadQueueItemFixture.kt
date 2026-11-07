@@ -9,8 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
 
 /**
-* Creates a test [UploadQueueItem] instance.
-*/
+ * Creates a test [UploadQueueItem] instance.
+ */
 public fun createTestUploadQueueItem(
     id: UploadQueueItemId = UploadQueueItemId.generate(),
     category: StorageCategory = StorageCategory.IMAGE,

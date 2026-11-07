@@ -4,10 +4,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PHONE
 
 /**
-* Creates a test client [LoginByPhoneParams] navigation params instance.
-*
-* @param phone Pre-filled phone number string.
-*/
+ * Creates a test client [LoginByPhoneParams] navigation params instance.
+ *
+ * @param phone Pre-filled phone number string.
+ */
 public fun createTestLoginByPhoneParams(phone: String? = TEST_PHONE): LoginByPhoneParams =
     LoginByPhoneParams(
         phone = phone

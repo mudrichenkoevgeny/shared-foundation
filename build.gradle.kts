@@ -3,12 +3,12 @@ import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import dev.detekt.gradle.extensions.DetektExtension
 import org.jetbrains.dokka.gradle.DokkaExtension
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import java.util.Properties
 
 plugins {
@@ -75,6 +75,7 @@ subprojects {
             buildUponDefaultConfig = true
             autoCorrect = true
             allRules = false
+            config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
         }
 
         extensions.configure<DokkaExtension> {

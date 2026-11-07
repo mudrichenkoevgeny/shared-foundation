@@ -17,6 +17,7 @@ public fun UserModuleStrings.resolveUserLockedMessage(
     when {
         lockoutType == AccountLockoutType.TEMPORARY && !formattedUntil.isNullOrBlank() ->
             errors.locked(formattedUntil)
+
         else ->
             errors.lockedWithoutArgs
     }

@@ -7,11 +7,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserPrivate
 
 /**
-* Creates a test [AuthData] domain instance.
-*
-* @param userPrivate Authenticated user details ([UserPrivate]).
-* @param sessionToken Active session security tokens ([SessionToken]).
-*/
+ * Creates a test [AuthData] domain instance.
+ *
+ * @param userPrivate Authenticated user details ([UserPrivate]).
+ * @param sessionToken Active session security tokens ([SessionToken]).
+ */
 public fun createTestAuthData(
     userPrivate: UserPrivate = createTestUserPrivate(),
     sessionToken: SessionToken = createTestSessionToken()

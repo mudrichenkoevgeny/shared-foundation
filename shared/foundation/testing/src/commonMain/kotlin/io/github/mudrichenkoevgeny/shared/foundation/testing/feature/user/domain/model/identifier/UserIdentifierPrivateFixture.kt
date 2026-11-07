@@ -12,18 +12,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
-* Creates a test [UserIdentifierPrivate] instance with default mock properties for unit testing.
-*
-* @param id Unique identifier ID ([UserIdentifierId]).
-* @param userId Owning user ID ([UserId]).
-* @param userAuthProvider Provider category ([UserAuthProvider]).
-* @param identifier Raw or masked credential identifier.
-* @param displayName Non-null display name.
-* @param externalProviderEmail External email address if available.
-* @param isSensitiveValuesMasked Whether sensitive fields are masked.
-* @param createdAt Creation timestamp.
-* @param updatedAt Modification timestamp.
-*/
+ * Creates a test [UserIdentifierPrivate] instance with default mock properties for unit testing.
+ *
+ * @param id Unique identifier ID ([UserIdentifierId]).
+ * @param userId Owning user ID ([UserId]).
+ * @param userAuthProvider Provider category ([UserAuthProvider]).
+ * @param identifier Raw or masked credential identifier.
+ * @param displayName Non-null display name.
+ * @param externalProviderEmail External email address if available.
+ * @param isSensitiveValuesMasked Whether sensitive fields are masked.
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ */
 public fun createTestUserIdentifierPrivate(
     id: UserIdentifierId = createTestUserIdentifierId(),
     userId: UserId = createTestUserId(),
@@ -48,12 +48,12 @@ public fun createTestUserIdentifierPrivate(
     )
 
 /**
-* Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,
-* alternating providers, and time shifts.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,
+ * alternating providers, and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserIdentifierPrivateList(
     count: Int = 2,
     generator: (index: Int) -> UserIdentifierPrivate = { index ->

@@ -1,17 +1,36 @@
 root = true
 
-[*.{kt,kts}]
+[*]
+charset = utf-8
+end_of_line = lf
 indent_size = 4
-tab_width = 4
+indent_style = space
 insert_final_newline = true
+max_line_length = off
 trim_trailing_whitespace = true
+
+[*.{kt,kts}]
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
+ij_kotlin_continuation_indent_size = 4
+ij_kotlin_keep_line_breaks = true
+ij_kotlin_name_count_to_use_star_import = 2147483647
 
-[**/build/**]
-generated = true
-ktlint_standard = disabled
+[*.md]
+trim_trailing_whitespace = false
+ij_formatter_enabled = false
 
-[**/generated/**]
-generated = true
-ktlint_standard = disabled
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.properties]
+ij_formatter_enabled = false
+
+[*.json]
+indent_size = 2
+
+[tools/npm-generator/src/main/kotlin/**.kt]
+ij_formatter_enabled = false
+
+[buildSrc/src/main/kotlin/GenerateLocalizationTask.kt]
+ij_formatter_enabled = false

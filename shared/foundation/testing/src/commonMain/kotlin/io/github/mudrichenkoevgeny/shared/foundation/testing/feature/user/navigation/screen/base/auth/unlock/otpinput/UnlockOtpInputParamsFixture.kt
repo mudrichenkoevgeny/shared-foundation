@@ -5,13 +5,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
 /**
-* Creates a test [UnlockOtpInputParams] navigation params instance.
-*
-* @param unlockMethod Chosen account unlock method ([UnlockMethod]).
-* @param identifier Target credential string.
-* @param retryAfterSeconds Delay in seconds before a new code can be requested.
-* @param code Pre-filled OTP code.
-*/
+ * Creates a test [UnlockOtpInputParams] navigation params instance.
+ *
+ * @param unlockMethod Chosen account unlock method ([UnlockMethod]).
+ * @param identifier Target credential string.
+ * @param retryAfterSeconds Delay in seconds before a new code can be requested.
+ * @param code Pre-filled OTP code.
+ */
 public fun createTestUnlockOtpInputParams(
     unlockMethod: UnlockMethod? = UnlockMethod.EMAIL,
     identifier: String? = TEST_EMAIL,

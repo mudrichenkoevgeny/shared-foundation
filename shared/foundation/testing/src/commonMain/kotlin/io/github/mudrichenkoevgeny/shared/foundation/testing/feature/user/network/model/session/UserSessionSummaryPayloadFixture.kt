@@ -11,16 +11,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
-* Creates a test [UserSessionSummaryPayload] wire object for unit testing mapper logic.
-*
-* @param id Raw session ID string.
-* @param userId Raw user ID string.
-* @param clientDeviceInfo Hardware device info wire payload ([ClientDeviceInfoPayload]).
-* @param identifierDisplayName Display name string.
-* @param identifierAuthProvider Wire string representation of [UserAuthProvider].
-* @param lastAccessedAt Last activity epoch-millisecond timestamp.
-* @param expiresAt Expiration epoch-millisecond timestamp.
-*/
+ * Creates a test [UserSessionSummaryPayload] wire object for unit testing mapper logic.
+ *
+ * @param id Raw session ID string.
+ * @param userId Raw user ID string.
+ * @param clientDeviceInfo Hardware device info wire payload ([ClientDeviceInfoPayload]).
+ * @param identifierDisplayName Display name string.
+ * @param identifierAuthProvider Wire string representation of [UserAuthProvider].
+ * @param lastAccessedAt Last activity epoch-millisecond timestamp.
+ * @param expiresAt Expiration epoch-millisecond timestamp.
+ */
 public fun createTestUserSessionSummaryPayload(
     id: String = TEST_SESSION_ID,
     userId: String = TEST_USER_ID,
@@ -41,12 +41,12 @@ public fun createTestUserSessionSummaryPayload(
     )
 
 /**
-* Creates a list of test [UserSessionSummaryPayload] wire objects with deterministic raw UUIDs,
-* alternating devices, and time shifts.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserSessionSummaryPayload] wire objects with deterministic raw UUIDs,
+ * alternating devices, and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserSessionSummaryPayloadList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionSummaryPayload = { index ->

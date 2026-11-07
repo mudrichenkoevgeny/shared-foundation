@@ -4,10 +4,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PHONE
 
 /**
-* Creates a test [SendConfirmationToPhoneRequest] request object instance.
-*
-* @param phoneNumber Destination phone number string.
-*/
+ * Creates a test [SendConfirmationToPhoneRequest] request object instance.
+ *
+ * @param phoneNumber Destination phone number string.
+ */
 public fun createTestSendConfirmationToPhoneRequest(phoneNumber: String = TEST_PHONE): SendConfirmationToPhoneRequest =
     SendConfirmationToPhoneRequest(
         phoneNumber = phoneNumber

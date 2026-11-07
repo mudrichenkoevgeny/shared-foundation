@@ -4,11 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.security.useridentifiers.AddUserIdentifierExternalAuthProviderRequest
 
 /**
-* Creates a test [AddUserIdentifierExternalAuthProviderRequest] request object instance.
-*
-* @param authProvider External provider wire string ([UserAuthProvider]).
-* @param externalProviderToken OAuth token string from provider.
-*/
+ * Creates a test [AddUserIdentifierExternalAuthProviderRequest] request object instance.
+ *
+ * @param authProvider External provider wire string ([UserAuthProvider]).
+ * @param externalProviderToken OAuth token string from provider.
+ */
 public fun createTestAddUserIdentifierExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345"

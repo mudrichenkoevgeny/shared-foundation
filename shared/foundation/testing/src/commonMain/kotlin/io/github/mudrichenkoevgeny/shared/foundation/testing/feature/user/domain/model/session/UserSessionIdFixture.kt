@@ -7,8 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
 public const val TEST_SESSION_ID: String = "00000000-0000-4000-8000-000000000010"
 
 /**
-* Creates a test [UserSessionId] instance for unit testing.
-*
-* @param value String representation of the UUID (defaults to [TEST_SESSION_ID]).
-*/
+ * Creates a test [UserSessionId] instance for unit testing.
+ *
+ * @param value String representation of the UUID (defaults to [TEST_SESSION_ID]).
+ */
 public fun createTestUserSessionId(value: String = TEST_SESSION_ID): UserSessionId = value.toUserSessionIdOrThrow()

@@ -4,11 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PHONE
 
 /**
-* Creates a test [LoginByPhoneRequest] request object instance.
-*
-* @param phoneNumber Login phone number string.
-* @param confirmationCode SMS confirmation code string.
-*/
+ * Creates a test [LoginByPhoneRequest] request object instance.
+ *
+ * @param phoneNumber Login phone number string.
+ * @param confirmationCode SMS confirmation code string.
+ */
 public fun createTestLoginByPhoneRequest(
     phoneNumber: String = TEST_PHONE,
     confirmationCode: String = "123456"

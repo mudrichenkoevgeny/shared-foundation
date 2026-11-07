@@ -9,15 +9,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 
 /**
-* Creates a test [UserSummary] instance with default mock properties for unit testing.
-*
-* @param id Unique user ID ([UserId]).
-* @param role Assigned access role ([UserRole]).
-* @param accountStatus Current account state ([UserAccountStatus]).
-* @param nickname User handle or username.
-* @param displayName Human-readable display name.
-* @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
-*/
+ * Creates a test [UserSummary] instance with default mock properties for unit testing.
+ *
+ * @param id Unique user ID ([UserId]).
+ * @param role Assigned access role ([UserRole]).
+ * @param accountStatus Current account state ([UserAccountStatus]).
+ * @param nickname User handle or username.
+ * @param displayName Human-readable display name.
+ * @param avatarUrls Structured avatar image URL variants ([FileUrls]), or `null`.
+ */
 public fun createTestUserSummary(
     id: UserId = createTestUserId(),
     role: UserRole = UserRole.USER,
@@ -36,11 +36,11 @@ public fun createTestUserSummary(
     )
 
 /**
-* Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSummary = { index ->

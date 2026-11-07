@@ -9,8 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import kotlin.time.Instant
 
 /**
-* Creates a test [StorageFilePrivate] domain model instance.
-*/
+ * Creates a test [StorageFilePrivate] domain model instance.
+ */
 public fun createTestStorageFilePrivate(
     id: FileId = createTestFileId(),
     ownerUserId: String? = "usr_000000000001",

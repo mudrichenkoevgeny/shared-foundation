@@ -10,8 +10,8 @@ public const val TEST_USER_ID: String = "00000000-0000-4000-8000-000000000001"
 public const val TEST_USER_ID_2: String = "00000000-0000-4000-8000-000000000002"
 
 /**
-* Creates a test [UserId] instance for unit testing.
-*
-* @param value String representation of the UUID (defaults to [TEST_USER_ID]).
-*/
+ * Creates a test [UserId] instance for unit testing.
+ *
+ * @param value String representation of the UUID (defaults to [TEST_USER_ID]).
+ */
 public fun createTestUserId(value: String = TEST_USER_ID): UserId = value.toUserIdOrThrow()

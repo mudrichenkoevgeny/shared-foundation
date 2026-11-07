@@ -4,17 +4,17 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.res
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.CompositeAuditResourceTypeParser
 
 /**
-* Test implementation of [AuditResourceType] that wraps any arbitrary string.
-*/
+ * Test implementation of [AuditResourceType] that wraps any arbitrary string.
+ */
 public data class TestAuditResourceType(
     public override val value: String
 ) : AuditResourceType
 
 /**
-* Creates a permissive [CompositeAuditResourceTypeParser] for testing, accepting any string resource.
-*
-* @param parser Function mapping raw resource strings to [AuditResourceType].
-*/
+ * Creates a permissive [CompositeAuditResourceTypeParser] for testing, accepting any string resource.
+ *
+ * @param parser Function mapping raw resource strings to [AuditResourceType].
+ */
 public fun createTestCompositeAuditResourceTypeParser(
     parser: (String) -> AuditResourceType? = { TestAuditResourceType(it) }
 ): CompositeAuditResourceTypeParser = CompositeAuditResourceTypeParser(listOf(parser))

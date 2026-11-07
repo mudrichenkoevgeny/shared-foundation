@@ -4,11 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 
 /**
-* Creates a test [AvailableAuthProviders] domain instance.
-*
-* @param primary List of primary authentication providers ([UserAuthProvider]).
-* @param secondary List of secondary authentication providers ([UserAuthProvider]).
-*/
+ * Creates a test [AvailableAuthProviders] domain instance.
+ *
+ * @param primary List of primary authentication providers ([UserAuthProvider]).
+ * @param secondary List of secondary authentication providers ([UserAuthProvider]).
+ */
 public fun createTestAvailableAuthProviders(
     primary: List<UserAuthProvider> = listOf(UserAuthProvider.EMAIL, UserAuthProvider.PHONE),
     secondary: List<UserAuthProvider> = emptyList()

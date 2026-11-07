@@ -11,13 +11,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain
 import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings.createTestManagementAuthSettings
 
 /**
-* Creates a test [ManagementUserConfiguration] domain instance.
-*
-* @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
-* @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
-* @param managementStorageSettings Storage settings for management ([ManagementStorageSettings]).
-* @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
-*/
+ * Creates a test [ManagementUserConfiguration] domain instance.
+ *
+ * @param managementGlobalSettings Global application settings for management ([ManagementGlobalSettings]).
+ * @param managementSecuritySettings Security settings for management ([ManagementSecuritySettings]).
+ * @param managementStorageSettings Storage settings for management ([ManagementStorageSettings]).
+ * @param managementAuthSettings Authentication settings for management ([ManagementAuthSettings]).
+ */
 public fun createTestManagementUserConfiguration(
     managementGlobalSettings: ManagementGlobalSettings = createTestManagementGlobalSettings(),
     managementSecuritySettings: ManagementSecuritySettings = createTestManagementSecuritySettings(),

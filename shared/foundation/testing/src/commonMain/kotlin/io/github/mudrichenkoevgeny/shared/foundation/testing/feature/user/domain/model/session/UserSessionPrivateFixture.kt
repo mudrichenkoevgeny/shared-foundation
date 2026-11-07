@@ -19,25 +19,25 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
-* Creates a test [UserSessionPrivate] instance with default mock properties for unit testing.
-*
-* @param id Unique session ID ([UserSessionId]).
-* @param userId Owning user ID ([UserId]).
-* @param userRole User access level ([UserRole]).
-* @param identifier Login credential identifier string.
-* @param identifierId Credential ID ([UserIdentifierId]).
-* @param identifierDisplayName Display name of the identifier.
-* @param identifierAuthProvider Provider category ([UserAuthProvider]).
-* @param clientDeviceInfo Device info ([ClientDeviceInfo]).
-* @param userAgent HTTP User-Agent header string.
-* @param ipAddress Client IP address.
-* @param expiresAt Expiration timestamp.
-* @param lastAccessedAt Last activity timestamp.
-* @param lastReauthenticatedAt Last re-authentication timestamp.
-* @param isSensitiveValuesMasked Whether sensitive values are masked.
-* @param createdAt Creation timestamp.
-* @param updatedAt Modification timestamp.
-*/
+ * Creates a test [UserSessionPrivate] instance with default mock properties for unit testing.
+ *
+ * @param id Unique session ID ([UserSessionId]).
+ * @param userId Owning user ID ([UserId]).
+ * @param userRole User access level ([UserRole]).
+ * @param identifier Login credential identifier string.
+ * @param identifierId Credential ID ([UserIdentifierId]).
+ * @param identifierDisplayName Display name of the identifier.
+ * @param identifierAuthProvider Provider category ([UserAuthProvider]).
+ * @param clientDeviceInfo Device info ([ClientDeviceInfo]).
+ * @param userAgent HTTP User-Agent header string.
+ * @param ipAddress Client IP address.
+ * @param expiresAt Expiration timestamp.
+ * @param lastAccessedAt Last activity timestamp.
+ * @param lastReauthenticatedAt Last re-authentication timestamp.
+ * @param isSensitiveValuesMasked Whether sensitive values are masked.
+ * @param createdAt Creation timestamp.
+ * @param updatedAt Modification timestamp.
+ */
 public fun createTestUserSessionPrivate(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),
@@ -76,12 +76,12 @@ public fun createTestUserSessionPrivate(
     )
 
 /**
-* Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,
-* alternating devices, and time shifts.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,
+ * alternating devices, and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserSessionPrivateList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionPrivate = { index ->

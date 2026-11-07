@@ -4,14 +4,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 
 /**
-* Creates a test [PagedResult] instance with auto-calculated pagination properties.
-*
-* @param items List of result items.
-* @param totalCount Total count of matching records.
-* @param pageNumber 1-based page index.
-* @param pageSize Number of items per page.
-* @param totalPages Total calculated page count.
-*/
+ * Creates a test [PagedResult] instance with auto-calculated pagination properties.
+ *
+ * @param items List of result items.
+ * @param totalCount Total count of matching records.
+ * @param pageNumber 1-based page index.
+ * @param pageSize Number of items per page.
+ * @param totalPages Total calculated page count.
+ */
 public fun <T> createTestPagedResult(
     items: List<T> = emptyList(),
     totalCount: Long = items.size.toLong(),

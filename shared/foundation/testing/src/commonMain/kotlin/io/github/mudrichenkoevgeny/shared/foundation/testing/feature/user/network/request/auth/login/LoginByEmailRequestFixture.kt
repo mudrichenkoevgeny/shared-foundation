@@ -4,11 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
 /**
-* Creates a test [LoginByEmailRequest] request object instance.
-*
-* @param email Login email address string.
-* @param password Account password string.
-*/
+ * Creates a test [LoginByEmailRequest] request object instance.
+ *
+ * @param email Login email address string.
+ * @param password Account password string.
+ */
 public fun createTestLoginByEmailRequest(
     email: String = TEST_EMAIL,
     password: String = "Secret123!"

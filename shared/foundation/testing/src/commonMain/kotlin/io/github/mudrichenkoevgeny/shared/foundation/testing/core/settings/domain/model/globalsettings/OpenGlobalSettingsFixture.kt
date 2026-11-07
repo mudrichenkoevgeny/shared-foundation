@@ -4,13 +4,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.OpenGlobalSettings
 
 /**
-* Creates a test [OpenGlobalSettings] domain instance.
-*
-* @param privacyPolicyUrl URL of the privacy policy.
-* @param termsOfServiceUrl URL of the terms of service.
-* @param contactSupportEmail Contact support email address.
-* @param minSupportedAppVersions Map of client types to minimum supported app versions.
-*/
+ * Creates a test [OpenGlobalSettings] domain instance.
+ *
+ * @param privacyPolicyUrl URL of the privacy policy.
+ * @param termsOfServiceUrl URL of the terms of service.
+ * @param contactSupportEmail Contact support email address.
+ * @param minSupportedAppVersions Map of client types to minimum supported app versions.
+ */
 public fun createTestOpenGlobalSettings(
     privacyPolicyUrl: String? = "https://example.com/privacy",
     termsOfServiceUrl: String? = "https://example.com/terms",

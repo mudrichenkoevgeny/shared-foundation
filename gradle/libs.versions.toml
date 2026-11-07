@@ -18,7 +18,7 @@ detektApi = "1.23.8"
 ktlint = "14.2.0"
 konsist = "0.18.1"
 binary-compatibility-validator = "0.18.2"
-dokka = "2.2.0"
+dokka = "2.3.0"
 
 # Kotlin
 kotlinx-serialization = "1.12.0"

@@ -4,8 +4,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.rout
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.params.TestNavigationScreenParams
 
 /**
-* Simple test implementation of [ParameterizedNavigationRoute] utilizing [TestNavigationScreenParams].
-*/
+ * Simple test implementation of [ParameterizedNavigationRoute] utilizing [TestNavigationScreenParams].
+ */
 public data class TestParameterizedNavigationRoute(
     public override val route: String = "/test/parameterized",
     public override val params: TestNavigationScreenParams = TestNavigationScreenParams(),

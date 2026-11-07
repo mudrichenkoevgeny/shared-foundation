@@ -7,8 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.StorageFileSummaryPayload
 
 /**
-* Creates a test [StorageFileSummaryPayload] wire object instance.
-*/
+ * Creates a test [StorageFileSummaryPayload] wire object instance.
+ */
 public fun createTestStorageFileSummaryPayload(
     id: String = "00000000-0000-4000-8000-000000000001",
     fileName: String = "test_image.png",

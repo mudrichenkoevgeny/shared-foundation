@@ -6,8 +6,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.t
 public const val TEST_ACCESS_TOKEN: String = "test_access_token"
 
 /**
-* Creates a test [AccessToken] instance for unit testing.
-*
-* @param value Token string (defaults to [TEST_ACCESS_TOKEN]).
-*/
+ * Creates a test [AccessToken] instance for unit testing.
+ *
+ * @param value Token string (defaults to [TEST_ACCESS_TOKEN]).
+ */
 public fun createTestAccessToken(value: String = TEST_ACCESS_TOKEN): AccessToken = AccessToken(value)

@@ -7,8 +7,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 public const val TEST_CLIENT_DEVICE_ID: String = "00000000-0000-4000-8000-000000000030"
 
 /**
-* Creates a test [ClientDeviceId] instance for unit testing.
-*
-* @param value String representation of the UUID (defaults to [TEST_CLIENT_DEVICE_ID]).
-*/
+ * Creates a test [ClientDeviceId] instance for unit testing.
+ *
+ * @param value String representation of the UUID (defaults to [TEST_CLIENT_DEVICE_ID]).
+ */
 public fun createTestClientDeviceId(value: String = TEST_CLIENT_DEVICE_ID): ClientDeviceId = value.toClientDeviceIdOrThrow()

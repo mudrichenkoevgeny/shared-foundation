@@ -4,11 +4,11 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 
 /**
-* Creates a test [LoginByEmailParams] navigation params instance.
-*
-* @param email Pre-filled email string.
-* @param redirectUrl Post-login redirect URL.
-*/
+ * Creates a test [LoginByEmailParams] navigation params instance.
+ *
+ * @param email Pre-filled email string.
+ * @param redirectUrl Post-login redirect URL.
+ */
 public fun createTestLoginByEmailParams(
     email: String? = TEST_EMAIL,
     redirectUrl: String? = null

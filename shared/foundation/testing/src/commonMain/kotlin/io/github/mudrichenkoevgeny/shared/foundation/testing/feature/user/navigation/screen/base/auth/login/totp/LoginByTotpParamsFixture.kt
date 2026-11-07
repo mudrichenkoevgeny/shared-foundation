@@ -4,12 +4,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.login.totp.LoginByTotpParams
 
 /**
-* Creates a test [LoginByTotpParams] navigation params instance.
-*
-* @param mfaToken MFA setup session token string.
-* @param loginByTotpMode TOTP login display mode ([LoginByTotpMode]).
-* @param redirectUrl Post-login redirect URL.
-*/
+ * Creates a test [LoginByTotpParams] navigation params instance.
+ *
+ * @param mfaToken MFA setup session token string.
+ * @param loginByTotpMode TOTP login display mode ([LoginByTotpMode]).
+ * @param redirectUrl Post-login redirect URL.
+ */
 public fun createTestLoginByTotpParams(
     mfaToken: String? = "mfa_token_12345",
     loginByTotpMode: LoginByTotpMode = LoginByTotpMode.DEFAULT,

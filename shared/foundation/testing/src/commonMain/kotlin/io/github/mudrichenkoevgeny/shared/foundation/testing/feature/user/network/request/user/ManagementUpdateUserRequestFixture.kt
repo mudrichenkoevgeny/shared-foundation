@@ -6,19 +6,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.ManagementUpdateUserRequest
 
 /**
-* Creates a test [ManagementUpdateUserRequest] request object instance.
-*
-* @param accountStatus Target account status update ([PatchField]).
-* @param authorityLevel Target authority level update ([PatchField]).
-* @param permissionCodes Target explicit permission codes update ([PatchField]).
-* @param lockoutType Target account lockout type update ([PatchField]).
-* @param temporaryLockoutUntil Target temporary lockout expiration timestamp update ([PatchField]).
-* @param storageConfiguration Target storage configuration overrides update ([PatchField]).
-* @param nickname Target nickname update ([PatchField]).
-* @param displayName Target display name update ([PatchField]).
-* @param avatarFileId Target avatar file identifier update ([PatchField]).
-* @param birthdate Target birthdate timestamp update ([PatchField]).
-*/
+ * Creates a test [ManagementUpdateUserRequest] request object instance.
+ *
+ * @param accountStatus Target account status update ([PatchField]).
+ * @param authorityLevel Target authority level update ([PatchField]).
+ * @param permissionCodes Target explicit permission codes update ([PatchField]).
+ * @param lockoutType Target account lockout type update ([PatchField]).
+ * @param temporaryLockoutUntil Target temporary lockout expiration timestamp update ([PatchField]).
+ * @param storageConfiguration Target storage configuration overrides update ([PatchField]).
+ * @param nickname Target nickname update ([PatchField]).
+ * @param displayName Target display name update ([PatchField]).
+ * @param avatarFileId Target avatar file identifier update ([PatchField]).
+ * @param birthdate Target birthdate timestamp update ([PatchField]).
+ */
 public fun createTestManagementUpdateUserRequest(
     accountStatus: PatchField<String> = PatchField.Value(UserAccountStatus.ACTIVE.value),
     authorityLevel: PatchField<Int> = PatchField.Value(10),

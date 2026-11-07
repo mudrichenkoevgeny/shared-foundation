@@ -6,13 +6,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 
 /**
-* Creates a test [ClientInfoPayload] wire object instance.
-*
-* @param clientDeviceInfo Client device information payload.
-* @param userAgent User agent string.
-* @param ipAddress IP address string.
-* @param apiVersion Version of the API being called.
-*/
+ * Creates a test [ClientInfoPayload] wire object instance.
+ *
+ * @param clientDeviceInfo Client device information payload.
+ * @param userAgent User agent string.
+ * @param ipAddress IP address string.
+ * @param apiVersion Version of the API being called.
+ */
 public fun createTestClientInfoPayload(
     clientDeviceInfo: ClientDeviceInfoPayload = createTestClientDeviceInfoPayload(),
     userAgent: String? = TEST_USER_AGENT,

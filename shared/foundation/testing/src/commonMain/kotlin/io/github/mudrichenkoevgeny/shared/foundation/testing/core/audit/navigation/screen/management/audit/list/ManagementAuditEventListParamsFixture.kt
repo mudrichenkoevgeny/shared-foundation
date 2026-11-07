@@ -8,27 +8,27 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
 
 /**
-* Creates a test [ManagementAuditEventListParams] navigation params instance.
-*
-* @param pageNumber 1-based page index.
-* @param pageSize Number of items per page.
-* @param sortBy Sort field ([AuditEventSortBy]).
-* @param sortOrder Sort direction ([SortOrder]).
-* @param eventIds Filter event IDs list.
-* @param actorIds Filter actor IDs list.
-* @param actorTypes Filter actor types list ([AuditActorType]).
-* @param excludeActorTypes Exclude actor types list ([AuditActorType]).
-* @param actorUserRoles Filter actor user roles list.
-* @param actions Filter audit actions list.
-* @param excludeActions Exclude audit actions list.
-* @param resources Filter audit resources list.
-* @param resourceIds Filter resource IDs list.
-* @param statuses Filter audit statuses list ([AuditStatus]).
-* @param excludeStatuses Exclude audit statuses list ([AuditStatus]).
-* @param createdAtFrom Lower bound creation timestamp.
-* @param createdAtTo Upper bound creation timestamp.
-* @param searchQuery Free-text search query string.
-*/
+ * Creates a test [ManagementAuditEventListParams] navigation params instance.
+ *
+ * @param pageNumber 1-based page index.
+ * @param pageSize Number of items per page.
+ * @param sortBy Sort field ([AuditEventSortBy]).
+ * @param sortOrder Sort direction ([SortOrder]).
+ * @param eventIds Filter event IDs list.
+ * @param actorIds Filter actor IDs list.
+ * @param actorTypes Filter actor types list ([AuditActorType]).
+ * @param excludeActorTypes Exclude actor types list ([AuditActorType]).
+ * @param actorUserRoles Filter actor user roles list.
+ * @param actions Filter audit actions list.
+ * @param excludeActions Exclude audit actions list.
+ * @param resources Filter audit resources list.
+ * @param resourceIds Filter resource IDs list.
+ * @param statuses Filter audit statuses list ([AuditStatus]).
+ * @param excludeStatuses Exclude audit statuses list ([AuditStatus]).
+ * @param createdAtFrom Lower bound creation timestamp.
+ * @param createdAtTo Upper bound creation timestamp.
+ * @param searchQuery Free-text search query string.
+ */
 public fun createTestManagementAuditEventListParams(
     pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
     pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,

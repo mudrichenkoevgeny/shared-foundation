@@ -6,8 +6,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 public const val TEST_ENCRYPTED_STRING: String = "test_encrypted_secret"
 
 /**
-* Creates a test [EncryptedString] instance for unit testing.
-*
-* @param value Encrypted string value (defaults to [TEST_ENCRYPTED_STRING]).
-*/
+ * Creates a test [EncryptedString] instance for unit testing.
+ *
+ * @param value Encrypted string value (defaults to [TEST_ENCRYPTED_STRING]).
+ */
 public fun createTestEncryptedString(value: String = TEST_ENCRYPTED_STRING): EncryptedString = EncryptedString(value)

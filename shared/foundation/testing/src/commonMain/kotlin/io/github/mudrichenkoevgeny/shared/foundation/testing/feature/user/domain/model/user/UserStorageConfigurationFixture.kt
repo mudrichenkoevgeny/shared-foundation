@@ -3,12 +3,12 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domai
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserStorageConfiguration
 
 /**
-* Creates a test [UserStorageConfiguration] domain instance.
-*
-* @param quotaBytes Custom total storage quota in bytes.
-* @param maxUploadSizeBytes Custom maximum single file upload size in bytes.
-* @param maxPendingUploads Custom maximum concurrent pending uploads count.
-*/
+ * Creates a test [UserStorageConfiguration] domain instance.
+ *
+ * @param quotaBytes Custom total storage quota in bytes.
+ * @param maxUploadSizeBytes Custom maximum single file upload size in bytes.
+ * @param maxPendingUploads Custom maximum concurrent pending uploads count.
+ */
 public fun createTestUserStorageConfiguration(
     quotaBytes: Long? = 1_073_741_824L,
     maxUploadSizeBytes: Long? = 104_857_600L,

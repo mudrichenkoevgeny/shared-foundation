@@ -9,8 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.v
 import kotlin.time.Instant
 
 /**
-* Creates a test [StorageFileSummary] domain model instance.
-*/
+ * Creates a test [StorageFileSummary] domain model instance.
+ */
 public fun createTestStorageFileSummary(
     id: FileId = createTestFileId(),
     fileName: String = "test_image.png",

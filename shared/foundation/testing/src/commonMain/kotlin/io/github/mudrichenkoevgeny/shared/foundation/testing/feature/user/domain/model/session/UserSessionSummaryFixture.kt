@@ -13,16 +13,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 import kotlin.time.Instant
 
 /**
-* Creates a test [UserSessionSummary] instance with default mock properties for unit testing.
-*
-* @param id Unique session ID ([UserSessionId]).
-* @param userId Owning user ID ([UserId]).
-* @param clientDeviceInfo Hardware and device info ([ClientDeviceInfo]).
-* @param identifierDisplayName Identifier display name.
-* @param identifierAuthProvider Auth provider category ([UserAuthProvider]).
-* @param lastAccessedAt Timestamp of last activity.
-* @param expiresAt Expiration timestamp.
-*/
+ * Creates a test [UserSessionSummary] instance with default mock properties for unit testing.
+ *
+ * @param id Unique session ID ([UserSessionId]).
+ * @param userId Owning user ID ([UserId]).
+ * @param clientDeviceInfo Hardware and device info ([ClientDeviceInfo]).
+ * @param identifierDisplayName Identifier display name.
+ * @param identifierAuthProvider Auth provider category ([UserAuthProvider]).
+ * @param lastAccessedAt Timestamp of last activity.
+ * @param expiresAt Expiration timestamp.
+ */
 public fun createTestUserSessionSummary(
     id: UserSessionId = createTestUserSessionId(),
     userId: UserId = createTestUserId(),
@@ -43,12 +43,12 @@ public fun createTestUserSessionSummary(
     )
 
 /**
-* Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,
-* alternating devices, and time shifts.
-*
-* @param count Number of elements to generate (defaults to 2).
-* @param generator Custom item builder receiving 0-based element index.
-*/
+ * Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,
+ * alternating devices, and time shifts.
+ *
+ * @param count Number of elements to generate (defaults to 2).
+ * @param generator Custom item builder receiving 0-based element index.
+ */
 public fun createTestUserSessionSummaryList(
     count: Int = 2,
     generator: (index: Int) -> UserSessionSummary = { index ->

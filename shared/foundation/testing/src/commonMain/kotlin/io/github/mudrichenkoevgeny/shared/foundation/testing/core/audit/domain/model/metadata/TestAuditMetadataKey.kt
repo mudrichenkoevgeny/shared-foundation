@@ -5,18 +5,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.met
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CompositeAuditMetadataKeyParser
 
 /**
-* Test implementation of [AuditMetadataKey] that accepts any arbitrary string.
-*/
+ * Test implementation of [AuditMetadataKey] that accepts any arbitrary string.
+ */
 public data class TestAuditMetadataKey(
     public override val value: String,
     public override val valueSensitivity: AuditValueSensitivity = AuditValueSensitivity.NON_SENSITIVE
 ) : AuditMetadataKey
 
 /**
-* Creates a permissive [CompositeAuditMetadataKeyParser] for tests, accepting any string key.
-*
-* @param parser Function mapping raw metadata key strings to [AuditMetadataKey].
-*/
+ * Creates a permissive [CompositeAuditMetadataKeyParser] for tests, accepting any string key.
+ *
+ * @param parser Function mapping raw metadata key strings to [AuditMetadataKey].
+ */
 public fun createTestCompositeAuditMetadataKeyParser(
     parser: (String) -> AuditMetadataKey? = { TestAuditMetadataKey(it) }
 ): CompositeAuditMetadataKeyParser = CompositeAuditMetadataKeyParser(listOf(parser))

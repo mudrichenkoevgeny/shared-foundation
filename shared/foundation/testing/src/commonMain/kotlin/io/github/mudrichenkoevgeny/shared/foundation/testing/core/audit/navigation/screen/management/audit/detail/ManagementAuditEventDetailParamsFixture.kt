@@ -4,10 +4,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.scree
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event.TEST_AUDIT_EVENT_ID
 
 /**
-* Creates a test [ManagementAuditEventDetailParams] navigation params instance.
-*
-* @param eventId Audit event ID string.
-*/
+ * Creates a test [ManagementAuditEventDetailParams] navigation params instance.
+ *
+ * @param eventId Audit event ID string.
+ */
 public fun createTestManagementAuditEventDetailParams(eventId: String = TEST_AUDIT_EVENT_ID): ManagementAuditEventDetailParams =
     ManagementAuditEventDetailParams(
         eventId = eventId

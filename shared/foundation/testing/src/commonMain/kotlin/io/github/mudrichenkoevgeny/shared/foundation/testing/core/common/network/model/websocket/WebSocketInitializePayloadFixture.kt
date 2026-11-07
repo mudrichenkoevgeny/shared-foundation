@@ -4,16 +4,16 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.websocket.WebSocketInitializePayload
 
 /**
-* Creates a test [WebSocketInitializePayload] initialization payload instance.
-*
-* @param clientType Type of client platform.
-* @param language Preferred language code.
-* @param deviceId Client device ID.
-* @param deviceName Name of the client device.
-* @param appVersion Version of the client application.
-* @param operationSystemVersion Version of the operating system.
-* @param apiVersion Version of the API.
-*/
+ * Creates a test [WebSocketInitializePayload] initialization payload instance.
+ *
+ * @param clientType Type of client platform.
+ * @param language Preferred language code.
+ * @param deviceId Client device ID.
+ * @param deviceName Name of the client device.
+ * @param appVersion Version of the client application.
+ * @param operationSystemVersion Version of the operating system.
+ * @param apiVersion Version of the API.
+ */
 public fun createTestWebSocketInitializePayload(
     clientType: String? = ClientType.ANDROID.value,
     language: String? = "en",
