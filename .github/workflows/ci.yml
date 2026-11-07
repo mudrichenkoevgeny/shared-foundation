@@ -11,6 +11,9 @@ jobs:
     name: Build, Lint & Test (Multiplatform)
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Environment & Toolchains
         uses: ./.github/actions/setup-env
 

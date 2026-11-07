@@ -13,6 +13,9 @@ jobs:
       contents: read
       id-token: write
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Environment & Toolchains
         uses: ./.github/actions/setup-env
 
@@ -33,6 +36,9 @@ jobs:
       contents: read
       id-token: write
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Environment & Toolchains
         uses: ./.github/actions/setup-env
 
@@ -51,6 +57,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Environment & Toolchains
         uses: ./.github/actions/setup-env
 
