@@ -158,6 +158,10 @@ private fun Project.configureMavenPublishingAndDokka() {
     pluginManager.apply("com.vanniktech.maven.publish")
     pluginManager.apply("org.jetbrains.dokka")
 
+    rootProject.dependencies {
+        add("dokka", project(this@configureMavenPublishingAndDokka.path))
+    }
+
     extensions.configure<DokkaExtension> {
         dokkaPublications.configureEach {
             failOnWarning.set(true)
