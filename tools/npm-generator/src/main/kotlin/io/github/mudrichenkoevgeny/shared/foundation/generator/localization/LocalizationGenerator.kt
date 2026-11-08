@@ -28,6 +28,24 @@ public data class ModuleLocalizationData(
 )
 
 public fun generateLocalizationCode(rootDir: File): Pair<String, String> {
+    val allResources = collectLocalizationResources(rootDir)
+    if (allResources.isEmpty()) {
+        return Pair("// No localization resources found", "// No localization resources found")
+    }
+
+    val fallbackLocale = if (allResources.containsKey("en")) "en" else allResources.keys.first()
+    val fallbackData = allResources[fallbackLocale] ?: emptyMap()
+    val modulesList = buildModuleLocalizationData(fallbackData)
+
+    val jsCode = generateLocalizationJs(allResources, modulesList)
+    val dtsCode = generateLocalizationDts(modulesList)
+
+    return Pair(jsCode, dtsCode)
+}
+
+private fun collectLocalizationResources(
+    rootDir: File
+): MutableMap<String, MutableMap<String, MutableMap<String, Map<String, String>>>> {
     val localizationDirs =
         rootDir
             .walkTopDown()
@@ -59,80 +77,80 @@ public fun generateLocalizationCode(rootDir: File): Pair<String, String> {
             }
     }
 
-    if (allResources.isEmpty()) {
-        return Pair("// No localization resources found", "// No localization resources found")
-    }
+    return allResources
+}
 
-    val fallbackLocale = if (allResources.containsKey("en")) "en" else allResources.keys.first()
-    val fallbackData = allResources[fallbackLocale] ?: emptyMap()
-
+private fun buildModuleLocalizationData(
+    fallbackData: Map<String, Map<String, Map<String, String>>>
+): List<ModuleLocalizationData> {
     val placeholderRegex = Regex("""\{([a-zA-Z0-9_]+)\}""")
 
-    val modulesList =
-        fallbackData.map { (modulePath, bundleMap) ->
-            val modulePrefix =
-                modulePath
-                    .split('/')
-                    .last()
-                    .split('_')
-                    .joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }
-            val facadeClassName = "${modulePrefix}ModuleStrings"
+    return fallbackData.map { (modulePath, bundleMap) ->
+        val modulePrefix =
+            modulePath
+                .split('/')
+                .last()
+                .split('_')
+                .joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }
+        val facadeClassName = "${modulePrefix}ModuleStrings"
 
-            val bundlesList =
-                bundleMap.map { (bundleName, jsonMap) ->
-                    val bundleClassName = "${modulePrefix}${bundleName.split('_').joinToString("") { part ->
-                        part.replaceFirstChar { char ->
-                            char.uppercase()
-                        }
-                    }}Strings"
-                    val entriesList =
-                        jsonMap.map { (rawKey, value) ->
-                            val placeholders =
-                                placeholderRegex
-                                    .findAll(value)
-                                    .map { it.groupValues[1] }
-                                    .distinct()
-                                    .toList()
-                            val cleanKey = rawKey.removeSuffix("_without_args").removeSuffix("_with_args")
-                            val propertyName = toCamelCase(cleanKey)
-                            val isMethod = placeholders.isNotEmpty()
-                            val propOrMethodName =
-                                if (!isMethod && rawKey.endsWith("_without_args")) {
-                                    "${propertyName}WithoutArgs"
-                                } else {
-                                    propertyName
-                                }
-                            LocalizationKeyEntry(
-                                rawKey = rawKey,
-                                value = value,
-                                cleanKey = cleanKey,
-                                propertyOrMethodName = propOrMethodName,
-                                placeholders = placeholders,
-                                isMethod = isMethod
-                            )
-                        }
-                    LocalizationBundleData(
-                        modulePath = modulePath,
-                        modulePrefix = modulePrefix,
-                        bundleName = bundleName,
-                        className = bundleClassName,
-                        entries = entriesList
-                    )
-                }
+        val bundlesList =
+            bundleMap.map { (bundleName, jsonMap) ->
+                val bundleClassName = "${modulePrefix}${bundleName.split('_').joinToString("") { part ->
+                    part.replaceFirstChar { char -> char.uppercase() }
+                }}Strings"
+                val entriesList =
+                    jsonMap.map { (rawKey, value) ->
+                        val placeholders =
+                            placeholderRegex
+                                .findAll(value)
+                                .map { it.groupValues[1] }
+                                .distinct()
+                                .toList()
+                        val cleanKey = rawKey.removeSuffix("_without_args").removeSuffix("_with_args")
+                        val propertyName = toCamelCase(cleanKey)
+                        val isMethod = placeholders.isNotEmpty()
+                        val propOrMethodName =
+                            if (!isMethod && rawKey.endsWith("_without_args")) {
+                                "${propertyName}WithoutArgs"
+                            } else {
+                                propertyName
+                            }
+                        LocalizationKeyEntry(
+                            rawKey = rawKey,
+                            value = value,
+                            cleanKey = cleanKey,
+                            propertyOrMethodName = propOrMethodName,
+                            placeholders = placeholders,
+                            isMethod = isMethod
+                        )
+                    }
+                LocalizationBundleData(
+                    modulePath = modulePath,
+                    modulePrefix = modulePrefix,
+                    bundleName = bundleName,
+                    className = bundleClassName,
+                    entries = entriesList
+                )
+            }
 
-            ModuleLocalizationData(
-                modulePath = modulePath,
-                modulePrefix = modulePrefix,
-                facadeClassName = facadeClassName,
-                bundles = bundlesList
-            )
-        }
+        ModuleLocalizationData(
+            modulePath = modulePath,
+            modulePrefix = modulePrefix,
+            facadeClassName = facadeClassName,
+            bundles = bundlesList
+        )
+    }
+}
 
+private fun generateLocalizationJs(
+    allResources: Map<String, Map<String, Map<String, Map<String, String>>>>,
+    modulesList: List<ModuleLocalizationData>
+): String {
     val jsSb = StringBuilder()
-
     val jsonResourcesCode = formatAsJsObject(allResources)
-    jsSb
-        .append(
+
+    jsSb.append(
 """
 /**
  * Raw localization resource dictionaries by locale, module path, and bundle name.
@@ -194,12 +212,21 @@ export function formatByteSize(bytesRaw, locale = 'en', decimals = 0, resolver =
 }
 
 """.trimIndent()
-        ).append("\n\n")
+    ).append("\n\n")
 
     modulesList.forEach { moduleData ->
-        moduleData.bundles.forEach { bundleData ->
-            jsSb
-                .append(
+        appendModuleBundleClassesJs(jsSb, moduleData)
+        appendModuleFacadeClassJs(jsSb, moduleData)
+    }
+
+    appendGlobalLocalizationJs(jsSb, modulesList)
+
+    return jsSb.toString()
+}
+
+private fun appendModuleBundleClassesJs(jsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+    moduleData.bundles.forEach { bundleData ->
+        jsSb.append(
 """
 export class ${bundleData.className} {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
@@ -212,27 +239,22 @@ export class ${bundleData.className} {
   }
 
 """.trimIndent()
-                ).append("\n")
+        ).append("\n")
 
-            bundleData.entries.forEach { entry ->
-                if (!entry.isMethod) {
-                    jsSb
-                        .append(
+        bundleData.entries.forEach { entry ->
+            if (!entry.isMethod) {
+                jsSb.append(
 """
 get ${entry.propertyOrMethodName}() {
   return this._get("${entry.rawKey}");
 }
 
 """.trimIndent()
-                        ).append("\n")
-                } else {
-                    val argList =
-                        entry.placeholders.indices
-                            .map { "arg${it + 1}" }
-                            .joinToString(", ")
-                    val objProps = entry.placeholders.mapIndexed { idx, p -> "$p: arg${idx + 1}" }.joinToString(", ")
-                    jsSb
-                        .append(
+                ).append("\n")
+            } else {
+                val argList = entry.placeholders.indices.map { "arg${it + 1}" }.joinToString(", ")
+                val objProps = entry.placeholders.mapIndexed { idx, p -> "$p: arg${idx + 1}" }.joinToString(", ")
+                jsSb.append(
 """
 ${entry.propertyOrMethodName}($argList) {
   const template = this._get("${entry.rawKey}");
@@ -241,36 +263,32 @@ ${entry.propertyOrMethodName}($argList) {
 }
 
 """.trimIndent()
-                        ).append("\n")
-                }
+                ).append("\n")
             }
-
-            jsSb.append("}\n\n")
         }
 
-        jsSb
-            .append(
+        jsSb.append("}\n\n")
+    }
+}
+
+private fun appendModuleFacadeClassJs(jsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+    jsSb.append(
 """
 export class ${moduleData.facadeClassName} {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
 
 """.trimIndent()
-            ).append("\n")
-        moduleData.bundles.forEach { bundleData ->
-            val fieldName =
-                bundleData.bundleName
-                    .split('_')
-                    .joinToString("") { part ->
-                        part.replaceFirstChar { char ->
-                            char.uppercase()
-                        }
-                    }.decapitalizeFirstLetter()
-            jsSb.append("    this.$fieldName = new ${bundleData.className}(resolver, locale);\n")
-        }
+    ).append("\n")
 
-        if (moduleData.facadeClassName == "SecurityModuleStrings") {
-            jsSb
-                .append(
+    moduleData.bundles.forEach { bundleData ->
+        val fieldName = bundleData.bundleName.split('_').joinToString("") { part ->
+            part.replaceFirstChar { char -> char.uppercase() }
+        }.decapitalizeFirstLetter()
+        jsSb.append("    this.$fieldName = new ${bundleData.className}(resolver, locale);\n")
+    }
+
+    if (moduleData.facadeClassName == "SecurityModuleStrings") {
+        jsSb.append(
 """
 }
 
@@ -299,14 +317,13 @@ resolvePasswordTooWeakReasons(args) {
   return reasons.length > 0 ? reasons : [this.errors.passwordTooWeak];
 }
 """.trimIndent()
-                ).append("\n")
-        } else if (moduleData.facadeClassName != "UserModuleStrings") {
-            jsSb.append("  }\n")
-        }
+        ).append("\n")
+    } else if (moduleData.facadeClassName != "UserModuleStrings") {
+        jsSb.append("  }\n")
+    }
 
-        if (moduleData.facadeClassName == "UserModuleStrings") {
-            jsSb
-                .append(
+    if (moduleData.facadeClassName == "UserModuleStrings") {
+        jsSb.append(
 """
 }
 
@@ -334,28 +351,28 @@ resolveTotalUserIdentifiersLimitReachedMessage(limit) {
   return this.errors.totalIdentifiersLimitReachedWithoutArgs;
 }
 """.trimIndent()
-                ).append("\n")
-        }
-
-        jsSb.append("}\n\n")
+        ).append("\n")
     }
 
-    jsSb
-        .append(
+    jsSb.append("}\n\n")
+}
+
+private fun appendGlobalLocalizationJs(jsSb: StringBuilder, modulesList: List<ModuleLocalizationData>) {
+    jsSb.append(
 """
 export class SharedFoundationLocalization {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
 
 """.trimIndent()
-        ).append("\n")
+    ).append("\n")
+
     modulesList.forEach { moduleData ->
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
         jsSb.append("    this.$fieldName = new ${moduleData.facadeClassName}(resolver, locale);\n")
     }
     jsSb.append("  }\n}\n\n")
 
-    jsSb
-        .append(
+    jsSb.append(
 """
 let _globalLocale = 'en';
 let _globalResolver = defaultLocalizedStringResolver;
@@ -382,12 +399,11 @@ export const sharedLocalization = new Proxy({}, {
 });
 
 """.trimIndent()
-        ).append("\n")
+    ).append("\n")
 
     modulesList.forEach { moduleData ->
         val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
-        jsSb
-            .append(
+        jsSb.append(
 """
 export const $singletonName = new Proxy({}, {
   get(_, prop) {
@@ -396,13 +412,14 @@ export const $singletonName = new Proxy({}, {
 });
 
 """.trimIndent()
-            ).append("\n")
+        ).append("\n")
     }
+}
 
+private fun generateLocalizationDts(modulesList: List<ModuleLocalizationData>): String {
     val dtsSb = StringBuilder()
 
-    dtsSb
-        .append(
+    dtsSb.append(
 """
 export type LocalizedStringResolver = (modulePath: string, bundleName: string, key: string, locale?: string) => string | undefined;
 
@@ -419,20 +436,24 @@ export declare const defaultLocalizedStringResolver: LocalizedStringResolver;
 export declare const localizationResources: Record<string, Record<string, Record<string, Record<string, string>>>>;
 
 """.trimIndent()
-        ).append("\n\n")
+    ).append("\n\n")
 
     modulesList.forEach { moduleData ->
-        moduleData.bundles.forEach { bundleData ->
-            val rawKeysUnion = bundleData.entries.joinToString(" | ") { "'${it.rawKey}'" }.ifEmpty { "string" }
-            val propsUnion =
-                bundleData.entries
-                    .joinToString(
-                        " | "
-                    ) { "'${it.propertyOrMethodName}'" }
-                    .ifEmpty { "string" }
+        appendModuleBundleClassesDts(dtsSb, moduleData)
+        appendModuleFacadeClassDts(dtsSb, moduleData)
+    }
 
-            dtsSb
-                .append(
+    appendGlobalLocalizationDts(dtsSb, modulesList)
+
+    return dtsSb.toString()
+}
+
+private fun appendModuleBundleClassesDts(dtsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+    moduleData.bundles.forEach { bundleData ->
+        val rawKeysUnion = bundleData.entries.joinToString(" | ") { "'${it.rawKey}'" }.ifEmpty { "string" }
+        val propsUnion = bundleData.entries.joinToString(" | ") { "'${it.propertyOrMethodName}'" }.ifEmpty { "string" }
+
+        dtsSb.append(
 """
 export type ${bundleData.className}RawKey = $rawKeysUnion;
 export type ${bundleData.className}Property = $propsUnion;
@@ -441,95 +462,86 @@ export class ${bundleData.className} {
 constructor(resolver?: LocalizedStringResolver, locale?: string);
 
 """.trimIndent()
+        ).append("\n")
+
+        bundleData.entries.forEach { entry ->
+            val escapedVal = entry.value.replace("\n", " ").replace("*/", "* /")
+            if (!entry.isMethod) {
+                dtsSb.append(
+"""
+/**
+ * Template: "$escapedVal"
+ */
+get ${entry.propertyOrMethodName}(): string;
+
+""".trimIndent()
                 ).append("\n")
+            } else {
+                val paramsObjType = entry.placeholders.joinToString("; ") { "$it: string | number" }
+                val paramsPositional = entry.placeholders.joinToString(", ") { "$it: string | number" }
+                dtsSb.append(
+"""
+/**
+ * Template: "$escapedVal"
+ */
+${entry.propertyOrMethodName}(params: { $paramsObjType }): string;
+${entry.propertyOrMethodName}($paramsPositional): string;
 
-            bundleData.entries.forEach { entry ->
-                val escapedVal = entry.value.replace("\n", " ").replace("*/", "* /")
-                if (!entry.isMethod) {
-                    dtsSb
-                        .append(
-                            """
-                            /**
-                             * Template: "$escapedVal"
-                             */
-                            get ${entry.propertyOrMethodName}(): string;
-
-                            """.trimIndent()
-                        ).append("\n")
-                } else {
-                    val paramsObjType = entry.placeholders.joinToString("; ") { "$it: string | number" }
-                    val paramsPositional = entry.placeholders.joinToString(", ") { "$it: string | number" }
-                    dtsSb
-                        .append(
-                            """
-                            /**
-                             * Template: "$escapedVal"
-                             */
-                            ${entry.propertyOrMethodName}(params: { $paramsObjType }): string;
-                            ${entry.propertyOrMethodName}($paramsPositional): string;
-
-                            """.trimIndent()
-                        ).append("\n")
-                }
+""".trimIndent()
+                ).append("\n")
             }
-
-            dtsSb.append("}\n\n")
-        }
-
-        dtsSb
-            .append(
-                """
-export class ${moduleData.facadeClassName} {
-  constructor(resolver?: LocalizedStringResolver, locale?: string);
-
-                """.trimIndent()
-            ).append("\n")
-        moduleData.bundles.forEach { bundleData ->
-            val fieldName =
-                bundleData.bundleName
-                    .split('_')
-                    .joinToString("") { part ->
-                        part.replaceFirstChar { char -> char.uppercase() }
-                    }.decapitalizeFirstLetter()
-            dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
-        }
-
-        if (moduleData.facadeClassName == "SecurityModuleStrings") {
-            dtsSb.append("  resolvePasswordTooWeakReasons(args?: Record<string, unknown> | null): string[];\n")
-        }
-
-        if (moduleData.facadeClassName == "UserModuleStrings") {
-            dtsSb.append(
-                "  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n"
-            )
-            dtsSb.append(
-                "  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n"
-            )
-            dtsSb.append(
-                "  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n"
-            )
         }
 
         dtsSb.append("}\n\n")
     }
+}
 
-    dtsSb
-        .append(
-            """
+private fun appendModuleFacadeClassDts(dtsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+    dtsSb.append(
+"""
+export class ${moduleData.facadeClassName} {
+  constructor(resolver?: LocalizedStringResolver, locale?: string);
+
+""".trimIndent()
+    ).append("\n")
+
+    moduleData.bundles.forEach { bundleData ->
+        val fieldName = bundleData.bundleName.split('_').joinToString("") { part ->
+            part.replaceFirstChar { char -> char.uppercase() }
+        }.decapitalizeFirstLetter()
+        dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
+    }
+
+    if (moduleData.facadeClassName == "SecurityModuleStrings") {
+        dtsSb.append("  resolvePasswordTooWeakReasons(args?: Record<string, unknown> | null): string[];\n")
+    }
+
+    if (moduleData.facadeClassName == "UserModuleStrings") {
+        dtsSb.append("  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n")
+        dtsSb.append("  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n")
+        dtsSb.append("  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n")
+    }
+
+    dtsSb.append("}\n\n")
+}
+
+private fun appendGlobalLocalizationDts(dtsSb: StringBuilder, modulesList: List<ModuleLocalizationData>) {
+    dtsSb.append(
+"""
 export class SharedFoundationLocalization {
   constructor(resolver?: LocalizedStringResolver, locale?: string);
 
-            """.trimIndent()
-        ).append("\n")
+""".trimIndent()
+    ).append("\n")
+
     modulesList.forEach { moduleData ->
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
         dtsSb.append("  readonly $fieldName: ${moduleData.facadeClassName};\n")
     }
     dtsSb.append("}\n\n")
 
-    dtsSb
-        .append(
-            """
+    dtsSb.append(
+"""
 export declare const SharedLocalization: {
   setLocale(locale: string): void;
   getLocale(): string;
@@ -539,15 +551,13 @@ export declare const SharedLocalization: {
 
 export declare const sharedLocalization: SharedFoundationLocalization;
 
-            """.trimIndent()
-        ).append("\n")
+""".trimIndent()
+    ).append("\n")
 
     modulesList.forEach { moduleData ->
         val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
         dtsSb.append("export declare const $singletonName: ${moduleData.facadeClassName};\n")
     }
-
-    return Pair(jsSb.toString(), dtsSb.toString())
 }
 
 public fun parseFlatJson(content: String): Map<String, String> {

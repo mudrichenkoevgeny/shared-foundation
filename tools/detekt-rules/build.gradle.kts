@@ -1,18 +1,10 @@
-import com.vanniktech.maven.publish.MavenPublishBaseExtension
+extra["publishToMaven"] = true
+extra["artifactId"] = "shared-foundation-detekt-rules"
 
 plugins {
-    alias(libs.plugins.jetbrains.kotlin.jvm)
-    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
     compileOnly(libs.detekt.api)
-}
-
-extensions.configure<MavenPublishBaseExtension> {
-    coordinates(
-        groupId = rootProject.group.toString(),
-        artifactId = "shared-foundation-detekt-rules",
-        version = rootProject.version.toString()
-    )
 }

@@ -18,6 +18,9 @@ public data class ClientDeviceInfo(
     public val appVersion: String?,
     public val operationSystemVersion: String?
 ) {
+    /**
+     * Returns true if the client application is a mobile client ([ClientType.ANDROID] or [ClientType.IOS]).
+     */
     public fun isMobileClient(): Boolean = clientType?.isMobileClient() == true
 
     public companion object {

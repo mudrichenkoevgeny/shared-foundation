@@ -6,11 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class SessionDetailParamsTest {
-    private companion object {
-        const val TEST_SESSION_ID = "00000000-0000-4000-8000-000000000010"
-        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
-    }
-
     @Test
     fun `parse extracts sessionId and userId correctly`() {
         val params =
@@ -43,5 +38,10 @@ class SessionDetailParamsTest {
 
         assertEquals(emptyMap(), serialized)
         assertEquals(serialized, SessionDetailParams.serialize(model))
+    }
+
+    private companion object {
+        const val TEST_SESSION_ID = "00000000-0000-4000-8000-000000000010"
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
     }
 }

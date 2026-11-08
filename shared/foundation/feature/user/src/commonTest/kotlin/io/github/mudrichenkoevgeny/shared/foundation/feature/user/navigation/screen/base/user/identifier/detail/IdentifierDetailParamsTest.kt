@@ -6,11 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class IdentifierDetailParamsTest {
-    private companion object {
-        const val TEST_IDENTIFIER_ID = "00000000-0000-4000-8000-000000000020"
-        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
-    }
-
     @Test
     fun `parse extracts identifierId and userId correctly`() {
         val params =
@@ -43,5 +38,10 @@ class IdentifierDetailParamsTest {
 
         assertEquals(emptyMap(), serialized)
         assertEquals(serialized, IdentifierDetailParams.serialize(model))
+    }
+
+    private companion object {
+        const val TEST_IDENTIFIER_ID = "00000000-0000-4000-8000-000000000020"
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
     }
 }

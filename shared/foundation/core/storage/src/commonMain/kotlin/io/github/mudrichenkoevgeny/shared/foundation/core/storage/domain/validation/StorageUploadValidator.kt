@@ -36,23 +36,19 @@ public object StorageUploadValidator {
             if (filter.isBlank()) return@any false
 
             when {
-                // Extension pattern starting with dot (e.g., ".png", ".webp")
                 filter.startsWith(".") -> {
                     extension == filter || lowerFileName.endsWith(filter)
                 }
 
-                // MIME wildcard pattern (e.g., "image" wildcard)
                 filter.endsWith(WILDCARD_SUFFIX) -> {
                     val mimePrefix = filter.removeSuffix(WILDCARD_SUFFIX)
                     normalizedMimeType != null && normalizedMimeType.startsWith("$mimePrefix/")
                 }
 
-                // Exact MIME type (e.g., "application/pdf", "image/png")
                 filter.contains('/') -> {
                     normalizedMimeType == filter
                 }
 
-                // Extension without leading dot (e.g., "png", "pdf")
                 else -> {
                     extension == ".$filter"
                 }

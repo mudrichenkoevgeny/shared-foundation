@@ -5,6 +5,7 @@ import dev.detekt.api.Config
 import dev.detekt.api.Entity
 import dev.detekt.api.Finding
 import dev.detekt.api.Rule
+import dev.detekt.api.RuleName
 
 /**
  * Detekt rule prohibiting redundant inline comments in code bodies.
@@ -18,7 +19,9 @@ public class NoInlineCommentRule(
                 "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
     ) {
     private val allowedPrefixes =
-        listOf("/**", "// todo", "// fixme", "// workaround", "// suppress", "// @")
+        listOf("/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---")
+
+    override val ruleName: RuleName = RuleName("NoInlineComment")
 
     override fun visitComment(comment: PsiComment) {
         super.visitComment(comment)

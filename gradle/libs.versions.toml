@@ -13,27 +13,31 @@ kotlin = "2.4.21"
 androidGradlePlugin = "9.5.1"
 maven-publish-plugin = "0.37.0"
 dependency-analysis = "3.20.1"
-detekt = "2.0.0-alpha.6"
-ktlint = "14.2.0"
-konsist = "0.18.1"
 binary-compatibility-validator = "0.18.2"
 dokka = "2.3.0"
 
 # Kotlin
 kotlinx-serialization = "1.12.0"
 
+# Code Analysis
+ktlint = "14.2.0"
+detekt = "2.0.0-alpha.6"
+konsist = "0.18.1"
+
 [libraries]
 # Kotlin
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" } # Transitive for kotlinx-serialization
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+# Code Analysis
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 detekt-api = { group = "dev.detekt", name = "detekt-api", version.ref = "detekt" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "androidGradlePlugin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish-plugin" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }

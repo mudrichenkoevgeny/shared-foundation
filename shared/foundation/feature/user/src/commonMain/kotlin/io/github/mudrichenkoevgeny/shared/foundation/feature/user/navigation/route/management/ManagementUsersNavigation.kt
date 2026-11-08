@@ -91,9 +91,15 @@ public sealed interface ManagementUsersNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [userId].
+             */
             public fun getPath(userId: UserId): String =
                 ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [userId].
+             */
             public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
@@ -126,9 +132,15 @@ public sealed interface ManagementUsersNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/sessions"
 
+            /**
+             * Returns the formatted navigation route path for the given [userId].
+             */
             public fun getPath(userId: UserId): String =
                 ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [userId].
+             */
             public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
@@ -161,9 +173,15 @@ public sealed interface ManagementUsersNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "$BASE_USERS_ROUTE/{${UserApiPaths.USER_ID}}/identifiers"
 
+            /**
+             * Returns the formatted navigation route path for the given [userId].
+             */
             public fun getPath(userId: UserId): String =
                 ROUTE.replace("{${UserApiPaths.USER_ID}}", userId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [userId].
+             */
             public fun getPath(userId: String): String = ROUTE.replace("{${UserApiPaths.USER_ID}}", userId)
         }
     }
@@ -245,9 +263,15 @@ public sealed interface ManagementUsersNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "$BASE_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [identifierId].
+             */
             public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [identifierId].
+             */
             public fun getPath(identifierId: String): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
@@ -280,9 +304,15 @@ public sealed interface ManagementUsersNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "$BASE_SESSIONS_ROUTE/{${UserApiPaths.SESSION_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [sessionId].
+             */
             public fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [sessionId].
+             */
             public fun getPath(sessionId: String): String = ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
     }

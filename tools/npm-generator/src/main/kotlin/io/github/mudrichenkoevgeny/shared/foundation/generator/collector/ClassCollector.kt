@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.generator.collector
 
+import java.lang.reflect.Modifier
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource.CommonAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
@@ -305,9 +306,7 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
     val staticFields =
         kClass.java.declaredFields
             .filter {
-                java.lang.reflect.Modifier
-                    .isStatic(it.modifiers) &&
-                    it.type == String::class.java
+                Modifier.isStatic(it.modifiers) && it.type == String::class.java
             }.mapNotNull { field ->
                 try {
                     field.isAccessible = true
@@ -366,8 +365,7 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
                 .filter {
                     it.parameterCount == 0 &&
                         it.returnType == String::class.java &&
-                        !java.lang.reflect.Modifier
-                            .isStatic(it.modifiers)
+                        !Modifier.isStatic(it.modifiers)
                 }.mapNotNull { method ->
                     try {
                         method.isAccessible = true
@@ -855,7 +853,7 @@ public fun getEnumInfo(kClass: KClass<*>): EnumInfo {
         }
     } else if (kClass == ExternalAuthProvider::class) {
         for (ext in ExternalAuthProvider.all) {
-            entries.add(ext.userAuthProvider.name to ext.userAuthProvider.value)
+            entries.add(ext.userAuthProvider.value.uppercase() to ext.userAuthProvider.value)
         }
     }
 

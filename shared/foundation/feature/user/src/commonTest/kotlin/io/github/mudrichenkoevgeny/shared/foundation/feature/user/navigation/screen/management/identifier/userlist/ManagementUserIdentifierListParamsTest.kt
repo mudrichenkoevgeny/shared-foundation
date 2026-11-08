@@ -10,10 +10,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ManagementUserIdentifierListParamsTest {
-    private companion object {
-        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
-    }
-
     @Test
     fun `parse extracts user identifier list params correctly`() {
         val params =
@@ -83,5 +79,9 @@ class ManagementUserIdentifierListParamsTest {
         val restored = ManagementUserIdentifierListParams.parse(serialized + (UserApiPaths.USER_ID to TEST_USER_ID))
 
         assertEquals(original, restored)
+    }
+
+    private companion object {
+        const val TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
     }
 }

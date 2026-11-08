@@ -81,9 +81,15 @@ public sealed interface ManagementAuditNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "${AuditEventList.ROUTE}/{${AuditApiPaths.EVENT_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [eventId].
+             */
             public fun getPath(eventId: AuditEventId): String =
                 ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [eventId].
+             */
             public fun getPath(eventId: String): String = ROUTE.replace("{${AuditApiPaths.EVENT_ID}}", eventId)
         }
     }

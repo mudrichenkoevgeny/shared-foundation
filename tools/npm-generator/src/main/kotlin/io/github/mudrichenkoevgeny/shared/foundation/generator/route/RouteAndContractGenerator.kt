@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength")
-
 package io.github.mudrichenkoevgeny.shared.foundation.generator.route
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues

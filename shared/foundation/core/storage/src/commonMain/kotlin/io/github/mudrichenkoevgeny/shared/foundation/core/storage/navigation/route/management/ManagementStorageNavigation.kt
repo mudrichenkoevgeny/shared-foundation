@@ -81,9 +81,15 @@ public sealed interface ManagementStorageNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [fileId].
+             */
             public fun getPath(fileId: FileId): String =
                 ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [fileId].
+             */
             public fun getPath(fileId: String): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
         }
     }

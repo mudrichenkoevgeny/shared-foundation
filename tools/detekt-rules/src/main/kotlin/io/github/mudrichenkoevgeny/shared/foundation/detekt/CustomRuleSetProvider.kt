@@ -14,9 +14,13 @@ public class CustomRuleSetProvider : RuleSetProvider {
         RuleSet(
             ruleSetId,
             listOf(
-                ::NoInlineCommentRule,
+                ::AvoidElseInSealedWhenRule,
                 ::NoFullyQualifiedNameRule,
-                ::PreferValueOverNameRule
+                ::NoHardcodedTimeMillisRule,
+                ::NoInlineCommentRule,
+                ::PreferValueOverNameRule,
+                ::ProhibitNonSafeAssertionRule,
+                ::ProhibitPrintlnRule,
             )
         )
 }

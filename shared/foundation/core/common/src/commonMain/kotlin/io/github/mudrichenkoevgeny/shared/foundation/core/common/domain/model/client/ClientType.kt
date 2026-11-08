@@ -41,6 +41,9 @@ public enum class ClientType(
     @SerialName(CLIENT_DESKTOP)
     DESKTOP(CLIENT_DESKTOP);
 
+    /**
+     * Returns true if this client type is a mobile platform ([ANDROID] or [IOS]).
+     */
     public fun isMobileClient(): Boolean = this == ANDROID || this == IOS
 
     public companion object {

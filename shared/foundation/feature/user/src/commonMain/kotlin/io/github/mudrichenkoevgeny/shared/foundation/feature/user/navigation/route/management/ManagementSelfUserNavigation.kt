@@ -102,9 +102,15 @@ public sealed interface ManagementSelfUserNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "${IdentifierList.ROUTE}/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [identifierId].
+             */
             public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [identifierId].
+             */
             public fun getPath(identifierId: String): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
@@ -158,9 +164,15 @@ public sealed interface ManagementSelfUserNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "${SessionList.ROUTE}/{${UserApiPaths.SESSION_ID}}"
 
+            /**
+             * Returns the formatted navigation route path for the given [sessionId].
+             */
             public fun getPath(sessionId: UserSessionId): String =
                 ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId.asHexDashString())
 
+            /**
+             * Returns the formatted navigation route path for the given string [sessionId].
+             */
             public fun getPath(sessionId: String): String = ROUTE.replace("{${UserApiPaths.SESSION_ID}}", sessionId)
         }
     }

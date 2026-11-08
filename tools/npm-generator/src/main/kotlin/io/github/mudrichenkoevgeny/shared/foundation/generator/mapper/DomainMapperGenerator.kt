@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength")
-
 package io.github.mudrichenkoevgeny.shared.foundation.generator.mapper
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode

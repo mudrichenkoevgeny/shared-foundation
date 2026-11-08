@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength", "Indent")
-
 package io.github.mudrichenkoevgeny.shared.foundation.generator.schema
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
@@ -202,131 +200,117 @@ public fun resolveZodType(
     val classifier = type.classifier as? KClass<*> ?: return "z.unknown()"
     val isMarkedNullable = type.isMarkedNullable
 
-    val baseZod =
-        when {
-            classifier == UserAuthProvider::class -> "userAuthProviderSchema"
-            classifier == ExternalAuthProvider::class -> "externalAuthProviderSchema"
-            classifier == UserRole::class -> "userRoleSchema"
-            classifier == UserAccountStatus::class -> "userAccountStatusSchema"
-            classifier == AccountLockoutType::class -> "accountLockoutTypeSchema"
-            classifier == AuditActorType::class -> "auditActorTypeSchema"
-            classifier == AuditValueSensitivity::class -> "auditValueSensitivitySchema"
-            classifier == AuditStatus::class -> "auditStatusSchema"
-            classifier == CommonAuditMetadataKey::class -> "commonAuditMetadataKeySchema"
-            classifier == UserAuditMetadataKey::class -> "userAuditMetadataKeySchema"
-            classifier == ClientType::class -> "clientTypeSchema"
-            classifier == SortOrder::class -> "sortOrderSchema"
-            classifier == PasswordPolicyFailReason::class -> "passwordPolicyFailReasonSchema"
-            classifier == TotpStep::class -> "totpStepSchema"
-            classifier == LoginByTotpMode::class -> "loginByTotpModeSchema"
-            classifier == UnlockMethod::class -> "unlockMethodSchema"
-            classifier == UserSortBy::class -> "userSortBySchema"
-            classifier == UserIdentifierSortBy::class -> "userIdentifierSortBySchema"
-            classifier == UserSessionSortBy::class -> "userSessionSortBySchema"
-            classifier == AuditEventSortBy::class -> "auditEventSortBySchema"
-            classifier == CommonSortValues::class -> "CommonSortValuesSchema"
-            classifier == JsonElement::class -> "z.unknown()"
-
-            paramName == "totpStep" -> "totpStepSchema"
-            paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "loginByTotpModeSchema"
-            classifier == StorageCategory::class -> "storageCategorySchema"
-            classifier == StorageFileStatus::class -> "storageFileStatusSchema"
-            classifier == StorageFileVisibility::class -> "storageFileVisibilitySchema"
-            paramName == "unlockMethod" -> "unlockMethodSchema"
-            paramName == "clientType" -> "clientTypeSchema"
-            paramName == "deviceId" || paramName == "clientDeviceId" -> "clientDeviceIdSchema"
-            paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "userRoleSchema"
-            paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "userAccountStatusSchema"
-            paramName == "lockoutType" -> "accountLockoutTypeSchema"
-            paramName == "actorType" -> "auditActorTypeSchema"
-            paramName == "status" &&
-                (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "auditStatusSchema"
-            paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "userAuthProviderSchema"
-            paramName == "sensitivity" || paramName == "valueSensitivity" -> "auditValueSensitivitySchema"
-            paramName == "permissionCodes" -> "z.array(permissionCodeSchema)"
-
-            classifier == String::class -> {
-                when (paramName) {
-                    "id" ->
-                        when (parentClass) {
-                            UserSummaryPayload::class, UserPrivatePayload::class, UserSummary::class, UserPrivate::class -> "userIdSchema"
-                            UserSessionSummaryPayload::class, UserSessionPrivatePayload::class, UserSessionSummary::class, UserSessionPrivate::class -> "userSessionIdSchema"
-                            AuditEventSummaryPayload::class, AuditEventPrivatePayload::class, AuditEventSummary::class, AuditEventPrivate::class -> "auditEventIdSchema"
-                            UserIdentifierSummaryPayload::class, UserIdentifierPrivatePayload::class, UserIdentifierSummary::class, UserIdentifierPrivate::class -> "userIdentifierIdSchema"
-                            StorageFileSummaryPayload::class, StorageFilePrivatePayload::class, StorageFileSummary::class, StorageFilePrivate::class, StorageFileInternal::class -> "fileIdSchema"
-                            else -> "z.string()"
-                        }
-                    "fileId" -> "fileIdSchema"
-                    "userId" -> "userIdSchema"
-                    "identifierId" -> "userIdentifierIdSchema"
-                    "sessionId" -> "userSessionIdSchema"
-                    "actorId" -> "userIdSchema"
-                    "permissionCode" -> "permissionCodeSchema"
-                    else -> "z.string()"
-                }
-            }
-            classifier == Int::class ||
-                classifier == Long::class ||
-                classifier == Float::class ||
-                classifier == Double::class ||
-                classifier == Short::class ||
-                classifier == Byte::class -> "z.number()"
-            classifier == Boolean::class -> "z.boolean()"
-            classifier == PermissionCode::class -> "permissionCodeSchema"
-            classifier == UserId::class -> "userIdSchema"
-            classifier == UserIdentifierId::class -> "userIdentifierIdSchema"
-            classifier == UserSessionId::class -> "userSessionIdSchema"
-            classifier == AuditEventId::class -> "auditEventIdSchema"
-            classifier == FileId::class -> "fileIdSchema"
-            classifier == UploadQueueItemId::class -> "uploadQueueItemIdSchema"
-            classifier == ClientDeviceId::class -> "clientDeviceIdSchema"
-            classifier == DecryptedString::class -> "decryptedStringSchema"
-            classifier == EncryptedString::class -> "encryptedStringSchema"
-            classifier == PasswordHash::class -> "passwordHashSchema"
-            classifier == AccessToken::class -> "accessTokenSchema"
-            classifier == RefreshToken::class -> "refreshTokenSchema"
-            classifier == RefreshTokenHash::class -> "refreshTokenHashSchema"
-            classifier == Instant::class -> "z.number()"
-            classifier == List::class ||
-                classifier == Set::class ||
-                classifier == Collection::class ||
-                classifier.simpleName == "Set" ||
-                classifier.simpleName == "List" ||
-                classifier.simpleName == "Collection" -> {
-                val elementType = type.arguments.firstOrNull()?.type
-                val elementZod =
-                    if (elementType !=
-                        null
-                    ) {
-                        resolveZodType(paramName, elementType, parentClass)
-                    } else {
-                        "z.unknown()"
-                    }
-                "z.array($elementZod)"
-            }
-            classifier == PatchField::class -> {
-                val innerType = type.arguments.firstOrNull()?.type
-                val innerZod =
-                    if (innerType !=
-                        null
-                    ) {
-                        resolveZodType(paramName, innerType, parentClass)
-                    } else {
-                        "z.unknown()"
-                    }
-                "$innerZod.nullable().optional()"
-            }
-            classifier == Map::class || classifier.simpleName == "Map" -> {
-                val valType = type.arguments.getOrNull(1)?.type
-                val valZod = if (valType != null) resolveZodType(paramName, valType, parentClass) else "z.unknown()"
-                "z.record(z.string(), $valZod)"
-            }
-            else -> {
-                classifier.simpleName?.decapitalizeFirstLetter() + "Schema"
-            }
-        }
+    val baseZod = resolveDomainEnumZod(classifier, paramName, parentClass)
+        ?: resolveBrandedOrSpecialZod(classifier, paramName, parentClass)
+        ?: resolveContainerZod(type, paramName, parentClass)
+        ?: (classifier.simpleName?.decapitalizeFirstLetter() + "Schema")
 
     return if (isMarkedNullable) "$baseZod.nullable()" else baseZod
+}
+
+private fun resolveDomainEnumZod(
+    classifier: KClass<*>,
+    paramName: String,
+    parentClass: KClass<*>
+): String? = when {
+    classifier == UserAuthProvider::class || paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "userAuthProviderSchema"
+    classifier == ExternalAuthProvider::class -> "externalAuthProviderSchema"
+    classifier == UserRole::class || paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "userRoleSchema"
+    classifier == UserAccountStatus::class || paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "userAccountStatusSchema"
+    classifier == AccountLockoutType::class || paramName == "lockoutType" -> "accountLockoutTypeSchema"
+    classifier == AuditActorType::class || paramName == "actorType" -> "auditActorTypeSchema"
+    classifier == AuditValueSensitivity::class || paramName == "sensitivity" || paramName == "valueSensitivity" -> "auditValueSensitivitySchema"
+    classifier == AuditStatus::class || (paramName == "status" && (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class)) -> "auditStatusSchema"
+    classifier == CommonAuditMetadataKey::class -> "commonAuditMetadataKeySchema"
+    classifier == UserAuditMetadataKey::class -> "userAuditMetadataKeySchema"
+    classifier == ClientType::class || paramName == "clientType" -> "clientTypeSchema"
+    classifier == SortOrder::class -> "sortOrderSchema"
+    classifier == PasswordPolicyFailReason::class -> "passwordPolicyFailReasonSchema"
+    classifier == TotpStep::class || paramName == "totpStep" -> "totpStepSchema"
+    classifier == LoginByTotpMode::class || paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "loginByTotpModeSchema"
+    classifier == UnlockMethod::class || paramName == "unlockMethod" -> "unlockMethodSchema"
+    classifier == UserSortBy::class -> "userSortBySchema"
+    classifier == UserIdentifierSortBy::class -> "userIdentifierSortBySchema"
+    classifier == UserSessionSortBy::class -> "userSessionSortBySchema"
+    classifier == AuditEventSortBy::class -> "auditEventSortBySchema"
+    classifier == CommonSortValues::class -> "CommonSortValuesSchema"
+    classifier == StorageCategory::class -> "storageCategorySchema"
+    classifier == StorageFileStatus::class -> "storageFileStatusSchema"
+    classifier == StorageFileVisibility::class -> "storageFileVisibilitySchema"
+    else -> null
+}
+
+private fun resolveBrandedOrSpecialZod(
+    classifier: KClass<*>,
+    paramName: String,
+    parentClass: KClass<*>
+): String? = when {
+    paramName == "deviceId" || paramName == "clientDeviceId" || classifier == ClientDeviceId::class -> "clientDeviceIdSchema"
+    paramName == "permissionCodes" -> "z.array(permissionCodeSchema)"
+    classifier == String::class -> resolveStringIdZod(paramName, parentClass)
+    classifier == Int::class || classifier == Long::class || classifier == Float::class ||
+        classifier == Double::class || classifier == Short::class || classifier == Byte::class -> "z.number()"
+    classifier == Boolean::class -> "z.boolean()"
+    classifier == PermissionCode::class -> "permissionCodeSchema"
+    classifier == UserId::class -> "userIdSchema"
+    classifier == UserIdentifierId::class -> "userIdentifierIdSchema"
+    classifier == UserSessionId::class -> "userSessionIdSchema"
+    classifier == AuditEventId::class -> "auditEventIdSchema"
+    classifier == FileId::class -> "fileIdSchema"
+    classifier == UploadQueueItemId::class -> "uploadQueueItemIdSchema"
+    classifier == DecryptedString::class -> "decryptedStringSchema"
+    classifier == EncryptedString::class -> "encryptedStringSchema"
+    classifier == PasswordHash::class -> "passwordHashSchema"
+    classifier == AccessToken::class -> "accessTokenSchema"
+    classifier == RefreshToken::class -> "refreshTokenSchema"
+    classifier == RefreshTokenHash::class -> "refreshTokenHashSchema"
+    classifier == Instant::class -> "z.number()"
+    classifier == JsonElement::class -> "z.unknown()"
+    else -> null
+}
+
+private fun resolveStringIdZod(paramName: String, parentClass: KClass<*>): String = when (paramName) {
+    "id" -> when (parentClass) {
+        UserSummaryPayload::class, UserPrivatePayload::class, UserSummary::class, UserPrivate::class -> "userIdSchema"
+        UserSessionSummaryPayload::class, UserSessionPrivatePayload::class, UserSessionSummary::class, UserSessionPrivate::class -> "userSessionIdSchema"
+        AuditEventSummaryPayload::class, AuditEventPrivatePayload::class, AuditEventSummary::class, AuditEventPrivate::class -> "auditEventIdSchema"
+        UserIdentifierSummaryPayload::class, UserIdentifierPrivatePayload::class, UserIdentifierSummary::class, UserIdentifierPrivate::class -> "userIdentifierIdSchema"
+        StorageFileSummaryPayload::class, StorageFilePrivatePayload::class, StorageFileSummary::class, StorageFilePrivate::class, StorageFileInternal::class -> "fileIdSchema"
+        else -> "z.string()"
+    }
+    "fileId" -> "fileIdSchema"
+    "userId", "actorId" -> "userIdSchema"
+    "identifierId" -> "userIdentifierIdSchema"
+    "sessionId" -> "userSessionIdSchema"
+    "permissionCode" -> "permissionCodeSchema"
+    else -> "z.string()"
+}
+
+private fun resolveContainerZod(
+    type: KType,
+    paramName: String,
+    parentClass: KClass<*>
+): String? {
+    val classifier = type.classifier as? KClass<*> ?: return null
+    return when {
+        classifier == List::class || classifier == Set::class || classifier == Collection::class ||
+            classifier.simpleName == "Set" || classifier.simpleName == "List" || classifier.simpleName == "Collection" -> {
+            val elementType = type.arguments.firstOrNull()?.type
+            val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
+            "z.array($elementZod)"
+        }
+        classifier == PatchField::class -> {
+            val innerType = type.arguments.firstOrNull()?.type
+            val innerZod = if (innerType != null) resolveZodType(paramName, innerType, parentClass) else "z.unknown()"
+            "$innerZod.nullable().optional()"
+        }
+        classifier == Map::class || classifier.simpleName == "Map" -> {
+            val valType = type.arguments.getOrNull(1)?.type
+            val valZod = if (valType != null) resolveZodType(paramName, valType, parentClass) else "z.unknown()"
+            "z.record(z.string(), $valZod)"
+        }
+        else -> null
+    }
 }
 
 public fun resolveTsType(
@@ -337,127 +321,109 @@ public fun resolveTsType(
     val classifier = type.classifier as? KClass<*> ?: return "unknown"
     val isMarkedNullable = type.isMarkedNullable
 
-    val baseTs =
-        when {
-            classifier == UserAuthProvider::class -> "UserAuthProvider"
-            classifier == ExternalAuthProvider::class -> "ExternalAuthProvider"
-            classifier == UserRole::class -> "UserRole"
-            classifier == UserAccountStatus::class -> "UserAccountStatus"
-            classifier == AccountLockoutType::class -> "AccountLockoutType"
-            classifier == AuditActorType::class -> "AuditActorType"
-            classifier == AuditValueSensitivity::class -> "AuditValueSensitivity"
-            classifier == AuditStatus::class -> "AuditStatus"
-            classifier == CommonAuditMetadataKey::class -> "CommonAuditMetadataKey"
-            classifier == UserAuditMetadataKey::class -> "UserAuditMetadataKey"
-            classifier == ClientType::class -> "ClientType"
-            classifier == SortOrder::class -> "SortOrder"
-            classifier == PasswordPolicyFailReason::class -> "PasswordPolicyFailReason"
-            classifier == TotpStep::class -> "TotpStep"
-            classifier == LoginByTotpMode::class -> "LoginByTotpMode"
-            classifier == UnlockMethod::class -> "UnlockMethod"
-            classifier == UserSortBy::class -> "UserSortBy"
-            classifier == UserIdentifierSortBy::class -> "UserIdentifierSortBy"
-            classifier == UserSessionSortBy::class -> "UserSessionSortBy"
-            classifier == AuditEventSortBy::class -> "AuditEventSortBy"
-            classifier == CommonSortValues::class -> "CommonSortValues"
-            classifier == JsonElement::class -> "unknown"
-            classifier == PatchField::class -> {
-                val innerType = type.arguments.firstOrNull()?.type
-                val innerTs = if (innerType != null) resolveTsType(paramName, innerType, parentClass) else "unknown"
-                "$innerTs | null"
-            }
-            classifier == Instant::class -> "Instant"
-
-            paramName == "totpStep" -> "TotpStep"
-            paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "LoginByTotpMode"
-            paramName == "unlockMethod" -> "UnlockMethod"
-            paramName == "clientType" -> "ClientType"
-            paramName == "deviceId" || paramName == "clientDeviceId" -> "ClientDeviceId"
-            paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "UserRole"
-            paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "UserAccountStatus"
-            paramName == "lockoutType" -> "AccountLockoutType"
-            paramName == "actorType" -> "AuditActorType"
-            paramName == "status" &&
-                (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "AuditStatus"
-            paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "UserAuthProvider"
-            paramName == "sensitivity" || paramName == "valueSensitivity" -> "AuditValueSensitivity"
-            paramName == "permissionCodes" -> "PermissionCode[]"
-
-            classifier == String::class -> {
-                when (paramName) {
-                    "id" ->
-                        when (parentClass) {
-                            UserSummaryPayload::class, UserPrivatePayload::class, UserSummary::class, UserPrivate::class -> "UserId"
-                            UserSessionSummaryPayload::class, UserSessionPrivatePayload::class, UserSessionSummary::class, UserSessionPrivate::class -> "UserSessionId"
-                            AuditEventSummaryPayload::class, AuditEventPrivatePayload::class, AuditEventSummary::class, AuditEventPrivate::class -> "AuditEventId"
-                            UserIdentifierSummaryPayload::class, UserIdentifierPrivatePayload::class, UserIdentifierSummary::class, UserIdentifierPrivate::class -> "UserIdentifierId"
-                            else -> "string"
-                        }
-                    "userId" -> "UserId"
-                    "identifierId" -> "UserIdentifierId"
-                    "sessionId" -> "UserSessionId"
-                    "actorId" -> "UserId"
-                    "permissionCode" -> "PermissionCode"
-                    else -> "string"
-                }
-            }
-            classifier == Int::class ||
-                classifier == Long::class ||
-                classifier == Float::class ||
-                classifier == Double::class ||
-                classifier == Short::class ||
-                classifier == Byte::class -> "number"
-            classifier == Boolean::class -> "boolean"
-            classifier == PermissionCode::class -> "PermissionCode"
-            classifier == UserId::class -> "UserId"
-            classifier == UserIdentifierId::class -> "UserIdentifierId"
-            classifier == UserSessionId::class -> "UserSessionId"
-            classifier == AuditEventId::class -> "AuditEventId"
-            classifier == ClientDeviceId::class -> "ClientDeviceId"
-            classifier == DecryptedString::class -> "DecryptedString"
-            classifier == EncryptedString::class -> "EncryptedString"
-            classifier == PasswordHash::class -> "PasswordHash"
-            classifier == AccessToken::class -> "AccessToken"
-            classifier == RefreshToken::class -> "RefreshToken"
-            classifier == RefreshTokenHash::class -> "RefreshTokenHash"
-            classifier == List::class ||
-                classifier == Set::class ||
-                classifier == Collection::class ||
-                classifier.simpleName == "Set" ||
-                classifier.simpleName == "List" ||
-                classifier.simpleName == "Collection" -> {
-                val elementType = type.arguments.firstOrNull()?.type
-                val elementTs =
-                    if (elementType !=
-                        null
-                    ) {
-                        resolveTsType(paramName, elementType, parentClass)
-                    } else {
-                        "unknown"
-                    }
-                "$elementTs[]"
-            }
-            classifier == PatchField::class -> {
-                val innerType = type.arguments.firstOrNull()?.type
-                val innerZod =
-                    if (innerType !=
-                        null
-                    ) {
-                        resolveZodType(paramName, innerType, parentClass)
-                    } else {
-                        "z.unknown()"
-                    }
-                "$innerZod.nullable().optional()"
-            }
-            classifier == Map::class || classifier.simpleName == "Map" -> {
-                val valType = type.arguments.getOrNull(1)?.type
-                val valTs = if (valType != null) resolveTsType(paramName, valType, parentClass) else "unknown"
-                "Record<string, $valTs>"
-            }
-            else -> {
-                classifier.simpleName ?: "unknown"
-            }
-        }
+    val baseTs = resolveDomainEnumTs(classifier, paramName, parentClass)
+        ?: resolveBrandedOrPrimitiveTs(classifier, paramName, parentClass)
+        ?: resolveContainerTs(type, paramName, parentClass)
+        ?: (classifier.simpleName ?: "unknown")
 
     return if (isMarkedNullable) "$baseTs | null" else baseTs
+}
+
+private fun resolveDomainEnumTs(
+    classifier: KClass<*>,
+    paramName: String,
+    parentClass: KClass<*>
+): String? = when {
+    classifier == UserAuthProvider::class || paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "UserAuthProvider"
+    classifier == ExternalAuthProvider::class -> "ExternalAuthProvider"
+    classifier == UserRole::class || paramName == "role" || paramName == "userRole" || paramName == "actorUserRole" -> "UserRole"
+    classifier == UserAccountStatus::class || paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "UserAccountStatus"
+    classifier == AccountLockoutType::class || paramName == "lockoutType" -> "AccountLockoutType"
+    classifier == AuditActorType::class || paramName == "actorType" -> "AuditActorType"
+    classifier == AuditValueSensitivity::class || paramName == "sensitivity" || paramName == "valueSensitivity" -> "AuditValueSensitivity"
+    classifier == AuditStatus::class || (paramName == "status" && (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class)) -> "AuditStatus"
+    classifier == CommonAuditMetadataKey::class -> "CommonAuditMetadataKey"
+    classifier == UserAuditMetadataKey::class -> "UserAuditMetadataKey"
+    classifier == ClientType::class || paramName == "clientType" -> "ClientType"
+    classifier == SortOrder::class -> "SortOrder"
+    classifier == PasswordPolicyFailReason::class -> "PasswordPolicyFailReason"
+    classifier == TotpStep::class || paramName == "totpStep" -> "TotpStep"
+    classifier == LoginByTotpMode::class || paramName == "loginByTotpMode" || (paramName == "mode" && parentClass == LoginByTotpParams::class) -> "LoginByTotpMode"
+    classifier == UnlockMethod::class || paramName == "unlockMethod" -> "UnlockMethod"
+    classifier == UserSortBy::class -> "UserSortBy"
+    classifier == UserIdentifierSortBy::class -> "UserIdentifierSortBy"
+    classifier == UserSessionSortBy::class -> "UserSessionSortBy"
+    classifier == AuditEventSortBy::class -> "AuditEventSortBy"
+    classifier == CommonSortValues::class -> "CommonSortValues"
+    else -> null
+}
+
+private fun resolveBrandedOrPrimitiveTs(
+    classifier: KClass<*>,
+    paramName: String,
+    parentClass: KClass<*>
+): String? = when {
+    paramName == "deviceId" || paramName == "clientDeviceId" || classifier == ClientDeviceId::class -> "ClientDeviceId"
+    paramName == "permissionCodes" -> "PermissionCode[]"
+    classifier == String::class -> resolveStringIdTs(paramName, parentClass)
+    classifier == Int::class || classifier == Long::class || classifier == Float::class ||
+        classifier == Double::class || classifier == Short::class || classifier == Byte::class -> "number"
+    classifier == Boolean::class -> "boolean"
+    classifier == PermissionCode::class -> "PermissionCode"
+    classifier == UserId::class -> "UserId"
+    classifier == UserIdentifierId::class -> "UserIdentifierId"
+    classifier == UserSessionId::class -> "UserSessionId"
+    classifier == AuditEventId::class -> "AuditEventId"
+    classifier == ClientDeviceId::class -> "ClientDeviceId"
+    classifier == DecryptedString::class -> "DecryptedString"
+    classifier == EncryptedString::class -> "EncryptedString"
+    classifier == PasswordHash::class -> "PasswordHash"
+    classifier == AccessToken::class -> "AccessToken"
+    classifier == RefreshToken::class -> "RefreshToken"
+    classifier == RefreshTokenHash::class -> "RefreshTokenHash"
+    classifier == Instant::class -> "Instant"
+    classifier == JsonElement::class -> "unknown"
+    else -> null
+}
+
+private fun resolveStringIdTs(paramName: String, parentClass: KClass<*>): String = when (paramName) {
+    "id" -> when (parentClass) {
+        UserSummaryPayload::class, UserPrivatePayload::class, UserSummary::class, UserPrivate::class -> "UserId"
+        UserSessionSummaryPayload::class, UserSessionPrivatePayload::class, UserSessionSummary::class, UserSessionPrivate::class -> "UserSessionId"
+        AuditEventSummaryPayload::class, AuditEventPrivatePayload::class, AuditEventSummary::class, AuditEventPrivate::class -> "AuditEventId"
+        UserIdentifierSummaryPayload::class, UserIdentifierPrivatePayload::class, UserIdentifierSummary::class, UserIdentifierPrivate::class -> "UserIdentifierId"
+        else -> "string"
+    }
+    "userId", "actorId" -> "UserId"
+    "identifierId" -> "UserIdentifierId"
+    "sessionId" -> "UserSessionId"
+    "permissionCode" -> "PermissionCode"
+    else -> "string"
+}
+
+private fun resolveContainerTs(
+    type: KType,
+    paramName: String,
+    parentClass: KClass<*>
+): String? {
+    val classifier = type.classifier as? KClass<*> ?: return null
+    return when {
+        classifier == List::class || classifier == Set::class || classifier == Collection::class ||
+            classifier.simpleName == "Set" || classifier.simpleName == "List" || classifier.simpleName == "Collection" -> {
+            val elementType = type.arguments.firstOrNull()?.type
+            val elementTs = if (elementType != null) resolveTsType(paramName, elementType, parentClass) else "unknown"
+            "$elementTs[]"
+        }
+        classifier == PatchField::class -> {
+            val innerType = type.arguments.firstOrNull()?.type
+            val innerTs = if (innerType != null) resolveTsType(paramName, innerType, parentClass) else "unknown"
+            "$innerTs | null"
+        }
+        classifier == Map::class || classifier.simpleName == "Map" -> {
+            val valType = type.arguments.getOrNull(1)?.type
+            val valTs = if (valType != null) resolveTsType(paramName, valType, parentClass) else "unknown"
+            "Record<string, $valTs>"
+        }
+        else -> null
+    }
 }

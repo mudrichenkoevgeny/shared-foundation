@@ -491,189 +491,207 @@ public data class ManagementUserListParams(
          */
         override fun serialize(params: ManagementUserListParams): Map<String, List<String>> {
             val result = mutableMapOf<String, List<String>>()
+            result.serializePaginationAndSorting(params)
+            result.serializeCoreAndAccessFilters(params)
+            result.serializeActivityAndLockoutFilters(params)
+            result.serializeStorageAndProfileFilters(params)
+            return result
+        }
 
+        private fun MutableMap<String, List<String>>.serializePaginationAndSorting(params: ManagementUserListParams) {
             if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {
-                result[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
+                this[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
             }
             if (params.pageSize != ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE) {
-                result[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
+                this[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
             }
             if (params.sortBy != UserSortBy.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
+                this[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
             }
             if (params.sortOrder != SortOrder.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
+                this[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeCoreAndAccessFilters(params: ManagementUserListParams) {
             if (params.userIds.isNotEmpty()) {
-                result[UserFilterValues.USER_ID] = params.userIds
+                this[UserFilterValues.USER_ID] = params.userIds
             }
             if (params.userRoles.isNotEmpty()) {
-                result[UserFilterValues.ROLE] = params.userRoles.map { it.value }
+                this[UserFilterValues.ROLE] = params.userRoles.map { it.value }
             }
             if (params.excludeUserRoles.isNotEmpty()) {
-                result[UserFilterValues.EXCLUDE_ROLE] = params.excludeUserRoles.map { it.value }
+                this[UserFilterValues.EXCLUDE_ROLE] = params.excludeUserRoles.map { it.value }
             }
             if (params.accountStatuses.isNotEmpty()) {
-                result[UserFilterValues.ACCOUNT_STATUS] = params.accountStatuses.map { it.value }
+                this[UserFilterValues.ACCOUNT_STATUS] = params.accountStatuses.map { it.value }
             }
             if (params.excludeAccountStatuses.isNotEmpty()) {
-                result[UserFilterValues.EXCLUDE_ACCOUNT_STATUS] = params.excludeAccountStatuses.map { it.value }
+                this[UserFilterValues.EXCLUDE_ACCOUNT_STATUS] = params.excludeAccountStatuses.map { it.value }
             }
             if (params.accountStatusesOnRestore.isNotEmpty()) {
-                result[UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] = params.accountStatusesOnRestore.map { it.value }
+                this[UserFilterValues.ACCOUNT_STATUS_ON_RESTORE] = params.accountStatusesOnRestore.map { it.value }
             }
             if (params.excludeAccountStatusesOnRestore.isNotEmpty()) {
-                result[UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE] =
+                this[UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE] =
                     params.excludeAccountStatusesOnRestore.map { it.value }
             }
             if (params.isAccountStatusOnRestoreSet != null) {
-                result[UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET] =
+                this[UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET] =
                     listOf(params.isAccountStatusOnRestoreSet.toString())
             }
             if (params.authorityLevelFrom != null) {
-                result[UserFilterValues.AUTHORITY_LEVEL_FROM] = listOf(params.authorityLevelFrom.toString())
+                this[UserFilterValues.AUTHORITY_LEVEL_FROM] = listOf(params.authorityLevelFrom.toString())
             }
             if (params.authorityLevelTo != null) {
-                result[UserFilterValues.AUTHORITY_LEVEL_TO] = listOf(params.authorityLevelTo.toString())
+                this[UserFilterValues.AUTHORITY_LEVEL_TO] = listOf(params.authorityLevelTo.toString())
             }
             if (params.permissionCodes.isNotEmpty()) {
-                result[UserFilterValues.PERMISSION_CODES] = params.permissionCodes
+                this[UserFilterValues.PERMISSION_CODES] = params.permissionCodes
             }
             if (params.excludePermissionCodes.isNotEmpty()) {
-                result[UserFilterValues.EXCLUDE_PERMISSION_CODES] = params.excludePermissionCodes
+                this[UserFilterValues.EXCLUDE_PERMISSION_CODES] = params.excludePermissionCodes
             }
             if (params.isTotpEnabled != null) {
-                result[UserFilterValues.IS_TOTP_ENABLED] = listOf(params.isTotpEnabled.toString())
+                this[UserFilterValues.IS_TOTP_ENABLED] = listOf(params.isTotpEnabled.toString())
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeActivityAndLockoutFilters(
+            params: ManagementUserListParams
+        ) {
             if (params.lastLoginAtFrom != null) {
-                result[UserFilterValues.LAST_LOGIN_AT_FROM] = listOf(params.lastLoginAtFrom)
+                this[UserFilterValues.LAST_LOGIN_AT_FROM] = listOf(params.lastLoginAtFrom)
             }
             if (params.lastLoginAtTo != null) {
-                result[UserFilterValues.LAST_LOGIN_AT_TO] = listOf(params.lastLoginAtTo)
+                this[UserFilterValues.LAST_LOGIN_AT_TO] = listOf(params.lastLoginAtTo)
             }
             if (params.isLastLoginAtSet != null) {
-                result[UserFilterValues.IS_LAST_LOGIN_AT_SET] = listOf(params.isLastLoginAtSet.toString())
+                this[UserFilterValues.IS_LAST_LOGIN_AT_SET] = listOf(params.isLastLoginAtSet.toString())
             }
             if (params.lastActiveAtFrom != null) {
-                result[UserFilterValues.LAST_ACTIVE_AT_FROM] = listOf(params.lastActiveAtFrom)
+                this[UserFilterValues.LAST_ACTIVE_AT_FROM] = listOf(params.lastActiveAtFrom)
             }
             if (params.lastActiveAtTo != null) {
-                result[UserFilterValues.LAST_ACTIVE_AT_TO] = listOf(params.lastActiveAtTo)
+                this[UserFilterValues.LAST_ACTIVE_AT_TO] = listOf(params.lastActiveAtTo)
             }
             if (params.isLastActiveAtSet != null) {
-                result[UserFilterValues.IS_LAST_ACTIVE_AT_SET] = listOf(params.isLastActiveAtSet.toString())
+                this[UserFilterValues.IS_LAST_ACTIVE_AT_SET] = listOf(params.isLastActiveAtSet.toString())
             }
             if (params.createdAtFrom != null) {
-                result[UserFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
+                this[UserFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
             }
             if (params.createdAtTo != null) {
-                result[UserFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
+                this[UserFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
             }
             if (params.updatedAtFrom != null) {
-                result[UserFilterValues.UPDATED_AT_FROM] = listOf(params.updatedAtFrom)
+                this[UserFilterValues.UPDATED_AT_FROM] = listOf(params.updatedAtFrom)
             }
             if (params.updatedAtTo != null) {
-                result[UserFilterValues.UPDATED_AT_TO] = listOf(params.updatedAtTo)
+                this[UserFilterValues.UPDATED_AT_TO] = listOf(params.updatedAtTo)
             }
             if (params.isUpdatedAtSet != null) {
-                result[UserFilterValues.IS_UPDATED_AT_SET] = listOf(params.isUpdatedAtSet.toString())
+                this[UserFilterValues.IS_UPDATED_AT_SET] = listOf(params.isUpdatedAtSet.toString())
             }
             if (params.scheduledPermanentDeletionAtFrom != null) {
-                result[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM] =
+                this[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM] =
                     listOf(params.scheduledPermanentDeletionAtFrom)
             }
             if (params.scheduledPermanentDeletionAtTo != null) {
-                result[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO] =
+                this[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO] =
                     listOf(params.scheduledPermanentDeletionAtTo)
             }
             if (params.isScheduledPermanentDeletionAtSet != null) {
-                result[UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET] =
+                this[UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET] =
                     listOf(params.isScheduledPermanentDeletionAtSet.toString())
             }
             if (params.accountLockoutTypes.isNotEmpty()) {
-                result[UserFilterValues.ACCOUNT_LOCKOUT_TYPE] = params.accountLockoutTypes.map { it.value }
+                this[UserFilterValues.ACCOUNT_LOCKOUT_TYPE] = params.accountLockoutTypes.map { it.value }
             }
             if (params.excludeAccountLockoutTypes.isNotEmpty()) {
-                result[UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE] =
+                this[UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE] =
                     params.excludeAccountLockoutTypes.map { it.value }
             }
             if (params.temporaryLockoutUntilFrom != null) {
-                result[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM] = listOf(params.temporaryLockoutUntilFrom)
+                this[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM] = listOf(params.temporaryLockoutUntilFrom)
             }
             if (params.temporaryLockoutUntilTo != null) {
-                result[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO] = listOf(params.temporaryLockoutUntilTo)
+                this[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO] = listOf(params.temporaryLockoutUntilTo)
             }
             if (params.isTemporaryLockoutUntilSet != null) {
-                result[UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET] =
+                this[UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET] =
                     listOf(params.isTemporaryLockoutUntilSet.toString())
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeStorageAndProfileFilters(
+            params: ManagementUserListParams
+        ) {
             if (params.storageQuotaBytesFrom != null) {
-                result[UserFilterValues.STORAGE_QUOTA_BYTES_FROM] = listOf(params.storageQuotaBytesFrom.toString())
+                this[UserFilterValues.STORAGE_QUOTA_BYTES_FROM] = listOf(params.storageQuotaBytesFrom.toString())
             }
             if (params.storageQuotaBytesTo != null) {
-                result[UserFilterValues.STORAGE_QUOTA_BYTES_TO] = listOf(params.storageQuotaBytesTo.toString())
+                this[UserFilterValues.STORAGE_QUOTA_BYTES_TO] = listOf(params.storageQuotaBytesTo.toString())
             }
             if (params.isStorageQuotaBytesSet != null) {
-                result[UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET] =
+                this[UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET] =
                     listOf(params.isStorageQuotaBytesSet.toString())
             }
             if (params.storageMaxUploadSizeBytesFrom != null) {
-                result[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM] =
+                this[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM] =
                     listOf(params.storageMaxUploadSizeBytesFrom.toString())
             }
             if (params.storageMaxUploadSizeBytesTo != null) {
-                result[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO] =
+                this[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO] =
                     listOf(params.storageMaxUploadSizeBytesTo.toString())
             }
             if (params.isStorageMaxUploadSizeBytesSet != null) {
-                result[UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET] =
+                this[UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET] =
                     listOf(params.isStorageMaxUploadSizeBytesSet.toString())
             }
             if (params.storageMaxPendingUploadsFrom != null) {
-                result[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM] =
+                this[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM] =
                     listOf(params.storageMaxPendingUploadsFrom.toString())
             }
             if (params.storageMaxPendingUploadsTo != null) {
-                result[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO] =
+                this[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO] =
                     listOf(params.storageMaxPendingUploadsTo.toString())
             }
             if (params.isStorageMaxPendingUploadsSet != null) {
-                result[UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET] =
+                this[UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET] =
                     listOf(params.isStorageMaxPendingUploadsSet.toString())
             }
             if (params.isStorageConfigurationSet != null) {
-                result[UserFilterValues.IS_STORAGE_CONFIGURATION_SET] =
+                this[UserFilterValues.IS_STORAGE_CONFIGURATION_SET] =
                     listOf(params.isStorageConfigurationSet.toString())
             }
             if (!params.nickname.isNullOrBlank()) {
-                result[UserFilterValues.NICKNAME] = listOf(params.nickname.trim())
+                this[UserFilterValues.NICKNAME] = listOf(params.nickname.trim())
             }
             if (params.isNicknameSet != null) {
-                result[UserFilterValues.IS_NICKNAME_SET] = listOf(params.isNicknameSet.toString())
+                this[UserFilterValues.IS_NICKNAME_SET] = listOf(params.isNicknameSet.toString())
             }
             if (!params.displayName.isNullOrBlank()) {
-                result[UserFilterValues.DISPLAY_NAME] = listOf(params.displayName.trim())
+                this[UserFilterValues.DISPLAY_NAME] = listOf(params.displayName.trim())
             }
             if (params.isDisplayNameSet != null) {
-                result[UserFilterValues.IS_DISPLAY_NAME_SET] = listOf(params.isDisplayNameSet.toString())
+                this[UserFilterValues.IS_DISPLAY_NAME_SET] = listOf(params.isDisplayNameSet.toString())
             }
             if (params.isAvatarSet != null) {
-                result[UserFilterValues.IS_AVATAR_SET] = listOf(params.isAvatarSet.toString())
+                this[UserFilterValues.IS_AVATAR_SET] = listOf(params.isAvatarSet.toString())
             }
             if (params.birthdateFrom != null) {
-                result[UserFilterValues.BIRTHDATE_FROM] = listOf(params.birthdateFrom)
+                this[UserFilterValues.BIRTHDATE_FROM] = listOf(params.birthdateFrom)
             }
             if (params.birthdateTo != null) {
-                result[UserFilterValues.BIRTHDATE_TO] = listOf(params.birthdateTo)
+                this[UserFilterValues.BIRTHDATE_TO] = listOf(params.birthdateTo)
             }
             if (params.isBirthdateSet != null) {
-                result[UserFilterValues.IS_BIRTHDATE_SET] = listOf(params.isBirthdateSet.toString())
+                this[UserFilterValues.IS_BIRTHDATE_SET] = listOf(params.isBirthdateSet.toString())
             }
             if (params.searchQuery != null) {
-                result[UserFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
+                this[UserFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
             }
-
-            return result
         }
     }
 }

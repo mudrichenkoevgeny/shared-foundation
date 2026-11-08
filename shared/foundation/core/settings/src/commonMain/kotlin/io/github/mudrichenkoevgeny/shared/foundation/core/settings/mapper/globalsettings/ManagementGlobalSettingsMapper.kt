@@ -4,6 +4,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings.ManagementGlobalSettings
 import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.globalsettings.ManagementGlobalSettingsPayload
 
+/**
+ * Maps [ManagementGlobalSettingsPayload] DTO to [ManagementGlobalSettings] domain model.
+ */
 public fun ManagementGlobalSettingsPayload.toManagementGlobalSettings(): ManagementGlobalSettings =
     ManagementGlobalSettings(
         privacyPolicyUrl = privacyPolicyUrl,
@@ -15,6 +18,9 @@ public fun ManagementGlobalSettingsPayload.toManagementGlobalSettings(): Managem
         isVerboseLoggingEnabled = isVerboseLoggingEnabled
     )
 
+/**
+ * Maps [ManagementGlobalSettings] domain model to [ManagementGlobalSettingsPayload] DTO.
+ */
 public fun ManagementGlobalSettings.toManagementGlobalSettingsPayload(): ManagementGlobalSettingsPayload =
     ManagementGlobalSettingsPayload(
         privacyPolicyUrl = privacyPolicyUrl,

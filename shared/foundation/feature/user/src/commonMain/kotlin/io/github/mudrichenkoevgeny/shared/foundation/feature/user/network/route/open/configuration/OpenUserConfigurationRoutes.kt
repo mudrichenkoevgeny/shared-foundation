@@ -22,6 +22,8 @@ public object OpenUserConfigurationRoutes {
      * - **Required Permissions:** None.
      *
      * **UI Presentation:** None.
+     *
+     * @see OpenUserConfigurationPayload
      */
     public const val GET_OPEN_USER_CONFIGURATION: String = "$BASE_USER_ROUTE/configuration"
 }

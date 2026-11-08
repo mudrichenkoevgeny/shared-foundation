@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength", "Indent")
-
 package io.github.mudrichenkoevgeny.shared.foundation.generator
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing.AuditEventFilterValues
@@ -56,15 +54,49 @@ public fun main() {
         val outputDir = File(rootDir, "build/npm-package")
         outputDir.mkdirs()
 
-        val packageVersion =
-            System
-                .getProperty("PACKAGE_VERSION")
-                ?.takeIf { it.isNotBlank() && it != "unspecified" }
-                ?: System.getenv("PACKAGE_VERSION")
-                ?: parseRootBuildGradleVersion(rootDir)
-                ?: "0.0.71"
+        val packageVersion = resolvePackageVersion(rootDir)
 
-        val packageJson =
+        File(outputDir, "package.json").writeText(generatePackageJson(packageVersion))
+        File(outputDir, ".npmignore").writeText("*.tgz\n")
+        File(outputDir, "README.md").writeText(generateNpmReadmeText())
+
+        val (localizationJsCode, localizationDtsCode) = generateLocalizationCode(rootDir)
+        val testingJsCode = generateTestFixturesJs()
+        val testingDtsCode = generateTestFixturesDts()
+
+        val fullJsContent = buildFullJsContent(testingJsCode, localizationJsCode)
+
+        File(outputDir, "index.js").writeText(fullJsContent)
+        File(outputDir, "index.mjs").writeText(fullJsContent)
+
+        val dtsContent = generateDeclarationFile(localizationDtsCode, testingDtsCode)
+        File(outputDir, "index.d.ts").writeText(dtsContent)
+
+        val localWebSdkDir = File(rootDir.parentFile, "web-platform-sdk/packages/core-common/src/generated")
+        if (localWebSdkDir.exists()) {
+            outputDir.copyRecursively(localWebSdkDir, overwrite = true)
+            println("Synced generated files to local web-platform-sdk: ${localWebSdkDir.absolutePath}")
+        }
+
+        println("Successfully generated NPM package in ${outputDir.absolutePath}")
+    } catch (e: Throwable) {
+        val sw = StringWriter()
+        e.printStackTrace(PrintWriter(sw))
+        File("build/generator-error.log").apply {
+            parentFile.mkdirs()
+            writeText(sw.toString())
+        }
+        throw e
+    }
+}
+
+private fun resolvePackageVersion(rootDir: File): String =
+    System.getProperty("PACKAGE_VERSION")?.takeIf { it.isNotBlank() && it != "unspecified" }
+        ?: System.getenv("PACKAGE_VERSION")
+        ?: parseRootBuildGradleVersion(rootDir)
+        ?: "0.0.71"
+
+private fun generatePackageJson(packageVersion: String): String =
 """
 {
   "name": "@mudrichenkoevgeny/shared-foundation",
@@ -96,10 +128,7 @@ public fun main() {
 }
 """.trimIndent()
 
-        File(outputDir, "package.json").writeText(packageJson)
-        File(outputDir, ".npmignore").writeText("*.tgz\n")
-
-        val npmReadme =
+private fun generateNpmReadmeText(): String =
 """
 # @mudrichenkoevgeny/shared-foundation
 
@@ -293,24 +322,19 @@ The source code for this library and generator is maintained in the main GitHub 
 Apache License 2.0. See [LICENSE](https://github.com/mudrichenkoevgeny/shared-foundation/blob/main/LICENSE) for details.
 """.trimIndent()
 
-        File(outputDir, "README.md").writeText(npmReadme)
+private fun buildFullJsContent(testingJsCode: String, localizationJsCode: String): String {
+    val brandedCode = generateBrandedTypes()
+    val enumCode = generateEnumsJs()
+    val compositeParsersJsCode = generateCompositeParsersJs()
+    val routeCode = generateRouteObjects()
+    val contractCode = generateContractObjects()
+    val errorCodeCode = generateErrorCodeObjects()
+    val permissionCodeCode = generatePermissionCodeObjects()
+    val domainModelsAndMappersCode = generateDomainModelsAndMappersJs()
+    val dtoCode = generateDtoSchemasAndTypes()
+    val paramParsersJsCode = generateParamParsersAndSerializersJs()
 
-        val brandedCode = generateBrandedTypes()
-        val enumCode = generateEnumsJs()
-        val compositeParsersJsCode = generateCompositeParsersJs()
-        val routeCode = generateRouteObjects()
-        val contractCode = generateContractObjects()
-        val errorCodeCode = generateErrorCodeObjects()
-        val permissionCodeCode = generatePermissionCodeObjects()
-        val domainModelsAndMappersCode = generateDomainModelsAndMappersJs()
-        val dtoCode = generateDtoSchemasAndTypes()
-        val paramParsersJsCode = generateParamParsersAndSerializersJs()
-        val testingJsCode = generateTestFixturesJs()
-        val testingDtsCode = generateTestFixturesDts()
-        val (localizationJsCode, localizationDtsCode) = generateLocalizationCode(rootDir)
-
-        val fullJsContent =
-            """
+    return """
 import { z } from 'zod';
 
 $brandedCode
@@ -336,93 +360,188 @@ $paramParsersJsCode
 $testingJsCode
 
 $localizationJsCode
-            """.trimIndent()
-
-        File(outputDir, "index.js").writeText(fullJsContent)
-        File(outputDir, "index.mjs").writeText(fullJsContent)
-
-        val dtsContent = generateDeclarationFile(localizationDtsCode, testingDtsCode)
-        File(outputDir, "index.d.ts").writeText(dtsContent)
-
-        val localWebSdkDir = File(rootDir.parentFile, "web-platform-sdk/packages/core-common/src/generated")
-        if (localWebSdkDir.exists()) {
-            outputDir.copyRecursively(localWebSdkDir, overwrite = true)
-            println("Synced generated files to local web-platform-sdk: ${localWebSdkDir.absolutePath}")
-        }
-
-        println("Successfully generated NPM package in ${outputDir.absolutePath}")
-    } catch (e: Throwable) {
-        val sw = StringWriter()
-        e.printStackTrace(PrintWriter(sw))
-        File("build/generator-error.log").apply {
-            parentFile.mkdirs()
-            writeText(sw.toString())
-        }
-        throw e
-    }
+    """.trimIndent()
 }
 
 private fun generateDeclarationFile(
     localizationDtsCode: String,
     testingDtsCode: String
 ): String {
-    val routeDeclarations =
-        routeClasses.joinToString("\n\n") { kClass ->
-            val name = kClass.simpleName ?: ""
-            val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-            val structure = extractClassStructure(kClass)
+    val routeDeclarations = generateRouteDeclarationsDts()
+    val contractDeclarations = generateContractDeclarationsDts()
+    val listingParamNamesDecl = generateListingAndFilterValuesDts()
+    val errorDeclarations = generateErrorDeclarationsDts()
+    val permDeclarations = generatePermDeclarationsDts()
+    val enumDeclarations = generateEnumDeclarationsDts()
+    val extraDeclarations = generateExtraDeclarationsDts()
+    val dtoDeclarations = generateDtoDeclarationsDts()
 
-            val directFields =
-                structure.directProps.map { (valName, valValue) ->
-                    val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    "$fieldDoc    readonly $valName: \"$valValue\";"
-                }
+    return """
+import { z } from 'zod';
 
-            val nestedFields =
-                structure.nestedObjects.map { (nestedName, nestedProps) ->
-                    val nestedDoc =
-                        extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    val propsCode =
-                        nestedProps.joinToString("\n") { (vName, vVal) ->
-                            val vDoc =
-                                extractKDoc(
-                                    kClass,
-                                    memberName = vName,
-                                    nestedClassName = nestedName
-                                )?.formatAsJsDoc("      ")?.let { "$it\n" }
-                                    ?: ""
-                            "$vDoc      readonly $vName: \"$vVal\";"
-                        }
-                    "$nestedDoc    readonly $nestedName: {\n$propsCode\n    };"
-                }
+export type Instant = number;
 
-            val allFields = directFields + nestedFields
+export type PermissionCode = string & { readonly __brand: 'PermissionCode' };
+export function toPermissionCodeOrNull(value: string | null | undefined): PermissionCode | null;
+export function toPermissionCodeOrThrow(value: string): PermissionCode;
+export const permissionCodeSchema: z.ZodType<PermissionCode>;
 
-            """
+export type UserId = string & { readonly __brand: 'UserId' };
+export function toUserIdOrNull(value: string | null | undefined): UserId | null;
+export function toUserIdOrThrow(value: string): UserId;
+export const userIdSchema: z.ZodType<UserId>;
+
+export type UserIdentifierId = string & { readonly __brand: 'UserIdentifierId' };
+export function toUserIdentifierIdOrNull(value: string | null | undefined): UserIdentifierId | null;
+export function toUserIdentifierIdOrThrow(value: string): UserIdentifierId;
+export const userIdentifierIdSchema: z.ZodType<UserIdentifierId>;
+
+export type UserSessionId = string & { readonly __brand: 'UserSessionId' };
+export function toUserSessionIdOrNull(value: string | null | undefined): UserSessionId | null;
+export function toUserSessionIdOrThrow(value: string): UserSessionId;
+export const userSessionIdSchema: z.ZodType<UserSessionId>;
+
+export type AuditEventId = string & { readonly __brand: 'AuditEventId' };
+export function toAuditEventIdOrNull(value: string | null | undefined): AuditEventId | null;
+export function toAuditEventIdOrThrow(value: string): AuditEventId;
+export const auditEventIdSchema: z.ZodType<AuditEventId>;
+
+export type FileId = string & { readonly __brand: 'FileId' };
+export function toFileIdOrNull(value: string | null | undefined): FileId | null;
+export function toFileIdOrThrow(value: string): FileId;
+export const fileIdSchema: z.ZodType<FileId>;
+
+export type UploadQueueItemId = string & { readonly __brand: 'UploadQueueItemId' };
+export function toUploadQueueItemIdOrNull(value: string | null | undefined): UploadQueueItemId | null;
+export function toUploadQueueItemIdOrThrow(value: string): UploadQueueItemId;
+export const uploadQueueItemIdSchema: z.ZodType<UploadQueueItemId>;
+
+export type ClientDeviceId = string & { readonly __brand: 'ClientDeviceId' };
+export function toClientDeviceIdOrNull(value: string | null | undefined): ClientDeviceId | null;
+export function toClientDeviceIdOrThrow(value: string): ClientDeviceId;
+export const clientDeviceIdSchema: z.ZodType<ClientDeviceId>;
+
+export type DecryptedString = string & { readonly __brand: 'DecryptedString' };
+export function toDecryptedStringOrNull(value: string | null | undefined): DecryptedString | null;
+export function toDecryptedStringOrThrow(value: string): DecryptedString;
+export const decryptedStringSchema: z.ZodType<DecryptedString>;
+
+export type EncryptedString = string & { readonly __brand: 'EncryptedString' };
+export function toEncryptedStringOrNull(value: string | null | undefined): EncryptedString | null;
+export function toEncryptedStringOrThrow(value: string): EncryptedString;
+export const encryptedStringSchema: z.ZodType<EncryptedString>;
+
+export type PasswordHash = string & { readonly __brand: 'PasswordHash' };
+export function toPasswordHashOrNull(value: string | null | undefined): PasswordHash | null;
+export function toPasswordHashOrThrow(value: string): PasswordHash;
+export const passwordHashSchema: z.ZodType<PasswordHash>;
+
+export type AccessToken = string & { readonly __brand: 'AccessToken' };
+export function toAccessTokenOrNull(value: string | null | undefined): AccessToken | null;
+export function toAccessTokenOrThrow(value: string): AccessToken;
+export const accessTokenSchema: z.ZodType<AccessToken>;
+
+export type RefreshToken = string & { readonly __brand: 'RefreshToken' };
+export function toRefreshTokenOrNull(value: string | null | undefined): RefreshToken | null;
+export function toRefreshTokenOrThrow(value: string): RefreshToken;
+export const refreshTokenSchema: z.ZodType<RefreshToken>;
+
+export type RefreshTokenHash = string & { readonly __brand: 'RefreshTokenHash' };
+export function toRefreshTokenHashOrNull(value: string | null | undefined): RefreshTokenHash | null;
+export function toRefreshTokenHashOrThrow(value: string): RefreshTokenHash;
+export const refreshTokenHashSchema: z.ZodType<RefreshTokenHash>;
+
+$routeDeclarations
+
+$contractDeclarations
+
+$listingParamNamesDecl
+
+$errorDeclarations
+
+$permDeclarations
+
+$enumDeclarations
+
+$extraDeclarations
+
+export function pagedResultSchema<T extends z.ZodTypeAny>(itemSchema: T): z.ZodType<PagedResult<z.infer<T>>>;
+
+export interface PagedResult<T> {
+items: T[];
+totalCount: number;
+pageNumber: number;
+pageSize: number;
+totalPages: number;
+}
+
+$dtoDeclarations
+
+${generateParamParsersAndSerializersDts()}
+
+$testingDtsCode
+
+$localizationDtsCode
+    """.trimIndent()
+}
+
+private fun generateRouteDeclarationsDts(): String =
+    routeClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val structure = extractClassStructure(kClass)
+
+        val directFields =
+            structure.directProps.map { (valName, valValue) ->
+                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "$fieldDoc    readonly $valName: \"$valValue\";"
+            }
+
+        val nestedFields =
+            structure.nestedObjects.map { (nestedName, nestedProps) ->
+                val nestedDoc =
+                    extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                val propsCode =
+                    nestedProps.joinToString("\n") { (vName, vVal) ->
+                        val vDoc =
+                            extractKDoc(
+                                kClass,
+                                memberName = vName,
+                                nestedClassName = nestedName
+                            )?.formatAsJsDoc("      ")?.let { "$it\n" }
+                                ?: ""
+                        "$vDoc      readonly $vName: \"$vVal\";"
+                    }
+                "$nestedDoc    readonly $nestedName: {\n$propsCode\n    };"
+            }
+
+        val allFields = directFields + nestedFields
+
+        """
 $classDoc export declare const $name: {
 ${allFields.joinToString("\n")}
 };
-            """.trimIndent()
-        }
+        """.trimIndent()
+    }
 
-    val contractDeclarations =
-        contractClasses.joinToString("\n\n") { kClass ->
-            val name = kClass.simpleName ?: ""
-            val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-            val props = extractObjectStringProperties(kClass)
-            val fields =
-                props.map { (valName, valValue) ->
-                    val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    "$fieldDoc    readonly $valName: \"$valValue\";"
-                }
-            """
+private fun generateContractDeclarationsDts(): String =
+    contractClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val props = extractObjectStringProperties(kClass)
+        val fields =
+            props.map { (valName, valValue) ->
+                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "$fieldDoc    readonly $valName: \"$valValue\";"
+            }
+        """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-            """.trimIndent()
-        }
+        """.trimIndent()
+    }
 
-    val listingParamNamesDecl =
+private fun generateListingAndFilterValuesDts(): String =
 """
 export declare const ListingParamNames: {
 readonly PAGE_NUMBER: "${ListingParamNames.Pagination.PAGE_NUMBER}";
@@ -611,66 +730,66 @@ readonly AVATAR: "${UserStorageTargetScopes.AVATAR}";
 };
 """.trimIndent()
 
-    val errorDeclarations =
-        errorClasses.joinToString("\n\n") { kClass ->
-            val name = kClass.simpleName ?: ""
-            val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-            val props = extractObjectStringProperties(kClass)
-            val fields =
-                props.map { (valName, valValue) ->
-                    val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    "$fieldDoc    readonly $valName: \"$valValue\";"
-                }
-            """
+private fun generateErrorDeclarationsDts(): String =
+    errorClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val props = extractObjectStringProperties(kClass)
+        val fields =
+            props.map { (valName, valValue) ->
+                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "$fieldDoc    readonly $valName: \"$valValue\";"
+            }
+        """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-            """.trimIndent()
-        }
+        """.trimIndent()
+    }
 
-    val permDeclarations =
-        permClasses.joinToString("\n\n") { kClass ->
-            val name = kClass.simpleName ?: ""
-            val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-            val props = extractPermissionCodeProperties(kClass)
-            val fields =
-                props.map { (valName, _) ->
-                    val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    "$fieldDoc    readonly $valName: PermissionCode;"
-                }
-            """
+private fun generatePermDeclarationsDts(): String =
+    permClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val props = extractPermissionCodeProperties(kClass)
+        val fields =
+            props.map { (valName, _) ->
+                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "$fieldDoc    readonly $valName: PermissionCode;"
+            }
+        """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-            """.trimIndent()
-        }
+        """.trimIndent()
+    }
 
-    val enumDeclarations =
-        getAllEnumInfos().joinToString("\n\n") { info ->
-            val enumClass = enumClasses.firstOrNull { (it.simpleName ?: "") == info.name }
-            val classDoc = enumClass?.let { extractKDoc(it) }?.let { "$it\n" } ?: ""
-            val unionType =
-                info.entries
-                    .map { it.second }
-                    .distinct()
-                    .joinToString(" | ") { "'$it'" }
-            val objectFields =
-                info.entries.joinToString("\n") { (key, wire) ->
-                    val entryDoc = enumClass?.let { extractKDoc(it, key) }?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
-                    "$entryDoc  readonly $key: '$wire';"
-                }
+private fun generateEnumDeclarationsDts(): String =
+    getAllEnumInfos().joinToString("\n\n") { info ->
+        val enumClass = enumClasses.firstOrNull { (it.simpleName ?: "") == info.name }
+        val classDoc = enumClass?.let { extractKDoc(it) }?.let { "$it\n" } ?: ""
+        val unionType =
+            info.entries
+                .map { it.second }
+                .distinct()
+                .joinToString(" | ") { "'$it'" }
+        val objectFields =
+            info.entries.joinToString("\n") { (key, wire) ->
+                val entryDoc = enumClass?.let { extractKDoc(it, key) }?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
+                "$entryDoc  readonly $key: '$wire';"
+            }
 
-            """
+        """
 $classDoc export type ${info.name} = $unionType;
 $classDoc export const ${info.name}: {
 $objectFields
 };
 export const ${info.schemaName}: z.ZodType<${info.name}>;
-            """.trimIndent()
-        }
+        """.trimIndent()
+    }
 
-    val extraDeclarations =
-        """
+private fun generateExtraDeclarationsDts(): String =
+"""
 export interface ConfirmationKey {
   readonly type: ConfirmationType;
   readonly identifier: string;
@@ -713,35 +832,35 @@ export function resolveUserDisplayName(user: UserDisplayNameInput, fallbackPrefi
 ${generateDomainModelsAndMappersDts()}
 
 ${generateCompositeParsersDts()}
-        """.trimIndent()
+""".trimIndent()
 
-    val dtoDeclarations =
-        dtoClasses.joinToString("\n\n") { kClass ->
-            val name = kClass.simpleName ?: ""
-            val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-            val schemaName = name.decapitalizeFirstLetter() + "Schema"
-            val primaryConstructor = kClass.primaryConstructor
+private fun generateDtoDeclarationsDts(): String =
+    dtoClasses.joinToString("\n\n") { kClass ->
+        val name = kClass.simpleName ?: ""
+        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+        val schemaName = name.decapitalizeFirstLetter() + "Schema"
+        val primaryConstructor = kClass.primaryConstructor
 
-            val fields =
-                if (primaryConstructor != null) {
-                    primaryConstructor.parameters.map { param ->
-                        val paramName = param.name ?: ""
-                        val serialNameAnnotation =
-                            param.annotations.filterIsInstance<SerialName>().firstOrNull()
-                                ?: kClass.declaredMemberProperties
-                                    .firstOrNull {
-                                        it.name == paramName
-                                    }?.findAnnotation<SerialName>()
+        val fields =
+            if (primaryConstructor != null) {
+                primaryConstructor.parameters.map { param ->
+                    val paramName = param.name ?: ""
+                    val serialNameAnnotation =
+                        param.annotations.filterIsInstance<SerialName>().firstOrNull()
+                            ?: kClass.declaredMemberProperties
+                                .firstOrNull {
+                                    it.name == paramName
+                                }?.findAnnotation<SerialName>()
 
-                        val wireKey = serialNameAnnotation?.value ?: paramName
-                        val tsType = resolveTsType(paramName, param.type, kClass)
-                        val optionalSign = if (param.isOptional) "?" else ""
-                        val fieldDoc = extractKDoc(kClass, paramName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                        "$fieldDoc    $wireKey$optionalSign: $tsType;"
-                    }
-                } else {
-                    emptyList()
+                    val wireKey = serialNameAnnotation?.value ?: paramName
+                    val tsType = resolveTsType(paramName, param.type, kClass)
+                    val optionalSign = if (param.isOptional) "?" else ""
+                    val fieldDoc = extractKDoc(kClass, paramName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                    "$fieldDoc    $wireKey$optionalSign: $tsType;"
                 }
+            } else {
+                emptyList()
+            }
 
 """
 $classDoc export interface $name {
@@ -749,116 +868,7 @@ ${fields.joinToString("\n")}
 }
 export const $schemaName: z.ZodType<$name>;
 """.trimIndent()
-        }
-
-    return """
-import { z } from 'zod';
-
-export type Instant = number;
-
-export type PermissionCode = string & { readonly __brand: 'PermissionCode' };
-export function toPermissionCodeOrNull(value: string | null | undefined): PermissionCode | null;
-export function toPermissionCodeOrThrow(value: string): PermissionCode;
-export const permissionCodeSchema: z.ZodType<PermissionCode>;
-
-export type UserId = string & { readonly __brand: 'UserId' };
-export function toUserIdOrNull(value: string | null | undefined): UserId | null;
-export function toUserIdOrThrow(value: string): UserId;
-export const userIdSchema: z.ZodType<UserId>;
-
-export type UserIdentifierId = string & { readonly __brand: 'UserIdentifierId' };
-export function toUserIdentifierIdOrNull(value: string | null | undefined): UserIdentifierId | null;
-export function toUserIdentifierIdOrThrow(value: string): UserIdentifierId;
-export const userIdentifierIdSchema: z.ZodType<UserIdentifierId>;
-
-export type UserSessionId = string & { readonly __brand: 'UserSessionId' };
-export function toUserSessionIdOrNull(value: string | null | undefined): UserSessionId | null;
-export function toUserSessionIdOrThrow(value: string): UserSessionId;
-export const userSessionIdSchema: z.ZodType<UserSessionId>;
-
-export type AuditEventId = string & { readonly __brand: 'AuditEventId' };
-export function toAuditEventIdOrNull(value: string | null | undefined): AuditEventId | null;
-export function toAuditEventIdOrThrow(value: string): AuditEventId;
-export const auditEventIdSchema: z.ZodType<AuditEventId>;
-
-export type FileId = string & { readonly __brand: 'FileId' };
-export function toFileIdOrNull(value: string | null | undefined): FileId | null;
-export function toFileIdOrThrow(value: string): FileId;
-export const fileIdSchema: z.ZodType<FileId>;
-
-export type UploadQueueItemId = string & { readonly __brand: 'UploadQueueItemId' };
-export function toUploadQueueItemIdOrNull(value: string | null | undefined): UploadQueueItemId | null;
-export function toUploadQueueItemIdOrThrow(value: string): UploadQueueItemId;
-export const uploadQueueItemIdSchema: z.ZodType<UploadQueueItemId>;
-
-export type ClientDeviceId = string & { readonly __brand: 'ClientDeviceId' };
-export function toClientDeviceIdOrNull(value: string | null | undefined): ClientDeviceId | null;
-export function toClientDeviceIdOrThrow(value: string): ClientDeviceId;
-export const clientDeviceIdSchema: z.ZodType<ClientDeviceId>;
-
-export type DecryptedString = string & { readonly __brand: 'DecryptedString' };
-export function toDecryptedStringOrNull(value: string | null | undefined): DecryptedString | null;
-export function toDecryptedStringOrThrow(value: string): DecryptedString;
-export const decryptedStringSchema: z.ZodType<DecryptedString>;
-
-export type EncryptedString = string & { readonly __brand: 'EncryptedString' };
-export function toEncryptedStringOrNull(value: string | null | undefined): EncryptedString | null;
-export function toEncryptedStringOrThrow(value: string): EncryptedString;
-export const encryptedStringSchema: z.ZodType<EncryptedString>;
-
-export type PasswordHash = string & { readonly __brand: 'PasswordHash' };
-export function toPasswordHashOrNull(value: string | null | undefined): PasswordHash | null;
-export function toPasswordHashOrThrow(value: string): PasswordHash;
-export const passwordHashSchema: z.ZodType<PasswordHash>;
-
-export type AccessToken = string & { readonly __brand: 'AccessToken' };
-export function toAccessTokenOrNull(value: string | null | undefined): AccessToken | null;
-export function toAccessTokenOrThrow(value: string): AccessToken;
-export const accessTokenSchema: z.ZodType<AccessToken>;
-
-export type RefreshToken = string & { readonly __brand: 'RefreshToken' };
-export function toRefreshTokenOrNull(value: string | null | undefined): RefreshToken | null;
-export function toRefreshTokenOrThrow(value: string): RefreshToken;
-export const refreshTokenSchema: z.ZodType<RefreshToken>;
-
-export type RefreshTokenHash = string & { readonly __brand: 'RefreshTokenHash' };
-export function toRefreshTokenHashOrNull(value: string | null | undefined): RefreshTokenHash | null;
-export function toRefreshTokenHashOrThrow(value: string): RefreshTokenHash;
-export const refreshTokenHashSchema: z.ZodType<RefreshTokenHash>;
-
-$routeDeclarations
-
-$contractDeclarations
-
-$listingParamNamesDecl
-
-$errorDeclarations
-
-$permDeclarations
-
-$enumDeclarations
-
-$extraDeclarations
-
-export function pagedResultSchema<T extends z.ZodTypeAny>(itemSchema: T): z.ZodType<PagedResult<z.infer<T>>>;
-
-export interface PagedResult<T> {
-items: T[];
-totalCount: number;
-pageNumber: number;
-pageSize: number;
-totalPages: number;
-}
-
-$dtoDeclarations
-
-${generateParamParsersAndSerializersDts()}
-
-$testingDtsCode
-
-$localizationDtsCode
-        """.trimIndent()
-}
+    }
 
 private fun parseRootBuildGradleVersion(rootDir: File): String? {
     val buildFile = File(rootDir, "build.gradle.kts")

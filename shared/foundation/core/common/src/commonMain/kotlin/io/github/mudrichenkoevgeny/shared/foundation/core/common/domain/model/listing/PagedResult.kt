@@ -1,6 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +13,7 @@ import kotlinx.serialization.Serializable
  * so list requests and responses stay aligned. [pageNumber] is **one-based** (`1` = first page), matching [ListingParamNames.Pagination.PAGE_NUMBER].
  * [totalPages] is typically computed by the producer so consumers do not reimplement edge cases for empty results or the last partial page.
  *
- * @param T Element type of [items]; must have a matching [kotlinx.serialization.KSerializer] at the call site when
+ * @param T Element type of [items]; must have a matching [KSerializer] at the call site when
  *   encoding or decoding JSON.
  * @property items Records for the current page (may be shorter than [pageSize] on the last page).
  * @property totalCount Total number of items matching the query across all pages.
@@ -20,6 +21,8 @@ import kotlinx.serialization.Serializable
  * @property pageSize Maximum number of items per page for this response (same key as
  *   [ListingParamNames.Pagination.PAGE_SIZE]).
  * @property totalPages Number of pages for [totalCount] and [pageSize]; `0` when [pageSize] is not positive.
+ *
+ * @see KSerializer
  */
 @Serializable
 public data class PagedResult<T>(
@@ -35,6 +38,9 @@ public data class PagedResult<T>(
     public val totalPages: Long
 ) {
     public companion object {
+        /**
+         * Creates an empty [PagedResult] with zero total items and initial pagination parameters.
+         */
         public fun <T> empty(): PagedResult<T> =
             PagedResult<T>(
                 items = emptyList(),

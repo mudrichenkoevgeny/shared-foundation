@@ -95,13 +95,6 @@ style:
   WildcardImport:
     active: true
 
-libraries:
-  active: true
-  LibraryEntitiesShouldNotBePublic:
-    active: false
-  ForbiddenPublicDataClass:
-    active: false
-
 exceptions:
   active: true
   SwallowedException:
@@ -120,11 +113,19 @@ potential-bugs:
 
 custom-rules:
   active: true
+  AvoidElseInSealedWhen:
+    active: true
   NoFullyQualifiedName:
+    active: true
+  NoHardcodedTimeMillis:
     active: true
   NoInlineComment:
     active: true
   PreferValueOverName:
+    active: true
+  ProhibitNonSafeAssertion:
+    active: true
+  ProhibitPrintln:
     active: true
 
 comments:
@@ -134,14 +135,17 @@ comments:
     excludes:
       - '**/*Test.kt'
       - '**/testing/**'
+      - '**/tools/**'
     searchInNestedClass: true
     searchInInnerClass: true
-    searchInInnerObject: true
+    searchInInnerObject: false
     searchInInnerInterface: true
+    ignoreDefaultCompanionObject: true
   UndocumentedPublicFunction:
     active: true
     excludes:
       - '**/*Test.kt'
       - '**/testing/**'
+      - '**/tools/**'
   UndocumentedPublicProperty:
     active: false

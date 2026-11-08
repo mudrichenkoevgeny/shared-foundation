@@ -5,10 +5,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ManagementAuditEventDetailParamsTest {
-    private companion object {
-        const val TEST_EVENT_ID = "00000000-0000-4000-8000-000000000099"
-    }
-
     @Test
     fun `parse extracts eventId correctly`() {
         val paramsMap =
@@ -39,5 +35,9 @@ class ManagementAuditEventDetailParamsTest {
 
         assertEquals(emptyMap(), serialized)
         assertEquals(serialized, ManagementAuditEventDetailParams.serialize(params))
+    }
+
+    private companion object {
+        const val TEST_EVENT_ID = "00000000-0000-4000-8000-000000000099"
     }
 }

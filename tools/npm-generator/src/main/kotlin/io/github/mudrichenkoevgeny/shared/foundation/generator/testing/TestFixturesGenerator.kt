@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength", "Indent")
-
 package io.github.mudrichenkoevgeny.shared.foundation.generator.testing
 
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.getEnumInfo
@@ -27,147 +25,106 @@ public fun getDefaultMockValueJs(
     ownerClass: KClass<*>? = null
 ): String {
     val classifier = type.classifier as? KClass<*>
+    if (classifier != null && classifier.java.isEnum) {
+        return getEnumDefaultMockValue(classifier)
+    }
+
     val typeName = classifier?.simpleName ?: ""
     val ownerClassName = ownerClass?.simpleName ?: ""
 
-    if (classifier != null && classifier.java.isEnum) {
-        val enumInfo = getEnumInfo(classifier)
-        val defaultEntry =
-            enumInfo.entries.firstOrNull {
-                it.first == "DEFAULT" ||
-                    it.first == "NONE" ||
-                    it.first == "ACTIVE" ||
-                    it.first == "USER" ||
-                    it.first == "SUCCESS"
-            }
-                ?: enumInfo.entries.firstOrNull()
-        return if (defaultEntry != null) {
-            "\"${defaultEntry.second}\""
-        } else {
-            "\"\""
-        }
-    }
-
     return when {
-        typeName == "String" -> {
-            when {
-                paramName == "role" ||
-                    paramName == "userRole" ||
-                    paramName == "actorUserRole" ||
-                    paramName == "user_role" ||
-                    paramName == "actor_user_role" -> "\"user\""
-                paramName == "accountStatus" ||
-                    paramName == "accountStatusOnRestore" ||
-                    paramName == "account_status" ||
-                    paramName == "account_status_on_restore" -> "\"active\""
-                paramName == "lockoutType" ||
-                    paramName == "accountLockoutType" ||
-                    paramName == "lockout_type" ||
-                    paramName == "account_lockout_type" -> "\"none\""
-                paramName == "identifierAuthProvider" ||
-                    paramName == "userAuthProvider" ||
-                    paramName == "identifier_auth_provider" ||
-                    paramName == "user_auth_provider" -> "\"email\""
-                paramName == "actorType" || paramName == "actor_type" -> "\"user\""
-                paramName == "action" -> "\"login.email\""
-                paramName == "resource" -> "\"audit.event\""
-                paramName == "status" -> "\"success\""
-                paramName == "clientType" || paramName == "client_type" -> "\"android\""
-                paramName == "themeMode" || paramName == "theme_mode" -> "\"system\""
-                paramName == "sortOrder" || paramName == "sort_order" -> "\"desc\""
-                paramName == "id" || paramName.endsWith("Id") || paramName.endsWith("_id") -> {
-                    when (paramName) {
-                        "userId", "user_id", "actorId", "actor_id", "resourceId", "resource_id" -> "TEST_USER_ID"
-                        "sessionId", "session_id" -> "TEST_SESSION_ID"
-                        "identifierId", "userIdentifierId", "user_identifier_id" -> "TEST_IDENTIFIER_ID"
-                        "auditEventId", "event_id", "eventId", "audit_event_id" -> "TEST_AUDIT_EVENT_ID"
-                        "fileId", "file_id" -> "TEST_FILE_ID"
-                        "clientDeviceId", "device_id", "deviceId" -> "TEST_CLIENT_DEVICE_ID"
-                        "id" -> {
-                            if (ownerClassName.contains("UserIdentifier")) {
-                                "TEST_IDENTIFIER_ID"
-                            } else if (ownerClassName.contains("UserSession") ||
-                                ownerClassName.contains("DeletedSession") ||
-                                ownerClassName.contains("RefreshToken")
-                            ) {
-                                "TEST_SESSION_ID"
-                            } else if (ownerClassName.contains("AuditEvent")) {
-                                "TEST_AUDIT_EVENT_ID"
-                            } else if (ownerClassName.contains("StorageFile")) {
-                                "TEST_FILE_ID"
-                            } else if (ownerClassName.contains("User") || ownerClassName.contains("AuthData")) {
-                                "TEST_USER_ID"
-                            } else {
-                                "\"00000000-0000-0000-0000-000000000000\""
-                            }
-                        }
-                        else -> "\"00000000-0000-0000-0000-000000000000\""
-                    }
-                }
-                paramName.contains("email", ignoreCase = true) -> "TEST_EMAIL"
-                paramName.contains("phone", ignoreCase = true) -> "TEST_PHONE"
-                paramName.contains(
-                    "ipAddress",
-                    ignoreCase = true
-                ) ||
-                    paramName.contains("ip_address", ignoreCase = true) -> "TEST_IP_ADDRESS"
-                paramName.contains(
-                    "userAgent",
-                    ignoreCase = true
-                ) ||
-                    paramName.contains("user_agent", ignoreCase = true) -> "TEST_USER_AGENT"
-                paramName.contains("code", ignoreCase = true) ||
-                    paramName.contains("otp", ignoreCase = true) ||
-                    paramName.contains("token", ignoreCase = true) ||
-                    paramName.contains("mfa", ignoreCase = true) -> "\"123456\""
-                paramName.contains("url", ignoreCase = true) -> "\"https://example.com\""
-                paramName.contains("host", ignoreCase = true) -> "\"api.example.com\""
-                paramName.contains("message", ignoreCase = true) -> "\"Test message\""
-                paramName.contains("name", ignoreCase = true) -> "\"test_name\""
-                else -> "\"test_${paramName}\""
-            }
-        }
-        typeName == "Int" || typeName == "Long" || typeName == "Number" -> {
-            when {
-                paramName == "pageNumber" || paramName == "page_number" || paramName == "page" -> "1"
-                paramName == "pageSize" || paramName == "page_size" -> "20"
-                paramName == "authorityLevel" || paramName == "authority_level" -> "10"
-                paramName == "retryAfterSeconds" || paramName == "retry_after_seconds" -> "60"
-                paramName.endsWith("At") ||
-                    paramName.endsWith("_at") ||
-                    paramName.endsWith("Time") ||
-                    paramName.endsWith("Timestamp") ||
-                    paramName.endsWith("Until") ||
-                    paramName.endsWith("_until") -> "TEST_TIME_MILLIS"
-                else -> "1"
-            }
-        }
-        typeName == "Boolean" -> "false"
-        typeName == "List" || typeName == "Set" || typeName == "Collection" -> "[]"
-        typeName == "Map" -> "{}"
-        typeName == "UserId" -> "toUserIdOrThrow(TEST_USER_ID)"
-        typeName == "UserSessionId" -> "toUserSessionIdOrThrow(TEST_SESSION_ID)"
-        typeName == "UserIdentifierId" -> "toUserIdentifierIdOrThrow(TEST_IDENTIFIER_ID)"
-        typeName == "AuditEventId" -> "toAuditEventIdOrThrow(TEST_AUDIT_EVENT_ID)"
-        typeName == "ClientDeviceId" -> "toClientDeviceIdOrThrow(TEST_CLIENT_DEVICE_ID)"
-        typeName == "PermissionCode" -> "toPermissionCodeOrThrow(TEST_PERMISSION_CODE)"
-        typeName == "AccessToken" -> "toAccessTokenOrThrow(TEST_ACCESS_TOKEN)"
-        typeName == "RefreshToken" -> "toRefreshTokenOrThrow(TEST_REFRESH_TOKEN)"
-        typeName == "RefreshTokenHash" -> "toRefreshTokenHashOrThrow(TEST_REFRESH_TOKEN_HASH)"
-        typeName == "DecryptedString" -> "TEST_DECRYPTED_STRING"
-        typeName == "EncryptedString" -> "TEST_ENCRYPTED_STRING"
-        typeName == "PasswordHash" -> "TEST_PASSWORD_HASH"
-        typeName == "Instant" || typeName == "Duration" -> "TEST_TIME_MILLIS"
-        rawDtoClasses.any {
-            it.simpleName == typeName
-        } ||
-            typeName.endsWith("Payload") ||
-            typeName.endsWith("Params") ||
-            typeName.endsWith("Request") ||
-            typeName.endsWith("Response") -> "createTest$typeName()"
-        type.isMarkedNullable -> "null"
-        else -> "{}"
+        typeName == "String" -> getDefaultStringMockValue(paramName, ownerClassName)
+        typeName == "Int" || typeName == "Long" || typeName == "Number" -> getDefaultNumberMockValue(paramName)
+        else -> getDefaultTypeOrBrandedMockValue(type, typeName)
     }
+}
+
+private fun getEnumDefaultMockValue(classifier: KClass<*>): String {
+    val enumInfo = getEnumInfo(classifier)
+    val defaultEntry = enumInfo.entries.firstOrNull {
+        it.first == "DEFAULT" || it.first == "NONE" || it.first == "ACTIVE" ||
+            it.first == "USER" || it.first == "SUCCESS"
+    } ?: enumInfo.entries.firstOrNull()
+    return if (defaultEntry != null) "\"${defaultEntry.second}\"" else "\"\""
+}
+
+private fun getDefaultStringMockValue(paramName: String, ownerClassName: String): String = when {
+    paramName in setOf("role", "userRole", "actorUserRole", "user_role", "actor_user_role") -> "\"user\""
+    paramName in setOf("accountStatus", "accountStatusOnRestore", "account_status", "account_status_on_restore") -> "\"active\""
+    paramName in setOf("lockoutType", "accountLockoutType", "lockout_type", "account_lockout_type") -> "\"none\""
+    paramName in setOf("identifierAuthProvider", "userAuthProvider", "identifier_auth_provider", "user_auth_provider") -> "\"email\""
+    paramName in setOf("actorType", "actor_type") -> "\"user\""
+    paramName == "action" -> "\"login.email\""
+    paramName == "resource" -> "\"audit.event\""
+    paramName == "status" -> "\"success\""
+    paramName in setOf("clientType", "client_type") -> "\"android\""
+    paramName in setOf("themeMode", "theme_mode") -> "\"system\""
+    paramName in setOf("sortOrder", "sort_order") -> "\"desc\""
+    paramName == "id" || paramName.endsWith("Id") || paramName.endsWith("_id") -> getDefaultStringIdMockValue(paramName, ownerClassName)
+    paramName.contains("email", ignoreCase = true) -> "TEST_EMAIL"
+    paramName.contains("phone", ignoreCase = true) -> "TEST_PHONE"
+    paramName.contains("ipAddress", ignoreCase = true) || paramName.contains("ip_address", ignoreCase = true) -> "TEST_IP_ADDRESS"
+    paramName.contains("userAgent", ignoreCase = true) || paramName.contains("user_agent", ignoreCase = true) -> "TEST_USER_AGENT"
+    paramName.contains("code", ignoreCase = true) || paramName.contains("otp", ignoreCase = true) ||
+        paramName.contains("token", ignoreCase = true) || paramName.contains("mfa", ignoreCase = true) -> "\"123456\""
+    paramName.contains("url", ignoreCase = true) -> "\"https://example.com\""
+    paramName.contains("host", ignoreCase = true) -> "\"api.example.com\""
+    paramName.contains("message", ignoreCase = true) -> "\"Test message\""
+    paramName.contains("name", ignoreCase = true) -> "\"test_name\""
+    else -> "\"test_${paramName}\""
+}
+
+private fun getDefaultStringIdMockValue(paramName: String, ownerClassName: String): String = when (paramName) {
+    "userId", "user_id", "actorId", "actor_id", "resourceId", "resource_id" -> "TEST_USER_ID"
+    "sessionId", "session_id" -> "TEST_SESSION_ID"
+    "identifierId", "userIdentifierId", "user_identifier_id" -> "TEST_IDENTIFIER_ID"
+    "auditEventId", "event_id", "eventId", "audit_event_id" -> "TEST_AUDIT_EVENT_ID"
+    "fileId", "file_id" -> "TEST_FILE_ID"
+    "clientDeviceId", "device_id", "deviceId" -> "TEST_CLIENT_DEVICE_ID"
+    "id" -> when {
+        ownerClassName.contains("UserIdentifier") -> "TEST_IDENTIFIER_ID"
+        ownerClassName.contains("UserSession") || ownerClassName.contains("DeletedSession") || ownerClassName.contains("RefreshToken") -> "TEST_SESSION_ID"
+        ownerClassName.contains("AuditEvent") -> "TEST_AUDIT_EVENT_ID"
+        ownerClassName.contains("StorageFile") -> "TEST_FILE_ID"
+        ownerClassName.contains("User") || ownerClassName.contains("AuthData") -> "TEST_USER_ID"
+        else -> "\"00000000-0000-0000-0000-000000000000\""
+    }
+    else -> "\"00000000-0000-0000-0000-000000000000\""
+}
+
+private fun getDefaultNumberMockValue(paramName: String): String = when {
+    paramName in setOf("pageNumber", "page_number", "page") -> "1"
+    paramName in setOf("pageSize", "page_size") -> "20"
+    paramName in setOf("authorityLevel", "authority_level") -> "10"
+    paramName in setOf("retryAfterSeconds", "retry_after_seconds") -> "60"
+    paramName.endsWith("At") || paramName.endsWith("_at") ||
+        paramName.endsWith("Time") || paramName.endsWith("Timestamp") ||
+        paramName.endsWith("Until") || paramName.endsWith("_until") -> "TEST_TIME_MILLIS"
+    else -> "1"
+}
+
+private fun getDefaultTypeOrBrandedMockValue(type: KType, typeName: String): String = when {
+    typeName == "Boolean" -> "false"
+    typeName in setOf("List", "Set", "Collection") -> "[]"
+    typeName == "Map" -> "{}"
+    typeName == "UserId" -> "toUserIdOrThrow(TEST_USER_ID)"
+    typeName == "UserSessionId" -> "toUserSessionIdOrThrow(TEST_SESSION_ID)"
+    typeName == "UserIdentifierId" -> "toUserIdentifierIdOrThrow(TEST_IDENTIFIER_ID)"
+    typeName == "AuditEventId" -> "toAuditEventIdOrThrow(TEST_AUDIT_EVENT_ID)"
+    typeName == "ClientDeviceId" -> "toClientDeviceIdOrThrow(TEST_CLIENT_DEVICE_ID)"
+    typeName == "PermissionCode" -> "toPermissionCodeOrThrow(TEST_PERMISSION_CODE)"
+    typeName == "AccessToken" -> "toAccessTokenOrThrow(TEST_ACCESS_TOKEN)"
+    typeName == "RefreshToken" -> "toRefreshTokenOrThrow(TEST_REFRESH_TOKEN)"
+    typeName == "RefreshTokenHash" -> "toRefreshTokenHashOrThrow(TEST_REFRESH_TOKEN_HASH)"
+    typeName == "DecryptedString" -> "TEST_DECRYPTED_STRING"
+    typeName == "EncryptedString" -> "TEST_ENCRYPTED_STRING"
+    typeName == "PasswordHash" -> "TEST_PASSWORD_HASH"
+    typeName == "Instant" || typeName == "Duration" -> "TEST_TIME_MILLIS"
+    rawDtoClasses.any { it.simpleName == typeName } ||
+        typeName.endsWith("Payload") || typeName.endsWith("Params") ||
+        typeName.endsWith("Request") || typeName.endsWith("Response") -> "createTest$typeName()"
+    type.isMarkedNullable -> "null"
+    else -> "{}"
 }
 
 public fun getAllExportableTestClasses(): List<KClass<*>> {

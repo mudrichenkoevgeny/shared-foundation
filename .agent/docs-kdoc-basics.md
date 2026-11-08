@@ -15,6 +15,7 @@ This document defines mandatory language and syntax standards for all public int
 - **Simple Names Only:** Use only simple names that resolve via imports: `[Foo]` or `[SomeType.member]`.
 - **No FQN in Links:** Fully qualified names in links (e.g., `[full.package.Foo]`) are strictly forbidden.
 - **Import Requirement:** Every type referenced in a link must be imported in the current file.
+- **Avoiding Unused Imports:** If a type is referenced only in KDoc prose (e.g., `Response body: [SomePayload]`) and not in executable code, add `@see SomePayload` at the bottom of the KDoc block. This keeps the `import` statement active for linters (Ktlint/Detekt) and generates a hyperlinked `@see` reference in Dokka documentation.
 - **Unreachable Targets:** If a type cannot be imported (e.g., from a consumer module), use **plain text** without brackets.
 - **No Deferred Prose:** Do not redirect the reader to other KDocs. Phrasing like "Same as [Other.CONST]" is forbidden. Repeat the contract details fully to ensure each constant is self-contained.
 
