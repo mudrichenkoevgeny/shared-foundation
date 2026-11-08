@@ -10,4 +10,5 @@ public const val TEST_REFRESH_TOKEN_HASH: String = "test_refresh_token_hash"
  *
  * @param value Hash string (defaults to [TEST_REFRESH_TOKEN_HASH]).
  */
-public fun createTestRefreshTokenHash(value: String = TEST_REFRESH_TOKEN_HASH): RefreshTokenHash = RefreshTokenHash(value)
+public fun createTestRefreshTokenHash(value: String = TEST_REFRESH_TOKEN_HASH): RefreshTokenHash =
+    RefreshTokenHash(value)

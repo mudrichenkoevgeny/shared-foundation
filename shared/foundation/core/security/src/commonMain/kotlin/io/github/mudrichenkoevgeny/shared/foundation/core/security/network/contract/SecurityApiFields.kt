@@ -8,7 +8,8 @@ public object SecurityApiFields {
      * JSON field name for how long a recent step-up or re-authentication remains valid
      * for open user actions, in seconds.
      */
-    public const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER: String = "recent_authentication_validity_seconds_for_open_user"
+    public const val RECENT_AUTHENTICATION_VALIDITY_SECONDS_FOR_OPEN_USER: String =
+        "recent_authentication_validity_seconds_for_open_user"
 
     /**
      * JSON field name for how long a recent re-authentication remains valid

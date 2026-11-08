@@ -82,7 +82,8 @@ public sealed interface OpenStorageNavigation : NavigationRoute {
         public companion object {
             public const val ROUTE: String = "${FileList.ROUTE}/{${StorageApiPaths.FILE_ID}}"
 
-            public fun getPath(fileId: FileId): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
+            public fun getPath(fileId: FileId): String =
+                ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId.asHexDashString())
 
             public fun getPath(fileId: String): String = ROUTE.replace("{${StorageApiPaths.FILE_ID}}", fileId)
         }

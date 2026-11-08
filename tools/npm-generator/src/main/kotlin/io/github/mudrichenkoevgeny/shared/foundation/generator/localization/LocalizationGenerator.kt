@@ -424,7 +424,12 @@ export declare const localizationResources: Record<string, Record<string, Record
     modulesList.forEach { moduleData ->
         moduleData.bundles.forEach { bundleData ->
             val rawKeysUnion = bundleData.entries.joinToString(" | ") { "'${it.rawKey}'" }.ifEmpty { "string" }
-            val propsUnion = bundleData.entries.joinToString(" | ") { "'${it.propertyOrMethodName}'" }.ifEmpty { "string" }
+            val propsUnion =
+                bundleData.entries
+                    .joinToString(
+                        " | "
+                    ) { "'${it.propertyOrMethodName}'" }
+                    .ifEmpty { "string" }
 
             dtsSb
                 .append(
@@ -494,11 +499,15 @@ export class ${moduleData.facadeClassName} {
         }
 
         if (moduleData.facadeClassName == "UserModuleStrings") {
-            dtsSb.append("  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n")
+            dtsSb.append(
+                "  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n"
+            )
             dtsSb.append(
                 "  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n"
             )
-            dtsSb.append("  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n")
+            dtsSb.append(
+                "  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n"
+            )
         }
 
         dtsSb.append("}\n\n")
@@ -565,7 +574,15 @@ public fun formatAsJsObject(obj: Any?): String =
         is Map<*, *> -> {
             val entries =
                 obj.entries.joinToString(",\n") { (k, v) ->
-                    val keyStr = if (k.toString().matches(Regex("^[a-zA-Z_$][a-zA-Z0-9_$]*$"))) k.toString() else "\"$k\""
+                    val keyStr =
+                        if (k.toString().matches(
+                                Regex("^[a-zA-Z_$][a-zA-Z0-9_$]*$")
+                            )
+                        ) {
+                            k.toString()
+                        } else {
+                            "\"$k\""
+                        }
                     "$keyStr: ${formatAsJsObject(v)}"
                 }
             "{\n${entries.indent(2)}\n}"

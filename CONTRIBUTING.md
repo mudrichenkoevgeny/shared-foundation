@@ -1,5 +1,41 @@
 # Development and Publishing
 
+## Code Quality, Formatting & Pre-Commit Verification
+
+Before submitting changes or creating a commit, run the pre-commit verification suite to ensure code style, static analysis, and compilation rules pass cleanly.
+
+### 1. Code Style & Formatting (Ktlint)
+
+Check for code style and formatting violations:
+```bash
+./gradlew ktlintCheck
+```
+If formatting errors occur (e.g. trailing whitespace, indentation, or imports), automatically fix them with:
+```bash
+./gradlew ktlintFormat
+```
+
+### 2. Static Analysis & Architectural Rules (Detekt)
+
+Run Detekt static analysis, complexity checks, and custom library rules (`NoFullyQualifiedName`, `NoInlineComment`):
+```bash
+./gradlew detekt
+```
+
+### 3. Compilation & Full Verification
+
+Verify Kotlin compilation across all target platforms:
+```bash
+./gradlew compileKotlin
+```
+
+Run the complete project verification suite (Ktlint, Detekt, Binary Compatibility API checks, multiplatform unit tests, and NPM package generation):
+```bash
+./gradlew check
+```
+
+---
+
 ## Dependency Analysis
 
 The project uses the [`com.autonomousapps.dependency-analysis`](https://github.com/autonomousapps/dependency-analysis-gradle-plugin) plugin to maintain a clean classpath and keep published Maven metadata accurate (`api` vs `implementation`, unused deps, transitive deps that should be direct).
@@ -119,13 +155,13 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm pack ./build/npm-package --pack-destination ./build/npm-package
    ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.1.7.tgz` will be created inside `build/npm-package/`.
+   The archive `mudrichenkoevgeny-shared-foundation-0.1.8.tgz` will be created inside `build/npm-package/`.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.7.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.8.tgz'
    ```
    And run from the root directory:
    ```bash

@@ -7,7 +7,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  *
  * @param codes List of backup recovery codes strings.
  */
-public fun createTestTotpRecoveryCodesPayload(codes: List<String> = listOf("REC-1111-2222", "REC-3333-4444")): TotpRecoveryCodesPayload =
+public fun createTestTotpRecoveryCodesPayload(
+    codes: List<String> = listOf("REC-1111-2222", "REC-3333-4444")
+): TotpRecoveryCodesPayload =
     TotpRecoveryCodesPayload(
         codes = codes
     )

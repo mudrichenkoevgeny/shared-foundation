@@ -10,11 +10,17 @@ max_line_length = off
 trim_trailing_whitespace = true
 
 [*.{kt,kts}]
+max_line_length = 120
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 ij_kotlin_continuation_indent_size = 4
 ij_kotlin_keep_line_breaks = true
 ij_kotlin_name_count_to_use_star_import = 2147483647
+ij_kotlin_name_count_to_use_star_import_for_members = 2147483647
+ij_kotlin_imports_layout = *, java.**, javax.**, kotlin.**, ^
+ij_kotlin_method_call_chain_wrap = normal
+ij_kotlin_method_parameters_wrap = normal
+ij_kotlin_call_parameters_wrap = normal
 
 [*.md]
 trim_trailing_whitespace = false

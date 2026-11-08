@@ -32,7 +32,8 @@ public value class UploadQueueItemId(
  *
  * Returns `null` if the value is not a valid UUID in hex-with-dashes form.
  */
-public fun String.toUploadQueueItemIdOrNull(): UploadQueueItemId? = Uuid.parseOrNull(this)?.let { UploadQueueItemId(it) }
+public fun String.toUploadQueueItemIdOrNull(): UploadQueueItemId? =
+    Uuid.parseOrNull(this)?.let { UploadQueueItemId(it) }
 
 /**
  * Parses this string into an [UploadQueueItemId] or throws if the value is not a valid UUID.

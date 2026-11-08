@@ -8,7 +8,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
  *
  * @param unlockMethod Chosen account unlock method ([UnlockMethod]).
  */
-public fun createTestUnlockTargetInputParams(unlockMethod: UnlockMethod? = UnlockMethod.EMAIL): UnlockTargetInputParams =
+public fun createTestUnlockTargetInputParams(
+    unlockMethod: UnlockMethod? = UnlockMethod.EMAIL
+): UnlockTargetInputParams =
     UnlockTargetInputParams(
         unlockMethod = unlockMethod
     )

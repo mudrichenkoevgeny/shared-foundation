@@ -23,7 +23,9 @@ public sealed interface ManagementStorageSettingsNavigation : NavigationRoute {
     @Serializable
     public data object StorageSettings : ManagementStorageSettingsNavigation {
         override val route: String
-            get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE}"
+            get() =
+                CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE +
+                    BaseStorageNavigationRoutes.BASE_STORAGE_NAVIGATION_ROUTE
 
         override val parentRoute: String
             get() = CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE

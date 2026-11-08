@@ -27,7 +27,8 @@ public fun extractKDoc(
 
     val text =
         if (nestedClassName != null) {
-            val nestedBlockRegex = Regex("""(?:object|class)\s+$nestedClassName\b[\s\S]*?(?=(?:(?:object|class)\s+\w+\b)|$)""")
+            val nestedBlockRegex =
+                Regex("""(?:object|class)\s+$nestedClassName\b[\s\S]*?(?=(?:(?:object|class)\s+\w+\b)|$)""")
             nestedBlockRegex.find(fullText)?.value ?: fullText
         } else {
             fullText

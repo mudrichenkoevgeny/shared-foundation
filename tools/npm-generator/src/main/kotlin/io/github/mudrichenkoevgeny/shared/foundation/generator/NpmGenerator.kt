@@ -380,7 +380,8 @@ private fun generateDeclarationFile(
 
             val nestedFields =
                 structure.nestedObjects.map { (nestedName, nestedProps) ->
-                    val nestedDoc = extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                    val nestedDoc =
+                        extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
                     val propsCode =
                         nestedProps.joinToString("\n") { (vName, vVal) ->
                             val vDoc =
@@ -727,7 +728,10 @@ ${generateCompositeParsersDts()}
                         val paramName = param.name ?: ""
                         val serialNameAnnotation =
                             param.annotations.filterIsInstance<SerialName>().firstOrNull()
-                                ?: kClass.declaredMemberProperties.firstOrNull { it.name == paramName }?.findAnnotation<SerialName>()
+                                ?: kClass.declaredMemberProperties
+                                    .firstOrNull {
+                                        it.name == paramName
+                                    }?.findAnnotation<SerialName>()
 
                         val wireKey = serialNameAnnotation?.value ?: paramName
                         val tsType = resolveTsType(paramName, param.type, kClass)

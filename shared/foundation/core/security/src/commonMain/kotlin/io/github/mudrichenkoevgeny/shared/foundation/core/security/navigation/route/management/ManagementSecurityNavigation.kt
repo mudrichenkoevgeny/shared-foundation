@@ -24,7 +24,9 @@ public sealed interface ManagementSecurityNavigation : NavigationRoute {
     @Serializable
     public data object SecuritySettings : ManagementSecurityNavigation {
         override val route: String
-            get() = "${CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE}${BaseSecurityNavigationRoutes.BASE_SECURITY_NAVIGATION_ROUTE}"
+            get() =
+                CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE +
+                    BaseSecurityNavigationRoutes.BASE_SECURITY_NAVIGATION_ROUTE
 
         override val parentRoute: String
             get() = CommonNavigationRoutes.BASE_SETTINGS_NAVIGATION_ROUTE

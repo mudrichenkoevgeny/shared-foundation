@@ -11,4 +11,5 @@ public const val TEST_CLIENT_DEVICE_ID: String = "00000000-0000-4000-8000-000000
  *
  * @param value String representation of the UUID (defaults to [TEST_CLIENT_DEVICE_ID]).
  */
-public fun createTestClientDeviceId(value: String = TEST_CLIENT_DEVICE_ID): ClientDeviceId = value.toClientDeviceIdOrThrow()
+public fun createTestClientDeviceId(value: String = TEST_CLIENT_DEVICE_ID): ClientDeviceId =
+    value.toClientDeviceIdOrThrow()

@@ -31,7 +31,8 @@ public data class LoginByEmailParams(
         override fun parse(params: Map<String, Any?>): LoginByEmailParams {
             val normalized = params.normalizeQueryParams()
             val email = normalized[UserApiFields.EMAIL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
-            val redirectUrl = normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
+            val redirectUrl =
+                normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
             return LoginByEmailParams(email = email, redirectUrl = redirectUrl)
         }
 

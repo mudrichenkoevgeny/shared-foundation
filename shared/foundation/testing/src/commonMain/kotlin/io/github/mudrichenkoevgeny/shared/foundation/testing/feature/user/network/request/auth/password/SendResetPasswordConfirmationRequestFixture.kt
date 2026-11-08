@@ -8,7 +8,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
  *
  * @param email Target email address string.
  */
-public fun createTestSendResetPasswordConfirmationRequest(email: String = TEST_EMAIL): SendResetPasswordConfirmationRequest =
+public fun createTestSendResetPasswordConfirmationRequest(
+    email: String = TEST_EMAIL
+): SendResetPasswordConfirmationRequest =
     SendResetPasswordConfirmationRequest(
         email = email
     )

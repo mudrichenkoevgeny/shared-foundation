@@ -31,7 +31,8 @@ public data class ClientRegistrationByEmailParams(
         override fun parse(params: Map<String, Any?>): ClientRegistrationByEmailParams {
             val normalized = params.normalizeQueryParams()
             val email = normalized[UserApiFields.EMAIL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
-            val redirectUrl = normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
+            val redirectUrl =
+                normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
             return ClientRegistrationByEmailParams(email = email, redirectUrl = redirectUrl)
         }
 

@@ -57,7 +57,12 @@ class NpmGeneratorTest {
     fun testGeneratePermissionCodeObjects() {
         val result = generatePermissionCodeObjects()
 
-        assertTrue(result.contains("export const AuditPermissionCode") || result.contains("export const SecurityPermissionCode"))
+        assertTrue(
+            result.contains("export const AuditPermissionCode") ||
+                result.contains(
+                    "export const SecurityPermissionCode"
+                )
+        )
     }
 
     @Test

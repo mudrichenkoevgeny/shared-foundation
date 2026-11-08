@@ -8,7 +8,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  *
  * @param deletedSessionIds List of deleted session ID strings.
  */
-public fun createTestDeletedSessionsPayload(deletedSessionIds: List<String> = listOf(TEST_SESSION_ID)): DeletedSessionsPayload =
+public fun createTestDeletedSessionsPayload(
+    deletedSessionIds: List<String> = listOf(TEST_SESSION_ID)
+): DeletedSessionsPayload =
     DeletedSessionsPayload(
         deletedSessionIds = deletedSessionIds
     )

@@ -11,7 +11,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  */
 public object ManagementUserConfigurationRoutes {
     /** Base path for management user configuration endpoints. */
-    private const val BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE = "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}/user-configuration"
+    private const val BASE_MANAGEMENT_USER_CONFIGURATION_ROUTE =
+        "${CommonNetworkRoutes.BASE_MANAGEMENT_NETWORK_ROUTE}/user-configuration"
 
     /**
      * **HTTP method:** `GET`

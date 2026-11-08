@@ -22,7 +22,8 @@ public value class RefreshTokenHash(
  * Attempts to create a [RefreshTokenHash] from this string.
  * Returns `null` if the string is blank.
  */
-public fun String.toRefreshTokenHashOrNull(): RefreshTokenHash? = if (this.isNotBlank()) RefreshTokenHash(this) else null
+public fun String.toRefreshTokenHashOrNull(): RefreshTokenHash? =
+    if (this.isNotBlank()) RefreshTokenHash(this) else null
 
 /**
  * Creates a [RefreshTokenHash] from this string or throws an exception if the string is blank.

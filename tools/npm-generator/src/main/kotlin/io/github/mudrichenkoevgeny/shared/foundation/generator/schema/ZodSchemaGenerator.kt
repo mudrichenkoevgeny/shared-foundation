@@ -163,7 +163,10 @@ public fun generateSingleDtoSchema(kClass: KClass<*>): String {
 
             val serialNameAnnotation =
                 param.annotations.filterIsInstance<SerialName>().firstOrNull()
-                    ?: kClass.declaredMemberProperties.firstOrNull { it.name == paramName }?.findAnnotation<SerialName>()
+                    ?: kClass.declaredMemberProperties
+                        .firstOrNull {
+                            it.name == paramName
+                        }?.findAnnotation<SerialName>()
 
             val wireKey = serialNameAnnotation?.value ?: paramName
 
@@ -236,7 +239,8 @@ public fun resolveZodType(
             paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "userAccountStatusSchema"
             paramName == "lockoutType" -> "accountLockoutTypeSchema"
             paramName == "actorType" -> "auditActorTypeSchema"
-            paramName == "status" && (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "auditStatusSchema"
+            paramName == "status" &&
+                (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "auditStatusSchema"
             paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "userAuthProviderSchema"
             paramName == "sensitivity" || paramName == "valueSensitivity" -> "auditValueSensitivitySchema"
             paramName == "permissionCodes" -> "z.array(permissionCodeSchema)"
@@ -290,12 +294,26 @@ public fun resolveZodType(
                 classifier.simpleName == "List" ||
                 classifier.simpleName == "Collection" -> {
                 val elementType = type.arguments.firstOrNull()?.type
-                val elementZod = if (elementType != null) resolveZodType(paramName, elementType, parentClass) else "z.unknown()"
+                val elementZod =
+                    if (elementType !=
+                        null
+                    ) {
+                        resolveZodType(paramName, elementType, parentClass)
+                    } else {
+                        "z.unknown()"
+                    }
                 "z.array($elementZod)"
             }
             classifier == PatchField::class -> {
                 val innerType = type.arguments.firstOrNull()?.type
-                val innerZod = if (innerType != null) resolveZodType(paramName, innerType, parentClass) else "z.unknown()"
+                val innerZod =
+                    if (innerType !=
+                        null
+                    ) {
+                        resolveZodType(paramName, innerType, parentClass)
+                    } else {
+                        "z.unknown()"
+                    }
                 "$innerZod.nullable().optional()"
             }
             classifier == Map::class || classifier.simpleName == "Map" -> {
@@ -359,7 +377,8 @@ public fun resolveTsType(
             paramName == "accountStatus" || paramName == "accountStatusOnRestore" -> "UserAccountStatus"
             paramName == "lockoutType" -> "AccountLockoutType"
             paramName == "actorType" -> "AuditActorType"
-            paramName == "status" && (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "AuditStatus"
+            paramName == "status" &&
+                (parentClass == AuditEventSummaryPayload::class || parentClass == AuditEventPrivatePayload::class) -> "AuditStatus"
             paramName == "identifierAuthProvider" || paramName == "userAuthProvider" -> "UserAuthProvider"
             paramName == "sensitivity" || paramName == "valueSensitivity" -> "AuditValueSensitivity"
             paramName == "permissionCodes" -> "PermissionCode[]"
@@ -408,12 +427,26 @@ public fun resolveTsType(
                 classifier.simpleName == "List" ||
                 classifier.simpleName == "Collection" -> {
                 val elementType = type.arguments.firstOrNull()?.type
-                val elementTs = if (elementType != null) resolveTsType(paramName, elementType, parentClass) else "unknown"
+                val elementTs =
+                    if (elementType !=
+                        null
+                    ) {
+                        resolveTsType(paramName, elementType, parentClass)
+                    } else {
+                        "unknown"
+                    }
                 "$elementTs[]"
             }
             classifier == PatchField::class -> {
                 val innerType = type.arguments.firstOrNull()?.type
-                val innerZod = if (innerType != null) resolveZodType(paramName, innerType, parentClass) else "z.unknown()"
+                val innerZod =
+                    if (innerType !=
+                        null
+                    ) {
+                        resolveZodType(paramName, innerType, parentClass)
+                    } else {
+                        "z.unknown()"
+                    }
                 "$innerZod.nullable().optional()"
             }
             classifier == Map::class || classifier.simpleName == "Map" -> {

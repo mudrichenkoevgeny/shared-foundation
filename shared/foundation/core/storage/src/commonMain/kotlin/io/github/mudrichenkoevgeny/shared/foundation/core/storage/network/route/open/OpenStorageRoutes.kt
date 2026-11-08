@@ -131,7 +131,8 @@ public object OpenStorageRoutes {
      * - Screens:
      *   - [OpenStorageNavigation.FileUpload]
      */
-    public const val POST_PRESIGNED_UPLOAD_URL: String = "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/presigned-url"
+    public const val POST_PRESIGNED_UPLOAD_URL: String =
+        "${BaseStorageNetworkRoutes.BASE_STORAGE_NETWORK_ROUTE}/presigned-url"
 
     /**
      * **HTTP method:** `POST`

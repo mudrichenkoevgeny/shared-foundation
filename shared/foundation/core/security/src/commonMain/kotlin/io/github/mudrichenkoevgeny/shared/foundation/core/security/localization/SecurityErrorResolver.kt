@@ -16,16 +16,27 @@ public fun SecurityModuleStrings.resolvePasswordTooWeakReasons(args: Map<String,
     if (args == null) return listOf(errors.passwordTooWeak)
 
     val minLength = args[SecurityErrorArgs.PASSWORD_MIN_LENGTH]?.toString()?.toIntOrNull()
-    val isTooShort = args[SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT] == true || args[SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT] == "true"
-    val isNoLetter = args[SecurityErrorArgs.PASSWORD_FAIL_NO_LETTER] == true || args[SecurityErrorArgs.PASSWORD_FAIL_NO_LETTER] == "true"
+    val isTooShort =
+        args[SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_TOO_SHORT] == "true"
+    val isNoLetter =
+        args[SecurityErrorArgs.PASSWORD_FAIL_NO_LETTER] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_NO_LETTER] == "true"
     val isNoUpperCase =
-        args[SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE] == true || args[SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE] == "true"
+        args[SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_NO_UPPERCASE] == "true"
     val isNoLowerCase =
-        args[SecurityErrorArgs.PASSWORD_FAIL_NO_LOWERCASE] == true || args[SecurityErrorArgs.PASSWORD_FAIL_NO_LOWERCASE] == "true"
-    val isNoDigit = args[SecurityErrorArgs.PASSWORD_FAIL_NO_DIGIT] == true || args[SecurityErrorArgs.PASSWORD_FAIL_NO_DIGIT] == "true"
+        args[SecurityErrorArgs.PASSWORD_FAIL_NO_LOWERCASE] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_NO_LOWERCASE] == "true"
+    val isNoDigit =
+        args[SecurityErrorArgs.PASSWORD_FAIL_NO_DIGIT] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_NO_DIGIT] == "true"
     val isNoSpecialChar =
-        args[SecurityErrorArgs.PASSWORD_FAIL_NO_SPECIAL_CHAR] == true || args[SecurityErrorArgs.PASSWORD_FAIL_NO_SPECIAL_CHAR] == "true"
-    val isTooCommon = args[SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON] == true || args[SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON] == "true"
+        args[SecurityErrorArgs.PASSWORD_FAIL_NO_SPECIAL_CHAR] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_NO_SPECIAL_CHAR] == "true"
+    val isTooCommon =
+        args[SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON] == true ||
+            args[SecurityErrorArgs.PASSWORD_FAIL_TOO_COMMON] == "true"
 
     val reasons = mutableListOf<String>()
 

@@ -62,7 +62,7 @@ class PasswordPolicyValidatorTest {
     }
 
     @Test
-    fun `given policy with special char required when validate without special char then return no special char reason`() {
+    fun `given special char required when validate without it then return no special char reason`() {
         val policy = defaultPolicy.copy(requireSpecialChar = true)
         val password = "NoSpecialChar123"
         val result = validator.validate(policy, password)
@@ -138,7 +138,7 @@ class PasswordPolicyValidatorTest {
     }
 
     @Test
-    fun `given policy with letter required when validate with digits and special chars only then return no letter reason`() {
+    fun `given letter required when validate without letters then return no letter reason`() {
         val policy = defaultPolicy.copy(requireLetter = true)
         val password = "123!@#"
         val result = validator.validate(policy, password)

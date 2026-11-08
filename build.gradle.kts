@@ -33,7 +33,7 @@ apiValidation {
 
 allprojects {
     group = "io.github.mudrichenkoevgeny"
-    version = "0.1.7"
+    version = "0.1.8"
 }
 
 val daemonJvmVersion: Int = run {
@@ -205,7 +205,8 @@ subprojects {
 
 tasks.register("generateNpmPackage") {
     group = "publishing"
-    description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types, Zod schemas, and route constants."
+    description =
+        "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types, Zod schemas, and route constants."
     dependsOn(":tools:npm-generator:run")
     finalizedBy(":tools:npm-generator:auditNpmExports")
 }

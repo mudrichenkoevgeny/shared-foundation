@@ -9,7 +9,8 @@ import kotlin.time.Instant
 public fun UserSessionPrivate.isValid(
     clientDeviceId: ClientDeviceId?,
     now: Instant
-): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+): Boolean =
+    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 /**
  * Returns `true` when [UserSessionSummary] is not expired and matches [clientDeviceId].
@@ -17,7 +18,8 @@ public fun UserSessionPrivate.isValid(
 public fun UserSessionSummary.isValid(
     clientDeviceId: ClientDeviceId?,
     now: Instant
-): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+): Boolean =
+    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 /**
  * Returns `true` when [UserSessionInternal] is not expired and matches [clientDeviceId].
@@ -25,7 +27,8 @@ public fun UserSessionSummary.isValid(
 public fun UserSessionInternal.isValid(
     clientDeviceId: ClientDeviceId?,
     now: Instant
-): Boolean = !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
+): Boolean =
+    !isUserSessionExpired(expiresAt, now) && isUserSessionCorrectDevice(clientDeviceInfo.deviceId, clientDeviceId)
 
 private fun isUserSessionExpired(
     expiresAt: Instant,

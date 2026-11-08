@@ -159,7 +159,8 @@ public object SelfManagementStorageRoutes {
      * - Screens:
      *   - [ManagementSelfStorageNavigation.FileUpload]
      */
-    public const val CONFIRM_UPLOAD: String = "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
+    public const val CONFIRM_UPLOAD: String =
+        "$BASE_SELF_MANAGEMENT_STORAGE_FILES_ROUTE/{${StorageApiPaths.FILE_ID}}/confirm"
 
     /**
      * **HTTP method:** `DELETE`

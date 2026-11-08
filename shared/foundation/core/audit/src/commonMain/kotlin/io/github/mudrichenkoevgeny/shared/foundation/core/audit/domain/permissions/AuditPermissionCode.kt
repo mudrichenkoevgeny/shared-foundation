@@ -34,13 +34,15 @@ public object AuditPermissionCode {
     public val AUDIT_GET_FOR_SYSTEM_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.system.actor.masked")
 
     /** Read audit events in the system actor scope ([AuditActorType.SYSTEM]); unmasked sensitive fields. */
-    public val AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.system.actor.unmasked")
+    public val AUDIT_GET_FOR_SYSTEM_ACTOR_UNMASKED: PermissionCode =
+        PermissionCode("audit.get.for.system.actor.unmasked")
 
     /** Read audit events in the service actor scope ([AuditActorType.SERVICE]); masked sensitive fields. */
     public val AUDIT_GET_FOR_SERVICE_ACTOR_MASKED: PermissionCode = PermissionCode("audit.get.for.service.actor.masked")
 
     /** Read audit events in the service actor scope ([AuditActorType.SERVICE]); unmasked sensitive fields. */
-    public val AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED: PermissionCode = PermissionCode("audit.get.for.service.actor.unmasked")
+    public val AUDIT_GET_FOR_SERVICE_ACTOR_UNMASKED: PermissionCode =
+        PermissionCode("audit.get.for.service.actor.unmasked")
 
     /**
      * All audit permissions.

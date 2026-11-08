@@ -8,7 +8,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
  *
  * @param deletedSessionIds List of deleted session IDs ([UserSessionId]).
  */
-public fun createTestDeletedSessions(deletedSessionIds: List<UserSessionId> = listOf(createTestUserSessionId())): DeletedSessions =
+public fun createTestDeletedSessions(
+    deletedSessionIds: List<UserSessionId> = listOf(createTestUserSessionId())
+): DeletedSessions =
     DeletedSessions(
         deletedSessionIds = deletedSessionIds
     )

@@ -34,7 +34,11 @@ public fun getDefaultMockValueJs(
         val enumInfo = getEnumInfo(classifier)
         val defaultEntry =
             enumInfo.entries.firstOrNull {
-                it.first == "DEFAULT" || it.first == "NONE" || it.first == "ACTIVE" || it.first == "USER" || it.first == "SUCCESS"
+                it.first == "DEFAULT" ||
+                    it.first == "NONE" ||
+                    it.first == "ACTIVE" ||
+                    it.first == "USER" ||
+                    it.first == "SUCCESS"
             }
                 ?: enumInfo.entries.firstOrNull()
         return if (defaultEntry != null) {
@@ -332,7 +336,8 @@ return { isSuccess: false, reasons: this.failReasons };
     val factoriesJs =
         exportableClasses.joinToString("\n\n") { kClass ->
             val className = kClass.simpleName ?: ""
-            val isPayload = className.endsWith("Payload") || className.endsWith("Request") || className.endsWith("Response")
+            val isPayload =
+                className.endsWith("Payload") || className.endsWith("Request") || className.endsWith("Response")
             val props = extractClassProperties(kClass)
 
             val fieldsJs =

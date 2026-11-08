@@ -19,7 +19,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
  */
 public object SelfManagementUserRoutes {
     /** Base path for self-service user operations in the management API. */
-    internal const val BASE_SELF_MANAGEMENT_USER_ROUTE = "${CommonNetworkRoutes.BASE_SELF_MANAGEMENT_NETWORK_ROUTE}/user"
+    internal const val BASE_SELF_MANAGEMENT_USER_ROUTE =
+        "${CommonNetworkRoutes.BASE_SELF_MANAGEMENT_NETWORK_ROUTE}/user"
 
     /**
      * **HTTP method:** `GET`

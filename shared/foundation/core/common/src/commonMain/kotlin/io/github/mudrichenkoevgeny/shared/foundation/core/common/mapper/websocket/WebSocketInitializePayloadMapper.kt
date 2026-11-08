@@ -45,7 +45,9 @@ public fun WebSocketInitializePayload.mergeClientInfo(existingClientInfo: Client
  * @param existingClientDeviceInfo Optional baseline [ClientDeviceInfo] to merge fields into.
  * @return merged [ClientDeviceInfo] instance.
  */
-public fun WebSocketInitializePayload.mergeClientDeviceInfo(existingClientDeviceInfo: ClientDeviceInfo? = null): ClientDeviceInfo {
+public fun WebSocketInitializePayload.mergeClientDeviceInfo(
+    existingClientDeviceInfo: ClientDeviceInfo? = null
+): ClientDeviceInfo {
     val currentClientDeviceInfo =
         existingClientDeviceInfo ?: ClientDeviceInfo(
             deviceId = null,

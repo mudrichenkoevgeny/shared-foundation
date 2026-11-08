@@ -105,7 +105,8 @@ public sealed interface ManagementSelfUserNavigation : NavigationRoute {
             public fun getPath(identifierId: UserIdentifierId): String =
                 ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId.asHexDashString())
 
-            public fun getPath(identifierId: String): String = ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
+            public fun getPath(identifierId: String): String =
+                ROUTE.replace("{${UserApiPaths.USER_IDENTIFIER_ID}}", identifierId)
         }
     }
 

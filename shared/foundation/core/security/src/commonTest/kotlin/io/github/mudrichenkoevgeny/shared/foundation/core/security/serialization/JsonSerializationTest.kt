@@ -30,7 +30,11 @@ public class JsonSerializationTest {
         val serialized = FoundationJson.encodeToString(payload)
 
         assertTrue(serialized.contains("\"totp_secret_key\":\"JBSWY3DPEHPK3PXP\""))
-        assertTrue(serialized.contains("\"totp_otp_auth_url\":\"otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP\""))
+        assertTrue(
+            serialized.contains(
+                "\"totp_otp_auth_url\":\"otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP\""
+            )
+        )
         assertTrue(serialized.contains("\"mfa_token\":\"mfa_token_12345\""))
 
         val deserialized = FoundationJson.decodeFromString<TotpSetupPayload>(serialized)

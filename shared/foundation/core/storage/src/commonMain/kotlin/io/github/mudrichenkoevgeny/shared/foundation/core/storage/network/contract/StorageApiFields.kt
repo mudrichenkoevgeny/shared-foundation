@@ -59,7 +59,8 @@ public object StorageApiFields {
     public const val TOTAL_STORAGE_QUOTA_FOR_OPEN_USER_BYTES: String = "total_storage_quota_for_open_user_bytes"
 
     /** JSON field name for total storage quota in bytes for management users. */
-    public const val TOTAL_STORAGE_QUOTA_FOR_MANAGEMENT_USER_BYTES: String = "total_storage_quota_for_management_user_bytes"
+    public const val TOTAL_STORAGE_QUOTA_FOR_MANAGEMENT_USER_BYTES: String =
+        "total_storage_quota_for_management_user_bytes"
 
     /** JSON field name for presigned URL expiration time in seconds. */
     public const val PRESIGNED_URL_EXPIRATION_SECONDS: String = "presigned_url_expiration_seconds"

@@ -10,7 +10,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
  *
  * @param compositeMetadataKeyParser Resolves payload `key` strings to [AuditMetadataKey].
  */
-public fun AuditEventMetadataPayload.toAuditEventMetadata(compositeMetadataKeyParser: CompositeAuditMetadataKeyParser): AuditEventMetadata =
+public fun AuditEventMetadataPayload.toAuditEventMetadata(
+    compositeMetadataKeyParser: CompositeAuditMetadataKeyParser
+): AuditEventMetadata =
     AuditEventMetadata(
         key = compositeMetadataKeyParser.fromValueOrThrow(key),
         value = value

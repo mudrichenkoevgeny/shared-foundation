@@ -21,13 +21,16 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.7"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.8"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
     
     // For unit, integration, and UI preview tests:
     testImplementation("io.github.mudrichenkoevgeny:shared-foundation-testing")
+
+    // For enforcing shared architectural Detekt lint rules (NoFQN, NoInlineComment, PreferValueOverName):
+    detektPlugins("io.github.mudrichenkoevgeny:shared-foundation-detekt-rules")
 }
 ```
 
@@ -52,6 +55,7 @@ Published artifacts (versions aligned via the BOM):
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
 - **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).
+- **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`) for enforcing shared library architectural standards across consumer applications.
 - **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 

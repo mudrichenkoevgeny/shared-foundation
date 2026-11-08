@@ -1,18 +1,22 @@
 package io.github.mudrichenkoevgeny.shared.foundation.detekt
 
-import io.gitlab.arturbosch.detekt.api.Config
-import io.gitlab.arturbosch.detekt.api.RuleSet
-import io.gitlab.arturbosch.detekt.api.RuleSetProvider
+import dev.detekt.api.RuleSet
+import dev.detekt.api.RuleSetId
+import dev.detekt.api.RuleSetProvider
 
+/**
+ * Detekt rule set provider for project-specific custom static analysis rules.
+ */
 public class CustomRuleSetProvider : RuleSetProvider {
-    override val ruleSetId: String = "custom-rules"
+    override val ruleSetId: RuleSetId = RuleSetId("custom-rules")
 
-    override fun instance(config: Config): RuleSet =
+    override fun instance(): RuleSet =
         RuleSet(
             ruleSetId,
             listOf(
-                NoInlineCommentRule(config),
-                NoFullyQualifiedNameRule(config)
+                ::NoInlineCommentRule,
+                ::NoFullyQualifiedNameRule,
+                ::PreferValueOverNameRule
             )
         )
 }

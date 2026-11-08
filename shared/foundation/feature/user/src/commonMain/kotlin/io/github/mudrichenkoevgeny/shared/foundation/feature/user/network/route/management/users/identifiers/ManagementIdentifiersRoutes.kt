@@ -234,7 +234,8 @@ public object ManagementIdentifiersRoutes {
      *   - [ManagementUsersNavigation.GlobalIdentifierList]
      *   - [ManagementUsersNavigation.IdentifierDetail]
      */
-    public const val DELETE_IDENTIFIER: String = "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
+    public const val DELETE_IDENTIFIER: String =
+        "$BASE_MANAGEMENT_IDENTIFIERS_ROUTE/{${UserApiPaths.USER_IDENTIFIER_ID}}"
 
     /**
      * **HTTP method:** `DELETE`

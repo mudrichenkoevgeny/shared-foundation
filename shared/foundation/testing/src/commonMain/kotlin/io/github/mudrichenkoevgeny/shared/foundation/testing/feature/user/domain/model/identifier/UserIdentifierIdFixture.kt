@@ -11,4 +11,5 @@ public const val TEST_IDENTIFIER_ID: String = "00000000-0000-4000-8000-000000000
  *
  * @param value String representation of the UUID (defaults to [TEST_IDENTIFIER_ID]).
  */
-public fun createTestUserIdentifierId(value: String = TEST_IDENTIFIER_ID): UserIdentifierId = value.toUserIdentifierIdOrThrow()
+public fun createTestUserIdentifierId(value: String = TEST_IDENTIFIER_ID): UserIdentifierId =
+    value.toUserIdentifierIdOrThrow()

@@ -9,7 +9,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.i
  *
  * Excludes `passwordHash`.
  */
-public fun UserIdentifierInternal.toUserIdentifierPrivate(isSensitiveValuesMasked: Boolean = false): UserIdentifierPrivate =
+public fun UserIdentifierInternal.toUserIdentifierPrivate(
+    isSensitiveValuesMasked: Boolean = false
+): UserIdentifierPrivate =
     UserIdentifierPrivate(
         id = id,
         userId = userId,

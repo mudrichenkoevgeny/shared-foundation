@@ -16,9 +16,13 @@ class DisplayNameValidatorTest {
 
     @Test
     fun testValidate_Valid_ReturnsSuccess() {
-        assertTrue(validator.validate("Ivan Ivanov", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
+        assertTrue(
+            validator.validate("Ivan Ivanov", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success
+        )
         assertTrue(validator.validate("A", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
-        assertTrue(validator.validate("John Doe 😎", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
+        assertTrue(
+            validator.validate("John Doe 😎", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success
+        )
         assertTrue(validator.validate("      ", minLength = 1, maxLength = 50) is DisplayNameValidatorResult.Success)
     }
 

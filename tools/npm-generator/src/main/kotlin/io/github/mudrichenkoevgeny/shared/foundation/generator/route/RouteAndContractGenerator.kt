@@ -275,7 +275,9 @@ public fun extractPermissionCodeProperties(kClass: KClass<*>): List<Pair<String,
             .filter { PermissionCode::class.java.isAssignableFrom(it.type) }
             .mapNotNull { field ->
                 field.isAccessible = true
-                val permObj = field.get(instance) as? PermissionCode ?: field.get(null) as? PermissionCode ?: return@mapNotNull null
+                val permObj =
+                    field.get(instance) as? PermissionCode ?: field.get(null) as? PermissionCode
+                        ?: return@mapNotNull null
                 field.name to permObj.value
             }
 

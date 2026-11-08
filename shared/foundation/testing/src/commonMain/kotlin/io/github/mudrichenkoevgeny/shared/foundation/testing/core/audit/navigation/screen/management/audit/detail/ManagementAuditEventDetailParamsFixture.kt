@@ -8,7 +8,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.m
  *
  * @param eventId Audit event ID string.
  */
-public fun createTestManagementAuditEventDetailParams(eventId: String = TEST_AUDIT_EVENT_ID): ManagementAuditEventDetailParams =
+public fun createTestManagementAuditEventDetailParams(
+    eventId: String = TEST_AUDIT_EVENT_ID
+): ManagementAuditEventDetailParams =
     ManagementAuditEventDetailParams(
         eventId = eventId
     )

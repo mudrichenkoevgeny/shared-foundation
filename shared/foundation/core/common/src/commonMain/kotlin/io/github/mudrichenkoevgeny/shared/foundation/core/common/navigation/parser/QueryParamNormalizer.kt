@@ -30,7 +30,8 @@ public object QueryParamNormalizer {
             }
         }
 
-    private fun Iterable<*>.toNonBlankStrings(): List<String> = mapNotNull { it?.toString()?.takeIf { str -> str.isNotBlank() } }
+    private fun Iterable<*>.toNonBlankStrings(): List<String> =
+        mapNotNull { it?.toString()?.takeIf { str -> str.isNotBlank() } }
 }
 
 /**

@@ -38,7 +38,8 @@ public data class LoginByTotpParams(
                     ?.firstOrNull()
                     ?.let { LoginByTotpMode.fromValueOrNull(it) }
                     ?: LoginByTotpMode.DEFAULT
-            val redirectUrl = normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
+            val redirectUrl =
+                normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
 
             return LoginByTotpParams(
                 mfaToken = mfaToken,

@@ -20,7 +20,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
  */
 public object OpenRegistrationRoutes {
     /** Base path for email registration operations. */
-    private const val REGISTRATION_BY_EMAIL_ROUTE = "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/registration/email"
+    private const val REGISTRATION_BY_EMAIL_ROUTE =
+        "${BaseUserNetworkRoutes.BASE_USER_AUTH_NETWORK_ROUTE}/registration/email"
 
     /**
      * **HTTP method:** `POST`
