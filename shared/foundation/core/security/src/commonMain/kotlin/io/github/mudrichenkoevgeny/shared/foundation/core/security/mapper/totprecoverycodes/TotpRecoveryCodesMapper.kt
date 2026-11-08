@@ -6,15 +6,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 /**
  * Maps [TotpRecoveryCodesPayload] DTO to domain model [TotpRecoveryCodes].
  */
-public fun TotpRecoveryCodesPayload.toTotpRecoveryCodes(): TotpRecoveryCodes =
-    TotpRecoveryCodes(
-        codes = this.codes
-    )
+public fun TotpRecoveryCodesPayload.toTotpRecoveryCodes(): TotpRecoveryCodes = TotpRecoveryCodes(
+    codes = this.codes
+)
 
 /**
  * Maps domain model [TotpRecoveryCodes] to [TotpRecoveryCodesPayload] DTO.
  */
-public fun TotpRecoveryCodes.toTotpRecoveryCodesPayload(): TotpRecoveryCodesPayload =
-    TotpRecoveryCodesPayload(
-        codes = this.codes
-    )
+public fun TotpRecoveryCodes.toTotpRecoveryCodesPayload(): TotpRecoveryCodesPayload = TotpRecoveryCodesPayload(
+    codes = this.codes
+)

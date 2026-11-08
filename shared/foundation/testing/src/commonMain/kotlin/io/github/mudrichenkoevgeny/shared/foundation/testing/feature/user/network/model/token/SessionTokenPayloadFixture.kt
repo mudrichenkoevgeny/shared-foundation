@@ -13,12 +13,11 @@ public fun createTestSessionTokenPayload(
     tokenType: String = UserAuthSpec.TOKEN_TYPE_BEARER,
     sessionId: String = TEST_SESSION_ID,
     identifierId: String = TEST_IDENTIFIER_ID
-): SessionTokenPayload =
-    SessionTokenPayload(
-        accessToken = accessToken,
-        refreshToken = refreshToken,
-        expiresAt = expiresAt,
-        tokenType = tokenType,
-        sessionId = sessionId,
-        identifierId = identifierId
-    )
+): SessionTokenPayload = SessionTokenPayload(
+    accessToken = accessToken,
+    refreshToken = refreshToken,
+    expiresAt = expiresAt,
+    tokenType = tokenType,
+    sessionId = sessionId,
+    identifierId = identifierId
+)

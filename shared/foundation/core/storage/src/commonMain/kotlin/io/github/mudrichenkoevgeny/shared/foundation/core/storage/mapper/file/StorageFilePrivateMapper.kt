@@ -11,37 +11,35 @@ import kotlin.time.Instant
 /**
  * Builds domain [StorageFilePrivate] from [StorageFilePrivatePayload].
  */
-public fun StorageFilePrivatePayload.toStorageFilePrivate(): StorageFilePrivate =
-    StorageFilePrivate(
-        id = id.toFileIdOrThrow(),
-        ownerUserId = ownerUserId,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = StorageCategory.fromValueOrThrow(category),
-        visibility = StorageFileVisibility.fromValueOrThrow(visibility),
-        status = StorageFileStatus.fromValueOrThrow(status),
-        targetScope = targetScope,
-        fileUrls = fileUrls?.toFileUrls(),
-        createdAt = Instant.fromEpochMilliseconds(createdAt),
-        updatedAt = updatedAt?.let { Instant.fromEpochMilliseconds(it) }
-    )
+public fun StorageFilePrivatePayload.toStorageFilePrivate(): StorageFilePrivate = StorageFilePrivate(
+    id = id.toFileIdOrThrow(),
+    ownerUserId = ownerUserId,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = StorageCategory.fromValueOrThrow(category),
+    visibility = StorageFileVisibility.fromValueOrThrow(visibility),
+    status = StorageFileStatus.fromValueOrThrow(status),
+    targetScope = targetScope,
+    fileUrls = fileUrls?.toFileUrls(),
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let { Instant.fromEpochMilliseconds(it) }
+)
 
 /**
  * Builds network [StorageFilePrivatePayload] from domain [StorageFilePrivate].
  */
-public fun StorageFilePrivate.toStorageFilePrivatePayload(): StorageFilePrivatePayload =
-    StorageFilePrivatePayload(
-        id = id.asHexDashString(),
-        ownerUserId = ownerUserId,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = category.value,
-        visibility = visibility.value,
-        status = status.value,
-        targetScope = targetScope,
-        fileUrls = fileUrls?.toFileUrlsPayload(),
-        createdAt = createdAt.toEpochMilliseconds(),
-        updatedAt = updatedAt?.toEpochMilliseconds()
-    )
+public fun StorageFilePrivate.toStorageFilePrivatePayload(): StorageFilePrivatePayload = StorageFilePrivatePayload(
+    id = id.asHexDashString(),
+    ownerUserId = ownerUserId,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = category.value,
+    visibility = visibility.value,
+    status = status.value,
+    targetScope = targetScope,
+    fileUrls = fileUrls?.toFileUrlsPayload(),
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
+)

@@ -13,9 +13,8 @@ public fun createTestOtpConfirmation(
     retryAfterSeconds: Int = 60,
     numberOfSymbols: Int = 6,
     expirationSeconds: Int = 300
-): OtpConfirmation =
-    OtpConfirmation(
-        retryAfterSeconds = retryAfterSeconds,
-        numberOfSymbols = numberOfSymbols,
-        expirationSeconds = expirationSeconds
-    )
+): OtpConfirmation = OtpConfirmation(
+    retryAfterSeconds = retryAfterSeconds,
+    numberOfSymbols = numberOfSymbols,
+    expirationSeconds = expirationSeconds
+)

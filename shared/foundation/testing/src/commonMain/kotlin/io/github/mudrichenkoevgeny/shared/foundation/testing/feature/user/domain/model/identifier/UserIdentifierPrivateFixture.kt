@@ -34,18 +34,17 @@ public fun createTestUserIdentifierPrivate(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): UserIdentifierPrivate =
-    UserIdentifierPrivate(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserIdentifierPrivate = UserIdentifierPrivate(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
 /**
  * Creates a list of test [UserIdentifierPrivate] instances with deterministic index-based UUIDs,

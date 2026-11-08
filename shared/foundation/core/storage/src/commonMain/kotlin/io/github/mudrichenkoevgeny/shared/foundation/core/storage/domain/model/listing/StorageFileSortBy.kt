@@ -40,11 +40,10 @@ public enum class StorageFileSortBy(
         /**
          * Returns [StorageFileSortBy] for the given wire value or case-insensitive enum name.
          */
-        public fun fromValueOrNull(value: String): StorageFileSortBy? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): StorageFileSortBy? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [StorageFileSortBy] for the given wire or enum-style string.

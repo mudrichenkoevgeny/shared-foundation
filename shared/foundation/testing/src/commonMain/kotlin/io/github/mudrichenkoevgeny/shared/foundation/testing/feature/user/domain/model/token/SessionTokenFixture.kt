@@ -28,12 +28,11 @@ public fun createTestSessionToken(
     tokenType: String = UserAuthSpec.TOKEN_TYPE_BEARER,
     sessionId: UserSessionId = createTestUserSessionId(),
     identifierId: UserIdentifierId = createTestUserIdentifierId()
-): SessionToken =
-    SessionToken(
-        accessToken = accessToken,
-        refreshToken = refreshToken,
-        expiresAt = expiresAt,
-        tokenType = tokenType,
-        sessionId = sessionId,
-        identifierId = identifierId
-    )
+): SessionToken = SessionToken(
+    accessToken = accessToken,
+    refreshToken = refreshToken,
+    expiresAt = expiresAt,
+    tokenType = tokenType,
+    sessionId = sessionId,
+    identifierId = identifierId
+)

@@ -11,8 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
 public fun createTestVerifyTotp(
     mfaToken: String = "mfa_token_12345",
     code: String = "123456"
-): VerifyTotp =
-    VerifyTotp(
-        mfaToken = mfaToken,
-        code = code
-    )
+): VerifyTotp = VerifyTotp(
+    mfaToken = mfaToken,
+    code = code
+)

@@ -7,7 +7,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.scr
  */
 public fun createTestStorageFileDetailParams(
     fileId: String = "00000000-0000-4000-8000-000000000001"
-): StorageFileDetailParams =
-    StorageFileDetailParams(
-        fileId = fileId
-    )
+): StorageFileDetailParams = StorageFileDetailParams(
+    fileId = fileId
+)

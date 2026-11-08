@@ -14,9 +14,8 @@ public fun createTestRegistrationByEmailRequest(
     email: String = TEST_EMAIL,
     password: String = "Secret123!",
     confirmationCode: String = "123456"
-): RegistrationByEmailRequest =
-    RegistrationByEmailRequest(
-        email = email,
-        password = password,
-        confirmationCode = confirmationCode
-    )
+): RegistrationByEmailRequest = RegistrationByEmailRequest(
+    email = email,
+    password = password,
+    confirmationCode = confirmationCode
+)

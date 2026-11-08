@@ -22,16 +22,15 @@ public fun createTestUploadQueueItem(
     status: UploadQueueItemStatus = UploadQueueItemStatus.IDLE,
     error: ApiErrorResponse? = null,
     uploadedFile: StorageFilePrivate? = null
-): UploadQueueItem =
-    UploadQueueItem(
-        id = id,
-        category = category,
-        visibility = visibility,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        progressPercent = progressPercent,
-        status = status,
-        error = error,
-        uploadedFile = uploadedFile
-    )
+): UploadQueueItem = UploadQueueItem(
+    id = id,
+    category = category,
+    visibility = visibility,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    progressPercent = progressPercent,
+    status = status,
+    error = error,
+    uploadedFile = uploadedFile
+)

@@ -8,15 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  * Builds domain [DeletedSessions] from [DeletedSessionsPayload].
  * * @throws IllegalArgumentException when any of the session IDs is not a valid UUID string.
  */
-public fun DeletedSessionsPayload.toDeletedSessions(): DeletedSessions =
-    DeletedSessions(
-        deletedSessionIds = deletedSessionIds.map { it.toUserSessionIdOrThrow() }
-    )
+public fun DeletedSessionsPayload.toDeletedSessions(): DeletedSessions = DeletedSessions(
+    deletedSessionIds = deletedSessionIds.map { it.toUserSessionIdOrThrow() }
+)
 
 /**
  * Builds network [DeletedSessionsPayload] from domain [DeletedSessions].
  */
-public fun DeletedSessions.toDeletedSessionsPayload(): DeletedSessionsPayload =
-    DeletedSessionsPayload(
-        deletedSessionIds = deletedSessionIds.map { it.asHexDashString() }
-    )
+public fun DeletedSessions.toDeletedSessionsPayload(): DeletedSessionsPayload = DeletedSessionsPayload(
+    deletedSessionIds = deletedSessionIds.map { it.asHexDashString() }
+)

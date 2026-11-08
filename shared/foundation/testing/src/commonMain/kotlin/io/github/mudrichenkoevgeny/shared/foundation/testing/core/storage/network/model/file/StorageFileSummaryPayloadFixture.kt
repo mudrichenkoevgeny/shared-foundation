@@ -19,15 +19,14 @@ public fun createTestStorageFileSummaryPayload(
     status: String = StorageFileStatus.READY.value,
     fileUrls: FileUrlsPayload? = createTestFileUrlsPayload(),
     createdAt: Long = 1700000000000L
-): StorageFileSummaryPayload =
-    StorageFileSummaryPayload(
-        id = id,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = category,
-        visibility = visibility,
-        status = status,
-        fileUrls = fileUrls,
-        createdAt = createdAt
-    )
+): StorageFileSummaryPayload = StorageFileSummaryPayload(
+    id = id,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = category,
+    visibility = visibility,
+    status = status,
+    fileUrls = fileUrls,
+    createdAt = createdAt
+)

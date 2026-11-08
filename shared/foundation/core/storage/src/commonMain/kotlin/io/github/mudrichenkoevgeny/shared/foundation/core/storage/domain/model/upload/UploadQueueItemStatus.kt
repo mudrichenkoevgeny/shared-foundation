@@ -45,11 +45,10 @@ public enum class UploadQueueItemStatus(
         /**
          * Returns [UploadQueueItemStatus] for the given string value, or null if unmapped.
          */
-        public fun fromValueOrNull(value: String): UploadQueueItemStatus? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UploadQueueItemStatus? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UploadQueueItemStatus] for the given string value, or throws [IllegalArgumentException].

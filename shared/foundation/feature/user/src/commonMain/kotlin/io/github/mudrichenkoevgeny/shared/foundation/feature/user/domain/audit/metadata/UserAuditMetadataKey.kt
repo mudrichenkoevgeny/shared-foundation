@@ -72,11 +72,10 @@ public enum class UserAuditMetadataKey(
          * Returns [UserAuditMetadataKey] for a wire or enum-style string: first by case-insensitive enum constant name,
          * then by case-insensitive [value] match.
          */
-        public fun fromValueOrNull(value: String): UserAuditMetadataKey? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UserAuditMetadataKey? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UserAuditMetadataKey] for the given wire or enum-style string.

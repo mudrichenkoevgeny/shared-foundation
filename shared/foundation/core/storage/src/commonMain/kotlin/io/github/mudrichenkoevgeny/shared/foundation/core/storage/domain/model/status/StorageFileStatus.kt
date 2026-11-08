@@ -45,11 +45,10 @@ public enum class StorageFileStatus(
         /**
          * Returns [StorageFileStatus] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): StorageFileStatus? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): StorageFileStatus? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [StorageFileStatus] for the given wire or enum-style string (case-insensitive enum name).

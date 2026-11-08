@@ -16,10 +16,9 @@ public fun createTestApiErrorResponse(
     code: String = CommonErrorCodes.INTERNAL,
     message: String = "Internal server error",
     args: Map<String, String> = emptyMap()
-): ApiErrorResponse =
-    ApiErrorResponse(
-        id = id,
-        code = code,
-        message = message,
-        args = args
-    )
+): ApiErrorResponse = ApiErrorResponse(
+    id = id,
+    code = code,
+    message = message,
+    args = args
+)

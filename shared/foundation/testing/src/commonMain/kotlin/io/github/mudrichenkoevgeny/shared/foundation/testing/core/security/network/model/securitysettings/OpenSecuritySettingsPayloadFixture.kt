@@ -15,8 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.netwo
 public fun createTestOpenSecuritySettingsPayload(
     passwordPolicy: OpenPasswordPolicyPayload = createTestOpenPasswordPolicyPayload(),
     otpConfirmation: OtpConfirmationPayload = createTestOtpConfirmationPayload()
-): OpenSecuritySettingsPayload =
-    OpenSecuritySettingsPayload(
-        passwordPolicy = passwordPolicy,
-        otpConfirmation = otpConfirmation
-    )
+): OpenSecuritySettingsPayload = OpenSecuritySettingsPayload(
+    passwordPolicy = passwordPolicy,
+    otpConfirmation = otpConfirmation
+)

@@ -56,29 +56,28 @@ public fun createTestUserPrivatePayload(
     avatarFileId: String? = null,
     avatarUrls: FileUrlsPayload? = null,
     birthdate: Long? = null
-): UserPrivatePayload =
-    UserPrivatePayload(
-        id = id,
-        role = role,
-        accountStatus = accountStatus,
-        accountStatusOnRestore = accountStatusOnRestore,
-        authorityLevel = authorityLevel,
-        permissionCodes = permissionCodes,
-        isTotpEnabled = isTotpEnabled,
-        lastLoginAt = lastLoginAt,
-        lastActiveAt = lastActiveAt,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
-        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
-        lockoutType = lockoutType,
-        temporaryLockoutUntil = temporaryLockoutUntil,
-        storageConfiguration = storageConfiguration,
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId,
-        avatarUrls = avatarUrls,
-        birthdate = birthdate
-    )
+): UserPrivatePayload = UserPrivatePayload(
+    id = id,
+    role = role,
+    accountStatus = accountStatus,
+    accountStatusOnRestore = accountStatusOnRestore,
+    authorityLevel = authorityLevel,
+    permissionCodes = permissionCodes,
+    isTotpEnabled = isTotpEnabled,
+    lastLoginAt = lastLoginAt,
+    lastActiveAt = lastActiveAt,
+    createdAt = createdAt,
+    updatedAt = updatedAt,
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
+    lockoutType = lockoutType,
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    avatarUrls = avatarUrls,
+    birthdate = birthdate
+)
 
 /**
  * Creates a list of test [UserPrivatePayload] wire objects with deterministic raw UUIDs

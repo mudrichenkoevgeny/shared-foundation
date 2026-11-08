@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PH
 public fun createTestLoginByPhoneRequest(
     phoneNumber: String = TEST_PHONE,
     confirmationCode: String = "123456"
-): LoginByPhoneRequest =
-    LoginByPhoneRequest(
-        phoneNumber = phoneNumber,
-        confirmationCode = confirmationCode
-    )
+): LoginByPhoneRequest = LoginByPhoneRequest(
+    phoneNumber = phoneNumber,
+    confirmationCode = confirmationCode
+)

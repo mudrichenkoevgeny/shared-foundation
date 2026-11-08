@@ -30,20 +30,19 @@ public fun AuditEventPrivatePayload.toAuditEventPrivate(
     compositeActionTypeParser: CompositeAuditActionTypeParser,
     compositeResourceTypeParser: CompositeAuditResourceTypeParser,
     compositeMetadataKeyParser: CompositeAuditMetadataKeyParser
-): AuditEventPrivate =
-    AuditEventPrivate(
-        id = id.toAuditEventIdOrThrow(),
-        actorId = actorId,
-        actorType = AuditActorType.fromValueOrThrow(actorType),
-        actorUserRole = actorUserRole,
-        action = compositeActionTypeParser.fromValueOrThrow(action),
-        resource = compositeResourceTypeParser.fromValueOrThrow(resource),
-        resourceId = resourceId,
-        status = AuditStatus.fromValueOrThrow(status),
-        metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
-        message = message,
-        createdAt = Instant.fromEpochMilliseconds(createdAt)
-    )
+): AuditEventPrivate = AuditEventPrivate(
+    id = id.toAuditEventIdOrThrow(),
+    actorId = actorId,
+    actorType = AuditActorType.fromValueOrThrow(actorType),
+    actorUserRole = actorUserRole,
+    action = compositeActionTypeParser.fromValueOrThrow(action),
+    resource = compositeResourceTypeParser.fromValueOrThrow(resource),
+    resourceId = resourceId,
+    status = AuditStatus.fromValueOrThrow(status),
+    metadata = metadata.map { it.toAuditEventMetadata(compositeMetadataKeyParser) }.toSet(),
+    message = message,
+    createdAt = Instant.fromEpochMilliseconds(createdAt)
+)
 
 /**
  * Builds a network [AuditEventPrivatePayload] from a domain [AuditEventPrivate].
@@ -54,17 +53,16 @@ public fun AuditEventPrivatePayload.toAuditEventPrivate(
  *
  * @return payload DTO aligned with the shared [AuditEventPrivatePayload] contract (`snake_case` keys, epoch millis timestamps).
  */
-public fun AuditEventPrivate.toAuditEventPrivatePayload(): AuditEventPrivatePayload =
-    AuditEventPrivatePayload(
-        id = id.asHexDashString(),
-        actorId = actorId,
-        actorType = actorType.value,
-        actorUserRole = actorUserRole,
-        action = action.value,
-        resource = resource.value,
-        resourceId = resourceId,
-        status = status.value,
-        metadata = metadata.map { it.toAuditEventMetadataPayload() },
-        message = message,
-        createdAt = createdAt.toEpochMilliseconds()
-    )
+public fun AuditEventPrivate.toAuditEventPrivatePayload(): AuditEventPrivatePayload = AuditEventPrivatePayload(
+    id = id.asHexDashString(),
+    actorId = actorId,
+    actorType = actorType.value,
+    actorUserRole = actorUserRole,
+    action = action.value,
+    resource = resource.value,
+    resourceId = resourceId,
+    status = status.value,
+    metadata = metadata.map { it.toAuditEventMetadataPayload() },
+    message = message,
+    createdAt = createdAt.toEpochMilliseconds()
+)

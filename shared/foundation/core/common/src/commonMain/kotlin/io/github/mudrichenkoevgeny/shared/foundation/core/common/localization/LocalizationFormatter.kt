@@ -14,8 +14,7 @@ public object LocalizationFormatter {
     public fun format(
         template: String,
         args: Map<String, Any?>
-    ): String =
-        args.entries.fold(template) { current, (key, value) ->
-            current.replace("{$key}", value?.toString().orEmpty())
-        }
+    ): String = args.entries.fold(template) { current, (key, value) ->
+        current.replace("{$key}", value?.toString().orEmpty())
+    }
 }

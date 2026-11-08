@@ -14,8 +14,10 @@ class DefaultLocalizedStringResolverTest {
                     when (path) {
                         "localization/core/common/en/errors.json" ->
                             """{"unknown":"Unknown error","not_found":"Not found"}"""
+
                         "localization/core/common/ru/errors.json" ->
                             """{"unknown":"Неизвестная ошибка"}"""
+
                         else -> null
                     }
                 },

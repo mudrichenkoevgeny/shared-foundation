@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
 public fun createTestResetPasswordParams(
     email: String? = TEST_EMAIL,
     code: String? = null
-): ResetPasswordParams =
-    ResetPasswordParams(
-        email = email,
-        code = code
-    )
+): ResetPasswordParams = ResetPasswordParams(
+    email = email,
+    code = code
+)

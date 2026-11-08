@@ -7,11 +7,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [AvailableAuthProviders] from [AvailableAuthProvidersPayload].
  */
-public fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProviders =
-    AvailableAuthProviders(
-        primary = primary.map { it.toUserAuthProviderOnWire() },
-        secondary = secondary.map { it.toUserAuthProviderOnWire() }
-    )
+public fun AvailableAuthProvidersPayload.toAvailableAuthProviders(): AvailableAuthProviders = AvailableAuthProviders(
+    primary = primary.map { it.toUserAuthProviderOnWire() },
+    secondary = secondary.map { it.toUserAuthProviderOnWire() }
+)
 
 /**
  * Builds network [AvailableAuthProvidersPayload] from domain [AvailableAuthProviders].

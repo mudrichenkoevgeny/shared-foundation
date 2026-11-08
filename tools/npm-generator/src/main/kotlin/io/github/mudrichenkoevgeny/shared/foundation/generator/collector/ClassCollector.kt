@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.generator.collector
 
-import java.lang.reflect.Modifier
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract.AuditEventFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource.CommonAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
@@ -284,6 +283,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.user.session.OpenSessionRoutes
 import io.github.mudrichenkoevgeny.shared.foundation.generator.decapitalizeFirstLetter
 import kotlinx.serialization.SerialName
+import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.full.companionObjectInstance

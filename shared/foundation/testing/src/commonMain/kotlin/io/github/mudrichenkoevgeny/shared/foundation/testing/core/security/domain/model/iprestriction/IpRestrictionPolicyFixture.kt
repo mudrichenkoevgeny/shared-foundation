@@ -15,10 +15,9 @@ public fun createTestIpRestrictionPolicy(
     blacklist: List<String> = emptyList(),
     isWhitelistEnabled: Boolean = false,
     whitelist: List<String> = emptyList()
-): IpRestrictionPolicy =
-    IpRestrictionPolicy(
-        isBlacklistEnabled = isBlacklistEnabled,
-        blacklist = blacklist,
-        isWhitelistEnabled = isWhitelistEnabled,
-        whitelist = whitelist
-    )
+): IpRestrictionPolicy = IpRestrictionPolicy(
+    isBlacklistEnabled = isBlacklistEnabled,
+    blacklist = blacklist,
+    isWhitelistEnabled = isWhitelistEnabled,
+    whitelist = whitelist
+)

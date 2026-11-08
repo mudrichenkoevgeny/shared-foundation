@@ -38,11 +38,10 @@ public enum class AccountLockoutType(
         /**
          * Returns [AccountLockoutType] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): AccountLockoutType? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): AccountLockoutType? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [AccountLockoutType] for the given wire or enum-style string (case-insensitive enum name).

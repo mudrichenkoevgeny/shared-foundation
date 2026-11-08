@@ -11,8 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 public fun createTestEmailPasswordChangeRequest(
     oldPassword: String = "OldSecret123!",
     newPassword: String = "NewSecret123!"
-): EmailPasswordChangeRequest =
-    EmailPasswordChangeRequest(
-        oldPassword = oldPassword,
-        newPassword = newPassword
-    )
+): EmailPasswordChangeRequest = EmailPasswordChangeRequest(
+    oldPassword = oldPassword,
+    newPassword = newPassword
+)

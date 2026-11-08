@@ -23,10 +23,9 @@ public fun createTestManagementUserConfiguration(
     managementSecuritySettings: ManagementSecuritySettings = createTestManagementSecuritySettings(),
     managementStorageSettings: ManagementStorageSettings = createTestManagementStorageSettings(),
     managementAuthSettings: ManagementAuthSettings = createTestManagementAuthSettings()
-): ManagementUserConfiguration =
-    ManagementUserConfiguration(
-        managementGlobalSettings = managementGlobalSettings,
-        managementSecuritySettings = managementSecuritySettings,
-        managementStorageSettings = managementStorageSettings,
-        managementAuthSettings = managementAuthSettings
-    )
+): ManagementUserConfiguration = ManagementUserConfiguration(
+    managementGlobalSettings = managementGlobalSettings,
+    managementSecuritySettings = managementSecuritySettings,
+    managementStorageSettings = managementStorageSettings,
+    managementAuthSettings = managementAuthSettings
+)

@@ -8,13 +8,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
  *
  * @return domain model aligned with [EmailRestrictionPolicy] semantics.
  */
-public fun EmailRestrictionPolicyPayload.toEmailRestrictionPolicy(): EmailRestrictionPolicy =
-    EmailRestrictionPolicy(
-        isBlacklistEnabled = isBlacklistEnabled,
-        blacklist = blacklist,
-        isWhitelistEnabled = isWhitelistEnabled,
-        whitelist = whitelist
-    )
+public fun EmailRestrictionPolicyPayload.toEmailRestrictionPolicy(): EmailRestrictionPolicy = EmailRestrictionPolicy(
+    isBlacklistEnabled = isBlacklistEnabled,
+    blacklist = blacklist,
+    isWhitelistEnabled = isWhitelistEnabled,
+    whitelist = whitelist
+)
 
 /**
  * Builds network [EmailRestrictionPolicyPayload] DTO from domain [EmailRestrictionPolicy].

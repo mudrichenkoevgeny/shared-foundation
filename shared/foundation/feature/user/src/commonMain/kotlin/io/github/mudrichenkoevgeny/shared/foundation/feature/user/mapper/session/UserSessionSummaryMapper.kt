@@ -12,27 +12,25 @@ import kotlin.time.Instant
 /**
  * Builds domain [UserSessionSummary] from [UserSessionSummaryPayload].
  */
-public fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary =
-    UserSessionSummary(
-        id = id.toUserSessionIdOrThrow(),
-        userId = userId.toUserIdOrThrow(),
-        clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
-        lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
-        expiresAt = Instant.fromEpochMilliseconds(expiresAt)
-    )
+public fun UserSessionSummaryPayload.toUserSessionSummary(): UserSessionSummary = UserSessionSummary(
+    id = id.toUserSessionIdOrThrow(),
+    userId = userId.toUserIdOrThrow(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
+    lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
+    expiresAt = Instant.fromEpochMilliseconds(expiresAt)
+)
 
 /**
  * Builds network [UserSessionSummaryPayload] from domain [UserSessionSummary].
  */
-public fun UserSessionSummary.toUserSessionSummaryPayload(): UserSessionSummaryPayload =
-    UserSessionSummaryPayload(
-        id = id.asHexDashString(),
-        userId = userId.asHexDashString(),
-        clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider.value,
-        lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
-        expiresAt = expiresAt.toEpochMilliseconds()
-    )
+public fun UserSessionSummary.toUserSessionSummaryPayload(): UserSessionSummaryPayload = UserSessionSummaryPayload(
+    id = id.asHexDashString(),
+    userId = userId.asHexDashString(),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider.value,
+    lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
+    expiresAt = expiresAt.toEpochMilliseconds()
+)

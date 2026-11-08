@@ -11,41 +11,38 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.i
  */
 public fun UserIdentifierInternal.toUserIdentifierPrivate(
     isSensitiveValuesMasked: Boolean = false
-): UserIdentifierPrivate =
-    UserIdentifierPrivate(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserIdentifierPrivate = UserIdentifierPrivate(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
 /**
  * Converts a [UserIdentifierPrivate] into a condensed [UserIdentifierSummary].
  */
-public fun UserIdentifierPrivate.toUserIdentifierSummary(): UserIdentifierSummary =
-    UserIdentifierSummary(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName
-    )
+public fun UserIdentifierPrivate.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName
+)
 
 /**
  * Converts a [UserIdentifierInternal] directly into a condensed [UserIdentifierSummary].
  *
  * Maps fields directly without allocating an intermediate [UserIdentifierPrivate] instance.
  */
-public fun UserIdentifierInternal.toUserIdentifierSummary(): UserIdentifierSummary =
-    UserIdentifierSummary(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName
-    )
+public fun UserIdentifierInternal.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName
+)

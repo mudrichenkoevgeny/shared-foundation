@@ -113,11 +113,7 @@ potential-bugs:
 
 custom-rules:
   active: true
-  AvoidElseInSealedWhen:
-    active: true
   NoFullyQualifiedName:
-    active: true
-  NoHardcodedTimeMillis:
     active: true
   NoInlineComment:
     active: true

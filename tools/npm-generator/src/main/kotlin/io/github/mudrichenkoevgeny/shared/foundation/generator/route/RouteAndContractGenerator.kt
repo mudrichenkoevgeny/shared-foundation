@@ -19,32 +19,31 @@ import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.permCla
 import io.github.mudrichenkoevgeny.shared.foundation.generator.collector.routeClasses
 import kotlin.reflect.KClass
 
-public fun generateRouteObjects(): String =
-    routeClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val structure = extractClassStructure(kClass)
+public fun generateRouteObjects(): String = routeClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val structure = extractClassStructure(kClass)
 
-        val directFields = structure.directProps.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
-        val nestedFields =
-            structure.nestedObjects.map { (nestedName, nestedProps) ->
-                val propsCode = nestedProps.joinToString(",\n    ") { (vName, vVal) -> "$vName: \"$vVal\"" }
-                "  $nestedName: {\n    $propsCode\n  }"
-            }
+    val directFields = structure.directProps.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
+    val nestedFields =
+        structure.nestedObjects.map { (nestedName, nestedProps) ->
+            val propsCode = nestedProps.joinToString(",\n    ") { (vName, vVal) -> "$vName: \"$vVal\"" }
+            "  $nestedName: {\n    $propsCode\n  }"
+        }
 
-        val allFields = directFields + nestedFields
+    val allFields = directFields + nestedFields
 
-        if (allFields.isEmpty()) {
-            """
+    if (allFields.isEmpty()) {
+        """
 export const $name = {};
-            """.trimIndent()
-        } else {
-            """
+        """.trimIndent()
+    } else {
+        """
 export const $name = {
 ${allFields.joinToString(",\n")}
 };
-            """.trimIndent()
-        }
+        """.trimIndent()
     }
+}
 
 public fun generateContractObjects(): String {
     val standardContracts =
@@ -252,18 +251,17 @@ AVATAR: "${UserStorageTargetScopes.AVATAR}"
     return "$standardContracts\n\n$listingParamNamesCode"
 }
 
-public fun generateErrorCodeObjects(): String =
-    errorClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val props = extractObjectStringProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
+public fun generateErrorCodeObjects(): String = errorClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val props = extractObjectStringProperties(kClass)
+    val fields = props.map { (valName, valValue) -> "  $valName: \"$valValue\"" }
 
-        """
+    """
 export const $name = {
 ${fields.joinToString(",\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
 public fun extractPermissionCodeProperties(kClass: KClass<*>): List<Pair<String, String>> {
     val instance = kClass.objectInstance ?: return emptyList()
@@ -294,18 +292,17 @@ public fun extractPermissionCodeProperties(kClass: KClass<*>): List<Pair<String,
     return methods
 }
 
-public fun generatePermissionCodeObjects(): String =
-    permClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val props = extractPermissionCodeProperties(kClass)
-        val fields = props.map { (valName, valValue) -> "  $valName: toPermissionCodeOrThrow(\"$valValue\")" }
+public fun generatePermissionCodeObjects(): String = permClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val props = extractPermissionCodeProperties(kClass)
+    val fields = props.map { (valName, valValue) -> "  $valName: toPermissionCodeOrThrow(\"$valValue\")" }
 
-        """
+    """
 export const $name = {
 ${fields.joinToString(",\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
 public fun generateEnumsJs(): String {
     val enumJsBlocks =

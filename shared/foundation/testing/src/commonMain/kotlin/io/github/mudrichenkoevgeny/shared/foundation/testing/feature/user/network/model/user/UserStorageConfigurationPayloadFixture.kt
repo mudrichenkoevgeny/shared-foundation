@@ -13,9 +13,8 @@ public fun createTestUserStorageConfigurationPayload(
     quotaBytes: Long? = 1_073_741_824L,
     maxUploadSizeBytes: Long? = 104_857_600L,
     maxPendingUploads: Int? = 5
-): UserStorageConfigurationPayload =
-    UserStorageConfigurationPayload(
-        quotaBytes = quotaBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes,
-        maxPendingUploads = maxPendingUploads
-    )
+): UserStorageConfigurationPayload = UserStorageConfigurationPayload(
+    quotaBytes = quotaBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes,
+    maxPendingUploads = maxPendingUploads
+)

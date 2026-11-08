@@ -52,11 +52,10 @@ public enum class UserAccountStatus(
         /**
          * Returns [UserAccountStatus] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): UserAccountStatus? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UserAccountStatus? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UserAccountStatus] for the given wire or enum-style string (case-insensitive enum name).

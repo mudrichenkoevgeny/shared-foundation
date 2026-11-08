@@ -15,8 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 public fun createTestAuthData(
     userPrivate: UserPrivate = createTestUserPrivate(),
     sessionToken: SessionToken = createTestSessionToken()
-): AuthData =
-    AuthData(
-        userPrivate = userPrivate,
-        sessionToken = sessionToken
-    )
+): AuthData = AuthData(
+    userPrivate = userPrivate,
+    sessionToken = sessionToken
+)

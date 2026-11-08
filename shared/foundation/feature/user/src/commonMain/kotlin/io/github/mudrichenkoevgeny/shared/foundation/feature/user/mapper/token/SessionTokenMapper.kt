@@ -13,25 +13,23 @@ import kotlin.time.Instant
  *
  * @throws IllegalArgumentException when `sessionId` or `identifierId` is not a valid UUID string.
  */
-public fun SessionTokenPayload.toSessionToken(): SessionToken =
-    SessionToken(
-        accessToken = AccessToken(accessToken),
-        refreshToken = RefreshToken(refreshToken),
-        expiresAt = Instant.fromEpochMilliseconds(expiresAt),
-        tokenType = tokenType,
-        sessionId = sessionId.toUserSessionIdOrThrow(),
-        identifierId = identifierId.toUserIdentifierIdOrThrow()
-    )
+public fun SessionTokenPayload.toSessionToken(): SessionToken = SessionToken(
+    accessToken = AccessToken(accessToken),
+    refreshToken = RefreshToken(refreshToken),
+    expiresAt = Instant.fromEpochMilliseconds(expiresAt),
+    tokenType = tokenType,
+    sessionId = sessionId.toUserSessionIdOrThrow(),
+    identifierId = identifierId.toUserIdentifierIdOrThrow()
+)
 
 /**
  * Builds network [SessionTokenPayload] from domain [SessionToken].
  */
-public fun SessionToken.toSessionTokenPayload(): SessionTokenPayload =
-    SessionTokenPayload(
-        accessToken = accessToken.value,
-        refreshToken = refreshToken.value,
-        expiresAt = expiresAt.toEpochMilliseconds(),
-        tokenType = tokenType,
-        sessionId = sessionId.asHexDashString(),
-        identifierId = identifierId.asHexDashString()
-    )
+public fun SessionToken.toSessionTokenPayload(): SessionTokenPayload = SessionTokenPayload(
+    accessToken = accessToken.value,
+    refreshToken = refreshToken.value,
+    expiresAt = expiresAt.toEpochMilliseconds(),
+    tokenType = tokenType,
+    sessionId = sessionId.asHexDashString(),
+    identifierId = identifierId.asHexDashString()
+)

@@ -23,14 +23,13 @@ public fun createTestUserIdentifierSummaryPayload(
     userAuthProvider: String = UserAuthProvider.EMAIL.value,
     identifier: String = TEST_EMAIL,
     displayName: String = "Test User"
-): UserIdentifierSummaryPayload =
-    UserIdentifierSummaryPayload(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName
-    )
+): UserIdentifierSummaryPayload = UserIdentifierSummaryPayload(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName
+)
 
 /**
  * Creates a list of test [UserIdentifierSummaryPayload] wire objects with deterministic raw UUIDs,

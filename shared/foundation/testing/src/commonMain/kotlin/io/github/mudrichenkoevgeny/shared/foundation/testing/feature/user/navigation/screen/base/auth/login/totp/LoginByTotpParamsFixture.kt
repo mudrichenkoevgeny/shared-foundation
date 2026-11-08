@@ -14,9 +14,8 @@ public fun createTestLoginByTotpParams(
     mfaToken: String? = "mfa_token_12345",
     loginByTotpMode: LoginByTotpMode = LoginByTotpMode.DEFAULT,
     redirectUrl: String? = null
-): LoginByTotpParams =
-    LoginByTotpParams(
-        mfaToken = mfaToken,
-        loginByTotpMode = loginByTotpMode,
-        redirectUrl = redirectUrl
-    )
+): LoginByTotpParams = LoginByTotpParams(
+    mfaToken = mfaToken,
+    loginByTotpMode = loginByTotpMode,
+    redirectUrl = redirectUrl
+)

@@ -17,10 +17,9 @@ public fun createTestUnlockOtpInputParams(
     identifier: String? = TEST_EMAIL,
     retryAfterSeconds: Int? = null,
     code: String? = null
-): UnlockOtpInputParams =
-    UnlockOtpInputParams(
-        unlockMethod = unlockMethod,
-        identifier = identifier,
-        retryAfterSeconds = retryAfterSeconds,
-        code = code
-    )
+): UnlockOtpInputParams = UnlockOtpInputParams(
+    unlockMethod = unlockMethod,
+    identifier = identifier,
+    retryAfterSeconds = retryAfterSeconds,
+    code = code
+)

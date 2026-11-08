@@ -30,11 +30,10 @@ public enum class StorageAuditResourceType(
         /**
          * Returns [StorageAuditResourceType] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): StorageAuditResourceType? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): StorageAuditResourceType? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [StorageAuditResourceType] for the given wire or enum-style string.

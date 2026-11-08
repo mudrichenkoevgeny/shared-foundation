@@ -21,11 +21,10 @@ class NavigationRouteUrlMapperTest {
         override val parser: NavigationScreenParamsParser<MockNavigationParams>
             get() = throw UnsupportedOperationException()
 
-        override fun toQueryMap(): Map<String, List<String>> =
-            mapOf(
-                "email" to listOf(email),
-                "search" to listOf(search)
-            )
+        override fun toQueryMap(): Map<String, List<String>> = mapOf(
+            "email" to listOf(email),
+            "search" to listOf(search)
+        )
     }
 
     private class MockParameterizedNavigationRoute(

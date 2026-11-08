@@ -52,25 +52,24 @@ public fun createTestUserSessionPrivatePayload(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Long = TEST_TIME_MILLIS,
     updatedAt: Long? = TEST_TIME_MILLIS
-): UserSessionPrivatePayload =
-    UserSessionPrivatePayload(
-        id = id,
-        userId = userId,
-        userRole = userRole,
-        identifier = identifier,
-        identifierId = identifierId,
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider,
-        clientDeviceInfo = clientDeviceInfo,
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        expiresAt = expiresAt,
-        lastAccessedAt = lastAccessedAt,
-        lastReauthenticatedAt = lastReauthenticatedAt,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserSessionPrivatePayload = UserSessionPrivatePayload(
+    id = id,
+    userId = userId,
+    userRole = userRole,
+    identifier = identifier,
+    identifierId = identifierId,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    clientDeviceInfo = clientDeviceInfo,
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    expiresAt = expiresAt,
+    lastAccessedAt = lastAccessedAt,
+    lastReauthenticatedAt = lastReauthenticatedAt,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
 /**
  * Creates a list of test [UserSessionPrivatePayload] wire objects with deterministic raw UUIDs,

@@ -18,14 +18,13 @@ public fun <T> createTestPagedResult(
     pageNumber: Int = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
     pageSize: Int = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
     totalPages: Long = calculateTotalPages(totalCount, pageSize)
-): PagedResult<T> =
-    PagedResult(
-        items = items,
-        totalCount = totalCount,
-        pageNumber = pageNumber,
-        pageSize = pageSize,
-        totalPages = totalPages
-    )
+): PagedResult<T> = PagedResult(
+    items = items,
+    totalCount = totalCount,
+    pageNumber = pageNumber,
+    pageSize = pageSize,
+    totalPages = totalPages
+)
 
 private fun calculateTotalPages(
     totalCount: Long,

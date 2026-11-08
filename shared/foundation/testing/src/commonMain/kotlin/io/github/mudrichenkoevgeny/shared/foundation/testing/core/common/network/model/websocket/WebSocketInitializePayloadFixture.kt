@@ -22,13 +22,12 @@ public fun createTestWebSocketInitializePayload(
     appVersion: String? = "1.0.0",
     operationSystemVersion: String? = "Android 14",
     apiVersion: String? = "1.0"
-): WebSocketInitializePayload =
-    WebSocketInitializePayload(
-        clientType = clientType,
-        language = language,
-        deviceId = deviceId,
-        deviceName = deviceName,
-        appVersion = appVersion,
-        operationSystemVersion = operationSystemVersion,
-        apiVersion = apiVersion
-    )
+): WebSocketInitializePayload = WebSocketInitializePayload(
+    clientType = clientType,
+    language = language,
+    deviceId = deviceId,
+    deviceName = deviceName,
+    appVersion = appVersion,
+    operationSystemVersion = operationSystemVersion,
+    apiVersion = apiVersion
+)

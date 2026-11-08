@@ -13,8 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 public fun createTestIdentifierDetailParams(
     identifierId: String = TEST_IDENTIFIER_ID,
     userId: String? = TEST_USER_ID
-): IdentifierDetailParams =
-    IdentifierDetailParams(
-        identifierId = identifierId,
-        userId = userId
-    )
+): IdentifierDetailParams = IdentifierDetailParams(
+    identifierId = identifierId,
+    userId = userId
+)

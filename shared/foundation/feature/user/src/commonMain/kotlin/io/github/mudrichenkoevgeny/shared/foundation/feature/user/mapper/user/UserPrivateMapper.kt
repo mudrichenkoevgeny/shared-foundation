@@ -18,64 +18,62 @@ import kotlin.time.Instant
  * @throws IllegalArgumentException when `id` is not a valid user UUID string, or when a wire value
  * for `role`, `accountStatus`, `accountStatusOnRestore`, or `lockoutType` is not recognized.
  */
-public fun UserPrivatePayload.toUserPrivate(): UserPrivate =
-    UserPrivate(
-        id = id.toUserIdOrThrow(),
-        role = UserRole.fromValueOrThrow(role),
-        accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
-        accountStatusOnRestore =
-            accountStatusOnRestore?.let { accountStatusOnRestore ->
-                UserAccountStatus.fromValueOrNull(accountStatusOnRestore)
-            },
-        authorityLevel = authorityLevel,
-        permissionCodes =
-            permissionCodes
-                .map { permissionCode ->
-                    PermissionCode(permissionCode)
-                }.toSet(),
-        isTotpEnabled = isTotpEnabled,
-        lastLoginAt = lastLoginAt?.let(Instant::fromEpochMilliseconds),
-        lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
-        createdAt = Instant.fromEpochMilliseconds(createdAt),
-        updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
-        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
-        lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
-        temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds),
-        storageConfiguration = storageConfiguration?.toUserStorageConfiguration(),
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId?.toFileIdOrNull(),
-        avatarUrls = avatarUrls?.toFileUrls(),
-        birthdate = birthdate?.let(Instant::fromEpochMilliseconds)
-    )
+public fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
+    id = id.toUserIdOrThrow(),
+    role = UserRole.fromValueOrThrow(role),
+    accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
+    accountStatusOnRestore =
+        accountStatusOnRestore?.let { accountStatusOnRestore ->
+            UserAccountStatus.fromValueOrNull(accountStatusOnRestore)
+        },
+    authorityLevel = authorityLevel,
+    permissionCodes =
+        permissionCodes
+            .map { permissionCode ->
+                PermissionCode(permissionCode)
+            }.toSet(),
+    isTotpEnabled = isTotpEnabled,
+    lastLoginAt = lastLoginAt?.let(Instant::fromEpochMilliseconds),
+    lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds),
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.let(Instant::fromEpochMilliseconds),
+    lockoutType = AccountLockoutType.fromValueOrThrow(lockoutType),
+    temporaryLockoutUntil = temporaryLockoutUntil?.let(Instant::fromEpochMilliseconds),
+    storageConfiguration = storageConfiguration?.toUserStorageConfiguration(),
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId?.toFileIdOrNull(),
+    avatarUrls = avatarUrls?.toFileUrls(),
+    birthdate = birthdate?.let(Instant::fromEpochMilliseconds)
+)
 
 /**
  * Builds network [UserPrivatePayload] from domain [UserPrivate].
  */
-public fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload =
-    UserPrivatePayload(
-        id = id.asHexDashString(),
-        role = role.value,
-        accountStatus = accountStatus.value,
-        accountStatusOnRestore = accountStatusOnRestore?.value,
-        authorityLevel = authorityLevel,
-        permissionCodes =
-            permissionCodes
-                .map { permissionCode ->
-                    permissionCode.value
-                }.toSet(),
-        isTotpEnabled = isTotpEnabled,
-        lastLoginAt = lastLoginAt?.toEpochMilliseconds(),
-        lastActiveAt = lastActiveAt?.toEpochMilliseconds(),
-        createdAt = createdAt.toEpochMilliseconds(),
-        updatedAt = updatedAt?.toEpochMilliseconds(),
-        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
-        lockoutType = lockoutType.value,
-        temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds(),
-        storageConfiguration = storageConfiguration?.toUserStorageConfigurationPayload(),
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId?.asHexDashString(),
-        avatarUrls = avatarUrls?.toFileUrlsPayload(),
-        birthdate = birthdate?.toEpochMilliseconds()
-    )
+public fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivatePayload(
+    id = id.asHexDashString(),
+    role = role.value,
+    accountStatus = accountStatus.value,
+    accountStatusOnRestore = accountStatusOnRestore?.value,
+    authorityLevel = authorityLevel,
+    permissionCodes =
+        permissionCodes
+            .map { permissionCode ->
+                permissionCode.value
+            }.toSet(),
+    isTotpEnabled = isTotpEnabled,
+    lastLoginAt = lastLoginAt?.toEpochMilliseconds(),
+    lastActiveAt = lastActiveAt?.toEpochMilliseconds(),
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds(),
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt?.toEpochMilliseconds(),
+    lockoutType = lockoutType.value,
+    temporaryLockoutUntil = temporaryLockoutUntil?.toEpochMilliseconds(),
+    storageConfiguration = storageConfiguration?.toUserStorageConfigurationPayload(),
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId?.asHexDashString(),
+    avatarUrls = avatarUrls?.toFileUrlsPayload(),
+    birthdate = birthdate?.toEpochMilliseconds()
+)

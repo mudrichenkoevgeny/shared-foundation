@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 public fun createTestAddUserIdentifierExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345"
-): AddUserIdentifierExternalAuthProviderRequest =
-    AddUserIdentifierExternalAuthProviderRequest(
-        authProvider = authProvider,
-        externalProviderToken = externalProviderToken
-    )
+): AddUserIdentifierExternalAuthProviderRequest = AddUserIdentifierExternalAuthProviderRequest(
+    authProvider = authProvider,
+    externalProviderToken = externalProviderToken
+)

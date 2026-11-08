@@ -28,10 +28,9 @@ public data class TestNavigationScreenParams(
             return TestNavigationScreenParams(query = query, id = id)
         }
 
-        public override fun serialize(params: TestNavigationScreenParams): Map<String, List<String>> =
-            mapOf(
-                "query" to listOf(params.query),
-                "id" to listOf(params.id.toString())
-            )
+        public override fun serialize(params: TestNavigationScreenParams): Map<String, List<String>> = mapOf(
+            "query" to listOf(params.query),
+            "id" to listOf(params.id.toString())
+        )
     }
 }

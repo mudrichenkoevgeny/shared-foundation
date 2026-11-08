@@ -9,14 +9,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [UserIdentifierSummary] from [UserIdentifierSummaryPayload].
  */
-public fun UserIdentifierSummaryPayload.toUserIdentifierSummary(): UserIdentifierSummary =
-    UserIdentifierSummary(
-        id = id.toUserIdentifierIdOrThrow(),
-        userId = userId.toUserIdOrThrow(),
-        userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
-        identifier = identifier,
-        displayName = displayName
-    )
+public fun UserIdentifierSummaryPayload.toUserIdentifierSummary(): UserIdentifierSummary = UserIdentifierSummary(
+    id = id.toUserIdentifierIdOrThrow(),
+    userId = userId.toUserIdOrThrow(),
+    userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
+    identifier = identifier,
+    displayName = displayName
+)
 
 /**
  * Builds network [UserIdentifierSummaryPayload] from domain [UserIdentifierSummary].

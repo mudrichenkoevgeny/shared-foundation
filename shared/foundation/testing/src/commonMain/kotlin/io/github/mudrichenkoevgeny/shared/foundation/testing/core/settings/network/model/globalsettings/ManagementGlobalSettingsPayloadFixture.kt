@@ -22,13 +22,12 @@ public fun createTestManagementGlobalSettingsPayload(
     isTracingEnabled: Boolean = true,
     isMetricsEnabled: Boolean = true,
     isVerboseLoggingEnabled: Boolean = false
-): ManagementGlobalSettingsPayload =
-    ManagementGlobalSettingsPayload(
-        privacyPolicyUrl = privacyPolicyUrl,
-        termsOfServiceUrl = termsOfServiceUrl,
-        contactSupportEmail = contactSupportEmail,
-        minSupportedAppVersions = minSupportedAppVersions,
-        isTracingEnabled = isTracingEnabled,
-        isMetricsEnabled = isMetricsEnabled,
-        isVerboseLoggingEnabled = isVerboseLoggingEnabled
-    )
+): ManagementGlobalSettingsPayload = ManagementGlobalSettingsPayload(
+    privacyPolicyUrl = privacyPolicyUrl,
+    termsOfServiceUrl = termsOfServiceUrl,
+    contactSupportEmail = contactSupportEmail,
+    minSupportedAppVersions = minSupportedAppVersions,
+    isTracingEnabled = isTracingEnabled,
+    isMetricsEnabled = isMetricsEnabled,
+    isVerboseLoggingEnabled = isVerboseLoggingEnabled
+)

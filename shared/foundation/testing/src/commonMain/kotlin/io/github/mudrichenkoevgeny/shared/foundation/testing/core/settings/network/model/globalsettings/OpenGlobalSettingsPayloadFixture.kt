@@ -16,10 +16,9 @@ public fun createTestOpenGlobalSettingsPayload(
     termsOfServiceUrl: String? = "https://example.com/terms",
     contactSupportEmail: String? = "support@example.com",
     minSupportedAppVersions: Map<String, String> = mapOf(ClientType.ANDROID.value to "1.0.0")
-): OpenGlobalSettingsPayload =
-    OpenGlobalSettingsPayload(
-        privacyPolicyUrl = privacyPolicyUrl,
-        termsOfServiceUrl = termsOfServiceUrl,
-        contactSupportEmail = contactSupportEmail,
-        minSupportedAppVersions = minSupportedAppVersions
-    )
+): OpenGlobalSettingsPayload = OpenGlobalSettingsPayload(
+    privacyPolicyUrl = privacyPolicyUrl,
+    termsOfServiceUrl = termsOfServiceUrl,
+    contactSupportEmail = contactSupportEmail,
+    minSupportedAppVersions = minSupportedAppVersions
+)

@@ -22,12 +22,11 @@ public fun createTestClientDeviceInfo(
     language: String? = "en-US",
     appVersion: String? = "1.0.0",
     operationSystemVersion: String? = "Android 14"
-): ClientDeviceInfo =
-    ClientDeviceInfo(
-        deviceId = deviceId,
-        deviceName = deviceName,
-        clientType = clientType,
-        language = language,
-        appVersion = appVersion,
-        operationSystemVersion = operationSystemVersion
-    )
+): ClientDeviceInfo = ClientDeviceInfo(
+    deviceId = deviceId,
+    deviceName = deviceName,
+    clientType = clientType,
+    language = language,
+    appVersion = appVersion,
+    operationSystemVersion = operationSystemVersion
+)

@@ -15,9 +15,8 @@ public fun createTestUnlockMethodSelectionParams(
     unlockMethod: UnlockMethod? = UnlockMethod.EMAIL,
     accountLockoutType: AccountLockoutType? = AccountLockoutType.TEMPORARY,
     temporaryLockoutUntil: Long? = null
-): UnlockMethodSelectionParams =
-    UnlockMethodSelectionParams(
-        unlockMethod = unlockMethod,
-        accountLockoutType = accountLockoutType,
-        temporaryLockoutUntil = temporaryLockoutUntil
-    )
+): UnlockMethodSelectionParams = UnlockMethodSelectionParams(
+    unlockMethod = unlockMethod,
+    accountLockoutType = accountLockoutType,
+    temporaryLockoutUntil = temporaryLockoutUntil
+)

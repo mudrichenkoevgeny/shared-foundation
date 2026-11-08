@@ -27,15 +27,14 @@ public fun createTestAuditEventSummaryPayload(
     resource: String = CommonAuditResourceType.AUDIT_EVENT.value,
     status: String = AuditStatus.SUCCESS.value,
     createdAt: Long = TEST_TIME_MILLIS
-): AuditEventSummaryPayload =
-    AuditEventSummaryPayload(
-        id = id,
-        actorType = actorType,
-        action = action,
-        resource = resource,
-        status = status,
-        createdAt = createdAt
-    )
+): AuditEventSummaryPayload = AuditEventSummaryPayload(
+    id = id,
+    actorType = actorType,
+    action = action,
+    resource = resource,
+    status = status,
+    createdAt = createdAt
+)
 
 /**
  * Creates a list of test [AuditEventSummaryPayload] wire objects with deterministic raw IDs,

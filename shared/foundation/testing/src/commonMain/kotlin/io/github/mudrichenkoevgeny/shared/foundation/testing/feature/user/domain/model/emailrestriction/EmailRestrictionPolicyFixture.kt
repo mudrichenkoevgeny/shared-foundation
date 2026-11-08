@@ -15,10 +15,9 @@ public fun createTestEmailRestrictionPolicy(
     blacklist: List<String> = emptyList(),
     isWhitelistEnabled: Boolean = false,
     whitelist: List<String> = emptyList()
-): EmailRestrictionPolicy =
-    EmailRestrictionPolicy(
-        isBlacklistEnabled = isBlacklistEnabled,
-        blacklist = blacklist,
-        isWhitelistEnabled = isWhitelistEnabled,
-        whitelist = whitelist
-    )
+): EmailRestrictionPolicy = EmailRestrictionPolicy(
+    isBlacklistEnabled = isBlacklistEnabled,
+    blacklist = blacklist,
+    isWhitelistEnabled = isWhitelistEnabled,
+    whitelist = whitelist
+)

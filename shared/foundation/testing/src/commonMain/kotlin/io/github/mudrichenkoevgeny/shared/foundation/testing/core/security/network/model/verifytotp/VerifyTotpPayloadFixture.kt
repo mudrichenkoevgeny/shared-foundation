@@ -11,8 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
 public fun createTestVerifyTotpPayload(
     mfaToken: String = "mfa_token_12345",
     code: String = "123456"
-): VerifyTotpPayload =
-    VerifyTotpPayload(
-        mfaToken = mfaToken,
-        code = code
-    )
+): VerifyTotpPayload = VerifyTotpPayload(
+    mfaToken = mfaToken,
+    code = code
+)

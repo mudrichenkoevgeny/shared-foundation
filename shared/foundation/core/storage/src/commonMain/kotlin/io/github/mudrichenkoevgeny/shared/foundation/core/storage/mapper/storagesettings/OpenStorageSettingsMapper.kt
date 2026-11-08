@@ -6,17 +6,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 /**
  * Builds domain [OpenStorageSettings] from [OpenStorageSettingsPayload].
  */
-public fun OpenStorageSettingsPayload.toOpenStorageSettings(): OpenStorageSettings =
-    OpenStorageSettings(
-        minUploadSizeBytes = minUploadSizeBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes
-    )
+public fun OpenStorageSettingsPayload.toOpenStorageSettings(): OpenStorageSettings = OpenStorageSettings(
+    minUploadSizeBytes = minUploadSizeBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes
+)
 
 /**
  * Builds network [OpenStorageSettingsPayload] from domain [OpenStorageSettings].
  */
-public fun OpenStorageSettings.toOpenStorageSettingsPayload(): OpenStorageSettingsPayload =
-    OpenStorageSettingsPayload(
-        minUploadSizeBytes = minUploadSizeBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes
-    )
+public fun OpenStorageSettings.toOpenStorageSettingsPayload(): OpenStorageSettingsPayload = OpenStorageSettingsPayload(
+    minUploadSizeBytes = minUploadSizeBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes
+)

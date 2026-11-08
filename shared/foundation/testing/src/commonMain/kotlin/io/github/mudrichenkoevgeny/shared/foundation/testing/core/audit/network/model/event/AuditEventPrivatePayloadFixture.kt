@@ -39,20 +39,19 @@ public fun createTestAuditEventPrivatePayload(
     metadata: List<AuditEventMetadataPayload> = listOf(createTestAuditEventMetadataPayload()),
     message: String? = "User logged in successfully",
     createdAt: Long = TEST_TIME_MILLIS
-): AuditEventPrivatePayload =
-    AuditEventPrivatePayload(
-        id = id,
-        actorId = actorId,
-        actorType = actorType,
-        actorUserRole = actorUserRole,
-        action = action,
-        resource = resource,
-        resourceId = resourceId,
-        status = status,
-        metadata = metadata,
-        message = message,
-        createdAt = createdAt
-    )
+): AuditEventPrivatePayload = AuditEventPrivatePayload(
+    id = id,
+    actorId = actorId,
+    actorType = actorType,
+    actorUserRole = actorUserRole,
+    action = action,
+    resource = resource,
+    resourceId = resourceId,
+    status = status,
+    metadata = metadata,
+    message = message,
+    createdAt = createdAt
+)
 
 /**
  * Creates a list of test [AuditEventPrivatePayload] wire objects with deterministic raw UUIDs,

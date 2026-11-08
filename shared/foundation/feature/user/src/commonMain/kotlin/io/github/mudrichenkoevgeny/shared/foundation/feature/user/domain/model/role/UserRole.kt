@@ -39,20 +39,18 @@ public enum class UserRole(
         /**
          * Returns [UserRole] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): UserRole? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UserRole? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UserRole] for the given wire or enum-style string (case-insensitive enum name).
          *
          * @throws IllegalArgumentException if [value] does not match any [UserRole].
          */
-        public fun fromValueOrThrow(value: String): UserRole =
-            fromValueOrNull(value) ?: throw IllegalArgumentException(
-                "Unknown value for ${UserRole::class.simpleName}: '$value'"
-            )
+        public fun fromValueOrThrow(value: String): UserRole = fromValueOrNull(value) ?: throw IllegalArgumentException(
+            "Unknown value for ${UserRole::class.simpleName}: '$value'"
+        )
     }
 }

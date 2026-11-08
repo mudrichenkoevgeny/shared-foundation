@@ -8,16 +8,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  *
  * @return domain model aligned with [AccountLockoutPolicy] semantics.
  */
-public fun AccountLockoutPolicyPayload.toAccountLockoutPolicy(): AccountLockoutPolicy =
-    AccountLockoutPolicy(
-        maxFailedPasswordAttempts = maxFailedPasswordAttempts,
-        maxFailedOtpAttempts = maxFailedOtpAttempts,
-        maxFailedTotpAttempts = maxFailedTotpAttempts,
-        failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
-        lockoutDurationSeconds = lockoutDurationSeconds,
-        indefiniteLockoutThreshold = indefiniteLockoutThreshold,
-        isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
-    )
+public fun AccountLockoutPolicyPayload.toAccountLockoutPolicy(): AccountLockoutPolicy = AccountLockoutPolicy(
+    maxFailedPasswordAttempts = maxFailedPasswordAttempts,
+    maxFailedOtpAttempts = maxFailedOtpAttempts,
+    maxFailedTotpAttempts = maxFailedTotpAttempts,
+    failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
+    lockoutDurationSeconds = lockoutDurationSeconds,
+    indefiniteLockoutThreshold = indefiniteLockoutThreshold,
+    isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
+)
 
 /**
  * Builds network [AccountLockoutPolicyPayload] DTO from domain [AccountLockoutPolicy].

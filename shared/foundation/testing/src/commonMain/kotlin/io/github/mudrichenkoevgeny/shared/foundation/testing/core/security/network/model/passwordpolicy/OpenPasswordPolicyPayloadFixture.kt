@@ -20,12 +20,11 @@ public fun createTestOpenPasswordPolicyPayload(
     requireLowerCase: Boolean = true,
     requireDigit: Boolean = true,
     requireSpecialChar: Boolean = false
-): OpenPasswordPolicyPayload =
-    OpenPasswordPolicyPayload(
-        minLength = minLength,
-        requireLetter = requireLetter,
-        requireUpperCase = requireUpperCase,
-        requireLowerCase = requireLowerCase,
-        requireDigit = requireDigit,
-        requireSpecialChar = requireSpecialChar
-    )
+): OpenPasswordPolicyPayload = OpenPasswordPolicyPayload(
+    minLength = minLength,
+    requireLetter = requireLetter,
+    requireUpperCase = requireUpperCase,
+    requireLowerCase = requireLowerCase,
+    requireDigit = requireDigit,
+    requireSpecialChar = requireSpecialChar
+)

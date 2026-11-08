@@ -16,10 +16,9 @@ public fun createTestSelfUpdateUserRequest(
     displayName: PatchField<String> = PatchField.Value("Test User"),
     avatarFileId: PatchField<String> = PatchField.Unchanged,
     birthdate: PatchField<Long> = PatchField.Unchanged
-): SelfUpdateUserRequest =
-    SelfUpdateUserRequest(
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId,
-        birthdate = birthdate
-    )
+): SelfUpdateUserRequest = SelfUpdateUserRequest(
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    birthdate = birthdate
+)

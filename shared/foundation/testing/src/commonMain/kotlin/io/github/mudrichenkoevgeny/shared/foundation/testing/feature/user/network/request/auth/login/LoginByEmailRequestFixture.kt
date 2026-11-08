@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
 public fun createTestLoginByEmailRequest(
     email: String = TEST_EMAIL,
     password: String = "Secret123!"
-): LoginByEmailRequest =
-    LoginByEmailRequest(
-        email = email,
-        password = password
-    )
+): LoginByEmailRequest = LoginByEmailRequest(
+    email = email,
+    password = password
+)

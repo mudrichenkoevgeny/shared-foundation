@@ -52,11 +52,10 @@ public enum class ClientType(
          *
          * @param value Case-insensitive enum name (e.g. `WEB`) or a wire string such as [CLIENT_WEB].
          */
-        public fun fromValueOrNull(value: String): ClientType? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): ClientType? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [ClientType] for the given wire or enum-style string (case-insensitive enum name).

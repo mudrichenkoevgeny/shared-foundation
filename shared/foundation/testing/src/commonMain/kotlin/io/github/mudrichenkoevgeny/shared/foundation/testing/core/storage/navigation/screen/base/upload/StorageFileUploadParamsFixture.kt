@@ -13,12 +13,11 @@ public fun createTestStorageFileUploadParams(
     acceptedFileTypes: List<String> = listOf(".jpg", ".png", "image/*"),
     maxFileSizeBytes: Long? = 2097152L,
     autoSubmit: Boolean = false
-): StorageFileUploadParams =
-    StorageFileUploadParams(
-        maxFiles = maxFiles,
-        targetScope = targetScope,
-        category = category,
-        acceptedFileTypes = acceptedFileTypes,
-        maxFileSizeBytes = maxFileSizeBytes,
-        autoSubmit = autoSubmit
-    )
+): StorageFileUploadParams = StorageFileUploadParams(
+    maxFiles = maxFiles,
+    targetScope = targetScope,
+    category = category,
+    acceptedFileTypes = acceptedFileTypes,
+    maxFileSizeBytes = maxFileSizeBytes,
+    autoSubmit = autoSubmit
+)

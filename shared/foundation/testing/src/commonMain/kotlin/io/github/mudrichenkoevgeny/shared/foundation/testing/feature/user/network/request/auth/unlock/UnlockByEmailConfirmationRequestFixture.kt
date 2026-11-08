@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
 public fun createTestUnlockByEmailConfirmationRequest(
     email: String = TEST_EMAIL,
     confirmationCode: String = "123456"
-): UnlockByEmailConfirmationRequest =
-    UnlockByEmailConfirmationRequest(
-        email = email,
-        confirmationCode = confirmationCode
-    )
+): UnlockByEmailConfirmationRequest = UnlockByEmailConfirmationRequest(
+    email = email,
+    confirmationCode = confirmationCode
+)

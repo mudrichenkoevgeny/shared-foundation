@@ -32,18 +32,17 @@ public fun createTestUserIdentifierPrivatePayload(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Long = TEST_TIME_MILLIS,
     updatedAt: Long? = TEST_TIME_MILLIS
-): UserIdentifierPrivatePayload =
-    UserIdentifierPrivatePayload(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserIdentifierPrivatePayload = UserIdentifierPrivatePayload(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
 /**
  * Creates a list of test [UserIdentifierPrivatePayload] wire objects with deterministic raw UUIDs,

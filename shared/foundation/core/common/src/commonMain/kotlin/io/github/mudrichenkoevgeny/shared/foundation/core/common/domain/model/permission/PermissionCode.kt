@@ -27,12 +27,11 @@ public value class PermissionCode(
  *
  * Returns `null` if the string is blank.
  */
-public fun String.toPermissionCodeOrNull(): PermissionCode? =
-    if (this.isNotBlank()) {
-        PermissionCode(this)
-    } else {
-        null
-    }
+public fun String.toPermissionCodeOrNull(): PermissionCode? = if (this.isNotBlank()) {
+    PermissionCode(this)
+} else {
+    null
+}
 
 /**
  * Creates a [PermissionCode] from this string or throws an exception if the string is blank.

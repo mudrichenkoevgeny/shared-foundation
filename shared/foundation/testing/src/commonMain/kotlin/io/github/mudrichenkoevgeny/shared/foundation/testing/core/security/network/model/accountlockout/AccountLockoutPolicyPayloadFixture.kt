@@ -21,13 +21,12 @@ public fun createTestAccountLockoutPolicyPayload(
     lockoutDurationSeconds: Int = 1800,
     indefiniteLockoutThreshold: Int = 3,
     isSelfServiceUnlockEnabled: Boolean = true
-): AccountLockoutPolicyPayload =
-    AccountLockoutPolicyPayload(
-        maxFailedPasswordAttempts = maxFailedPasswordAttempts,
-        maxFailedOtpAttempts = maxFailedOtpAttempts,
-        maxFailedTotpAttempts = maxFailedTotpAttempts,
-        failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
-        lockoutDurationSeconds = lockoutDurationSeconds,
-        indefiniteLockoutThreshold = indefiniteLockoutThreshold,
-        isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
-    )
+): AccountLockoutPolicyPayload = AccountLockoutPolicyPayload(
+    maxFailedPasswordAttempts = maxFailedPasswordAttempts,
+    maxFailedOtpAttempts = maxFailedOtpAttempts,
+    maxFailedTotpAttempts = maxFailedTotpAttempts,
+    failedAttemptsWindowSeconds = failedAttemptsWindowSeconds,
+    lockoutDurationSeconds = lockoutDurationSeconds,
+    indefiniteLockoutThreshold = indefiniteLockoutThreshold,
+    isSelfServiceUnlockEnabled = isSelfServiceUnlockEnabled
+)

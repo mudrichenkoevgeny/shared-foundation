@@ -8,7 +8,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  *
  * @param userId Target user ID string.
  */
-public fun createTestUserDetailParams(userId: String = TEST_USER_ID): UserDetailParams =
-    UserDetailParams(
-        userId = userId
-    )
+public fun createTestUserDetailParams(userId: String = TEST_USER_ID): UserDetailParams = UserDetailParams(
+    userId = userId
+)

@@ -30,17 +30,16 @@ public fun createTestOpenAuthSettings(
     userDisplayNameMaxLength: Int = 50,
     isUserNicknameChangeAllowed: Boolean = true,
     isRegistrationEnabled: Boolean = true
-): OpenAuthSettings =
-    OpenAuthSettings(
-        availableAuthProviders = availableAuthProviders,
-        maxTotalIdentifiers = maxTotalIdentifiers,
-        maxEmailIdentifiers = maxEmailIdentifiers,
-        maxPhoneIdentifiers = maxPhoneIdentifiers,
-        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        userNicknameMinLength = userNicknameMinLength,
-        userNicknameMaxLength = userNicknameMaxLength,
-        userDisplayNameMinLength = userDisplayNameMinLength,
-        userDisplayNameMaxLength = userDisplayNameMaxLength,
-        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
-        isRegistrationEnabled = isRegistrationEnabled
-    )
+): OpenAuthSettings = OpenAuthSettings(
+    availableAuthProviders = availableAuthProviders,
+    maxTotalIdentifiers = maxTotalIdentifiers,
+    maxEmailIdentifiers = maxEmailIdentifiers,
+    maxPhoneIdentifiers = maxPhoneIdentifiers,
+    maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+    userNicknameMinLength = userNicknameMinLength,
+    userNicknameMaxLength = userNicknameMaxLength,
+    userDisplayNameMinLength = userDisplayNameMinLength,
+    userDisplayNameMaxLength = userDisplayNameMaxLength,
+    isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
+    isRegistrationEnabled = isRegistrationEnabled
+)

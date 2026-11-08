@@ -11,8 +11,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.e
 public fun createTestEmailTemplate(
     subject: String = "Test Subject",
     body: String = "<p>Test Body</p>"
-): EmailTemplate =
-    EmailTemplate(
-        subject = subject,
-        body = body
-    )
+): EmailTemplate = EmailTemplate(
+    subject = subject,
+    body = body
+)

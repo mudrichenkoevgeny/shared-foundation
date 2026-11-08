@@ -21,15 +21,14 @@ public fun createTestStorageFileSummary(
     status: StorageFileStatus = StorageFileStatus.READY,
     fileUrls: FileUrls = createTestFileUrls(),
     createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
-): StorageFileSummary =
-    StorageFileSummary(
-        id = id,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = category,
-        visibility = visibility,
-        status = status,
-        fileUrls = fileUrls,
-        createdAt = createdAt
-    )
+): StorageFileSummary = StorageFileSummary(
+    id = id,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = category,
+    visibility = visibility,
+    status = status,
+    fileUrls = fileUrls,
+    createdAt = createdAt
+)

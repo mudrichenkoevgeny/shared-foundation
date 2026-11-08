@@ -10,7 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
  */
 public fun createTestUnlockTargetInputParams(
     unlockMethod: UnlockMethod? = UnlockMethod.EMAIL
-): UnlockTargetInputParams =
-    UnlockTargetInputParams(
-        unlockMethod = unlockMethod
-    )
+): UnlockTargetInputParams = UnlockTargetInputParams(
+    unlockMethod = unlockMethod
+)

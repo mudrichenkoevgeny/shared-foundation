@@ -10,7 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
  */
 public fun createTestDeletedSessionsPayload(
     deletedSessionIds: List<String> = listOf(TEST_SESSION_ID)
-): DeletedSessionsPayload =
-    DeletedSessionsPayload(
-        deletedSessionIds = deletedSessionIds
-    )
+): DeletedSessionsPayload = DeletedSessionsPayload(
+    deletedSessionIds = deletedSessionIds
+)

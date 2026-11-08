@@ -24,14 +24,13 @@ public fun createTestUserIdentifierSummary(
     userAuthProvider: UserAuthProvider = UserAuthProvider.EMAIL,
     identifier: String = TEST_EMAIL,
     displayName: String = "Test User"
-): UserIdentifierSummary =
-    UserIdentifierSummary(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName
-    )
+): UserIdentifierSummary = UserIdentifierSummary(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName
+)
 
 /**
  * Creates a list of test [UserIdentifierSummary] instances with deterministic index-based UUIDs,

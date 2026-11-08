@@ -10,7 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
  */
 public fun createTestSendResetPasswordConfirmationRequest(
     email: String = TEST_EMAIL
-): SendResetPasswordConfirmationRequest =
-    SendResetPasswordConfirmationRequest(
-        email = email
-    )
+): SendResetPasswordConfirmationRequest = SendResetPasswordConfirmationRequest(
+    email = email
+)

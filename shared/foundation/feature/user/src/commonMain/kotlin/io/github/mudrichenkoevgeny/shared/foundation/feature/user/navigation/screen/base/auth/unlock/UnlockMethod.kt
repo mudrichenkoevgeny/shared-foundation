@@ -27,11 +27,10 @@ public enum class UnlockMethod(
         /**
          * Returns [UnlockMethod] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): UnlockMethod? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UnlockMethod? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UnlockMethod] for the given string value.

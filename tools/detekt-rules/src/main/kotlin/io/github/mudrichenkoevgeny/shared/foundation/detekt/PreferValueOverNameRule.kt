@@ -49,8 +49,17 @@ public class PreferValueOverNameRule(
         if (selectorText == "name") {
             val isReflectionCall =
                 receiverText in setOf(
-                    "it", "method", "field", "param", "parameter", "member", "property",
-                    "kClass", "typeMatch", "aliasMatch", "exact"
+                    "it",
+                    "method",
+                    "field",
+                    "param",
+                    "parameter",
+                    "member",
+                    "property",
+                    "kClass",
+                    "typeMatch",
+                    "aliasMatch",
+                    "exact"
                 ) ||
                     receiverText.endsWith("Method") ||
                     receiverText.endsWith("Field") ||

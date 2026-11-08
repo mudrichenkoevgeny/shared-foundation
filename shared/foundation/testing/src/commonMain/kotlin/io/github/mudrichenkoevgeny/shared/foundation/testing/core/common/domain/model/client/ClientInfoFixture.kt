@@ -22,12 +22,11 @@ public fun createTestClientInfo(
     host: String? = "api.example.com",
     origin: String? = "https://example.com",
     apiVersion: String? = "1.0"
-): ClientInfo =
-    ClientInfo(
-        clientDeviceInfo = clientDeviceInfo,
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        host = host,
-        origin = origin,
-        apiVersion = apiVersion
-    )
+): ClientInfo = ClientInfo(
+    clientDeviceInfo = clientDeviceInfo,
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    host = host,
+    origin = origin,
+    apiVersion = apiVersion
+)

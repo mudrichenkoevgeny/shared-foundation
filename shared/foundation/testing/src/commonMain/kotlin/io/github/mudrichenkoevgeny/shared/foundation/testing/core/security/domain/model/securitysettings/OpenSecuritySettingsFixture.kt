@@ -15,8 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domai
 public fun createTestOpenSecuritySettings(
     passwordPolicy: OpenPasswordPolicy = createTestOpenPasswordPolicy(),
     otpConfirmation: OtpConfirmation = createTestOtpConfirmation()
-): OpenSecuritySettings =
-    OpenSecuritySettings(
-        passwordPolicy = passwordPolicy,
-        otpConfirmation = otpConfirmation
-    )
+): OpenSecuritySettings = OpenSecuritySettings(
+    passwordPolicy = passwordPolicy,
+    otpConfirmation = otpConfirmation
+)

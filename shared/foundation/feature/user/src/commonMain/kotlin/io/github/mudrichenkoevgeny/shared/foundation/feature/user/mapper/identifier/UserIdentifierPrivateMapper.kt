@@ -10,18 +10,17 @@ import kotlin.time.Instant
 /**
  * Builds domain [UserIdentifierPrivate] from [UserIdentifierPrivatePayload].
  */
-public fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivate =
-    UserIdentifierPrivate(
-        id = id.toUserIdentifierIdOrThrow(),
-        userId = userId.toUserIdOrThrow(),
-        userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = Instant.fromEpochMilliseconds(createdAt),
-        updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
-    )
+public fun UserIdentifierPrivatePayload.toUserIdentifierPrivate(): UserIdentifierPrivate = UserIdentifierPrivate(
+    id = id.toUserIdentifierIdOrThrow(),
+    userId = userId.toUserIdOrThrow(),
+    userAuthProvider = UserAuthProvider.fromValueOrThrow(userAuthProvider),
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
+)
 
 /**
  * Builds network [UserIdentifierPrivatePayload] from domain [UserIdentifierPrivate].

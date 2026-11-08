@@ -8,7 +8,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.scr
  *
  * @param totpStep Initial TOTP setup flow step ([TotpStep]).
  */
-public fun createTestTotpMainParams(totpStep: TotpStep = TotpStep.DEFAULT): TotpMainParams =
-    TotpMainParams(
-        totpStep = totpStep
-    )
+public fun createTestTotpMainParams(totpStep: TotpStep = TotpStep.DEFAULT): TotpMainParams = TotpMainParams(
+    totpStep = totpStep
+)

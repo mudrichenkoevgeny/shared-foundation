@@ -48,24 +48,23 @@ public fun createTestManagementAuditEventListParams(
     createdAtFrom: String? = null,
     createdAtTo: String? = null,
     searchQuery: String? = null
-): ManagementAuditEventListParams =
-    ManagementAuditEventListParams(
-        pageNumber = pageNumber,
-        pageSize = pageSize,
-        sortBy = sortBy,
-        sortOrder = sortOrder,
-        eventIds = eventIds,
-        actorIds = actorIds,
-        actorTypes = actorTypes,
-        excludeActorTypes = excludeActorTypes,
-        actorUserRoles = actorUserRoles,
-        actions = actions,
-        excludeActions = excludeActions,
-        resources = resources,
-        resourceIds = resourceIds,
-        statuses = statuses,
-        excludeStatuses = excludeStatuses,
-        createdAtFrom = createdAtFrom,
-        createdAtTo = createdAtTo,
-        searchQuery = searchQuery
-    )
+): ManagementAuditEventListParams = ManagementAuditEventListParams(
+    pageNumber = pageNumber,
+    pageSize = pageSize,
+    sortBy = sortBy,
+    sortOrder = sortOrder,
+    eventIds = eventIds,
+    actorIds = actorIds,
+    actorTypes = actorTypes,
+    excludeActorTypes = excludeActorTypes,
+    actorUserRoles = actorUserRoles,
+    actions = actions,
+    excludeActions = excludeActions,
+    resources = resources,
+    resourceIds = resourceIds,
+    statuses = statuses,
+    excludeStatuses = excludeStatuses,
+    createdAtFrom = createdAtFrom,
+    createdAtTo = createdAtTo,
+    searchQuery = searchQuery
+)

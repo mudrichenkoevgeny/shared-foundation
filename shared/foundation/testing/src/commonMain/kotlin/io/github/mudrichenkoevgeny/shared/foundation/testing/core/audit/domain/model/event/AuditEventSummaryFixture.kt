@@ -30,15 +30,14 @@ public fun createTestAuditEventSummary(
     resource: AuditResourceType = CommonAuditResourceType.AUDIT_EVENT,
     status: AuditStatus = AuditStatus.SUCCESS,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): AuditEventSummary =
-    AuditEventSummary(
-        id = id,
-        actorType = actorType,
-        action = action,
-        resource = resource,
-        status = status,
-        createdAt = createdAt
-    )
+): AuditEventSummary = AuditEventSummary(
+    id = id,
+    actorType = actorType,
+    action = action,
+    resource = resource,
+    status = status,
+    createdAt = createdAt
+)
 
 /**
  * Creates a list of test [AuditEventSummary] instances with deterministic index-based IDs,

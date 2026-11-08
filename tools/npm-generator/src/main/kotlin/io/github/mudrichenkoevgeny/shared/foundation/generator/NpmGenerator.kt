@@ -322,7 +322,10 @@ The source code for this library and generator is maintained in the main GitHub 
 Apache License 2.0. See [LICENSE](https://github.com/mudrichenkoevgeny/shared-foundation/blob/main/LICENSE) for details.
 """.trimIndent()
 
-private fun buildFullJsContent(testingJsCode: String, localizationJsCode: String): String {
+private fun buildFullJsContent(
+    testingJsCode: String,
+    localizationJsCode: String
+): String {
     val brandedCode = generateBrandedTypes()
     val enumCode = generateEnumsJs()
     val compositeParsersJsCode = generateCompositeParsersJs()
@@ -360,7 +363,7 @@ $paramParsersJsCode
 $testingJsCode
 
 $localizationJsCode
-    """.trimIndent()
+        """.trimIndent()
 }
 
 private fun generateDeclarationFile(
@@ -482,64 +485,62 @@ ${generateParamParsersAndSerializersDts()}
 $testingDtsCode
 
 $localizationDtsCode
-    """.trimIndent()
+        """.trimIndent()
 }
 
-private fun generateRouteDeclarationsDts(): String =
-    routeClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-        val structure = extractClassStructure(kClass)
+private fun generateRouteDeclarationsDts(): String = routeClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+    val structure = extractClassStructure(kClass)
 
-        val directFields =
-            structure.directProps.map { (valName, valValue) ->
-                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                "$fieldDoc    readonly $valName: \"$valValue\";"
-            }
+    val directFields =
+        structure.directProps.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "$fieldDoc    readonly $valName: \"$valValue\";"
+        }
 
-        val nestedFields =
-            structure.nestedObjects.map { (nestedName, nestedProps) ->
-                val nestedDoc =
-                    extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                val propsCode =
-                    nestedProps.joinToString("\n") { (vName, vVal) ->
-                        val vDoc =
-                            extractKDoc(
-                                kClass,
-                                memberName = vName,
-                                nestedClassName = nestedName
-                            )?.formatAsJsDoc("      ")?.let { "$it\n" }
-                                ?: ""
-                        "$vDoc      readonly $vName: \"$vVal\";"
-                    }
-                "$nestedDoc    readonly $nestedName: {\n$propsCode\n    };"
-            }
+    val nestedFields =
+        structure.nestedObjects.map { (nestedName, nestedProps) ->
+            val nestedDoc =
+                extractKDoc(kClass, nestedClassName = nestedName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            val propsCode =
+                nestedProps.joinToString("\n") { (vName, vVal) ->
+                    val vDoc =
+                        extractKDoc(
+                            kClass,
+                            memberName = vName,
+                            nestedClassName = nestedName
+                        )?.formatAsJsDoc("      ")?.let { "$it\n" }
+                            ?: ""
+                    "$vDoc      readonly $vName: \"$vVal\";"
+                }
+            "$nestedDoc    readonly $nestedName: {\n$propsCode\n    };"
+        }
 
-        val allFields = directFields + nestedFields
+    val allFields = directFields + nestedFields
 
-        """
+    """
 $classDoc export declare const $name: {
 ${allFields.joinToString("\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
-private fun generateContractDeclarationsDts(): String =
-    contractClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-        val props = extractObjectStringProperties(kClass)
-        val fields =
-            props.map { (valName, valValue) ->
-                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                "$fieldDoc    readonly $valName: \"$valValue\";"
-            }
-        """
+private fun generateContractDeclarationsDts(): String = contractClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+    val props = extractObjectStringProperties(kClass)
+    val fields =
+        props.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "$fieldDoc    readonly $valName: \"$valValue\";"
+        }
+    """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
 private fun generateListingAndFilterValuesDts(): String =
 """
@@ -730,63 +731,60 @@ readonly AVATAR: "${UserStorageTargetScopes.AVATAR}";
 };
 """.trimIndent()
 
-private fun generateErrorDeclarationsDts(): String =
-    errorClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-        val props = extractObjectStringProperties(kClass)
-        val fields =
-            props.map { (valName, valValue) ->
-                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                "$fieldDoc    readonly $valName: \"$valValue\";"
-            }
-        """
+private fun generateErrorDeclarationsDts(): String = errorClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+    val props = extractObjectStringProperties(kClass)
+    val fields =
+        props.map { (valName, valValue) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "$fieldDoc    readonly $valName: \"$valValue\";"
+        }
+    """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
-private fun generatePermDeclarationsDts(): String =
-    permClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-        val props = extractPermissionCodeProperties(kClass)
-        val fields =
-            props.map { (valName, _) ->
-                val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                "$fieldDoc    readonly $valName: PermissionCode;"
-            }
-        """
+private fun generatePermDeclarationsDts(): String = permClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+    val props = extractPermissionCodeProperties(kClass)
+    val fields =
+        props.map { (valName, _) ->
+            val fieldDoc = extractKDoc(kClass, valName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+            "$fieldDoc    readonly $valName: PermissionCode;"
+        }
+    """
 $classDoc export declare const $name: {
 ${fields.joinToString("\n")}
 };
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
-private fun generateEnumDeclarationsDts(): String =
-    getAllEnumInfos().joinToString("\n\n") { info ->
-        val enumClass = enumClasses.firstOrNull { (it.simpleName ?: "") == info.name }
-        val classDoc = enumClass?.let { extractKDoc(it) }?.let { "$it\n" } ?: ""
-        val unionType =
-            info.entries
-                .map { it.second }
-                .distinct()
-                .joinToString(" | ") { "'$it'" }
-        val objectFields =
-            info.entries.joinToString("\n") { (key, wire) ->
-                val entryDoc = enumClass?.let { extractKDoc(it, key) }?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
-                "$entryDoc  readonly $key: '$wire';"
-            }
+private fun generateEnumDeclarationsDts(): String = getAllEnumInfos().joinToString("\n\n") { info ->
+    val enumClass = enumClasses.firstOrNull { (it.simpleName ?: "") == info.name }
+    val classDoc = enumClass?.let { extractKDoc(it) }?.let { "$it\n" } ?: ""
+    val unionType =
+        info.entries
+            .map { it.second }
+            .distinct()
+            .joinToString(" | ") { "'$it'" }
+    val objectFields =
+        info.entries.joinToString("\n") { (key, wire) ->
+            val entryDoc = enumClass?.let { extractKDoc(it, key) }?.formatAsJsDoc("  ")?.let { "$it\n" } ?: ""
+            "$entryDoc  readonly $key: '$wire';"
+        }
 
-        """
+    """
 $classDoc export type ${info.name} = $unionType;
 $classDoc export const ${info.name}: {
 $objectFields
 };
 export const ${info.schemaName}: z.ZodType<${info.name}>;
-        """.trimIndent()
-    }
+    """.trimIndent()
+}
 
 private fun generateExtraDeclarationsDts(): String =
 """
@@ -834,33 +832,32 @@ ${generateDomainModelsAndMappersDts()}
 ${generateCompositeParsersDts()}
 """.trimIndent()
 
-private fun generateDtoDeclarationsDts(): String =
-    dtoClasses.joinToString("\n\n") { kClass ->
-        val name = kClass.simpleName ?: ""
-        val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
-        val schemaName = name.decapitalizeFirstLetter() + "Schema"
-        val primaryConstructor = kClass.primaryConstructor
+private fun generateDtoDeclarationsDts(): String = dtoClasses.joinToString("\n\n") { kClass ->
+    val name = kClass.simpleName ?: ""
+    val classDoc = extractKDoc(kClass)?.let { "$it\n" } ?: ""
+    val schemaName = name.decapitalizeFirstLetter() + "Schema"
+    val primaryConstructor = kClass.primaryConstructor
 
-        val fields =
-            if (primaryConstructor != null) {
-                primaryConstructor.parameters.map { param ->
-                    val paramName = param.name ?: ""
-                    val serialNameAnnotation =
-                        param.annotations.filterIsInstance<SerialName>().firstOrNull()
-                            ?: kClass.declaredMemberProperties
-                                .firstOrNull {
-                                    it.name == paramName
-                                }?.findAnnotation<SerialName>()
+    val fields =
+        if (primaryConstructor != null) {
+            primaryConstructor.parameters.map { param ->
+                val paramName = param.name ?: ""
+                val serialNameAnnotation =
+                    param.annotations.filterIsInstance<SerialName>().firstOrNull()
+                        ?: kClass.declaredMemberProperties
+                            .firstOrNull {
+                                it.name == paramName
+                            }?.findAnnotation<SerialName>()
 
-                    val wireKey = serialNameAnnotation?.value ?: paramName
-                    val tsType = resolveTsType(paramName, param.type, kClass)
-                    val optionalSign = if (param.isOptional) "?" else ""
-                    val fieldDoc = extractKDoc(kClass, paramName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
-                    "$fieldDoc    $wireKey$optionalSign: $tsType;"
-                }
-            } else {
-                emptyList()
+                val wireKey = serialNameAnnotation?.value ?: paramName
+                val tsType = resolveTsType(paramName, param.type, kClass)
+                val optionalSign = if (param.isOptional) "?" else ""
+                val fieldDoc = extractKDoc(kClass, paramName)?.formatAsJsDoc("    ")?.let { "$it\n" } ?: ""
+                "$fieldDoc    $wireKey$optionalSign: $tsType;"
             }
+        } else {
+            emptyList()
+        }
 
 """
 $classDoc export interface $name {
@@ -868,7 +865,7 @@ ${fields.joinToString("\n")}
 }
 export const $schemaName: z.ZodType<$name>;
 """.trimIndent()
-    }
+}
 
 private fun parseRootBuildGradleVersion(rootDir: File): String? {
     val buildFile = File(rootDir, "build.gradle.kts")

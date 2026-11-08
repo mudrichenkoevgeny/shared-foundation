@@ -48,24 +48,23 @@ public fun createTestSelfIdentifierListParams(
     updatedAtTo: String? = null,
     isUpdatedAtSet: Boolean? = null,
     searchQuery: String? = null
-): SelfIdentifierListParams =
-    SelfIdentifierListParams(
-        action = action,
-        pageNumber = pageNumber,
-        pageSize = pageSize,
-        sortBy = sortBy,
-        sortOrder = sortOrder,
-        identifierIds = identifierIds,
-        userAuthProviders = userAuthProviders,
-        excludeUserAuthProviders = excludeUserAuthProviders,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isExternalProviderEmailSet = isExternalProviderEmailSet,
-        createdAtFrom = createdAtFrom,
-        createdAtTo = createdAtTo,
-        updatedAtFrom = updatedAtFrom,
-        updatedAtTo = updatedAtTo,
-        isUpdatedAtSet = isUpdatedAtSet,
-        searchQuery = searchQuery
-    )
+): SelfIdentifierListParams = SelfIdentifierListParams(
+    action = action,
+    pageNumber = pageNumber,
+    pageSize = pageSize,
+    sortBy = sortBy,
+    sortOrder = sortOrder,
+    identifierIds = identifierIds,
+    userAuthProviders = userAuthProviders,
+    excludeUserAuthProviders = excludeUserAuthProviders,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isExternalProviderEmailSet = isExternalProviderEmailSet,
+    createdAtFrom = createdAtFrom,
+    createdAtTo = createdAtTo,
+    updatedAtFrom = updatedAtFrom,
+    updatedAtTo = updatedAtTo,
+    isUpdatedAtSet = isUpdatedAtSet,
+    searchQuery = searchQuery
+)

@@ -29,11 +29,10 @@ public enum class SecurityAuditActionType(
         /**
          * Returns [SecurityAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): SecurityAuditActionType? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): SecurityAuditActionType? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [SecurityAuditActionType] for the given wire or enum-style string (case-insensitive enum name).

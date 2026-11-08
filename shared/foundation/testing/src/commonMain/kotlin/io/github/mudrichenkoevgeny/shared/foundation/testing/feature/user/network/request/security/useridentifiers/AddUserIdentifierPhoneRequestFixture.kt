@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_PH
 public fun createTestAddUserIdentifierPhoneRequest(
     phoneNumber: String = TEST_PHONE,
     confirmationCode: String = "123456"
-): AddUserIdentifierPhoneRequest =
-    AddUserIdentifierPhoneRequest(
-        phoneNumber = phoneNumber,
-        confirmationCode = confirmationCode
-    )
+): AddUserIdentifierPhoneRequest = AddUserIdentifierPhoneRequest(
+    phoneNumber = phoneNumber,
+    confirmationCode = confirmationCode
+)

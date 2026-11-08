@@ -15,15 +15,14 @@ public fun createTestManagementStorageSettingsPayload(
     maxPendingUploadsForManagementUser: Int = 100,
     isDeduplicationEnabled: Boolean = true,
     deletedFilesCleanupIntervalSeconds: Int = 86400
-): ManagementStorageSettingsPayload =
-    ManagementStorageSettingsPayload(
-        minUploadSizeBytes = minUploadSizeBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes,
-        totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
-        totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
-        presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
-        maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
-        maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
-        isDeduplicationEnabled = isDeduplicationEnabled,
-        deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
-    )
+): ManagementStorageSettingsPayload = ManagementStorageSettingsPayload(
+    minUploadSizeBytes = minUploadSizeBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes,
+    totalStorageQuotaForOpenUserBytes = totalStorageQuotaForOpenUserBytes,
+    totalStorageQuotaForManagementUserBytes = totalStorageQuotaForManagementUserBytes,
+    presignedUrlExpirationSeconds = presignedUrlExpirationSeconds,
+    maxPendingUploadsForOpenUser = maxPendingUploadsForOpenUser,
+    maxPendingUploadsForManagementUser = maxPendingUploadsForManagementUser,
+    isDeduplicationEnabled = isDeduplicationEnabled,
+    deletedFilesCleanupIntervalSeconds = deletedFilesCleanupIntervalSeconds
+)

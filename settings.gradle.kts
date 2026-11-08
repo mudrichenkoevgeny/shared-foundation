@@ -59,10 +59,21 @@ dependencyResolutionManagement {
 
 rootProject.name = "shared-foundation"
 
-fun registerModules(group: String, modules: List<String>) {
+fun registerModules(
+    group: String,
+    modules: List<String>
+) {
     modules.forEach { name ->
-        val gradlePath = ":${group.replace(".", ":")}:$name"
-        val folderPath = group.replace(".", "/") + "/$name"
+        val gradlePath = ":${
+            group.replace(
+                ".",
+                ":"
+            )
+        }:$name"
+        val folderPath = group.replace(
+            ".",
+            "/"
+        ) + "/$name"
         include(gradlePath)
         project(gradlePath).projectDir = file(folderPath)
     }
@@ -77,14 +88,26 @@ val coreModules = listOf(
     "audit",
     "storage"
 )
-registerModules("$groupBase.core", coreModules)
+registerModules(
+    "$groupBase.core",
+    coreModules
+)
 
 val featureModules = listOf(
     "user"
 )
-registerModules("$groupBase.feature", featureModules)
+registerModules(
+    "$groupBase.feature",
+    featureModules
+)
 
-registerModules(groupBase, listOf("bom", "testing"))
+registerModules(
+    groupBase,
+    listOf(
+        "bom",
+        "testing"
+    )
+)
 
 include(":tools:npm-generator")
 project(":tools:npm-generator").projectDir = file("tools/npm-generator")

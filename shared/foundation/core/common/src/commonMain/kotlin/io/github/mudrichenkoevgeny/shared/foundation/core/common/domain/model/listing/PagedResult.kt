@@ -41,13 +41,12 @@ public data class PagedResult<T>(
         /**
          * Creates an empty [PagedResult] with zero total items and initial pagination parameters.
          */
-        public fun <T> empty(): PagedResult<T> =
-            PagedResult<T>(
-                items = emptyList(),
-                totalCount = 0,
-                pageNumber = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-                pageSize = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-                totalPages = 0
-            )
+        public fun <T> empty(): PagedResult<T> = PagedResult<T>(
+            items = emptyList(),
+            totalCount = 0,
+            pageNumber = ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+            pageSize = ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+            totalPages = 0
+        )
     }
 }

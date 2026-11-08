@@ -32,11 +32,10 @@ public enum class AuditStatus(
         /**
          * Returns [AuditStatus] based on the provided wire value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): AuditStatus? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): AuditStatus? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [AuditStatus] for the given wire or enum-style string (case-insensitive enum name).

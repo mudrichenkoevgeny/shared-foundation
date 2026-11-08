@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EM
 public fun createTestClientRegistrationByEmailParams(
     email: String? = TEST_EMAIL,
     redirectUrl: String? = null
-): ClientRegistrationByEmailParams =
-    ClientRegistrationByEmailParams(
-        email = email,
-        redirectUrl = redirectUrl
-    )
+): ClientRegistrationByEmailParams = ClientRegistrationByEmailParams(
+    email = email,
+    redirectUrl = redirectUrl
+)

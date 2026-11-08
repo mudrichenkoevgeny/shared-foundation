@@ -29,10 +29,9 @@ public object UserRoleDefaultAuthorityLevel {
     /**
      * Returns baseline authority level for the provided [role].
      */
-    public fun forRole(role: UserRole): Int =
-        when (role) {
-            UserRole.USER -> USER
-            UserRole.STAFF -> STAFF
-            UserRole.ADMIN -> ADMIN
-        }
+    public fun forRole(role: UserRole): Int = when (role) {
+        UserRole.USER -> USER
+        UserRole.STAFF -> STAFF
+        UserRole.ADMIN -> ADMIN
+    }
 }

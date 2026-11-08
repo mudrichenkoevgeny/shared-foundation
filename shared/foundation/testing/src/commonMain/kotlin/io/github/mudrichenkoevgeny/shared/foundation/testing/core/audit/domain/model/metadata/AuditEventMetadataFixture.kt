@@ -14,8 +14,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP
 public fun createTestAuditEventMetadata(
     key: AuditMetadataKey = CommonAuditMetadataKey.IP_ADDRESS,
     value: String = TEST_IP_ADDRESS
-): AuditEventMetadata =
-    AuditEventMetadata(
-        key = key,
-        value = value
-    )
+): AuditEventMetadata = AuditEventMetadata(
+    key = key,
+    value = value
+)

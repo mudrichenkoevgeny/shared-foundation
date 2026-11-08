@@ -24,11 +24,10 @@ public enum class SelfIdentifierListAction(
          *
          * Compares against both wire [value] and enum [name] case-insensitively.
          */
-        public fun fromValueOrNull(value: String): SelfIdentifierListAction? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): SelfIdentifierListAction? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Resolves [SelfIdentifierListAction] for the given [value].

@@ -10,7 +10,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.s
  */
 public fun createTestDeletedSessions(
     deletedSessionIds: List<UserSessionId> = listOf(createTestUserSessionId())
-): DeletedSessions =
-    DeletedSessions(
-        deletedSessionIds = deletedSessionIds
-    )
+): DeletedSessions = DeletedSessions(
+    deletedSessionIds = deletedSessionIds
+)

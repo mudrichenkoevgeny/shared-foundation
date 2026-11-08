@@ -42,17 +42,33 @@ public fun getDefaultMockValueJs(
 private fun getEnumDefaultMockValue(classifier: KClass<*>): String {
     val enumInfo = getEnumInfo(classifier)
     val defaultEntry = enumInfo.entries.firstOrNull {
-        it.first == "DEFAULT" || it.first == "NONE" || it.first == "ACTIVE" ||
-            it.first == "USER" || it.first == "SUCCESS"
+        it.first == "DEFAULT" ||
+            it.first == "NONE" ||
+            it.first == "ACTIVE" ||
+            it.first == "USER" ||
+            it.first == "SUCCESS"
     } ?: enumInfo.entries.firstOrNull()
     return if (defaultEntry != null) "\"${defaultEntry.second}\"" else "\"\""
 }
 
-private fun getDefaultStringMockValue(paramName: String, ownerClassName: String): String = when {
+private fun getDefaultStringMockValue(
+    paramName: String,
+    ownerClassName: String
+): String = when {
     paramName in setOf("role", "userRole", "actorUserRole", "user_role", "actor_user_role") -> "\"user\""
-    paramName in setOf("accountStatus", "accountStatusOnRestore", "account_status", "account_status_on_restore") -> "\"active\""
+    paramName in setOf(
+        "accountStatus",
+        "accountStatusOnRestore",
+        "account_status",
+        "account_status_on_restore"
+    ) -> "\"active\""
     paramName in setOf("lockoutType", "accountLockoutType", "lockout_type", "account_lockout_type") -> "\"none\""
-    paramName in setOf("identifierAuthProvider", "userAuthProvider", "identifier_auth_provider", "user_auth_provider") -> "\"email\""
+    paramName in setOf(
+        "identifierAuthProvider",
+        "userAuthProvider",
+        "identifier_auth_provider",
+        "user_auth_provider"
+    ) -> "\"email\""
     paramName in setOf("actorType", "actor_type") -> "\"user\""
     paramName == "action" -> "\"login.email\""
     paramName == "resource" -> "\"audit.event\""
@@ -60,13 +76,27 @@ private fun getDefaultStringMockValue(paramName: String, ownerClassName: String)
     paramName in setOf("clientType", "client_type") -> "\"android\""
     paramName in setOf("themeMode", "theme_mode") -> "\"system\""
     paramName in setOf("sortOrder", "sort_order") -> "\"desc\""
-    paramName == "id" || paramName.endsWith("Id") || paramName.endsWith("_id") -> getDefaultStringIdMockValue(paramName, ownerClassName)
+    paramName == "id" ||
+        paramName.endsWith(
+            "Id"
+        ) ||
+        paramName.endsWith("_id") -> getDefaultStringIdMockValue(paramName, ownerClassName)
     paramName.contains("email", ignoreCase = true) -> "TEST_EMAIL"
     paramName.contains("phone", ignoreCase = true) -> "TEST_PHONE"
-    paramName.contains("ipAddress", ignoreCase = true) || paramName.contains("ip_address", ignoreCase = true) -> "TEST_IP_ADDRESS"
-    paramName.contains("userAgent", ignoreCase = true) || paramName.contains("user_agent", ignoreCase = true) -> "TEST_USER_AGENT"
-    paramName.contains("code", ignoreCase = true) || paramName.contains("otp", ignoreCase = true) ||
-        paramName.contains("token", ignoreCase = true) || paramName.contains("mfa", ignoreCase = true) -> "\"123456\""
+    paramName.contains(
+        "ipAddress",
+        ignoreCase = true
+    ) ||
+        paramName.contains("ip_address", ignoreCase = true) -> "TEST_IP_ADDRESS"
+    paramName.contains(
+        "userAgent",
+        ignoreCase = true
+    ) ||
+        paramName.contains("user_agent", ignoreCase = true) -> "TEST_USER_AGENT"
+    paramName.contains("code", ignoreCase = true) ||
+        paramName.contains("otp", ignoreCase = true) ||
+        paramName.contains("token", ignoreCase = true) ||
+        paramName.contains("mfa", ignoreCase = true) -> "\"123456\""
     paramName.contains("url", ignoreCase = true) -> "\"https://example.com\""
     paramName.contains("host", ignoreCase = true) -> "\"api.example.com\""
     paramName.contains("message", ignoreCase = true) -> "\"Test message\""
@@ -74,7 +104,10 @@ private fun getDefaultStringMockValue(paramName: String, ownerClassName: String)
     else -> "\"test_${paramName}\""
 }
 
-private fun getDefaultStringIdMockValue(paramName: String, ownerClassName: String): String = when (paramName) {
+private fun getDefaultStringIdMockValue(
+    paramName: String,
+    ownerClassName: String
+): String = when (paramName) {
     "userId", "user_id", "actorId", "actor_id", "resourceId", "resource_id" -> "TEST_USER_ID"
     "sessionId", "session_id" -> "TEST_SESSION_ID"
     "identifierId", "userIdentifierId", "user_identifier_id" -> "TEST_IDENTIFIER_ID"
@@ -83,7 +116,9 @@ private fun getDefaultStringIdMockValue(paramName: String, ownerClassName: Strin
     "clientDeviceId", "device_id", "deviceId" -> "TEST_CLIENT_DEVICE_ID"
     "id" -> when {
         ownerClassName.contains("UserIdentifier") -> "TEST_IDENTIFIER_ID"
-        ownerClassName.contains("UserSession") || ownerClassName.contains("DeletedSession") || ownerClassName.contains("RefreshToken") -> "TEST_SESSION_ID"
+        ownerClassName.contains("UserSession") ||
+            ownerClassName.contains("DeletedSession") ||
+            ownerClassName.contains("RefreshToken") -> "TEST_SESSION_ID"
         ownerClassName.contains("AuditEvent") -> "TEST_AUDIT_EVENT_ID"
         ownerClassName.contains("StorageFile") -> "TEST_FILE_ID"
         ownerClassName.contains("User") || ownerClassName.contains("AuthData") -> "TEST_USER_ID"
@@ -97,13 +132,19 @@ private fun getDefaultNumberMockValue(paramName: String): String = when {
     paramName in setOf("pageSize", "page_size") -> "20"
     paramName in setOf("authorityLevel", "authority_level") -> "10"
     paramName in setOf("retryAfterSeconds", "retry_after_seconds") -> "60"
-    paramName.endsWith("At") || paramName.endsWith("_at") ||
-        paramName.endsWith("Time") || paramName.endsWith("Timestamp") ||
-        paramName.endsWith("Until") || paramName.endsWith("_until") -> "TEST_TIME_MILLIS"
+    paramName.endsWith("At") ||
+        paramName.endsWith("_at") ||
+        paramName.endsWith("Time") ||
+        paramName.endsWith("Timestamp") ||
+        paramName.endsWith("Until") ||
+        paramName.endsWith("_until") -> "TEST_TIME_MILLIS"
     else -> "1"
 }
 
-private fun getDefaultTypeOrBrandedMockValue(type: KType, typeName: String): String = when {
+private fun getDefaultTypeOrBrandedMockValue(
+    type: KType,
+    typeName: String
+): String = when {
     typeName == "Boolean" -> "false"
     typeName in setOf("List", "Set", "Collection") -> "[]"
     typeName == "Map" -> "{}"
@@ -121,15 +162,21 @@ private fun getDefaultTypeOrBrandedMockValue(type: KType, typeName: String): Str
     typeName == "PasswordHash" -> "TEST_PASSWORD_HASH"
     typeName == "Instant" || typeName == "Duration" -> "TEST_TIME_MILLIS"
     rawDtoClasses.any { it.simpleName == typeName } ||
-        typeName.endsWith("Payload") || typeName.endsWith("Params") ||
-        typeName.endsWith("Request") || typeName.endsWith("Response") -> "createTest$typeName()"
+        typeName.endsWith("Payload") ||
+        typeName.endsWith("Params") ||
+        typeName.endsWith("Request") ||
+        typeName.endsWith("Response") -> "createTest$typeName()"
     type.isMarkedNullable -> "null"
     else -> "{}"
 }
 
 public fun getAllExportableTestClasses(): List<KClass<*>> {
     val currentDir = File(System.getProperty("user.dir"))
-    val rootDir = if (currentDir.name == "npm-generator") currentDir.parentFile.parentFile else currentDir
+    val rootDir = if (currentDir.name == "npm-generator") {
+        currentDir.parentFile.parentFile
+    } else {
+        currentDir
+    }
     val testingSourceDir = File(rootDir, "shared/foundation/testing/src/commonMain/kotlin")
 
     val classes = mutableSetOf<KClass<*>>()
@@ -171,7 +218,13 @@ public fun getAllExportableTestClasses(): List<KClass<*>> {
 }
 
 public fun generateTestFixturesJs(): String {
-    val constantsJs =
+    val constantsJs = generateConstantsAndMocksJs()
+    val exportableClasses = getAllExportableTestClasses().filter { it.simpleName != "PagedResult" }
+    val factoriesJs = generateFactoriesJs(exportableClasses)
+    return "$constantsJs\n\n$factoriesJs"
+}
+
+private fun generateConstantsAndMocksJs(): String =
 """
 export const TEST_USER_ID = "00000000-0000-4000-8000-000000000001";
 export const TEST_USER_ID_2 = "00000000-0000-4000-8000-000000000002";
@@ -288,87 +341,228 @@ return { isSuccess: false, reasons: this.failReasons };
 }
 """.trimIndent()
 
-    val exportableClasses = getAllExportableTestClasses().filter { it.simpleName != "PagedResult" }
+private fun generateFactoriesJs(exportableClasses: List<KClass<*>>): String =
+    exportableClasses.joinToString("\n\n") { kClass ->
+        val className = kClass.simpleName ?: ""
+        val isPayload =
+            className.endsWith("Payload") || className.endsWith("Request") || className.endsWith("Response")
+        val props = extractClassProperties(kClass)
 
-    val factoriesJs =
-        exportableClasses.joinToString("\n\n") { kClass ->
-            val className = kClass.simpleName ?: ""
-            val isPayload =
-                className.endsWith("Payload") || className.endsWith("Request") || className.endsWith("Response")
-            val props = extractClassProperties(kClass)
+        val fieldsJs =
+            props.joinToString(",\n") { (paramName, paramType) ->
+                val wireKey = if (isPayload) {
+                    getWireKey(kClass, paramName)
+                } else {
+                    paramName
+                }
+                val mockVal = getDefaultMockValueJs(paramName, paramType, kClass)
+                "      $wireKey: $mockVal"
+            }
 
-            val fieldsJs =
-                props.joinToString(",\n") { (paramName, paramType) ->
-                    val wireKey = if (isPayload) getWireKey(kClass, paramName) else paramName
-                    val mockVal = getDefaultMockValueJs(paramName, paramType, kClass)
-                    "      $wireKey: $mockVal"
+        val listGeneratorCustomLogic =
+            when (className) {
+                "UserPrivate", "UserSummary", "UserPrivatePayload", "UserSummaryPayload" -> {
+                    val createdAtKey = if (isPayload) {
+                        "created_at"
+                    } else {
+                        "createdAt"
+                    }
+                    val updatedAtKey = if (isPayload) {
+                        "updated_at"
+                    } else {
+                        "updatedAt"
+                    }
+                    val lastLoginKey = if (isPayload) {
+                        "last_login_at"
+                    } else {
+                        "lastLoginAt"
+                    }
+                    val lastActiveKey = if (isPayload) {
+                        "last_active_at"
+                    } else {
+                        "lastActiveAt"
+                    }
+                    """
+const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
+return createTest$className({
+id: ${if (isPayload) {
+                        "generateTestUuidString(index, 1)"
+                    } else {
+                        "toUserIdOrThrow(generateTestUuidString(index, 1))"
+                    }},
+email: `user${'$'}{index + 1}@example.com`,
+$createdAtKey: createdAtMs,
+$updatedAtKey: createdAtMs + 30000,
+$lastLoginKey: createdAtMs + 15000,
+$lastActiveKey: createdAtMs + 15000,
+...itemOverrides
+});
+                    """.trimIndent()
                 }
 
-            val listGeneratorCustomLogic =
-                when (className) {
-                    "UserPrivate", "UserSummary", "UserPrivatePayload", "UserSummaryPayload" ->
-"""
+                "UserIdentifierPrivate", "UserIdentifierSummary",
+                "UserIdentifierPrivatePayload", "UserIdentifierSummaryPayload" -> {
+                    val idExpr = if (isPayload) {
+                        "generateTestUuidString(index, 1)"
+                    } else {
+                        "toUserIdentifierIdOrThrow(generateTestUuidString(index, 1))"
+                    }
+                    val userIdKey = if (isPayload) {
+                        "user_id"
+                    } else {
+                        "userId"
+                    }
+                    val userIdVal = if (isPayload) {
+                        "generateTestUuidString(index, 2)"
+                    } else {
+                        "toUserIdOrThrow(generateTestUuidString(index, 2))"
+                    }
+                    val authProviderKey = if (isPayload) {
+                        "user_auth_provider"
+                    } else {
+                        "userAuthProvider"
+                    }
+                    val displayNameKey = if (isPayload) {
+                        "display_name"
+                    } else {
+                        "displayName"
+                    }
+                    val createdAtKey = if (isPayload) {
+                        "created_at"
+                    } else {
+                        "createdAt"
+                    }
+                    val updatedAtKey = if (isPayload) {
+                        "updated_at"
+                    } else {
+                        "updatedAt"
+                    }
+                    """
 const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
 return createTest$className({
-id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserIdOrThrow(generateTestUuidString(index, 1))"},
-email: `user${'$'}{index + 1}@example.com`,
-${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
-${if (isPayload) "updated_at" else "updatedAt"}: createdAtMs + 30000,
-${if (isPayload) "last_login_at" else "lastLoginAt"}: createdAtMs + 15000,
-${if (isPayload) "last_active_at" else "lastActiveAt"}: createdAtMs + 15000,
-...itemOverrides
-});
-""".trimIndent()
-
-                    "UserIdentifierPrivate", "UserIdentifierSummary", "UserIdentifierPrivatePayload", "UserIdentifierSummaryPayload" ->
-"""
-const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
-return createTest$className({
-id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserIdentifierIdOrThrow(generateTestUuidString(index, 1))"},
-${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "generateTestUuidString(index, 2)" else "toUserIdOrThrow(generateTestUuidString(index, 2))"},
-${if (isPayload) "user_auth_provider" else "userAuthProvider"}: index % 2 === 0 ? "email" : "google",
+id: $idExpr,
+$userIdKey: $userIdVal,
+$authProviderKey: index % 2 === 0 ? "email" : "google",
 identifier: index % 2 === 0 ? `user${'$'}{index + 1}@example.com` : `+1555000000${'$'}{index + 1}`,
-${if (isPayload) "display_name" else "displayName"}: index % 2 === 0 ? "Email Identifier" : "Google Account",
-${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
-${if (isPayload) "updated_at" else "updatedAt"}: createdAtMs + 10000,
+$displayNameKey: index % 2 === 0 ? "Email Identifier" : "Google Account",
+$createdAtKey: createdAtMs,
+$updatedAtKey: createdAtMs + 10000,
 ...itemOverrides
 });
-""".trimIndent()
+                    """.trimIndent()
+                }
 
-                    "UserSessionPrivate", "UserSessionSummary", "UserSessionPrivatePayload", "UserSessionSummaryPayload" ->
-"""
+                "UserSessionPrivate", "UserSessionSummary",
+                "UserSessionPrivatePayload", "UserSessionSummaryPayload" -> {
+                    val idExpr = if (isPayload) {
+                        "generateTestUuidString(index, 1)"
+                    } else {
+                        "toUserSessionIdOrThrow(generateTestUuidString(index, 1))"
+                    }
+                    val userIdKey = if (isPayload) {
+                        "user_id"
+                    } else {
+                        "userId"
+                    }
+                    val userIdVal = if (isPayload) {
+                        "generateTestUuidString(index, 2)"
+                    } else {
+                        "toUserSessionIdOrThrow(generateTestUuidString(index, 2))"
+                    }
+                    val uaKey = if (isPayload) {
+                        "user_agent"
+                    } else {
+                        "userAgent"
+                    }
+                    val winUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36"
+                    val macUa = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15"
+                    val uaVal = "index % 2 === 0 ? \"$winUa\" : \"$macUa\""
+                    val deviceInfoKey = if (isPayload) {
+                        "client_device_info"
+                    } else {
+                        "clientDeviceInfo"
+                    }
+                    val winDev = if (isPayload) {
+                        "createTestClientDeviceInfoPayload({ device_name: \"Windows PC\", " +
+                            "operation_system_version: \"Windows 10\" })"
+                    } else {
+                        "createTestClientDeviceInfo({ deviceName: \"Windows PC\", " +
+                            "operationSystemVersion: \"Windows 10\" })"
+                    }
+                    val macDev = if (isPayload) {
+                        "createTestClientDeviceInfoPayload({ device_name: \"MacBook Pro\", " +
+                            "operation_system_version: \"macOS 14.0\" })"
+                    } else {
+                        "createTestClientDeviceInfo({ deviceName: \"MacBook Pro\", " +
+                            "operationSystemVersion: \"macOS 14.0\" })"
+                    }
+                    val deviceInfoVal = "index % 2 === 0 ? $winDev : $macDev"
+                    val createdAtKey = if (isPayload) {
+                        "created_at"
+                    } else {
+                        "createdAt"
+                    }
+                    val lastAccessedKey = if (isPayload) {
+                        "last_accessed_at"
+                    } else {
+                        "lastAccessedAt"
+                    }
+                    val lastReauthKey = if (isPayload) {
+                        "last_reauthenticated_at"
+                    } else {
+                        "lastReauthenticatedAt"
+                    }
+                    val expiresKey = if (isPayload) {
+                        "expires_at"
+                    } else {
+                        "expiresAt"
+                    }
+                    """
 const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
 return createTest$className({
-id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toUserSessionIdOrThrow(generateTestUuidString(index, 1))"},
-${if (isPayload) "user_id" else "userId"}: ${if (isPayload) "generateTestUuidString(index, 2)" else "toUserIdOrThrow(generateTestUuidString(index, 2))"},
-${if (isPayload) "user_agent" else "userAgent"}: index % 2 === 0 ? "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15",
-${if (isPayload) "client_device_info" else "clientDeviceInfo"}: index % 2 === 0 ? ${if (isPayload) "createTestClientDeviceInfoPayload({ device_name: \"Windows PC\", operation_system_version: \"Windows 10\" })" else "createTestClientDeviceInfo({ deviceName: \"Windows PC\", operationSystemVersion: \"Windows 10\" })"} : ${if (isPayload) "createTestClientDeviceInfoPayload({ device_name: \"MacBook Pro\", operation_system_version: \"macOS 14.0\" })" else "createTestClientDeviceInfo({ deviceName: \"MacBook Pro\", operationSystemVersion: \"macOS 14.0\" })"},
-${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
-${if (isPayload) "last_accessed_at" else "lastAccessedAt"}: createdAtMs + (index * 5000),
-${if (isPayload) "last_reauthenticated_at" else "lastReauthenticatedAt"}: createdAtMs + (index * 5000),
-${if (isPayload) "expires_at" else "expiresAt"}: createdAtMs + 86400000,
+id: $idExpr,
+$userIdKey: $userIdVal,
+$uaKey: $uaVal,
+$deviceInfoKey: $deviceInfoVal,
+$createdAtKey: createdAtMs,
+$lastAccessedKey: createdAtMs + (index * 5000),
+$lastReauthKey: createdAtMs + (index * 5000),
+$expiresKey: createdAtMs + 86400000,
 ...itemOverrides
 });
-""".trimIndent()
+                    """.trimIndent()
+                }
 
-                    "AuditEventPrivate", "AuditEventSummary", "AuditEventPrivatePayload", "AuditEventSummaryPayload" ->
-"""
+                "AuditEventPrivate", "AuditEventSummary",
+                "AuditEventPrivatePayload", "AuditEventSummaryPayload" -> {
+                    val idExpr = if (isPayload) {
+                        "generateTestUuidString(index, 1)"
+                    } else {
+                        "toAuditEventIdOrThrow(generateTestUuidString(index, 1))"
+                    }
+                    val createdAtKey = if (isPayload) {
+                        "created_at"
+                    } else {
+                        "createdAt"
+                    }
+                    """
 const createdAtMs = TEST_TIME_MILLIS + (index * 60000);
 return createTest$className({
-id: ${if (isPayload) "generateTestUuidString(index, 1)" else "toAuditEventIdOrThrow(generateTestUuidString(index, 1))"},
+id: $idExpr,
 status: index % 2 === 0 ? "success" : "failed",
-${if (isPayload) "created_at" else "createdAt"}: createdAtMs,
+$createdAtKey: createdAtMs,
 ...itemOverrides
 });
-""".trimIndent()
+                    """.trimIndent()
+                }
 
-                    else ->
+                else ->
 """
 return createTest$className(itemOverrides);
 """.trimIndent()
-                }
+            }
 
-"""
+        """
 export const createTest$className = (overrides = {}) => ({
 $fieldsJs,
 ...overrides
@@ -379,11 +573,8 @@ createTestList(count, (index) => {
 const itemOverrides = typeof overrides === 'function' ? overrides(index) : (overrides || {});
 $listGeneratorCustomLogic
 });
-""".trimIndent()
-        }
-
-    return "$constantsJs\n\n$factoriesJs"
-}
+        """.trimIndent()
+    }
 
 public fun generateTestFixturesDts(): String {
     val constantsDts =
@@ -407,7 +598,8 @@ export declare function createTestList<T>(count: number, generator: (index: numb
 export declare function createTestPagedResult<T>(overrides?: Partial<PagedResult<T>>): PagedResult<T>;
 
 /**
-* Creates a test instance of raw PagedResult payload (network DTO in snake_case) with auto-calculated total_pages and total_count.
+* Creates a test instance of raw PagedResult payload (network DTO in snake_case)
+* with auto-calculated total_pages and total_count.
 * @param overrides Partial properties or overrides for PagedResult payload.
 */
 export declare function createTestPagedResultPayload<T = Record<string, any>>(overrides?: Partial<{

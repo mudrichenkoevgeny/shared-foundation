@@ -59,29 +59,28 @@ public fun createTestUserPrivate(
     avatarFileId: FileId? = null,
     avatarUrls: FileUrls? = null,
     birthdate: Instant? = null
-): UserPrivate =
-    UserPrivate(
-        id = id,
-        role = role,
-        accountStatus = accountStatus,
-        accountStatusOnRestore = accountStatusOnRestore,
-        authorityLevel = authorityLevel,
-        permissionCodes = permissionCodes,
-        isTotpEnabled = isTotpEnabled,
-        lastLoginAt = lastLoginAt,
-        lastActiveAt = lastActiveAt,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
-        scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
-        lockoutType = lockoutType,
-        temporaryLockoutUntil = temporaryLockoutUntil,
-        storageConfiguration = storageConfiguration,
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId,
-        avatarUrls = avatarUrls,
-        birthdate = birthdate
-    )
+): UserPrivate = UserPrivate(
+    id = id,
+    role = role,
+    accountStatus = accountStatus,
+    accountStatusOnRestore = accountStatusOnRestore,
+    authorityLevel = authorityLevel,
+    permissionCodes = permissionCodes,
+    isTotpEnabled = isTotpEnabled,
+    lastLoginAt = lastLoginAt,
+    lastActiveAt = lastActiveAt,
+    createdAt = createdAt,
+    updatedAt = updatedAt,
+    scheduledPermanentDeletionAt = scheduledPermanentDeletionAt,
+    lockoutType = lockoutType,
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    avatarUrls = avatarUrls,
+    birthdate = birthdate
+)
 
 /**
  * Creates a list of test [UserPrivate] instances with deterministic index-based UUIDs

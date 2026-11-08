@@ -48,25 +48,24 @@ public fun createTestManagementAuthSettings(
     isRegistrationEnabled: Boolean = true,
     openEmailRestrictionPolicy: EmailRestrictionPolicy = createTestEmailRestrictionPolicy(),
     managementEmailRestrictionPolicy: EmailRestrictionPolicy = createTestEmailRestrictionPolicy()
-): ManagementAuthSettings =
-    ManagementAuthSettings(
-        availableAuthProviders = availableAuthProviders,
-        maxTotalIdentifiers = maxTotalIdentifiers,
-        maxEmailIdentifiers = maxEmailIdentifiers,
-        maxPhoneIdentifiers = maxPhoneIdentifiers,
-        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        userNicknameMinLength = userNicknameMinLength,
-        userNicknameMaxLength = userNicknameMaxLength,
-        userDisplayNameMinLength = userDisplayNameMinLength,
-        userDisplayNameMaxLength = userDisplayNameMaxLength,
-        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
-        maxActiveSessionsForOpenUser = maxActiveSessionsForOpenUser,
-        maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
-        accessTokenExpirationSeconds = accessTokenExpirationSeconds,
-        refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
-        accountDeletionGracePeriodSeconds = accountDeletionGracePeriodSeconds,
-        accountDeletionCheckIntervalSeconds = accountDeletionCheckIntervalSeconds,
-        isRegistrationEnabled = isRegistrationEnabled,
-        openEmailRestrictionPolicy = openEmailRestrictionPolicy,
-        managementEmailRestrictionPolicy = managementEmailRestrictionPolicy
-    )
+): ManagementAuthSettings = ManagementAuthSettings(
+    availableAuthProviders = availableAuthProviders,
+    maxTotalIdentifiers = maxTotalIdentifiers,
+    maxEmailIdentifiers = maxEmailIdentifiers,
+    maxPhoneIdentifiers = maxPhoneIdentifiers,
+    maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+    userNicknameMinLength = userNicknameMinLength,
+    userNicknameMaxLength = userNicknameMaxLength,
+    userDisplayNameMinLength = userDisplayNameMinLength,
+    userDisplayNameMaxLength = userDisplayNameMaxLength,
+    isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
+    maxActiveSessionsForOpenUser = maxActiveSessionsForOpenUser,
+    maxActiveSessionsForManagementUser = maxActiveSessionsForManagementUser,
+    accessTokenExpirationSeconds = accessTokenExpirationSeconds,
+    refreshTokenExpirationSeconds = refreshTokenExpirationSeconds,
+    accountDeletionGracePeriodSeconds = accountDeletionGracePeriodSeconds,
+    accountDeletionCheckIntervalSeconds = accountDeletionCheckIntervalSeconds,
+    isRegistrationEnabled = isRegistrationEnabled,
+    openEmailRestrictionPolicy = openEmailRestrictionPolicy,
+    managementEmailRestrictionPolicy = managementEmailRestrictionPolicy
+)

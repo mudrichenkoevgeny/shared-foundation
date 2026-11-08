@@ -15,8 +15,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.networ
 public fun createTestAuthDataPayload(
     userPrivatePayload: UserPrivatePayload = createTestUserPrivatePayload(),
     sessionTokenPayload: SessionTokenPayload = createTestSessionTokenPayload()
-): AuthDataPayload =
-    AuthDataPayload(
-        userPrivatePayload = userPrivatePayload,
-        sessionTokenPayload = sessionTokenPayload
-    )
+): AuthDataPayload = AuthDataPayload(
+    userPrivatePayload = userPrivatePayload,
+    sessionTokenPayload = sessionTokenPayload
+)

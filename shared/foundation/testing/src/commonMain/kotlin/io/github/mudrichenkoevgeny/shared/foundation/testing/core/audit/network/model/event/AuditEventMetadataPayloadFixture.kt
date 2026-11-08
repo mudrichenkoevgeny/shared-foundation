@@ -16,9 +16,8 @@ public fun createTestAuditEventMetadataPayload(
     key: String = CommonAuditMetadataKey.IP_ADDRESS.value,
     value: String = TEST_IP_ADDRESS,
     valueSensitivity: String = AuditValueSensitivity.NON_SENSITIVE.value
-): AuditEventMetadataPayload =
-    AuditEventMetadataPayload(
-        key = key,
-        value = value,
-        valueSensitivity = valueSensitivity
-    )
+): AuditEventMetadataPayload = AuditEventMetadataPayload(
+    key = key,
+    value = value,
+    valueSensitivity = valueSensitivity
+)

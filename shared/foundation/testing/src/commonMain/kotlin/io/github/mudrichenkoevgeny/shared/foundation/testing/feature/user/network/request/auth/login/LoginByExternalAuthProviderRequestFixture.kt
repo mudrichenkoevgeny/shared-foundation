@@ -14,9 +14,8 @@ public fun createTestLoginByExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345",
     displayName: String? = null
-): LoginByExternalAuthProviderRequest =
-    LoginByExternalAuthProviderRequest(
-        authProvider = authProvider,
-        externalProviderToken = externalProviderToken,
-        displayName = displayName
-    )
+): LoginByExternalAuthProviderRequest = LoginByExternalAuthProviderRequest(
+    authProvider = authProvider,
+    externalProviderToken = externalProviderToken,
+    displayName = displayName
+)

@@ -8,8 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.s
 public fun createTestOpenStorageSettings(
     minUploadSizeBytes: Long = 1L,
     maxUploadSizeBytes: Long = 52428800L
-): OpenStorageSettings =
-    OpenStorageSettings(
-        minUploadSizeBytes = minUploadSizeBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes
-    )
+): OpenStorageSettings = OpenStorageSettings(
+    minUploadSizeBytes = minUploadSizeBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes
+)

@@ -34,15 +34,14 @@ public fun createTestUserIdentifierInternal(
     passwordHash: PasswordHash? = createTestPasswordHash(),
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): UserIdentifierInternal =
-    UserIdentifierInternal(
-        id = id,
-        userId = userId,
-        userAuthProvider = userAuthProvider,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        passwordHash = passwordHash,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserIdentifierInternal = UserIdentifierInternal(
+    id = id,
+    userId = userId,
+    userAuthProvider = userAuthProvider,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    passwordHash = passwordHash,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)

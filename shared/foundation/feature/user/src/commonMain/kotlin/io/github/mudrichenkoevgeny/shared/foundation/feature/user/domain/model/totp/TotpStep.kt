@@ -35,20 +35,18 @@ public enum class TotpStep(
         /**
          * Returns [TotpStep] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): TotpStep? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): TotpStep? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [TotpStep] for the given string value.
          *
          * @throws IllegalArgumentException if [value] does not match any [TotpStep].
          */
-        public fun fromValueOrThrow(value: String): TotpStep =
-            fromValueOrNull(value) ?: throw IllegalArgumentException(
-                "Unknown value for ${TotpStep::class.simpleName}: '$value'"
-            )
+        public fun fromValueOrThrow(value: String): TotpStep = fromValueOrNull(value) ?: throw IllegalArgumentException(
+            "Unknown value for ${TotpStep::class.simpleName}: '$value'"
+        )
     }
 }

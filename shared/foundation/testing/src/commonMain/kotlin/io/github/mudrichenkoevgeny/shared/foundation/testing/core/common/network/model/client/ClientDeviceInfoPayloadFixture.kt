@@ -20,12 +20,11 @@ public fun createTestClientDeviceInfoPayload(
     deviceName: String? = "Test Device",
     appVersion: String? = "1.0.0",
     operationSystemVersion: String? = "Android 14"
-): ClientDeviceInfoPayload =
-    ClientDeviceInfoPayload(
-        clientType = clientType,
-        language = language,
-        deviceId = deviceId,
-        deviceName = deviceName,
-        appVersion = appVersion,
-        operationSystemVersion = operationSystemVersion
-    )
+): ClientDeviceInfoPayload = ClientDeviceInfoPayload(
+    clientType = clientType,
+    language = language,
+    deviceId = deviceId,
+    deviceName = deviceName,
+    appVersion = appVersion,
+    operationSystemVersion = operationSystemVersion
+)

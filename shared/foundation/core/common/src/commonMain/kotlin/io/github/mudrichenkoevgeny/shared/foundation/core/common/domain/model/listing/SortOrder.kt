@@ -30,11 +30,10 @@ public enum class SortOrder(
         /**
          * Returns [SortOrder] for the given wire value (`asc` / `desc`) or case-insensitive enum name (`ASC` / `DESC`).
          */
-        public fun fromValueOrNull(value: String): SortOrder? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): SortOrder? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [SortOrder] for the given wire or enum-style string.

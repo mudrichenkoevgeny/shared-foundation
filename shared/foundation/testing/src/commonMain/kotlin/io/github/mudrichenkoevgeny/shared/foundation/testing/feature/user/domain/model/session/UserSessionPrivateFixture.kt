@@ -55,25 +55,24 @@ public fun createTestUserSessionPrivate(
     isSensitiveValuesMasked: Boolean = false,
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): UserSessionPrivate =
-    UserSessionPrivate(
-        id = id,
-        userId = userId,
-        userRole = userRole,
-        identifier = identifier,
-        identifierId = identifierId,
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider,
-        clientDeviceInfo = clientDeviceInfo,
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        expiresAt = expiresAt,
-        lastAccessedAt = lastAccessedAt,
-        lastReauthenticatedAt = lastReauthenticatedAt,
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserSessionPrivate = UserSessionPrivate(
+    id = id,
+    userId = userId,
+    userRole = userRole,
+    identifier = identifier,
+    identifierId = identifierId,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    clientDeviceInfo = clientDeviceInfo,
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    expiresAt = expiresAt,
+    lastAccessedAt = lastAccessedAt,
+    lastReauthenticatedAt = lastReauthenticatedAt,
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
 /**
  * Creates a list of test [UserSessionPrivate] instances with deterministic index-based UUIDs,

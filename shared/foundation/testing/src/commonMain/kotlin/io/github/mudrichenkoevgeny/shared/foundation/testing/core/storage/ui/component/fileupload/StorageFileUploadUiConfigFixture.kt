@@ -16,14 +16,13 @@ public fun createTestStorageFileUploadUiConfig(
     minFileSizeBytes: Long? = 1024L,
     maxFileSizeBytes: Long? = 2097152L,
     autoSubmit: Boolean = false
-): StorageFileUploadUiConfig =
-    StorageFileUploadUiConfig(
-        maxFiles = maxFiles,
-        targetScope = targetScope,
-        category = category,
-        visibility = visibility,
-        acceptedFileTypes = acceptedFileTypes,
-        minFileSizeBytes = minFileSizeBytes,
-        maxFileSizeBytes = maxFileSizeBytes,
-        autoSubmit = autoSubmit
-    )
+): StorageFileUploadUiConfig = StorageFileUploadUiConfig(
+    maxFiles = maxFiles,
+    targetScope = targetScope,
+    category = category,
+    visibility = visibility,
+    acceptedFileTypes = acceptedFileTypes,
+    minFileSizeBytes = minFileSizeBytes,
+    maxFileSizeBytes = maxFileSizeBytes,
+    autoSubmit = autoSubmit
+)

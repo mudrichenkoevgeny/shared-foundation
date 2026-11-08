@@ -25,15 +25,14 @@ public fun createTestUserSummaryPayload(
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarUrls: FileUrlsPayload? = null
-): UserSummaryPayload =
-    UserSummaryPayload(
-        id = id,
-        role = role,
-        accountStatus = accountStatus,
-        nickname = nickname,
-        displayName = displayName,
-        avatarUrls = avatarUrls
-    )
+): UserSummaryPayload = UserSummaryPayload(
+    id = id,
+    role = role,
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrls = avatarUrls
+)
 
 /**
  * Creates a list of test [UserSummaryPayload] wire objects with deterministic raw UUIDs.

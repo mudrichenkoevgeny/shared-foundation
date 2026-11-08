@@ -8,21 +8,19 @@ import kotlin.time.Instant
 /**
  * Builds domain [PresignedUrl] from [PresignedUrlPayload].
  */
-public fun PresignedUrlPayload.toPresignedUrl(): PresignedUrl =
-    PresignedUrl(
-        fileId = fileId.toFileIdOrThrow(),
-        uploadUrl = uploadUrl,
-        fileUrl = fileUrl,
-        expiresAt = Instant.fromEpochMilliseconds(expiresAt)
-    )
+public fun PresignedUrlPayload.toPresignedUrl(): PresignedUrl = PresignedUrl(
+    fileId = fileId.toFileIdOrThrow(),
+    uploadUrl = uploadUrl,
+    fileUrl = fileUrl,
+    expiresAt = Instant.fromEpochMilliseconds(expiresAt)
+)
 
 /**
  * Builds network [PresignedUrlPayload] from domain [PresignedUrl].
  */
-public fun PresignedUrl.toPresignedUrlPayload(): PresignedUrlPayload =
-    PresignedUrlPayload(
-        fileId = fileId.asHexDashString(),
-        uploadUrl = uploadUrl,
-        fileUrl = fileUrl,
-        expiresAt = expiresAt.toEpochMilliseconds()
-    )
+public fun PresignedUrl.toPresignedUrlPayload(): PresignedUrlPayload = PresignedUrlPayload(
+    fileId = fileId.asHexDashString(),
+    uploadUrl = uploadUrl,
+    fileUrl = fileUrl,
+    expiresAt = expiresAt.toEpochMilliseconds()
+)

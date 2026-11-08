@@ -39,18 +39,17 @@ public fun createTestManagementSecuritySettings(
     maxRequestsPerPeriod: Int = 100,
     rateLimitPeriodSeconds: Int = 60,
     refreshTokenRotationGracePeriodSeconds: Int = 10
-): ManagementSecuritySettings =
-    ManagementSecuritySettings(
-        recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
-        recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
-        passwordPolicy = passwordPolicy,
-        otpConfirmation = otpConfirmation,
-        accountLockoutPolicy = accountLockoutPolicy,
-        accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
-        openIpRestrictionPolicy = openIpRestrictionPolicy,
-        managementIpRestrictionPolicy = managementIpRestrictionPolicy,
-        mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
-        maxRequestsPerPeriod = maxRequestsPerPeriod,
-        rateLimitPeriodSeconds = rateLimitPeriodSeconds,
-        refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
-    )
+): ManagementSecuritySettings = ManagementSecuritySettings(
+    recentAuthenticationValiditySecondsForOpenUser = recentAuthenticationValiditySecondsForOpenUser,
+    recentAuthenticationValiditySecondsForManagementUser = recentAuthenticationValiditySecondsForManagementUser,
+    passwordPolicy = passwordPolicy,
+    otpConfirmation = otpConfirmation,
+    accountLockoutPolicy = accountLockoutPolicy,
+    accountLockoutCheckIntervalSeconds = accountLockoutCheckIntervalSeconds,
+    openIpRestrictionPolicy = openIpRestrictionPolicy,
+    managementIpRestrictionPolicy = managementIpRestrictionPolicy,
+    mfaTokenExpirationSeconds = mfaTokenExpirationSeconds,
+    maxRequestsPerPeriod = maxRequestsPerPeriod,
+    rateLimitPeriodSeconds = rateLimitPeriodSeconds,
+    refreshTokenRotationGracePeriodSeconds = refreshTokenRotationGracePeriodSeconds
+)

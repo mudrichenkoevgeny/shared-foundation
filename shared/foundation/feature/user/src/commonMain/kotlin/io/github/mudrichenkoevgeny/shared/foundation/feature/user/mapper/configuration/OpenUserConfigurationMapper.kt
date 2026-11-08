@@ -14,13 +14,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [OpenUserConfiguration] from [OpenUserConfigurationPayload].
  */
-public fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguration =
-    OpenUserConfiguration(
-        openGlobalSettings = openGlobalSettings.toOpenGlobalSettings(),
-        openSecuritySettings = openSecuritySettings.toOpenSecuritySettings(),
-        openStorageSettings = openStorageSettings.toOpenStorageSettings(),
-        openAuthSettings = openAuthSettings.toOpenAuthSettings()
-    )
+public fun OpenUserConfigurationPayload.toOpenUserConfiguration(): OpenUserConfiguration = OpenUserConfiguration(
+    openGlobalSettings = openGlobalSettings.toOpenGlobalSettings(),
+    openSecuritySettings = openSecuritySettings.toOpenSecuritySettings(),
+    openStorageSettings = openStorageSettings.toOpenStorageSettings(),
+    openAuthSettings = openAuthSettings.toOpenAuthSettings()
+)
 
 /**
  * Builds network [OpenUserConfigurationPayload] from domain [OpenUserConfiguration].

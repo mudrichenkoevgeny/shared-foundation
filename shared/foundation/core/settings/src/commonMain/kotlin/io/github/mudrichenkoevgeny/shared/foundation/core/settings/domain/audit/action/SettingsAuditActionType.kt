@@ -29,11 +29,10 @@ public enum class SettingsAuditActionType(
         /**
          * Returns [SettingsAuditActionType] based on the provided string value, or null if the value is invalid.
          */
-        public fun fromValueOrNull(value: String): SettingsAuditActionType? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): SettingsAuditActionType? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [SettingsAuditActionType] for the given wire or enum-style string (case-insensitive enum name).

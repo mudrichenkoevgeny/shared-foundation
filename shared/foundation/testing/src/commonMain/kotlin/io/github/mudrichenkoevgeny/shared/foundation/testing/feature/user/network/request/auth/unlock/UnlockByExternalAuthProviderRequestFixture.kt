@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.reques
 public fun createTestUnlockByExternalAuthProviderRequest(
     authProvider: String = UserAuthProvider.GOOGLE.value,
     externalProviderToken: String = "google_token_12345"
-): UnlockByExternalAuthProviderRequest =
-    UnlockByExternalAuthProviderRequest(
-        authProvider = authProvider,
-        externalProviderToken = externalProviderToken
-    )
+): UnlockByExternalAuthProviderRequest = UnlockByExternalAuthProviderRequest(
+    authProvider = authProvider,
+    externalProviderToken = externalProviderToken
+)

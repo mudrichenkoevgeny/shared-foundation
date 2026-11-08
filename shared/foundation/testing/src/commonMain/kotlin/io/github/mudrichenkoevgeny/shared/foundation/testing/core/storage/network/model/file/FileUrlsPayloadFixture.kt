@@ -13,8 +13,7 @@ public fun createTestFileUrlsPayload(
             FileUrlPresets.THUMBNAIL to "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001_thumb",
             FileUrlPresets.PREVIEW to "https://cdn.example.com/files/00000000-0000-4000-8000-000000000001_preview"
         )
-): FileUrlsPayload =
-    FileUrlsPayload(
-        originalUrl = originalUrl,
-        urlPresets = presets
-    )
+): FileUrlsPayload = FileUrlsPayload(
+    originalUrl = originalUrl,
+    urlPresets = presets
+)

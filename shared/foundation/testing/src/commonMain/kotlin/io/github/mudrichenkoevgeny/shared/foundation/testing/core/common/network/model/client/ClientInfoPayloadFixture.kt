@@ -18,10 +18,9 @@ public fun createTestClientInfoPayload(
     userAgent: String? = TEST_USER_AGENT,
     ipAddress: String? = TEST_IP_ADDRESS,
     apiVersion: String? = "1.0"
-): ClientInfoPayload =
-    ClientInfoPayload(
-        clientDeviceInfo = clientDeviceInfo,
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        apiVersion = apiVersion
-    )
+): ClientInfoPayload = ClientInfoPayload(
+    clientDeviceInfo = clientDeviceInfo,
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    apiVersion = apiVersion
+)

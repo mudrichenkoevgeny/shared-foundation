@@ -24,15 +24,14 @@ import kotlin.time.Instant
 public fun AuditEventSummaryPayload.toAuditEventSummary(
     compositeActionTypeParser: CompositeAuditActionTypeParser,
     compositeResourceTypeParser: CompositeAuditResourceTypeParser
-): AuditEventSummary =
-    AuditEventSummary(
-        id = id.toAuditEventIdOrThrow(),
-        actorType = AuditActorType.fromValueOrThrow(actorType),
-        action = compositeActionTypeParser.fromValueOrThrow(action),
-        resource = compositeResourceTypeParser.fromValueOrThrow(resource),
-        status = AuditStatus.fromValueOrThrow(status),
-        createdAt = Instant.fromEpochMilliseconds(createdAt)
-    )
+): AuditEventSummary = AuditEventSummary(
+    id = id.toAuditEventIdOrThrow(),
+    actorType = AuditActorType.fromValueOrThrow(actorType),
+    action = compositeActionTypeParser.fromValueOrThrow(action),
+    resource = compositeResourceTypeParser.fromValueOrThrow(resource),
+    status = AuditStatus.fromValueOrThrow(status),
+    createdAt = Instant.fromEpochMilliseconds(createdAt)
+)
 
 /**
  * Builds a network [AuditEventSummaryPayload] from a domain [AuditEventSummary].
@@ -42,12 +41,11 @@ public fun AuditEventSummaryPayload.toAuditEventSummary(
  *
  * @return payload DTO aligned with the shared [AuditEventSummaryPayload] contract (`snake_case` keys, epoch millis timestamps).
  */
-public fun AuditEventSummary.toAuditEventSummaryPayload(): AuditEventSummaryPayload =
-    AuditEventSummaryPayload(
-        id = id.asHexDashString(),
-        actorType = actorType.value,
-        action = action.value,
-        resource = resource.value,
-        status = status.value,
-        createdAt = createdAt.toEpochMilliseconds()
-    )
+public fun AuditEventSummary.toAuditEventSummaryPayload(): AuditEventSummaryPayload = AuditEventSummaryPayload(
+    id = id.asHexDashString(),
+    actorType = actorType.value,
+    action = action.value,
+    resource = resource.value,
+    status = status.value,
+    createdAt = createdAt.toEpochMilliseconds()
+)

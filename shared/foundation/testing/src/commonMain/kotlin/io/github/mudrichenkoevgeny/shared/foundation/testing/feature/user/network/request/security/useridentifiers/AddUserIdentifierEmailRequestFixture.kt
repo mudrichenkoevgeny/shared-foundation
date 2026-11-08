@@ -14,9 +14,8 @@ public fun createTestAddUserIdentifierEmailRequest(
     email: String = TEST_EMAIL,
     password: String = "Secret123!",
     confirmationCode: String = "123456"
-): AddUserIdentifierEmailRequest =
-    AddUserIdentifierEmailRequest(
-        email = email,
-        password = password,
-        confirmationCode = confirmationCode
-    )
+): AddUserIdentifierEmailRequest = AddUserIdentifierEmailRequest(
+    email = email,
+    password = password,
+    confirmationCode = confirmationCode
+)

@@ -27,7 +27,11 @@ apiValidation {
     // Disabled to allow fast API iteration without breaking builds on signature changes.
     // Re-enable if strict binary backward compatibility (ABI) checks are required.
     validationDisabled = true
-    ignoredProjects += listOf("bom", "npm-generator", "testing")
+    ignoredProjects += listOf(
+        "bom",
+        "npm-generator",
+        "testing"
+    )
 }
 
 allprojects {
@@ -87,7 +91,10 @@ private fun Project.configureDetekt() {
 
     if (path != ":tools:detekt-rules") {
         dependencies {
-            add("detektPlugins", project(":tools:detekt-rules"))
+            add(
+                "detektPlugins",
+                project(":tools:detekt-rules")
+            )
         }
 
         tasks.withType<Detekt>().configureEach {
@@ -159,7 +166,10 @@ private fun Project.configureMavenPublishingAndDokka() {
     pluginManager.apply("org.jetbrains.dokka")
 
     rootProject.dependencies {
-        add("dokka", project(this@configureMavenPublishingAndDokka.path))
+        add(
+            "dokka",
+            project(this@configureMavenPublishingAndDokka.path)
+        )
     }
 
     extensions.configure<DokkaExtension> {
@@ -170,9 +180,10 @@ private fun Project.configureMavenPublishingAndDokka() {
 
     extensions.configure<MavenPublishBaseExtension> {
         val customArtifactId = project.findProperty("artifactId") as? String
-        val projectPathName = project.path
-            .removePrefix(":")
-            .replace(":", "-")
+        val projectPathName = project.path.removePrefix(":").replace(
+            ":",
+            "-"
+        )
 
         val newArtifactId = customArtifactId ?: if (projectPathName.startsWith(rootProject.name)) {
             projectPathName
@@ -225,9 +236,7 @@ private fun Project.configureMavenPublishingAndDokka() {
 
 tasks.register("generateNpmPackage") {
     group = "publishing"
-    description =
-        "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," +
-            " Zod schemas, and route constants."
+    description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," + " Zod schemas, and route constants."
     dependsOn(":tools:npm-generator:run")
     finalizedBy(":tools:npm-generator:auditNpmExports")
 }

@@ -13,9 +13,8 @@ public fun createTestTotpSetup(
     secretKey: String = "JBSWY3DPEHPK3PXP",
     otpAuthUrl: String = "otpauth://totp/Test:user@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Test",
     mfaToken: String = "mfa_token_12345"
-): TotpSetup =
-    TotpSetup(
-        secretKey = secretKey,
-        otpAuthUrl = otpAuthUrl,
-        mfaToken = mfaToken
-    )
+): TotpSetup = TotpSetup(
+    secretKey = secretKey,
+    otpAuthUrl = otpAuthUrl,
+    mfaToken = mfaToken
+)

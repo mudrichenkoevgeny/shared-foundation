@@ -12,11 +12,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  *
  * @return domain model aligned with [OpenSecuritySettings] semantics.
  */
-public fun OpenSecuritySettingsPayload.toOpenSecuritySettings(): OpenSecuritySettings =
-    OpenSecuritySettings(
-        passwordPolicy = passwordPolicy.toOpenPasswordPolicy(),
-        otpConfirmation = otpConfirmation.toOtpConfirmation()
-    )
+public fun OpenSecuritySettingsPayload.toOpenSecuritySettings(): OpenSecuritySettings = OpenSecuritySettings(
+    passwordPolicy = passwordPolicy.toOpenPasswordPolicy(),
+    otpConfirmation = otpConfirmation.toOtpConfirmation()
+)
 
 /**
  * Builds network [OpenSecuritySettingsPayload] DTO from domain [OpenSecuritySettings].

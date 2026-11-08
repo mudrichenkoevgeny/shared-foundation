@@ -7,21 +7,19 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model
 /**
  * Maps [OpenGlobalSettingsPayload] DTO to [OpenGlobalSettings] domain model.
  */
-public fun OpenGlobalSettingsPayload.toOpenGlobalSettings(): OpenGlobalSettings =
-    OpenGlobalSettings(
-        privacyPolicyUrl = privacyPolicyUrl,
-        termsOfServiceUrl = termsOfServiceUrl,
-        contactSupportEmail = contactSupportEmail,
-        minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) }
-    )
+public fun OpenGlobalSettingsPayload.toOpenGlobalSettings(): OpenGlobalSettings = OpenGlobalSettings(
+    privacyPolicyUrl = privacyPolicyUrl,
+    termsOfServiceUrl = termsOfServiceUrl,
+    contactSupportEmail = contactSupportEmail,
+    minSupportedAppVersions = minSupportedAppVersions.mapKeys { ClientType.fromValueOrThrow(it.key) }
+)
 
 /**
  * Maps [OpenGlobalSettings] domain model to [OpenGlobalSettingsPayload] DTO.
  */
-public fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload =
-    OpenGlobalSettingsPayload(
-        privacyPolicyUrl = privacyPolicyUrl,
-        termsOfServiceUrl = termsOfServiceUrl,
-        contactSupportEmail = contactSupportEmail,
-        minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value }
-    )
+public fun OpenGlobalSettings.toOpenGlobalSettingsPayload(): OpenGlobalSettingsPayload = OpenGlobalSettingsPayload(
+    privacyPolicyUrl = privacyPolicyUrl,
+    termsOfServiceUrl = termsOfServiceUrl,
+    contactSupportEmail = contactSupportEmail,
+    minSupportedAppVersions = minSupportedAppVersions.mapKeys { it.key.value }
+)

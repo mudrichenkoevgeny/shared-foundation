@@ -30,16 +30,15 @@ public fun createTestManagementUpdateUserRequest(
     displayName: PatchField<String> = PatchField.Value("Test User"),
     avatarFileId: PatchField<String> = PatchField.Unchanged,
     birthdate: PatchField<Long> = PatchField.Unchanged
-): ManagementUpdateUserRequest =
-    ManagementUpdateUserRequest(
-        accountStatus = accountStatus,
-        authorityLevel = authorityLevel,
-        permissionCodes = permissionCodes,
-        lockoutType = lockoutType,
-        temporaryLockoutUntil = temporaryLockoutUntil,
-        storageConfiguration = storageConfiguration,
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId,
-        birthdate = birthdate
-    )
+): ManagementUpdateUserRequest = ManagementUpdateUserRequest(
+    accountStatus = accountStatus,
+    authorityLevel = authorityLevel,
+    permissionCodes = permissionCodes,
+    lockoutType = lockoutType,
+    temporaryLockoutUntil = temporaryLockoutUntil,
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    birthdate = birthdate
+)

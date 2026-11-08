@@ -19,11 +19,10 @@ public fun createTestSocketFrame(
     payload: JsonElement? = null,
     metadata: Map<String, String> = emptyMap(),
     timestamp: Long = TEST_TIME_MILLIS
-): SocketFrame =
-    SocketFrame(
-        id = id,
-        type = type,
-        payload = payload,
-        metadata = metadata,
-        timestamp = timestamp
-    )
+): SocketFrame = SocketFrame(
+    id = id,
+    type = type,
+    payload = payload,
+    metadata = metadata,
+    timestamp = timestamp
+)

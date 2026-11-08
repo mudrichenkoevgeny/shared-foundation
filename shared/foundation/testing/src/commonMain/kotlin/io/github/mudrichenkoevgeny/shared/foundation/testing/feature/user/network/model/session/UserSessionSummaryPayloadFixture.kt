@@ -29,16 +29,15 @@ public fun createTestUserSessionSummaryPayload(
     identifierAuthProvider: String = UserAuthProvider.EMAIL.value,
     lastAccessedAt: Long = TEST_TIME_MILLIS,
     expiresAt: Long = TEST_TIME_MILLIS + 86400000L
-): UserSessionSummaryPayload =
-    UserSessionSummaryPayload(
-        id = id,
-        userId = userId,
-        clientDeviceInfo = clientDeviceInfo,
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider,
-        lastAccessedAt = lastAccessedAt,
-        expiresAt = expiresAt
-    )
+): UserSessionSummaryPayload = UserSessionSummaryPayload(
+    id = id,
+    userId = userId,
+    clientDeviceInfo = clientDeviceInfo,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    lastAccessedAt = lastAccessedAt,
+    expiresAt = expiresAt
+)
 
 /**
  * Creates a list of test [UserSessionSummaryPayload] wire objects with deterministic raw UUIDs,

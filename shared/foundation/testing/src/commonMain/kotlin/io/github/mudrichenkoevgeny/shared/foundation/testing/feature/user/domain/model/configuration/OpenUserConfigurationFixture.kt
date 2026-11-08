@@ -23,10 +23,9 @@ public fun createTestOpenUserConfiguration(
     openSecuritySettings: OpenSecuritySettings = createTestOpenSecuritySettings(),
     openStorageSettings: OpenStorageSettings = createTestOpenStorageSettings(),
     openAuthSettings: OpenAuthSettings = createTestOpenAuthSettings()
-): OpenUserConfiguration =
-    OpenUserConfiguration(
-        openGlobalSettings = openGlobalSettings,
-        openSecuritySettings = openSecuritySettings,
-        openStorageSettings = openStorageSettings,
-        openAuthSettings = openAuthSettings
-    )
+): OpenUserConfiguration = OpenUserConfiguration(
+    openGlobalSettings = openGlobalSettings,
+    openSecuritySettings = openSecuritySettings,
+    openStorageSettings = openStorageSettings,
+    openAuthSettings = openAuthSettings
+)

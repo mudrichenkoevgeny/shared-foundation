@@ -25,15 +25,14 @@ public fun createTestUserSummary(
     nickname: String? = "testuser",
     displayName: String? = "Test User",
     avatarUrls: FileUrls? = null
-): UserSummary =
-    UserSummary(
-        id = id,
-        role = role,
-        accountStatus = accountStatus,
-        nickname = nickname,
-        displayName = displayName,
-        avatarUrls = avatarUrls
-    )
+): UserSummary = UserSummary(
+    id = id,
+    role = role,
+    accountStatus = accountStatus,
+    nickname = nickname,
+    displayName = displayName,
+    avatarUrls = avatarUrls
+)
 
 /**
  * Creates a list of test [UserSummary] instances with deterministic index-based UUIDs.

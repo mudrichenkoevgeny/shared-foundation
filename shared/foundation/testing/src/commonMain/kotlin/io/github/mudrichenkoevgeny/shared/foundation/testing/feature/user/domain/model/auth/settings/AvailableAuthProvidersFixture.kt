@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 public fun createTestAvailableAuthProviders(
     primary: List<UserAuthProvider> = listOf(UserAuthProvider.EMAIL, UserAuthProvider.PHONE),
     secondary: List<UserAuthProvider> = emptyList()
-): AvailableAuthProviders =
-    AvailableAuthProviders(
-        primary = primary,
-        secondary = secondary
-    )
+): AvailableAuthProviders = AvailableAuthProviders(
+    primary = primary,
+    secondary = secondary
+)

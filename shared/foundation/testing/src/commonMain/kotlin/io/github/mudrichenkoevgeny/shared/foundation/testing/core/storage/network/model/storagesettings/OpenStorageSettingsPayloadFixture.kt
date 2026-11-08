@@ -8,8 +8,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 public fun createTestOpenStorageSettingsPayload(
     minUploadSizeBytes: Long = 1L,
     maxUploadSizeBytes: Long = 52428800L
-): OpenStorageSettingsPayload =
-    OpenStorageSettingsPayload(
-        minUploadSizeBytes = minUploadSizeBytes,
-        maxUploadSizeBytes = maxUploadSizeBytes
-    )
+): OpenStorageSettingsPayload = OpenStorageSettingsPayload(
+    minUploadSizeBytes = minUploadSizeBytes,
+    maxUploadSizeBytes = maxUploadSizeBytes
+)

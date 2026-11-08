@@ -55,22 +55,21 @@ public fun createTestUserSessionInternal(
     lastReauthenticatedAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     updatedAt: Instant? = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): UserSessionInternal =
-    UserSessionInternal(
-        id = id,
-        userId = userId,
-        userRole = userRole,
-        identifier = identifier,
-        identifierId = identifierId,
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider,
-        clientDeviceInfo = clientDeviceInfo,
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        refreshTokenHash = refreshTokenHash,
-        expiresAt = expiresAt,
-        lastAccessedAt = lastAccessedAt,
-        lastReauthenticatedAt = lastReauthenticatedAt,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): UserSessionInternal = UserSessionInternal(
+    id = id,
+    userId = userId,
+    userRole = userRole,
+    identifier = identifier,
+    identifierId = identifierId,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    clientDeviceInfo = clientDeviceInfo,
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    refreshTokenHash = refreshTokenHash,
+    expiresAt = expiresAt,
+    lastAccessedAt = lastAccessedAt,
+    lastReauthenticatedAt = lastReauthenticatedAt,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)

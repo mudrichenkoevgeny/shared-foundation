@@ -12,20 +12,18 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.ev
  */
 public fun AuditEventMetadataPayload.toAuditEventMetadata(
     compositeMetadataKeyParser: CompositeAuditMetadataKeyParser
-): AuditEventMetadata =
-    AuditEventMetadata(
-        key = compositeMetadataKeyParser.fromValueOrThrow(key),
-        value = value
-    )
+): AuditEventMetadata = AuditEventMetadata(
+    key = compositeMetadataKeyParser.fromValueOrThrow(key),
+    value = value
+)
 
 /**
  * Maps a domain metadata entry to the wire [AuditEventMetadataPayload].
  *
  * [AuditEventMetadataPayload.valueSensitivity] is taken from [AuditEventMetadata.key] so it stays aligned with the key contract.
  */
-public fun AuditEventMetadata.toAuditEventMetadataPayload(): AuditEventMetadataPayload =
-    AuditEventMetadataPayload(
-        key = key.value,
-        value = value,
-        valueSensitivity = key.valueSensitivity.value
-    )
+public fun AuditEventMetadata.toAuditEventMetadataPayload(): AuditEventMetadataPayload = AuditEventMetadataPayload(
+    key = key.value,
+    value = value,
+    valueSensitivity = key.valueSensitivity.value
+)

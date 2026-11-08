@@ -43,20 +43,19 @@ public fun createTestAuditEventPrivate(
     metadata: Set<AuditEventMetadata> = setOf(createTestAuditEventMetadata()),
     message: String? = "User logged in successfully",
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): AuditEventPrivate =
-    AuditEventPrivate(
-        id = id,
-        actorId = actorId,
-        actorType = actorType,
-        actorUserRole = actorUserRole,
-        action = action,
-        resource = resource,
-        resourceId = resourceId,
-        status = status,
-        metadata = metadata,
-        message = message,
-        createdAt = createdAt
-    )
+): AuditEventPrivate = AuditEventPrivate(
+    id = id,
+    actorId = actorId,
+    actorType = actorType,
+    actorUserRole = actorUserRole,
+    action = action,
+    resource = resource,
+    resourceId = resourceId,
+    status = status,
+    metadata = metadata,
+    message = message,
+    createdAt = createdAt
+)
 
 /**
  * Creates a list of test [AuditEventPrivate] instances with deterministic index-based UUIDs,

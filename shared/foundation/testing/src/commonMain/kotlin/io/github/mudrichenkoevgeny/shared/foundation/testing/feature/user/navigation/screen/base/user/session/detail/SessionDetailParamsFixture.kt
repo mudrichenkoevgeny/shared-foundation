@@ -13,8 +13,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain
 public fun createTestSessionDetailParams(
     sessionId: String = TEST_SESSION_ID,
     userId: String? = TEST_USER_ID
-): SessionDetailParams =
-    SessionDetailParams(
-        sessionId = sessionId,
-        userId = userId
-    )
+): SessionDetailParams = SessionDetailParams(
+    sessionId = sessionId,
+    userId = userId
+)

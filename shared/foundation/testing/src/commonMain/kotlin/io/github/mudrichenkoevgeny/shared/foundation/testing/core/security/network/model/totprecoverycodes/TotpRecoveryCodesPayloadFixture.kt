@@ -9,7 +9,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.network.model
  */
 public fun createTestTotpRecoveryCodesPayload(
     codes: List<String> = listOf("REC-1111-2222", "REC-3333-4444")
-): TotpRecoveryCodesPayload =
-    TotpRecoveryCodesPayload(
-        codes = codes
-    )
+): TotpRecoveryCodesPayload = TotpRecoveryCodesPayload(
+    codes = codes
+)

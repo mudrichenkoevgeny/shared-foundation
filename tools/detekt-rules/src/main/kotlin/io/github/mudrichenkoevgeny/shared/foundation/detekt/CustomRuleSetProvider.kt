@@ -10,17 +10,14 @@ import dev.detekt.api.RuleSetProvider
 public class CustomRuleSetProvider : RuleSetProvider {
     override val ruleSetId: RuleSetId = RuleSetId("custom-rules")
 
-    override fun instance(): RuleSet =
-        RuleSet(
-            ruleSetId,
-            listOf(
-                ::AvoidElseInSealedWhenRule,
-                ::NoFullyQualifiedNameRule,
-                ::NoHardcodedTimeMillisRule,
-                ::NoInlineCommentRule,
-                ::PreferValueOverNameRule,
-                ::ProhibitNonSafeAssertionRule,
-                ::ProhibitPrintlnRule,
-            )
+    override fun instance(): RuleSet = RuleSet(
+        ruleSetId,
+        listOf(
+            ::NoFullyQualifiedNameRule,
+            ::NoInlineCommentRule,
+            ::PreferValueOverNameRule,
+            ::ProhibitNonSafeAssertionRule,
+            ::ProhibitPrintlnRule
         )
+    )
 }

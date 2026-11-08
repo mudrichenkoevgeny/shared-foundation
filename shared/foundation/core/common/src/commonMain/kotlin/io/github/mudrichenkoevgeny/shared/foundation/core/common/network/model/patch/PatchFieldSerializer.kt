@@ -36,11 +36,10 @@ public class PatchFieldSerializer<T>(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override fun deserialize(decoder: Decoder): PatchField<T> =
-        if (decoder.decodeNotNullMark()) {
-            PatchField.Value(decoder.decodeSerializableValue(elementSerializer))
-        } else {
-            decoder.decodeNull()
-            PatchField.Value(null)
-        }
+    override fun deserialize(decoder: Decoder): PatchField<T> = if (decoder.decodeNotNullMark()) {
+        PatchField.Value(decoder.decodeSerializableValue(elementSerializer))
+    } else {
+        decoder.decodeNull()
+        PatchField.Value(null)
+    }
 }

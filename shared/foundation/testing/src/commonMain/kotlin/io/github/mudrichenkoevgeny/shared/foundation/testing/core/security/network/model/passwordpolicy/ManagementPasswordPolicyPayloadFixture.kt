@@ -22,13 +22,12 @@ public fun createTestManagementPasswordPolicyPayload(
     requireDigit: Boolean = true,
     requireSpecialChar: Boolean = false,
     commonPasswords: Set<String> = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
-): ManagementPasswordPolicyPayload =
-    ManagementPasswordPolicyPayload(
-        minLength = minLength,
-        requireLetter = requireLetter,
-        requireUpperCase = requireUpperCase,
-        requireLowerCase = requireLowerCase,
-        requireDigit = requireDigit,
-        requireSpecialChar = requireSpecialChar,
-        commonPasswords = commonPasswords
-    )
+): ManagementPasswordPolicyPayload = ManagementPasswordPolicyPayload(
+    minLength = minLength,
+    requireLetter = requireLetter,
+    requireUpperCase = requireUpperCase,
+    requireLowerCase = requireLowerCase,
+    requireDigit = requireDigit,
+    requireSpecialChar = requireSpecialChar,
+    commonPasswords = commonPasswords
+)

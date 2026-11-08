@@ -51,12 +51,11 @@ public object ByteSizeFormatter {
         }
     }
 
-    private fun parseBytes(raw: Any): Long? =
-        when (raw) {
-            is Number -> raw.toLong()
-            is String -> raw.toLongOrNull() ?: raw.toDoubleOrNull()?.toLong()
-            else -> raw.toString().toLongOrNull() ?: raw.toString().toDoubleOrNull()?.toLong()
-        }
+    private fun parseBytes(raw: Any): Long? = when (raw) {
+        is Number -> raw.toLong()
+        is String -> raw.toLongOrNull() ?: raw.toDoubleOrNull()?.toLong()
+        else -> raw.toString().toLongOrNull() ?: raw.toString().toDoubleOrNull()?.toLong()
+    }
 
     private fun formatValue(
         bytes: Long,

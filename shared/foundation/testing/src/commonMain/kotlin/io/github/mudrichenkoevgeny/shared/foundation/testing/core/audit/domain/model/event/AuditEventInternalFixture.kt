@@ -44,18 +44,17 @@ public fun createTestAuditEventInternal(
     metadata: Set<AuditEventMetadata> = setOf(createTestAuditEventMetadata()),
     message: String? = "User logged in successfully",
     createdAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS)
-): AuditEventInternal =
-    AuditEventInternal(
-        id = id,
-        actorId = actorId,
-        actorType = actorType,
-        actorUserRole = actorUserRole,
-        action = action,
-        resource = resource,
-        resourceId = resourceId,
-        resourceValueSensitivity = resourceValueSensitivity,
-        status = status,
-        metadata = metadata,
-        message = message,
-        createdAt = createdAt
-    )
+): AuditEventInternal = AuditEventInternal(
+    id = id,
+    actorId = actorId,
+    actorType = actorType,
+    actorUserRole = actorUserRole,
+    action = action,
+    resource = resource,
+    resourceId = resourceId,
+    resourceValueSensitivity = resourceValueSensitivity,
+    status = status,
+    metadata = metadata,
+    message = message,
+    createdAt = createdAt
+)

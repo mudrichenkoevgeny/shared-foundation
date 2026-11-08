@@ -7,10 +7,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.
 /**
  * Builds domain [PresignedReadUrlBatch] from [PresignedReadUrlBatchPayload].
  */
-public fun PresignedReadUrlBatchPayload.toPresignedReadUrlBatch(): PresignedReadUrlBatch =
-    PresignedReadUrlBatch(
-        urls = urls.mapKeys { it.key.toFileIdOrThrow() }
-    )
+public fun PresignedReadUrlBatchPayload.toPresignedReadUrlBatch(): PresignedReadUrlBatch = PresignedReadUrlBatch(
+    urls = urls.mapKeys { it.key.toFileIdOrThrow() }
+)
 
 /**
  * Builds network [PresignedReadUrlBatchPayload] from domain [PresignedReadUrlBatch].

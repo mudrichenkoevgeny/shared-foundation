@@ -33,17 +33,16 @@ public fun createTestCreateByEmailRequest(
     displayName: String? = "New User",
     avatarFileId: String? = null,
     birthdate: Long? = null
-): CreateByEmailRequest =
-    CreateByEmailRequest(
-        email = email,
-        password = password,
-        role = role,
-        status = status,
-        authorityLevel = authorityLevel,
-        permissionCodes = permissionCodes,
-        storageConfiguration = storageConfiguration,
-        nickname = nickname,
-        displayName = displayName,
-        avatarFileId = avatarFileId,
-        birthdate = birthdate
-    )
+): CreateByEmailRequest = CreateByEmailRequest(
+    email = email,
+    password = password,
+    role = role,
+    status = status,
+    authorityLevel = authorityLevel,
+    permissionCodes = permissionCodes,
+    storageConfiguration = storageConfiguration,
+    nickname = nickname,
+    displayName = displayName,
+    avatarFileId = avatarFileId,
+    birthdate = birthdate
+)

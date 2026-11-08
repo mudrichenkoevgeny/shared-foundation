@@ -38,11 +38,10 @@ public enum class UserIdentifierSortBy(
         /**
          * Returns [UserIdentifierSortBy] for the given wire value or case-insensitive enum name.
          */
-        public fun fromValueOrNull(value: String): UserIdentifierSortBy? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): UserIdentifierSortBy? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [UserIdentifierSortBy] for the given wire or enum-style string.

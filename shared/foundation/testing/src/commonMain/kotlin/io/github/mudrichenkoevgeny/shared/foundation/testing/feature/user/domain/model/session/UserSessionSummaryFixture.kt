@@ -31,16 +31,15 @@ public fun createTestUserSessionSummary(
     identifierAuthProvider: UserAuthProvider = UserAuthProvider.EMAIL,
     lastAccessedAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS),
     expiresAt: Instant = Instant.fromEpochMilliseconds(TEST_TIME_MILLIS + 86400000L)
-): UserSessionSummary =
-    UserSessionSummary(
-        id = id,
-        userId = userId,
-        clientDeviceInfo = clientDeviceInfo,
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider,
-        lastAccessedAt = lastAccessedAt,
-        expiresAt = expiresAt
-    )
+): UserSessionSummary = UserSessionSummary(
+    id = id,
+    userId = userId,
+    clientDeviceInfo = clientDeviceInfo,
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider,
+    lastAccessedAt = lastAccessedAt,
+    expiresAt = expiresAt
+)
 
 /**
  * Creates a list of test [UserSessionSummary] instances with deterministic index-based UUIDs,

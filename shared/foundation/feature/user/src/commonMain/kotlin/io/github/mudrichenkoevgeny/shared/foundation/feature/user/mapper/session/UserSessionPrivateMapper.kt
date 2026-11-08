@@ -14,45 +14,43 @@ import kotlin.time.Instant
 /**
  * Builds domain [UserSessionPrivate] from [UserSessionPrivatePayload].
  */
-public fun UserSessionPrivatePayload.toUserSessionPrivate(): UserSessionPrivate =
-    UserSessionPrivate(
-        id = id.toUserSessionIdOrThrow(),
-        userId = userId.toUserIdOrThrow(),
-        userRole = UserRole.fromValueOrThrow(userRole),
-        identifier = identifier,
-        identifierId = identifierId.toUserIdentifierIdOrThrow(),
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
-        clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        expiresAt = Instant.fromEpochMilliseconds(expiresAt),
-        lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
-        lastReauthenticatedAt = Instant.fromEpochMilliseconds(lastReauthenticatedAt),
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = Instant.fromEpochMilliseconds(createdAt),
-        updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
-    )
+public fun UserSessionPrivatePayload.toUserSessionPrivate(): UserSessionPrivate = UserSessionPrivate(
+    id = id.toUserSessionIdOrThrow(),
+    userId = userId.toUserIdOrThrow(),
+    userRole = UserRole.fromValueOrThrow(userRole),
+    identifier = identifier,
+    identifierId = identifierId.toUserIdentifierIdOrThrow(),
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = UserAuthProvider.fromValueOrThrow(identifierAuthProvider),
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfo(),
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    expiresAt = Instant.fromEpochMilliseconds(expiresAt),
+    lastAccessedAt = Instant.fromEpochMilliseconds(lastAccessedAt),
+    lastReauthenticatedAt = Instant.fromEpochMilliseconds(lastReauthenticatedAt),
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = Instant.fromEpochMilliseconds(createdAt),
+    updatedAt = updatedAt?.let(Instant::fromEpochMilliseconds)
+)
 
 /**
  * Builds network [UserSessionPrivatePayload] from domain [UserSessionPrivate].
  */
-public fun UserSessionPrivate.toUserSessionPrivatePayload(): UserSessionPrivatePayload =
-    UserSessionPrivatePayload(
-        id = id.asHexDashString(),
-        userId = userId.asHexDashString(),
-        userRole = userRole.value,
-        identifier = identifier,
-        identifierId = identifierId.asHexDashString(),
-        identifierDisplayName = identifierDisplayName,
-        identifierAuthProvider = identifierAuthProvider.value,
-        clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
-        userAgent = userAgent,
-        ipAddress = ipAddress,
-        expiresAt = expiresAt.toEpochMilliseconds(),
-        lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
-        lastReauthenticatedAt = lastReauthenticatedAt.toEpochMilliseconds(),
-        isSensitiveValuesMasked = isSensitiveValuesMasked,
-        createdAt = createdAt.toEpochMilliseconds(),
-        updatedAt = updatedAt?.toEpochMilliseconds()
-    )
+public fun UserSessionPrivate.toUserSessionPrivatePayload(): UserSessionPrivatePayload = UserSessionPrivatePayload(
+    id = id.asHexDashString(),
+    userId = userId.asHexDashString(),
+    userRole = userRole.value,
+    identifier = identifier,
+    identifierId = identifierId.asHexDashString(),
+    identifierDisplayName = identifierDisplayName,
+    identifierAuthProvider = identifierAuthProvider.value,
+    clientDeviceInfo = clientDeviceInfo.toClientDeviceInfoPayload(),
+    userAgent = userAgent,
+    ipAddress = ipAddress,
+    expiresAt = expiresAt.toEpochMilliseconds(),
+    lastAccessedAt = lastAccessedAt.toEpochMilliseconds(),
+    lastReauthenticatedAt = lastReauthenticatedAt.toEpochMilliseconds(),
+    isSensitiveValuesMasked = isSensitiveValuesMasked,
+    createdAt = createdAt.toEpochMilliseconds(),
+    updatedAt = updatedAt?.toEpochMilliseconds()
+)

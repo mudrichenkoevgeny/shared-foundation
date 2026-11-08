@@ -18,22 +18,20 @@ public class PasswordPolicyValidatorMock(
     public override fun validate(
         managementPasswordPolicy: ManagementPasswordPolicy,
         password: String
-    ): PasswordPolicyValidatorResult =
-        if (failReasons.isEmpty()) {
-            PasswordPolicyValidatorResult.Success
-        } else {
-            PasswordPolicyValidatorResult.Fail(
-                reasons = failReasons,
-                passwordPolicy = managementPasswordPolicy
-            )
-        }
+    ): PasswordPolicyValidatorResult = if (failReasons.isEmpty()) {
+        PasswordPolicyValidatorResult.Success
+    } else {
+        PasswordPolicyValidatorResult.Fail(
+            reasons = failReasons,
+            passwordPolicy = managementPasswordPolicy
+        )
+    }
 
     public override fun validate(
         openPasswordPolicy: OpenPasswordPolicy,
         password: String
-    ): PasswordPolicyValidatorResult =
-        validate(
-            openPasswordPolicy.toManagementPasswordPolicy(),
-            password
-        )
+    ): PasswordPolicyValidatorResult = validate(
+        openPasswordPolicy.toManagementPasswordPolicy(),
+        password
+    )
 }

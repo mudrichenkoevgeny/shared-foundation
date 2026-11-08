@@ -6,35 +6,33 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [OpenAuthSettings] from [OpenAuthSettingsPayload].
  */
-public fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings =
-    OpenAuthSettings(
-        availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
-        maxTotalIdentifiers = maxTotalIdentifiers,
-        maxEmailIdentifiers = maxEmailIdentifiers,
-        maxPhoneIdentifiers = maxPhoneIdentifiers,
-        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        userNicknameMinLength = userNicknameMinLength,
-        userNicknameMaxLength = userNicknameMaxLength,
-        userDisplayNameMinLength = userDisplayNameMinLength,
-        userDisplayNameMaxLength = userDisplayNameMaxLength,
-        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
-        isRegistrationEnabled = isRegistrationEnabled
-    )
+public fun OpenAuthSettingsPayload.toOpenAuthSettings(): OpenAuthSettings = OpenAuthSettings(
+    availableAuthProviders = availableAuthProviders.toAvailableAuthProviders(),
+    maxTotalIdentifiers = maxTotalIdentifiers,
+    maxEmailIdentifiers = maxEmailIdentifiers,
+    maxPhoneIdentifiers = maxPhoneIdentifiers,
+    maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+    userNicknameMinLength = userNicknameMinLength,
+    userNicknameMaxLength = userNicknameMaxLength,
+    userDisplayNameMinLength = userDisplayNameMinLength,
+    userDisplayNameMaxLength = userDisplayNameMaxLength,
+    isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
+    isRegistrationEnabled = isRegistrationEnabled
+)
 
 /**
  * Builds network [OpenAuthSettingsPayload] from domain [OpenAuthSettings].
  */
-public fun OpenAuthSettings.toOpenAuthSettingsPayload(): OpenAuthSettingsPayload =
-    OpenAuthSettingsPayload(
-        availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
-        maxTotalIdentifiers = maxTotalIdentifiers,
-        maxEmailIdentifiers = maxEmailIdentifiers,
-        maxPhoneIdentifiers = maxPhoneIdentifiers,
-        maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
-        userNicknameMinLength = userNicknameMinLength,
-        userNicknameMaxLength = userNicknameMaxLength,
-        userDisplayNameMinLength = userDisplayNameMinLength,
-        userDisplayNameMaxLength = userDisplayNameMaxLength,
-        isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
-        isRegistrationEnabled = isRegistrationEnabled
-    )
+public fun OpenAuthSettings.toOpenAuthSettingsPayload(): OpenAuthSettingsPayload = OpenAuthSettingsPayload(
+    availableAuthProviders = availableAuthProviders.toAvailableAuthProvidersPayload(),
+    maxTotalIdentifiers = maxTotalIdentifiers,
+    maxEmailIdentifiers = maxEmailIdentifiers,
+    maxPhoneIdentifiers = maxPhoneIdentifiers,
+    maxIdentifiersPerExternalProvider = maxIdentifiersPerExternalProvider,
+    userNicknameMinLength = userNicknameMinLength,
+    userNicknameMaxLength = userNicknameMaxLength,
+    userDisplayNameMinLength = userDisplayNameMinLength,
+    userDisplayNameMaxLength = userDisplayNameMaxLength,
+    isUserNicknameChangeAllowed = isUserNicknameChangeAllowed,
+    isRegistrationEnabled = isRegistrationEnabled
+)

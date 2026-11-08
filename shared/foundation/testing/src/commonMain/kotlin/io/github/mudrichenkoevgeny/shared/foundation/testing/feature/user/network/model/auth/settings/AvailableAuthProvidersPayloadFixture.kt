@@ -12,8 +12,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 public fun createTestAvailableAuthProvidersPayload(
     primary: List<String> = listOf(UserAuthProvider.EMAIL.value, UserAuthProvider.PHONE.value),
     secondary: List<String> = emptyList()
-): AvailableAuthProvidersPayload =
-    AvailableAuthProvidersPayload(
-        primary = primary,
-        secondary = secondary
-    )
+): AvailableAuthProvidersPayload = AvailableAuthProvidersPayload(
+    primary = primary,
+    secondary = secondary
+)

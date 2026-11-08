@@ -10,17 +10,15 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.
 /**
  * Builds domain [AuthData] from [AuthDataPayload].
  */
-public fun AuthDataPayload.toAuthData(): AuthData =
-    AuthData(
-        userPrivate = userPrivatePayload.toUserPrivate(),
-        sessionToken = sessionTokenPayload.toSessionToken()
-    )
+public fun AuthDataPayload.toAuthData(): AuthData = AuthData(
+    userPrivate = userPrivatePayload.toUserPrivate(),
+    sessionToken = sessionTokenPayload.toSessionToken()
+)
 
 /**
  * Builds network [AuthDataPayload] from domain [AuthData].
  */
-public fun AuthData.toAuthDataPayload(): AuthDataPayload =
-    AuthDataPayload(
-        userPrivatePayload = userPrivate.toUserPrivatePayload(),
-        sessionTokenPayload = sessionToken.toSessionTokenPayload()
-    )
+public fun AuthData.toAuthDataPayload(): AuthDataPayload = AuthDataPayload(
+    userPrivatePayload = userPrivate.toUserPrivatePayload(),
+    sessionTokenPayload = sessionToken.toSessionTokenPayload()
+)

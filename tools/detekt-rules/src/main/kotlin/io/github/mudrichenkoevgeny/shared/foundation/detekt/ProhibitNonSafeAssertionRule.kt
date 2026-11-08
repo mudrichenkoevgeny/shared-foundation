@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.psi.KtPostfixExpression
 public class ProhibitNonSafeAssertionRule(
     config: Config = Config.empty
 ) : Rule(
-    config = config,
-    description = "The !! operator is strictly forbidden in production code."
-) {
+        config = config,
+        description = "The !! operator is strictly forbidden in production code."
+    ) {
     override val ruleName: RuleName = RuleName("ProhibitNonSafeAssertion")
 
     override fun visitPostfixExpression(expression: KtPostfixExpression) {

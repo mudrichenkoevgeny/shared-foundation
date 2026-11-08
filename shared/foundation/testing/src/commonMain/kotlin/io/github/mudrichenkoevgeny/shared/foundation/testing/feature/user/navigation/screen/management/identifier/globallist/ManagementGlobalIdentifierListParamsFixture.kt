@@ -47,24 +47,23 @@ public fun createTestManagementGlobalIdentifierListParams(
     updatedAtTo: String? = null,
     isUpdatedAtSet: Boolean? = null,
     searchQuery: String? = null
-): ManagementGlobalIdentifierListParams =
-    ManagementGlobalIdentifierListParams(
-        pageNumber = pageNumber,
-        pageSize = pageSize,
-        sortBy = sortBy,
-        sortOrder = sortOrder,
-        identifierIds = identifierIds,
-        userIds = userIds,
-        userAuthProviders = userAuthProviders,
-        excludeUserAuthProviders = excludeUserAuthProviders,
-        identifier = identifier,
-        displayName = displayName,
-        externalProviderEmail = externalProviderEmail,
-        isExternalProviderEmailSet = isExternalProviderEmailSet,
-        createdAtFrom = createdAtFrom,
-        createdAtTo = createdAtTo,
-        updatedAtFrom = updatedAtFrom,
-        updatedAtTo = updatedAtTo,
-        isUpdatedAtSet = isUpdatedAtSet,
-        searchQuery = searchQuery
-    )
+): ManagementGlobalIdentifierListParams = ManagementGlobalIdentifierListParams(
+    pageNumber = pageNumber,
+    pageSize = pageSize,
+    sortBy = sortBy,
+    sortOrder = sortOrder,
+    identifierIds = identifierIds,
+    userIds = userIds,
+    userAuthProviders = userAuthProviders,
+    excludeUserAuthProviders = excludeUserAuthProviders,
+    identifier = identifier,
+    displayName = displayName,
+    externalProviderEmail = externalProviderEmail,
+    isExternalProviderEmailSet = isExternalProviderEmailSet,
+    createdAtFrom = createdAtFrom,
+    createdAtTo = createdAtTo,
+    updatedAtFrom = updatedAtFrom,
+    updatedAtTo = updatedAtTo,
+    isUpdatedAtSet = isUpdatedAtSet,
+    searchQuery = searchQuery
+)

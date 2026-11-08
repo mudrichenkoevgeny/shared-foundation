@@ -22,18 +22,17 @@ public fun createTestStorageFilePrivatePayload(
     fileUrls: FileUrlsPayload? = createTestFileUrlsPayload(),
     createdAt: Long = 1700000000000L,
     updatedAt: Long? = null
-): StorageFilePrivatePayload =
-    StorageFilePrivatePayload(
-        id = id,
-        ownerUserId = ownerUserId,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = category,
-        visibility = visibility,
-        status = status,
-        targetScope = targetScope,
-        fileUrls = fileUrls,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): StorageFilePrivatePayload = StorageFilePrivatePayload(
+    id = id,
+    ownerUserId = ownerUserId,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = category,
+    visibility = visibility,
+    status = status,
+    targetScope = targetScope,
+    fileUrls = fileUrls,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)

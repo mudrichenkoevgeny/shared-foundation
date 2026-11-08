@@ -9,7 +9,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.
  */
 public fun createTestTotpRecoveryCodes(
     codes: List<String> = listOf("REC-1111-2222", "REC-3333-4444")
-): TotpRecoveryCodes =
-    TotpRecoveryCodes(
-        codes = codes
-    )
+): TotpRecoveryCodes = TotpRecoveryCodes(
+    codes = codes
+)

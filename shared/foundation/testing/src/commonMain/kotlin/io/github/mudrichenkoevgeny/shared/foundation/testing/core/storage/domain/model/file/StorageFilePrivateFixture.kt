@@ -24,18 +24,17 @@ public fun createTestStorageFilePrivate(
     fileUrls: FileUrls = createTestFileUrls(),
     createdAt: Instant = Instant.fromEpochMilliseconds(1700000000000L),
     updatedAt: Instant? = null
-): StorageFilePrivate =
-    StorageFilePrivate(
-        id = id,
-        ownerUserId = ownerUserId,
-        fileName = fileName,
-        fileSizeBytes = fileSizeBytes,
-        mimeType = mimeType,
-        category = category,
-        visibility = visibility,
-        status = status,
-        targetScope = targetScope,
-        fileUrls = fileUrls,
-        createdAt = createdAt,
-        updatedAt = updatedAt
-    )
+): StorageFilePrivate = StorageFilePrivate(
+    id = id,
+    ownerUserId = ownerUserId,
+    fileName = fileName,
+    fileSizeBytes = fileSizeBytes,
+    mimeType = mimeType,
+    category = category,
+    visibility = visibility,
+    status = status,
+    targetScope = targetScope,
+    fileUrls = fileUrls,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)

@@ -14,9 +14,8 @@ public fun createTestResetPasswordRequest(
     email: String = TEST_EMAIL,
     confirmationCode: String = "123456",
     newPassword: String = "NewSecret123!"
-): ResetPasswordRequest =
-    ResetPasswordRequest(
-        email = email,
-        confirmationCode = confirmationCode,
-        newPassword = newPassword
-    )
+): ResetPasswordRequest = ResetPasswordRequest(
+    email = email,
+    confirmationCode = confirmationCode,
+    newPassword = newPassword
+)

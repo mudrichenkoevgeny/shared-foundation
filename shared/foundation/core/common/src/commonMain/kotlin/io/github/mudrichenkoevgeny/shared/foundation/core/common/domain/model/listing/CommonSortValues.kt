@@ -28,11 +28,10 @@ public enum class CommonSortValues(
         /**
          * Returns [CommonSortValues] for the given wire value or case-insensitive enum name.
          */
-        public fun fromValueOrNull(value: String): CommonSortValues? =
-            entries.firstOrNull {
-                it.value.equals(value, ignoreCase = true) ||
-                    it.name.equals(value, ignoreCase = true)
-            }
+        public fun fromValueOrNull(value: String): CommonSortValues? = entries.firstOrNull {
+            it.value.equals(value, ignoreCase = true) ||
+                it.name.equals(value, ignoreCase = true)
+        }
 
         /**
          * Returns [CommonSortValues] for the given wire or enum-style string.

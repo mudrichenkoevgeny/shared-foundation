@@ -150,7 +150,8 @@ private fun generateLocalizationJs(
     val jsSb = StringBuilder()
     val jsonResourcesCode = formatAsJsObject(allResources)
 
-    jsSb.append(
+    jsSb
+        .append(
 """
 /**
  * Raw localization resource dictionaries by locale, module path, and bundle name.
@@ -212,7 +213,7 @@ export function formatByteSize(bytesRaw, locale = 'en', decimals = 0, resolver =
 }
 
 """.trimIndent()
-    ).append("\n\n")
+        ).append("\n\n")
 
     modulesList.forEach { moduleData ->
         appendModuleBundleClassesJs(jsSb, moduleData)
@@ -224,9 +225,13 @@ export function formatByteSize(bytesRaw, locale = 'en', decimals = 0, resolver =
     return jsSb.toString()
 }
 
-private fun appendModuleBundleClassesJs(jsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+private fun appendModuleBundleClassesJs(
+    jsSb: StringBuilder,
+    moduleData: ModuleLocalizationData
+) {
     moduleData.bundles.forEach { bundleData ->
-        jsSb.append(
+        jsSb
+            .append(
 """
 export class ${bundleData.className} {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
@@ -239,22 +244,26 @@ export class ${bundleData.className} {
   }
 
 """.trimIndent()
-        ).append("\n")
+            ).append("\n")
 
         bundleData.entries.forEach { entry ->
             if (!entry.isMethod) {
-                jsSb.append(
+                jsSb
+                    .append(
 """
 get ${entry.propertyOrMethodName}() {
   return this._get("${entry.rawKey}");
 }
 
 """.trimIndent()
-                ).append("\n")
+                    ).append("\n")
             } else {
-                val argList = entry.placeholders.indices.map { "arg${it + 1}" }.joinToString(", ")
+                val argList = entry.placeholders.indices
+                    .map { "arg${it + 1}" }
+                    .joinToString(", ")
                 val objProps = entry.placeholders.mapIndexed { idx, p -> "$p: arg${idx + 1}" }.joinToString(", ")
-                jsSb.append(
+                jsSb
+                    .append(
 """
 ${entry.propertyOrMethodName}($argList) {
   const template = this._get("${entry.rawKey}");
@@ -263,7 +272,7 @@ ${entry.propertyOrMethodName}($argList) {
 }
 
 """.trimIndent()
-                ).append("\n")
+                    ).append("\n")
             }
         }
 
@@ -271,24 +280,31 @@ ${entry.propertyOrMethodName}($argList) {
     }
 }
 
-private fun appendModuleFacadeClassJs(jsSb: StringBuilder, moduleData: ModuleLocalizationData) {
-    jsSb.append(
+private fun appendModuleFacadeClassJs(
+    jsSb: StringBuilder,
+    moduleData: ModuleLocalizationData
+) {
+    jsSb
+        .append(
 """
 export class ${moduleData.facadeClassName} {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     moduleData.bundles.forEach { bundleData ->
-        val fieldName = bundleData.bundleName.split('_').joinToString("") { part ->
-            part.replaceFirstChar { char -> char.uppercase() }
-        }.decapitalizeFirstLetter()
+        val fieldName = bundleData.bundleName
+            .split('_')
+            .joinToString("") { part ->
+                part.replaceFirstChar { char -> char.uppercase() }
+            }.decapitalizeFirstLetter()
         jsSb.append("    this.$fieldName = new ${bundleData.className}(resolver, locale);\n")
     }
 
     if (moduleData.facadeClassName == "SecurityModuleStrings") {
-        jsSb.append(
+        jsSb
+            .append(
 """
 }
 
@@ -317,13 +333,14 @@ resolvePasswordTooWeakReasons(args) {
   return reasons.length > 0 ? reasons : [this.errors.passwordTooWeak];
 }
 """.trimIndent()
-        ).append("\n")
+            ).append("\n")
     } else if (moduleData.facadeClassName != "UserModuleStrings") {
         jsSb.append("  }\n")
     }
 
     if (moduleData.facadeClassName == "UserModuleStrings") {
-        jsSb.append(
+        jsSb
+            .append(
 """
 }
 
@@ -351,20 +368,24 @@ resolveTotalUserIdentifiersLimitReachedMessage(limit) {
   return this.errors.totalIdentifiersLimitReachedWithoutArgs;
 }
 """.trimIndent()
-        ).append("\n")
+            ).append("\n")
     }
 
     jsSb.append("}\n\n")
 }
 
-private fun appendGlobalLocalizationJs(jsSb: StringBuilder, modulesList: List<ModuleLocalizationData>) {
-    jsSb.append(
+private fun appendGlobalLocalizationJs(
+    jsSb: StringBuilder,
+    modulesList: List<ModuleLocalizationData>
+) {
+    jsSb
+        .append(
 """
 export class SharedFoundationLocalization {
   constructor(resolver = defaultLocalizedStringResolver, locale = 'en') {
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     modulesList.forEach { moduleData ->
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
@@ -372,7 +393,8 @@ export class SharedFoundationLocalization {
     }
     jsSb.append("  }\n}\n\n")
 
-    jsSb.append(
+    jsSb
+        .append(
 """
 let _globalLocale = 'en';
 let _globalResolver = defaultLocalizedStringResolver;
@@ -399,11 +421,12 @@ export const sharedLocalization = new Proxy({}, {
 });
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     modulesList.forEach { moduleData ->
         val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
-        jsSb.append(
+        jsSb
+            .append(
 """
 export const $singletonName = new Proxy({}, {
   get(_, prop) {
@@ -412,14 +435,15 @@ export const $singletonName = new Proxy({}, {
 });
 
 """.trimIndent()
-        ).append("\n")
+            ).append("\n")
     }
 }
 
 private fun generateLocalizationDts(modulesList: List<ModuleLocalizationData>): String {
     val dtsSb = StringBuilder()
 
-    dtsSb.append(
+    dtsSb
+        .append(
 """
 export type LocalizedStringResolver = (modulePath: string, bundleName: string, key: string, locale?: string) => string | undefined;
 
@@ -436,7 +460,7 @@ export declare const defaultLocalizedStringResolver: LocalizedStringResolver;
 export declare const localizationResources: Record<string, Record<string, Record<string, Record<string, string>>>>;
 
 """.trimIndent()
-    ).append("\n\n")
+        ).append("\n\n")
 
     modulesList.forEach { moduleData ->
         appendModuleBundleClassesDts(dtsSb, moduleData)
@@ -448,12 +472,16 @@ export declare const localizationResources: Record<string, Record<string, Record
     return dtsSb.toString()
 }
 
-private fun appendModuleBundleClassesDts(dtsSb: StringBuilder, moduleData: ModuleLocalizationData) {
+private fun appendModuleBundleClassesDts(
+    dtsSb: StringBuilder,
+    moduleData: ModuleLocalizationData
+) {
     moduleData.bundles.forEach { bundleData ->
         val rawKeysUnion = bundleData.entries.joinToString(" | ") { "'${it.rawKey}'" }.ifEmpty { "string" }
         val propsUnion = bundleData.entries.joinToString(" | ") { "'${it.propertyOrMethodName}'" }.ifEmpty { "string" }
 
-        dtsSb.append(
+        dtsSb
+            .append(
 """
 export type ${bundleData.className}RawKey = $rawKeysUnion;
 export type ${bundleData.className}Property = $propsUnion;
@@ -462,12 +490,13 @@ export class ${bundleData.className} {
 constructor(resolver?: LocalizedStringResolver, locale?: string);
 
 """.trimIndent()
-        ).append("\n")
+            ).append("\n")
 
         bundleData.entries.forEach { entry ->
             val escapedVal = entry.value.replace("\n", " ").replace("*/", "* /")
             if (!entry.isMethod) {
-                dtsSb.append(
+                dtsSb
+                    .append(
 """
 /**
  * Template: "$escapedVal"
@@ -475,11 +504,12 @@ constructor(resolver?: LocalizedStringResolver, locale?: string);
 get ${entry.propertyOrMethodName}(): string;
 
 """.trimIndent()
-                ).append("\n")
+                    ).append("\n")
             } else {
                 val paramsObjType = entry.placeholders.joinToString("; ") { "$it: string | number" }
                 val paramsPositional = entry.placeholders.joinToString(", ") { "$it: string | number" }
-                dtsSb.append(
+                dtsSb
+                    .append(
 """
 /**
  * Template: "$escapedVal"
@@ -488,7 +518,7 @@ ${entry.propertyOrMethodName}(params: { $paramsObjType }): string;
 ${entry.propertyOrMethodName}($paramsPositional): string;
 
 """.trimIndent()
-                ).append("\n")
+                    ).append("\n")
             }
         }
 
@@ -496,19 +526,25 @@ ${entry.propertyOrMethodName}($paramsPositional): string;
     }
 }
 
-private fun appendModuleFacadeClassDts(dtsSb: StringBuilder, moduleData: ModuleLocalizationData) {
-    dtsSb.append(
+private fun appendModuleFacadeClassDts(
+    dtsSb: StringBuilder,
+    moduleData: ModuleLocalizationData
+) {
+    dtsSb
+        .append(
 """
 export class ${moduleData.facadeClassName} {
   constructor(resolver?: LocalizedStringResolver, locale?: string);
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     moduleData.bundles.forEach { bundleData ->
-        val fieldName = bundleData.bundleName.split('_').joinToString("") { part ->
-            part.replaceFirstChar { char -> char.uppercase() }
-        }.decapitalizeFirstLetter()
+        val fieldName = bundleData.bundleName
+            .split('_')
+            .joinToString("") { part ->
+                part.replaceFirstChar { char -> char.uppercase() }
+            }.decapitalizeFirstLetter()
         dtsSb.append("  readonly $fieldName: ${bundleData.className};\n")
     }
 
@@ -517,22 +553,30 @@ export class ${moduleData.facadeClassName} {
     }
 
     if (moduleData.facadeClassName == "UserModuleStrings") {
-        dtsSb.append("  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n")
-        dtsSb.append("  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n")
+        dtsSb.append(
+            "  resolveUserLockedMessage(lockoutType?: string | null, formattedUntil?: string | null): string;\n"
+        )
+        dtsSb.append(
+            "  resolveUserIdentifierLimitReachedMessage(commonStrings: CommonModuleStrings, limit?: number | string | unknown, providerRaw?: string | null): string;\n"
+        )
         dtsSb.append("  resolveTotalUserIdentifiersLimitReachedMessage(limit?: number | string | unknown): string;\n")
     }
 
     dtsSb.append("}\n\n")
 }
 
-private fun appendGlobalLocalizationDts(dtsSb: StringBuilder, modulesList: List<ModuleLocalizationData>) {
-    dtsSb.append(
+private fun appendGlobalLocalizationDts(
+    dtsSb: StringBuilder,
+    modulesList: List<ModuleLocalizationData>
+) {
+    dtsSb
+        .append(
 """
 export class SharedFoundationLocalization {
   constructor(resolver?: LocalizedStringResolver, locale?: string);
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     modulesList.forEach { moduleData ->
         val fieldName = moduleData.modulePrefix.decapitalizeFirstLetter()
@@ -540,7 +584,8 @@ export class SharedFoundationLocalization {
     }
     dtsSb.append("}\n\n")
 
-    dtsSb.append(
+    dtsSb
+        .append(
 """
 export declare const SharedLocalization: {
   setLocale(locale: string): void;
@@ -552,7 +597,7 @@ export declare const SharedLocalization: {
 export declare const sharedLocalization: SharedFoundationLocalization;
 
 """.trimIndent()
-    ).append("\n")
+        ).append("\n")
 
     modulesList.forEach { moduleData ->
         val singletonName = "${moduleData.modulePrefix.decapitalizeFirstLetter()}Strings"
@@ -579,27 +624,26 @@ public fun toCamelCase(snakeCase: String): String {
         }
 }
 
-public fun formatAsJsObject(obj: Any?): String =
-    when (obj) {
-        is Map<*, *> -> {
-            val entries =
-                obj.entries.joinToString(",\n") { (k, v) ->
-                    val keyStr =
-                        if (k.toString().matches(
-                                Regex("^[a-zA-Z_$][a-zA-Z0-9_$]*$")
-                            )
-                        ) {
-                            k.toString()
-                        } else {
-                            "\"$k\""
-                        }
-                    "$keyStr: ${formatAsJsObject(v)}"
-                }
-            "{\n${entries.indent(2)}\n}"
-        }
-        is String -> "\"${obj.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n")}\""
-        else -> obj.toString()
+public fun formatAsJsObject(obj: Any?): String = when (obj) {
+    is Map<*, *> -> {
+        val entries =
+            obj.entries.joinToString(",\n") { (k, v) ->
+                val keyStr =
+                    if (k.toString().matches(
+                            Regex("^[a-zA-Z_$][a-zA-Z0-9_$]*$")
+                        )
+                    ) {
+                        k.toString()
+                    } else {
+                        "\"$k\""
+                    }
+                "$keyStr: ${formatAsJsObject(v)}"
+            }
+        "{\n${entries.indent(2)}\n}"
     }
+    is String -> "\"${obj.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n")}\""
+    else -> obj.toString()
+}
 
 public fun String.indent(spaces: Int): String {
     val prefix = " ".repeat(spaces)
