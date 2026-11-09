@@ -236,7 +236,8 @@ private fun Project.configureMavenPublishingAndDokka() {
 
 tasks.register("generateNpmPackage") {
     group = "publishing"
-    description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," + " Zod schemas, and route constants."
+    description =
+        "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," + " Zod schemas, and route constants."
     dependsOn(":tools:npm-generator:run")
     finalizedBy(":tools:npm-generator:auditNpmExports")
 }

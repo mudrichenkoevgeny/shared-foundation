@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 public class ProhibitPrintlnRule(
     config: Config = Config.empty
 ) : Rule(
-        config = config,
-        description =
-            "The 'println' or 'print' call is prohibited in production code. " +
-                "Use structured loggers or KMP logging primitives."
-    ) {
+    config = config,
+    description =
+        "The 'println' or 'print' call is prohibited in production code. " +
+            "Use structured loggers or KMP logging primitives."
+) {
     override val ruleName: RuleName = RuleName("ProhibitPrintln")
 
     override fun visitCallExpression(expression: KtCallExpression) {

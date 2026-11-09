@@ -13,11 +13,11 @@ import dev.detekt.api.RuleName
 public class NoInlineCommentRule(
     config: Config = Config.empty
 ) : Rule(
-        config = config,
-        description =
-            "Banal and redundant inline comments are prohibited. " +
-                "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
-    ) {
+    config = config,
+    description =
+        "Banal and redundant inline comments are prohibited. " +
+            "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
+) {
     private val allowedPrefixes =
         listOf("/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---")
 

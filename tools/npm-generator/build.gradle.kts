@@ -34,7 +34,8 @@ tasks.named<JavaExec>("run") {
 
 val verifyConsumerNpmPackage = tasks.register<Exec>("verifyConsumerNpmPackage") {
     group = "verification"
-    description = "Runs isolated NPM consumer smoke test (npm pack --dry-run, node --check, TypeScript declaration verification)."
+    description =
+        "Runs isolated NPM consumer smoke test (npm pack --dry-run, node --check, TypeScript declaration verification)."
     commandLine(
         "node",
         "scripts/consumer-smoke-test.js"
@@ -44,7 +45,8 @@ val verifyConsumerNpmPackage = tasks.register<Exec>("verifyConsumerNpmPackage") 
 
 val auditNpmExports = tasks.register<Exec>("auditNpmExports") {
     group = "verification"
-    description = "Audits generated NPM package to guarantee 100% parity between Kotlin classes/fixtures and JS/DTS exports."
+    description =
+        "Audits generated NPM package to guarantee 100% parity between Kotlin classes/fixtures and JS/DTS exports."
     commandLine(
         "node",
         "scripts/audit-npm-exports.js"

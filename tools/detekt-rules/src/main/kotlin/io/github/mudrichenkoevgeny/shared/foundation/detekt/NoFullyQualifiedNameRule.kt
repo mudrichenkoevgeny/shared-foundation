@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.psi.psiUtil.getStrictParentOfType
 public class NoFullyQualifiedNameRule(
     config: Config = Config.empty
 ) : Rule(
-        config = config,
-        description =
-            "Fully Qualified Names (FQN) in code bodies and comments are prohibited. Import the symbol explicitly."
-    ) {
+    config = config,
+    description =
+        "Fully Qualified Names (FQN) in code bodies and comments are prohibited. Import the symbol explicitly."
+) {
     private val fqnRegex = Regex(
         """(?:kotlin|kotlinx|java|javax|android|androidx|com|org|io|net|dev)\.""" +
             """[a-z0-9_.]+\.[A-Z]\w+(?:\.[a-zA-Z0-9_]+)*"""

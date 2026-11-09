@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 public class PreferValueOverNameRule(
     config: Config = Config.empty
 ) : Rule(
-        config = config,
-        description = "Use '.value' property instead of '.name' or '.serialName' when " +
-            "referencing domain enums or wire types."
-    ) {
+    config = config,
+    description = "Use '.value' property instead of '.name' or '.serialName' when " +
+        "referencing domain enums or wire types."
+) {
     private val enumEntryPattern = Regex("""^[A-Z][a-zA-Z0-9_]*\.[A-Z0-9_]+$""")
     private val enumPropertyPattern =
         Regex(
