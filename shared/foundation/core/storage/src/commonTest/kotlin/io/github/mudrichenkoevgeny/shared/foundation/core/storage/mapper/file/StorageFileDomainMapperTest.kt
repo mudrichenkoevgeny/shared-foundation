@@ -18,11 +18,10 @@ class StorageFileDomainMapperTest {
     private val testFileUrls =
         FileUrls(
             originalUrl = "https://cdn.example.com/orig.png",
-            urlPresets =
-                mapOf(
-                    FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.png",
-                    FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.png"
-                )
+            urlPresets = mapOf(
+                FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.png",
+                FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.png"
+            )
         )
 
     private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()

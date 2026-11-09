@@ -21,8 +21,7 @@ public class NoFullyQualifiedNameRule(
     config: Config = Config.empty
 ) : Rule(
     config = config,
-    description =
-        "Fully Qualified Names (FQN) in code bodies and comments are prohibited. Import the symbol explicitly."
+    description = RULE_DESCRIPTION
 ) {
     private val fqnRegex = Regex(
         """(?:kotlin|kotlinx|java|javax|android|androidx|com|org|io|net|dev)\.""" +
@@ -42,9 +41,8 @@ public class NoFullyQualifiedNameRule(
                 report(
                     Finding(
                         entity = Entity.from(kDoc),
-                        message =
-                            "Fully Qualified Name '$match' found in comment/documentation. " +
-                                "Use simple imported class names in KDoc [SimpleClassName] as per project standards."
+                        message = "Fully Qualified Name '$match' found in comment/documentation. " +
+                            "Use simple imported class names in KDoc [SimpleClassName] as per project standards."
                     )
                 )
             }
@@ -72,9 +70,8 @@ public class NoFullyQualifiedNameRule(
             report(
                 Finding(
                     entity = Entity.from(expression),
-                    message =
-                        "Fully Qualified Name '$match' found in code. " +
-                            "Import the symbol explicitly instead of using FQN."
+                    message = "Fully Qualified Name '$match' found in code. " +
+                        "Import the symbol explicitly instead of using FQN."
                 )
             )
         }
@@ -91,11 +88,15 @@ public class NoFullyQualifiedNameRule(
             report(
                 Finding(
                     entity = Entity.from(comment),
-                    message =
-                        "Fully Qualified Name '$match' found in comment/documentation. " +
-                            "Use simple imported class names in KDoc [SimpleClassName] as per project standards."
+                    message = "Fully Qualified Name '$match' found in comment/documentation. " +
+                        "Use simple imported class names in KDoc [SimpleClassName] as per project standards."
                 )
             )
         }
+    }
+
+    public companion object {
+        public const val RULE_DESCRIPTION: String =
+            "Fully Qualified Names (FQN) in code bodies and comments are prohibited. Import the symbol explicitly."
     }
 }

@@ -91,11 +91,10 @@ public fun createTestUserSessionPrivatePayloadList(
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL.value else UserAuthProvider.GOOGLE.value,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
             userAgent = if (isEven) winAgent else macAgent,
-            clientDeviceInfo =
-                createTestClientDeviceInfoPayload(
-                    deviceName = if (isEven) "Windows PC" else "MacBook Pro",
-                    operationSystemVersion = if (isEven) "Windows 10" else "macOS 14.0"
-                ),
+            clientDeviceInfo = createTestClientDeviceInfoPayload(
+                deviceName = if (isEven) "Windows PC" else "MacBook Pro",
+                operationSystemVersion = if (isEven) "Windows 10" else "macOS 14.0"
+            ),
             createdAt = createdAtMs,
             lastAccessedAt = createdAtMs + (index * 5_000L),
             lastReauthenticatedAt = createdAtMs + (index * 5_000L),

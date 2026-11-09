@@ -11,6 +11,7 @@ trim_trailing_whitespace = true
 
 [*.{kt,kts}]
 max_line_length = 120
+
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 ij_kotlin_continuation_indent_size = 4
@@ -27,13 +28,39 @@ ij_kotlin_method_parameters_right_paren_on_new_line = true
 ij_kotlin_call_parameters_wrap = normal
 ij_kotlin_call_parameters_new_line_after_left_paren = false
 ij_kotlin_call_parameters_right_paren_on_new_line = false
-ktlint_standard_indent = disabled
-ktlint_standard_string-template-indent = disabled
-ktlint_standard_multiline-expression-wrapping = disabled
-ktlint_function_signature_body_expression_wrapping = default
+
+# https://ktlint.github.io/ktlint/latest/rules/code-styles/
+ktlint_code_style = intellij_idea
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#function-signature
+ktlint_standard_function-signature = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#class-signature
+ktlint_standard_class-signature = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#parameter-list-wrapping
+ktlint_standard_parameter-list-wrapping = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#no-line-break-before-assignment
 ktlint_standard_no-line-break-before-assignment = enabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#binary-expression-wrapping
 ktlint_standard_binary-expression-wrapping = enabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#multiline-expression-wrapping
+ktlint_standard_multiline-expression-wrapping = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#annotation-formatting
 ktlint_standard_annotation = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#trailing-comma-on-call-site
+ktlint_standard_trailing-comma-on-call-site = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#trailing-comma-on-declaration-site
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#import-ordering
+ktlint_standard_import-ordering = disabled
 
 [*.md]
 trim_trailing_whitespace = false
@@ -50,6 +77,10 @@ indent_size = 2
 
 [tools/npm-generator/src/main/kotlin/**.kt]
 ij_formatter_enabled = false
+# https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/#disable-rules
+ktlint_standard = disabled
 
 [buildSrc/src/main/kotlin/GenerateLocalizationTask.kt]
 ij_formatter_enabled = false
+# https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/#disable-rules
+ktlint_standard = disabled

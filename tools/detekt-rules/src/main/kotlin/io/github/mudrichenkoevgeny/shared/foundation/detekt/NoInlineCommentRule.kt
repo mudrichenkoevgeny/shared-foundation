@@ -14,9 +14,7 @@ public class NoInlineCommentRule(
     config: Config = Config.empty
 ) : Rule(
     config = config,
-    description =
-        "Banal and redundant inline comments are prohibited. " +
-            "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
+    description = RULE_DESCRIPTION
 ) {
     private val allowedPrefixes =
         listOf("/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---")
@@ -31,11 +29,16 @@ public class NoInlineCommentRule(
             report(
                 Finding(
                     entity = Entity.from(comment),
-                    message =
-                        "Redundant inline comment found: '${comment.text.trim()}'. " +
-                            "Decompose steps into named functions or use KDoc for public APIs."
+                    message = "Redundant inline comment found: '${comment.text.trim()}'. " +
+                        "Decompose steps into named functions or use KDoc for public APIs."
                 )
             )
         }
+    }
+
+    public companion object {
+        public const val RULE_DESCRIPTION: String =
+            "Banal and redundant inline comments are prohibited. " +
+                "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
     }
 }

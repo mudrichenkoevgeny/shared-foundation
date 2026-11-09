@@ -20,15 +20,14 @@ class UserSessionModelUtilsTest {
             UserSessionSummary(
                 id = UserSessionId.generate(),
                 userId = UserId.generate(),
-                clientDeviceInfo =
-                    ClientDeviceInfo(
-                        deviceId = deviceId,
-                        deviceName = "Pixel 8",
-                        clientType = null,
-                        language = null,
-                        appVersion = null,
-                        operationSystemVersion = null
-                    ),
+                clientDeviceInfo = ClientDeviceInfo(
+                    deviceId = deviceId,
+                    deviceName = "Pixel 8",
+                    clientType = null,
+                    language = null,
+                    appVersion = null,
+                    operationSystemVersion = null
+                ),
                 identifierDisplayName = "user",
                 identifierAuthProvider = UserAuthProvider.EMAIL,
                 lastAccessedAt = now,
@@ -48,15 +47,14 @@ class UserSessionModelUtilsTest {
             UserSessionSummary(
                 id = UserSessionId.generate(),
                 userId = UserId.generate(),
-                clientDeviceInfo =
-                    ClientDeviceInfo(
-                        deviceId = deviceId,
-                        deviceName = "Pixel 8",
-                        clientType = null,
-                        language = null,
-                        appVersion = null,
-                        operationSystemVersion = null
-                    ),
+                clientDeviceInfo = ClientDeviceInfo(
+                    deviceId = deviceId,
+                    deviceName = "Pixel 8",
+                    clientType = null,
+                    language = null,
+                    appVersion = null,
+                    operationSystemVersion = null
+                ),
                 identifierDisplayName = "user",
                 identifierAuthProvider = UserAuthProvider.EMAIL,
                 lastAccessedAt = Instant.fromEpochMilliseconds(1000),
@@ -77,15 +75,14 @@ class UserSessionModelUtilsTest {
             UserSessionSummary(
                 id = UserSessionId.generate(),
                 userId = UserId.generate(),
-                clientDeviceInfo =
-                    ClientDeviceInfo(
-                        deviceId = sessionDeviceId,
-                        deviceName = "Pixel 8",
-                        clientType = null,
-                        language = null,
-                        appVersion = null,
-                        operationSystemVersion = null
-                    ),
+                clientDeviceInfo = ClientDeviceInfo(
+                    deviceId = sessionDeviceId,
+                    deviceName = "Pixel 8",
+                    clientType = null,
+                    language = null,
+                    appVersion = null,
+                    operationSystemVersion = null
+                ),
                 identifierDisplayName = "user",
                 identifierAuthProvider = UserAuthProvider.EMAIL,
                 lastAccessedAt = now,

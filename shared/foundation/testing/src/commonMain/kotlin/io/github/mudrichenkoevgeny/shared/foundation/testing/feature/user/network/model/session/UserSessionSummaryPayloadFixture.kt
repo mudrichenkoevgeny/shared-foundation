@@ -56,11 +56,10 @@ public fun createTestUserSessionSummaryPayloadList(
             userId = generateTestUuidString(index),
             identifierAuthProvider = if (isEven) UserAuthProvider.EMAIL.value else UserAuthProvider.GOOGLE.value,
             identifierDisplayName = if (isEven) "Email Identifier" else "Google Account",
-            clientDeviceInfo =
-                createTestClientDeviceInfoPayload(
-                    deviceName = if (isEven) "Windows PC" else "MacBook Pro",
-                    operationSystemVersion = if (isEven) "Windows 10" else "macOS 14.0"
-                ),
+            clientDeviceInfo = createTestClientDeviceInfoPayload(
+                deviceName = if (isEven) "Windows PC" else "MacBook Pro",
+                operationSystemVersion = if (isEven) "Windows 10" else "macOS 14.0"
+            ),
             lastAccessedAt = createdAtMs + (index * 5_000L),
             expiresAt = createdAtMs + 86_400_000L
         )

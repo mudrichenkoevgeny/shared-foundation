@@ -17,11 +17,10 @@ class UserDomainMapperTest {
     private val testFileUrls =
         FileUrls(
             originalUrl = "https://cdn.example.com/avatar_orig.png",
-            urlPresets =
-                mapOf(
-                    FileUrlPresets.THUMBNAIL to "https://cdn.example.com/avatar_thumb.png",
-                    FileUrlPresets.PREVIEW to "https://cdn.example.com/avatar_prev.png"
-                )
+            urlPresets = mapOf(
+                FileUrlPresets.THUMBNAIL to "https://cdn.example.com/avatar_thumb.png",
+                FileUrlPresets.PREVIEW to "https://cdn.example.com/avatar_prev.png"
+            )
         )
 
     private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()

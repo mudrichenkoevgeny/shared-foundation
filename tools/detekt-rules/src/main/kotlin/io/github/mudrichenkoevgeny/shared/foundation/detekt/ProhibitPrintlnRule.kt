@@ -15,9 +15,7 @@ public class ProhibitPrintlnRule(
     config: Config = Config.empty
 ) : Rule(
     config = config,
-    description =
-        "The 'println' or 'print' call is prohibited in production code. " +
-            "Use structured loggers or KMP logging primitives."
+    description = RULE_DESCRIPTION
 ) {
     override val ruleName: RuleName = RuleName("ProhibitPrintln")
 
@@ -36,9 +34,8 @@ public class ProhibitPrintlnRule(
                 report(
                     Finding(
                         entity = Entity.from(expression),
-                        message =
-                            "The '$calleeName' call is prohibited in production code. " +
-                                "Use structured loggers or KMP logging primitives."
+                        message = "The '$calleeName' call is prohibited in production code. " +
+                            "Use structured loggers or KMP logging primitives."
                     )
                 )
             }
@@ -60,12 +57,17 @@ public class ProhibitPrintlnRule(
                 report(
                     Finding(
                         entity = Entity.from(expression),
-                        message =
-                            "Direct System.out/err print call '$text' is prohibited in production code. " +
-                                "Use structured loggers or KMP logging primitives."
+                        message = "Direct System.out/err print call '$text' is prohibited in production code. " +
+                            "Use structured loggers or KMP logging primitives."
                     )
                 )
             }
         }
+    }
+
+    public companion object {
+        public const val RULE_DESCRIPTION: String =
+            "The 'println' or 'print' call is prohibited in production code. " +
+                "Use structured loggers or KMP logging primitives."
     }
 }

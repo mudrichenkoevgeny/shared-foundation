@@ -170,8 +170,7 @@ public fun generateSingleDtoSchema(kClass: KClass<*>): String {
             var zodType = resolveZodType(paramName, type, kClass)
 
             if (param.isOptional) {
-                zodType =
-                    when {
+                zodType = when {
                         zodType.startsWith("z.array(") -> "$zodType.default([])"
                         zodType == "z.number()" && paramName == "pageNumber" ->
                             "$zodType.default(ListingDefaultValues.INITIAL_PAGE_NUMBER)"

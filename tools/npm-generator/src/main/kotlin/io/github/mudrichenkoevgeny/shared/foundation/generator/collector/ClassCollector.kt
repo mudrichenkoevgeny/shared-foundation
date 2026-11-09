@@ -584,8 +584,7 @@ public val extraEnumInfos: List<EnumInfo> =
         EnumInfo(
             name = "ConfirmationType",
             schemaName = "confirmationTypeSchema",
-            entries =
-                listOf(
+            entries = listOf(
                     "REGISTRATION_EMAIL" to "REGISTRATION_EMAIL",
                     "ADD_EMAIL" to "ADD_EMAIL",
                     "PASSWORD_RESET_EMAIL" to "PASSWORD_RESET_EMAIL",
@@ -598,8 +597,7 @@ public val extraEnumInfos: List<EnumInfo> =
         EnumInfo(
             name = "AppType",
             schemaName = "appTypeSchema",
-            entries =
-                listOf(
+            entries = listOf(
                     "CLIENT" to "CLIENT",
                     "MANAGEMENT" to "MANAGEMENT"
                 )

@@ -15,7 +15,7 @@ public class ProhibitNonSafeAssertionRule(
     config: Config = Config.empty
 ) : Rule(
     config = config,
-    description = "The !! operator is strictly forbidden in production code."
+    description = RULE_DESCRIPTION
 ) {
     override val ruleName: RuleName = RuleName("ProhibitNonSafeAssertion")
 
@@ -32,12 +32,15 @@ public class ProhibitNonSafeAssertionRule(
                 report(
                     Finding(
                         entity = Entity.from(expression),
-                        message =
-                            "The !! operator is strictly forbidden in production code. " +
-                                "Use requireNotNull(...), checkNotNull(...), ?: error(...) or safe-calls ?."
+                        message = "The !! operator is strictly forbidden in production code. " +
+                            "Use requireNotNull(...), checkNotNull(...), ?: error(...) or safe-calls ?."
                     )
                 )
             }
         }
+    }
+
+    public companion object {
+        public const val RULE_DESCRIPTION: String = "The !! operator is strictly forbidden in production code."
     }
 }

@@ -22,16 +22,13 @@ public fun UserPrivatePayload.toUserPrivate(): UserPrivate = UserPrivate(
     id = id.toUserIdOrThrow(),
     role = UserRole.fromValueOrThrow(role),
     accountStatus = UserAccountStatus.fromValueOrThrow(accountStatus),
-    accountStatusOnRestore =
-        accountStatusOnRestore?.let { accountStatusOnRestore ->
-            UserAccountStatus.fromValueOrNull(accountStatusOnRestore)
-        },
+    accountStatusOnRestore = accountStatusOnRestore?.let { accountStatusOnRestore ->
+        UserAccountStatus.fromValueOrNull(accountStatusOnRestore)
+    },
     authorityLevel = authorityLevel,
-    permissionCodes =
-        permissionCodes
-            .map { permissionCode ->
-                PermissionCode(permissionCode)
-            }.toSet(),
+    permissionCodes = permissionCodes.map { permissionCode ->
+        PermissionCode(permissionCode)
+    }.toSet(),
     isTotpEnabled = isTotpEnabled,
     lastLoginAt = lastLoginAt?.let(Instant::fromEpochMilliseconds),
     lastActiveAt = lastActiveAt?.let(Instant::fromEpochMilliseconds),
@@ -57,11 +54,10 @@ public fun UserPrivate.toUserPrivatePayload(): UserPrivatePayload = UserPrivateP
     accountStatus = accountStatus.value,
     accountStatusOnRestore = accountStatusOnRestore?.value,
     authorityLevel = authorityLevel,
-    permissionCodes =
-        permissionCodes
-            .map { permissionCode ->
-                permissionCode.value
-            }.toSet(),
+    permissionCodes = permissionCodes
+        .map { permissionCode ->
+            permissionCode.value
+        }.toSet(),
     isTotpEnabled = isTotpEnabled,
     lastLoginAt = lastLoginAt?.toEpochMilliseconds(),
     lastActiveAt = lastActiveAt?.toEpochMilliseconds(),

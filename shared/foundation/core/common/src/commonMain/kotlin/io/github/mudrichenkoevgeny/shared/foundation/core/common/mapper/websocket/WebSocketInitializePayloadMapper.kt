@@ -15,15 +15,14 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.w
 public fun WebSocketInitializePayload.mergeClientInfo(existingClientInfo: ClientInfo? = null): ClientInfo {
     val currentClientInfo =
         existingClientInfo ?: ClientInfo(
-            clientDeviceInfo =
-                ClientDeviceInfo(
-                    deviceId = null,
-                    deviceName = null,
-                    clientType = null,
-                    language = null,
-                    appVersion = null,
-                    operationSystemVersion = null
-                ),
+            clientDeviceInfo = ClientDeviceInfo(
+                deviceId = null,
+                deviceName = null,
+                clientType = null,
+                language = null,
+                appVersion = null,
+                operationSystemVersion = null
+            ),
             userAgent = null,
             ipAddress = null,
             host = null,

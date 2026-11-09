@@ -15,15 +15,13 @@ public class PreferValueOverNameRule(
     config: Config = Config.empty
 ) : Rule(
     config = config,
-    description = "Use '.value' property instead of '.name' or '.serialName' when " +
-        "referencing domain enums or wire types."
+    description = RULE_DESCRIPTION
 ) {
     private val enumEntryPattern = Regex("""^[A-Z][a-zA-Z0-9_]*\.[A-Z0-9_]+$""")
     private val enumPropertyPattern =
         Regex(
-            pattern =
-                "role|status|category|visibility|type|actorType|order|mode|provider|" +
-                    "sensitivity|action|resource|method|target|format|level",
+            pattern = "role|status|category|visibility|type|actorType|order|mode|provider|" +
+                "sensitivity|action|resource|method|target|format|level",
             options = setOf(RegexOption.IGNORE_CASE)
         )
 
@@ -38,9 +36,8 @@ public class PreferValueOverNameRule(
             report(
                 Finding(
                     entity = Entity.from(expression),
-                    message =
-                        "Do not use '.serialName' on domain enums or wire types. " +
-                            "Use the '.value' property instead as per project standards."
+                    message = "Do not use '.serialName' on domain enums or wire types. " +
+                        "Use the '.value' property instead as per project standards."
                 )
             )
             return
@@ -77,12 +74,16 @@ public class PreferValueOverNameRule(
                 report(
                     Finding(
                         entity = Entity.from(expression),
-                        message =
-                            "Do not use '.name' on domain enums. " +
-                                "Use the '.value' property for wire string representations as per project standards."
+                        message = "Do not use '.name' on domain enums. " +
+                            "Use the '.value' property for wire string representations as per project standards."
                     )
                 )
             }
         }
+    }
+
+    public companion object {
+        public const val RULE_DESCRIPTION: String = "Use '.value' property instead of '.name' or '.serialName' when " +
+            "referencing domain enums or wire types."
     }
 }
