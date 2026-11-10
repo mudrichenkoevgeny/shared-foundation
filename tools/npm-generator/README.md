@@ -25,7 +25,10 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
    - **Polymorphic Composite Parsers**: Runtime parsers (`CompositeAuditActionTypeParser`, `CompositeAuditMetadataKeyParser`, `CompositeAuditResourceTypeParser`).
    - **Testing Fixtures & Collection Generators**: Ready-to-use constants (`TEST_*`), mock factories (`createTestUserSummary`, `createTestUserPrivatePayload`), auto-calculating `createTestPagedResult<T>`, generic helper `createTestList<T>`, and deterministic collection generators (`createTest<Entity>List`, `createTest<Entity>PayloadList`) with 0-based index IDs, alternating providers/devices, and time shifting (`TEST_TIME_MILLIS + index * 60_000`).
    - **Localization Bundles & Formatters**: Raw JSON dictionary constant (`localizationResources`), string template formatter (`formatLocalizedString`), default resolver (`defaultLocalizedStringResolver`), bundle classes, and module facades.
-4. **`README.md`**: Comprehensive documentation for NPM package consumers with installation instructions, module-by-module navigation route & Zod parameter schema (`*ParamsSchema`) index, and code examples for Zod validation, REST API calls, and router search parameter parsing.
+4. **`scripts/postinstall-sync-rules.mjs` & `scripts/agent-rules-syncer.mjs`**: Automatic postinstall synchronization hooks and reusable helper module:
+   - **`scripts/postinstall-sync-rules.mjs`**: Package postinstall entrypoint configured in `package.json` (`"scripts": { "postinstall": "node ./scripts/postinstall-sync-rules.mjs" }`) that automatically copies `.agent/common` rules into `.agent/global/common` of consuming Node.js/TypeScript projects upon `npm/pnpm install`.
+   - **`scripts/agent-rules-syncer.mjs`**: Reusable ES module exported via package subpath (`@mudrichenkoevgeny/shared-foundation/scripts/agent-rules-syncer.mjs`). Provides `syncAgentRules({ sourceAgentDir, relativeTargetSubdir, packageName })` for downstream SDKs (`web-platform-sdk`) to synchronize their own agent rules with Windows file-lock retry backoff and graceful error handling.
+5. **`README.md`**: Comprehensive documentation for NPM package consumers with installation instructions, module-by-module navigation route & Zod parameter schema (`*ParamsSchema`) index, and code examples for Zod validation, REST API calls, and router search parameter parsing.
 
 ---
 
@@ -40,15 +43,20 @@ Running `./gradlew generateNpmPackage` executes this tool and produces the follo
    - `rawDtoClasses`: Collects all DTO payloads, request models, and screen parameter data classes (`*Params`).
    - `rawDomainToDtoClasses`: Maps Domain entity models to DTO payloads.
 
-2. **KDoc to JSDoc Parser (`extractKDoc`)**:
+2. **PostInstall Script & Agent Rules Syncer (`PostInstallScriptGenerator`)**:
+   - Copies `.agent/global/common` rules from repository root into `build/npm-package/.agent/common`.
+   - Generates reusable `agent-rules-syncer.mjs` with Windows file-lock retry logic (`Atomics.wait`) and non-blocking `try/catch` error handling.
+   - Generates `postinstall-sync-rules.mjs` entrypoint script and updates `package.json` `"scripts"` and `"exports"` object.
+
+3. **KDoc to JSDoc Parser (`extractKDoc`)**:
    - Scans Kotlin source `.kt` files in `shared/foundation/`.
    - Extracts KDoc comment blocks (`/** ... */`) for classes, objects, interfaces, nested screen objects, properties, and enum entries.
    - Converts KDoc links (`[Type.member]`) into clean TypeScript JSDoc comments.
 
-3. **Evaluation Order Safeguard**:
+4. **Evaluation Order Safeguard**:
    - Emits Zod enum schemas (`$enumCode`) at the very top of `index.mjs` / `index.js` right after branded types, ensuring all enum schemas are defined BEFORE any DTO schema or mapper that references them (preventing `ReferenceError` during ESM evaluation).
 
-4. **Optional Field & Default Value Converter**:
+5. **Optional Field & Default Value Converter**:
    - Inspects Kotlin primary constructor parameter metadata (`param.isOptional`).
    - Generates `.default(...)` or `.optional()` in Zod schemas and `?` in `index.d.ts` interfaces so `*ParamsSchema.parse({})` accepts partial/empty input maps.
 

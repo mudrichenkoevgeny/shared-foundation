@@ -37,6 +37,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.generator.route.generateRou
 import io.github.mudrichenkoevgeny.shared.foundation.generator.schema.generateBrandedTypes
 import io.github.mudrichenkoevgeny.shared.foundation.generator.schema.generateDtoSchemasAndTypes
 import io.github.mudrichenkoevgeny.shared.foundation.generator.schema.resolveTsType
+import io.github.mudrichenkoevgeny.shared.foundation.generator.script.PostInstallScriptGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.generator.testing.generateTestFixturesDts
 import io.github.mudrichenkoevgeny.shared.foundation.generator.testing.generateTestFixturesJs
 import kotlinx.serialization.SerialName
@@ -61,6 +62,8 @@ public fun main() {
         File(outputDir, ".npmignore").writeText("*.tgz\n")
         File(outputDir, "README.md").writeText(generateNpmReadmeText())
 
+        PostInstallScriptGenerator.generateScriptAndSyncAgentRules(rootDir, outputDir)
+
         val (localizationJsCode, localizationDtsCode) = generateLocalizationCode(rootDir)
         val testingJsCode = generateTestFixturesJs()
         val testingDtsCode = generateTestFixturesDts()
@@ -72,14 +75,6 @@ public fun main() {
 
         val dtsContent = generateDeclarationFile(localizationDtsCode, testingDtsCode)
         File(outputDir, "index.d.ts").writeText(dtsContent)
-
-        val agentOutputDir = File(outputDir, ".agent")
-        agentOutputDir.mkdirs()
-
-        val globalCommonDir = File(rootDir, ".agent/global/common")
-        if (globalCommonDir.exists()) {
-            globalCommonDir.copyRecursively(File(agentOutputDir, "common"), overwrite = true)
-        }
 
         val localWebSdkDir = File(rootDir.parentFile, "web-platform-sdk/packages/core-common/src/generated")
         if (localWebSdkDir.exists()) {
@@ -129,7 +124,11 @@ private fun generatePackageJson(packageVersion: String): String =
       "types": "./index.d.ts",
       "import": "./index.mjs",
       "require": "./index.js"
-    }
+    },
+    "./scripts/*": "./scripts/*"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall-sync-rules.mjs"
   },
   "dependencies": {
     "zod": "^3.23.0"
