@@ -7,6 +7,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseBoolean
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseEnumList
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseNonBlankString
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseStringList
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
@@ -116,266 +120,67 @@ public data class ManagementGlobalSessionListParams(
          */
         override fun parse(params: Map<String, Any?>): ManagementGlobalSessionListParams {
             val normalized = params.normalizeQueryParams()
-
-            val pageNumber =
-                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
-
-            val pageSize =
-                normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
-
-            val sortBy =
-                normalized[ListingParamNames.Sort.SORT_BY]
-                    ?.firstOrNull()
-                    ?.let { UserSessionSortBy.fromValueOrNull(it) }
-                    ?: UserSessionSortBy.DEFAULT
-
-            val sortOrder =
-                normalized[ListingParamNames.Sort.SORT_ORDER]
-                    ?.firstOrNull()
-                    ?.let { SortOrder.fromValueOrNull(it) }
-                    ?: SortOrder.DEFAULT
-
-            val sessionIds =
-                normalized[UserSessionFilterValues.SESSION_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val userIds =
-                normalized[UserSessionFilterValues.USER_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val userRoles =
-                normalized[UserSessionFilterValues.USER_ROLE]
-                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeUserRoles =
-                normalized[UserSessionFilterValues.EXCLUDE_USER_ROLE]
-                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val identifier =
-                normalized[UserSessionFilterValues.IDENTIFIER]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val identifierIds =
-                normalized[UserSessionFilterValues.IDENTIFIER_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val identifierDisplayName =
-                normalized[UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val identifierAuthProviders =
-                normalized[UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER]
-                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeIdentifierAuthProviders =
-                normalized[UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER]
-                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val clientTypes =
-                normalized[UserSessionFilterValues.CLIENT_TYPE]
-                    ?.mapNotNull { ClientType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeClientTypes =
-                normalized[UserSessionFilterValues.EXCLUDE_CLIENT_TYPE]
-                    ?.mapNotNull { ClientType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val isClientTypeSet =
-                normalized[UserSessionFilterValues.IS_CLIENT_TYPE_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val deviceId =
-                normalized[UserSessionFilterValues.DEVICE_ID]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isDeviceIdSet =
-                normalized[UserSessionFilterValues.IS_DEVICE_ID_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val deviceName =
-                normalized[UserSessionFilterValues.DEVICE_NAME]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isDeviceNameSet =
-                normalized[UserSessionFilterValues.IS_DEVICE_NAME_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val language =
-                normalized[UserSessionFilterValues.LANGUAGE]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isLanguageSet =
-                normalized[UserSessionFilterValues.IS_LANGUAGE_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val appVersion =
-                normalized[UserSessionFilterValues.APP_VERSION]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isAppVersionSet =
-                normalized[UserSessionFilterValues.IS_APP_VERSION_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val osVersion =
-                normalized[UserSessionFilterValues.OPERATION_SYSTEM_VERSION]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isOperationSystemVersionSet =
-                normalized[UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val userAgent =
-                normalized[UserSessionFilterValues.USER_AGENT]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isUserAgentSet =
-                normalized[UserSessionFilterValues.IS_USER_AGENT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val ipAddress =
-                normalized[UserSessionFilterValues.IP_ADDRESS]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isIpAddressSet =
-                normalized[UserSessionFilterValues.IS_IP_ADDRESS_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val expiresAtFrom =
-                normalized[UserSessionFilterValues.EXPIRES_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val expiresAtTo =
-                normalized[UserSessionFilterValues.EXPIRES_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastAccessedAtFrom =
-                normalized[UserSessionFilterValues.LAST_ACCESSED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastAccessedAtTo =
-                normalized[UserSessionFilterValues.LAST_ACCESSED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastReauthenticatedAtFrom =
-                normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastReauthenticatedAtTo =
-                normalized[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val createdAtFrom =
-                normalized[UserSessionFilterValues.CREATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val createdAtTo =
-                normalized[UserSessionFilterValues.CREATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtFrom =
-                normalized[UserSessionFilterValues.UPDATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtTo =
-                normalized[UserSessionFilterValues.UPDATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isUpdatedAtSet =
-                normalized[UserSessionFilterValues.IS_UPDATED_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val searchQuery =
-                normalized[UserSessionFilterValues.SEARCH_QUERY]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
             return ManagementGlobalSessionListParams(
-                pageNumber = pageNumber,
-                pageSize = pageSize,
-                sortBy = sortBy,
-                sortOrder = sortOrder,
-                sessionIds = sessionIds,
-                userIds = userIds,
-                userRoles = userRoles,
-                excludeUserRoles = excludeUserRoles,
-                identifier = identifier,
-                identifierIds = identifierIds,
-                identifierDisplayName = identifierDisplayName,
-                identifierAuthProviders = identifierAuthProviders,
-                excludeIdentifierAuthProviders = excludeIdentifierAuthProviders,
-                clientTypes = clientTypes,
-                excludeClientTypes = excludeClientTypes,
-                isClientTypeSet = isClientTypeSet,
-                deviceId = deviceId,
-                isDeviceIdSet = isDeviceIdSet,
-                deviceName = deviceName,
-                isDeviceNameSet = isDeviceNameSet,
-                language = language,
-                isLanguageSet = isLanguageSet,
-                appVersion = appVersion,
-                isAppVersionSet = isAppVersionSet,
-                osVersion = osVersion,
-                isOperationSystemVersionSet = isOperationSystemVersionSet,
-                userAgent = userAgent,
-                isUserAgentSet = isUserAgentSet,
-                ipAddress = ipAddress,
-                isIpAddressSet = isIpAddressSet,
-                expiresAtFrom = expiresAtFrom,
-                expiresAtTo = expiresAtTo,
-                lastAccessedAtFrom = lastAccessedAtFrom,
-                lastAccessedAtTo = lastAccessedAtTo,
-                lastReauthenticatedAtFrom = lastReauthenticatedAtFrom,
-                lastReauthenticatedAtTo = lastReauthenticatedAtTo,
-                createdAtFrom = createdAtFrom,
-                createdAtTo = createdAtTo,
-                updatedAtFrom = updatedAtFrom,
-                updatedAtTo = updatedAtTo,
-                isUpdatedAtSet = isUpdatedAtSet,
-                searchQuery = searchQuery
+                pageNumber =
+                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize =
+                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy =
+                    normalized[ListingParamNames.Sort.SORT_BY]
+                        ?.firstOrNull()
+                        ?.let { UserSessionSortBy.fromValueOrNull(it) }
+                        ?: UserSessionSortBy.DEFAULT,
+                sortOrder =
+                    normalized[ListingParamNames.Sort.SORT_ORDER]
+                        ?.firstOrNull()
+                        ?.let { SortOrder.fromValueOrNull(it) }
+                        ?: SortOrder.DEFAULT,
+                sessionIds = normalized.parseStringList(UserSessionFilterValues.SESSION_ID),
+                userIds = normalized.parseStringList(UserSessionFilterValues.USER_ID),
+                userRoles = normalized.parseEnumList(UserSessionFilterValues.USER_ROLE) { UserRole.fromValueOrNull(it) },
+                excludeUserRoles = normalized.parseEnumList(UserSessionFilterValues.EXCLUDE_USER_ROLE) { UserRole.fromValueOrNull(it) },
+                identifier = normalized.parseNonBlankString(UserSessionFilterValues.IDENTIFIER),
+                identifierIds = normalized.parseStringList(UserSessionFilterValues.IDENTIFIER_ID),
+                identifierDisplayName = normalized.parseNonBlankString(UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME),
+                identifierAuthProviders = normalized.parseEnumList(UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
+                excludeIdentifierAuthProviders = normalized.parseEnumList(UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
+                clientTypes = normalized.parseEnumList(UserSessionFilterValues.CLIENT_TYPE) { ClientType.fromValueOrNull(it) },
+                excludeClientTypes = normalized.parseEnumList(UserSessionFilterValues.EXCLUDE_CLIENT_TYPE) { ClientType.fromValueOrNull(it) },
+                isClientTypeSet = normalized.parseBoolean(UserSessionFilterValues.IS_CLIENT_TYPE_SET),
+                deviceId = normalized.parseNonBlankString(UserSessionFilterValues.DEVICE_ID),
+                isDeviceIdSet = normalized.parseBoolean(UserSessionFilterValues.IS_DEVICE_ID_SET),
+                deviceName = normalized.parseNonBlankString(UserSessionFilterValues.DEVICE_NAME),
+                isDeviceNameSet = normalized.parseBoolean(UserSessionFilterValues.IS_DEVICE_NAME_SET),
+                language = normalized.parseNonBlankString(UserSessionFilterValues.LANGUAGE),
+                isLanguageSet = normalized.parseBoolean(UserSessionFilterValues.IS_LANGUAGE_SET),
+                appVersion = normalized.parseNonBlankString(UserSessionFilterValues.APP_VERSION),
+                isAppVersionSet = normalized.parseBoolean(UserSessionFilterValues.IS_APP_VERSION_SET),
+                osVersion = normalized.parseNonBlankString(UserSessionFilterValues.OPERATION_SYSTEM_VERSION),
+                isOperationSystemVersionSet = normalized.parseBoolean(UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET),
+                userAgent = normalized.parseNonBlankString(UserSessionFilterValues.USER_AGENT),
+                isUserAgentSet = normalized.parseBoolean(UserSessionFilterValues.IS_USER_AGENT_SET),
+                ipAddress = normalized.parseNonBlankString(UserSessionFilterValues.IP_ADDRESS),
+                isIpAddressSet = normalized.parseBoolean(UserSessionFilterValues.IS_IP_ADDRESS_SET),
+                expiresAtFrom = normalized.parseNonBlankString(UserSessionFilterValues.EXPIRES_AT_FROM),
+                expiresAtTo = normalized.parseNonBlankString(UserSessionFilterValues.EXPIRES_AT_TO),
+                lastAccessedAtFrom = normalized.parseNonBlankString(UserSessionFilterValues.LAST_ACCESSED_AT_FROM),
+                lastAccessedAtTo = normalized.parseNonBlankString(UserSessionFilterValues.LAST_ACCESSED_AT_TO),
+                lastReauthenticatedAtFrom = normalized.parseNonBlankString(UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM),
+                lastReauthenticatedAtTo = normalized.parseNonBlankString(UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO),
+                createdAtFrom = normalized.parseNonBlankString(UserSessionFilterValues.CREATED_AT_FROM),
+                createdAtTo = normalized.parseNonBlankString(UserSessionFilterValues.CREATED_AT_TO),
+                updatedAtFrom = normalized.parseNonBlankString(UserSessionFilterValues.UPDATED_AT_FROM),
+                updatedAtTo = normalized.parseNonBlankString(UserSessionFilterValues.UPDATED_AT_TO),
+                isUpdatedAtSet = normalized.parseBoolean(UserSessionFilterValues.IS_UPDATED_AT_SET),
+                searchQuery = normalized.parseNonBlankString(UserSessionFilterValues.SEARCH_QUERY)
             )
         }
 
@@ -387,138 +192,152 @@ public data class ManagementGlobalSessionListParams(
          */
         override fun serialize(params: ManagementGlobalSessionListParams): Map<String, List<String>> {
             val result = mutableMapOf<String, List<String>>()
+            result.serializePaginationAndSorting(params)
+            result.serializeUserAndIdentifierFilters(params)
+            result.serializeClientAndAppFilters(params)
+            result.serializeSessionTimestampFilters(params)
+            return result
+        }
 
+        private fun MutableMap<String, List<String>>.serializePaginationAndSorting(params: ManagementGlobalSessionListParams) {
             if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {
-                result[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
+                this[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
             }
             if (params.pageSize != ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE) {
-                result[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
+                this[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
             }
             if (params.sortBy != UserSessionSortBy.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
+                this[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
             }
             if (params.sortOrder != SortOrder.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
+                this[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeUserAndIdentifierFilters(params: ManagementGlobalSessionListParams) {
             if (params.sessionIds.isNotEmpty()) {
-                result[UserSessionFilterValues.SESSION_ID] = params.sessionIds
+                this[UserSessionFilterValues.SESSION_ID] = params.sessionIds
             }
             if (params.userIds.isNotEmpty()) {
-                result[UserSessionFilterValues.USER_ID] = params.userIds
+                this[UserSessionFilterValues.USER_ID] = params.userIds
             }
             if (params.userRoles.isNotEmpty()) {
-                result[UserSessionFilterValues.USER_ROLE] = params.userRoles.map { it.value }
+                this[UserSessionFilterValues.USER_ROLE] = params.userRoles.map { it.value }
             }
             if (params.excludeUserRoles.isNotEmpty()) {
-                result[UserSessionFilterValues.EXCLUDE_USER_ROLE] = params.excludeUserRoles.map { it.value }
+                this[UserSessionFilterValues.EXCLUDE_USER_ROLE] = params.excludeUserRoles.map { it.value }
             }
             if (!params.identifier.isNullOrBlank()) {
-                result[UserSessionFilterValues.IDENTIFIER] = listOf(params.identifier.trim())
+                this[UserSessionFilterValues.IDENTIFIER] = listOf(params.identifier.trim())
             }
             if (params.identifierIds.isNotEmpty()) {
-                result[UserSessionFilterValues.IDENTIFIER_ID] = params.identifierIds
+                this[UserSessionFilterValues.IDENTIFIER_ID] = params.identifierIds
             }
             if (!params.identifierDisplayName.isNullOrBlank()) {
-                result[UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME] = listOf(params.identifierDisplayName.trim())
+                this[UserSessionFilterValues.IDENTIFIER_DISPLAY_NAME] = listOf(params.identifierDisplayName.trim())
             }
             if (params.identifierAuthProviders.isNotEmpty()) {
-                result[UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER] =
+                this[UserSessionFilterValues.IDENTIFIER_AUTH_PROVIDER] =
                     params.identifierAuthProviders.map { it.value }
             }
             if (params.excludeIdentifierAuthProviders.isNotEmpty()) {
-                result[UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER] =
+                this[UserSessionFilterValues.EXCLUDE_IDENTIFIER_AUTH_PROVIDER] =
                     params.excludeIdentifierAuthProviders.map { it.value }
             }
             if (params.clientTypes.isNotEmpty()) {
-                result[UserSessionFilterValues.CLIENT_TYPE] = params.clientTypes.map { it.value }
+                this[UserSessionFilterValues.CLIENT_TYPE] = params.clientTypes.map { it.value }
             }
             if (params.excludeClientTypes.isNotEmpty()) {
-                result[UserSessionFilterValues.EXCLUDE_CLIENT_TYPE] = params.excludeClientTypes.map { it.value }
+                this[UserSessionFilterValues.EXCLUDE_CLIENT_TYPE] = params.excludeClientTypes.map { it.value }
             }
             if (params.isClientTypeSet != null) {
-                result[UserSessionFilterValues.IS_CLIENT_TYPE_SET] = listOf(params.isClientTypeSet.toString())
+                this[UserSessionFilterValues.IS_CLIENT_TYPE_SET] = listOf(params.isClientTypeSet.toString())
             }
             if (!params.deviceId.isNullOrBlank()) {
-                result[UserSessionFilterValues.DEVICE_ID] = listOf(params.deviceId.trim())
+                this[UserSessionFilterValues.DEVICE_ID] = listOf(params.deviceId.trim())
             }
             if (params.isDeviceIdSet != null) {
-                result[UserSessionFilterValues.IS_DEVICE_ID_SET] = listOf(params.isDeviceIdSet.toString())
+                this[UserSessionFilterValues.IS_DEVICE_ID_SET] = listOf(params.isDeviceIdSet.toString())
             }
             if (!params.deviceName.isNullOrBlank()) {
-                result[UserSessionFilterValues.DEVICE_NAME] = listOf(params.deviceName.trim())
+                this[UserSessionFilterValues.DEVICE_NAME] = listOf(params.deviceName.trim())
             }
             if (params.isDeviceNameSet != null) {
-                result[UserSessionFilterValues.IS_DEVICE_NAME_SET] = listOf(params.isDeviceNameSet.toString())
+                this[UserSessionFilterValues.IS_DEVICE_NAME_SET] = listOf(params.isDeviceNameSet.toString())
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeClientAndAppFilters(params: ManagementGlobalSessionListParams) {
             if (!params.language.isNullOrBlank()) {
-                result[UserSessionFilterValues.LANGUAGE] = listOf(params.language.trim())
+                this[UserSessionFilterValues.LANGUAGE] = listOf(params.language.trim())
             }
             if (params.isLanguageSet != null) {
-                result[UserSessionFilterValues.IS_LANGUAGE_SET] = listOf(params.isLanguageSet.toString())
+                this[UserSessionFilterValues.IS_LANGUAGE_SET] = listOf(params.isLanguageSet.toString())
             }
             if (!params.appVersion.isNullOrBlank()) {
-                result[UserSessionFilterValues.APP_VERSION] = listOf(params.appVersion.trim())
+                this[UserSessionFilterValues.APP_VERSION] = listOf(params.appVersion.trim())
             }
             if (params.isAppVersionSet != null) {
-                result[UserSessionFilterValues.IS_APP_VERSION_SET] = listOf(params.isAppVersionSet.toString())
+                this[UserSessionFilterValues.IS_APP_VERSION_SET] = listOf(params.isAppVersionSet.toString())
             }
             if (!params.osVersion.isNullOrBlank()) {
-                result[UserSessionFilterValues.OPERATION_SYSTEM_VERSION] = listOf(params.osVersion.trim())
+                this[UserSessionFilterValues.OPERATION_SYSTEM_VERSION] = listOf(params.osVersion.trim())
             }
             if (params.isOperationSystemVersionSet != null) {
-                result[UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET] =
+                this[UserSessionFilterValues.IS_OPERATION_SYSTEM_VERSION_SET] =
                     listOf(params.isOperationSystemVersionSet.toString())
             }
             if (!params.userAgent.isNullOrBlank()) {
-                result[UserSessionFilterValues.USER_AGENT] = listOf(params.userAgent.trim())
+                this[UserSessionFilterValues.USER_AGENT] = listOf(params.userAgent.trim())
             }
             if (params.isUserAgentSet != null) {
-                result[UserSessionFilterValues.IS_USER_AGENT_SET] = listOf(params.isUserAgentSet.toString())
+                this[UserSessionFilterValues.IS_USER_AGENT_SET] = listOf(params.isUserAgentSet.toString())
             }
             if (!params.ipAddress.isNullOrBlank()) {
-                result[UserSessionFilterValues.IP_ADDRESS] = listOf(params.ipAddress.trim())
+                this[UserSessionFilterValues.IP_ADDRESS] = listOf(params.ipAddress.trim())
             }
             if (params.isIpAddressSet != null) {
-                result[UserSessionFilterValues.IS_IP_ADDRESS_SET] = listOf(params.isIpAddressSet.toString())
+                this[UserSessionFilterValues.IS_IP_ADDRESS_SET] = listOf(params.isIpAddressSet.toString())
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeSessionTimestampFilters(params: ManagementGlobalSessionListParams) {
             if (params.expiresAtFrom != null) {
-                result[UserSessionFilterValues.EXPIRES_AT_FROM] = listOf(params.expiresAtFrom)
+                this[UserSessionFilterValues.EXPIRES_AT_FROM] = listOf(params.expiresAtFrom)
             }
             if (params.expiresAtTo != null) {
-                result[UserSessionFilterValues.EXPIRES_AT_TO] = listOf(params.expiresAtTo)
+                this[UserSessionFilterValues.EXPIRES_AT_TO] = listOf(params.expiresAtTo)
             }
             if (params.lastAccessedAtFrom != null) {
-                result[UserSessionFilterValues.LAST_ACCESSED_AT_FROM] = listOf(params.lastAccessedAtFrom)
+                this[UserSessionFilterValues.LAST_ACCESSED_AT_FROM] = listOf(params.lastAccessedAtFrom)
             }
             if (params.lastAccessedAtTo != null) {
-                result[UserSessionFilterValues.LAST_ACCESSED_AT_TO] = listOf(params.lastAccessedAtTo)
+                this[UserSessionFilterValues.LAST_ACCESSED_AT_TO] = listOf(params.lastAccessedAtTo)
             }
             if (params.lastReauthenticatedAtFrom != null) {
-                result[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM] = listOf(params.lastReauthenticatedAtFrom)
+                this[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_FROM] = listOf(params.lastReauthenticatedAtFrom)
             }
             if (params.lastReauthenticatedAtTo != null) {
-                result[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO] = listOf(params.lastReauthenticatedAtTo)
+                this[UserSessionFilterValues.LAST_REAUTHENTICATED_AT_TO] = listOf(params.lastReauthenticatedAtTo)
             }
             if (params.createdAtFrom != null) {
-                result[UserSessionFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
+                this[UserSessionFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
             }
             if (params.createdAtTo != null) {
-                result[UserSessionFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
+                this[UserSessionFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
             }
             if (params.updatedAtFrom != null) {
-                result[UserSessionFilterValues.UPDATED_AT_FROM] = listOf(params.updatedAtFrom)
+                this[UserSessionFilterValues.UPDATED_AT_FROM] = listOf(params.updatedAtFrom)
             }
             if (params.updatedAtTo != null) {
-                result[UserSessionFilterValues.UPDATED_AT_TO] = listOf(params.updatedAtTo)
+                this[UserSessionFilterValues.UPDATED_AT_TO] = listOf(params.updatedAtTo)
             }
             if (params.isUpdatedAtSet != null) {
-                result[UserSessionFilterValues.IS_UPDATED_AT_SET] = listOf(params.isUpdatedAtSet.toString())
+                this[UserSessionFilterValues.IS_UPDATED_AT_SET] = listOf(params.isUpdatedAtSet.toString())
             }
             if (params.searchQuery != null) {
-                result[UserSessionFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
+                this[UserSessionFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
             }
-
-            return result
         }
     }
 }

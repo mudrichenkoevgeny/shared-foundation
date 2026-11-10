@@ -10,6 +10,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseEnumList
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseNonBlankString
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseStringList
 import kotlinx.serialization.Serializable
 
 /**
@@ -71,121 +74,43 @@ public data class ManagementAuditEventListParams(
         public override fun parse(params: Map<String, Any?>): ManagementAuditEventListParams {
             val normalized = params.normalizeQueryParams()
 
-            val pageNumber =
-                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
-
-            val pageSize =
-                normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
-
-            val sortBy =
-                normalized[ListingParamNames.Sort.SORT_BY]
-                    ?.firstOrNull()
-                    ?.let { AuditEventSortBy.fromValueOrNull(it) }
-                    ?: AuditEventSortBy.DEFAULT
-
-            val sortOrder =
-                normalized[ListingParamNames.Sort.SORT_ORDER]
-                    ?.firstOrNull()
-                    ?.let { SortOrder.fromValueOrNull(it) }
-                    ?: SortOrder.DEFAULT
-
-            val eventIds =
-                normalized[AuditEventFilterValues.EVENT_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val actorIds =
-                normalized[AuditEventFilterValues.ACTOR_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val actorTypes =
-                normalized[AuditEventFilterValues.ACTOR_TYPE]
-                    ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeActorTypes =
-                normalized[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE]
-                    ?.mapNotNull { AuditActorType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val actorUserRoles =
-                normalized[AuditEventFilterValues.ACTOR_USER_ROLE]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val actions =
-                normalized[AuditEventFilterValues.ACTION]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val excludeActions =
-                normalized[AuditEventFilterValues.EXCLUDE_ACTION]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val resources =
-                normalized[AuditEventFilterValues.RESOURCE]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val resourceIds =
-                normalized[AuditEventFilterValues.RESOURCE_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val statuses =
-                normalized[AuditEventFilterValues.STATUS]
-                    ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeStatuses =
-                normalized[AuditEventFilterValues.EXCLUDE_STATUS]
-                    ?.mapNotNull { AuditStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val createdAtFrom =
-                normalized[AuditEventFilterValues.CREATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val createdAtTo =
-                normalized[AuditEventFilterValues.CREATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val searchQuery =
-                normalized[AuditEventFilterValues.SEARCH_QUERY]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
             return ManagementAuditEventListParams(
-                pageNumber = pageNumber,
-                pageSize = pageSize,
-                sortBy = sortBy,
-                sortOrder = sortOrder,
-                eventIds = eventIds,
-                actorIds = actorIds,
-                actorTypes = actorTypes,
-                excludeActorTypes = excludeActorTypes,
-                actorUserRoles = actorUserRoles,
-                actions = actions,
-                excludeActions = excludeActions,
-                resources = resources,
-                resourceIds = resourceIds,
-                statuses = statuses,
-                excludeStatuses = excludeStatuses,
-                createdAtFrom = createdAtFrom,
-                createdAtTo = createdAtTo,
-                searchQuery = searchQuery
+                pageNumber =
+                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize =
+                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy =
+                    normalized[ListingParamNames.Sort.SORT_BY]
+                        ?.firstOrNull()
+                        ?.let { AuditEventSortBy.fromValueOrNull(it) }
+                        ?: AuditEventSortBy.DEFAULT,
+                sortOrder =
+                    normalized[ListingParamNames.Sort.SORT_ORDER]
+                        ?.firstOrNull()
+                        ?.let { SortOrder.fromValueOrNull(it) }
+                        ?: SortOrder.DEFAULT,
+                eventIds = normalized.parseStringList(AuditEventFilterValues.EVENT_ID),
+                actorIds = normalized.parseStringList(AuditEventFilterValues.ACTOR_ID),
+                actorTypes = normalized.parseEnumList(AuditEventFilterValues.ACTOR_TYPE) { AuditActorType.fromValueOrNull(it) },
+                excludeActorTypes = normalized.parseEnumList(AuditEventFilterValues.EXCLUDE_ACTOR_TYPE) { AuditActorType.fromValueOrNull(it) },
+                actorUserRoles = normalized.parseStringList(AuditEventFilterValues.ACTOR_USER_ROLE),
+                actions = normalized.parseStringList(AuditEventFilterValues.ACTION),
+                excludeActions = normalized.parseStringList(AuditEventFilterValues.EXCLUDE_ACTION),
+                resources = normalized.parseStringList(AuditEventFilterValues.RESOURCE),
+                resourceIds = normalized.parseStringList(AuditEventFilterValues.RESOURCE_ID),
+                statuses = normalized.parseEnumList(AuditEventFilterValues.STATUS) { AuditStatus.fromValueOrNull(it) },
+                excludeStatuses = normalized.parseEnumList(AuditEventFilterValues.EXCLUDE_STATUS) { AuditStatus.fromValueOrNull(it) },
+                createdAtFrom = normalized.parseNonBlankString(AuditEventFilterValues.CREATED_AT_FROM),
+                createdAtTo = normalized.parseNonBlankString(AuditEventFilterValues.CREATED_AT_TO),
+                searchQuery = normalized.parseNonBlankString(AuditEventFilterValues.SEARCH_QUERY)
             )
         }
 
@@ -197,63 +122,73 @@ public data class ManagementAuditEventListParams(
          */
         public override fun serialize(params: ManagementAuditEventListParams): Map<String, List<String>> {
             val result = mutableMapOf<String, List<String>>()
+            result.serializePaginationAndSorting(params)
+            result.serializeActorAndActionFilters(params)
+            result.serializeResourceAndStatusFilters(params)
+            return result
+        }
 
+        private fun MutableMap<String, List<String>>.serializePaginationAndSorting(params: ManagementAuditEventListParams) {
             if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {
-                result[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
+                this[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
             }
             if (params.pageSize != ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE) {
-                result[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
+                this[ListingParamNames.Pagination.PAGE_SIZE] = listOf(params.pageSize.toString())
             }
             if (params.sortBy != AuditEventSortBy.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
+                this[ListingParamNames.Sort.SORT_BY] = listOf(params.sortBy.value)
             }
             if (params.sortOrder != SortOrder.DEFAULT) {
-                result[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
+                this[ListingParamNames.Sort.SORT_ORDER] = listOf(params.sortOrder.value)
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeActorAndActionFilters(params: ManagementAuditEventListParams) {
             if (params.eventIds.isNotEmpty()) {
-                result[AuditEventFilterValues.EVENT_ID] = params.eventIds
+                this[AuditEventFilterValues.EVENT_ID] = params.eventIds
             }
             if (params.actorIds.isNotEmpty()) {
-                result[AuditEventFilterValues.ACTOR_ID] = params.actorIds
+                this[AuditEventFilterValues.ACTOR_ID] = params.actorIds
             }
             if (params.actorTypes.isNotEmpty()) {
-                result[AuditEventFilterValues.ACTOR_TYPE] = params.actorTypes.map { it.value }
+                this[AuditEventFilterValues.ACTOR_TYPE] = params.actorTypes.map { it.value }
             }
             if (params.excludeActorTypes.isNotEmpty()) {
-                result[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE] = params.excludeActorTypes.map { it.value }
+                this[AuditEventFilterValues.EXCLUDE_ACTOR_TYPE] = params.excludeActorTypes.map { it.value }
             }
             if (params.actorUserRoles.isNotEmpty()) {
-                result[AuditEventFilterValues.ACTOR_USER_ROLE] = params.actorUserRoles
+                this[AuditEventFilterValues.ACTOR_USER_ROLE] = params.actorUserRoles
             }
             if (params.actions.isNotEmpty()) {
-                result[AuditEventFilterValues.ACTION] = params.actions
+                this[AuditEventFilterValues.ACTION] = params.actions
             }
             if (params.excludeActions.isNotEmpty()) {
-                result[AuditEventFilterValues.EXCLUDE_ACTION] = params.excludeActions
+                this[AuditEventFilterValues.EXCLUDE_ACTION] = params.excludeActions
             }
+        }
+
+        private fun MutableMap<String, List<String>>.serializeResourceAndStatusFilters(params: ManagementAuditEventListParams) {
             if (params.resources.isNotEmpty()) {
-                result[AuditEventFilterValues.RESOURCE] = params.resources
+                this[AuditEventFilterValues.RESOURCE] = params.resources
             }
             if (params.resourceIds.isNotEmpty()) {
-                result[AuditEventFilterValues.RESOURCE_ID] = params.resourceIds
+                this[AuditEventFilterValues.RESOURCE_ID] = params.resourceIds
             }
             if (params.statuses.isNotEmpty()) {
-                result[AuditEventFilterValues.STATUS] = params.statuses.map { it.value }
+                this[AuditEventFilterValues.STATUS] = params.statuses.map { it.value }
             }
             if (params.excludeStatuses.isNotEmpty()) {
-                result[AuditEventFilterValues.EXCLUDE_STATUS] = params.excludeStatuses.map { it.value }
+                this[AuditEventFilterValues.EXCLUDE_STATUS] = params.excludeStatuses.map { it.value }
             }
             if (params.createdAtFrom != null) {
-                result[AuditEventFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
+                this[AuditEventFilterValues.CREATED_AT_FROM] = listOf(params.createdAtFrom)
             }
             if (params.createdAtTo != null) {
-                result[AuditEventFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
+                this[AuditEventFilterValues.CREATED_AT_TO] = listOf(params.createdAtTo)
             }
             if (params.searchQuery != null) {
-                result[AuditEventFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
+                this[AuditEventFilterValues.SEARCH_QUERY] = listOf(params.searchQuery)
             }
-
-            return result
         }
     }
 }

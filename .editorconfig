@@ -75,6 +75,7 @@ ij_formatter_enabled = false
 [*.json]
 indent_size = 2
 
+# --- LOCAL OVERRIDES ---
 [tools/npm-generator/src/main/kotlin/**.kt]
 ij_formatter_enabled = false
 # https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/#disable-rules

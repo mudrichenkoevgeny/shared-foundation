@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("tools/gradle-plugin")
     repositories {
         google {
             content {
@@ -27,6 +28,7 @@ dependencyResolutionManagement {
                 includeGroupByRegex("android.*")
             }
         }
+        gradlePluginPortal()
         mavenCentral()
         ivy {
             name = "Node Distributions at https://nodejs.org/dist"

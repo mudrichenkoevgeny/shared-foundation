@@ -19,7 +19,7 @@ alwaysApply: true
 - **`*ErrorCodes` Objects:** Class-level KDoc must state alignment with the wire format. Each `const val` must have a short KDoc if its name is not self-explanatory.
 
 ## 4. HTTP Route Constants (Critical)
-Every `const val` representing an endpoint must follow the format defined in `api-documentation-standard.md`:
+Every `const val` representing an endpoint must follow the format defined in `api-documentation-basics.md`:
 - **HTTP Method:** Explicitly stated in backticks (e.g., `GET`).
 - **Request/Response:** Mandatory `Request body:` (`None.` if absent) and `Response body:` (`None (204 No Content)` if absent). Linked types only if they exist in the current or dependent modules.
 - **Redundancy Policy:** Intentionally duplicate authorization, pagination, and filter logic. Do not use "See [OtherRoute]".

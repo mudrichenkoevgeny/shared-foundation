@@ -43,6 +43,7 @@ import kotlinx.serialization.SerialName
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
+import java.util.Properties
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.primaryConstructor
@@ -71,6 +72,14 @@ public fun main() {
 
         val dtsContent = generateDeclarationFile(localizationDtsCode, testingDtsCode)
         File(outputDir, "index.d.ts").writeText(dtsContent)
+
+        val agentOutputDir = File(outputDir, ".agent")
+        agentOutputDir.mkdirs()
+
+        val globalCommonDir = File(rootDir, ".agent/global/common")
+        if (globalCommonDir.exists()) {
+            globalCommonDir.copyRecursively(File(agentOutputDir, "common"), overwrite = true)
+        }
 
         val localWebSdkDir = File(rootDir.parentFile, "web-platform-sdk/packages/core-common/src/generated")
         if (localWebSdkDir.exists()) {
@@ -868,6 +877,16 @@ export const $schemaName: z.ZodType<$name>;
 }
 
 private fun parseRootBuildGradleVersion(rootDir: File): String? {
+    val gradleProperties = File(rootDir, "gradle.properties")
+    if (gradleProperties.exists()) {
+        val props = Properties().apply {
+            gradleProperties.inputStream().use { load(it) }
+        }
+        val versionProperty = props.getProperty("version")?.trim()
+        if (!versionProperty.isNullOrBlank()) {
+            return versionProperty
+        }
+    }
     val buildFile = File(rootDir, "build.gradle.kts")
     if (!buildFile.exists()) return null
     val regex = Regex("""version\s*=\s*["']([^"']+)["']""")

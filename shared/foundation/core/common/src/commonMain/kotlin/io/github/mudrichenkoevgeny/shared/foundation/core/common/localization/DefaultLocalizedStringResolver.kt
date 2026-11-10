@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.core.common.localization
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.collection.createConcurrentMap
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.serialization.FoundationJson
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -68,7 +69,9 @@ public class DefaultLocalizedStringResolver(
             try {
                 val jsonObject = FoundationJson.decodeFromString<JsonObject>(customContent)
                 jsonObject.mapValues { it.value.jsonPrimitive.content }
-            } catch (e: Exception) {
+            } catch (e: SerializationException) {
+                throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
+            } catch (e: IllegalArgumentException) {
                 throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
             }
 

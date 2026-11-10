@@ -29,12 +29,26 @@ dependencies {
     // For unit, integration, and UI preview tests:
     testImplementation("io.github.mudrichenkoevgeny:shared-foundation-testing")
 
-    // For enforcing shared architectural Detekt lint rules (NoFQN, NoInlineComment, PreferValueOverName):
+    // For enforcing shared architectural Detekt lint rules (NoFullyQualifiedName, NoInlineComment, PreferValueOverName, ProhibitNonSafeAssertion, ProhibitPrintln):
     detektPlugins("io.github.mudrichenkoevgeny:shared-foundation-detekt-rules")
 }
 ```
 
 With a version catalog: declare BOM and module aliases in `gradle/libs.versions.toml`, then use `implementation(platform(libs.shared.foundation.bom))` and `testImplementation(libs.shared.foundation.fixtures)`.
+
+### Gradle Convention Plugins
+
+Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply shared convention plugins to automatically configure Ktlint, Detekt with custom rules, compiler options, publishing, and AI agent rules synchronization:
+
+```kotlin
+// build.gradle.kts (Consumer Projects)
+plugins {
+    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.8"
+    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.8"
+    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.8"
+    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.8"
+}
+```
 
 ### Web / TypeScript (NPM)
 
@@ -55,7 +69,8 @@ Published artifacts (versions aligned via the BOM):
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
 - **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).
-- **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`) for enforcing shared library architectural standards across consumer applications.
+- **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) for enforcing shared library architectural standards across consumer applications ([module README](tools/detekt-rules/README.md)).
+- **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`) for auto-configuring quality checks, compiler options, publishing, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
 - **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 

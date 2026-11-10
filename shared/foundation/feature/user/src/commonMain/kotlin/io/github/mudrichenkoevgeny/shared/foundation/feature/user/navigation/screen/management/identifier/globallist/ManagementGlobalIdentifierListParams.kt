@@ -6,6 +6,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseBoolean
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseEnumList
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseNonBlankString
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseStringList
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
@@ -93,95 +97,25 @@ public data class ManagementGlobalIdentifierListParams(
                     ?.let { SortOrder.fromValueOrNull(it) }
                     ?: SortOrder.DEFAULT
 
-            val identifierIds =
-                normalized[UserIdentifierFilterValues.IDENTIFIER_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val userIds =
-                normalized[UserIdentifierFilterValues.USER_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val userAuthProviders =
-                normalized[UserIdentifierFilterValues.USER_AUTH_PROVIDER]
-                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeUserAuthProviders =
-                normalized[UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER]
-                    ?.mapNotNull { UserAuthProvider.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val identifier =
-                normalized[UserIdentifierFilterValues.IDENTIFIER]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val displayName =
-                normalized[UserIdentifierFilterValues.DISPLAY_NAME]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val externalProviderEmail =
-                normalized[UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isExternalProviderEmailSet =
-                normalized[UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val createdAtFrom =
-                normalized[UserIdentifierFilterValues.CREATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val createdAtTo =
-                normalized[UserIdentifierFilterValues.CREATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtFrom =
-                normalized[UserIdentifierFilterValues.UPDATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtTo =
-                normalized[UserIdentifierFilterValues.UPDATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isUpdatedAtSet =
-                normalized[UserIdentifierFilterValues.IS_UPDATED_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val searchQuery =
-                normalized[UserIdentifierFilterValues.SEARCH_QUERY]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
             return ManagementGlobalIdentifierListParams(
                 pageNumber = pageNumber,
                 pageSize = pageSize,
                 sortBy = sortBy,
                 sortOrder = sortOrder,
-                identifierIds = identifierIds,
-                userIds = userIds,
-                userAuthProviders = userAuthProviders,
-                excludeUserAuthProviders = excludeUserAuthProviders,
-                identifier = identifier,
-                displayName = displayName,
-                externalProviderEmail = externalProviderEmail,
-                isExternalProviderEmailSet = isExternalProviderEmailSet,
-                createdAtFrom = createdAtFrom,
-                createdAtTo = createdAtTo,
-                updatedAtFrom = updatedAtFrom,
-                updatedAtTo = updatedAtTo,
-                isUpdatedAtSet = isUpdatedAtSet,
-                searchQuery = searchQuery
+                identifierIds = normalized.parseStringList(UserIdentifierFilterValues.IDENTIFIER_ID),
+                userIds = normalized.parseStringList(UserIdentifierFilterValues.USER_ID),
+                userAuthProviders = normalized.parseEnumList(UserIdentifierFilterValues.USER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
+                excludeUserAuthProviders = normalized.parseEnumList(UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
+                identifier = normalized.parseNonBlankString(UserIdentifierFilterValues.IDENTIFIER),
+                displayName = normalized.parseNonBlankString(UserIdentifierFilterValues.DISPLAY_NAME),
+                externalProviderEmail = normalized.parseNonBlankString(UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL),
+                isExternalProviderEmailSet = normalized.parseBoolean(UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET),
+                createdAtFrom = normalized.parseNonBlankString(UserIdentifierFilterValues.CREATED_AT_FROM),
+                createdAtTo = normalized.parseNonBlankString(UserIdentifierFilterValues.CREATED_AT_TO),
+                updatedAtFrom = normalized.parseNonBlankString(UserIdentifierFilterValues.UPDATED_AT_FROM),
+                updatedAtTo = normalized.parseNonBlankString(UserIdentifierFilterValues.UPDATED_AT_TO),
+                isUpdatedAtSet = normalized.parseBoolean(UserIdentifierFilterValues.IS_UPDATED_AT_SET),
+                searchQuery = normalized.parseNonBlankString(UserIdentifierFilterValues.SEARCH_QUERY)
             )
         }
 

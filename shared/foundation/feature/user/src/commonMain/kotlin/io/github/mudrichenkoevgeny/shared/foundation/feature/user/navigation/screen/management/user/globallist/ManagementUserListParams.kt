@@ -6,6 +6,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseBoolean
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseEnumList
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseInt
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseLong
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseNonBlankString
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.parseStringList
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
@@ -142,344 +148,80 @@ public data class ManagementUserListParams(
          */
         override fun parse(params: Map<String, Any?>): ManagementUserListParams {
             val normalized = params.normalizeQueryParams()
-
-            val pageNumber =
-                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
-
-            val pageSize =
-                normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
-
-            val sortBy =
-                normalized[ListingParamNames.Sort.SORT_BY]
-                    ?.firstOrNull()
-                    ?.let { UserSortBy.fromValueOrNull(it) }
-                    ?: UserSortBy.DEFAULT
-
-            val sortOrder =
-                normalized[ListingParamNames.Sort.SORT_ORDER]
-                    ?.firstOrNull()
-                    ?.let { SortOrder.fromValueOrNull(it) }
-                    ?: SortOrder.DEFAULT
-
-            val userIds =
-                normalized[UserFilterValues.USER_ID]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val userRoles =
-                normalized[UserFilterValues.ROLE]
-                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeUserRoles =
-                normalized[UserFilterValues.EXCLUDE_ROLE]
-                    ?.mapNotNull { UserRole.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val accountStatuses =
-                normalized[UserFilterValues.ACCOUNT_STATUS]
-                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeAccountStatuses =
-                normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS]
-                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val accountStatusesOnRestore =
-                normalized[UserFilterValues.ACCOUNT_STATUS_ON_RESTORE]
-                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeAccountStatusesOnRestore =
-                normalized[UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE]
-                    ?.mapNotNull { UserAccountStatus.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val isAccountStatusOnRestoreSet =
-                normalized[UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val authorityLevelFrom =
-                normalized[UserFilterValues.AUTHORITY_LEVEL_FROM]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-
-            val authorityLevelTo =
-                normalized[UserFilterValues.AUTHORITY_LEVEL_TO]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-
-            val permissionCodes =
-                normalized[UserFilterValues.PERMISSION_CODES]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val excludePermissionCodes =
-                normalized[UserFilterValues.EXCLUDE_PERMISSION_CODES]
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
-
-            val isTotpEnabled =
-                normalized[UserFilterValues.IS_TOTP_ENABLED]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val lastLoginAtFrom =
-                normalized[UserFilterValues.LAST_LOGIN_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastLoginAtTo =
-                normalized[UserFilterValues.LAST_LOGIN_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isLastLoginAtSet =
-                normalized[UserFilterValues.IS_LAST_LOGIN_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val lastActiveAtFrom =
-                normalized[UserFilterValues.LAST_ACTIVE_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val lastActiveAtTo =
-                normalized[UserFilterValues.LAST_ACTIVE_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isLastActiveAtSet =
-                normalized[UserFilterValues.IS_LAST_ACTIVE_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val createdAtFrom =
-                normalized[UserFilterValues.CREATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val createdAtTo =
-                normalized[UserFilterValues.CREATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtFrom =
-                normalized[UserFilterValues.UPDATED_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val updatedAtTo =
-                normalized[UserFilterValues.UPDATED_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isUpdatedAtSet =
-                normalized[UserFilterValues.IS_UPDATED_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val scheduledPermanentDeletionAtFrom =
-                normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val scheduledPermanentDeletionAtTo =
-                normalized[UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isScheduledPermanentDeletionAtSet =
-                normalized[UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val accountLockoutTypes =
-                normalized[UserFilterValues.ACCOUNT_LOCKOUT_TYPE]
-                    ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val excludeAccountLockoutTypes =
-                normalized[UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE]
-                    ?.mapNotNull { AccountLockoutType.fromValueOrNull(it) }
-                    ?: emptyList()
-
-            val temporaryLockoutUntilFrom =
-                normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val temporaryLockoutUntilTo =
-                normalized[UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isTemporaryLockoutUntilSet =
-                normalized[UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val storageQuotaBytesFrom =
-                normalized[UserFilterValues.STORAGE_QUOTA_BYTES_FROM]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val storageQuotaBytesTo =
-                normalized[UserFilterValues.STORAGE_QUOTA_BYTES_TO]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val isStorageQuotaBytesSet =
-                normalized[UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val storageMaxUploadSizeBytesFrom =
-                normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val storageMaxUploadSizeBytesTo =
-                normalized[UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val isStorageMaxUploadSizeBytesSet =
-                normalized[UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val storageMaxPendingUploadsFrom =
-                normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val storageMaxPendingUploadsTo =
-                normalized[UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-
-            val isStorageMaxPendingUploadsSet =
-                normalized[UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val isStorageConfigurationSet =
-                normalized[UserFilterValues.IS_STORAGE_CONFIGURATION_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val nickname =
-                normalized[UserFilterValues.NICKNAME]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isNicknameSet =
-                normalized[UserFilterValues.IS_NICKNAME_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val displayName =
-                normalized[UserFilterValues.DISPLAY_NAME]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isDisplayNameSet =
-                normalized[UserFilterValues.IS_DISPLAY_NAME_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val isAvatarSet =
-                normalized[UserFilterValues.IS_AVATAR_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val birthdateFrom =
-                normalized[UserFilterValues.BIRTHDATE_FROM]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val birthdateTo =
-                normalized[UserFilterValues.BIRTHDATE_TO]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
-            val isBirthdateSet =
-                normalized[UserFilterValues.IS_BIRTHDATE_SET]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-
-            val searchQuery =
-                normalized[UserFilterValues.SEARCH_QUERY]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-
             return ManagementUserListParams(
-                pageNumber = pageNumber,
-                pageSize = pageSize,
-                sortBy = sortBy,
-                sortOrder = sortOrder,
-                userIds = userIds,
-                userRoles = userRoles,
-                excludeUserRoles = excludeUserRoles,
-                accountStatuses = accountStatuses,
-                excludeAccountStatuses = excludeAccountStatuses,
-                accountStatusesOnRestore = accountStatusesOnRestore,
-                excludeAccountStatusesOnRestore = excludeAccountStatusesOnRestore,
-                isAccountStatusOnRestoreSet = isAccountStatusOnRestoreSet,
-                authorityLevelFrom = authorityLevelFrom,
-                authorityLevelTo = authorityLevelTo,
-                permissionCodes = permissionCodes,
-                excludePermissionCodes = excludePermissionCodes,
-                isTotpEnabled = isTotpEnabled,
-                lastLoginAtFrom = lastLoginAtFrom,
-                lastLoginAtTo = lastLoginAtTo,
-                isLastLoginAtSet = isLastLoginAtSet,
-                lastActiveAtFrom = lastActiveAtFrom,
-                lastActiveAtTo = lastActiveAtTo,
-                isLastActiveAtSet = isLastActiveAtSet,
-                createdAtFrom = createdAtFrom,
-                createdAtTo = createdAtTo,
-                updatedAtFrom = updatedAtFrom,
-                updatedAtTo = updatedAtTo,
-                isUpdatedAtSet = isUpdatedAtSet,
-                scheduledPermanentDeletionAtFrom = scheduledPermanentDeletionAtFrom,
-                scheduledPermanentDeletionAtTo = scheduledPermanentDeletionAtTo,
-                isScheduledPermanentDeletionAtSet = isScheduledPermanentDeletionAtSet,
-                accountLockoutTypes = accountLockoutTypes,
-                excludeAccountLockoutTypes = excludeAccountLockoutTypes,
-                temporaryLockoutUntilFrom = temporaryLockoutUntilFrom,
-                temporaryLockoutUntilTo = temporaryLockoutUntilTo,
-                isTemporaryLockoutUntilSet = isTemporaryLockoutUntilSet,
-                storageQuotaBytesFrom = storageQuotaBytesFrom,
-                storageQuotaBytesTo = storageQuotaBytesTo,
-                isStorageQuotaBytesSet = isStorageQuotaBytesSet,
-                storageMaxUploadSizeBytesFrom = storageMaxUploadSizeBytesFrom,
-                storageMaxUploadSizeBytesTo = storageMaxUploadSizeBytesTo,
-                isStorageMaxUploadSizeBytesSet = isStorageMaxUploadSizeBytesSet,
-                storageMaxPendingUploadsFrom = storageMaxPendingUploadsFrom,
-                storageMaxPendingUploadsTo = storageMaxPendingUploadsTo,
-                isStorageMaxPendingUploadsSet = isStorageMaxPendingUploadsSet,
-                isStorageConfigurationSet = isStorageConfigurationSet,
-                nickname = nickname,
-                isNicknameSet = isNicknameSet,
-                displayName = displayName,
-                isDisplayNameSet = isDisplayNameSet,
-                isAvatarSet = isAvatarSet,
-                birthdateFrom = birthdateFrom,
-                birthdateTo = birthdateTo,
-                isBirthdateSet = isBirthdateSet,
-                searchQuery = searchQuery
+                pageNumber =
+                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize =
+                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                        ?.firstOrNull()
+                        ?.toIntOrNull()
+                        ?.takeIf { it > 0 }
+                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy =
+                    normalized[ListingParamNames.Sort.SORT_BY]
+                        ?.firstOrNull()
+                        ?.let { UserSortBy.fromValueOrNull(it) }
+                        ?: UserSortBy.DEFAULT,
+                sortOrder =
+                    normalized[ListingParamNames.Sort.SORT_ORDER]
+                        ?.firstOrNull()
+                        ?.let { SortOrder.fromValueOrNull(it) }
+                        ?: SortOrder.DEFAULT,
+                userIds = normalized.parseStringList(UserFilterValues.USER_ID),
+                userRoles = normalized.parseEnumList(UserFilterValues.ROLE) { UserRole.fromValueOrNull(it) },
+                excludeUserRoles = normalized.parseEnumList(UserFilterValues.EXCLUDE_ROLE) { UserRole.fromValueOrNull(it) },
+                accountStatuses = normalized.parseEnumList(UserFilterValues.ACCOUNT_STATUS) { UserAccountStatus.fromValueOrNull(it) },
+                excludeAccountStatuses = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_STATUS) { UserAccountStatus.fromValueOrNull(it) },
+                accountStatusesOnRestore = normalized.parseEnumList(UserFilterValues.ACCOUNT_STATUS_ON_RESTORE) { UserAccountStatus.fromValueOrNull(it) },
+                excludeAccountStatusesOnRestore = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE) { UserAccountStatus.fromValueOrNull(it) },
+                isAccountStatusOnRestoreSet = normalized.parseBoolean(UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET),
+                authorityLevelFrom = normalized.parseInt(UserFilterValues.AUTHORITY_LEVEL_FROM),
+                authorityLevelTo = normalized.parseInt(UserFilterValues.AUTHORITY_LEVEL_TO),
+                permissionCodes = normalized.parseStringList(UserFilterValues.PERMISSION_CODES),
+                excludePermissionCodes = normalized.parseStringList(UserFilterValues.EXCLUDE_PERMISSION_CODES),
+                isTotpEnabled = normalized.parseBoolean(UserFilterValues.IS_TOTP_ENABLED),
+                lastLoginAtFrom = normalized.parseNonBlankString(UserFilterValues.LAST_LOGIN_AT_FROM),
+                lastLoginAtTo = normalized.parseNonBlankString(UserFilterValues.LAST_LOGIN_AT_TO),
+                isLastLoginAtSet = normalized.parseBoolean(UserFilterValues.IS_LAST_LOGIN_AT_SET),
+                lastActiveAtFrom = normalized.parseNonBlankString(UserFilterValues.LAST_ACTIVE_AT_FROM),
+                lastActiveAtTo = normalized.parseNonBlankString(UserFilterValues.LAST_ACTIVE_AT_TO),
+                isLastActiveAtSet = normalized.parseBoolean(UserFilterValues.IS_LAST_ACTIVE_AT_SET),
+                createdAtFrom = normalized.parseNonBlankString(UserFilterValues.CREATED_AT_FROM),
+                createdAtTo = normalized.parseNonBlankString(UserFilterValues.CREATED_AT_TO),
+                updatedAtFrom = normalized.parseNonBlankString(UserFilterValues.UPDATED_AT_FROM),
+                updatedAtTo = normalized.parseNonBlankString(UserFilterValues.UPDATED_AT_TO),
+                isUpdatedAtSet = normalized.parseBoolean(UserFilterValues.IS_UPDATED_AT_SET),
+                scheduledPermanentDeletionAtFrom = normalized.parseNonBlankString(UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM),
+                scheduledPermanentDeletionAtTo = normalized.parseNonBlankString(UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO),
+                isScheduledPermanentDeletionAtSet = normalized.parseBoolean(UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET),
+                accountLockoutTypes = normalized.parseEnumList(UserFilterValues.ACCOUNT_LOCKOUT_TYPE) { AccountLockoutType.fromValueOrNull(it) },
+                excludeAccountLockoutTypes = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE) { AccountLockoutType.fromValueOrNull(it) },
+                temporaryLockoutUntilFrom = normalized.parseNonBlankString(UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM),
+                temporaryLockoutUntilTo = normalized.parseNonBlankString(UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO),
+                isTemporaryLockoutUntilSet = normalized.parseBoolean(UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET),
+                storageQuotaBytesFrom = normalized.parseLong(UserFilterValues.STORAGE_QUOTA_BYTES_FROM),
+                storageQuotaBytesTo = normalized.parseLong(UserFilterValues.STORAGE_QUOTA_BYTES_TO),
+                isStorageQuotaBytesSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET),
+                storageMaxUploadSizeBytesFrom = normalized.parseLong(UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM),
+                storageMaxUploadSizeBytesTo = normalized.parseLong(UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO),
+                isStorageMaxUploadSizeBytesSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET),
+                storageMaxPendingUploadsFrom = normalized.parseLong(UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM),
+                storageMaxPendingUploadsTo = normalized.parseLong(UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO),
+                isStorageMaxPendingUploadsSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET),
+                isStorageConfigurationSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_CONFIGURATION_SET),
+                nickname = normalized.parseNonBlankString(UserFilterValues.NICKNAME),
+                isNicknameSet = normalized.parseBoolean(UserFilterValues.IS_NICKNAME_SET),
+                displayName = normalized.parseNonBlankString(UserFilterValues.DISPLAY_NAME),
+                isDisplayNameSet = normalized.parseBoolean(UserFilterValues.IS_DISPLAY_NAME_SET),
+                isAvatarSet = normalized.parseBoolean(UserFilterValues.IS_AVATAR_SET),
+                birthdateFrom = normalized.parseNonBlankString(UserFilterValues.BIRTHDATE_FROM),
+                birthdateTo = normalized.parseNonBlankString(UserFilterValues.BIRTHDATE_TO),
+                isBirthdateSet = normalized.parseBoolean(UserFilterValues.IS_BIRTHDATE_SET),
+                searchQuery = normalized.parseNonBlankString(UserFilterValues.SEARCH_QUERY)
             )
         }
 

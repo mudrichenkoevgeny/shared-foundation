@@ -4,6 +4,7 @@ import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import io.github.mudrichenkoevgeny.build.tasks.GenerateLocalizationTask
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -56,7 +57,7 @@ configure<KotlinMultiplatformExtension> {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
     dependsOn(generateLocalization)
 }
 

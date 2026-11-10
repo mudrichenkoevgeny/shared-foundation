@@ -49,12 +49,6 @@ Domain models and API wire payloads follow a standardized **up to 4-tier** proje
 - **`[Entity]PrivateMapper.kt`**: `[Entity]PrivatePayload <-> [Entity]Private`
 - **`[Entity]DomainMapper.kt`**: Direct 1-step domain-to-domain conversions (`Internal -> Private`, `Internal -> Details`, `Private -> Summary`, `Internal -> Summary`) without allocating temporary intermediate objects.
 
-### Mapper Structure:
-- **`[Entity]SummaryMapper.kt`**: `[Entity]SummaryPayload <-> [Entity]Summary`
-- **`[Entity]PrivateMapper.kt`**: `[Entity]PrivatePayload <-> [Entity]Private`
-- **`[Entity]DetailsMapper.kt`**: `[Entity]DetailsPayload <-> [Entity]Details` (if applicable)
-- **`[Entity]DomainMapper.kt`**: Direct 1-step domain-to-domain conversions (`Internal -> Private`, `Private -> Summary`, `Internal -> Summary`) without allocating temporary intermediate objects.
-
 ## 3. Serialization & Wire Format
 
 - **Implementation:** Strictly `kotlinx.serialization`.
@@ -221,6 +215,16 @@ Sorting architecture requires two dedicated parameters to prevent ambiguity.
 ### 11.10. Flat Top-Level Structure (No Redundant Object Nesting)
 - **Top-Level Objects:** Filter value objects MUST be top-level Kotlin `object [Entity]FilterValues`. Do NOT wrap them inside redundant outer containers like `object [Entity]FilterValues { object [Entity]FilterValues }`.
 - **Top-Level Enums:** Sort enums MUST be top-level Kotlin `@Serializable enum class [Entity]SortBy(val value: String)`. Do NOT wrap them inside redundant outer `object` containers.
+
+## 12. Non-Localized UI Values (`UiValues`) & UI Component Configurations (`*UiConfig`)
+
+- **Non-Localized UI Values (`UiValues`):** Pure non-localized UI placeholders, formatting constants, and static display values reside in `core/common` (`UiValues`). They must remain decoupled from localized string bundles and contain no framework dependencies.
+- **UI Component Configurations (`*UiConfig`):** Component configuration models (e.g. `StorageFileUploadUiConfig`) define presentation parameters for embeddable client UI elements. They are strictly data classes published for UI consumers across Web, Mobile, and Desktop platforms.
+
+## 13. Direct-to-S3 Presigned Upload Contracts (`core/storage`)
+
+- **Sequence Protocol:** File uploads offload transfer overhead by requesting S3 Presigned URLs (`PresignedUrlRequest` -> `PresignedUrlPayload`), followed by binary upload directly to Object Storage, and finalizing state via `confirm` routes.
+- **File Projections & Presets:** Projections (`StorageFileSummary`, `StorageFilePrivate`, `StorageFileInternal`) govern access control and preset URL variants (`FileUrlPresets`: `AVATAR_SM`, `THUMBNAIL`, `PREVIEW`). For full details, see [Storage & Presigned Upload Contracts](docs/architecture/storage_and_presigned_urls.md).
 
 ---
 *Refer to `AGENTS.md` for coding style rules (No FQN, No Comments).*

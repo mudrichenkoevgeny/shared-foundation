@@ -17,7 +17,7 @@ If formatting errors occur (e.g. trailing whitespace, indentation, or imports), 
 
 ### 2. Static Analysis & Architectural Rules (Detekt)
 
-Run Detekt static analysis, complexity checks, and custom library rules (`NoFullyQualifiedName`, `NoInlineComment`):
+Run Detekt static analysis, complexity checks, and custom library rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`):
 ```bash
 ./gradlew detekt
 ```
