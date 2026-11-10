@@ -17,7 +17,13 @@ public class NoInlineCommentRule(
     description = RULE_DESCRIPTION
 ) {
     private val allowedPrefixes = listOf(
-        "/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---"
+        "/**",
+        "// todo",
+        "// fixme",
+        "// workaround",
+        "// suppress",
+        "// @",
+        "// ---"
     )
 
     override val ruleName: RuleName = RuleName("NoInlineComment")

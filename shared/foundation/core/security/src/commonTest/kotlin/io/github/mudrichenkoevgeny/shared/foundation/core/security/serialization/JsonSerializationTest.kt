@@ -17,9 +17,9 @@ import kotlin.test.assertTrue
 /**
  * Unit tests verifying JSON serialization and deserialization contracts for core/security payloads.
  */
-public class JsonSerializationTest {
+class JsonSerializationTest {
     @Test
-    public fun testTotpSetupPayloadSerialization() {
+    fun testTotpSetupPayloadSerialization() {
         val payload = TotpSetupPayload(
             secretKey = "JBSWY3DPEHPK3PXP",
             otpAuthUrl = "otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP",
@@ -41,7 +41,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testVerifyTotpPayloadSerialization() {
+    fun testVerifyTotpPayloadSerialization() {
         val payload = VerifyTotpPayload(
             mfaToken = "mfa_token_12345",
             code = "123456"
@@ -57,7 +57,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testOpenSecuritySettingsPayloadSerialization() {
+    fun testOpenSecuritySettingsPayloadSerialization() {
         val passwordPolicy = OpenPasswordPolicyPayload(
             minLength = 8,
             requireLetter = true,
@@ -90,7 +90,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testManagementSecuritySettingsPayloadSerialization() {
+    fun testManagementSecuritySettingsPayloadSerialization() {
         val passwordPolicy = ManagementPasswordPolicyPayload(
             minLength = 12,
             requireLetter = true,
@@ -153,7 +153,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testAccountLockoutPolicyPayloadSerialization() {
+    fun testAccountLockoutPolicyPayloadSerialization() {
         val payload = AccountLockoutPolicyPayload(
             maxFailedPasswordAttempts = 5,
             maxFailedOtpAttempts = 3,
@@ -179,7 +179,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testIpRestrictionPolicyPayloadSerialization() {
+    fun testIpRestrictionPolicyPayloadSerialization() {
         val payload = IpRestrictionPolicyPayload(
             isBlacklistEnabled = true,
             blacklist = listOf("10.0.0.1", "192.168.1.0/24"),

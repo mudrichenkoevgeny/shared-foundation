@@ -8,9 +8,9 @@ import kotlin.test.assertEquals
 /**
  * Unit tests verifying mapping between [AccountLockoutPolicyPayload] DTO and domain [AccountLockoutPolicy].
  */
-public class AccountLockoutPolicyMapperTest {
+class AccountLockoutPolicyMapperTest {
     @Test
-    public fun testAccountLockoutPolicyPayloadToDomainMapping() {
+    fun testAccountLockoutPolicyPayloadToDomainMapping() {
         val payload = AccountLockoutPolicyPayload(
             maxFailedPasswordAttempts = 5,
             maxFailedOtpAttempts = 3,
@@ -33,7 +33,7 @@ public class AccountLockoutPolicyMapperTest {
     }
 
     @Test
-    public fun testAccountLockoutPolicyDomainToPayloadMapping() {
+    fun testAccountLockoutPolicyDomainToPayloadMapping() {
         val domain = AccountLockoutPolicy(
             maxFailedPasswordAttempts = 10,
             maxFailedOtpAttempts = 5,

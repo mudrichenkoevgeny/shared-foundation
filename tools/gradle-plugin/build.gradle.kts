@@ -64,12 +64,14 @@ dependencies {
 val repoRootDir = rootDir.parentFile.parentFile
 
 val generatePluginVersionResource = tasks.register("generatePluginVersionResource") {
+    val currentVersion = project.version.toString()
+    inputs.property("version", currentVersion)
     val versionFile = layout.buildDirectory.file("generated/resources/plugin-version.txt")
     outputs.file(versionFile)
     doLast {
         val file = versionFile.get().asFile
         file.parentFile.mkdirs()
-        file.writeText(project.version.toString())
+        file.writeText(currentVersion)
     }
 }
 

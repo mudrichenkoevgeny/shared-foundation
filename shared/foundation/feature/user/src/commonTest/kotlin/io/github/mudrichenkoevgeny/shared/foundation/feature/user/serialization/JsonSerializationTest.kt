@@ -23,9 +23,9 @@ import kotlin.test.assertTrue
 /**
  * Unit tests verifying JSON serialization and deserialization contracts for feature/user payloads.
  */
-public class JsonSerializationTest {
+class JsonSerializationTest {
     @Test
-    public fun testUserSummaryPayloadSerialization() {
+    fun testUserSummaryPayloadSerialization() {
         val avatarUrls = FileUrlsPayload(
             originalUrl = "https://cdn.example.com/orig.png",
             urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
@@ -54,7 +54,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUserPrivatePayloadSerialization() {
+    fun testUserPrivatePayloadSerialization() {
         val payload = UserPrivatePayload(
             id = "00000000-0000-4000-8000-000000000001",
             role = UserRole.USER.value,
@@ -83,7 +83,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testAuthDataPayloadSerialization() {
+    fun testAuthDataPayloadSerialization() {
         val userPrivate = UserPrivatePayload(
             id = "00000000-0000-4000-8000-000000000001",
             role = UserRole.USER.value,
@@ -123,7 +123,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUserSessionSummaryPayloadSerialization() {
+    fun testUserSessionSummaryPayloadSerialization() {
         val deviceInfo = ClientDeviceInfoPayload(
             clientType = "web",
             language = "en",
@@ -156,7 +156,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUserSessionPrivatePayloadSerialization() {
+    fun testUserSessionPrivatePayloadSerialization() {
         val deviceInfo = ClientDeviceInfoPayload(
             clientType = "mobile",
             language = "en",
@@ -198,7 +198,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUserIdentifierSummaryPayloadSerialization() {
+    fun testUserIdentifierSummaryPayloadSerialization() {
         val payload = UserIdentifierSummaryPayload(
             id = "00000000-0000-4000-8000-000000000001",
             userId = "usr_000000000001",
@@ -219,7 +219,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUserIdentifierPrivatePayloadSerialization() {
+    fun testUserIdentifierPrivatePayloadSerialization() {
         val payload = UserIdentifierPrivatePayload(
             id = "00000000-0000-4000-8000-000000000001",
             userId = "usr_000000000001",
@@ -245,7 +245,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUnlockByEmailConfirmationRequestSerialization() {
+    fun testUnlockByEmailConfirmationRequestSerialization() {
         val request = UnlockByEmailConfirmationRequest(
             email = "user@example.com",
             confirmationCode = "123456"
@@ -261,7 +261,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testUnlockByPhoneConfirmationRequestSerialization() {
+    fun testUnlockByPhoneConfirmationRequestSerialization() {
         val request = UnlockByPhoneConfirmationRequest(
             phoneNumber = "+1234567890",
             confirmationCode = "654321"

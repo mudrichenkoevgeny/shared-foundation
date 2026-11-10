@@ -98,18 +98,33 @@ The project utilizes the `com.vanniktech.maven.publish` plugin for artifact mana
 
 ### 1. Local Maven Deployment (`mavenLocal`)
 
-1. **Publish artifacts to local Maven repository:**
-   Uploads all published library Maven artifacts to your machine's local Maven cache (`~/.m2/repository/`):
+Because `tools/gradle-plugin` is configured as an included build (`includeBuild`), running a plain `./gradlew publishToMavenLocal` only publishes library artifacts (`shared-foundation-bom`, `core-*`, `feature-*`, `testing`, `detekt-rules`). To publish both libraries and Gradle convention plugins to your machine's local Maven cache (`~/.m2/repository/`), specify both tasks:
+
+1. **Publish all libraries and Gradle convention plugins:**
    ```bash
-   ./gradlew publishToMavenLocal
+   ./gradlew publishToMavenLocal :gradle-plugin:publishToMavenLocal
+   ```
+
+   *To publish only the Gradle convention plugins and custom Detekt rules, run:*
+   ```bash
+   ./gradlew :gradle-plugin:publishToMavenLocal :tools:detekt-rules:publishToMavenLocal
    ```
 
 2. **Connect in your consumer project:**
-   Add `mavenLocal()` to your consumer project's `settings.gradle.kts` (or root `build.gradle.kts`):
+   Add `mavenLocal()` to both `pluginManagement` (for convention plugins) and `dependencyResolutionManagement` (for library artifacts) in your consumer project's `settings.gradle.kts`:
    ```kotlin
+   pluginManagement {
+       repositories {
+           mavenLocal() // Required for shared-foundation Gradle convention plugins
+           gradlePluginPortal()
+           google()
+           mavenCentral()
+       }
+   }
+
    dependencyResolutionManagement {
        repositories {
-           mavenLocal() // Must be at the top to take priority over remote repositories
+           mavenLocal() // Required for shared-foundation library artifacts (BOM, core-*, feature-*)
            mavenCentral()
            google()
        }
@@ -155,13 +170,13 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm pack ./build/npm-package --pack-destination ./build/npm-package
    ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.1.8.tgz` will be created inside `build/npm-package/`.
+   The archive `mudrichenkoevgeny-shared-foundation-0.1.9.tgz` will be created inside `build/npm-package/`.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.8.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.9.tgz'
    ```
    And run from the root directory:
    ```bash

@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.8"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.9"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -43,10 +43,10 @@ Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply sh
 ```kotlin
 // build.gradle.kts (Consumer Projects)
 plugins {
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.8"
-    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.8"
-    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.8"
-    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.8"
+    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.9"
+    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.9"
+    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.9"
+    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.9"
 }
 ```
 

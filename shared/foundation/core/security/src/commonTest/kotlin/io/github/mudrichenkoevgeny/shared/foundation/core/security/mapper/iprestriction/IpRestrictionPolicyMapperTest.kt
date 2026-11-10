@@ -8,9 +8,9 @@ import kotlin.test.assertEquals
 /**
  * Unit tests verifying mapping between [IpRestrictionPolicyPayload] DTO and domain [IpRestrictionPolicy].
  */
-public class IpRestrictionPolicyMapperTest {
+class IpRestrictionPolicyMapperTest {
     @Test
-    public fun testIpRestrictionPolicyPayloadToDomainMapping() {
+    fun testIpRestrictionPolicyPayloadToDomainMapping() {
         val payload = IpRestrictionPolicyPayload(
             isBlacklistEnabled = true,
             blacklist = listOf("192.168.1.1", "10.0.0.0/8"),
@@ -27,7 +27,7 @@ public class IpRestrictionPolicyMapperTest {
     }
 
     @Test
-    public fun testIpRestrictionPolicyDomainToPayloadMapping() {
+    fun testIpRestrictionPolicyDomainToPayloadMapping() {
         val domain = IpRestrictionPolicy(
             isBlacklistEnabled = false,
             blacklist = emptyList(),

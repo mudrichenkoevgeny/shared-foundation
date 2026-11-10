@@ -18,9 +18,9 @@ import kotlin.test.assertTrue
 /**
  * Unit tests verifying JSON serialization and deserialization contracts for core/storage payloads.
  */
-public class JsonSerializationTest {
+class JsonSerializationTest {
     @Test
-    public fun testStorageFileSummaryPayloadSerialization() {
+    fun testStorageFileSummaryPayloadSerialization() {
         val fileUrls = FileUrlsPayload(
             originalUrl = "https://cdn.example.com/orig.png",
             urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
@@ -55,7 +55,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testStorageFilePrivatePayloadSerialization() {
+    fun testStorageFilePrivatePayloadSerialization() {
         val payload = StorageFilePrivatePayload(
             id = "00000000-0000-4000-8000-000000000001",
             ownerUserId = "usr_100",
@@ -80,7 +80,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testPresignedUrlPayloadSerialization() {
+    fun testPresignedUrlPayloadSerialization() {
         val payload = PresignedUrlPayload(
             fileId = "00000000-0000-4000-8000-000000000001",
             uploadUrl = "https://s3.amazonaws.com/bucket/key?signature=abc",
@@ -100,7 +100,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testPresignedUrlRequestSerialization() {
+    fun testPresignedUrlRequestSerialization() {
         val request = PresignedUrlRequest(
             fileName = "document.pdf",
             fileSizeBytes = 1048576L,
@@ -124,7 +124,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testManagementStorageSettingsPayloadSerialization() {
+    fun testManagementStorageSettingsPayloadSerialization() {
         val payload = ManagementStorageSettingsPayload(
             minUploadSizeBytes = 1024L,
             maxUploadSizeBytes = 104857600L,
@@ -153,7 +153,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testOpenStorageSettingsPayloadSerialization() {
+    fun testOpenStorageSettingsPayloadSerialization() {
         val payload = OpenStorageSettingsPayload(
             minUploadSizeBytes = 1024L,
             maxUploadSizeBytes = 10485760L

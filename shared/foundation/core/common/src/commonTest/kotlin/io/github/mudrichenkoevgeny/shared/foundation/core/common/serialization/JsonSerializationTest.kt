@@ -16,9 +16,9 @@ import kotlin.test.assertTrue
 /**
  * Unit tests verifying JSON serialization and deserialization contracts for core/common payloads.
  */
-public class JsonSerializationTest {
+class JsonSerializationTest {
     @Test
-    public fun testClientInfoPayloadSerialization() {
+    fun testClientInfoPayloadSerialization() {
         val deviceInfo = ClientDeviceInfoPayload(
             clientType = "web",
             language = "en",
@@ -50,7 +50,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testClientInfoPayloadNullabilityHandling() {
+    fun testClientInfoPayloadNullabilityHandling() {
         val deviceInfo = ClientDeviceInfoPayload(
             clientType = null,
             language = null,
@@ -74,7 +74,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testApiErrorResponseSerialization() {
+    fun testApiErrorResponseSerialization() {
         val payload = ApiErrorResponse(
             id = "err_001",
             code = CommonErrorCodes.BAD_REQUEST,
@@ -94,7 +94,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testApiErrorResponseErrorCodeMapping() {
+    fun testApiErrorResponseErrorCodeMapping() {
         val commonErrorCode = CommonErrorCodes.NOT_FOUND
         val responseWithCommonError = ApiErrorResponse(
             id = "err_404",
@@ -124,7 +124,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testWebSocketInitializePayloadSerialization() {
+    fun testWebSocketInitializePayloadSerialization() {
         val payload = WebSocketInitializePayload(
             clientType = "mobile",
             language = "ru",
@@ -150,7 +150,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testSocketFrameSerialization() {
+    fun testSocketFrameSerialization() {
         val payloadJson = buildJsonObject {
             put("key", "value")
         }
@@ -176,7 +176,7 @@ public class JsonSerializationTest {
     }
 
     @Test
-    public fun testSocketFrameNullPayloadSerialization() {
+    fun testSocketFrameNullPayloadSerialization() {
         val frame = SocketFrame(
             id = "frame_67890",
             type = "pong",

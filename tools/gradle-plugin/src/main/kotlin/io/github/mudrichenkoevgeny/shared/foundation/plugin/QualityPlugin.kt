@@ -126,7 +126,11 @@ public class QualityPlugin : Plugin<Project> {
                 return versionFromResource
             }
         }
-        return javaClass.`package`?.implementationVersion ?: "0.1.8"
+        val implementationVersion = javaClass.`package`?.implementationVersion
+        check(!implementationVersion.isNullOrBlank()) {
+            "Unable to resolve plugin version from 'plugin-version.txt' resource or Manifest"
+        }
+        return implementationVersion
     }
 
     private fun extractDetektBaseConfig(targetFile: File) {

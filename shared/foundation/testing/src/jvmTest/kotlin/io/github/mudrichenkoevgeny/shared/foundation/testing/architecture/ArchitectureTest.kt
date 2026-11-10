@@ -7,9 +7,9 @@ import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-public class ArchitectureTest {
+class ArchitectureTest {
     @Test
-    public fun noClassShouldHaveInternalPayloadSuffix() {
+    fun noClassShouldHaveInternalPayloadSuffix() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -17,7 +17,7 @@ public class ArchitectureTest {
     }
 
     @Test
-    public fun filterValuesAndSortByClassesShouldBeTopLevel() {
+    fun filterValuesAndSortByClassesShouldBeTopLevel() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -31,7 +31,7 @@ public class ArchitectureTest {
     }
 
     @Test
-    public fun apiNetworkRouteConstantsMustHaveRequiredKDocSections() {
+    fun apiNetworkRouteConstantsMustHaveRequiredKDocSections() {
         Konsist
             .scopeFromProject()
             .properties()
@@ -53,7 +53,7 @@ public class ArchitectureTest {
     }
 
     @Test
-    public fun localizationJsonKeysShouldBeSnakeCase() {
+    fun localizationJsonKeysShouldBeSnakeCase() {
         val rootDir = File(".")
         val jsonFiles = rootDir
             .walkTopDown()
