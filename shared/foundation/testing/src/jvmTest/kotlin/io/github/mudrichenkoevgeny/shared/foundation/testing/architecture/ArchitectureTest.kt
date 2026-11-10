@@ -55,11 +55,10 @@ public class ArchitectureTest {
     @Test
     public fun localizationJsonKeysShouldBeSnakeCase() {
         val rootDir = File(".")
-        val jsonFiles =
-            rootDir
-                .walkTopDown()
-                .filter { it.isFile && it.extension == "json" && it.path.contains("localization") }
-                .toList()
+        val jsonFiles = rootDir
+            .walkTopDown()
+            .filter { it.isFile && it.extension == "json" && it.path.contains("localization") }
+            .toList()
 
         val snakeCaseRegex = Regex("^[a-z0-9_]+$")
         jsonFiles.forEach { file ->

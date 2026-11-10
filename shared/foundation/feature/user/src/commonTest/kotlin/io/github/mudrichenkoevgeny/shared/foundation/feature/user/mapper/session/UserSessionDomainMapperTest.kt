@@ -24,35 +24,33 @@ class UserSessionDomainMapperTest {
     private val testCreatedAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
     private val testExpiresAt: Instant = Instant.fromEpochMilliseconds(1700086400000L)
 
-    private val testDeviceInfo: ClientDeviceInfo =
-        ClientDeviceInfo(
-            clientType = null,
-            language = "en",
-            deviceId = null,
-            deviceName = "Chrome",
-            appVersion = "1.0.0",
-            operationSystemVersion = "Windows"
-        )
+    private val testDeviceInfo: ClientDeviceInfo = ClientDeviceInfo(
+        clientType = null,
+        language = "en",
+        deviceId = null,
+        deviceName = "Chrome",
+        appVersion = "1.0.0",
+        operationSystemVersion = "Windows"
+    )
 
-    private val testInternal: UserSessionInternal =
-        UserSessionInternal(
-            id = testId,
-            userId = testUserId,
-            userRole = UserRole.USER,
-            identifier = "john.doe@example.com",
-            identifierId = testIdentifierId,
-            identifierDisplayName = "john.doe@example.com",
-            identifierAuthProvider = UserAuthProvider.EMAIL,
-            refreshTokenHash = RefreshTokenHash("hash_123"),
-            clientDeviceInfo = testDeviceInfo,
-            userAgent = "Mozilla/5.0",
-            ipAddress = "127.0.0.1",
-            expiresAt = testExpiresAt,
-            lastAccessedAt = testCreatedAt,
-            lastReauthenticatedAt = testCreatedAt,
-            createdAt = testCreatedAt,
-            updatedAt = null
-        )
+    private val testInternal: UserSessionInternal = UserSessionInternal(
+        id = testId,
+        userId = testUserId,
+        userRole = UserRole.USER,
+        identifier = "john.doe@example.com",
+        identifierId = testIdentifierId,
+        identifierDisplayName = "john.doe@example.com",
+        identifierAuthProvider = UserAuthProvider.EMAIL,
+        refreshTokenHash = RefreshTokenHash("hash_123"),
+        clientDeviceInfo = testDeviceInfo,
+        userAgent = "Mozilla/5.0",
+        ipAddress = "127.0.0.1",
+        expiresAt = testExpiresAt,
+        lastAccessedAt = testCreatedAt,
+        lastReauthenticatedAt = testCreatedAt,
+        createdAt = testCreatedAt,
+        updatedAt = null
+    )
 
     @Test
     fun testInternalToPrivateMapping() {

@@ -76,11 +76,10 @@ public object ByteSizeFormatter {
             return integerPart.toString()
         }
 
-        val fractionalStr =
-            fractionalPart
-                .toString()
-                .padStart(decimals, '0')
-                .trimEnd('0')
+        val fractionalStr = fractionalPart
+            .toString()
+            .padStart(decimals, '0')
+            .trimEnd('0')
 
         return if (fractionalStr.isEmpty()) {
             integerPart.toString()

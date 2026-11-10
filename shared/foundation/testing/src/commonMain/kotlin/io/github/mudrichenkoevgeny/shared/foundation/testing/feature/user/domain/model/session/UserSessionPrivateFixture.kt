@@ -88,16 +88,14 @@ public fun createTestUserSessionPrivateList(
         val isEven = index % 2 == 0
         val winAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36"
         val macAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15"
-        val winDevice =
-            createTestClientDeviceInfo(
-                deviceName = "Windows PC",
-                operationSystemVersion = "Windows 10"
-            )
-        val macDevice =
-            createTestClientDeviceInfo(
-                deviceName = "MacBook Pro",
-                operationSystemVersion = "macOS 14.0"
-            )
+        val winDevice = createTestClientDeviceInfo(
+            deviceName = "Windows PC",
+            operationSystemVersion = "Windows 10"
+        )
+        val macDevice = createTestClientDeviceInfo(
+            deviceName = "MacBook Pro",
+            operationSystemVersion = "macOS 14.0"
+        )
         createTestUserSessionPrivate(
             id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
             userId = createTestUserId(generateTestUuidString(index = index, group = 2)),

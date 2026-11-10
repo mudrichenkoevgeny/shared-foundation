@@ -14,15 +14,14 @@ import kotlin.test.assertTrue
 class JsonSerializationTest {
     @Test
     fun testAuditEventSummaryPayloadSerialization() {
-        val payload =
-            AuditEventSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                actorType = "user",
-                action = "user.create",
-                resource = "user",
-                status = "success",
-                createdAt = 1700000000000L
-            )
+        val payload = AuditEventSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            actorType = "user",
+            action = "user.create",
+            resource = "user",
+            status = "success",
+            createdAt = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -39,29 +38,27 @@ class JsonSerializationTest {
 
     @Test
     fun testAuditEventPrivatePayloadSerialization() {
-        val metadata =
-            listOf(
-                AuditEventMetadataPayload(
-                    key = "ip_address",
-                    value = "127.0.0.1",
-                    valueSensitivity = "none"
-                )
+        val metadata = listOf(
+            AuditEventMetadataPayload(
+                key = "ip_address",
+                value = "127.0.0.1",
+                valueSensitivity = "none"
             )
+        )
 
-        val payload =
-            AuditEventPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                actorId = "usr_123",
-                actorType = "user",
-                actorUserRole = "admin",
-                action = "user.update",
-                resource = "user",
-                resourceId = "usr_456",
-                status = "success",
-                metadata = metadata,
-                message = "Updated user profile",
-                createdAt = 1700000000000L
-            )
+        val payload = AuditEventPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            actorId = "usr_123",
+            actorType = "user",
+            actorUserRole = "admin",
+            action = "user.update",
+            resource = "user",
+            resourceId = "usr_456",
+            status = "success",
+            metadata = metadata,
+            message = "Updated user profile",
+            createdAt = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -79,20 +76,19 @@ class JsonSerializationTest {
 
     @Test
     fun testAuditEventPrivatePayloadNullabilityHandling() {
-        val payload =
-            AuditEventPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                actorId = null,
-                actorType = "system",
-                actorUserRole = null,
-                action = "system.cleanup",
-                resource = "system",
-                resourceId = null,
-                status = "success",
-                metadata = emptyList(),
-                message = null,
-                createdAt = 1700000000000L
-            )
+        val payload = AuditEventPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            actorId = null,
+            actorType = "system",
+            actorUserRole = null,
+            action = "system.cleanup",
+            resource = "system",
+            resourceId = null,
+            status = "success",
+            metadata = emptyList(),
+            message = null,
+            createdAt = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
         val deserialized = FoundationJson.decodeFromString<AuditEventPrivatePayload>(serialized)

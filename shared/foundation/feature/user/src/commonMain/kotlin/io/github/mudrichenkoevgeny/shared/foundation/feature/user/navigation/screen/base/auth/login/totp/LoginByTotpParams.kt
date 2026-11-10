@@ -33,11 +33,10 @@ public data class LoginByTotpParams(
         override fun parse(params: Map<String, Any?>): LoginByTotpParams {
             val normalized = params.normalizeQueryParams()
             val mfaToken = normalized[SecurityApiFields.MFA_TOKEN]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
-            val loginByTotpMode =
-                normalized[UserNavigationPaths.LOGIN_BY_TOTP_MODE]
-                    ?.firstOrNull()
-                    ?.let { LoginByTotpMode.fromValueOrNull(it) }
-                    ?: LoginByTotpMode.DEFAULT
+            val loginByTotpMode = normalized[UserNavigationPaths.LOGIN_BY_TOTP_MODE]
+                ?.firstOrNull()
+                ?.let { LoginByTotpMode.fromValueOrNull(it) }
+                ?: LoginByTotpMode.DEFAULT
             val redirectUrl =
                 normalized[UserNavigationPaths.REDIRECT_URL]?.firstOrNull()?.trim()?.takeIf { it.isNotBlank() }
 

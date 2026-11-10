@@ -15,15 +15,13 @@ public data class TestNavigationScreenParams(
 
     public companion object : NavigationScreenParamsParser<TestNavigationScreenParams> {
         public override fun parse(params: Map<String, Any?>): TestNavigationScreenParams {
-            val query =
-                (params["query"] as? Iterable<*>)?.firstOrNull()?.toString()
-                    ?: params["query"]?.toString()
-                    ?: "test-value"
+            val query = (params["query"] as? Iterable<*>)?.firstOrNull()?.toString()
+                ?: params["query"]?.toString()
+                ?: "test-value"
 
-            val id =
-                (params["id"] as? Iterable<*>)?.firstOrNull()?.toString()?.toIntOrNull()
-                    ?: params["id"]?.toString()?.toIntOrNull()
-                    ?: 1
+            val id = (params["id"] as? Iterable<*>)?.firstOrNull()?.toString()?.toIntOrNull()
+                ?: params["id"]?.toString()?.toIntOrNull()
+                ?: 1
 
             return TestNavigationScreenParams(query = query, id = id)
         }

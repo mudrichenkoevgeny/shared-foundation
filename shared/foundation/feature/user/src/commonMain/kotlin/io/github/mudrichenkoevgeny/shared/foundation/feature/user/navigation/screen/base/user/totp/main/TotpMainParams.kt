@@ -28,11 +28,10 @@ public data class TotpMainParams(
          */
         override fun parse(params: Map<String, Any?>): TotpMainParams {
             val normalized = params.normalizeQueryParams()
-            val step =
-                normalized[UserNavigationPaths.TOTP_STEP]
-                    ?.firstOrNull()
-                    ?.let { TotpStep.fromValueOrNull(it) }
-                    ?: TotpStep.DEFAULT
+            val step = normalized[UserNavigationPaths.TOTP_STEP]
+                ?.firstOrNull()
+                ?.let { TotpStep.fromValueOrNull(it) }
+                ?: TotpStep.DEFAULT
 
             return TotpMainParams(totpStep = step)
         }

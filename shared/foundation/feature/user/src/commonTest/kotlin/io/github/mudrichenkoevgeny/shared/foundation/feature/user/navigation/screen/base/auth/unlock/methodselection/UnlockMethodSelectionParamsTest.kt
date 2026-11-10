@@ -11,12 +11,11 @@ import kotlin.test.assertNull
 class UnlockMethodSelectionParamsTest {
     @Test
     fun `parse extracts unlockMethod accountLockoutType and temporaryLockoutUntil correctly`() {
-        val params =
-            mapOf(
-                UserNavigationPaths.UNLOCK_METHOD to "phone",
-                UserApiFields.ACCOUNT_LOCKOUT_TYPE to "temporary",
-                UserApiFields.TEMPORARY_LOCKOUT_UNTIL to "1700000000000"
-            )
+        val params = mapOf(
+            UserNavigationPaths.UNLOCK_METHOD to "phone",
+            UserApiFields.ACCOUNT_LOCKOUT_TYPE to "temporary",
+            UserApiFields.TEMPORARY_LOCKOUT_UNTIL to "1700000000000"
+        )
         val parsed = UnlockMethodSelectionParams.parse(params)
 
         assertEquals(UnlockMethod.PHONE, parsed.unlockMethod)
@@ -37,12 +36,11 @@ class UnlockMethodSelectionParamsTest {
 
     @Test
     fun `serialize and toQueryMap produce correct map`() {
-        val model =
-            UnlockMethodSelectionParams(
-                unlockMethod = UnlockMethod.EMAIL,
-                accountLockoutType = AccountLockoutType.INDEFINITE,
-                temporaryLockoutUntil = 1700000000000L
-            )
+        val model = UnlockMethodSelectionParams(
+            unlockMethod = UnlockMethod.EMAIL,
+            accountLockoutType = AccountLockoutType.INDEFINITE,
+            temporaryLockoutUntil = 1700000000000L
+        )
         val serialized = model.toQueryMap()
 
         assertEquals(listOf("email"), serialized[UserNavigationPaths.UNLOCK_METHOD])

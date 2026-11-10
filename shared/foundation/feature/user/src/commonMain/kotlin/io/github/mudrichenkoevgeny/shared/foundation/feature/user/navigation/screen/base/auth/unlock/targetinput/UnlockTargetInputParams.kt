@@ -28,10 +28,9 @@ public data class UnlockTargetInputParams(
          */
         override fun parse(params: Map<String, Any?>): UnlockTargetInputParams {
             val normalized = params.normalizeQueryParams()
-            val unlockMethod =
-                normalized[UserNavigationPaths.UNLOCK_METHOD]
-                    ?.firstOrNull()
-                    ?.let { UnlockMethod.fromValueOrNull(it) }
+            val unlockMethod = normalized[UserNavigationPaths.UNLOCK_METHOD]
+                ?.firstOrNull()
+                ?.let { UnlockMethod.fromValueOrNull(it) }
 
             return UnlockTargetInputParams(unlockMethod = unlockMethod)
         }

@@ -11,16 +11,15 @@ import kotlin.test.assertEquals
 public class AccountLockoutPolicyMapperTest {
     @Test
     public fun testAccountLockoutPolicyPayloadToDomainMapping() {
-        val payload =
-            AccountLockoutPolicyPayload(
-                maxFailedPasswordAttempts = 5,
-                maxFailedOtpAttempts = 3,
-                maxFailedTotpAttempts = 4,
-                failedAttemptsWindowSeconds = 600,
-                lockoutDurationSeconds = 1200,
-                indefiniteLockoutThreshold = 5,
-                isSelfServiceUnlockEnabled = true
-            )
+        val payload = AccountLockoutPolicyPayload(
+            maxFailedPasswordAttempts = 5,
+            maxFailedOtpAttempts = 3,
+            maxFailedTotpAttempts = 4,
+            failedAttemptsWindowSeconds = 600,
+            lockoutDurationSeconds = 1200,
+            indefiniteLockoutThreshold = 5,
+            isSelfServiceUnlockEnabled = true
+        )
 
         val domain = payload.toAccountLockoutPolicy()
 
@@ -35,16 +34,15 @@ public class AccountLockoutPolicyMapperTest {
 
     @Test
     public fun testAccountLockoutPolicyDomainToPayloadMapping() {
-        val domain =
-            AccountLockoutPolicy(
-                maxFailedPasswordAttempts = 10,
-                maxFailedOtpAttempts = 5,
-                maxFailedTotpAttempts = 5,
-                failedAttemptsWindowSeconds = 900,
-                lockoutDurationSeconds = 1800,
-                indefiniteLockoutThreshold = 3,
-                isSelfServiceUnlockEnabled = false
-            )
+        val domain = AccountLockoutPolicy(
+            maxFailedPasswordAttempts = 10,
+            maxFailedOtpAttempts = 5,
+            maxFailedTotpAttempts = 5,
+            failedAttemptsWindowSeconds = 900,
+            lockoutDurationSeconds = 1800,
+            indefiniteLockoutThreshold = 3,
+            isSelfServiceUnlockEnabled = false
+        )
 
         val payload = domain.toAccountLockoutPolicyPayload()
 

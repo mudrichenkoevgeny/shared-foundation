@@ -13,32 +13,31 @@ import kotlin.test.assertEquals
 class SelfStorageFileListParamsTest {
     @Test
     fun `parse extracts self storage file list params correctly`() {
-        val raw =
-            mapOf(
-                ListingParamNames.Pagination.PAGE_NUMBER to "1",
-                ListingParamNames.Pagination.PAGE_SIZE to "20",
-                ListingParamNames.Sort.SORT_BY to "created_at",
-                ListingParamNames.Sort.SORT_ORDER to "desc",
-                StorageFileFilterValues.FILE_ID to listOf("00000000-0000-4000-8000-000000000001"),
-                StorageFileFilterValues.FILE_NAME to "avatar.png",
-                StorageFileFilterValues.FILE_SIZE_BYTES_FROM to "1024",
-                StorageFileFilterValues.FILE_SIZE_BYTES_TO to "2048",
-                StorageFileFilterValues.MIME_TYPE to listOf("image/png"),
-                StorageFileFilterValues.CATEGORY to listOf("image"),
-                StorageFileFilterValues.EXCLUDE_CATEGORY to listOf("audio"),
-                StorageFileFilterValues.VISIBILITY to listOf("public"),
-                StorageFileFilterValues.EXCLUDE_VISIBILITY to listOf("private"),
-                StorageFileFilterValues.STATUS to listOf("ready"),
-                StorageFileFilterValues.EXCLUDE_STATUS to listOf("pending_upload"),
-                StorageFileFilterValues.TARGET_SCOPE to listOf("avatar"),
-                StorageFileFilterValues.IS_TARGET_SCOPE_SET to "true",
-                StorageFileFilterValues.CREATED_AT_FROM to "2026-01-01T00:00:00Z",
-                StorageFileFilterValues.CREATED_AT_TO to "2026-03-01T00:00:00Z",
-                StorageFileFilterValues.UPDATED_AT_FROM to "2026-01-02T00:00:00Z",
-                StorageFileFilterValues.UPDATED_AT_TO to "2026-03-02T00:00:00Z",
-                StorageFileFilterValues.IS_UPDATED_AT_SET to "true",
-                StorageFileFilterValues.SEARCH_QUERY to "avatar"
-            )
+        val raw = mapOf(
+            ListingParamNames.Pagination.PAGE_NUMBER to "1",
+            ListingParamNames.Pagination.PAGE_SIZE to "20",
+            ListingParamNames.Sort.SORT_BY to "created_at",
+            ListingParamNames.Sort.SORT_ORDER to "desc",
+            StorageFileFilterValues.FILE_ID to listOf("00000000-0000-4000-8000-000000000001"),
+            StorageFileFilterValues.FILE_NAME to "avatar.png",
+            StorageFileFilterValues.FILE_SIZE_BYTES_FROM to "1024",
+            StorageFileFilterValues.FILE_SIZE_BYTES_TO to "2048",
+            StorageFileFilterValues.MIME_TYPE to listOf("image/png"),
+            StorageFileFilterValues.CATEGORY to listOf("image"),
+            StorageFileFilterValues.EXCLUDE_CATEGORY to listOf("audio"),
+            StorageFileFilterValues.VISIBILITY to listOf("public"),
+            StorageFileFilterValues.EXCLUDE_VISIBILITY to listOf("private"),
+            StorageFileFilterValues.STATUS to listOf("ready"),
+            StorageFileFilterValues.EXCLUDE_STATUS to listOf("pending_upload"),
+            StorageFileFilterValues.TARGET_SCOPE to listOf("avatar"),
+            StorageFileFilterValues.IS_TARGET_SCOPE_SET to "true",
+            StorageFileFilterValues.CREATED_AT_FROM to "2026-01-01T00:00:00Z",
+            StorageFileFilterValues.CREATED_AT_TO to "2026-03-01T00:00:00Z",
+            StorageFileFilterValues.UPDATED_AT_FROM to "2026-01-02T00:00:00Z",
+            StorageFileFilterValues.UPDATED_AT_TO to "2026-03-02T00:00:00Z",
+            StorageFileFilterValues.IS_UPDATED_AT_SET to "true",
+            StorageFileFilterValues.SEARCH_QUERY to "avatar"
+        )
 
         val parsed = SelfStorageFileListParams.parse(raw)
 
@@ -75,32 +74,31 @@ class SelfStorageFileListParamsTest {
 
     @Test
     fun `serialize and parse roundtrip maintains equality`() {
-        val original =
-            SelfStorageFileListParams(
-                pageNumber = 1,
-                pageSize = 20,
-                sortBy = StorageFileSortBy.CREATED_AT,
-                sortOrder = SortOrder.DESC,
-                fileIds = listOf("00000000-0000-4000-8000-000000000001"),
-                fileName = "avatar.png",
-                fileSizeBytesFrom = 1024L,
-                fileSizeBytesTo = 2048L,
-                mimeTypes = listOf("image/png"),
-                categories = listOf(StorageCategory.IMAGE),
-                excludeCategories = listOf(StorageCategory.AUDIO),
-                visibilities = listOf(StorageFileVisibility.PUBLIC),
-                excludeVisibilities = listOf(StorageFileVisibility.PRIVATE),
-                statuses = listOf(StorageFileStatus.READY),
-                excludeStatuses = listOf(StorageFileStatus.PENDING_UPLOAD),
-                targetScopes = listOf("avatar"),
-                isTargetScopeSet = true,
-                createdAtFrom = "2026-01-01T00:00:00Z",
-                createdAtTo = "2026-03-01T00:00:00Z",
-                updatedAtFrom = "2026-01-02T00:00:00Z",
-                updatedAtTo = "2026-03-02T00:00:00Z",
-                isUpdatedAtSet = true,
-                searchQuery = "avatar"
-            )
+        val original = SelfStorageFileListParams(
+            pageNumber = 1,
+            pageSize = 20,
+            sortBy = StorageFileSortBy.CREATED_AT,
+            sortOrder = SortOrder.DESC,
+            fileIds = listOf("00000000-0000-4000-8000-000000000001"),
+            fileName = "avatar.png",
+            fileSizeBytesFrom = 1024L,
+            fileSizeBytesTo = 2048L,
+            mimeTypes = listOf("image/png"),
+            categories = listOf(StorageCategory.IMAGE),
+            excludeCategories = listOf(StorageCategory.AUDIO),
+            visibilities = listOf(StorageFileVisibility.PUBLIC),
+            excludeVisibilities = listOf(StorageFileVisibility.PRIVATE),
+            statuses = listOf(StorageFileStatus.READY),
+            excludeStatuses = listOf(StorageFileStatus.PENDING_UPLOAD),
+            targetScopes = listOf("avatar"),
+            isTargetScopeSet = true,
+            createdAtFrom = "2026-01-01T00:00:00Z",
+            createdAtTo = "2026-03-01T00:00:00Z",
+            updatedAtFrom = "2026-01-02T00:00:00Z",
+            updatedAtTo = "2026-03-02T00:00:00Z",
+            isUpdatedAtSet = true,
+            searchQuery = "avatar"
+        )
 
         val serialized = SelfStorageFileListParams.serialize(original)
         val restored = SelfStorageFileListParams.parse(serialized)

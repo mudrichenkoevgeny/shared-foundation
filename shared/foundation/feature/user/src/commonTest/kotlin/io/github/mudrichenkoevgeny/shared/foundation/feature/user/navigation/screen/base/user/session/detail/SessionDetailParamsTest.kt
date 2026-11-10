@@ -8,11 +8,10 @@ import kotlin.test.assertNull
 class SessionDetailParamsTest {
     @Test
     fun `parse extracts sessionId and userId correctly`() {
-        val params =
-            mapOf(
-                UserApiPaths.SESSION_ID to TEST_SESSION_ID,
-                UserApiPaths.USER_ID to TEST_USER_ID
-            )
+        val params = mapOf(
+            UserApiPaths.SESSION_ID to TEST_SESSION_ID,
+            UserApiPaths.USER_ID to TEST_USER_ID
+        )
         val parsed = SessionDetailParams.parse(params)
 
         assertEquals(TEST_SESSION_ID, parsed.sessionId)
@@ -29,11 +28,10 @@ class SessionDetailParamsTest {
 
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
-        val model =
-            SessionDetailParams(
-                sessionId = TEST_SESSION_ID,
-                userId = TEST_USER_ID
-            )
+        val model = SessionDetailParams(
+            sessionId = TEST_SESSION_ID,
+            userId = TEST_USER_ID
+        )
         val serialized = model.toQueryMap()
 
         assertEquals(emptyMap(), serialized)

@@ -28,10 +28,9 @@ public data class UnlockSuccessParams(
          */
         override fun parse(params: Map<String, Any?>): UnlockSuccessParams {
             val normalized = params.normalizeQueryParams()
-            val method =
-                normalized[UserNavigationPaths.UNLOCK_METHOD]
-                    ?.firstOrNull()
-                    ?.let { UnlockMethod.fromValueOrNull(it) }
+            val method = normalized[UserNavigationPaths.UNLOCK_METHOD]
+                ?.firstOrNull()
+                ?.let { UnlockMethod.fromValueOrNull(it) }
 
             return UnlockSuccessParams(unlockMethod = method)
         }

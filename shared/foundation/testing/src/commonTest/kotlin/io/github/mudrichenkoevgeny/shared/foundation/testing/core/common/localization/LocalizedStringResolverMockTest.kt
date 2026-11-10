@@ -9,13 +9,12 @@ class LocalizedStringResolverMockTest {
     fun resolvesFormattedStringWithPrefix() {
         val resolver = LocalizedStringResolverMock(prefix = "[Mock]")
 
-        val result =
-            resolver.resolve(
-                module = "core/common",
-                file = "errors",
-                key = "unknown_error",
-                locale = "en-US"
-            )
+        val result = resolver.resolve(
+            module = "core/common",
+            file = "errors",
+            key = "unknown_error",
+            locale = "en-US"
+        )
 
         assertEquals("[Mock] en-US:core/common:errors:unknown_error", result)
     }
@@ -25,13 +24,12 @@ class LocalizedStringResolverMockTest {
         val nullKey = "missing_key"
         val resolver = LocalizedStringResolverMock(nullKey = nullKey)
 
-        val result =
-            resolver.resolve(
-                module = "core/common",
-                file = "errors",
-                key = nullKey,
-                locale = "en-US"
-            )
+        val result = resolver.resolve(
+            module = "core/common",
+            file = "errors",
+            key = nullKey,
+            locale = "en-US"
+        )
 
         assertNull(result)
     }

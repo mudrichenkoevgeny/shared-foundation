@@ -37,46 +37,39 @@ public data class StorageFileUploadParams(
         override fun parse(params: Map<String, Any?>): StorageFileUploadParams {
             val normalized = params.normalizeQueryParams()
 
-            val maxFiles =
-                normalized[StorageNavigationPaths.MAX_FILES]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
+            val maxFiles = normalized[StorageNavigationPaths.MAX_FILES]
+                ?.firstOrNull()
+                ?.toIntOrNull()
+                ?.takeIf { it > 0 }
 
-            val targetScope =
-                normalized[StorageApiFields.TARGET_SCOPE]
-                    ?.firstOrNull()
-                    ?.trim()
-                    ?.takeIf { it.isNotBlank() }
+            val targetScope = normalized[StorageApiFields.TARGET_SCOPE]
+                ?.firstOrNull()
+                ?.trim()
+                ?.takeIf { it.isNotBlank() }
 
-            val category =
-                normalized[StorageApiFields.CATEGORY]
-                    ?.firstOrNull()
-                    ?.let { StorageCategory.fromValueOrNull(it) }
+            val category = normalized[StorageApiFields.CATEGORY]
+                ?.firstOrNull()
+                ?.let { StorageCategory.fromValueOrNull(it) }
 
-            val visibility =
-                normalized[StorageApiFields.VISIBILITY]
-                    ?.firstOrNull()
-                    ?.let { StorageFileVisibility.fromValueOrNull(it) }
+            val visibility = normalized[StorageApiFields.VISIBILITY]
+                ?.firstOrNull()
+                ?.let { StorageFileVisibility.fromValueOrNull(it) }
 
-            val acceptedFileTypes =
-                normalized[StorageNavigationPaths.ACCEPTED_FILE_TYPES]
-                    ?.flatMap { it.split(",") }
-                    ?.map { it.trim() }
-                    ?.filter { it.isNotBlank() }
-                    ?: emptyList()
+            val acceptedFileTypes = normalized[StorageNavigationPaths.ACCEPTED_FILE_TYPES]
+                ?.flatMap { it.split(",") }
+                ?.map { it.trim() }
+                ?.filter { it.isNotBlank() }
+                ?: emptyList()
 
-            val maxFileSizeBytes =
-                normalized[StorageNavigationPaths.MAX_FILE_SIZE_BYTES]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-                    ?.takeIf { it > 0 }
+            val maxFileSizeBytes = normalized[StorageNavigationPaths.MAX_FILE_SIZE_BYTES]
+                ?.firstOrNull()
+                ?.toLongOrNull()
+                ?.takeIf { it > 0 }
 
-            val autoSubmit =
-                normalized[StorageNavigationPaths.AUTO_SUBMIT]
-                    ?.firstOrNull()
-                    ?.toBooleanStrictOrNull()
-                    ?: false
+            val autoSubmit = normalized[StorageNavigationPaths.AUTO_SUBMIT]
+                ?.firstOrNull()
+                ?.toBooleanStrictOrNull()
+                ?: false
 
             return StorageFileUploadParams(
                 maxFiles = maxFiles,

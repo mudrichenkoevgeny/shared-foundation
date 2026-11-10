@@ -303,8 +303,7 @@ public data class ClassStructure(
 public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, String>> {
     val result = mutableListOf<Pair<String, String>>()
 
-    val staticFields =
-        kClass.java.declaredFields
+    val staticFields = kClass.java.declaredFields
             .filter {
                 Modifier.isStatic(it.modifiers) && it.type == String::class.java
             }.mapNotNull { field ->
@@ -319,15 +318,13 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
             }
     result.addAll(staticFields)
 
-    val companionInstance =
-        try {
+    val companionInstance = try {
             kClass.companionObjectInstance
         } catch (_: Exception) {
             null
         }
     if (companionInstance != null) {
-        val companionFields =
-            companionInstance
+        val companionFields = companionInstance
                 .javaClass.declaredFields
                 .filter { it.type == String::class.java }
                 .mapNotNull { field ->
@@ -345,8 +342,7 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
 
     val instance = kClass.objectInstance
     if (instance != null) {
-        val instanceFields =
-            kClass.java.declaredFields
+        val instanceFields = kClass.java.declaredFields
                 .filter { it.type == String::class.java }
                 .mapNotNull { field ->
                     try {
@@ -360,8 +356,7 @@ public fun extractObjectStringProperties(kClass: KClass<*>): List<Pair<String, S
                 }
         result.addAll(instanceFields)
 
-        val instanceMethods =
-            kClass.java.declaredMethods
+        val instanceMethods = kClass.java.declaredMethods
                 .filter {
                     it.parameterCount == 0 &&
                         it.returnType == String::class.java &&
@@ -395,8 +390,7 @@ public fun extractClassStructure(kClass: KClass<*>): ClassStructure {
     val directProps = extractObjectStringProperties(kClass)
     val nestedObjects = mutableListOf<Pair<String, List<Pair<String, String>>>>()
 
-    val nestedClasses =
-        try {
+    val nestedClasses = try {
             kClass.nestedClasses
         } catch (_: Exception) {
             emptyList()
@@ -638,8 +632,7 @@ public fun getDtoDependencies(
 
 public fun sortDtosTopologically(classes: List<KClass<*>>): List<KClass<*>> {
     val allClasses = classes.toSet()
-    val depMap =
-        classes.associateWith { kClass ->
+    val depMap = classes.associateWith { kClass ->
             getDtoDependencies(kClass, allClasses)
         }
 
@@ -673,12 +666,10 @@ public fun getDomainPairDependencies(
 ): Set<Pair<KClass<*>, KClass<*>?>> {
     val dependencies = mutableSetOf<Pair<KClass<*>, KClass<*>?>>()
     val (domainClass, payloadClass) = pair
-    val domainRefClasses =
-        (domainClass.primaryConstructor?.parameters ?: emptyList())
+    val domainRefClasses = (domainClass.primaryConstructor?.parameters ?: emptyList())
             .flatMap { extractReferencedClasses(it.type) }
             .toSet()
-    val payloadRefClasses =
-        (payloadClass?.primaryConstructor?.parameters ?: emptyList())
+    val payloadRefClasses = (payloadClass?.primaryConstructor?.parameters ?: emptyList())
             .flatMap { extractReferencedClasses(it.type) }
             .toSet()
 
@@ -697,8 +688,7 @@ public fun getDomainPairDependencies(
 }
 
 public fun sortDomainToDtoTopologically(pairs: List<Pair<KClass<*>, KClass<*>?>>): List<Pair<KClass<*>, KClass<*>?>> {
-    val depMap =
-        pairs.associateWith { pair ->
+    val depMap = pairs.associateWith { pair ->
             getDomainPairDependencies(pair, pairs)
         }
 
@@ -833,15 +823,13 @@ public fun getEnumInfo(kClass: KClass<*>): EnumInfo {
     if (enumConstants != null && enumConstants.isNotEmpty()) {
         for (enumConst in enumConstants) {
             val key = (enumConst as Enum<*>).name
-            val field =
-                try {
+            val field = try {
                     kClass.java.getField(key)
                 } catch (_: Exception) {
                     null
                 }
             val serialNameAnnot = field?.getAnnotation(SerialName::class.java)?.value
-            val serialNameProp =
-                try {
+            val serialNameProp = try {
                     enumConst.javaClass.getMethod("getSerialName").invoke(enumConst) as? String
                 } catch (_: Exception) {
                     null

@@ -2,10 +2,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.plugin
 
 import dev.detekt.gradle.Detekt
 import dev.detekt.gradle.extensions.DetektExtension
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.SourceTask
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import java.io.File
 
 /**

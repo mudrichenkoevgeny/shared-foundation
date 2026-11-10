@@ -26,21 +26,19 @@ import kotlin.test.assertTrue
 public class JsonSerializationTest {
     @Test
     public fun testUserSummaryPayloadSerialization() {
-        val avatarUrls =
-            FileUrlsPayload(
-                originalUrl = "https://cdn.example.com/orig.png",
-                urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
-            )
+        val avatarUrls = FileUrlsPayload(
+            originalUrl = "https://cdn.example.com/orig.png",
+            urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
+        )
 
-        val payload =
-            UserSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                role = UserRole.USER.value,
-                accountStatus = UserAccountStatus.ACTIVE.value,
-                nickname = "johndoe",
-                displayName = "John Doe",
-                avatarUrls = avatarUrls
-            )
+        val payload = UserSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            nickname = "johndoe",
+            displayName = "John Doe",
+            avatarUrls = avatarUrls
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -57,20 +55,19 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUserPrivatePayloadSerialization() {
-        val payload =
-            UserPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                role = UserRole.USER.value,
-                accountStatus = UserAccountStatus.ACTIVE.value,
-                authorityLevel = 10,
-                permissionCodes = setOf("USER_READ", "USER_WRITE"),
-                isTotpEnabled = true,
-                createdAt = 1700000000000L,
-                lockoutType = "none",
-                nickname = "johndoe",
-                displayName = "John Doe",
-                avatarUrls = null
-            )
+        val payload = UserPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            authorityLevel = 10,
+            permissionCodes = setOf("USER_READ", "USER_WRITE"),
+            isTotpEnabled = true,
+            createdAt = 1700000000000L,
+            lockoutType = "none",
+            nickname = "johndoe",
+            displayName = "John Doe",
+            avatarUrls = null
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -87,36 +84,33 @@ public class JsonSerializationTest {
 
     @Test
     public fun testAuthDataPayloadSerialization() {
-        val userPrivate =
-            UserPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                role = UserRole.USER.value,
-                accountStatus = UserAccountStatus.ACTIVE.value,
-                authorityLevel = 10,
-                permissionCodes = setOf("USER_READ"),
-                isTotpEnabled = false,
-                createdAt = 1700000000000L,
-                lockoutType = "none",
-                nickname = "johndoe",
-                displayName = "John Doe",
-                avatarUrls = null
-            )
+        val userPrivate = UserPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            authorityLevel = 10,
+            permissionCodes = setOf("USER_READ"),
+            isTotpEnabled = false,
+            createdAt = 1700000000000L,
+            lockoutType = "none",
+            nickname = "johndoe",
+            displayName = "John Doe",
+            avatarUrls = null
+        )
 
-        val sessionToken =
-            SessionTokenPayload(
-                accessToken = "acc_token_123",
-                refreshToken = "ref_token_456",
-                expiresAt = 1700086400000L,
-                tokenType = "Bearer",
-                sessionId = "00000000-0000-4000-8000-000000000005",
-                identifierId = "00000000-0000-4000-8000-000000000006"
-            )
+        val sessionToken = SessionTokenPayload(
+            accessToken = "acc_token_123",
+            refreshToken = "ref_token_456",
+            expiresAt = 1700086400000L,
+            tokenType = "Bearer",
+            sessionId = "00000000-0000-4000-8000-000000000005",
+            identifierId = "00000000-0000-4000-8000-000000000006"
+        )
 
-        val payload =
-            AuthDataPayload(
-                userPrivatePayload = userPrivate,
-                sessionTokenPayload = sessionToken
-            )
+        val payload = AuthDataPayload(
+            userPrivatePayload = userPrivate,
+            sessionTokenPayload = sessionToken
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -130,26 +124,24 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUserSessionSummaryPayloadSerialization() {
-        val deviceInfo =
-            ClientDeviceInfoPayload(
-                clientType = "web",
-                language = "en",
-                deviceId = "dev_100",
-                deviceName = "Chrome",
-                appVersion = "1.0.0",
-                operationSystemVersion = "Windows"
-            )
+        val deviceInfo = ClientDeviceInfoPayload(
+            clientType = "web",
+            language = "en",
+            deviceId = "dev_100",
+            deviceName = "Chrome",
+            appVersion = "1.0.0",
+            operationSystemVersion = "Windows"
+        )
 
-        val payload =
-            UserSessionSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                userId = "usr_000000000001",
-                clientDeviceInfo = deviceInfo,
-                identifierDisplayName = "john.doe@example.com",
-                identifierAuthProvider = UserAuthProvider.EMAIL.value,
-                lastAccessedAt = 1700000000000L,
-                expiresAt = 1700086400000L
-            )
+        val payload = UserSessionSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            userId = "usr_000000000001",
+            clientDeviceInfo = deviceInfo,
+            identifierDisplayName = "john.doe@example.com",
+            identifierAuthProvider = UserAuthProvider.EMAIL.value,
+            lastAccessedAt = 1700000000000L,
+            expiresAt = 1700086400000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -165,35 +157,33 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUserSessionPrivatePayloadSerialization() {
-        val deviceInfo =
-            ClientDeviceInfoPayload(
-                clientType = "mobile",
-                language = "en",
-                deviceId = "dev_200",
-                deviceName = "Pixel 8",
-                appVersion = "2.0.0",
-                operationSystemVersion = "Android 14"
-            )
+        val deviceInfo = ClientDeviceInfoPayload(
+            clientType = "mobile",
+            language = "en",
+            deviceId = "dev_200",
+            deviceName = "Pixel 8",
+            appVersion = "2.0.0",
+            operationSystemVersion = "Android 14"
+        )
 
-        val payload =
-            UserSessionPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000002",
-                userId = "usr_000000000001",
-                userRole = UserRole.USER.value,
-                identifier = "john.doe@example.com",
-                identifierId = "00000000-0000-4000-8000-000000000003",
-                identifierDisplayName = "john.doe@example.com",
-                identifierAuthProvider = UserAuthProvider.EMAIL.value,
-                clientDeviceInfo = deviceInfo,
-                userAgent = "MobileApp/2.0",
-                ipAddress = "10.0.0.1",
-                expiresAt = 1700086400000L,
-                lastAccessedAt = 1700000000000L,
-                lastReauthenticatedAt = 1700000000000L,
-                isSensitiveValuesMasked = false,
-                createdAt = 1700000000000L,
-                updatedAt = null
-            )
+        val payload = UserSessionPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000002",
+            userId = "usr_000000000001",
+            userRole = UserRole.USER.value,
+            identifier = "john.doe@example.com",
+            identifierId = "00000000-0000-4000-8000-000000000003",
+            identifierDisplayName = "john.doe@example.com",
+            identifierAuthProvider = UserAuthProvider.EMAIL.value,
+            clientDeviceInfo = deviceInfo,
+            userAgent = "MobileApp/2.0",
+            ipAddress = "10.0.0.1",
+            expiresAt = 1700086400000L,
+            lastAccessedAt = 1700000000000L,
+            lastReauthenticatedAt = 1700000000000L,
+            isSensitiveValuesMasked = false,
+            createdAt = 1700000000000L,
+            updatedAt = null
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -209,14 +199,13 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUserIdentifierSummaryPayloadSerialization() {
-        val payload =
-            UserIdentifierSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                userId = "usr_000000000001",
-                userAuthProvider = UserAuthProvider.EMAIL.value,
-                identifier = "john.doe@example.com",
-                displayName = "Primary Email"
-            )
+        val payload = UserIdentifierSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            userId = "usr_000000000001",
+            userAuthProvider = UserAuthProvider.EMAIL.value,
+            identifier = "john.doe@example.com",
+            displayName = "Primary Email"
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -231,18 +220,17 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUserIdentifierPrivatePayloadSerialization() {
-        val payload =
-            UserIdentifierPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                userId = "usr_000000000001",
-                userAuthProvider = UserAuthProvider.EMAIL.value,
-                identifier = "john.doe@example.com",
-                displayName = "Primary Email",
-                externalProviderEmail = null,
-                isSensitiveValuesMasked = false,
-                createdAt = 1700000000000L,
-                updatedAt = 1700003600000L
-            )
+        val payload = UserIdentifierPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            userId = "usr_000000000001",
+            userAuthProvider = UserAuthProvider.EMAIL.value,
+            identifier = "john.doe@example.com",
+            displayName = "Primary Email",
+            externalProviderEmail = null,
+            isSensitiveValuesMasked = false,
+            createdAt = 1700000000000L,
+            updatedAt = 1700003600000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -258,11 +246,10 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUnlockByEmailConfirmationRequestSerialization() {
-        val request =
-            UnlockByEmailConfirmationRequest(
-                email = "user@example.com",
-                confirmationCode = "123456"
-            )
+        val request = UnlockByEmailConfirmationRequest(
+            email = "user@example.com",
+            confirmationCode = "123456"
+        )
 
         val serialized = FoundationJson.encodeToString(request)
 
@@ -275,11 +262,10 @@ public class JsonSerializationTest {
 
     @Test
     public fun testUnlockByPhoneConfirmationRequestSerialization() {
-        val request =
-            UnlockByPhoneConfirmationRequest(
-                phoneNumber = "+1234567890",
-                confirmationCode = "654321"
-            )
+        val request = UnlockByPhoneConfirmationRequest(
+            phoneNumber = "+1234567890",
+            confirmationCode = "654321"
+        )
 
         val serialized = FoundationJson.encodeToString(request)
 

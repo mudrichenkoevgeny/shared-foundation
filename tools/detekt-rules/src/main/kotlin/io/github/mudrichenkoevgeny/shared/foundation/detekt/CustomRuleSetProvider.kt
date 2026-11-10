@@ -8,7 +8,7 @@ import dev.detekt.api.RuleSetProvider
  * Detekt rule set provider for project-specific custom static analysis rules.
  */
 public class CustomRuleSetProvider : RuleSetProvider {
-    override val ruleSetId: RuleSetId = RuleSetId("custom-rules")
+    override val ruleSetId: RuleSetId = RuleSetId("shared-rules")
 
     override fun instance(): RuleSet = RuleSet(
         ruleSetId,

@@ -52,9 +52,8 @@ public class NoFullyQualifiedNameRule(
     override fun visitDotQualifiedExpression(expression: KtDotQualifiedExpression) {
         super.visitDotQualifiedExpression(expression)
 
-        val isImportOrPackage =
-            expression.getStrictParentOfType<KtImportDirective>() != null ||
-                expression.getStrictParentOfType<KtPackageDirective>() != null
+        val isImportOrPackage = expression.getStrictParentOfType<KtImportDirective>() != null ||
+            expression.getStrictParentOfType<KtPackageDirective>() != null
 
         if (isImportOrPackage) return
 

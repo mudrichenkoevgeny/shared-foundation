@@ -35,7 +35,6 @@ subprojects {
         return@subprojects
     }
 
-    pluginManager.apply("com.autonomousapps.dependency-analysis")
     pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-quality")
 
     if (isBom) {
@@ -44,17 +43,19 @@ subprojects {
         pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-kotlin")
     }
 
-    val explicitPublishFlag = (project.findProperty("publishToMaven") as? String)?.toBoolean()
-    if (!isTool || explicitPublishFlag == true) {
-        pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
+    afterEvaluate {
+        val explicitPublishFlag = (findProperty("publishToMaven") as? Boolean)
+            ?: (findProperty("publishToMaven")?.toString()?.toBoolean())
+        if (!isTool || explicitPublishFlag == true) {
+            pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
+        }
     }
 }
 
 tasks.register("generateNpmPackage") {
     group = "publishing"
-    description =
-        "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," +
-            " Zod schemas, and route constants."
+    description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," +
+        " Zod schemas, and route constants."
     dependsOn(":tools:npm-generator:run")
     finalizedBy(":tools:npm-generator:auditNpmExports")
 }

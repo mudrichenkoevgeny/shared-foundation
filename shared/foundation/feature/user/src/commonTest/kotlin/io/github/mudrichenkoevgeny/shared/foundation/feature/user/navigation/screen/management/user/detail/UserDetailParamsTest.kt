@@ -7,10 +7,9 @@ import kotlin.test.assertEquals
 class UserDetailParamsTest {
     @Test
     fun `parse extracts userId correctly`() {
-        val params =
-            mapOf(
-                UserApiPaths.USER_ID to TEST_USER_ID
-            )
+        val params = mapOf(
+            UserApiPaths.USER_ID to TEST_USER_ID
+        )
 
         val parsed = UserDetailParams.parse(params)
 

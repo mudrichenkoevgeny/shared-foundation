@@ -16,12 +16,11 @@ public fun NavigationRoute.toFullUrl(baseUrl: String): String {
 
     if (this !is ParameterizedNavigationRoute<*>) return fullPathUrl
 
-    val queryParams =
-        params.toQueryMap().flatMap { (key, values) ->
-            values.filter { it.isNotBlank() }.map { value ->
-                "${key.encodeUriQueryComponent()}=${value.encodeUriQueryComponent()}"
-            }
+    val queryParams = params.toQueryMap().flatMap { (key, values) ->
+        values.filter { it.isNotBlank() }.map { value ->
+            "${key.encodeUriQueryComponent()}=${value.encodeUriQueryComponent()}"
         }
+    }
     if (queryParams.isEmpty()) return fullPathUrl
 
     return "$fullPathUrl?${queryParams.joinToString("&")}"

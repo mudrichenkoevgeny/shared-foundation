@@ -2,7 +2,7 @@
 
 **Custom Detekt static analysis rules plugin** for enforcing shared library architectural standards and coding conventions across `shared-foundation` and consumer applications.
 
-It provides a custom Detekt rule set (`custom-rules`) registered via [CustomRuleSetProvider].
+It provides a custom Detekt rule set (`shared-rules`) registered via [CustomRuleSetProvider].
 
 ## Included Detekt Rules
 
@@ -51,7 +51,7 @@ dependencies {
 Enable the rule set in `detekt-base.yml` or local `config/detekt/detekt.yml`:
 
 ```yaml
-custom-rules:
+shared-rules:
   active: true
   NoFullyQualifiedName:
     active: true

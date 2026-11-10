@@ -8,16 +8,15 @@ import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
 class PasswordPolicyValidatorTest {
-    private val defaultPolicy =
-        ManagementPasswordPolicy(
-            minLength = ManagementPasswordPolicy.DEFAULT_MIN_LENGTH,
-            requireLetter = true,
-            requireUpperCase = false,
-            requireLowerCase = false,
-            requireDigit = false,
-            requireSpecialChar = false,
-            commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
-        )
+    private val defaultPolicy = ManagementPasswordPolicy(
+        minLength = ManagementPasswordPolicy.DEFAULT_MIN_LENGTH,
+        requireLetter = true,
+        requireUpperCase = false,
+        requireLowerCase = false,
+        requireDigit = false,
+        requireSpecialChar = false,
+        commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
+    )
     private val validator = PasswordPolicyValidatorImpl()
 
     @Test
@@ -72,16 +71,15 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given password missing everything when validate then return multiple reasons`() {
-        val strictPolicy =
-            ManagementPasswordPolicy(
-                minLength = 10,
-                requireLetter = true,
-                requireUpperCase = true,
-                requireLowerCase = true,
-                requireDigit = true,
-                requireSpecialChar = true,
-                commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
-            )
+        val strictPolicy = ManagementPasswordPolicy(
+            minLength = 10,
+            requireLetter = true,
+            requireUpperCase = true,
+            requireLowerCase = true,
+            requireDigit = true,
+            requireSpecialChar = true,
+            commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
+        )
         val password = "abc"
         val result = validator.validate(strictPolicy, password)
         val fail = assertIs<PasswordPolicyValidatorResult.Fail>(result)
@@ -93,16 +91,15 @@ class PasswordPolicyValidatorTest {
 
     @Test
     fun `given empty password when validate then return multiple reasons`() {
-        val strictPolicy =
-            ManagementPasswordPolicy(
-                minLength = 8,
-                requireLetter = true,
-                requireUpperCase = true,
-                requireLowerCase = true,
-                requireDigit = true,
-                requireSpecialChar = true,
-                commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
-            )
+        val strictPolicy = ManagementPasswordPolicy(
+            minLength = 8,
+            requireLetter = true,
+            requireUpperCase = true,
+            requireLowerCase = true,
+            requireDigit = true,
+            requireSpecialChar = true,
+            commonPasswords = ManagementPasswordPolicy.DEFAULT_COMMON_PASSWORDS
+        )
         val result = validator.validate(strictPolicy, "")
         val fail = assertIs<PasswordPolicyValidatorResult.Fail>(result)
         assertTrue(fail.reasons.contains(PasswordPolicyFailReason.TOO_SHORT))

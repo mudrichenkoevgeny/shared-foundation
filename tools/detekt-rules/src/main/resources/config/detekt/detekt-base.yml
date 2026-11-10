@@ -100,19 +100,39 @@ exceptions:
   active: true
   SwallowedException:
     active: true
+    excludes:
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
   TooGenericExceptionCaught:
     active: true
+    excludes:
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
   TooGenericExceptionThrown:
     active: true
+    excludes:
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
   PrintStackTrace:
     active: true
+    excludes:
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
 
 potential-bugs:
   active: true
   UnsafeCallOnNullableType:
     active: true
 
-custom-rules:
+shared-rules:
   active: true
   NoFullyQualifiedName:
     active: true
@@ -130,10 +150,10 @@ comments:
   UndocumentedPublicClass:
     active: true
     excludes:
-      - '**/*Test.kt'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
       - '**/testing/**'
       - '**/testFixtures/**'
-      - '**/tools/**'
     searchInNestedClass: true
     searchInInnerClass: true
     searchInInnerObject: false
@@ -142,9 +162,9 @@ comments:
   UndocumentedPublicFunction:
     active: true
     excludes:
-      - '**/*Test.kt'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
       - '**/testing/**'
       - '**/testFixtures/**'
-      - '**/tools/**'
   UndocumentedPublicProperty:
     active: false

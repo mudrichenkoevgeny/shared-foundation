@@ -85,31 +85,27 @@ public data class ManagementUserIdentifierListParams(
 
             val userId = normalized[UserApiPaths.USER_ID]?.firstOrNull()?.trim() ?: ""
 
-            val pageNumber =
-                normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
+            val pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                ?.firstOrNull()
+                ?.toIntOrNull()
+                ?.takeIf { it > 0 }
+                ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER
 
-            val pageSize =
-                normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it > 0 }
-                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
+            val pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                ?.firstOrNull()
+                ?.toIntOrNull()
+                ?.takeIf { it > 0 }
+                ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE
 
-            val sortBy =
-                normalized[ListingParamNames.Sort.SORT_BY]
-                    ?.firstOrNull()
-                    ?.let { UserIdentifierSortBy.fromValueOrNull(it) }
-                    ?: UserIdentifierSortBy.DEFAULT
+            val sortBy = normalized[ListingParamNames.Sort.SORT_BY]
+                ?.firstOrNull()
+                ?.let { UserIdentifierSortBy.fromValueOrNull(it) }
+                ?: UserIdentifierSortBy.DEFAULT
 
-            val sortOrder =
-                normalized[ListingParamNames.Sort.SORT_ORDER]
-                    ?.firstOrNull()
-                    ?.let { SortOrder.fromValueOrNull(it) }
-                    ?: SortOrder.DEFAULT
+            val sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
+                ?.firstOrNull()
+                ?.let { SortOrder.fromValueOrNull(it) }
+                ?: SortOrder.DEFAULT
 
             return ManagementUserIdentifierListParams(
                 userId = userId,
@@ -118,12 +114,20 @@ public data class ManagementUserIdentifierListParams(
                 sortBy = sortBy,
                 sortOrder = sortOrder,
                 identifierIds = normalized.parseStringList(UserIdentifierFilterValues.IDENTIFIER_ID),
-                userAuthProviders = normalized.parseEnumList(UserIdentifierFilterValues.USER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
-                excludeUserAuthProviders = normalized.parseEnumList(UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER) { UserAuthProvider.fromValueOrNull(it) },
+                userAuthProviders = normalized.parseEnumList(
+                    UserIdentifierFilterValues.USER_AUTH_PROVIDER
+                ) { UserAuthProvider.fromValueOrNull(it) },
+                excludeUserAuthProviders = normalized.parseEnumList(
+                    UserIdentifierFilterValues.EXCLUDE_USER_AUTH_PROVIDER
+                ) { UserAuthProvider.fromValueOrNull(it) },
                 identifier = normalized.parseNonBlankString(UserIdentifierFilterValues.IDENTIFIER),
                 displayName = normalized.parseNonBlankString(UserIdentifierFilterValues.DISPLAY_NAME),
-                externalProviderEmail = normalized.parseNonBlankString(UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL),
-                isExternalProviderEmailSet = normalized.parseBoolean(UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET),
+                externalProviderEmail = normalized.parseNonBlankString(
+                    UserIdentifierFilterValues.EXTERNAL_PROVIDER_EMAIL
+                ),
+                isExternalProviderEmailSet = normalized.parseBoolean(
+                    UserIdentifierFilterValues.IS_EXTERNAL_PROVIDER_EMAIL_SET
+                ),
                 createdAtFrom = normalized.parseNonBlankString(UserIdentifierFilterValues.CREATED_AT_FROM),
                 createdAtTo = normalized.parseNonBlankString(UserIdentifierFilterValues.CREATED_AT_TO),
                 updatedAtFrom = normalized.parseNonBlankString(UserIdentifierFilterValues.UPDATED_AT_FROM),

@@ -46,8 +46,7 @@ public fun generateLocalizationCode(rootDir: File): Pair<String, String> {
 private fun collectLocalizationResources(
     rootDir: File
 ): MutableMap<String, MutableMap<String, MutableMap<String, Map<String, String>>>> {
-    val localizationDirs =
-        rootDir
+    val localizationDirs = rootDir
             .walkTopDown()
             .filter { it.isDirectory && it.name == "localization" && it.parentFile?.name == "resources" }
             .toList()
@@ -86,23 +85,19 @@ private fun buildModuleLocalizationData(
     val placeholderRegex = Regex("""\{([a-zA-Z0-9_]+)\}""")
 
     return fallbackData.map { (modulePath, bundleMap) ->
-        val modulePrefix =
-            modulePath
+        val modulePrefix = modulePath
                 .split('/')
                 .last()
                 .split('_')
                 .joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }
         val facadeClassName = "${modulePrefix}ModuleStrings"
 
-        val bundlesList =
-            bundleMap.map { (bundleName, jsonMap) ->
+        val bundlesList = bundleMap.map { (bundleName, jsonMap) ->
                 val bundleClassName = "${modulePrefix}${bundleName.split('_').joinToString("") { part ->
                     part.replaceFirstChar { char -> char.uppercase() }
                 }}Strings"
-                val entriesList =
-                    jsonMap.map { (rawKey, value) ->
-                        val placeholders =
-                            placeholderRegex
+                val entriesList = jsonMap.map { (rawKey, value) ->
+                        val placeholders = placeholderRegex
                                 .findAll(value)
                                 .map { it.groupValues[1] }
                                 .distinct()
@@ -110,8 +105,7 @@ private fun buildModuleLocalizationData(
                         val cleanKey = rawKey.removeSuffix("_without_args").removeSuffix("_with_args")
                         val propertyName = toCamelCase(cleanKey)
                         val isMethod = placeholders.isNotEmpty()
-                        val propOrMethodName =
-                            if (!isMethod && rawKey.endsWith("_without_args")) {
+                        val propOrMethodName = if (!isMethod && rawKey.endsWith("_without_args")) {
                                 "${propertyName}WithoutArgs"
                             } else {
                                 propertyName
@@ -626,10 +620,8 @@ public fun toCamelCase(snakeCase: String): String {
 
 public fun formatAsJsObject(obj: Any?): String = when (obj) {
     is Map<*, *> -> {
-        val entries =
-            obj.entries.joinToString(",\n") { (k, v) ->
-                val keyStr =
-                    if (k.toString().matches(
+        val entries = obj.entries.joinToString(",\n") { (k, v) ->
+                val keyStr = if (k.toString().matches(
                             Regex("^[a-zA-Z_$][a-zA-Z0-9_$]*$")
                         )
                     ) {

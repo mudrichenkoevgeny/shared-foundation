@@ -15,14 +15,13 @@ import kotlin.test.assertEquals
 import kotlin.time.Instant
 
 class StorageFileDomainMapperTest {
-    private val testFileUrls =
-        FileUrls(
-            originalUrl = "https://cdn.example.com/orig.png",
-            urlPresets = mapOf(
-                FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.png",
-                FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.png"
-            )
+    private val testFileUrls = FileUrls(
+        originalUrl = "https://cdn.example.com/orig.png",
+        urlPresets = mapOf(
+            FileUrlPresets.THUMBNAIL to "https://cdn.example.com/thumb.png",
+            FileUrlPresets.PREVIEW to "https://cdn.example.com/prev.png"
         )
+    )
 
     private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()
 
@@ -31,20 +30,19 @@ class StorageFileDomainMapperTest {
 
     @Test
     fun testStorageFilePrivatePayloadMapping() {
-        val payload =
-            StorageFilePrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                ownerUserId = "usr_000000000001",
-                fileName = "test.png",
-                fileSizeBytes = 1024L,
-                mimeType = "image/png",
-                category = StorageCategory.IMAGE.value,
-                visibility = StorageFileVisibility.PUBLIC.value,
-                status = StorageFileStatus.READY.value,
-                targetScope = "avatar",
-                fileUrls = testFileUrlsPayload,
-                createdAt = 1700000000000L
-            )
+        val payload = StorageFilePrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            ownerUserId = "usr_000000000001",
+            fileName = "test.png",
+            fileSizeBytes = 1024L,
+            mimeType = "image/png",
+            category = StorageCategory.IMAGE.value,
+            visibility = StorageFileVisibility.PUBLIC.value,
+            status = StorageFileStatus.READY.value,
+            targetScope = "avatar",
+            fileUrls = testFileUrlsPayload,
+            createdAt = 1700000000000L
+        )
 
         val domain = payload.toStorageFilePrivate()
 
@@ -56,18 +54,17 @@ class StorageFileDomainMapperTest {
 
     @Test
     fun testStorageFileSummaryPayloadMapping() {
-        val payload =
-            StorageFileSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                fileName = "test.png",
-                fileSizeBytes = 1024L,
-                mimeType = "image/png",
-                category = StorageCategory.IMAGE.value,
-                visibility = StorageFileVisibility.PUBLIC.value,
-                status = StorageFileStatus.READY.value,
-                fileUrls = testFileUrlsPayload,
-                createdAt = 1700000000000L
-            )
+        val payload = StorageFileSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            fileName = "test.png",
+            fileSizeBytes = 1024L,
+            mimeType = "image/png",
+            category = StorageCategory.IMAGE.value,
+            visibility = StorageFileVisibility.PUBLIC.value,
+            status = StorageFileStatus.READY.value,
+            fileUrls = testFileUrlsPayload,
+            createdAt = 1700000000000L
+        )
 
         val domain = payload.toStorageFileSummary()
 
@@ -79,21 +76,20 @@ class StorageFileDomainMapperTest {
 
     @Test
     fun testStorageFilePrivateToSummaryMapping() {
-        val privateModel =
-            StorageFilePrivate(
-                id = testFileId,
-                ownerUserId = "usr_000000000001",
-                fileName = "test.png",
-                fileSizeBytes = 1024L,
-                mimeType = "image/png",
-                category = StorageCategory.IMAGE,
-                visibility = StorageFileVisibility.PUBLIC,
-                status = StorageFileStatus.READY,
-                targetScope = "avatar",
-                fileUrls = testFileUrls,
-                createdAt = testCreatedAt,
-                updatedAt = null
-            )
+        val privateModel = StorageFilePrivate(
+            id = testFileId,
+            ownerUserId = "usr_000000000001",
+            fileName = "test.png",
+            fileSizeBytes = 1024L,
+            mimeType = "image/png",
+            category = StorageCategory.IMAGE,
+            visibility = StorageFileVisibility.PUBLIC,
+            status = StorageFileStatus.READY,
+            targetScope = "avatar",
+            fileUrls = testFileUrls,
+            createdAt = testCreatedAt,
+            updatedAt = null
+        )
 
         val summaryModel = privateModel.toStorageFileSummary()
 
@@ -110,24 +106,23 @@ class StorageFileDomainMapperTest {
 
     @Test
     fun testStorageFileInternalMapping() {
-        val internalModel =
-            StorageFileInternal(
-                id = testFileId,
-                ownerUserId = "usr_000000000001",
-                fileName = "test.png",
-                fileSizeBytes = 1024L,
-                mimeType = "image/png",
-                category = StorageCategory.IMAGE,
-                visibility = StorageFileVisibility.PUBLIC,
-                status = StorageFileStatus.READY,
-                targetScope = "avatar",
-                contentHash = null,
-                s3Bucket = "my-bucket",
-                s3Key = "files/test.png",
-                fileUrls = testFileUrls,
-                createdAt = testCreatedAt,
-                updatedAt = null
-            )
+        val internalModel = StorageFileInternal(
+            id = testFileId,
+            ownerUserId = "usr_000000000001",
+            fileName = "test.png",
+            fileSizeBytes = 1024L,
+            mimeType = "image/png",
+            category = StorageCategory.IMAGE,
+            visibility = StorageFileVisibility.PUBLIC,
+            status = StorageFileStatus.READY,
+            targetScope = "avatar",
+            contentHash = null,
+            s3Bucket = "my-bucket",
+            s3Key = "files/test.png",
+            fileUrls = testFileUrls,
+            createdAt = testCreatedAt,
+            updatedAt = null
+        )
 
         val privateModel = internalModel.toStorageFilePrivate()
 

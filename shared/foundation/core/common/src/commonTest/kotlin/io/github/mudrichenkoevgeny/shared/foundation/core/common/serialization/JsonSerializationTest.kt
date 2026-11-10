@@ -19,23 +19,21 @@ import kotlin.test.assertTrue
 public class JsonSerializationTest {
     @Test
     public fun testClientInfoPayloadSerialization() {
-        val deviceInfo =
-            ClientDeviceInfoPayload(
-                clientType = "web",
-                language = "en",
-                deviceId = "dev_123456789",
-                deviceName = "Chrome browser",
-                appVersion = "1.0.0",
-                operationSystemVersion = "Windows 11"
-            )
+        val deviceInfo = ClientDeviceInfoPayload(
+            clientType = "web",
+            language = "en",
+            deviceId = "dev_123456789",
+            deviceName = "Chrome browser",
+            appVersion = "1.0.0",
+            operationSystemVersion = "Windows 11"
+        )
 
-        val payload =
-            ClientInfoPayload(
-                clientDeviceInfo = deviceInfo,
-                userAgent = "Mozilla/5.0",
-                ipAddress = "192.168.1.1",
-                apiVersion = "1.0.0"
-            )
+        val payload = ClientInfoPayload(
+            clientDeviceInfo = deviceInfo,
+            userAgent = "Mozilla/5.0",
+            ipAddress = "192.168.1.1",
+            apiVersion = "1.0.0"
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -53,23 +51,21 @@ public class JsonSerializationTest {
 
     @Test
     public fun testClientInfoPayloadNullabilityHandling() {
-        val deviceInfo =
-            ClientDeviceInfoPayload(
-                clientType = null,
-                language = null,
-                deviceId = null,
-                deviceName = null,
-                appVersion = null,
-                operationSystemVersion = null
-            )
+        val deviceInfo = ClientDeviceInfoPayload(
+            clientType = null,
+            language = null,
+            deviceId = null,
+            deviceName = null,
+            appVersion = null,
+            operationSystemVersion = null
+        )
 
-        val payload =
-            ClientInfoPayload(
-                clientDeviceInfo = deviceInfo,
-                userAgent = null,
-                ipAddress = null,
-                apiVersion = null
-            )
+        val payload = ClientInfoPayload(
+            clientDeviceInfo = deviceInfo,
+            userAgent = null,
+            ipAddress = null,
+            apiVersion = null
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
         val deserialized = FoundationJson.decodeFromString<ClientInfoPayload>(serialized)
@@ -79,13 +75,12 @@ public class JsonSerializationTest {
 
     @Test
     public fun testApiErrorResponseSerialization() {
-        val payload =
-            ApiErrorResponse(
-                id = "err_001",
-                code = CommonErrorCodes.BAD_REQUEST,
-                message = "Invalid input",
-                args = mapOf("field" to "email")
-            )
+        val payload = ApiErrorResponse(
+            id = "err_001",
+            code = CommonErrorCodes.BAD_REQUEST,
+            message = "Invalid input",
+            args = mapOf("field" to "email")
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -101,13 +96,12 @@ public class JsonSerializationTest {
     @Test
     public fun testApiErrorResponseErrorCodeMapping() {
         val commonErrorCode = CommonErrorCodes.NOT_FOUND
-        val responseWithCommonError =
-            ApiErrorResponse(
-                id = "err_404",
-                code = commonErrorCode,
-                message = "User not found",
-                args = mapOf("resource" to "User")
-            )
+        val responseWithCommonError = ApiErrorResponse(
+            id = "err_404",
+            code = commonErrorCode,
+            message = "User not found",
+            args = mapOf("resource" to "User")
+        )
 
         val serializedCommon = FoundationJson.encodeToString(responseWithCommonError)
         val deserializedCommon = FoundationJson.decodeFromString<ApiErrorResponse>(serializedCommon)
@@ -116,13 +110,12 @@ public class JsonSerializationTest {
         assertEquals("User", deserializedCommon.args["resource"])
 
         val clientErrorCode = ClientCommonErrorCodes.NO_INTERNET_CONNECTION
-        val responseWithClientError =
-            ApiErrorResponse(
-                id = "err_client_001",
-                code = clientErrorCode,
-                message = "No active internet connection",
-                args = emptyMap()
-            )
+        val responseWithClientError = ApiErrorResponse(
+            id = "err_client_001",
+            code = clientErrorCode,
+            message = "No active internet connection",
+            args = emptyMap()
+        )
 
         val serializedClient = FoundationJson.encodeToString(responseWithClientError)
         val deserializedClient = FoundationJson.decodeFromString<ApiErrorResponse>(serializedClient)
@@ -132,16 +125,15 @@ public class JsonSerializationTest {
 
     @Test
     public fun testWebSocketInitializePayloadSerialization() {
-        val payload =
-            WebSocketInitializePayload(
-                clientType = "mobile",
-                language = "ru",
-                deviceId = "device_999",
-                deviceName = "Pixel 8",
-                appVersion = "2.0.0",
-                operationSystemVersion = "Android 14",
-                apiVersion = "1.1.0"
-            )
+        val payload = WebSocketInitializePayload(
+            clientType = "mobile",
+            language = "ru",
+            deviceId = "device_999",
+            deviceName = "Pixel 8",
+            appVersion = "2.0.0",
+            operationSystemVersion = "Android 14",
+            apiVersion = "1.1.0"
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -159,19 +151,17 @@ public class JsonSerializationTest {
 
     @Test
     public fun testSocketFrameSerialization() {
-        val payloadJson =
-            buildJsonObject {
-                put("key", "value")
-            }
+        val payloadJson = buildJsonObject {
+            put("key", "value")
+        }
 
-        val frame =
-            SocketFrame(
-                id = "frame_12345",
-                type = "ping",
-                payload = payloadJson,
-                metadata = mapOf("trace_id" to "tr_abc123"),
-                timestamp = 1700000000000L
-            )
+        val frame = SocketFrame(
+            id = "frame_12345",
+            type = "ping",
+            payload = payloadJson,
+            metadata = mapOf("trace_id" to "tr_abc123"),
+            timestamp = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(frame)
 
@@ -187,14 +177,13 @@ public class JsonSerializationTest {
 
     @Test
     public fun testSocketFrameNullPayloadSerialization() {
-        val frame =
-            SocketFrame(
-                id = "frame_67890",
-                type = "pong",
-                payload = null,
-                metadata = emptyMap(),
-                timestamp = 1700000001000L
-            )
+        val frame = SocketFrame(
+            id = "frame_67890",
+            type = "pong",
+            payload = null,
+            metadata = emptyMap(),
+            timestamp = 1700000001000L
+        )
 
         val serialized = FoundationJson.encodeToString(frame)
         val deserialized = FoundationJson.decodeFromString<SocketFrame>(serialized)

@@ -12,12 +12,11 @@ public fun String?.normalizePhoneQueryParam(): String? {
     val trimmed = this.trim()
     if (trimmed.isEmpty()) return null
 
-    val restored =
-        if (this.startsWith(' ') && !trimmed.startsWith('+') && trimmed.first().isDigit()) {
-            "+$trimmed"
-        } else {
-            trimmed
-        }
+    val restored = if (this.startsWith(' ') && !trimmed.startsWith('+') && trimmed.first().isDigit()) {
+        "+$trimmed"
+    } else {
+        trimmed
+    }
     return restored
 }
 

@@ -18,24 +18,23 @@ class ManagementAuditEventListParamsTest {
 
     @Test
     fun `parse extracts typed parameters correctly`() {
-        val rawParams =
-            mapOf(
-                ListingParamNames.Pagination.PAGE_NUMBER to listOf("2"),
-                ListingParamNames.Pagination.PAGE_SIZE to listOf("50"),
-                ListingParamNames.Sort.SORT_BY to listOf("created_at"),
-                ListingParamNames.Sort.SORT_ORDER to listOf("asc"),
-                AuditEventFilterValues.EVENT_ID to listOf("evt_123"),
-                AuditEventFilterValues.ACTOR_ID to listOf("usr_123"),
-                AuditEventFilterValues.ACTOR_TYPE to listOf("user", "system"),
-                AuditEventFilterValues.EXCLUDE_ACTOR_TYPE to listOf("service"),
-                AuditEventFilterValues.ACTION to listOf("user.login"),
-                AuditEventFilterValues.EXCLUDE_ACTION to listOf("cron.tick"),
-                AuditEventFilterValues.STATUS to listOf("success", "failed"),
-                AuditEventFilterValues.EXCLUDE_STATUS to listOf("denied"),
-                AuditEventFilterValues.CREATED_AT_FROM to listOf("2026-01-01T00:00:00Z"),
-                AuditEventFilterValues.CREATED_AT_TO to listOf("2026-03-01T00:00:00Z"),
-                AuditEventFilterValues.SEARCH_QUERY to listOf("invalid password")
-            )
+        val rawParams = mapOf(
+            ListingParamNames.Pagination.PAGE_NUMBER to listOf("2"),
+            ListingParamNames.Pagination.PAGE_SIZE to listOf("50"),
+            ListingParamNames.Sort.SORT_BY to listOf("created_at"),
+            ListingParamNames.Sort.SORT_ORDER to listOf("asc"),
+            AuditEventFilterValues.EVENT_ID to listOf("evt_123"),
+            AuditEventFilterValues.ACTOR_ID to listOf("usr_123"),
+            AuditEventFilterValues.ACTOR_TYPE to listOf("user", "system"),
+            AuditEventFilterValues.EXCLUDE_ACTOR_TYPE to listOf("service"),
+            AuditEventFilterValues.ACTION to listOf("user.login"),
+            AuditEventFilterValues.EXCLUDE_ACTION to listOf("cron.tick"),
+            AuditEventFilterValues.STATUS to listOf("success", "failed"),
+            AuditEventFilterValues.EXCLUDE_STATUS to listOf("denied"),
+            AuditEventFilterValues.CREATED_AT_FROM to listOf("2026-01-01T00:00:00Z"),
+            AuditEventFilterValues.CREATED_AT_TO to listOf("2026-03-01T00:00:00Z"),
+            AuditEventFilterValues.SEARCH_QUERY to listOf("invalid password")
+        )
 
         val parsed = ManagementAuditEventListParams.parse(rawParams)
 
@@ -58,13 +57,12 @@ class ManagementAuditEventListParamsTest {
 
     @Test
     fun `parse extracts single string values from JS style map`() {
-        val rawParams =
-            mapOf(
-                ListingParamNames.Pagination.PAGE_NUMBER to "3",
-                ListingParamNames.Pagination.PAGE_SIZE to "25",
-                AuditEventFilterValues.ACTOR_ID to "usr_789",
-                AuditEventFilterValues.STATUS to "denied"
-            )
+        val rawParams = mapOf(
+            ListingParamNames.Pagination.PAGE_NUMBER to "3",
+            ListingParamNames.Pagination.PAGE_SIZE to "25",
+            AuditEventFilterValues.ACTOR_ID to "usr_789",
+            AuditEventFilterValues.STATUS to "denied"
+        )
 
         val parsed = ManagementAuditEventListParams.parse(rawParams)
 
@@ -76,13 +74,12 @@ class ManagementAuditEventListParamsTest {
 
     @Test
     fun `parse gracefully handles invalid values`() {
-        val rawParams =
-            mapOf(
-                ListingParamNames.Pagination.PAGE_NUMBER to listOf("-1"),
-                ListingParamNames.Sort.SORT_BY to listOf("invalid_field"),
-                ListingParamNames.Sort.SORT_ORDER to listOf("unknown_order"),
-                AuditEventFilterValues.STATUS to listOf("invalid_status", "success")
-            )
+        val rawParams = mapOf(
+            ListingParamNames.Pagination.PAGE_NUMBER to listOf("-1"),
+            ListingParamNames.Sort.SORT_BY to listOf("invalid_field"),
+            ListingParamNames.Sort.SORT_ORDER to listOf("unknown_order"),
+            AuditEventFilterValues.STATUS to listOf("invalid_status", "success")
+        )
 
         val parsed = ManagementAuditEventListParams.parse(rawParams)
 
@@ -94,24 +91,23 @@ class ManagementAuditEventListParamsTest {
 
     @Test
     fun `serialize and parse roundtrip maintains equality`() {
-        val original =
-            ManagementAuditEventListParams(
-                pageNumber = 3,
-                pageSize = 30,
-                sortBy = AuditEventSortBy.CREATED_AT,
-                sortOrder = SortOrder.ASC,
-                eventIds = listOf("evt_999"),
-                actorIds = listOf("usr_456"),
-                actorTypes = listOf(AuditActorType.SERVICE),
-                excludeActorTypes = listOf(AuditActorType.SYSTEM),
-                actions = listOf("user.delete"),
-                excludeActions = listOf("user.get"),
-                statuses = listOf(AuditStatus.DENIED),
-                excludeStatuses = listOf(AuditStatus.SUCCESS),
-                createdAtFrom = "2026-01-01T00:00:00Z",
-                createdAtTo = "2026-03-01T00:00:00Z",
-                searchQuery = "failed login"
-            )
+        val original = ManagementAuditEventListParams(
+            pageNumber = 3,
+            pageSize = 30,
+            sortBy = AuditEventSortBy.CREATED_AT,
+            sortOrder = SortOrder.ASC,
+            eventIds = listOf("evt_999"),
+            actorIds = listOf("usr_456"),
+            actorTypes = listOf(AuditActorType.SERVICE),
+            excludeActorTypes = listOf(AuditActorType.SYSTEM),
+            actions = listOf("user.delete"),
+            excludeActions = listOf("user.get"),
+            statuses = listOf(AuditStatus.DENIED),
+            excludeStatuses = listOf(AuditStatus.SUCCESS),
+            createdAtFrom = "2026-01-01T00:00:00Z",
+            createdAtTo = "2026-03-01T00:00:00Z",
+            searchQuery = "failed login"
+        )
 
         val serialized = ManagementAuditEventListParams.serialize(original)
         val restored = ManagementAuditEventListParams.parse(serialized)

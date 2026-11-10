@@ -11,13 +11,12 @@ import kotlin.test.assertEquals
 public class IpRestrictionPolicyMapperTest {
     @Test
     public fun testIpRestrictionPolicyPayloadToDomainMapping() {
-        val payload =
-            IpRestrictionPolicyPayload(
-                isBlacklistEnabled = true,
-                blacklist = listOf("192.168.1.1", "10.0.0.0/8"),
-                isWhitelistEnabled = false,
-                whitelist = emptyList()
-            )
+        val payload = IpRestrictionPolicyPayload(
+            isBlacklistEnabled = true,
+            blacklist = listOf("192.168.1.1", "10.0.0.0/8"),
+            isWhitelistEnabled = false,
+            whitelist = emptyList()
+        )
 
         val domain = payload.toIpRestrictionPolicy()
 
@@ -29,13 +28,12 @@ public class IpRestrictionPolicyMapperTest {
 
     @Test
     public fun testIpRestrictionPolicyDomainToPayloadMapping() {
-        val domain =
-            IpRestrictionPolicy(
-                isBlacklistEnabled = false,
-                blacklist = emptyList(),
-                isWhitelistEnabled = true,
-                whitelist = listOf("127.0.0.1", "172.16.0.1")
-            )
+        val domain = IpRestrictionPolicy(
+            isBlacklistEnabled = false,
+            blacklist = emptyList(),
+            isWhitelistEnabled = true,
+            whitelist = listOf("127.0.0.1", "172.16.0.1")
+        )
 
         val payload = domain.toIpRestrictionPolicyPayload()
 

@@ -149,36 +149,44 @@ public data class ManagementUserListParams(
         override fun parse(params: Map<String, Any?>): ManagementUserListParams {
             val normalized = params.normalizeQueryParams()
             return ManagementUserListParams(
-                pageNumber =
-                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-                pageSize =
-                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-                sortBy =
-                    normalized[ListingParamNames.Sort.SORT_BY]
-                        ?.firstOrNull()
-                        ?.let { UserSortBy.fromValueOrNull(it) }
-                        ?: UserSortBy.DEFAULT,
-                sortOrder =
-                    normalized[ListingParamNames.Sort.SORT_ORDER]
-                        ?.firstOrNull()
-                        ?.let { SortOrder.fromValueOrNull(it) }
-                        ?: SortOrder.DEFAULT,
+                pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy = normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { UserSortBy.fromValueOrNull(it) }
+                    ?: UserSortBy.DEFAULT,
+                sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT,
                 userIds = normalized.parseStringList(UserFilterValues.USER_ID),
                 userRoles = normalized.parseEnumList(UserFilterValues.ROLE) { UserRole.fromValueOrNull(it) },
-                excludeUserRoles = normalized.parseEnumList(UserFilterValues.EXCLUDE_ROLE) { UserRole.fromValueOrNull(it) },
-                accountStatuses = normalized.parseEnumList(UserFilterValues.ACCOUNT_STATUS) { UserAccountStatus.fromValueOrNull(it) },
-                excludeAccountStatuses = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_STATUS) { UserAccountStatus.fromValueOrNull(it) },
-                accountStatusesOnRestore = normalized.parseEnumList(UserFilterValues.ACCOUNT_STATUS_ON_RESTORE) { UserAccountStatus.fromValueOrNull(it) },
-                excludeAccountStatusesOnRestore = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE) { UserAccountStatus.fromValueOrNull(it) },
-                isAccountStatusOnRestoreSet = normalized.parseBoolean(UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET),
+                excludeUserRoles = normalized.parseEnumList(UserFilterValues.EXCLUDE_ROLE) {
+                    UserRole.fromValueOrNull(it)
+                },
+                accountStatuses = normalized.parseEnumList(
+                    UserFilterValues.ACCOUNT_STATUS
+                ) { UserAccountStatus.fromValueOrNull(it) },
+                excludeAccountStatuses = normalized.parseEnumList(
+                    UserFilterValues.EXCLUDE_ACCOUNT_STATUS
+                ) { UserAccountStatus.fromValueOrNull(it) },
+                accountStatusesOnRestore = normalized.parseEnumList(
+                    UserFilterValues.ACCOUNT_STATUS_ON_RESTORE
+                ) { UserAccountStatus.fromValueOrNull(it) },
+                excludeAccountStatusesOnRestore = normalized.parseEnumList(
+                    UserFilterValues.EXCLUDE_ACCOUNT_STATUS_ON_RESTORE
+                ) { UserAccountStatus.fromValueOrNull(it) },
+                isAccountStatusOnRestoreSet = normalized.parseBoolean(
+                    UserFilterValues.IS_ACCOUNT_STATUS_ON_RESTORE_SET
+                ),
                 authorityLevelFrom = normalized.parseInt(UserFilterValues.AUTHORITY_LEVEL_FROM),
                 authorityLevelTo = normalized.parseInt(UserFilterValues.AUTHORITY_LEVEL_TO),
                 permissionCodes = normalized.parseStringList(UserFilterValues.PERMISSION_CODES),
@@ -195,23 +203,41 @@ public data class ManagementUserListParams(
                 updatedAtFrom = normalized.parseNonBlankString(UserFilterValues.UPDATED_AT_FROM),
                 updatedAtTo = normalized.parseNonBlankString(UserFilterValues.UPDATED_AT_TO),
                 isUpdatedAtSet = normalized.parseBoolean(UserFilterValues.IS_UPDATED_AT_SET),
-                scheduledPermanentDeletionAtFrom = normalized.parseNonBlankString(UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM),
-                scheduledPermanentDeletionAtTo = normalized.parseNonBlankString(UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO),
-                isScheduledPermanentDeletionAtSet = normalized.parseBoolean(UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET),
-                accountLockoutTypes = normalized.parseEnumList(UserFilterValues.ACCOUNT_LOCKOUT_TYPE) { AccountLockoutType.fromValueOrNull(it) },
-                excludeAccountLockoutTypes = normalized.parseEnumList(UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE) { AccountLockoutType.fromValueOrNull(it) },
-                temporaryLockoutUntilFrom = normalized.parseNonBlankString(UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM),
+                scheduledPermanentDeletionAtFrom = normalized.parseNonBlankString(
+                    UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_FROM
+                ),
+                scheduledPermanentDeletionAtTo = normalized.parseNonBlankString(
+                    UserFilterValues.SCHEDULED_PERMANENT_DELETION_AT_TO
+                ),
+                isScheduledPermanentDeletionAtSet = normalized.parseBoolean(
+                    UserFilterValues.IS_SCHEDULED_PERMANENT_DELETION_AT_SET
+                ),
+                accountLockoutTypes = normalized.parseEnumList(
+                    UserFilterValues.ACCOUNT_LOCKOUT_TYPE
+                ) { AccountLockoutType.fromValueOrNull(it) },
+                excludeAccountLockoutTypes = normalized.parseEnumList(
+                    UserFilterValues.EXCLUDE_ACCOUNT_LOCKOUT_TYPE
+                ) { AccountLockoutType.fromValueOrNull(it) },
+                temporaryLockoutUntilFrom = normalized.parseNonBlankString(
+                    UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_FROM
+                ),
                 temporaryLockoutUntilTo = normalized.parseNonBlankString(UserFilterValues.TEMPORARY_LOCKOUT_UNTIL_TO),
                 isTemporaryLockoutUntilSet = normalized.parseBoolean(UserFilterValues.IS_TEMPORARY_LOCKOUT_UNTIL_SET),
                 storageQuotaBytesFrom = normalized.parseLong(UserFilterValues.STORAGE_QUOTA_BYTES_FROM),
                 storageQuotaBytesTo = normalized.parseLong(UserFilterValues.STORAGE_QUOTA_BYTES_TO),
                 isStorageQuotaBytesSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_QUOTA_BYTES_SET),
-                storageMaxUploadSizeBytesFrom = normalized.parseLong(UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM),
+                storageMaxUploadSizeBytesFrom = normalized.parseLong(
+                    UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_FROM
+                ),
                 storageMaxUploadSizeBytesTo = normalized.parseLong(UserFilterValues.STORAGE_MAX_UPLOAD_SIZE_BYTES_TO),
-                isStorageMaxUploadSizeBytesSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET),
+                isStorageMaxUploadSizeBytesSet = normalized.parseBoolean(
+                    UserFilterValues.IS_STORAGE_MAX_UPLOAD_SIZE_BYTES_SET
+                ),
                 storageMaxPendingUploadsFrom = normalized.parseLong(UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_FROM),
                 storageMaxPendingUploadsTo = normalized.parseLong(UserFilterValues.STORAGE_MAX_PENDING_UPLOADS_TO),
-                isStorageMaxPendingUploadsSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET),
+                isStorageMaxPendingUploadsSet = normalized.parseBoolean(
+                    UserFilterValues.IS_STORAGE_MAX_PENDING_UPLOADS_SET
+                ),
                 isStorageConfigurationSet = normalized.parseBoolean(UserFilterValues.IS_STORAGE_CONFIGURATION_SET),
                 nickname = normalized.parseNonBlankString(UserFilterValues.NICKNAME),
                 isNicknameSet = normalized.parseBoolean(UserFilterValues.IS_NICKNAME_SET),

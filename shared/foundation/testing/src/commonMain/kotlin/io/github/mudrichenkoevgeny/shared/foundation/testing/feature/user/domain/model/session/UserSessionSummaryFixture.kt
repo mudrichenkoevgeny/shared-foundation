@@ -53,16 +53,14 @@ public fun createTestUserSessionSummaryList(
     generator: (index: Int) -> UserSessionSummary = { index ->
         val createdAtMs = TEST_TIME_MILLIS + (index * 60_000L)
         val isEven = index % 2 == 0
-        val winDevice =
-            createTestClientDeviceInfo(
-                deviceName = "Windows PC",
-                operationSystemVersion = "Windows 10"
-            )
-        val macDevice =
-            createTestClientDeviceInfo(
-                deviceName = "MacBook Pro",
-                operationSystemVersion = "macOS 14.0"
-            )
+        val winDevice = createTestClientDeviceInfo(
+            deviceName = "Windows PC",
+            operationSystemVersion = "Windows 10"
+        )
+        val macDevice = createTestClientDeviceInfo(
+            deviceName = "MacBook Pro",
+            operationSystemVersion = "macOS 14.0"
+        )
         createTestUserSessionSummary(
             id = createTestUserSessionId(generateTestUuidString(index = index, group = 1)),
             userId = createTestUserId(generateTestUuidString(index = index, group = 2)),

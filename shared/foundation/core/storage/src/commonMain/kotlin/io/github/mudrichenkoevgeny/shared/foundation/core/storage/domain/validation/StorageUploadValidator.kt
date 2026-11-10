@@ -25,10 +25,9 @@ public object StorageUploadValidator {
         if (acceptedFileTypes.isEmpty()) return true
 
         val lowerFileName = fileName.lowercase()
-        val extension =
-            lowerFileName.substringAfterLast('.', "").let {
-                if (it.isNotEmpty()) ".$it" else ""
-            }
+        val extension = lowerFileName.substringAfterLast('.', "").let {
+            if (it.isNotEmpty()) ".$it" else ""
+        }
         val normalizedMimeType = mimeType?.lowercase()?.trim()
 
         return acceptedFileTypes.any { rawFilter ->

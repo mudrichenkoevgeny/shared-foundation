@@ -11,13 +11,12 @@ import kotlin.test.assertNull
 class UnlockOtpInputParamsTest {
     @Test
     fun `parse extracts method identifier retryAfterSeconds and code correctly`() {
-        val params =
-            mapOf(
-                UserNavigationPaths.UNLOCK_METHOD to "email",
-                UserApiFields.IDENTIFIER to "user@example.com",
-                SecurityApiFields.RETRY_AFTER_SECONDS to "60",
-                UserApiFields.CONFIRMATION_CODE to "123456"
-            )
+        val params = mapOf(
+            UserNavigationPaths.UNLOCK_METHOD to "email",
+            UserApiFields.IDENTIFIER to "user@example.com",
+            SecurityApiFields.RETRY_AFTER_SECONDS to "60",
+            UserApiFields.CONFIRMATION_CODE to "123456"
+        )
         val parsed = UnlockOtpInputParams.parse(params)
 
         assertEquals(UnlockMethod.EMAIL, parsed.unlockMethod)
@@ -28,11 +27,10 @@ class UnlockOtpInputParamsTest {
 
     @Test
     fun `parse normalizes phone identifier when method is phone`() {
-        val params =
-            mapOf(
-                UserNavigationPaths.UNLOCK_METHOD to "phone",
-                UserApiFields.IDENTIFIER to "+12345678900"
-            )
+        val params = mapOf(
+            UserNavigationPaths.UNLOCK_METHOD to "phone",
+            UserApiFields.IDENTIFIER to "+12345678900"
+        )
         val parsed = UnlockOtpInputParams.parse(params)
 
         assertEquals(UnlockMethod.PHONE, parsed.unlockMethod)
@@ -50,13 +48,12 @@ class UnlockOtpInputParamsTest {
 
     @Test
     fun `serialize and toQueryMap produce correct map`() {
-        val model =
-            UnlockOtpInputParams(
-                unlockMethod = UnlockMethod.EMAIL,
-                identifier = "user@example.com",
-                retryAfterSeconds = 60,
-                code = "123456"
-            )
+        val model = UnlockOtpInputParams(
+            unlockMethod = UnlockMethod.EMAIL,
+            identifier = "user@example.com",
+            retryAfterSeconds = 60,
+            code = "123456"
+        )
         val serialized = model.toQueryMap()
 
         assertEquals(listOf("email"), serialized[UserNavigationPaths.UNLOCK_METHOD])

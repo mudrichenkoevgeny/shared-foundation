@@ -75,39 +75,41 @@ public data class ManagementAuditEventListParams(
             val normalized = params.normalizeQueryParams()
 
             return ManagementAuditEventListParams(
-                pageNumber =
-                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-                pageSize =
-                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-                sortBy =
-                    normalized[ListingParamNames.Sort.SORT_BY]
-                        ?.firstOrNull()
-                        ?.let { AuditEventSortBy.fromValueOrNull(it) }
-                        ?: AuditEventSortBy.DEFAULT,
-                sortOrder =
-                    normalized[ListingParamNames.Sort.SORT_ORDER]
-                        ?.firstOrNull()
-                        ?.let { SortOrder.fromValueOrNull(it) }
-                        ?: SortOrder.DEFAULT,
+                pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy = normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { AuditEventSortBy.fromValueOrNull(it) }
+                    ?: AuditEventSortBy.DEFAULT,
+                sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT,
                 eventIds = normalized.parseStringList(AuditEventFilterValues.EVENT_ID),
                 actorIds = normalized.parseStringList(AuditEventFilterValues.ACTOR_ID),
-                actorTypes = normalized.parseEnumList(AuditEventFilterValues.ACTOR_TYPE) { AuditActorType.fromValueOrNull(it) },
-                excludeActorTypes = normalized.parseEnumList(AuditEventFilterValues.EXCLUDE_ACTOR_TYPE) { AuditActorType.fromValueOrNull(it) },
+                actorTypes = normalized.parseEnumList(
+                    AuditEventFilterValues.ACTOR_TYPE
+                ) { AuditActorType.fromValueOrNull(it) },
+                excludeActorTypes = normalized.parseEnumList(
+                    AuditEventFilterValues.EXCLUDE_ACTOR_TYPE
+                ) { AuditActorType.fromValueOrNull(it) },
                 actorUserRoles = normalized.parseStringList(AuditEventFilterValues.ACTOR_USER_ROLE),
                 actions = normalized.parseStringList(AuditEventFilterValues.ACTION),
                 excludeActions = normalized.parseStringList(AuditEventFilterValues.EXCLUDE_ACTION),
                 resources = normalized.parseStringList(AuditEventFilterValues.RESOURCE),
                 resourceIds = normalized.parseStringList(AuditEventFilterValues.RESOURCE_ID),
                 statuses = normalized.parseEnumList(AuditEventFilterValues.STATUS) { AuditStatus.fromValueOrNull(it) },
-                excludeStatuses = normalized.parseEnumList(AuditEventFilterValues.EXCLUDE_STATUS) { AuditStatus.fromValueOrNull(it) },
+                excludeStatuses = normalized.parseEnumList(
+                    AuditEventFilterValues.EXCLUDE_STATUS
+                ) { AuditStatus.fromValueOrNull(it) },
                 createdAtFrom = normalized.parseNonBlankString(AuditEventFilterValues.CREATED_AT_FROM),
                 createdAtTo = normalized.parseNonBlankString(AuditEventFilterValues.CREATED_AT_TO),
                 searchQuery = normalized.parseNonBlankString(AuditEventFilterValues.SEARCH_QUERY)
@@ -128,7 +130,9 @@ public data class ManagementAuditEventListParams(
             return result
         }
 
-        private fun MutableMap<String, List<String>>.serializePaginationAndSorting(params: ManagementAuditEventListParams) {
+        private fun MutableMap<String, List<String>>.serializePaginationAndSorting(
+            params: ManagementAuditEventListParams
+        ) {
             if (params.pageNumber != ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER) {
                 this[ListingParamNames.Pagination.PAGE_NUMBER] = listOf(params.pageNumber.toString())
             }
@@ -143,7 +147,9 @@ public data class ManagementAuditEventListParams(
             }
         }
 
-        private fun MutableMap<String, List<String>>.serializeActorAndActionFilters(params: ManagementAuditEventListParams) {
+        private fun MutableMap<String, List<String>>.serializeActorAndActionFilters(
+            params: ManagementAuditEventListParams
+        ) {
             if (params.eventIds.isNotEmpty()) {
                 this[AuditEventFilterValues.EVENT_ID] = params.eventIds
             }
@@ -167,7 +173,9 @@ public data class ManagementAuditEventListParams(
             }
         }
 
-        private fun MutableMap<String, List<String>>.serializeResourceAndStatusFilters(params: ManagementAuditEventListParams) {
+        private fun MutableMap<String, List<String>>.serializeResourceAndStatusFilters(
+            params: ManagementAuditEventListParams
+        ) {
             if (params.resources.isNotEmpty()) {
                 this[AuditEventFilterValues.RESOURCE] = params.resources
             }

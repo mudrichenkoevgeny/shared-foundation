@@ -1,4 +1,3 @@
-import org.gradle.language.jvm.tasks.ProcessResources
 import java.util.Properties
 
 val rootProps = Properties().apply {

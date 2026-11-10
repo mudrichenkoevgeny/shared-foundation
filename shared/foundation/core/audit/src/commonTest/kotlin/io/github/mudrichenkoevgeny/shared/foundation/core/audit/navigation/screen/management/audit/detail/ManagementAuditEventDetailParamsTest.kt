@@ -7,10 +7,9 @@ import kotlin.test.assertEquals
 class ManagementAuditEventDetailParamsTest {
     @Test
     fun `parse extracts eventId correctly`() {
-        val paramsMap =
-            mapOf(
-                AuditApiPaths.EVENT_ID to TEST_EVENT_ID
-            )
+        val paramsMap = mapOf(
+            AuditApiPaths.EVENT_ID to TEST_EVENT_ID
+        )
 
         val parsed = ManagementAuditEventDetailParams.parse(paramsMap)
 
@@ -26,10 +25,9 @@ class ManagementAuditEventDetailParamsTest {
 
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
-        val params =
-            ManagementAuditEventDetailParams(
-                eventId = TEST_EVENT_ID
-            )
+        val params = ManagementAuditEventDetailParams(
+            eventId = TEST_EVENT_ID
+        )
 
         val serialized = params.toQueryMap()
 

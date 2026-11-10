@@ -38,30 +38,26 @@ public data class UnlockOtpInputParams(
         override fun parse(params: Map<String, Any?>): UnlockOtpInputParams {
             val normalized = params.normalizeQueryParams()
 
-            val unlockMethod =
-                normalized[UserNavigationPaths.UNLOCK_METHOD]
-                    ?.firstOrNull()
-                    ?.let { UnlockMethod.fromValueOrNull(it) }
+            val unlockMethod = normalized[UserNavigationPaths.UNLOCK_METHOD]
+                ?.firstOrNull()
+                ?.let { UnlockMethod.fromValueOrNull(it) }
 
             val rawIdentifier = normalized[UserApiFields.IDENTIFIER]?.firstOrNull()?.trim()
-            val identifier =
-                if (unlockMethod == UnlockMethod.PHONE) {
-                    rawIdentifier.normalizePhoneQueryParam()
-                } else {
-                    rawIdentifier?.takeIf { it.isNotBlank() }
-                }
+            val identifier = if (unlockMethod == UnlockMethod.PHONE) {
+                rawIdentifier.normalizePhoneQueryParam()
+            } else {
+                rawIdentifier?.takeIf { it.isNotBlank() }
+            }
 
-            val retryAfterSeconds =
-                normalized[SecurityApiFields.RETRY_AFTER_SECONDS]
-                    ?.firstOrNull()
-                    ?.toIntOrNull()
-                    ?.takeIf { it >= 0 }
+            val retryAfterSeconds = normalized[SecurityApiFields.RETRY_AFTER_SECONDS]
+                ?.firstOrNull()
+                ?.toIntOrNull()
+                ?.takeIf { it >= 0 }
 
-            val code =
-                normalized[UserApiFields.CONFIRMATION_CODE]
-                    ?.firstOrNull()
-                    ?.trim()
-                    ?.takeIf { it.isNotBlank() }
+            val code = normalized[UserApiFields.CONFIRMATION_CODE]
+                ?.firstOrNull()
+                ?.trim()
+                ?.takeIf { it.isNotBlank() }
 
             return UnlockOtpInputParams(
                 unlockMethod = unlockMethod,

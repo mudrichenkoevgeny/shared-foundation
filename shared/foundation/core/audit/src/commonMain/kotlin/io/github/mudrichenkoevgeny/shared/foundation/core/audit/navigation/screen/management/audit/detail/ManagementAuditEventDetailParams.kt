@@ -30,11 +30,10 @@ public data class ManagementAuditEventDetailParams(
          */
         override fun parse(params: Map<String, Any?>): ManagementAuditEventDetailParams {
             val normalized = params.normalizeQueryParams()
-            val eventId =
-                normalized[AuditApiPaths.EVENT_ID]
-                    ?.firstOrNull()
-                    ?.takeIf { it.isNotBlank() }
-                    ?: ""
+            val eventId = normalized[AuditApiPaths.EVENT_ID]
+                ?.firstOrNull()
+                ?.takeIf { it.isNotBlank() }
+                ?: ""
             return ManagementAuditEventDetailParams(eventId = eventId)
         }
 

@@ -8,11 +8,10 @@ import kotlin.test.assertNull
 class IdentifierDetailParamsTest {
     @Test
     fun `parse extracts identifierId and userId correctly`() {
-        val params =
-            mapOf(
-                UserApiPaths.USER_IDENTIFIER_ID to TEST_IDENTIFIER_ID,
-                UserApiPaths.USER_ID to TEST_USER_ID
-            )
+        val params = mapOf(
+            UserApiPaths.USER_IDENTIFIER_ID to TEST_IDENTIFIER_ID,
+            UserApiPaths.USER_ID to TEST_USER_ID
+        )
         val parsed = IdentifierDetailParams.parse(params)
 
         assertEquals(TEST_IDENTIFIER_ID, parsed.identifierId)
@@ -29,11 +28,10 @@ class IdentifierDetailParamsTest {
 
     @Test
     fun `serialize and toQueryMap return empty map for path parameters`() {
-        val model =
-            IdentifierDetailParams(
-                identifierId = TEST_IDENTIFIER_ID,
-                userId = TEST_USER_ID
-            )
+        val model = IdentifierDetailParams(
+            identifierId = TEST_IDENTIFIER_ID,
+            userId = TEST_USER_ID
+        )
         val serialized = model.toQueryMap()
 
         assertEquals(emptyMap(), serialized)

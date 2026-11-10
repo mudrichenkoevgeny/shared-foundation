@@ -13,6 +13,30 @@ exceptions:
   TooGenericExceptionCaught:
     excludes:
       - '**/tools/npm-generator/**'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
   PrintStackTrace:
     excludes:
       - '**/tools/npm-generator/**'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
+
+comments:
+  UndocumentedPublicClass:
+    excludes:
+      - '**/tools/npm-generator/**'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'
+  UndocumentedPublicFunction:
+    excludes:
+      - '**/tools/npm-generator/**'
+      - '**/*Test*.kt'
+      - '**/*Test*/**'
+      - '**/testing/**'
+      - '**/testFixtures/**'

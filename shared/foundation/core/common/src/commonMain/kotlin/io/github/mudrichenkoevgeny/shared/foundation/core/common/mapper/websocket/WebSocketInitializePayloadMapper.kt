@@ -13,22 +13,21 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.w
  * @return merged [ClientInfo] instance.
  */
 public fun WebSocketInitializePayload.mergeClientInfo(existingClientInfo: ClientInfo? = null): ClientInfo {
-    val currentClientInfo =
-        existingClientInfo ?: ClientInfo(
-            clientDeviceInfo = ClientDeviceInfo(
-                deviceId = null,
-                deviceName = null,
-                clientType = null,
-                language = null,
-                appVersion = null,
-                operationSystemVersion = null
-            ),
-            userAgent = null,
-            ipAddress = null,
-            host = null,
-            origin = null,
-            apiVersion = null
-        )
+    val currentClientInfo = existingClientInfo ?: ClientInfo(
+        clientDeviceInfo = ClientDeviceInfo(
+            deviceId = null,
+            deviceName = null,
+            clientType = null,
+            language = null,
+            appVersion = null,
+            operationSystemVersion = null
+        ),
+        userAgent = null,
+        ipAddress = null,
+        host = null,
+        origin = null,
+        apiVersion = null
+    )
     return currentClientInfo.copy(
         clientDeviceInfo = mergeClientDeviceInfo(currentClientInfo.clientDeviceInfo),
         apiVersion = apiVersion ?: currentClientInfo.apiVersion
@@ -47,15 +46,14 @@ public fun WebSocketInitializePayload.mergeClientInfo(existingClientInfo: Client
 public fun WebSocketInitializePayload.mergeClientDeviceInfo(
     existingClientDeviceInfo: ClientDeviceInfo? = null
 ): ClientDeviceInfo {
-    val currentClientDeviceInfo =
-        existingClientDeviceInfo ?: ClientDeviceInfo(
-            deviceId = null,
-            deviceName = null,
-            clientType = null,
-            language = null,
-            appVersion = null,
-            operationSystemVersion = null
-        )
+    val currentClientDeviceInfo = existingClientDeviceInfo ?: ClientDeviceInfo(
+        deviceId = null,
+        deviceName = null,
+        clientType = null,
+        language = null,
+        appVersion = null,
+        operationSystemVersion = null
+    )
     return currentClientDeviceInfo.copy(
         clientType = clientType?.let { ClientType.fromValueOrNull(it) } ?: currentClientDeviceInfo.clientType,
         language = language ?: currentClientDeviceInfo.language,

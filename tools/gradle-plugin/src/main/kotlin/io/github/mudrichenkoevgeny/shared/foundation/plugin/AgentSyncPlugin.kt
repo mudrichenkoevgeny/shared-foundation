@@ -115,7 +115,10 @@ public abstract class AgentSyncTask : DefaultTask() {
         syncEditorConfig(rootDir, classLoader)
     }
 
-    private fun syncEditorConfig(rootDir: File, classLoader: ClassLoader) {
+    private fun syncEditorConfig(
+        rootDir: File,
+        classLoader: ClassLoader
+    ) {
         val localEditorConfig = File(rootDir, ".editorconfig")
         val baseConfigStream = classLoader.getResourceAsStream("config/editorconfig/.editorconfig") ?: return
         val rawConfigText = baseConfigStream.bufferedReader().use { it.readText() }
@@ -136,14 +139,19 @@ public abstract class AgentSyncTask : DefaultTask() {
         }
 
         val normalizedContent = contentToSave.replace("\r\n", "\n")
-        val currentNormalized = if (localEditorConfig.exists()) localEditorConfig.readText().replace("\r\n", "\n") else null
+        val currentNormalized =
+            if (localEditorConfig.exists()) localEditorConfig.readText().replace("\r\n", "\n") else null
 
         if (currentNormalized != normalizedContent) {
             localEditorConfig.writeText(normalizedContent)
         }
     }
 
-    private fun copyResourceFolder(classLoader: ClassLoader, resourcePath: String, targetFolder: File) {
+    private fun copyResourceFolder(
+        classLoader: ClassLoader,
+        resourcePath: String,
+        targetFolder: File
+    ) {
         val normalizedPath = resourcePath.trimEnd('/')
         val resourceUrl = classLoader.getResource(normalizedPath)
             ?: classLoader.getResource("$normalizedPath/")

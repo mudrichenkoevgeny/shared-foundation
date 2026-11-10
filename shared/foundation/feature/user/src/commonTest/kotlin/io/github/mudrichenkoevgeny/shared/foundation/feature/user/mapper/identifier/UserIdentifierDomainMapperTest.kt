@@ -18,18 +18,17 @@ class UserIdentifierDomainMapperTest {
     private val testUserId: UserId = UserId.generate()
     private val testCreatedAt: Instant = Instant.fromEpochMilliseconds(1700000000000L)
 
-    private val testInternal: UserIdentifierInternal =
-        UserIdentifierInternal(
-            id = testId,
-            userId = testUserId,
-            userAuthProvider = UserAuthProvider.EMAIL,
-            identifier = "john.doe@example.com",
-            passwordHash = null,
-            displayName = "Primary Email",
-            externalProviderEmail = "john.doe@gmail.com",
-            createdAt = testCreatedAt,
-            updatedAt = null
-        )
+    private val testInternal: UserIdentifierInternal = UserIdentifierInternal(
+        id = testId,
+        userId = testUserId,
+        userAuthProvider = UserAuthProvider.EMAIL,
+        identifier = "john.doe@example.com",
+        passwordHash = null,
+        displayName = "Primary Email",
+        externalProviderEmail = "john.doe@gmail.com",
+        createdAt = testCreatedAt,
+        updatedAt = null
+    )
 
     @Test
     fun testInternalToPrivateMapping() {

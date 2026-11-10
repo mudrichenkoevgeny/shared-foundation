@@ -21,24 +21,22 @@ import kotlin.test.assertTrue
 public class JsonSerializationTest {
     @Test
     public fun testStorageFileSummaryPayloadSerialization() {
-        val fileUrls =
-            FileUrlsPayload(
-                originalUrl = "https://cdn.example.com/orig.png",
-                urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
-            )
+        val fileUrls = FileUrlsPayload(
+            originalUrl = "https://cdn.example.com/orig.png",
+            urlPresets = mapOf("thumbnail" to "https://cdn.example.com/thumb.png")
+        )
 
-        val payload =
-            StorageFileSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                fileName = "avatar.png",
-                fileSizeBytes = 2048L,
-                mimeType = "image/png",
-                category = StorageCategory.IMAGE.value,
-                visibility = StorageFileVisibility.PUBLIC.value,
-                status = StorageFileStatus.READY.value,
-                fileUrls = fileUrls,
-                createdAt = 1700000000000L
-            )
+        val payload = StorageFileSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            fileName = "avatar.png",
+            fileSizeBytes = 2048L,
+            mimeType = "image/png",
+            category = StorageCategory.IMAGE.value,
+            visibility = StorageFileVisibility.PUBLIC.value,
+            status = StorageFileStatus.READY.value,
+            fileUrls = fileUrls,
+            createdAt = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -58,20 +56,19 @@ public class JsonSerializationTest {
 
     @Test
     public fun testStorageFilePrivatePayloadSerialization() {
-        val payload =
-            StorageFilePrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                ownerUserId = "usr_100",
-                fileName = "doc.pdf",
-                fileSizeBytes = 4096L,
-                mimeType = "application/pdf",
-                category = StorageCategory.DOCUMENT.value,
-                visibility = StorageFileVisibility.PRIVATE.value,
-                status = StorageFileStatus.READY.value,
-                targetScope = "document",
-                fileUrls = null,
-                createdAt = 1700000000000L
-            )
+        val payload = StorageFilePrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            ownerUserId = "usr_100",
+            fileName = "doc.pdf",
+            fileSizeBytes = 4096L,
+            mimeType = "application/pdf",
+            category = StorageCategory.DOCUMENT.value,
+            visibility = StorageFileVisibility.PRIVATE.value,
+            status = StorageFileStatus.READY.value,
+            targetScope = "document",
+            fileUrls = null,
+            createdAt = 1700000000000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -84,13 +81,12 @@ public class JsonSerializationTest {
 
     @Test
     public fun testPresignedUrlPayloadSerialization() {
-        val payload =
-            PresignedUrlPayload(
-                fileId = "00000000-0000-4000-8000-000000000001",
-                uploadUrl = "https://s3.amazonaws.com/bucket/key?signature=abc",
-                fileUrl = "https://cdn.example.com/key",
-                expiresAt = 1700003600000L
-            )
+        val payload = PresignedUrlPayload(
+            fileId = "00000000-0000-4000-8000-000000000001",
+            uploadUrl = "https://s3.amazonaws.com/bucket/key?signature=abc",
+            fileUrl = "https://cdn.example.com/key",
+            expiresAt = 1700003600000L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -105,15 +101,14 @@ public class JsonSerializationTest {
 
     @Test
     public fun testPresignedUrlRequestSerialization() {
-        val request =
-            PresignedUrlRequest(
-                fileName = "document.pdf",
-                fileSizeBytes = 1048576L,
-                mimeType = "application/pdf",
-                category = StorageCategory.DOCUMENT.value,
-                visibility = StorageFileVisibility.PRIVATE.value,
-                targetScope = "user_attachment"
-            )
+        val request = PresignedUrlRequest(
+            fileName = "document.pdf",
+            fileSizeBytes = 1048576L,
+            mimeType = "application/pdf",
+            category = StorageCategory.DOCUMENT.value,
+            visibility = StorageFileVisibility.PRIVATE.value,
+            targetScope = "user_attachment"
+        )
 
         val serialized = FoundationJson.encodeToString(request)
 
@@ -130,18 +125,17 @@ public class JsonSerializationTest {
 
     @Test
     public fun testManagementStorageSettingsPayloadSerialization() {
-        val payload =
-            ManagementStorageSettingsPayload(
-                minUploadSizeBytes = 1024L,
-                maxUploadSizeBytes = 104857600L,
-                totalStorageQuotaForOpenUserBytes = 1073741824L,
-                totalStorageQuotaForManagementUserBytes = null,
-                presignedUrlExpirationSeconds = 3600,
-                maxPendingUploadsForOpenUser = 5,
-                maxPendingUploadsForManagementUser = 20,
-                isDeduplicationEnabled = true,
-                deletedFilesCleanupIntervalSeconds = 86400
-            )
+        val payload = ManagementStorageSettingsPayload(
+            minUploadSizeBytes = 1024L,
+            maxUploadSizeBytes = 104857600L,
+            totalStorageQuotaForOpenUserBytes = 1073741824L,
+            totalStorageQuotaForManagementUserBytes = null,
+            presignedUrlExpirationSeconds = 3600,
+            maxPendingUploadsForOpenUser = 5,
+            maxPendingUploadsForManagementUser = 20,
+            isDeduplicationEnabled = true,
+            deletedFilesCleanupIntervalSeconds = 86400
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -160,11 +154,10 @@ public class JsonSerializationTest {
 
     @Test
     public fun testOpenStorageSettingsPayloadSerialization() {
-        val payload =
-            OpenStorageSettingsPayload(
-                minUploadSizeBytes = 1024L,
-                maxUploadSizeBytes = 10485760L
-            )
+        val payload = OpenStorageSettingsPayload(
+            minUploadSizeBytes = 1024L,
+            maxUploadSizeBytes = 10485760L
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 

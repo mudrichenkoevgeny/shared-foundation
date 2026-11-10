@@ -14,14 +14,13 @@ import kotlin.test.assertEquals
 import kotlin.time.Instant
 
 class UserDomainMapperTest {
-    private val testFileUrls =
-        FileUrls(
-            originalUrl = "https://cdn.example.com/avatar_orig.png",
-            urlPresets = mapOf(
-                FileUrlPresets.THUMBNAIL to "https://cdn.example.com/avatar_thumb.png",
-                FileUrlPresets.PREVIEW to "https://cdn.example.com/avatar_prev.png"
-            )
+    private val testFileUrls = FileUrls(
+        originalUrl = "https://cdn.example.com/avatar_orig.png",
+        urlPresets = mapOf(
+            FileUrlPresets.THUMBNAIL to "https://cdn.example.com/avatar_thumb.png",
+            FileUrlPresets.PREVIEW to "https://cdn.example.com/avatar_prev.png"
         )
+    )
 
     private val testFileUrlsPayload = testFileUrls.toFileUrlsPayload()
 
@@ -29,20 +28,19 @@ class UserDomainMapperTest {
 
     @Test
     fun testUserPrivatePayloadMapping() {
-        val payload =
-            UserPrivatePayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                role = UserRole.USER.value,
-                accountStatus = UserAccountStatus.ACTIVE.value,
-                authorityLevel = 10,
-                permissionCodes = emptySet(),
-                isTotpEnabled = false,
-                createdAt = 1700000000000L,
-                lockoutType = "none",
-                nickname = "testuser",
-                displayName = "Test User",
-                avatarUrls = testFileUrlsPayload
-            )
+        val payload = UserPrivatePayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            authorityLevel = 10,
+            permissionCodes = emptySet(),
+            isTotpEnabled = false,
+            createdAt = 1700000000000L,
+            lockoutType = "none",
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarUrls = testFileUrlsPayload
+        )
 
         val domain = payload.toUserPrivate()
 
@@ -54,15 +52,14 @@ class UserDomainMapperTest {
 
     @Test
     fun testUserSummaryPayloadMapping() {
-        val payload =
-            UserSummaryPayload(
-                id = "00000000-0000-4000-8000-000000000001",
-                role = UserRole.USER.value,
-                accountStatus = UserAccountStatus.ACTIVE.value,
-                nickname = "testuser",
-                displayName = "Test User",
-                avatarUrls = testFileUrlsPayload
-            )
+        val payload = UserSummaryPayload(
+            id = "00000000-0000-4000-8000-000000000001",
+            role = UserRole.USER.value,
+            accountStatus = UserAccountStatus.ACTIVE.value,
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarUrls = testFileUrlsPayload
+        )
 
         val domain = payload.toUserSummary()
 
@@ -74,28 +71,27 @@ class UserDomainMapperTest {
 
     @Test
     fun testUserInternalToPrivateAndSummaryMapping() {
-        val internalUser =
-            UserInternal(
-                role = UserRole.USER,
-                accountStatus = UserAccountStatus.ACTIVE,
-                accountStatusOnRestore = null,
-                authorityLevel = 10,
-                permissionCodes = emptySet(),
-                isTotpEnabled = true,
-                lastLoginAt = null,
-                lastActiveAt = null,
-                createdAt = testCreatedAt,
-                updatedAt = null,
-                scheduledPermanentDeletionAt = null,
-                lockoutType = AccountLockoutType.NONE,
-                temporaryLockoutUntil = null,
-                storageConfiguration = null,
-                nickname = "testuser",
-                displayName = "Test User",
-                avatarFileId = null,
-                avatarUrls = testFileUrls,
-                birthdate = null
-            )
+        val internalUser = UserInternal(
+            role = UserRole.USER,
+            accountStatus = UserAccountStatus.ACTIVE,
+            accountStatusOnRestore = null,
+            authorityLevel = 10,
+            permissionCodes = emptySet(),
+            isTotpEnabled = true,
+            lastLoginAt = null,
+            lastActiveAt = null,
+            createdAt = testCreatedAt,
+            updatedAt = null,
+            scheduledPermanentDeletionAt = null,
+            lockoutType = AccountLockoutType.NONE,
+            temporaryLockoutUntil = null,
+            storageConfiguration = null,
+            nickname = "testuser",
+            displayName = "Test User",
+            avatarFileId = null,
+            avatarUrls = testFileUrls,
+            birthdate = null
+        )
 
         val privateModel = internalUser.toUserPrivate()
 

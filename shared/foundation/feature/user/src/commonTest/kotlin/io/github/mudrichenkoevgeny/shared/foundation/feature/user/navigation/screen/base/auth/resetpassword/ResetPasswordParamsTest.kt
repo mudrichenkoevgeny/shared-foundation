@@ -8,11 +8,10 @@ import kotlin.test.assertNull
 class ResetPasswordParamsTest {
     @Test
     fun `parse extracts email and code correctly`() {
-        val params =
-            mapOf(
-                UserApiFields.EMAIL to "user@example.com",
-                UserApiFields.CONFIRMATION_CODE to "123456"
-            )
+        val params = mapOf(
+            UserApiFields.EMAIL to "user@example.com",
+            UserApiFields.CONFIRMATION_CODE to "123456"
+        )
         val parsed = ResetPasswordParams.parse(params)
 
         assertEquals("user@example.com", parsed.email)

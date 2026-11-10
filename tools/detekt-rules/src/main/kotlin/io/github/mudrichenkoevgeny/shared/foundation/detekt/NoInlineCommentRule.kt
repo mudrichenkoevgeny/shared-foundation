@@ -16,8 +16,9 @@ public class NoInlineCommentRule(
     config = config,
     description = RULE_DESCRIPTION
 ) {
-    private val allowedPrefixes =
-        listOf("/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---")
+    private val allowedPrefixes = listOf(
+        "/**", "// todo", "// fixme", "// workaround", "// suppress", "// @", "// ---"
+    )
 
     override val ruleName: RuleName = RuleName("NoInlineComment")
 
@@ -37,8 +38,7 @@ public class NoInlineCommentRule(
     }
 
     public companion object {
-        public const val RULE_DESCRIPTION: String =
-            "Banal and redundant inline comments are prohibited. " +
-                "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
+        public const val RULE_DESCRIPTION: String = "Banal and redundant inline comments are prohibited. " +
+            "Decompose complex logic into private functions, use KDoc, or use TODO/FIXME/workaround."
     }
 }

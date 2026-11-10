@@ -16,23 +16,22 @@ class UserSessionModelUtilsTest {
         val expiresAt = Instant.fromEpochMilliseconds(2000)
         val deviceId = ClientDeviceId.generate()
 
-        val session =
-            UserSessionSummary(
-                id = UserSessionId.generate(),
-                userId = UserId.generate(),
-                clientDeviceInfo = ClientDeviceInfo(
-                    deviceId = deviceId,
-                    deviceName = "Pixel 8",
-                    clientType = null,
-                    language = null,
-                    appVersion = null,
-                    operationSystemVersion = null
-                ),
-                identifierDisplayName = "user",
-                identifierAuthProvider = UserAuthProvider.EMAIL,
-                lastAccessedAt = now,
-                expiresAt = expiresAt
-            )
+        val session = UserSessionSummary(
+            id = UserSessionId.generate(),
+            userId = UserId.generate(),
+            clientDeviceInfo = ClientDeviceInfo(
+                deviceId = deviceId,
+                deviceName = "Pixel 8",
+                clientType = null,
+                language = null,
+                appVersion = null,
+                operationSystemVersion = null
+            ),
+            identifierDisplayName = "user",
+            identifierAuthProvider = UserAuthProvider.EMAIL,
+            lastAccessedAt = now,
+            expiresAt = expiresAt
+        )
 
         assertTrue(session.isValid(deviceId, now))
     }
@@ -43,23 +42,22 @@ class UserSessionModelUtilsTest {
         val expiresAt = Instant.fromEpochMilliseconds(2000)
         val deviceId = ClientDeviceId.generate()
 
-        val session =
-            UserSessionSummary(
-                id = UserSessionId.generate(),
-                userId = UserId.generate(),
-                clientDeviceInfo = ClientDeviceInfo(
-                    deviceId = deviceId,
-                    deviceName = "Pixel 8",
-                    clientType = null,
-                    language = null,
-                    appVersion = null,
-                    operationSystemVersion = null
-                ),
-                identifierDisplayName = "user",
-                identifierAuthProvider = UserAuthProvider.EMAIL,
-                lastAccessedAt = Instant.fromEpochMilliseconds(1000),
-                expiresAt = expiresAt
-            )
+        val session = UserSessionSummary(
+            id = UserSessionId.generate(),
+            userId = UserId.generate(),
+            clientDeviceInfo = ClientDeviceInfo(
+                deviceId = deviceId,
+                deviceName = "Pixel 8",
+                clientType = null,
+                language = null,
+                appVersion = null,
+                operationSystemVersion = null
+            ),
+            identifierDisplayName = "user",
+            identifierAuthProvider = UserAuthProvider.EMAIL,
+            lastAccessedAt = Instant.fromEpochMilliseconds(1000),
+            expiresAt = expiresAt
+        )
 
         assertFalse(session.isValid(deviceId, now))
     }
@@ -71,23 +69,22 @@ class UserSessionModelUtilsTest {
         val sessionDeviceId = ClientDeviceId.generate()
         val callerDeviceId = ClientDeviceId.generate()
 
-        val session =
-            UserSessionSummary(
-                id = UserSessionId.generate(),
-                userId = UserId.generate(),
-                clientDeviceInfo = ClientDeviceInfo(
-                    deviceId = sessionDeviceId,
-                    deviceName = "Pixel 8",
-                    clientType = null,
-                    language = null,
-                    appVersion = null,
-                    operationSystemVersion = null
-                ),
-                identifierDisplayName = "user",
-                identifierAuthProvider = UserAuthProvider.EMAIL,
-                lastAccessedAt = now,
-                expiresAt = expiresAt
-            )
+        val session = UserSessionSummary(
+            id = UserSessionId.generate(),
+            userId = UserId.generate(),
+            clientDeviceInfo = ClientDeviceInfo(
+                deviceId = sessionDeviceId,
+                deviceName = "Pixel 8",
+                clientType = null,
+                language = null,
+                appVersion = null,
+                operationSystemVersion = null
+            ),
+            identifierDisplayName = "user",
+            identifierAuthProvider = UserAuthProvider.EMAIL,
+            lastAccessedAt = now,
+            expiresAt = expiresAt
+        )
 
         assertFalse(session.isValid(callerDeviceId, now))
     }

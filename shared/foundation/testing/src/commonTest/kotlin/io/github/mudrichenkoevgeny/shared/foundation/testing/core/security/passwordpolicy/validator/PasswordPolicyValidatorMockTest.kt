@@ -9,26 +9,24 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class PasswordPolicyValidatorMockTest {
-    private val managementPolicy =
-        ManagementPasswordPolicy(
-            minLength = 8,
-            requireLetter = true,
-            requireUpperCase = true,
-            requireLowerCase = true,
-            requireDigit = true,
-            requireSpecialChar = false,
-            commonPasswords = emptySet()
-        )
+    private val managementPolicy = ManagementPasswordPolicy(
+        minLength = 8,
+        requireLetter = true,
+        requireUpperCase = true,
+        requireLowerCase = true,
+        requireDigit = true,
+        requireSpecialChar = false,
+        commonPasswords = emptySet()
+    )
 
-    private val openPolicy =
-        OpenPasswordPolicy(
-            minLength = 8,
-            requireLetter = true,
-            requireUpperCase = true,
-            requireLowerCase = true,
-            requireDigit = true,
-            requireSpecialChar = false
-        )
+    private val openPolicy = OpenPasswordPolicy(
+        minLength = 8,
+        requireLetter = true,
+        requireUpperCase = true,
+        requireLowerCase = true,
+        requireDigit = true,
+        requireSpecialChar = false
+    )
 
     @Test
     fun returnsSuccessByDefaultWhenNoFailReasonsConfigured() {

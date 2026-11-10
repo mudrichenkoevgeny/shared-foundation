@@ -12,15 +12,14 @@ import kotlin.test.assertTrue
 class StorageFileUploadParamsTest {
     @Test
     fun `parse correctly extracts all upload screen parameters`() {
-        val raw =
-            mapOf(
-                StorageNavigationPaths.MAX_FILES to "5",
-                StorageApiFields.TARGET_SCOPE to "avatar",
-                StorageApiFields.CATEGORY to "IMAGE",
-                StorageNavigationPaths.ACCEPTED_FILE_TYPES to ".jpg,.png,image/*",
-                StorageNavigationPaths.MAX_FILE_SIZE_BYTES to "2097152",
-                StorageNavigationPaths.AUTO_SUBMIT to "true"
-            )
+        val raw = mapOf(
+            StorageNavigationPaths.MAX_FILES to "5",
+            StorageApiFields.TARGET_SCOPE to "avatar",
+            StorageApiFields.CATEGORY to "IMAGE",
+            StorageNavigationPaths.ACCEPTED_FILE_TYPES to ".jpg,.png,image/*",
+            StorageNavigationPaths.MAX_FILE_SIZE_BYTES to "2097152",
+            StorageNavigationPaths.AUTO_SUBMIT to "true"
+        )
 
         val parsed = StorageFileUploadParams.parse(raw)
 
@@ -46,15 +45,14 @@ class StorageFileUploadParamsTest {
 
     @Test
     fun `serialize produces valid query parameters map`() {
-        val params =
-            StorageFileUploadParams(
-                maxFiles = 3,
-                targetScope = "ticket_attachment",
-                category = StorageCategory.DOCUMENT,
-                acceptedFileTypes = listOf(".pdf", ".docx", "application/pdf"),
-                maxFileSizeBytes = 10485760L,
-                autoSubmit = true
-            )
+        val params = StorageFileUploadParams(
+            maxFiles = 3,
+            targetScope = "ticket_attachment",
+            category = StorageCategory.DOCUMENT,
+            acceptedFileTypes = listOf(".pdf", ".docx", "application/pdf"),
+            maxFileSizeBytes = 10485760L,
+            autoSubmit = true
+        )
 
         val serialized = StorageFileUploadParams.serialize(params)
 

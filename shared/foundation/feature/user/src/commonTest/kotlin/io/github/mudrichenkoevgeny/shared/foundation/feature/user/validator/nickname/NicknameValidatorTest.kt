@@ -34,14 +34,13 @@ class NicknameValidatorTest {
 
     @Test
     fun testValidate_DisabledChange_ReturnsDisabledError() {
-        val result =
-            validator.validate(
-                nickname = "new_nick",
-                minLength = 3,
-                maxLength = 30,
-                isNicknameChangeAllowed = false,
-                isNicknameChanging = true
-            )
+        val result = validator.validate(
+            nickname = "new_nick",
+            minLength = 3,
+            maxLength = 30,
+            isNicknameChangeAllowed = false,
+            isNicknameChanging = true
+        )
         assertEquals(NicknameValidatorResult.Fail(UserErrorCodes.NICKNAME_CHANGE_DISABLED), result)
     }
 

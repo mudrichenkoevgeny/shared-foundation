@@ -66,8 +66,7 @@ public class ProhibitPrintlnRule(
     }
 
     public companion object {
-        public const val RULE_DESCRIPTION: String =
-            "The 'println' or 'print' call is prohibited in production code. " +
-                "Use structured loggers or KMP logging primitives."
+        public const val RULE_DESCRIPTION: String = "The 'println' or 'print' call is prohibited in production " +
+            "code. Use structured loggers or KMP logging primitives."
     }
 }

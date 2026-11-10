@@ -41,12 +41,11 @@ public fun UserModuleStrings.resolveUserIdentifierLimitReachedMessage(
         return errors.identifierLimitReachedWithoutArgs
     }
 
-    val localizedProvider =
-        when (providerRaw.lowercase()) {
-            "email" -> commonStrings.general.email
-            "phone" -> commonStrings.general.phone
-            else -> commonStrings.general.externalProvider
-        }
+    val localizedProvider = when (providerRaw.lowercase()) {
+        "email" -> commonStrings.general.email
+        "phone" -> commonStrings.general.phone
+        else -> commonStrings.general.externalProvider
+    }
 
     return errors.identifierLimitReached(limit = limit, provider = localizedProvider)
 }

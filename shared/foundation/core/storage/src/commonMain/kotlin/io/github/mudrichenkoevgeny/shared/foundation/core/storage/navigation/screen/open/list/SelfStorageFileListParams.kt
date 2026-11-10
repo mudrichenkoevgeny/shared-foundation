@@ -87,39 +87,47 @@ public data class SelfStorageFileListParams(
         override fun parse(params: Map<String, Any?>): SelfStorageFileListParams {
             val normalized = params.normalizeQueryParams()
             return SelfStorageFileListParams(
-                pageNumber =
-                    normalized[ListingParamNames.Pagination.PAGE_NUMBER]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
-                pageSize =
-                    normalized[ListingParamNames.Pagination.PAGE_SIZE]
-                        ?.firstOrNull()
-                        ?.toIntOrNull()
-                        ?.takeIf { it > 0 }
-                        ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
-                sortBy =
-                    normalized[ListingParamNames.Sort.SORT_BY]
-                        ?.firstOrNull()
-                        ?.let { StorageFileSortBy.fromValueOrNull(it) }
-                        ?: StorageFileSortBy.DEFAULT,
-                sortOrder =
-                    normalized[ListingParamNames.Sort.SORT_ORDER]
-                        ?.firstOrNull()
-                        ?.let { SortOrder.fromValueOrNull(it) }
-                        ?: SortOrder.DEFAULT,
+                pageNumber = normalized[ListingParamNames.Pagination.PAGE_NUMBER]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER,
+                pageSize = normalized[ListingParamNames.Pagination.PAGE_SIZE]
+                    ?.firstOrNull()
+                    ?.toIntOrNull()
+                    ?.takeIf { it > 0 }
+                    ?: ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE,
+                sortBy = normalized[ListingParamNames.Sort.SORT_BY]
+                    ?.firstOrNull()
+                    ?.let { StorageFileSortBy.fromValueOrNull(it) }
+                    ?: StorageFileSortBy.DEFAULT,
+                sortOrder = normalized[ListingParamNames.Sort.SORT_ORDER]
+                    ?.firstOrNull()
+                    ?.let { SortOrder.fromValueOrNull(it) }
+                    ?: SortOrder.DEFAULT,
                 fileIds = normalized.parseStringList(StorageFileFilterValues.FILE_ID),
                 fileName = normalized.parseNonBlankString(StorageFileFilterValues.FILE_NAME),
                 fileSizeBytesFrom = normalized.parseLong(StorageFileFilterValues.FILE_SIZE_BYTES_FROM),
                 fileSizeBytesTo = normalized.parseLong(StorageFileFilterValues.FILE_SIZE_BYTES_TO),
                 mimeTypes = normalized.parseStringList(StorageFileFilterValues.MIME_TYPE),
-                categories = normalized.parseEnumList(StorageFileFilterValues.CATEGORY) { StorageCategory.fromValueOrNull(it) },
-                excludeCategories = normalized.parseEnumList(StorageFileFilterValues.EXCLUDE_CATEGORY) { StorageCategory.fromValueOrNull(it) },
-                visibilities = normalized.parseEnumList(StorageFileFilterValues.VISIBILITY) { StorageFileVisibility.fromValueOrNull(it) },
-                excludeVisibilities = normalized.parseEnumList(StorageFileFilterValues.EXCLUDE_VISIBILITY) { StorageFileVisibility.fromValueOrNull(it) },
-                statuses = normalized.parseEnumList(StorageFileFilterValues.STATUS) { StorageFileStatus.fromValueOrNull(it) },
-                excludeStatuses = normalized.parseEnumList(StorageFileFilterValues.EXCLUDE_STATUS) { StorageFileStatus.fromValueOrNull(it) }
+                categories = normalized.parseEnumList(
+                    StorageFileFilterValues.CATEGORY
+                ) { StorageCategory.fromValueOrNull(it) },
+                excludeCategories = normalized.parseEnumList(
+                    StorageFileFilterValues.EXCLUDE_CATEGORY
+                ) { StorageCategory.fromValueOrNull(it) },
+                visibilities = normalized.parseEnumList(
+                    StorageFileFilterValues.VISIBILITY
+                ) { StorageFileVisibility.fromValueOrNull(it) },
+                excludeVisibilities = normalized.parseEnumList(
+                    StorageFileFilterValues.EXCLUDE_VISIBILITY
+                ) { StorageFileVisibility.fromValueOrNull(it) },
+                statuses = normalized.parseEnumList(StorageFileFilterValues.STATUS) {
+                    StorageFileStatus.fromValueOrNull(it)
+                },
+                excludeStatuses = normalized.parseEnumList(
+                    StorageFileFilterValues.EXCLUDE_STATUS
+                ) { StorageFileStatus.fromValueOrNull(it) }
                     .ifEmpty { listOf(StorageFileStatus.DELETED) },
                 targetScopes = normalized.parseStringList(StorageFileFilterValues.TARGET_SCOPE),
                 isTargetScopeSet = normalized.parseBoolean(StorageFileFilterValues.IS_TARGET_SCOPE_SET),
@@ -161,7 +169,9 @@ public data class SelfStorageFileListParams(
             }
         }
 
-        private fun MutableMap<String, List<String>>.serializeCoreAndMetadataFilters(params: SelfStorageFileListParams) {
+        private fun MutableMap<String, List<String>>.serializeCoreAndMetadataFilters(
+            params: SelfStorageFileListParams
+        ) {
             if (params.fileIds.isNotEmpty()) {
                 this[StorageFileFilterValues.FILE_ID] = params.fileIds
             }
@@ -197,7 +207,9 @@ public data class SelfStorageFileListParams(
             }
         }
 
-        private fun MutableMap<String, List<String>>.serializeCategoryStatusAndScopeFilters(params: SelfStorageFileListParams) {
+        private fun MutableMap<String, List<String>>.serializeCategoryStatusAndScopeFilters(
+            params: SelfStorageFileListParams
+        ) {
             if (params.categories.isNotEmpty()) {
                 this[StorageFileFilterValues.CATEGORY] = params.categories.map { it.value }
             }

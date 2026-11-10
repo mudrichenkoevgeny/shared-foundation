@@ -20,10 +20,9 @@ import kotlin.time.Instant
  * Unit tests verifying domain projection mapping for audit events (Internal -> Private -> Summary).
  */
 class AuditEventDomainMapperTest {
-    private val testAction: AuditActionType =
-        object : AuditActionType {
-            override val value: String = "test.action"
-        }
+    private val testAction: AuditActionType = object : AuditActionType {
+        override val value: String = "test.action"
+    }
 
     private val testResource: AuditResourceType = CommonAuditResourceType.AUDIT_EVENT
 
@@ -38,21 +37,20 @@ class AuditEventDomainMapperTest {
             )
         )
 
-    private val testInternalEvent: AuditEventInternal =
-        AuditEventInternal(
-            id = testId,
-            actorId = "usr_100",
-            actorType = AuditActorType.USER,
-            actorUserRole = "admin",
-            action = testAction,
-            resource = testResource,
-            resourceId = "res_200",
-            resourceValueSensitivity = AuditValueSensitivity.FULL_VALUE_MASK,
-            status = AuditStatus.SUCCESS,
-            metadata = testMetadata,
-            message = "Test event message",
-            createdAt = testCreatedAt
-        )
+    private val testInternalEvent: AuditEventInternal = AuditEventInternal(
+        id = testId,
+        actorId = "usr_100",
+        actorType = AuditActorType.USER,
+        actorUserRole = "admin",
+        action = testAction,
+        resource = testResource,
+        resourceId = "res_200",
+        resourceValueSensitivity = AuditValueSensitivity.FULL_VALUE_MASK,
+        status = AuditStatus.SUCCESS,
+        metadata = testMetadata,
+        message = "Test event message",
+        createdAt = testCreatedAt
+    )
 
     @Test
     fun testInternalToPrivateMapping() {

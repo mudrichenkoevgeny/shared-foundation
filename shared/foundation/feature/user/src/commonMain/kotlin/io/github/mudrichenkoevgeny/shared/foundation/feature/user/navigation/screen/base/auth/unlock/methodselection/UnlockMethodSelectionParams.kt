@@ -35,21 +35,18 @@ public data class UnlockMethodSelectionParams(
         override fun parse(params: Map<String, Any?>): UnlockMethodSelectionParams {
             val normalized = params.normalizeQueryParams()
 
-            val unlockMethod =
-                normalized[UserNavigationPaths.UNLOCK_METHOD]
-                    ?.firstOrNull()
-                    ?.let { UnlockMethod.fromValueOrNull(it) }
+            val unlockMethod = normalized[UserNavigationPaths.UNLOCK_METHOD]
+                ?.firstOrNull()
+                ?.let { UnlockMethod.fromValueOrNull(it) }
 
-            val lockoutType =
-                normalized[UserApiFields.ACCOUNT_LOCKOUT_TYPE]
-                    ?.firstOrNull()
-                    ?.let { AccountLockoutType.fromValueOrNull(it) }
+            val lockoutType = normalized[UserApiFields.ACCOUNT_LOCKOUT_TYPE]
+                ?.firstOrNull()
+                ?.let { AccountLockoutType.fromValueOrNull(it) }
 
-            val temporaryLockoutUntil =
-                normalized[UserApiFields.TEMPORARY_LOCKOUT_UNTIL]
-                    ?.firstOrNull()
-                    ?.toLongOrNull()
-                    ?.takeIf { it > 0L }
+            val temporaryLockoutUntil = normalized[UserApiFields.TEMPORARY_LOCKOUT_UNTIL]
+                ?.firstOrNull()
+                ?.toLongOrNull()
+                ?.takeIf { it > 0L }
 
             return UnlockMethodSelectionParams(
                 unlockMethod = unlockMethod,

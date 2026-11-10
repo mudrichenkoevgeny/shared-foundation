@@ -20,12 +20,11 @@ import kotlin.test.assertTrue
 public class JsonSerializationTest {
     @Test
     public fun testTotpSetupPayloadSerialization() {
-        val payload =
-            TotpSetupPayload(
-                secretKey = "JBSWY3DPEHPK3PXP",
-                otpAuthUrl = "otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP",
-                mfaToken = "mfa_token_12345"
-            )
+        val payload = TotpSetupPayload(
+            secretKey = "JBSWY3DPEHPK3PXP",
+            otpAuthUrl = "otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP",
+            mfaToken = "mfa_token_12345"
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -43,11 +42,10 @@ public class JsonSerializationTest {
 
     @Test
     public fun testVerifyTotpPayloadSerialization() {
-        val payload =
-            VerifyTotpPayload(
-                mfaToken = "mfa_token_12345",
-                code = "123456"
-            )
+        val payload = VerifyTotpPayload(
+            mfaToken = "mfa_token_12345",
+            code = "123456"
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -60,28 +58,25 @@ public class JsonSerializationTest {
 
     @Test
     public fun testOpenSecuritySettingsPayloadSerialization() {
-        val passwordPolicy =
-            OpenPasswordPolicyPayload(
-                minLength = 8,
-                requireLetter = true,
-                requireUpperCase = true,
-                requireLowerCase = true,
-                requireDigit = true,
-                requireSpecialChar = false
-            )
+        val passwordPolicy = OpenPasswordPolicyPayload(
+            minLength = 8,
+            requireLetter = true,
+            requireUpperCase = true,
+            requireLowerCase = true,
+            requireDigit = true,
+            requireSpecialChar = false
+        )
 
-        val otpConfirmation =
-            OtpConfirmationPayload(
-                retryAfterSeconds = 60,
-                numberOfSymbols = 6,
-                expirationSeconds = 300
-            )
+        val otpConfirmation = OtpConfirmationPayload(
+            retryAfterSeconds = 60,
+            numberOfSymbols = 6,
+            expirationSeconds = 300
+        )
 
-        val payload =
-            OpenSecuritySettingsPayload(
-                passwordPolicy = passwordPolicy,
-                otpConfirmation = otpConfirmation
-            )
+        val payload = OpenSecuritySettingsPayload(
+            passwordPolicy = passwordPolicy,
+            otpConfirmation = otpConfirmation
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -96,58 +91,53 @@ public class JsonSerializationTest {
 
     @Test
     public fun testManagementSecuritySettingsPayloadSerialization() {
-        val passwordPolicy =
-            ManagementPasswordPolicyPayload(
-                minLength = 12,
-                requireLetter = true,
-                requireUpperCase = true,
-                requireLowerCase = true,
-                requireDigit = true,
-                requireSpecialChar = true,
-                commonPasswords = setOf("123456", "password")
-            )
+        val passwordPolicy = ManagementPasswordPolicyPayload(
+            minLength = 12,
+            requireLetter = true,
+            requireUpperCase = true,
+            requireLowerCase = true,
+            requireDigit = true,
+            requireSpecialChar = true,
+            commonPasswords = setOf("123456", "password")
+        )
 
-        val otpConfirmation =
-            OtpConfirmationPayload(
-                retryAfterSeconds = 60,
-                numberOfSymbols = 6,
-                expirationSeconds = 300
-            )
+        val otpConfirmation = OtpConfirmationPayload(
+            retryAfterSeconds = 60,
+            numberOfSymbols = 6,
+            expirationSeconds = 300
+        )
 
-        val accountLockout =
-            AccountLockoutPolicyPayload(
-                maxFailedPasswordAttempts = 5,
-                maxFailedOtpAttempts = 3,
-                maxFailedTotpAttempts = 3,
-                failedAttemptsWindowSeconds = 900,
-                lockoutDurationSeconds = 1800,
-                indefiniteLockoutThreshold = 3,
-                isSelfServiceUnlockEnabled = true
-            )
+        val accountLockout = AccountLockoutPolicyPayload(
+            maxFailedPasswordAttempts = 5,
+            maxFailedOtpAttempts = 3,
+            maxFailedTotpAttempts = 3,
+            failedAttemptsWindowSeconds = 900,
+            lockoutDurationSeconds = 1800,
+            indefiniteLockoutThreshold = 3,
+            isSelfServiceUnlockEnabled = true
+        )
 
-        val ipRestriction =
-            IpRestrictionPolicyPayload(
-                isBlacklistEnabled = true,
-                blacklist = listOf("192.168.1.100"),
-                isWhitelistEnabled = false,
-                whitelist = emptyList()
-            )
+        val ipRestriction = IpRestrictionPolicyPayload(
+            isBlacklistEnabled = true,
+            blacklist = listOf("192.168.1.100"),
+            isWhitelistEnabled = false,
+            whitelist = emptyList()
+        )
 
-        val payload =
-            ManagementSecuritySettingsPayload(
-                recentAuthenticationValiditySecondsForOpenUser = 300,
-                recentAuthenticationValiditySecondsForManagementUser = 120,
-                passwordPolicy = passwordPolicy,
-                otpConfirmation = otpConfirmation,
-                accountLockoutPolicy = accountLockout,
-                accountLockoutCheckIntervalSeconds = 60,
-                openIpRestrictionPolicy = ipRestriction,
-                managementIpRestrictionPolicy = ipRestriction,
-                mfaTokenExpirationSeconds = 600,
-                maxRequestsPerPeriod = 100,
-                rateLimitPeriodSeconds = 60,
-                refreshTokenRotationGracePeriodSeconds = 10
-            )
+        val payload = ManagementSecuritySettingsPayload(
+            recentAuthenticationValiditySecondsForOpenUser = 300,
+            recentAuthenticationValiditySecondsForManagementUser = 120,
+            passwordPolicy = passwordPolicy,
+            otpConfirmation = otpConfirmation,
+            accountLockoutPolicy = accountLockout,
+            accountLockoutCheckIntervalSeconds = 60,
+            openIpRestrictionPolicy = ipRestriction,
+            managementIpRestrictionPolicy = ipRestriction,
+            mfaTokenExpirationSeconds = 600,
+            maxRequestsPerPeriod = 100,
+            rateLimitPeriodSeconds = 60,
+            refreshTokenRotationGracePeriodSeconds = 10
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -164,16 +154,15 @@ public class JsonSerializationTest {
 
     @Test
     public fun testAccountLockoutPolicyPayloadSerialization() {
-        val payload =
-            AccountLockoutPolicyPayload(
-                maxFailedPasswordAttempts = 5,
-                maxFailedOtpAttempts = 3,
-                maxFailedTotpAttempts = 3,
-                failedAttemptsWindowSeconds = 900,
-                lockoutDurationSeconds = 1800,
-                indefiniteLockoutThreshold = 3,
-                isSelfServiceUnlockEnabled = true
-            )
+        val payload = AccountLockoutPolicyPayload(
+            maxFailedPasswordAttempts = 5,
+            maxFailedOtpAttempts = 3,
+            maxFailedTotpAttempts = 3,
+            failedAttemptsWindowSeconds = 900,
+            lockoutDurationSeconds = 1800,
+            indefiniteLockoutThreshold = 3,
+            isSelfServiceUnlockEnabled = true
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 
@@ -191,13 +180,12 @@ public class JsonSerializationTest {
 
     @Test
     public fun testIpRestrictionPolicyPayloadSerialization() {
-        val payload =
-            IpRestrictionPolicyPayload(
-                isBlacklistEnabled = true,
-                blacklist = listOf("10.0.0.1", "192.168.1.0/24"),
-                isWhitelistEnabled = true,
-                whitelist = listOf("127.0.0.1")
-            )
+        val payload = IpRestrictionPolicyPayload(
+            isBlacklistEnabled = true,
+            blacklist = listOf("10.0.0.1", "192.168.1.0/24"),
+            isWhitelistEnabled = true,
+            whitelist = listOf("127.0.0.1")
+        )
 
         val serialized = FoundationJson.encodeToString(payload)
 

@@ -47,10 +47,9 @@ public class DefaultLocalizedStringResolver(
         key: String
     ): String? {
         val cacheKey = "$module/$file/$locale"
-        val bundle =
-            cache.getOrPut(cacheKey) {
-                loadBundle(module, file, locale)
-            }
+        val bundle = cache.getOrPut(cacheKey) {
+            loadBundle(module, file, locale)
+        }
         return bundle[key]
     }
 
@@ -65,15 +64,14 @@ public class DefaultLocalizedStringResolver(
         val path = "localization/$module/$locale/$file.json"
         val customContent = loader(path) ?: return embedded
 
-        val customMap =
-            try {
-                val jsonObject = FoundationJson.decodeFromString<JsonObject>(customContent)
-                jsonObject.mapValues { it.value.jsonPrimitive.content }
-            } catch (e: SerializationException) {
-                throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
-            } catch (e: IllegalArgumentException) {
-                throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
-            }
+        val customMap = try {
+            val jsonObject = FoundationJson.decodeFromString<JsonObject>(customContent)
+            jsonObject.mapValues { it.value.jsonPrimitive.content }
+        } catch (e: SerializationException) {
+            throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
+        } catch (e: IllegalArgumentException) {
+            throw IllegalStateException("Failed to parse localization JSON bundle at path '$path'", e)
+        }
 
         return if (embedded.isEmpty()) customMap else embedded + customMap
     }
