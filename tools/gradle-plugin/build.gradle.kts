@@ -1,3 +1,6 @@
+import com.vanniktech.maven.publish.GradlePlugin
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.SourcesJar
 import java.util.Properties
 
 val rootProps = Properties().apply {
@@ -10,9 +13,6 @@ val rootProps = Properties().apply {
 
 group = checkNotNull(rootProps.getProperty("group")) { "Missing 'group' property in root gradle.properties" }
 version = checkNotNull(rootProps.getProperty("version")) { "Missing 'version' property in root gradle.properties" }
-
-extra["publishToMaven"] = true
-extra["artifactId"] = "shared-foundation-gradle-plugin"
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -53,20 +53,40 @@ gradlePlugin {
     }
 }
 
-dependencies {
-    compileOnly(libs.kotlin.gradle.plugin)
-    compileOnly(libs.detekt.gradle.plugin)
-    compileOnly(libs.ktlint.gradle.plugin)
-    compileOnly(libs.maven.publish.gradle.plugin)
-    compileOnly(libs.dokka.gradle.plugin)
+mavenPublishing {
+    coordinates(
+        group.toString(),
+        "shared-foundation-gradle-plugin",
+        version.toString()
+    )
+
+    publishToMavenCentral()
+    signAllPublications()
+
+    configure(
+        GradlePlugin(
+            javadocJar = JavadocJar.Javadoc(),
+            sourcesJar = SourcesJar.Sources()
+        )
+    )
 }
 
-val repoRootDir = rootDir.parentFile.parentFile
+dependencies {
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.detekt.gradle.plugin)
+    implementation(libs.ktlint.gradle.plugin)
+    implementation(libs.maven.publish.gradle.plugin)
+    implementation(libs.dokka.gradle.plugin)
+}
+
+val repoRootDir = checkNotNull(rootDir.parentFile?.parentFile) {
+    "Unable to resolve repository root directory from: ${rootDir.absolutePath}"
+}
 
 val generatePluginVersionResource = tasks.register("generatePluginVersionResource") {
     val currentVersion = project.version.toString()
     inputs.property("version", currentVersion)
-    val versionFile = layout.buildDirectory.file("generated/resources/plugin-version.txt")
+    val versionFile = layout.buildDirectory.file("generated/resources/shared-foundation-plugin-version.txt")
     outputs.file(versionFile)
     doLast {
         val file = versionFile.get().asFile
@@ -85,11 +105,5 @@ tasks.named<ProcessResources>("processResources") {
     }
     from(repoRootDir.resolve(".agent/global/shared")) {
         into("agent-rules/shared")
-    }
-    from(repoRootDir.resolve("tools/detekt-rules/src/main/resources/config/detekt/detekt-base.yml")) {
-        into("config/detekt")
-    }
-    from(repoRootDir.resolve(".editorconfig")) {
-        into("config/editorconfig")
     }
 }

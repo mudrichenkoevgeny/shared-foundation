@@ -37,7 +37,7 @@ Focus on feature-specific contracts, navigation, and workflows.
 Focus on build-time static analysis, agent sync plugins, and artifact generation.
 
 - **`tools/detekt-rules`:** Custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) enforcing architectural constraints across consumer applications ([module README](tools/detekt-rules/README.md)).
-- **`tools/gradle-plugin`:** Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`) providing build tasks, quality checks, compiler options, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
+- **`tools/gradle-plugin`:** Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`) providing build tasks, quality checks, compiler options, multi-layer `.editorconfig` synchronization, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
 - **`tools/npm-generator`:** Executable JVM generator exporting TypeScript declarations (`index.d.ts`), Zod validation schemas, API routes, domain mappers, testing fixtures, and localization bundles into the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`) ([module README](tools/npm-generator/README.md)).
 
 ### Utility

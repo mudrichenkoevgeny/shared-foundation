@@ -1,25 +1,12 @@
-complexity:
-  CyclomaticComplexMethod:
-    excludes:
-      - '**/tools/npm-generator/**'
-  LongMethod:
-    excludes:
-      - '**/tools/npm-generator/**'
-  NestedBlockDepth:
-    excludes:
-      - '**/tools/npm-generator/**'
-
 exceptions:
   TooGenericExceptionCaught:
     excludes:
-      - '**/tools/npm-generator/**'
       - '**/*Test*.kt'
       - '**/*Test*/**'
       - '**/testing/**'
       - '**/testFixtures/**'
   PrintStackTrace:
     excludes:
-      - '**/tools/npm-generator/**'
       - '**/*Test*.kt'
       - '**/*Test*/**'
       - '**/testing/**'
@@ -28,14 +15,12 @@ exceptions:
 comments:
   UndocumentedPublicClass:
     excludes:
-      - '**/tools/npm-generator/**'
       - '**/*Test*.kt'
       - '**/*Test*/**'
       - '**/testing/**'
       - '**/testFixtures/**'
   UndocumentedPublicFunction:
     excludes:
-      - '**/tools/npm-generator/**'
       - '**/*Test*.kt'
       - '**/*Test*/**'
       - '**/testing/**'

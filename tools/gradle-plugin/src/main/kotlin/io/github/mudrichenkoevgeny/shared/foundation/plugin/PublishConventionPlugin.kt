@@ -1,17 +1,19 @@
 package io.github.mudrichenkoevgeny.shared.foundation.plugin
 
+import com.vanniktech.maven.publish.GradlePlugin
 import com.vanniktech.maven.publish.JavaPlatform
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinJvm
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import com.vanniktech.maven.publish.SourcesJar
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.dokka.gradle.DokkaExtension
 
 /**
  * Gradle plugin configuring Vanniktech Maven Publishing, Dokka, and POM metadata
- * for JVM, KMP, and BOM (java-platform) modules.
+ * for JVM, KMP, BOM (java-platform), and Gradle Plugin (java-gradle-plugin) modules.
  */
 public class PublishConventionPlugin : Plugin<Project> {
     /**
@@ -74,6 +76,13 @@ public class PublishConventionPlugin : Plugin<Project> {
 
             if (isBom || target.pluginManager.hasPlugin("java-platform")) {
                 mavenPublish.configure(JavaPlatform())
+            } else if (target.pluginManager.hasPlugin("java-gradle-plugin")) {
+                mavenPublish.configure(
+                    GradlePlugin(
+                        javadocJar = JavadocJar.Javadoc(),
+                        sourcesJar = SourcesJar.Sources()
+                    )
+                )
             } else {
                 target.plugins.withId("org.jetbrains.kotlin.multiplatform") {
                     mavenPublish.configure(KotlinMultiplatform(javadocJar = JavadocJar.Empty()))

@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.binary.compatibility.validator)
     alias(libs.plugins.dokka)
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync")
+    alias(libs.plugins.shared.foundation.agent.sync)
 }
 
 apiValidation {
@@ -28,7 +28,6 @@ allprojects {
 
 subprojects {
     val isBom = project.name == "bom"
-    val isTool = project.path.startsWith(":tools")
     val isModule = project.projectDir.resolve("src").exists() || isBom
 
     if (!isModule) {
@@ -43,13 +42,7 @@ subprojects {
         pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-kotlin")
     }
 
-    afterEvaluate {
-        val explicitPublishFlag = (findProperty("publishToMaven") as? Boolean)
-            ?: (findProperty("publishToMaven")?.toString()?.toBoolean())
-        if (!isTool || explicitPublishFlag == true) {
-            pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
-        }
-    }
+    pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
 }
 
 tasks.register("generateNpmPackage") {
