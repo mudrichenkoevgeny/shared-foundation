@@ -54,10 +54,10 @@ To analyze a single module, use `projectHealth`:
 ./gradlew :<gradle-path>:projectHealth
 ```
 
-Example for `shared/foundation/core/common` (published artifact id `shared-foundation-core-common`):
+Example for `core/common` (published artifact id `shared-foundation-core-common`):
 
 ```bash
-./gradlew :shared:foundation:core:common:projectHealth
+./gradlew :core:common:projectHealth
 ```
 
 ### 2. Dependency insight
@@ -73,7 +73,7 @@ This repository is a **Kotlin Multiplatform (KMP)** library (targeting JVM, Andr
 Example for `core:common` and `org.jetbrains.kotlinx:kotlinx-serialization-json`:
 
 ```bash
-./gradlew :shared:foundation:core:common:dependencyInsight --dependency org.jetbrains.kotlinx:kotlinx-serialization-json --configuration jvmCompileClasspath
+./gradlew :core:common:dependencyInsight --dependency org.jetbrains.kotlinx:kotlinx-serialization-json --configuration jvmCompileClasspath
 ```
 
 Other targets (Android, iOS, Wasm) expose different configurations; list them with `./gradlew :<gradle-path>:dependencies` if you need a non-JVM variant.
@@ -87,7 +87,7 @@ To dump a full, searchable dependency tree for a module (JVM compile classpath):
 Example:
 
 ```bash
-./gradlew :shared:foundation:core:common:dependencies --configuration jvmCompileClasspath > build/reports/core-common-jvm-dependencies.txt
+./gradlew :core:common:dependencies --configuration jvmCompileClasspath > build/reports/core-common-jvm-dependencies.txt
 ```
 
 On Windows PowerShell you can use the same redirection; ensure `build/reports` exists or choose another path.
@@ -175,13 +175,13 @@ To test the generated package locally in any web project or library (pnpm worksp
      npm pack
      ```
 
-   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.11.tgz`) will be created.
+   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.13.tgz`) will be created.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.11.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.13.tgz'
    ```
    And run from the root directory:
    ```bash

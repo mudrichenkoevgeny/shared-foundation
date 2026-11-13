@@ -17,7 +17,8 @@ apiValidation {
     ignoredProjects += listOf(
         "bom",
         "npm-generator",
-        "foundation-npm-generator",
+        "npm-generator-runner",
+        "detekt-rules",
         "testing"
     )
 }
@@ -50,5 +51,5 @@ tasks.register("generateNpmPackage") {
     group = "publishing"
     description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," +
         " Zod schemas, and route constants."
-    dependsOn(":tools:foundation-npm-generator:generateNpmPackage")
+    dependsOn(":tools:npm-generator-runner:generateNpmPackage")
 }

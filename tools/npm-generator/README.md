@@ -96,8 +96,8 @@ In downstream project `tools/npm-generator/src/main/kotlin/com/hivepick/shared/g
 ```kotlin
 package com.hivepick.shared.generator
 
-import io.github.mudrichenkoevgeny.npmgenerator.engine.NpmGeneratorConfig
-import io.github.mudrichenkoevgeny.npmgenerator.engine.NpmGeneratorEngine
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorEngine
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import java.io.File
 

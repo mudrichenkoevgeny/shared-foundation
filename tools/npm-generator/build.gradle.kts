@@ -1,6 +1,3 @@
-extra["publishToMaven"] = true
-extra["artifactId"] = "shared-foundation-npm-generator"
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }

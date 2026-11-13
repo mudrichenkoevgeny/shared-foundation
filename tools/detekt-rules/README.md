@@ -65,9 +65,9 @@ shared-rules:
     active: true
 ```
 
-[CustomRuleSetProvider]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/CustomRuleSetProvider.kt
-[NoFullyQualifiedNameRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/NoFullyQualifiedNameRule.kt
-[NoInlineCommentRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/NoInlineCommentRule.kt
-[PreferValueOverNameRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/PreferValueOverNameRule.kt
-[ProhibitNonSafeAssertionRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/ProhibitNonSafeAssertionRule.kt
-[ProhibitPrintlnRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/detekt/ProhibitPrintlnRule.kt
+[CustomRuleSetProvider]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/CustomRuleSetProvider.kt
+[NoFullyQualifiedNameRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/NoFullyQualifiedNameRule.kt
+[NoInlineCommentRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/NoInlineCommentRule.kt
+[PreferValueOverNameRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/PreferValueOverNameRule.kt
+[ProhibitNonSafeAssertionRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/ProhibitNonSafeAssertionRule.kt
+[ProhibitPrintlnRule]: src/main/kotlin/io/github/mudrichenkoevgeny/shared/foundation/tools/detektrules/ProhibitPrintlnRule.kt

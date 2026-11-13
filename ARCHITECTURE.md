@@ -302,7 +302,7 @@ This diagram illustrates the compile-time code generation and runtime resolution
 
 ```mermaid
 flowchart TD
-    subgraph BuildTime ["Compile-Time (GenerateLocalizationTask)"]
+    subgraph BuildTime ["Compile-Time (shared-foundation-localization)"]
         JsonFiles["JSON Bundles\n(resources/localization/*)"]
         GradleTask["GenerateLocalizationTask"]
         BundleClasses["Generated *Strings.kt & *ModuleStrings.kt"]

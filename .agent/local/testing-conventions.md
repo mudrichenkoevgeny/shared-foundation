@@ -24,7 +24,7 @@ This document defines the project-specific Multiplatform testing strategy and co
 - **NPM Code Generator (`tools/npm-generator`):** Code generation logic mapping Kotlin domain classes to TypeScript definitions (`index.d.ts`) and Zod schemas must have unit test coverage.
 
 ## 3. Testing Fixtures
-- Use standardized test fixtures and constants from `shared/foundation/testing` (e.g., `TEST_*` constants, factory functions) rather than constructing dummy instances directly inside test methods.
+- Use standardized test fixtures and constants from `testing` (e.g., `TEST_*` constants, factory functions) rather than constructing dummy instances directly inside test methods.
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

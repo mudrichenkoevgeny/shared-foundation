@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.11"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.13"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -43,10 +43,11 @@ Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply sh
 ```kotlin
 // build.gradle.kts (Consumer Projects)
 plugins {
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.11"
-    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.11"
-    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.11"
-    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.11"
+    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.13"
+    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.13"
+    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.13"
+    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.13"
+    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "0.1.13"
 }
 ```
 
@@ -62,15 +63,15 @@ pnpm add @mudrichenkoevgeny/shared-foundation
 
 Published artifacts (versions aligned via the BOM):
 
-- **core-common** — shared errors, network contracts (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](shared/foundation/core/common/README.md)).
-- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, HTTP routes, permission codes, mappers, navigation (`ManagementSecurityNavigation`), and security localization (`SecurityModuleStrings`) ([module README](shared/foundation/core/security/README.md)).
-- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and settings navigation (`ManagementSettingsNavigation`) ([module README](shared/foundation/core/settings/README.md)).
-- **core-storage** — Direct-to-S3 presigned upload contracts, FileId, StorageCategory, StorageFileStatus, StorageFileVisibility, entity projections, storage settings, HTTP routes, permission codes, mappers, and storage navigation (`OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`) ([module README](shared/foundation/core/storage/README.md)).
-- **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](shared/foundation/core/audit/README.md)).
-- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](shared/foundation/feature/user/README.md)).
-- **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](shared/foundation/testing/README.md)).
+- **core-common** — shared errors, network contracts (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](core/common/README.md)).
+- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, HTTP routes, permission codes, mappers, navigation (`ManagementSecurityNavigation`), and security localization (`SecurityModuleStrings`) ([module README](core/security/README.md)).
+- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and settings navigation (`ManagementSettingsNavigation`) ([module README](core/settings/README.md)).
+- **core-storage** — Direct-to-S3 presigned upload contracts, FileId, StorageCategory, StorageFileStatus, StorageFileVisibility, entity projections, storage settings, HTTP routes, permission codes, mappers, and storage navigation (`OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`) ([module README](core/storage/README.md)).
+- **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](core/audit/README.md)).
+- **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](feature/user/README.md)).
+- **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](testing/README.md)).
 - **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) for enforcing shared library architectural standards across consumer applications ([module README](tools/detekt-rules/README.md)).
-- **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`) for auto-configuring quality checks, compiler options, publishing, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
+- **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`) for auto-configuring quality checks, compiler options, publishing, localization generation, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
 - **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
@@ -78,15 +79,15 @@ Published artifacts (versions aligned via the BOM):
 
 The library provides ready-to-use test data builders (`createTest*`), deterministic constants, value class factories, screen parameter fixtures, and in-memory mocks.
 
-You can include `:shared:foundation:testing` in your `testImplementation` / `commonTest.dependencies` (or import from `@mudrichenkoevgeny/shared-foundation` in npm) to use these pre-built fixtures in unit and integration tests instead of writing custom mocks.
+You can include `:testing` in your `testImplementation` / `commonTest.dependencies` (or import from `@mudrichenkoevgeny/shared-foundation` in npm) to use these pre-built fixtures in unit and integration tests instead of writing custom mocks.
 
-> **Note on Gradle Version Catalog (`libs.versions.toml`)**: When defining an alias for the testing module, it is recommended to use the suffix `-fixtures` (e.g. `shared-foundation-fixtures = { ... name = "shared-foundation-testing" }`) instead of `-testing` to prevent naming conflicts with the built-in Gradle `Project.testing` extension in JVM modules. See the [testing README](shared/foundation/testing/README.md) for details.
+> **Note on Gradle Version Catalog (`libs.versions.toml`)**: When defining an alias for the testing module, it is recommended to use the suffix `-fixtures` (e.g. `shared-foundation-fixtures = { ... name = "shared-foundation-testing" }`) instead of `-testing` to prevent naming conflicts with the built-in Gradle `Project.testing` extension in JVM modules. See the [testing README](testing/README.md) for details.
 
 ## Documentation & Architecture
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, navigation, and localization architecture.
-- **[core/common README](shared/foundation/core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
-- **[testing README](shared/foundation/testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and mocks.
+- **[core/common README](core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
+- **[testing README](testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and mocks.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Build instructions, dependency health checks (`./gradlew projectHealth`), and Maven Central publishing guidelines.
 - **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and constraints for contributors and AI coding assistants.
 

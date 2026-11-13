@@ -81,7 +81,7 @@ ij_formatter_enabled = false
 # https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/#disable-rules
 ktlint_standard = disabled
 
-[buildSrc/src/main/kotlin/GenerateLocalizationTask.kt]
+[tools/npm-generator-runner/src/main/kotlin/**.kt]
 ij_formatter_enabled = false
 # https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/#disable-rules
 ktlint_standard = disabled

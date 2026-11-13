@@ -34,6 +34,12 @@ Published Maven artifact: **`shared-foundation-gradle-plugin`**.
 4. **`io.github.mudrichenkoevgeny.shared-foundation-publish`** (`PublishConventionPlugin`):
    - **Description:** Configures Vanniktech Maven Publishing and Dokka with standardized POM metadata, license info, developer records, and artifactId derivation.
 
+5. **`io.github.mudrichenkoevgeny.shared-foundation-localization`** (`LocalizationPlugin`):
+   - **Task:** `generateLocalization` (`GenerateLocalizationTask`).
+   - **Description:** Automatically generates type-safe Kotlin localization accessors (`*Strings.kt`, `*ModuleStrings.kt`) and embedded resources (`*EmbeddedLocalizationResources.kt`) from JSON resource files (`localization/<module>/<locale>/*.json`).
+   - **Configuration Extension (`sharedLocalization`):** Configures `basePackageName` (defaults to `"io.github.mudrichenkoevgeny.shared.foundation"`), `resourcesDir` (defaults to `src/commonMain/resources`), and `outputDir` (defaults to `build/generated/sources/localization/kotlin/commonMain`).
+   - **Multiplatform Wiring:** Automatically registers `outputDir` into Kotlin Multiplatform `commonMain` sourceSet and wires task dependencies into Kotlin compilation tasks and IDE import (`prepareKotlinIdeaImport`).
+
 ## Quality & Synchronization Utilities
 
 - **`AgentSyncUtils`**:
@@ -57,6 +63,7 @@ plugins {
     id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "<version>"
     id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "<version>"
     id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "<version>"
+    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "<version>"
 }
 ```
 
