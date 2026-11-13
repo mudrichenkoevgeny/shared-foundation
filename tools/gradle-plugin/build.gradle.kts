@@ -82,6 +82,30 @@ mavenPublishing {
             sourcesJar = SourcesJar.Sources()
         )
     )
+
+    pom {
+        name.set("shared-foundation - gradle-plugin")
+        description.set("Gradle convention plugins for shared-foundation and consumer projects")
+        url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("mudrichenkoevgeny")
+                name.set("Evgeny Mudrichenko")
+                email.set("evgeny.mudrichenko@gmail.com")
+            }
+        }
+        scm {
+            connection.set("scm:git:git://github.com/mudrichenkoevgeny/shared-foundation.git")
+            developerConnection.set("scm:git:ssh://github.com/mudrichenkoevgeny/shared-foundation.git")
+            url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+        }
+    }
 }
 
 dependencies {

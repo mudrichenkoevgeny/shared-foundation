@@ -22,6 +22,8 @@ public class PublishConventionPlugin : Plugin<Project> {
      * @param target The target Gradle project to configure.
      */
     override fun apply(target: Project) {
+        wireIncludedGradlePluginTasks(target.rootProject)
+
         val explicitPublishFlag = (target.findProperty("publishToMaven") as? Boolean)
             ?: (target.findProperty("publishToMaven")?.toString()?.toBoolean())
         val isTool = target.path.startsWith(":tools")
@@ -70,18 +72,19 @@ public class PublishConventionPlugin : Plugin<Project> {
             val projectPathName = target.path.removePrefix(":").replace(":", "-").replace(".", "-")
             val rootProjectName = target.rootProject.name
 
-            val newArtifactId = customArtifactId ?: if (projectPathName.startsWith(rootProjectName)) {
-                projectPathName
-            } else {
-                "$rootProjectName-$projectPathName"
+            val newArtifactId = customArtifactId ?: when {
+                projectPathName.isEmpty() -> rootProjectName
+                projectPathName.startsWith(rootProjectName) -> projectPathName
+                else -> "$rootProjectName-$projectPathName"
             }
 
+            val defaultRepoName = rootProjectName.removeSuffix("-gradle-plugin")
             val repoUrl = (target.findProperty("pom.repoUrl") as? String)
-                ?: "https://github.com/mudrichenkoevgeny/$rootProjectName"
+                ?: "https://github.com/mudrichenkoevgeny/$defaultRepoName"
             val gitConnection = (target.findProperty("pom.gitConnection") as? String)
-                ?: "scm:git:git://github.com/mudrichenkoevgeny/$rootProjectName.git"
+                ?: "scm:git:git://github.com/mudrichenkoevgeny/$defaultRepoName.git"
             val sshConnection = (target.findProperty("pom.sshConnection") as? String)
-                ?: "scm:git:ssh://github.com/mudrichenkoevgeny/$rootProjectName.git"
+                ?: "scm:git:ssh://github.com/mudrichenkoevgeny/$defaultRepoName.git"
 
             mavenPublish.coordinates(
                 target.group.toString(),
@@ -112,7 +115,7 @@ public class PublishConventionPlugin : Plugin<Project> {
 
             mavenPublish.pom { pom ->
                 pom.name.set("$rootProjectName - ${target.name}")
-                pom.description.set("Module ${target.name} of $rootProjectName")
+                pom.description.set("Module ${target.name} of $defaultRepoName")
                 pom.url.set(repoUrl)
                 pom.licenses { licenses ->
                     licenses.license { license ->
@@ -133,6 +136,22 @@ public class PublishConventionPlugin : Plugin<Project> {
                     scm.url.set(repoUrl)
                 }
             }
+        }
+    }
+
+    private fun wireIncludedGradlePluginTasks(rootProject: Project) {
+        if (rootProject.extensions.extraProperties.has("includedGradlePluginWired")) return
+        rootProject.extensions.extraProperties.set("includedGradlePluginWired", true)
+
+        val pluginBuild = rootProject.gradle.includedBuilds.find {
+            it.name.endsWith("gradle-plugin")
+        } ?: return
+
+        rootProject.tasks.matching { it.name == "check" }.configureEach {
+            it.dependsOn(pluginBuild.task(":check"))
+        }
+        rootProject.tasks.matching { it.name == "publishToMavenLocal" }.configureEach {
+            it.dependsOn(pluginBuild.task(":publishToMavenLocal"))
         }
     }
 }

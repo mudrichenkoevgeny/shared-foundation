@@ -106,3 +106,5 @@ registerModules(
 
 include(":bom")
 include(":testing")
+
+includeBuild("tools/gradle-plugin")

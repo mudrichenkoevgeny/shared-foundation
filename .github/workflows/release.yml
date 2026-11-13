@@ -27,7 +27,9 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
-        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+        run:
+          ./gradlew -p tools/gradle-plugin publishAndReleaseToMavenCentral --no-configuration-cache
+          ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
   publish-npm:
     name: Publish NPM Package (@mudrichenkoevgeny/shared-foundation)
