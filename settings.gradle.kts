@@ -114,5 +114,8 @@ registerModules(
 include(":tools:npm-generator")
 project(":tools:npm-generator").projectDir = file("tools/npm-generator")
 
+include(":tools:foundation-npm-generator")
+project(":tools:foundation-npm-generator").projectDir = file("tools/foundation-npm-generator")
+
 include(":tools:detekt-rules")
 project(":tools:detekt-rules").projectDir = file("tools/detekt-rules")

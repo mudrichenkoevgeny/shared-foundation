@@ -1,0 +1,364 @@
+package io.github.mudrichenkoevgeny.npmgenerator.testing
+
+import io.github.mudrichenkoevgeny.npmgenerator.engine.NpmGeneratorConfig
+import io.github.mudrichenkoevgeny.npmgenerator.mapper.getWireKey
+import io.github.mudrichenkoevgeny.npmgenerator.util.decapitalizeFirstLetter
+import io.github.mudrichenkoevgeny.npmgenerator.util.getEnumInfo
+import kotlin.reflect.KClass
+import kotlin.reflect.KType
+import kotlin.reflect.full.primaryConstructor
+
+/**
+ * Extracts property names and types from a class primary constructor.
+ */
+public fun extractClassProperties(kClass: KClass<*>): List<Pair<String, KType>> {
+    val constructor = kClass.primaryConstructor ?: return emptyList()
+    return constructor.parameters.mapNotNull { param ->
+        val name = param.name ?: return@mapNotNull null
+        name to param.type
+    }
+}
+
+/**
+ * Generates default mock value expression for JavaScript code.
+ */
+public fun getDefaultMockValueJs(
+    paramName: String,
+    type: KType,
+    ownerClass: KClass<*>? = null,
+    config: NpmGeneratorConfig? = null,
+    importedFoundationJs: MutableSet<String>? = null
+): String {
+    val classifier = type.classifier as? KClass<*>
+    if (classifier != null && (classifier.java.isEnum || classifier in (config?.enumClasses ?: emptyList()))) {
+        return getEnumDefaultMockValue(classifier, config)
+    }
+
+    val typeName = classifier?.simpleName ?: ""
+    val ownerClassName = ownerClass?.simpleName ?: ""
+
+    return when {
+        typeName == "String" -> getDefaultStringMockValue(paramName, ownerClassName, config, importedFoundationJs)
+        typeName == "Int" || typeName == "Long" || typeName == "Number" -> getDefaultNumberMockValue(paramName, config)
+        else -> getDefaultTypeOrBrandedMockValue(type, typeName, config, importedFoundationJs)
+    }
+}
+
+private fun getEnumDefaultMockValue(classifier: KClass<*>, config: NpmGeneratorConfig? = null): String {
+    val enumInfo = getEnumInfo(classifier, config?.enumEnhancers ?: emptyMap(), config?.customEnumExtractor)
+    val preferredNames = config?.preferredEnumDefaultNames ?: listOf("DEFAULT", "NONE")
+    val defaultEntry = enumInfo.entries.firstOrNull { entry ->
+        preferredNames.any { preferred -> entry.first.equals(preferred, ignoreCase = true) }
+    } ?: enumInfo.entries.firstOrNull()
+    return if (defaultEntry != null) "\"${defaultEntry.second}\"" else "\"\""
+}
+
+private fun getDefaultStringMockValue(
+    paramName: String,
+    ownerClassName: String,
+    config: NpmGeneratorConfig? = null,
+    importedFoundationJs: MutableSet<String>? = null
+): String {
+    val stringMappings = config?.stringMockMappings ?: emptyMap()
+    val matchedEntry = stringMappings.entries.firstOrNull { (key, _) ->
+        paramName.equals(key, ignoreCase = true) || paramName.contains(key, ignoreCase = true)
+    }
+
+    if (matchedEntry != null) {
+        val mapped = matchedEntry.value
+        val autoSymbols = config?.autoImportSymbols ?: emptySet()
+        val isFoundation = config == null || config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+        if (!isFoundation && mapped in autoSymbols) {
+            importedFoundationJs?.add(mapped)
+        }
+        return if (mapped.startsWith("\"") || mapped in autoSymbols || mapped.contains("(")) mapped else "\"$mapped\""
+    }
+
+    if (paramName == "id" || paramName.endsWith("Id") || paramName.endsWith("_id")) {
+        return getDefaultStringIdMockValue(paramName, ownerClassName, config, importedFoundationJs)
+    }
+
+    return "\"test_${paramName}\""
+}
+
+private fun getDefaultStringIdMockValue(
+    paramName: String,
+    ownerClassName: String,
+    config: NpmGeneratorConfig? = null,
+    importedFoundationJs: MutableSet<String>? = null
+): String {
+    val autoSymbols = config?.autoImportSymbols ?: emptySet()
+    val idMappings = config?.idMockMappings ?: emptyMap()
+    val ownerIdMappings = config?.ownerIdMockMappings ?: emptyMap()
+    val isFoundation = config == null || config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+
+    if (paramName in idMappings) {
+        val symbol = idMappings[paramName]
+        if (symbol != null && symbol in autoSymbols) {
+            if (!isFoundation) {
+                importedFoundationJs?.add(symbol)
+            }
+            return symbol
+        }
+    }
+
+    if (paramName == "id") {
+        for ((ownerPrefix, symbol) in ownerIdMappings) {
+            if (ownerClassName.contains(ownerPrefix)) {
+                if (symbol in autoSymbols) {
+                    if (!isFoundation) {
+                        importedFoundationJs?.add(symbol)
+                    }
+                    return symbol
+                }
+            }
+        }
+    }
+
+    val defaultSymbol = config?.defaultIdMockMapping
+    if (defaultSymbol != null && defaultSymbol in autoSymbols) {
+        if (!isFoundation) {
+            importedFoundationJs?.add(defaultSymbol)
+        }
+        return defaultSymbol
+    }
+
+    return "\"test_${paramName}_12345\""
+}
+
+private fun getDefaultNumberMockValue(
+    paramName: String,
+    config: NpmGeneratorConfig? = null
+): String {
+    val numberMappings = config?.numberMockMappings ?: emptyMap()
+    val matchedEntry = numberMappings.entries.firstOrNull { (key, _) ->
+        paramName.equals(key, ignoreCase = true) || paramName.contains(key, ignoreCase = true)
+    }
+    if (matchedEntry != null) {
+        return matchedEntry.value
+    }
+
+    return "1"
+}
+
+private fun getDefaultTypeOrBrandedMockValue(
+    type: KType,
+    typeName: String,
+    config: NpmGeneratorConfig? = null,
+    importedFoundationJs: MutableSet<String>? = null
+): String {
+    val classifier = type.classifier as? KClass<*>
+    if (classifier != null && (classifier.java.isEnum || classifier in (config?.enumClasses ?: emptyList()))) {
+        return getEnumDefaultMockValue(classifier, config)
+    }
+
+    val isBranded = config?.brandedTypes?.contains(classifier) == true ||
+        typeName in (config?.brandedTypesNeedingHelpers ?: emptySet()) ||
+        typeName.endsWith("Id")
+
+    val isFoundation = config == null || config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+    val classifierPkg = classifier?.java?.name ?: ""
+    val isLocalClass = config != null && (classifier in config.brandedTypes || classifier in config.dtoClasses || classifier in config.enumClasses)
+    val isFromFoundation = !isLocalClass && config?.basePackagePrefix?.isNotEmpty() == true && classifierPkg.startsWith(config.basePackagePrefix)
+
+    if (isBranded) {
+        return resolveBrandedMockValue(typeName, isFoundation, isFromFoundation, config, importedFoundationJs)
+    }
+
+    val dtoOrDomainMock = resolveDtoOrDomainMockValue(classifier, isFoundation, isFromFoundation, config, importedFoundationJs)
+    if (dtoOrDomainMock != null) {
+        return dtoOrDomainMock
+    }
+
+    return resolvePrimitiveOrCollectionMockValue(typeName)
+}
+
+private fun resolveBrandedMockValue(
+    typeName: String,
+    isFoundation: Boolean,
+    isFromFoundation: Boolean,
+    config: NpmGeneratorConfig?,
+    importedFoundationJs: MutableSet<String>?
+): String {
+    val helperName = "to${typeName}OrThrow"
+    if (!isFoundation && (isFromFoundation || typeName in (config?.brandedTypesNeedingHelpers ?: emptySet()))) {
+        importedFoundationJs?.add(helperName)
+    }
+
+    val autoSymbols = config?.autoImportSymbols ?: emptySet()
+    val idMappings = config?.idMockMappings ?: emptyMap()
+    val brandedMockValues = config?.brandedTypeMockValues ?: emptyMap()
+
+    val mockArg = when {
+        typeName in idMappings -> {
+            val symbol = idMappings[typeName]
+            if (symbol != null && symbol in autoSymbols) {
+                if (!isFoundation) {
+                    importedFoundationJs?.add(symbol)
+                }
+                symbol
+            } else {
+                "\"00000000-0000-0000-0000-000000000001\""
+            }
+        }
+        typeName in brandedMockValues -> {
+            val valMock = brandedMockValues[typeName] ?: "test_value"
+            if (valMock in autoSymbols) {
+                if (!isFoundation) {
+                    importedFoundationJs?.add(valMock)
+                }
+                valMock
+            } else {
+                "\"$valMock\""
+            }
+        }
+        else -> "\"test_${typeName.decapitalizeFirstLetter()}_12345\""
+    }
+
+    return "$helperName($mockArg)"
+}
+
+private fun resolveDtoOrDomainMockValue(
+    classifier: KClass<*>?,
+    isFoundation: Boolean,
+    isFromFoundation: Boolean,
+    config: NpmGeneratorConfig?,
+    importedFoundationJs: MutableSet<String>?
+): String? {
+    if (classifier == null) return null
+    val isDtoOrDomain = (config?.dtoClasses?.contains(classifier) == true) ||
+        (config?.domainToDtoMappers?.any { it.first == classifier || it.second == classifier } == true)
+
+    if (!isDtoOrDomain) return null
+
+    val helperName = "createTest${classifier.simpleName}"
+    if (!isFoundation && isFromFoundation) {
+        importedFoundationJs?.add(helperName)
+    }
+    return "$helperName()"
+}
+
+private fun resolvePrimitiveOrCollectionMockValue(typeName: String): String = when (typeName) {
+    "Boolean" -> "true"
+    "Instant" -> "1700000000000"
+    "List", "Set", "Collection" -> "[]"
+    "Map" -> "{}"
+    else -> "{}"
+}
+
+private fun collectAllFixtureNames(config: NpmGeneratorConfig?): List<String> {
+    val names = mutableListOf<String>()
+
+    if (config?.testingSourceDirectory != null && config.testingSourceDirectory.exists()) {
+        config.testingSourceDirectory.walkTopDown()
+            .filter { it.isFile && it.name.endsWith("Fixture.kt") }
+            .forEach { file ->
+                val targetName = file.name.removeSuffix("Fixture.kt")
+                if (targetName.isNotBlank()) {
+                    names.add(targetName)
+                }
+            }
+    }
+
+    if (config != null && config.testFixtures.isNotEmpty()) {
+        config.testFixtures.forEach { kClass ->
+            kClass.simpleName?.let { names.add(it) }
+        }
+    } else {
+        val defaultClasses = (config?.dtoClasses ?: emptyList()) +
+            (config?.domainToDtoMappers?.map { it.first } ?: emptyList())
+        defaultClasses.forEach { kClass -> kClass.simpleName?.let { names.add(it) } }
+    }
+
+    return names.distinct()
+}
+
+/**
+ * Generates JavaScript test fixture factory functions.
+ */
+public fun generateTestFixturesJs(
+    config: NpmGeneratorConfig? = null,
+    importedFoundationJs: MutableSet<String>? = null
+): String {
+    val fixtureNames = collectAllFixtureNames(config)
+    val excluded = config?.excludedTestFixtures ?: emptySet()
+    val namesToGenerate = fixtureNames.filter { it !in excluded }
+
+    val isFoundation = config == null || config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+    if (!isFoundation && namesToGenerate.isNotEmpty()) {
+        importedFoundationJs?.add("createTestList")
+    }
+
+    val createTestListHelperJs = if (isFoundation && namesToGenerate.isNotEmpty()) {
+        """
+export const createTestList = (count = 2, factory) =>
+  Array.from({ length: count }, (_, index) => (typeof factory === 'function' ? factory(index) : factory));
+        """.trimIndent() + "\n\n"
+    } else {
+        ""
+    }
+
+    val allTargetClasses = (config?.dtoClasses ?: emptyList()) +
+        (config?.domainToDtoMappers?.map { it.first } ?: emptyList())
+    val testClassesMap = allTargetClasses.associateBy { it.simpleName ?: "" }
+
+    val generateFunctionCode = namesToGenerate.joinToString("\n\n") { name ->
+        val createSingleName = "createTest$name"
+        val createListName = "createTest${name}List"
+        val kClass = testClassesMap[name]
+        val props = if (kClass != null) extractClassProperties(kClass) else emptyList()
+
+        val defaultProps = if (props.isNotEmpty() && kClass != null) {
+            props.joinToString(",\n    ") { (propName, propType) ->
+                val wireKey = if (name.endsWith("Payload") || name.endsWith("Request")) getWireKey(kClass, propName) else propName
+                val mockVal = getDefaultMockValueJs(propName, propType, kClass, config, importedFoundationJs)
+                "    $wireKey: $mockVal"
+            }
+        } else {
+            "    id: \"00000000-0000-0000-0000-000000000001\""
+        }
+
+        """
+export const $createSingleName = (overrides = {}) => ({
+$defaultProps,
+  ...(typeof overrides === 'function' ? overrides(0) : overrides)
+});
+
+export const $createListName = (count = 2, overrides = {}) =>
+  createTestList(count, (index) => $createSingleName(typeof overrides === 'function' ? overrides(index) : (index === 0 ? overrides : { ...overrides })));
+        """.trimIndent()
+    }
+
+    return createTestListHelperJs + generateFunctionCode
+}
+
+/**
+ * Generates TypeScript declaration code for test fixture factory functions.
+ */
+public fun generateTestFixturesDts(config: NpmGeneratorConfig? = null): String {
+    val fixtureNames = collectAllFixtureNames(config)
+    val excluded = config?.excludedTestFixtures ?: emptySet()
+    val namesToGenerate = fixtureNames.filter { it !in excluded }
+
+    val isFoundation = config == null || config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+
+    val createTestListHelperDts = if (isFoundation && namesToGenerate.isNotEmpty()) {
+        "export declare function createTestList<T>(count?: number, factory?: ((index: number) => T) | T): T[];\n\n"
+    } else {
+        ""
+    }
+
+    val typeDef = "export type Overrides<T> = Partial<T> | ((index: number) => Partial<T>);\n\n"
+
+    val declarationsCode = namesToGenerate.joinToString("\n\n") { name ->
+        val createSingleName = "createTest$name"
+        val createListName = "createTest${name}List"
+
+        """
+export declare function $createSingleName(overrides?: Overrides<$name>): $name;
+export declare function $createListName(count?: number, overrides?: Overrides<$name>): $name[];
+        """.trimIndent()
+    }
+
+    return "$typeDef$createTestListHelperDts$declarationsCode"
+}

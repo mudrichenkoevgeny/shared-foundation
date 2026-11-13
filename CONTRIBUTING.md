@@ -166,17 +166,22 @@ The output package will be generated at `build/npm-package/`.
 To test the generated package locally in any web project or library (pnpm workspace) without publishing to a remote registry:
 
 1. **Generate the `.tgz` tarball archive:**
-   Run `npm pack` from the project root specifying the output directory as the destination:
-   ```bash
-   npm pack ./build/npm-package --pack-destination ./build/npm-package
-   ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.1.10.tgz` will be created inside `build/npm-package/`.
+   - **From the repository root (`shared-foundation/`):**
+     ```bash
+     npm pack ./build/npm-package
+     ```
+   - **Or if your terminal is inside `build/npm-package/`:**
+     ```bash
+     npm pack
+     ```
+
+   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.11.tgz`) will be created.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.10.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.11.tgz'
    ```
    And run from the root directory:
    ```bash
@@ -189,7 +194,12 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm login
    ```
-2. Publish the generated package directly from the project root:
-   ```bash
-   npm publish ./build/npm-package --access public
-   ```
+2. Publish the generated package:
+   - **From the repository root:**
+     ```bash
+     npm publish ./build/npm-package --access public
+     ```
+   - **Or if your terminal is inside `build/npm-package/`:**
+     ```bash
+     npm publish --access public
+     ```

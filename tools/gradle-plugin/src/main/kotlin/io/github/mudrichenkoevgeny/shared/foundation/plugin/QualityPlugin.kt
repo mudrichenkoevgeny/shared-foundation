@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.plugin
 
-import dev.detekt.gradle.Detekt
 import dev.detekt.gradle.extensions.DetektExtension
 import io.github.mudrichenkoevgeny.shared.foundation.plugin.utils.QualityUtils
 import org.gradle.api.Plugin
@@ -55,23 +54,15 @@ public class QualityPlugin : Plugin<Project> {
     private fun Project.configureDetekt() {
         pluginManager.apply("dev.detekt")
 
-        val isIgnoredTool = path == ":tools:npm-generator"
-
         extensions.configure(DetektExtension::class.java) { detekt ->
             detekt.buildUponDefaultConfig.set(true)
             detekt.autoCorrect.set(true)
             detekt.allRules.set(false)
-            detekt.ignoreFailures.set(isIgnoredTool)
 
             val srcDir = file("src")
             if (srcDir.exists()) {
                 detekt.source.setFrom(files(srcDir))
             }
-        }
-
-        tasks.withType(Detekt::class.java).configureEach { detektTask ->
-            detektTask.ignoreFailures.set(isIgnoredTool)
-            detektTask.enabled = !isIgnoredTool
         }
 
         QualityUtils.registerDetektConfigExtraction(
