@@ -15,7 +15,15 @@ internal fun main() {
     val packageVersion = resolvePackageVersion(rootDir)
     val zodVersion = resolveZodVersion(rootDir)
     val tsVersion = resolveTypescriptVersion(rootDir)
-    val config = buildFoundationNpmConfig(rootDir, outputDir, packageVersion, zodVersion, tsVersion)
+    val repoUrl = resolveRepositoryUrl(rootDir)
+    val config = buildFoundationNpmConfig(
+        rootDir = rootDir,
+        outputDir = outputDir,
+        packageVersion = packageVersion,
+        zodVersion = zodVersion,
+        typescriptVersion = tsVersion,
+        repositoryUrl = repoUrl
+    )
 
     try {
         NpmGeneratorEngine(config).generate()
@@ -83,5 +91,23 @@ private fun parseRootBuildGradleVersion(rootDir: File): String? {
     val regex = Regex("""version\s*=\s*"([^"]+)"""")
     return file.useLines { lines ->
         lines.mapNotNull { line -> regex.find(line)?.groupValues?.get(1) }.firstOrNull()
+    }
+}
+
+private fun resolveRepositoryUrl(rootDir: File): String =
+    System.getProperty("REPOSITORY_URL")?.takeIf { it.isNotBlank() }
+        ?: parsePropertyFromGradleProperties(rootDir, "POM_SCM_URL")
+        ?: parsePropertyFromGradleProperties(rootDir, "POM_URL")
+        ?: ""
+
+private fun parsePropertyFromGradleProperties(
+    rootDir: File,
+    key: String
+): String? {
+    val propsFile = File(rootDir, "gradle.properties")
+    if (!propsFile.exists()) return null
+    val regex = Regex("""^\s*$key\s*=\s*([^\s]+)""")
+    return propsFile.useLines { lines ->
+        lines.firstNotNullOfOrNull { regex.find(it)?.groupValues?.get(1) }
     }
 }

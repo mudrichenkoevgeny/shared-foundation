@@ -37,12 +37,14 @@ internal fun buildFoundationNpmConfig(
     outputDir: File,
     packageVersion: String,
     zodVersion: String,
-    typescriptVersion: String
+    typescriptVersion: String,
+    repositoryUrl: String = ""
 ): NpmGeneratorConfig {
     return NpmGeneratorConfig(
         packageName = "@mudrichenkoevgeny/shared-foundation",
         packageVersion = packageVersion,
         packageDescription = "Shared Foundation - TypeScript & Zod contracts and routes",
+        repositoryUrl = repositoryUrl,
         peerDependencies = emptyMap(),
         outputDirectory = outputDir,
         sourceCodeDirectory = rootDir,

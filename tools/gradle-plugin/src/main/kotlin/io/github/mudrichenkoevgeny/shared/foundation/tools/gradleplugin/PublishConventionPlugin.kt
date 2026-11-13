@@ -40,9 +40,27 @@ public class PublishConventionPlugin : Plugin<Project> {
                 target.rootProject.dependencies.add("dokka", target)
             }
 
-            target.extensions.configure(DokkaExtension::class.java) { dokka ->
-                dokka.dokkaPublications.configureEach { publication ->
-                    publication.failOnWarning.set(true)
+            target.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+                target.extensions.configure(DokkaExtension::class.java) { dokka ->
+                    dokka.dokkaPublications.configureEach { publication ->
+                        publication.failOnWarning.set(false)
+                    }
+                }
+            }
+
+            target.pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+                target.extensions.configure(DokkaExtension::class.java) { dokka ->
+                    dokka.dokkaPublications.configureEach { publication ->
+                        publication.failOnWarning.set(true)
+                    }
+                }
+            }
+
+            target.pluginManager.withPlugin("java-gradle-plugin") {
+                target.extensions.configure(DokkaExtension::class.java) { dokka ->
+                    dokka.dokkaPublications.configureEach { publication ->
+                        publication.failOnWarning.set(true)
+                    }
                 }
             }
         }

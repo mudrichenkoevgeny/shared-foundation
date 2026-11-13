@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     application
@@ -35,6 +37,16 @@ tasks.named<JavaExec>("run") {
     val tsVer = libs.versions.npmTypescript.get()
     systemProperty("ZOD_VERSION", zodVer)
     systemProperty("TYPESCRIPT_VERSION", tsVer)
+
+    val propsFile = rootProject.file("gradle.properties")
+    val props = Properties()
+    if (propsFile.exists()) {
+        propsFile.inputStream().use { props.load(it) }
+    }
+    val repoUrl = props.getProperty("POM_SCM_URL")
+        ?: props.getProperty("POM_URL")
+        ?: "https://github.com/mudrichenkoevgeny/shared-foundation"
+    systemProperty("REPOSITORY_URL", repoUrl)
 }
 
 val auditNpmExports = tasks.register<Exec>("auditNpmExports") {

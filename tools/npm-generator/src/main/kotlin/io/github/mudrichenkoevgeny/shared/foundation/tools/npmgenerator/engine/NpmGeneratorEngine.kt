@@ -194,6 +194,24 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
         }
         val depsJson = deps.entries.joinToString(",\n    ") { (k, v) -> "\"$k\": \"$v\"" }
 
+        val repoFields = if (config.repositoryUrl.isNotBlank()) {
+            val cleanUrl = config.repositoryUrl.trim().removePrefix("git+").removeSuffix(".git")
+            val gitUrl = "git+$cleanUrl.git"
+            val homepage = if (config.homepageUrl.isNotBlank()) config.homepageUrl else "$cleanUrl#readme"
+            val bugs = if (config.bugsUrl.isNotBlank()) config.bugsUrl else "$cleanUrl/issues"
+            """,
+  "repository": {
+    "type": "git",
+    "url": "$gitUrl"
+  },
+  "homepage": "$homepage",
+  "bugs": {
+    "url": "$bugs"
+  }"""
+        } else {
+            ""
+        }
+
         return """
 {
   "name": "${config.packageName}",
@@ -208,7 +226,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
       "types": "./index.d.ts",
       "import": "./index.js"
     }
-  },
+  }$repoFields,
   "dependencies": {
     $depsJson
   }

@@ -54,6 +54,9 @@ public data class NpmGeneratorConfig(
     public val preferredEnumDefaultNames: List<String> = listOf("DEFAULT", "NONE"),
     public val customDtsSmokeTestCode: String? = null,
     public val customRuntimeSmokeTestCode: String? = null,
+    public val repositoryUrl: String = "",
+    public val homepageUrl: String = "",
+    public val bugsUrl: String = "",
     public val zodVersion: String,
     public val typescriptVersion: String
 )
