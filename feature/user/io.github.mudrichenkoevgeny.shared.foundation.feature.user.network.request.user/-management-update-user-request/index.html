@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ManagementUpdateUserRequest</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":feature:user/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":feature:user/commonMain" data-filter=":feature:user/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="user::io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user/ManagementUpdateUserRequest///PointingToDeclaration//1428137388">
+  <div class="breadcrumbs"><a href="../../index.html">user</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user</a><span class="delimiter">/</span><span class="current">ManagementUpdateUserRequest</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Management</span><wbr><span>Update</span><wbr><span>User</span><wbr><span><span>Request</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">ManagementUpdateUserRequest</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>accountStatus<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>authorityLevel<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>permissionCodes<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>lockoutType<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>temporaryLockoutUntil<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>storageConfiguration<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>nickname<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>displayName<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>avatarFileId<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>birthdate<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged</span></span><span class="token punctuation">)</span></div><p class="paragraph">Request body for administrative updates to a target user's account, status, permissions, and details (management API).</p><p class="paragraph">Uses 3-state PatchField properties:</p><ul><li><p class="paragraph">PatchField.Unchanged: Field omitted in request; leave unchanged in persistence.</p></li><li><p class="paragraph">PatchField.Value with non-null value: Set field to new value in persistence.</p></li><li><p class="paragraph">PatchField.Value with <code class="lang-kotlin">null</code> value: Explicitly clear/nullify field in persistence.</p></li></ul></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="338420611%2FConstructors%2F1428137388" anchor-label="ManagementUpdateUserRequest" id="338420611%2FConstructors%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-management-update-user-request.html"><span>Management</span><wbr><span>Update</span><wbr><span>User</span><wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="338420611%2FConstructors%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountStatus<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">authorityLevel<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">permissionCodes<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">lockoutType<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">temporaryLockoutUntil<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">storageConfiguration<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">nickname<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">displayName<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">avatarFileId<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged<span class="token punctuation">, </span></span><span class="parameter ">birthdate<span class="token operator">: </span>PatchField<span class="token operator"> = </span>PatchField.Unchanged</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1200295309%2FProperties%2F1428137388" anchor-label="accountStatus" id="-1200295309%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="account-status.html"><span>account</span><wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1200295309%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="account-status.html">accountStatus</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target status as a <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus/-user-account-status/index.html">UserAccountStatus</a> serial name update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="222300455%2FProperties%2F1428137388" anchor-label="authorityLevel" id="222300455%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="authority-level.html"><span>authority</span><wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="222300455%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="authority-level.html">authorityLevel</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target authority level update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="942164568%2FProperties%2F1428137388" anchor-label="avatarFileId" id="942164568%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="avatar-file-id.html"><span>avatar</span><wbr><span>File</span><wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="942164568%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="avatar-file-id.html">avatarFileId</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target avatar file identifier update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="885186629%2FProperties%2F1428137388" anchor-label="birthdate" id="885186629%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="birthdate.html"><span><span>birthdate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="885186629%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="birthdate.html">birthdate</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target birthdate timestamp update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2072132219%2FProperties%2F1428137388" anchor-label="displayName" id="-2072132219%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="display-name.html"><span>display</span><wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2072132219%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="display-name.html">displayName</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target display name update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1222286891%2FProperties%2F1428137388" anchor-label="lockoutType" id="-1222286891%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lockout-type.html"><span>lockout</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1222286891%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="lockout-type.html">lockoutType</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target account lockout type as an AccountLockoutType serial name update (PatchField). Pass <code class="lang-kotlin">"NONE"</code> to unlock.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1185189786%2FProperties%2F1428137388" anchor-label="nickname" id="1185189786%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nickname.html"><span><span>nickname</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1185189786%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="nickname.html">nickname</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target nickname update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2052626149%2FProperties%2F1428137388" anchor-label="permissionCodes" id="-2052626149%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="permission-codes.html"><span>permission</span><wbr><span><span>Codes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2052626149%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="permission-codes.html">permissionCodes</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Explicit set of permission codes update (PatchField). Pass empty set to revoke all explicit grants.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-970592787%2FProperties%2F1428137388" anchor-label="storageConfiguration" id="-970592787%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="storage-configuration.html"><span>storage</span><wbr><span><span>Configuration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-970592787%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="storage-configuration.html">storageConfiguration</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target storage configuration overrides update (PatchField). Pass <code class="lang-kotlin">null</code> to reset to system defaults.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-95038778%2FProperties%2F1428137388" anchor-label="temporaryLockoutUntil" id="-95038778%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="temporary-lockout-until.html"><span>temporary</span><wbr><span>Lockout</span><wbr><span><span>Until</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-95038778%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="temporary-lockout-until.html">temporaryLockoutUntil</a><span class="token operator">: </span>PatchField</div><div class="brief "><p class="paragraph">Target temporary lockout expiration timestamp update (PatchField).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

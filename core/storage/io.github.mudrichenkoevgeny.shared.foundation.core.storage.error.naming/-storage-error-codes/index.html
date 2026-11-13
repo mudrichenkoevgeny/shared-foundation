@@ -1,0 +1,366 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>StorageErrorCodes</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":core:storage/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":core:storage/commonMain" data-filter=":core:storage/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="storage::io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming/StorageErrorCodes///PointingToDeclaration//1309410555">
+  <div class="breadcrumbs"><a href="../../index.html">storage</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.core.storage.error.naming</a><span class="delimiter">/</span><span class="current">StorageErrorCodes</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Storage</span><wbr><span>Error</span><wbr><span><span>Codes</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">StorageErrorCodes</a></div><p class="paragraph">Storage-specific error codes for API responses and backend logging, used to categorize failures.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-2048510608%2FProperties%2F1309410555" anchor-label="FILE_ALREADY_EXISTS" id="-2048510608%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-a-l-r-e-a-d-y_-e-x-i-s-t-s.html"><span>FILE_</span><wbr><span>ALREADY_</span><wbr><span>EXISTS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2048510608%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-a-l-r-e-a-d-y_-e-x-i-s-t-s.html">FILE_ALREADY_EXISTS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">A file with the specified identifier or content hash already exists and cannot be overwritten.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1317697078%2FProperties%2F1309410555" anchor-label="FILE_DELETE_FAILED" id="1317697078%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-d-e-l-e-t-e_-f-a-i-l-e-d.html"><span>FILE_</span><wbr><span>DELETE_</span><wbr><span>FAILED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1317697078%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-d-e-l-e-t-e_-f-a-i-l-e-d.html">FILE_DELETE_FAILED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Failed to remove the file binary from object storage or database metadata.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1752600239%2FProperties%2F1309410555" anchor-label="FILE_NOT_FOUND" id="-1752600239%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-n-o-t_-f-o-u-n-d.html"><span>FILE_</span><wbr><span>NOT_</span><wbr><span>FOUND</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1752600239%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-n-o-t_-f-o-u-n-d.html">FILE_NOT_FOUND</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The requested file record was not found in storage/metadata repository, OR the caller lacks permission to access it.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="467084880%2FProperties%2F1309410555" anchor-label="FILE_NOT_READY" id="467084880%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-n-o-t_-r-e-a-d-y.html"><span>FILE_</span><wbr><span>NOT_</span><wbr><span>READY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="467084880%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-n-o-t_-r-e-a-d-y.html">FILE_NOT_READY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The requested file is not yet available because it is still being uploaded, scanned, or processed asynchronously.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="762711953%2FProperties%2F1309410555" anchor-label="FILE_SIZE_BELOW_MINIMUM" id="762711953%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-s-i-z-e_-b-e-l-o-w_-m-i-n-i-m-u-m.html"><span>FILE_</span><wbr><span>SIZE_</span><wbr><span>BELOW_</span><wbr><span>MINIMUM</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="762711953%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-s-i-z-e_-b-e-l-o-w_-m-i-n-i-m-u-m.html">FILE_SIZE_BELOW_MINIMUM</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The requested file size is below the minimum permitted threshold (e.g. empty 0-byte file).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1931696950%2FProperties%2F1309410555" anchor-label="FILE_SIZE_EXCEEDS_LIMIT" id="1931696950%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-s-i-z-e_-e-x-c-e-e-d-s_-l-i-m-i-t.html"><span>FILE_</span><wbr><span>SIZE_</span><wbr><span>EXCEEDS_</span><wbr><span>LIMIT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1931696950%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-s-i-z-e_-e-x-c-e-e-d-s_-l-i-m-i-t.html">FILE_SIZE_EXCEEDS_LIMIT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The requested file size exceeds the maximum permitted limit for its category or system policy.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1467634079%2FProperties%2F1309410555" anchor-label="INVALID_UPLOAD_TOKEN" id="-1467634079%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-v-a-l-i-d_-u-p-l-o-a-d_-t-o-k-e-n.html"><span>INVALID_</span><wbr><span>UPLOAD_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1467634079%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-n-v-a-l-i-d_-u-p-l-o-a-d_-t-o-k-e-n.html">INVALID_UPLOAD_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The upload session token or signature is invalid, malformed, or tampered with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-91665163%2FProperties%2F1309410555" anchor-label="MAX_BATCH_UPLOAD_COUNT_EXCEEDED" id="-91665163%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-b-a-t-c-h_-u-p-l-o-a-d_-c-o-u-n-t_-e-x-c-e-e-d-e-d.html"><span>MAX_</span><wbr><span>BATCH_</span><wbr><span>UPLOAD_</span><wbr><span>COUNT_</span><wbr><span>EXCEEDED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-91665163%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-b-a-t-c-h_-u-p-l-o-a-d_-c-o-u-n-t_-e-x-c-e-e-d-e-d.html">MAX_BATCH_UPLOAD_COUNT_EXCEEDED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The user attempted to select or upload more files in a single batch than permitted by system policy or component configuration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="717084225%2FProperties%2F1309410555" anchor-label="PRESIGNED_URL_EXPIRED" id="717084225%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-r-e-s-i-g-n-e-d_-u-r-l_-e-x-p-i-r-e-d.html"><span>PRESIGNED_</span><wbr><span>URL_</span><wbr><span>EXPIRED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="717084225%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-r-e-s-i-g-n-e-d_-u-r-l_-e-x-p-i-r-e-d.html">PRESIGNED_URL_EXPIRED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The presigned upload URL or session token has expired and can no longer be used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1654985298%2FProperties%2F1309410555" anchor-label="STORAGE_ERROR" id="1654985298%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-o-r-a-g-e_-e-r-r-o-r.html"><span>STORAGE_</span><wbr><span>ERROR</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1654985298%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-o-r-a-g-e_-e-r-r-o-r.html">STORAGE_ERROR</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Generic unexpected storage infrastructure or metadata error.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1752804154%2FProperties%2F1309410555" anchor-label="STORAGE_QUOTA_EXCEEDED" id="-1752804154%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-o-r-a-g-e_-q-u-o-t-a_-e-x-c-e-e-d-e-d.html"><span>STORAGE_</span><wbr><span>QUOTA_</span><wbr><span>EXCEEDED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1752804154%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-o-r-a-g-e_-q-u-o-t-a_-e-x-c-e-e-d-e-d.html">STORAGE_QUOTA_EXCEEDED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The upload or storage operation failed because the user or tenant has exceeded their total allocated storage quota.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="797729375%2FProperties%2F1309410555" anchor-label="STORAGE_UPLOAD_FAILED" id="797729375%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-o-r-a-g-e_-u-p-l-o-a-d_-f-a-i-l-e-d.html"><span>STORAGE_</span><wbr><span>UPLOAD_</span><wbr><span>FAILED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="797729375%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-o-r-a-g-e_-u-p-l-o-a-d_-f-a-i-l-e-d.html">STORAGE_UPLOAD_FAILED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Verification or processing of an uploaded file failed after transfer (e.g. actual uploaded size mismatch, corrupted upload, or magic bytes check failure).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="941396655%2FProperties%2F1309410555" anchor-label="TOO_MANY_PENDING_UPLOADS" id="941396655%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-o-o_-m-a-n-y_-p-e-n-d-i-n-g_-u-p-l-o-a-d-s.html"><span>TOO_</span><wbr><span>MANY_</span><wbr><span>PENDING_</span><wbr><span>UPLOADS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="941396655%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-o-o_-m-a-n-y_-p-e-n-d-i-n-g_-u-p-l-o-a-d-s.html">TOO_MANY_PENDING_UPLOADS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The caller has created too many unfinalized presigned upload sessions without completing or canceling them.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="451465595%2FProperties%2F1309410555" anchor-label="UNSUPPORTED_MIME_TYPE" id="451465595%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-n-s-u-p-p-o-r-t-e-d_-m-i-m-e_-t-y-p-e.html"><span>UNSUPPORTED_</span><wbr><span>MIME_</span><wbr><span>TYPE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="451465595%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-n-s-u-p-p-o-r-t-e-d_-m-i-m-e_-t-y-p-e.html">UNSUPPORTED_MIME_TYPE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The provided MIME type is not supported or forbidden for the target storage category.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2141183928%2FProperties%2F1309410555" anchor-label="UNSUPPORTED_STORAGE_CATEGORY" id="2141183928%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-n-s-u-p-p-o-r-t-e-d_-s-t-o-r-a-g-e_-c-a-t-e-g-o-r-y.html"><span>UNSUPPORTED_</span><wbr><span>STORAGE_</span><wbr><span>CATEGORY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2141183928%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-n-s-u-p-p-o-r-t-e-d_-s-t-o-r-a-g-e_-c-a-t-e-g-o-r-y.html">UNSUPPORTED_STORAGE_CATEGORY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The specified storage category is disabled, unknown, or not supported by the platform configuration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1130561634%2FProperties%2F1309410555" anchor-label="UPLOAD_ALREADY_COMPLETED" id="-1130561634%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-p-l-o-a-d_-a-l-r-e-a-d-y_-c-o-m-p-l-e-t-e-d.html"><span>UPLOAD_</span><wbr><span>ALREADY_</span><wbr><span>COMPLETED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1130561634%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-p-l-o-a-d_-a-l-r-e-a-d-y_-c-o-m-p-l-e-t-e-d.html">UPLOAD_ALREADY_COMPLETED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The upload session or presigned URL has already been completed or finalized.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

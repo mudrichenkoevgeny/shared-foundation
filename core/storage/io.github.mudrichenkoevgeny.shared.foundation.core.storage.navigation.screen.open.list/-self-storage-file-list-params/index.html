@@ -1,0 +1,524 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>SelfStorageFileListParams</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":core:storage/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":core:storage/commonMain" data-filter=":core:storage/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="storage::io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list/SelfStorageFileListParams///PointingToDeclaration//1309410555">
+  <div class="breadcrumbs"><a href="../../index.html">storage</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.core.storage.navigation.screen.open.list</a><span class="delimiter">/</span><span class="current">SelfStorageFileListParams</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Self</span><wbr><span>Storage</span><wbr><span>File</span><wbr><span>List</span><wbr><span><span>Params</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">SelfStorageFileListParams</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>pageNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pageSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>sortBy<span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-sort-by/index.html">StorageFileSortBy</a><span class="token operator"> = </span>StorageFileSortBy.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>sortOrder<span class="token operator">: </span>SortOrder<span class="token operator"> = </span>SortOrder.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fileIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fileName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fileSizeBytesFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fileSizeBytesTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mimeTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeCategories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>visibilities<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeVisibilities<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>statuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeStatuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf(StorageFileStatus.DELETED)<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>targetScopes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isTargetScopeSet<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>createdAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>createdAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>updatedAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>updatedAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isUpdatedAtSet<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchQuery<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <span data-unresolved-link="/NavigationScreenParams///PointingToDeclaration/">NavigationScreenParams</span></div><p class="paragraph">Strongly typed parsed parameters for the self-service storage file list screen and API query.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-1977217544%2FConstructors%2F1309410555" anchor-label="SelfStorageFileListParams" id="-1977217544%2FConstructors%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-self-storage-file-list-params.html"><span>Self</span><wbr><span>Storage</span><wbr><span>File</span><wbr><span>List</span><wbr><span><span>Params</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1977217544%2FConstructors%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pageNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER<span class="token punctuation">, </span></span><span class="parameter ">pageSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE<span class="token punctuation">, </span></span><span class="parameter ">sortBy<span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-sort-by/index.html">StorageFileSortBy</a><span class="token operator"> = </span>StorageFileSortBy.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">sortOrder<span class="token operator">: </span>SortOrder<span class="token operator"> = </span>SortOrder.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">fileIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">fileName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">fileSizeBytesFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">fileSizeBytesTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">mimeTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeCategories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">visibilities<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeVisibilities<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">statuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeStatuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>listOf(StorageFileStatus.DELETED)<span class="token punctuation">, </span></span><span class="parameter ">targetScopes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">isTargetScopeSet<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">createdAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">createdAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">updatedAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">updatedAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">isUpdatedAtSet<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchQuery<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1810330231%2FClasslikes%2F1309410555" anchor-label="Companion" id="1810330231%2FClasslikes%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1810330231%2FClasslikes%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a> : <span data-unresolved-link="/NavigationScreenParamsParser///PointingToDeclaration/">NavigationScreenParamsParser</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="331146766%2FProperties%2F1309410555" anchor-label="categories" id="331146766%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="categories.html"><span><span>categories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="331146766%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="categories.html">categories</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a> items to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-c-a-t-e-g-o-r-y.html">StorageFileFilterValues.CATEGORY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1275681739%2FProperties%2F1309410555" anchor-label="createdAtFrom" id="1275681739%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="created-at-from.html"><span>created</span><wbr><span>At</span><wbr><span><span>From</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1275681739%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="created-at-from.html">createdAtFrom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Lower bound creation timestamp; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-c-r-e-a-t-e-d_-a-t_-f-r-o-m.html">StorageFileFilterValues.CREATED_AT_FROM</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-925122534%2FProperties%2F1309410555" anchor-label="createdAtTo" id="-925122534%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="created-at-to.html"><span>created</span><wbr><span>At</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-925122534%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="created-at-to.html">createdAtTo</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Upper bound creation timestamp; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-c-r-e-a-t-e-d_-a-t_-t-o.html">StorageFileFilterValues.CREATED_AT_TO</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-333702310%2FProperties%2F1309410555" anchor-label="excludeCategories" id="-333702310%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-categories.html"><span>exclude</span><wbr><span><span>Categories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-333702310%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-categories.html">excludeCategories</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/index.html">StorageCategory</a> items to exclude; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-e-x-c-l-u-d-e_-c-a-t-e-g-o-r-y.html">StorageFileFilterValues.EXCLUDE_CATEGORY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1749516310%2FProperties%2F1309410555" anchor-label="excludeStatuses" id="1749516310%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-statuses.html"><span>exclude</span><wbr><span><span>Statuses</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1749516310%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-statuses.html">excludeStatuses</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a> items to exclude; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-e-x-c-l-u-d-e_-s-t-a-t-u-s.html">StorageFileFilterValues.EXCLUDE_STATUS</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1665441414%2FProperties%2F1309410555" anchor-label="excludeVisibilities" id="1665441414%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-visibilities.html"><span>exclude</span><wbr><span><span>Visibilities</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1665441414%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-visibilities.html">excludeVisibilities</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Excluded <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a> items; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-e-x-c-l-u-d-e_-v-i-s-i-b-i-l-i-t-y.html">StorageFileFilterValues.EXCLUDE_VISIBILITY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1322811860%2FProperties%2F1309410555" anchor-label="fileIds" id="1322811860%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="file-ids.html"><span>file</span><wbr><span><span>Ids</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1322811860%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="file-ids.html">fileIds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Specific file IDs to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-f-i-l-e_-i-d.html">StorageFileFilterValues.FILE_ID</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1944473507%2FProperties%2F1309410555" anchor-label="fileName" id="1944473507%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="file-name.html"><span>file</span><wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1944473507%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="file-name.html">fileName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Substring match for original file name; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-f-i-l-e_-n-a-m-e.html">StorageFileFilterValues.FILE_NAME</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1613784472%2FProperties%2F1309410555" anchor-label="fileSizeBytesFrom" id="1613784472%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="file-size-bytes-from.html"><span>file</span><wbr><span>Size</span><wbr><span>Bytes</span><wbr><span><span>From</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1613784472%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="file-size-bytes-from.html">fileSizeBytesFrom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Lower bound for file size in bytes; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-f-r-o-m.html">StorageFileFilterValues.FILE_SIZE_BYTES_FROM</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="988076327%2FProperties%2F1309410555" anchor-label="fileSizeBytesTo" id="988076327%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="file-size-bytes-to.html"><span>file</span><wbr><span>Size</span><wbr><span>Bytes</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="988076327%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="file-size-bytes-to.html">fileSizeBytesTo</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Upper bound for file size in bytes; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-t-o.html">StorageFileFilterValues.FILE_SIZE_BYTES_TO</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1540274911%2FProperties%2F1309410555" anchor-label="isTargetScopeSet" id="-1540274911%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-target-scope-set.html"><span>is</span><wbr><span>Target</span><wbr><span>Scope</span><wbr><span><span>Set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1540274911%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-target-scope-set.html">isTargetScopeSet</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Filter by target scope presence; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-i-s_-t-a-r-g-e-t_-s-c-o-p-e_-s-e-t.html">StorageFileFilterValues.IS_TARGET_SCOPE_SET</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1032955284%2FProperties%2F1309410555" anchor-label="isUpdatedAtSet" id="-1032955284%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-updated-at-set.html"><span>is</span><wbr><span>Updated</span><wbr><span>At</span><wbr><span><span>Set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1032955284%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-updated-at-set.html">isUpdatedAtSet</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Filter by update presence; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-i-s_-u-p-d-a-t-e-d_-a-t_-s-e-t.html">StorageFileFilterValues.IS_UPDATED_AT_SET</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1347022891%2FProperties%2F1309410555" anchor-label="mimeTypes" id="1347022891%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mime-types.html"><span>mime</span><wbr><span><span>Types</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1347022891%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mime-types.html">mimeTypes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">MIME type filters; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-m-i-m-e_-t-y-p-e.html">StorageFileFilterValues.MIME_TYPE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2080018674%2FProperties%2F1309410555" anchor-label="pageNumber" id="2080018674%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="page-number.html"><span>page</span><wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2080018674%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="page-number.html">pageNumber</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">One-based page index; wire key is ListingParamNames.Pagination.PAGE_NUMBER.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-226800966%2FProperties%2F1309410555" anchor-label="pageSize" id="-226800966%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="page-size.html"><span>page</span><wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-226800966%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="page-size.html">pageSize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Maximum items returned per page; wire key is ListingParamNames.Pagination.PAGE_SIZE.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2127898603%2FProperties%2F1309410555" anchor-label="parser" id="2127898603%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="parser.html"><span><span>parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2127898603%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="parser.html">parser</a><span class="token operator">: </span>NavigationScreenParamsParser</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1934591088%2FProperties%2F1309410555" anchor-label="searchQuery" id="1934591088%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="search-query.html"><span>search</span><wbr><span><span>Query</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1934591088%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="search-query.html">searchQuery</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Search query targeting file name; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-s-e-a-r-c-h_-q-u-e-r-y.html">StorageFileFilterValues.SEARCH_QUERY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-290593227%2FProperties%2F1309410555" anchor-label="sortBy" id="-290593227%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sort-by.html"><span>sort</span><wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-290593227%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="sort-by.html">sortBy</a><span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-sort-by/index.html">StorageFileSortBy</a></div><div class="brief "><p class="paragraph">Field to sort listing results by; wire key is ListingParamNames.Sort.SORT_BY.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="611821280%2FProperties%2F1309410555" anchor-label="sortOrder" id="611821280%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sort-order.html"><span>sort</span><wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="611821280%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="sort-order.html">sortOrder</a><span class="token operator">: </span>SortOrder</div><div class="brief "><p class="paragraph">Direction of sorting; wire key is ListingParamNames.Sort.SORT_ORDER.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1598253002%2FProperties%2F1309410555" anchor-label="statuses" id="1598253002%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="statuses.html"><span><span>statuses</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1598253002%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="statuses.html">statuses</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/index.html">StorageFileStatus</a> items to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-s-t-a-t-u-s.html">StorageFileFilterValues.STATUS</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2022312486%2FProperties%2F1309410555" anchor-label="targetScopes" id="-2022312486%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="target-scopes.html"><span>target</span><wbr><span><span>Scopes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2022312486%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="target-scopes.html">targetScopes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Target scopes to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-t-a-r-g-e-t_-s-c-o-p-e.html">StorageFileFilterValues.TARGET_SCOPE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2008449128%2FProperties%2F1309410555" anchor-label="updatedAtFrom" id="-2008449128%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="updated-at-from.html"><span>updated</span><wbr><span>At</span><wbr><span><span>From</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2008449128%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="updated-at-from.html">updatedAtFrom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Lower bound update timestamp; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-u-p-d-a-t-e-d_-a-t_-f-r-o-m.html">StorageFileFilterValues.UPDATED_AT_FROM</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-360942809%2FProperties%2F1309410555" anchor-label="updatedAtTo" id="-360942809%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="updated-at-to.html"><span>updated</span><wbr><span>At</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-360942809%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="updated-at-to.html">updatedAtTo</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Upper bound update timestamp; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-u-p-d-a-t-e-d_-a-t_-t-o.html">StorageFileFilterValues.UPDATED_AT_TO</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="635276346%2FProperties%2F1309410555" anchor-label="visibilities" id="635276346%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visibilities.html"><span><span>visibilities</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="635276346%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="visibilities.html">visibilities</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/index.html">StorageFileVisibility</a> items to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/-storage-file-filter-values/-v-i-s-i-b-i-l-i-t-y.html">StorageFileFilterValues.VISIBILITY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

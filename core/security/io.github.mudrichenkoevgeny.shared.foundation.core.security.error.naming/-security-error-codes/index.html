@@ -1,0 +1,276 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>SecurityErrorCodes</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":core:security/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":core:security/commonMain" data-filter=":core:security/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="security::io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming/SecurityErrorCodes///PointingToDeclaration//-2015765998">
+  <div class="breadcrumbs"><a href="../../index.html">security</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming</a><span class="delimiter">/</span><span class="current">SecurityErrorCodes</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Security</span><wbr><span>Error</span><wbr><span><span>Codes</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">SecurityErrorCodes</a></div><p class="paragraph">Security-specific error codes for API responses and backend logging, used to categorize failures.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1431703798%2FProperties%2F-2015765998" anchor-label="INVALID_MFA_TOKEN" id="1431703798%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-v-a-l-i-d_-m-f-a_-t-o-k-e-n.html"><span>INVALID_</span><wbr><span>MFA_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1431703798%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-n-v-a-l-i-d_-m-f-a_-t-o-k-e-n.html">INVALID_MFA_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The provided MFA challenge token is invalid, malformed, or belongs to another session.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-524888573%2FProperties%2F-2015765998" anchor-label="INVALID_TOTP_CODE" id="-524888573%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-v-a-l-i-d_-t-o-t-p_-c-o-d-e.html"><span>INVALID_</span><wbr><span>TOTP_</span><wbr><span>CODE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-524888573%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-n-v-a-l-i-d_-t-o-t-p_-c-o-d-e.html">INVALID_TOTP_CODE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The TOTP or recovery code provided is incorrect.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-602102778%2FProperties%2F-2015765998" anchor-label="IP_NOT_ALLOWED" id="-602102778%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-p_-n-o-t_-a-l-l-o-w-e-d.html"><span>IP_</span><wbr><span>NOT_</span><wbr><span>ALLOWED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-602102778%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-p_-n-o-t_-a-l-l-o-w-e-d.html">IP_NOT_ALLOWED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Request was rejected because the client IP address is not permitted by IP restriction policy.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="45202430%2FProperties%2F-2015765998" anchor-label="MFA_CONFIRMATION_REQUIRED" id="45202430%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-f-a_-c-o-n-f-i-r-m-a-t-i-o-n_-r-e-q-u-i-r-e-d.html"><span>MFA_</span><wbr><span>CONFIRMATION_</span><wbr><span>REQUIRED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="45202430%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-f-a_-c-o-n-f-i-r-m-a-t-i-o-n_-r-e-q-u-i-r-e-d.html">MFA_CONFIRMATION_REQUIRED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Action requires confirmation via Multi-Factor Authentication (MFA).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1359560840%2FProperties%2F-2015765998" anchor-label="MFA_TOKEN_EXPIRED" id="1359560840%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-f-a_-t-o-k-e-n_-e-x-p-i-r-e-d.html"><span>MFA_</span><wbr><span>TOKEN_</span><wbr><span>EXPIRED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1359560840%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-f-a_-t-o-k-e-n_-e-x-p-i-r-e-d.html">MFA_TOKEN_EXPIRED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The provided MFA challenge token has expired.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1803198951%2FProperties%2F-2015765998" anchor-label="OTP_RETRY_TOO_SOON" id="-1803198951%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-t-p_-r-e-t-r-y_-t-o-o_-s-o-o-n.html"><span>OTP_</span><wbr><span>RETRY_</span><wbr><span>TOO_</span><wbr><span>SOON</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1803198951%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-t-p_-r-e-t-r-y_-t-o-o_-s-o-o-n.html">OTP_RETRY_TOO_SOON</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">A new OTP request was made before the cooling-off period had elapsed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1122526967%2FProperties%2F-2015765998" anchor-label="PASSWORD_TOO_WEAK" id="-1122526967%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-a-s-s-w-o-r-d_-t-o-o_-w-e-a-k.html"><span>PASSWORD_</span><wbr><span>TOO_</span><wbr><span>WEAK</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1122526967%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-a-s-s-w-o-r-d_-t-o-o_-w-e-a-k.html">PASSWORD_TOO_WEAK</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Top-level error code when a password fails policy validation (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordpolicy/-management-password-policy/index.html">ManagementPasswordPolicy</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2092399586%2FProperties%2F-2015765998" anchor-label="RECOVERY_CODE_ALREADY_USED" id="-2092399586%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-c-o-v-e-r-y_-c-o-d-e_-a-l-r-e-a-d-y_-u-s-e-d.html"><span>RECOVERY_</span><wbr><span>CODE_</span><wbr><span>ALREADY_</span><wbr><span>USED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2092399586%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-r-e-c-o-v-e-r-y_-c-o-d-e_-a-l-r-e-a-d-y_-u-s-e-d.html">RECOVERY_CODE_ALREADY_USED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The recovery code has already been used and is no longer valid.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-706234664%2FProperties%2F-2015765998" anchor-label="TOTP_ALREADY_ENABLED" id="-706234664%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-o-t-p_-a-l-r-e-a-d-y_-e-n-a-b-l-e-d.html"><span>TOTP_</span><wbr><span>ALREADY_</span><wbr><span>ENABLED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-706234664%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-o-t-p_-a-l-r-e-a-d-y_-e-n-a-b-l-e-d.html">TOTP_ALREADY_ENABLED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">TOTP is already configured and active for this account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1143702077%2FProperties%2F-2015765998" anchor-label="TOTP_NOT_ENABLED" id="1143702077%2FProperties%2F-2015765998" data-filterable-set=":core:security/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:security/commonMain" data-filterable-set=":core:security/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-o-t-p_-n-o-t_-e-n-a-b-l-e-d.html"><span>TOTP_</span><wbr><span>NOT_</span><wbr><span>ENABLED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1143702077%2FProperties%2F-2015765998"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:security/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-o-t-p_-n-o-t_-e-n-a-b-l-e-d.html">TOTP_NOT_ENABLED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Operation failed because TOTP is not enabled for this account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ManagementAuditEventListParams</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":core:audit/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":core:audit/commonMain" data-filter=":core:audit/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="audit::io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list/ManagementAuditEventListParams///PointingToDeclaration//-1322659813">
+  <div class="breadcrumbs"><a href="../../index.html">audit</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list</a><span class="delimiter">/</span><span class="current">ManagementAuditEventListParams</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Management</span><wbr><span>Audit</span><wbr><span>Event</span><wbr><span>List</span><wbr><span><span>Params</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">ManagementAuditEventListParams</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>pageNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pageSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>sortBy<span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-sort-by/index.html">AuditEventSortBy</a><span class="token operator"> = </span>AuditEventSortBy.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>sortOrder<span class="token operator">: </span>SortOrder<span class="token operator"> = </span>SortOrder.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>eventIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>actorIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>actorTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeActorTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>actorUserRoles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>actions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeActions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>resources<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>resourceIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>statuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>excludeStatuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>createdAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>createdAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchQuery<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <span data-unresolved-link="/NavigationScreenParams///PointingToDeclaration/">NavigationScreenParams</span></div><p class="paragraph">Strongly typed parsed parameters for the management audit events list screen and API query.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1695925314%2FConstructors%2F-1322659813" anchor-label="ManagementAuditEventListParams" id="1695925314%2FConstructors%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-management-audit-event-list-params.html"><span>Management</span><wbr><span>Audit</span><wbr><span>Event</span><wbr><span>List</span><wbr><span><span>Params</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1695925314%2FConstructors%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pageNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.INITIAL_PAGE_NUMBER<span class="token punctuation">, </span></span><span class="parameter ">pageSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>ListingDefaultValues.Pagination.DEFAULT_PAGE_SIZE<span class="token punctuation">, </span></span><span class="parameter ">sortBy<span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-sort-by/index.html">AuditEventSortBy</a><span class="token operator"> = </span>AuditEventSortBy.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">sortOrder<span class="token operator">: </span>SortOrder<span class="token operator"> = </span>SortOrder.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">eventIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">actorIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">actorTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeActorTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">actorUserRoles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">actions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeActions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">resources<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">resourceIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">statuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">excludeStatuses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">createdAtFrom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">createdAtTo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchQuery<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1130841708%2FClasslikes%2F-1322659813" anchor-label="Companion" id="-1130841708%2FClasslikes%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1130841708%2FClasslikes%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a> : <span data-unresolved-link="/NavigationScreenParamsParser///PointingToDeclaration/">NavigationScreenParamsParser</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="2129373680%2FProperties%2F-1322659813" anchor-label="actions" id="2129373680%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="actions.html"><span><span>actions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2129373680%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="actions.html">actions</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of audit action names to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-a-c-t-i-o-n.html">AuditEventFilterValues.ACTION</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="300573194%2FProperties%2F-1322659813" anchor-label="actorIds" id="300573194%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="actor-ids.html"><span>actor</span><wbr><span><span>Ids</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="300573194%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="actor-ids.html">actorIds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of actor IDs to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-a-c-t-o-r_-i-d.html">AuditEventFilterValues.ACTOR_ID</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1649802793%2FProperties%2F-1322659813" anchor-label="actorTypes" id="1649802793%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="actor-types.html"><span>actor</span><wbr><span><span>Types</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1649802793%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="actor-types.html">actorTypes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a> items to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-a-c-t-o-r_-t-y-p-e.html">AuditEventFilterValues.ACTOR_TYPE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1250473104%2FProperties%2F-1322659813" anchor-label="actorUserRoles" id="1250473104%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="actor-user-roles.html"><span>actor</span><wbr><span>User</span><wbr><span><span>Roles</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1250473104%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="actor-user-roles.html">actorUserRoles</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of actor user roles to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-a-c-t-o-r_-u-s-e-r_-r-o-l-e.html">AuditEventFilterValues.ACTOR_USER_ROLE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-967324568%2FProperties%2F-1322659813" anchor-label="createdAtFrom" id="-967324568%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="created-at-from.html"><span>created</span><wbr><span>At</span><wbr><span><span>From</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-967324568%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="created-at-from.html">createdAtFrom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Inclusive lower bound timestamp string; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-c-r-e-a-t-e-d_-a-t_-f-r-o-m.html">AuditEventFilterValues.CREATED_AT_FROM</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1302875145%2FProperties%2F-1322659813" anchor-label="createdAtTo" id="-1302875145%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="created-at-to.html"><span>created</span><wbr><span>At</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1302875145%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="created-at-to.html">createdAtTo</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Inclusive upper bound timestamp string; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-c-r-e-a-t-e-d_-a-t_-t-o.html">AuditEventFilterValues.CREATED_AT_TO</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1026388271%2FProperties%2F-1322659813" anchor-label="eventIds" id="1026388271%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="event-ids.html"><span>event</span><wbr><span><span>Ids</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1026388271%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="event-ids.html">eventIds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of specific audit event record IDs to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-e-v-e-n-t_-i-d.html">AuditEventFilterValues.EVENT_ID</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1006276810%2FProperties%2F-1322659813" anchor-label="excludeActions" id="1006276810%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-actions.html"><span>exclude</span><wbr><span><span>Actions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1006276810%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-actions.html">excludeActions</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of audit action names to exclude; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-e-x-c-l-u-d-e_-a-c-t-i-o-n.html">AuditEventFilterValues.EXCLUDE_ACTION</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1266184463%2FProperties%2F-1322659813" anchor-label="excludeActorTypes" id="1266184463%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-actor-types.html"><span>exclude</span><wbr><span>Actor</span><wbr><span><span>Types</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1266184463%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-actor-types.html">excludeActorTypes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor/-audit-actor-type/index.html">AuditActorType</a> items to exclude; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-e-x-c-l-u-d-e_-a-c-t-o-r_-t-y-p-e.html">AuditEventFilterValues.EXCLUDE_ACTOR_TYPE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2000929421%2FProperties%2F-1322659813" anchor-label="excludeStatuses" id="-2000929421%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exclude-statuses.html"><span>exclude</span><wbr><span><span>Statuses</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2000929421%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="exclude-statuses.html">excludeStatuses</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a> items to exclude; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-e-x-c-l-u-d-e_-s-t-a-t-u-s.html">AuditEventFilterValues.EXCLUDE_STATUS</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1098001781%2FProperties%2F-1322659813" anchor-label="pageNumber" id="1098001781%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="page-number.html"><span>page</span><wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1098001781%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="page-number.html">pageNumber</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">One-based page index; wire key is ListingParamNames.Pagination.PAGE_NUMBER.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="925248509%2FProperties%2F-1322659813" anchor-label="pageSize" id="925248509%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="page-size.html"><span>page</span><wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="925248509%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="page-size.html">pageSize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Maximum items returned per page; wire key is ListingParamNames.Pagination.PAGE_SIZE.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2084404718%2FProperties%2F-1322659813" anchor-label="parser" id="2084404718%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="parser.html"><span><span>parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2084404718%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="parser.html">parser</a><span class="token operator">: </span>NavigationScreenParamsParser</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="310330307%2FProperties%2F-1322659813" anchor-label="resourceIds" id="310330307%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resource-ids.html"><span>resource</span><wbr><span><span>Ids</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="310330307%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="resource-ids.html">resourceIds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of resource IDs to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-r-e-s-o-u-r-c-e_-i-d.html">AuditEventFilterValues.RESOURCE_ID</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1746276920%2FProperties%2F-1322659813" anchor-label="resources" id="-1746276920%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resources.html"><span><span>resources</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1746276920%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="resources.html">resources</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of audit resource names to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-r-e-s-o-u-r-c-e.html">AuditEventFilterValues.RESOURCE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1556838477%2FProperties%2F-1322659813" anchor-label="searchQuery" id="1556838477%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="search-query.html"><span>search</span><wbr><span><span>Query</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1556838477%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="search-query.html">searchQuery</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Free-text search query string targeting event messages; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-s-e-a-r-c-h_-q-u-e-r-y.html">AuditEventFilterValues.SEARCH_QUERY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-334087112%2FProperties%2F-1322659813" anchor-label="sortBy" id="-334087112%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sort-by.html"><span>sort</span><wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-334087112%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="sort-by.html">sortBy</a><span class="token operator">: </span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-sort-by/index.html">AuditEventSortBy</a></div><div class="brief "><p class="paragraph">Field to sort listing results by; wire key is ListingParamNames.Sort.SORT_BY.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1965616637%2FProperties%2F-1322659813" anchor-label="sortOrder" id="1965616637%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sort-order.html"><span>sort</span><wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1965616637%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="sort-order.html">sortOrder</a><span class="token operator">: </span>SortOrder</div><div class="brief "><p class="paragraph">Direction of sorting; wire key is ListingParamNames.Sort.SORT_ORDER.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1544664819%2FProperties%2F-1322659813" anchor-label="statuses" id="-1544664819%2FProperties%2F-1322659813" data-filterable-set=":core:audit/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:audit/commonMain" data-filterable-set=":core:audit/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="statuses.html"><span><span>statuses</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1544664819%2FProperties%2F-1322659813"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:audit/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="statuses.html">statuses</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">List of <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status/-audit-status/index.html">AuditStatus</a> items to filter by; wire key is <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.listing/-audit-event-filter-values/-s-t-a-t-u-s.html">AuditEventFilterValues.STATUS</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

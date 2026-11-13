@@ -1,0 +1,441 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>StorageFileFilterValues</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":core:storage/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":core:storage/commonMain" data-filter=":core:storage/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="storage::io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing/StorageFileFilterValues///PointingToDeclaration//1309410555">
+  <div class="breadcrumbs"><a href="../../index.html">storage</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing</a><span class="delimiter">/</span><span class="current">StorageFileFilterValues</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Storage</span><wbr><span>File</span><wbr><span>Filter</span><wbr><span><span>Values</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">StorageFileFilterValues</a></div><p class="paragraph">Stable <strong>keys</strong> for filtering storage file listings.</p><p class="paragraph">Keys follow the declaration order of properties in <a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file/-storage-file-private/index.html">StorageFilePrivate</a>. Use these constants when building HTTP query strings, parsing list requests, or mapping filters in services and persistence so clients, servers, and documentation stay aligned.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="743715909%2FProperties%2F1309410555" anchor-label="CATEGORY" id="743715909%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-a-t-e-g-o-r-y.html"><span><span>CATEGORY</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="743715909%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-c-a-t-e-g-o-r-y.html">CATEGORY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more storage category wire values (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/value.html">StorageCategory.value</a>) (OR semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="524781656%2FProperties%2F1309410555" anchor-label="CREATED_AT_FROM" id="524781656%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-r-e-a-t-e-d_-a-t_-f-r-o-m.html"><span>CREATED_</span><wbr><span>AT_</span><wbr><span>FROM</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="524781656%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-c-r-e-a-t-e-d_-a-t_-f-r-o-m.html">CREATED_AT_FROM</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Inclusive lower bound filter key for creation timestamp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-48158745%2FProperties%2F1309410555" anchor-label="CREATED_AT_TO" id="-48158745%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-r-e-a-t-e-d_-a-t_-t-o.html"><span>CREATED_</span><wbr><span>AT_</span><wbr><span>TO</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-48158745%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-c-r-e-a-t-e-d_-a-t_-t-o.html">CREATED_AT_TO</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Inclusive upper bound filter key for creation timestamp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="256266496%2FProperties%2F1309410555" anchor-label="EXCLUDE_CATEGORY" id="256266496%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-c-l-u-d-e_-c-a-t-e-g-o-r-y.html"><span>EXCLUDE_</span><wbr><span>CATEGORY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="256266496%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-c-l-u-d-e_-c-a-t-e-g-o-r-y.html">EXCLUDE_CATEGORY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter to exclude specific storage categories (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category/-storage-category/value.html">StorageCategory.value</a>) (NOT IN semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="453402828%2FProperties%2F1309410555" anchor-label="EXCLUDE_STATUS" id="453402828%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-c-l-u-d-e_-s-t-a-t-u-s.html"><span>EXCLUDE_</span><wbr><span>STATUS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="453402828%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-c-l-u-d-e_-s-t-a-t-u-s.html">EXCLUDE_STATUS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter to exclude specific storage file statuses (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/value.html">StorageFileStatus.value</a>) (NOT IN semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1645391572%2FProperties%2F1309410555" anchor-label="EXCLUDE_VISIBILITY" id="-1645391572%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-c-l-u-d-e_-v-i-s-i-b-i-l-i-t-y.html"><span>EXCLUDE_</span><wbr><span>VISIBILITY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1645391572%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-c-l-u-d-e_-v-i-s-i-b-i-l-i-t-y.html">EXCLUDE_VISIBILITY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter to exclude specific storage visibilities (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/value.html">StorageFileVisibility.value</a>) (NOT IN semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1547272761%2FProperties%2F1309410555" anchor-label="FILE_ID" id="1547272761%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-i-d.html"><span>FILE_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1547272761%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-i-d.html">FILE_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more specific file IDs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="72197385%2FProperties%2F1309410555" anchor-label="FILE_NAME" id="72197385%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-n-a-m-e.html"><span>FILE_</span><wbr><span>NAME</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="72197385%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-n-a-m-e.html">FILE_NAME</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by exact original file name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1018990410%2FProperties%2F1309410555" anchor-label="FILE_SIZE_BYTES_FROM" id="1018990410%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-f-r-o-m.html"><span>FILE_</span><wbr><span>SIZE_</span><wbr><span>BYTES_</span><wbr><span>FROM</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1018990410%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-f-r-o-m.html">FILE_SIZE_BYTES_FROM</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by inclusive lower bound for file size in bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="95372121%2FProperties%2F1309410555" anchor-label="FILE_SIZE_BYTES_TO" id="95372121%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-t-o.html"><span>FILE_</span><wbr><span>SIZE_</span><wbr><span>BYTES_</span><wbr><span>TO</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="95372121%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-i-l-e_-s-i-z-e_-b-y-t-e-s_-t-o.html">FILE_SIZE_BYTES_TO</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by inclusive upper bound for file size in bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-230346478%2FProperties%2F1309410555" anchor-label="IS_OWNER_USER_ID_SET" id="-230346478%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-o-w-n-e-r_-u-s-e-r_-i-d_-s-e-t.html"><span>IS_</span><wbr><span>OWNER_</span><wbr><span>USER_</span><wbr><span>ID_</span><wbr><span>SET</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-230346478%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-o-w-n-e-r_-u-s-e-r_-i-d_-s-e-t.html">IS_OWNER_USER_ID_SET</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by boolean flag indicating whether the file has an owner (true) or is anonymous/system (false).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1854409479%2FProperties%2F1309410555" anchor-label="IS_TARGET_SCOPE_SET" id="-1854409479%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-t-a-r-g-e-t_-s-c-o-p-e_-s-e-t.html"><span>IS_</span><wbr><span>TARGET_</span><wbr><span>SCOPE_</span><wbr><span>SET</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1854409479%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-t-a-r-g-e-t_-s-c-o-p-e_-s-e-t.html">IS_TARGET_SCOPE_SET</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by boolean flag indicating whether target scope is assigned.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1608241032%2FProperties%2F1309410555" anchor-label="IS_UPDATED_AT_SET" id="1608241032%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-u-p-d-a-t-e-d_-a-t_-s-e-t.html"><span>IS_</span><wbr><span>UPDATED_</span><wbr><span>AT_</span><wbr><span>SET</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1608241032%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-u-p-d-a-t-e-d_-a-t_-s-e-t.html">IS_UPDATED_AT_SET</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by boolean flag indicating whether the file record has been modified.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1875345394%2FProperties%2F1309410555" anchor-label="MIME_TYPE" id="1875345394%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-i-m-e_-t-y-p-e.html"><span>MIME_</span><wbr><span>TYPE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1875345394%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-i-m-e_-t-y-p-e.html">MIME_TYPE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by exact MIME type (e.g. <code class="lang-kotlin">image/png</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="605593780%2FProperties%2F1309410555" anchor-label="OWNER_USER_ID" id="605593780%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-w-n-e-r_-u-s-e-r_-i-d.html"><span>OWNER_</span><wbr><span>USER_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="605593780%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-w-n-e-r_-u-s-e-r_-i-d.html">OWNER_USER_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more owner user IDs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="19448402%2FProperties%2F1309410555" anchor-label="SEARCH_QUERY" id="19448402%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-a-r-c-h_-q-u-e-r-y.html"><span>SEARCH_</span><wbr><span>QUERY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="19448402%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-e-a-r-c-h_-q-u-e-r-y.html">SEARCH_QUERY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Free-text search query string targeting:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-363966127%2FProperties%2F1309410555" anchor-label="STATUS" id="-363966127%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-a-t-u-s.html"><span><span>STATUS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-363966127%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-a-t-u-s.html">STATUS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more storage file status wire values (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status/-storage-file-status/value.html">StorageFileStatus.value</a>) (OR semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1072273091%2FProperties%2F1309410555" anchor-label="TARGET_SCOPE" id="-1072273091%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-a-r-g-e-t_-s-c-o-p-e.html"><span>TARGET_</span><wbr><span>SCOPE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1072273091%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-a-r-g-e-t_-s-c-o-p-e.html">TARGET_SCOPE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more target scope or feature context strings.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1275981029%2FProperties%2F1309410555" anchor-label="UPDATED_AT_FROM" id="1275981029%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-p-d-a-t-e-d_-a-t_-f-r-o-m.html"><span>UPDATED_</span><wbr><span>AT_</span><wbr><span>FROM</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1275981029%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-p-d-a-t-e-d_-a-t_-f-r-o-m.html">UPDATED_AT_FROM</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Inclusive lower bound filter key for update timestamp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="962677684%2FProperties%2F1309410555" anchor-label="UPDATED_AT_TO" id="962677684%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-p-d-a-t-e-d_-a-t_-t-o.html"><span>UPDATED_</span><wbr><span>AT_</span><wbr><span>TO</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="962677684%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-p-d-a-t-e-d_-a-t_-t-o.html">UPDATED_AT_TO</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Inclusive upper bound filter key for update timestamp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1357940943%2FProperties%2F1309410555" anchor-label="VISIBILITY" id="-1357940943%2FProperties%2F1309410555" data-filterable-set=":core:storage/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core:storage/commonMain" data-filterable-set=":core:storage/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-v-i-s-i-b-i-l-i-t-y.html"><span><span>VISIBILITY</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357940943%2FProperties%2F1309410555"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:storage/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-v-i-s-i-b-i-l-i-t-y.html">VISIBILITY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Filter by one or more storage visibility wire values (<a href="../../io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility/-storage-file-visibility/value.html">StorageFileVisibility.value</a>) (OR semantics).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

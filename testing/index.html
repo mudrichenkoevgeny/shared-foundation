@@ -1,0 +1,1846 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>testing</title>
+<link href="../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script>
+<link href="../styles/style.css" rel="Stylesheet">
+<link href="../styles/main.css" rel="Stylesheet">
+<link href="../styles/prism.css" rel="Stylesheet">
+<link href="../styles/logo-styles.css" rel="Stylesheet">
+<link href="../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../scripts/main.js" defer></script>
+<script type="text/javascript" src="../scripts/prism.js" async></script>
+<script type="text/javascript" src="../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":testing/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":testing/commonMain" data-filter=":testing/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" id="content" pageids="testing::////PointingToDeclaration//1628975901">
+  <div class="breadcrumbs"></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>testing</span></span></h1>
+  </div>
+  <h2 class="">Packages</h2>
+  <div class="table"><a data-name="-944895193%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.action" id="-944895193%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.action/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.action</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-944895193%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1293387149%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event" id="1293387149%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1293387149%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1844816672%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata" id="1844816672%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1844816672%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-314078401%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.resource" id="-314078401%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.resource/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.resource</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-314078401%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="653274185%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.detail" id="653274185%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.detail/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.detail</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="653274185%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-384799786%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.list" id="-384799786%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.list/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.navigation.screen.management.audit.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-384799786%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1062638217%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.network.model.event" id="-1062638217%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.network.model.event/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.network.model.event</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1062638217%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1318134758%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common" id="-1318134758%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1318134758%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1091430074%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client" id="-1091430074%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1091430074%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1648491821%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.listing" id="1648491821%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.listing/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.listing</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1648491821%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1865754166%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.permission" id="-1865754166%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.permission/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.permission</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1865754166%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2082078033%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.error.model" id="-2082078033%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.error.model/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.error.model</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2082078033%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1781073841%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.localization" id="1781073841%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.localization/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.localization</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1781073841%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="164314060%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.params" id="164314060%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.params/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.params</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="164314060%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="426655879%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.route" id="426655879%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.route/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.route</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="426655879%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-431221176%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client" id="-431221176%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-431221176%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-699550034%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.websocket" id="-699550034%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.websocket/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.websocket</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-699550034%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="995870854%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.accountlockout" id="995870854%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.accountlockout/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.accountlockout</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="995870854%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-383089310%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.crypt" id="-383089310%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.crypt/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.crypt</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-383089310%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1229996167%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.iprestriction" id="-1229996167%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.iprestriction/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.iprestriction</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1229996167%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1948369364%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.otpconfirmation" id="1948369364%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.otpconfirmation/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.otpconfirmation</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1948369364%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-486778631%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordhash" id="-486778631%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordhash/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordhash</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-486778631%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-905471523%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordpolicy" id="-905471523%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordpolicy/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordpolicy</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-905471523%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1838228813%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.securitysettings" id="-1838228813%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.securitysettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.securitysettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1838228813%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1536820530%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totprecoverycodes" id="-1536820530%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totprecoverycodes/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totprecoverycodes</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1536820530%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-879152230%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totpsetup" id="-879152230%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totpsetup/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.totpsetup</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-879152230%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="781523392%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.verifytotp" id="781523392%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.verifytotp/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.verifytotp</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="781523392%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1452594558%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.accountlockout" id="1452594558%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.accountlockout/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.accountlockout</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1452594558%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="170210177%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.iprestriction" id="170210177%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.iprestriction/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.iprestriction</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="170210177%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1073064996%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.otpconfirmation" id="-1073064996%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.otpconfirmation/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.otpconfirmation</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1073064996%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-448747819%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.passwordpolicy" id="-448747819%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.passwordpolicy/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.passwordpolicy</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448747819%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1013413461%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.securitysettings" id="-1013413461%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.securitysettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.securitysettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1013413461%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1737348394%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totprecoverycodes" id="-1737348394%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totprecoverycodes/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totprecoverycodes</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1737348394%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="230288290%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totpsetup" id="230288290%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totpsetup/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.totpsetup</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="230288290%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="814441144%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.verifytotp" id="814441144%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.verifytotp/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.network.model.verifytotp</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="814441144%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-363462636%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator" id="-363462636%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.passwordpolicy.validator</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-363462636%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-383476103%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings" id="-383476103%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.domain.model.globalsettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-383476103%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2059434357%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings" id="-2059434357%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.settings.network.model.globalsettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2059434357%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-11350899%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.file" id="-11350899%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.file/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.file</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-11350899%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1002840463%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.storagesettings" id="-1002840463%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.storagesettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.storagesettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1002840463%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="885197074%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.upload" id="885197074%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.upload/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.upload</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="885197074%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="2029431272%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.detail" id="2029431272%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.detail/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.detail</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2029431272%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1444144024%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.upload" id="1444144024%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.upload/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.base.upload</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1444144024%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2082870397%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.management.list" id="-2082870397%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.management.list/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.management.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2082870397%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1320421732%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.open.list" id="-1320421732%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.open.list/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navigation.screen.open.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1320421732%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1345404835%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.file" id="1345404835%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.file/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.file</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1345404835%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1395245467%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.storagesettings" id="1395245467%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.storagesettings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.network.model.storagesettings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1395245467%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="378099946%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.ui.component.fileupload" id="378099946%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.ui.component.fileupload/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.ui.component.fileupload</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="378099946%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-92720756%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.data" id="-92720756%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.data/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.data</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-92720756%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="301344965%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings" id="301344965%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.auth.settings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="301344965%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1263191598%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.configuration" id="-1263191598%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.configuration/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.configuration</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1263191598%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1681229560%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.email" id="1681229560%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.email/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.email</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1681229560%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="45796824%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.emailrestriction" id="45796824%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.emailrestriction/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.emailrestriction</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="45796824%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1542618351%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier" id="-1542618351%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1542618351%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-845077774%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session" id="-845077774%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-845077774%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-340817131%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.token" id="-340817131%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.token/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.token</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-340817131%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1430042573%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user" id="-1430042573%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1430042573%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1260879937%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.email" id="-1260879937%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.email/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.email</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1260879937%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1723574776%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.totp" id="1723574776%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.totp/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.login.totp</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1723574776%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-642938734%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.resetpassword" id="-642938734%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.resetpassword/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.resetpassword</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-642938734%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="166333501%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.methodselection" id="166333501%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.methodselection/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.methodselection</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="166333501%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1369739345%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.otpinput" id="1369739345%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.otpinput/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.otpinput</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1369739345%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-969820043%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.success" id="-969820043%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.success/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.success</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-969820043%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="17664459%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.targetinput" id="17664459%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.targetinput/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.auth.unlock.targetinput</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="17664459%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1074932865%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.detail" id="1074932865%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.detail/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.detail</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1074932865%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1801119218%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.list" id="-1801119218%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.list/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1801119218%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1514093310%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.detail" id="-1514093310%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.detail/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.detail</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1514093310%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="980541135%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.list" id="980541135%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.list/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.session.list</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="980541135%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1343645989%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.totp.main" id="-1343645989%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.totp.main/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.totp.main</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1343645989%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-403942889%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.login.phone" id="-403942889%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.login.phone/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.login.phone</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-403942889%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="376567549%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.registration.email" id="376567549%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.registration.email/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.client.auth.registration.email</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="376567549%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-702943698%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.globallist" id="-702943698%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.globallist/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.globallist</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-702943698%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="490673942%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.userlist" id="490673942%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.userlist/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.identifier.userlist</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="490673942%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1031875285%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.globallist" id="1031875285%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.globallist/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.globallist</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1031875285%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1228189315%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.userlist" id="-1228189315%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.userlist/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.session.userlist</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1228189315%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1917896412%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.detail" id="1917896412%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.detail/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.detail</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1917896412%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-757722932%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.globallist" id="-757722932%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.globallist/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.management.user.globallist</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-757722932%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2017784636%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.data" id="-2017784636%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.data/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.data</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2017784636%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="669493245%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings" id="669493245%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.auth.settings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="669493245%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-895043318%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.configuration" id="-895043318%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.configuration/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.configuration</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-895043318%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1795267680%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.emailrestriction" id="-1795267680%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.emailrestriction/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.emailrestriction</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1795267680%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1090056487%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.identifier" id="-1090056487%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.identifier/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.identifier</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1090056487%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1718588374%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.session" id="-1718588374%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.session/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.session</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1718588374%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-19938739%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.token" id="-19938739%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.token/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.token</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-19938739%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1281144325%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user" id="-1281144325%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1281144325%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-385542468%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.create" id="-385542468%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.create/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.create</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-385542468%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2144021651%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.login" id="-2144021651%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.login/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.login</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2144021651%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1743988709%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.password" id="-1743988709%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.password/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.password</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1743988709%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1011228089%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.registration" id="1011228089%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.registration/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.registration</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1011228089%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-907900156%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.unlock" id="-907900156%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.unlock/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.unlock</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-907900156%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1116174465%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.confirmation" id="-1116174465%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.confirmation/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.confirmation</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1116174465%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="326511491%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.password" id="326511491%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.password/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.password</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="326511491%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-921364005%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.useridentifiers" id="-921364005%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.useridentifiers/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.security.useridentifiers</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-921364005%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1852760171%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.user" id="-1852760171%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.user/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.user</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1852760171%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-321119030%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.displayname" id="-321119030%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.displayname/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.displayname</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-321119030%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="32006613%2FPackages%2F1628975901" anchor-label="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.nickname" id="32006613%2FPackages%2F1628975901" data-filterable-set=":testing/commonMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":testing/commonMain" data-filterable-set=":testing/commonMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.nickname/index.html">io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.nickname</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="32006613%2FPackages%2F1628975901"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

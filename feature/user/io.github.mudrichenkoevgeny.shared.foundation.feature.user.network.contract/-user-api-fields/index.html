@@ -1,0 +1,1251 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>UserApiFields</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    shared-foundation
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.1.13
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":feature:user/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":feature:user/commonMain" data-filter=":feature:user/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    shared-foundation
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="user::io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract/UserApiFields///PointingToDeclaration//1428137388">
+  <div class="breadcrumbs"><a href="../../index.html">user</a><span class="delimiter">/</span><a href="../index.html">io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract</a><span class="delimiter">/</span><span class="current">UserApiFields</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>User</span><wbr><span>Api</span><wbr><span><span>Fields</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">UserApiFields</a></div><p class="paragraph">User-feature naming conventions for JSON request bodies, response fields, and filter/sort query keys that belong to this module’s HTTP contracts (authentication, users, identifiers, sessions, and related configuration).</p><p class="paragraph">Values are stable wire strings shared by server and clients; use these constants with <code class="lang-kotlin">@SerialName</code> on DTOs and when documenting endpoints.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-2010253886%2FProperties%2F1428137388" anchor-label="ACCESS_TOKEN" id="-2010253886%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-e-s-s_-t-o-k-e-n.html"><span>ACCESS_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2010253886%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-e-s-s_-t-o-k-e-n.html">ACCESS_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the access token issued for the session.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="102121671%2FProperties%2F1428137388" anchor-label="ACCESS_TOKEN_VALIDITY_SECONDS" id="102121671%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-e-s-s_-t-o-k-e-n_-v-a-l-i-d-i-t-y_-s-e-c-o-n-d-s.html"><span>ACCESS_</span><wbr><span>TOKEN_</span><wbr><span>VALIDITY_</span><wbr><span>SECONDS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="102121671%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-e-s-s_-t-o-k-e-n_-v-a-l-i-d-i-t-y_-s-e-c-o-n-d-s.html">ACCESS_TOKEN_VALIDITY_SECONDS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the validity window (in seconds) applied to <strong>newly issued</strong> access tokens.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1486903809%2FProperties%2F1428137388" anchor-label="ACCOUNT_DELETION_CHECK_INTERVAL_SECONDS" id="-1486903809%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-o-u-n-t_-d-e-l-e-t-i-o-n_-c-h-e-c-k_-i-n-t-e-r-v-a-l_-s-e-c-o-n-d-s.html"><span>ACCOUNT_</span><wbr><span>DELETION_</span><wbr><span>CHECK_</span><wbr><span>INTERVAL_</span><wbr><span>SECONDS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1486903809%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-o-u-n-t_-d-e-l-e-t-i-o-n_-c-h-e-c-k_-i-n-t-e-r-v-a-l_-s-e-c-o-n-d-s.html">ACCOUNT_DELETION_CHECK_INTERVAL_SECONDS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the background worker check interval (in seconds) for accounts eligible for permanent deletion.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="592462067%2FProperties%2F1428137388" anchor-label="ACCOUNT_DELETION_GRACE_PERIOD_SECONDS" id="592462067%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-o-u-n-t_-d-e-l-e-t-i-o-n_-g-r-a-c-e_-p-e-r-i-o-d_-s-e-c-o-n-d-s.html"><span>ACCOUNT_</span><wbr><span>DELETION_</span><wbr><span>GRACE_</span><wbr><span>PERIOD_</span><wbr><span>SECONDS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="592462067%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-o-u-n-t_-d-e-l-e-t-i-o-n_-g-r-a-c-e_-p-e-r-i-o-d_-s-e-c-o-n-d-s.html">ACCOUNT_DELETION_GRACE_PERIOD_SECONDS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the grace period (in seconds) between scheduling account deletion and its execution.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-922724232%2FProperties%2F1428137388" anchor-label="ACCOUNT_LOCKOUT_TYPE" id="-922724232%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-o-u-n-t_-l-o-c-k-o-u-t_-t-y-p-e.html"><span>ACCOUNT_</span><wbr><span>LOCKOUT_</span><wbr><span>TYPE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-922724232%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-o-u-n-t_-l-o-c-k-o-u-t_-t-y-p-e.html">ACCOUNT_LOCKOUT_TYPE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the account lockout state type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-554280804%2FProperties%2F1428137388" anchor-label="ACCOUNT_STATUS" id="-554280804%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-o-u-n-t_-s-t-a-t-u-s.html"><span>ACCOUNT_</span><wbr><span>STATUS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-554280804%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-o-u-n-t_-s-t-a-t-u-s.html">ACCOUNT_STATUS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the account status; wire value follows the status enum’s serial name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="696661105%2FProperties%2F1428137388" anchor-label="ACCOUNT_STATUS_ON_RESTORE" id="696661105%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-c-c-o-u-n-t_-s-t-a-t-u-s_-o-n_-r-e-s-t-o-r-e.html"><span>ACCOUNT_</span><wbr><span>STATUS_</span><wbr><span>ON_</span><wbr><span>RESTORE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="696661105%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-c-c-o-u-n-t_-s-t-a-t-u-s_-o-n_-r-e-s-t-o-r-e.html">ACCOUNT_STATUS_ON_RESTORE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the target account status assigned to the user upon restoring the account / canceling deletion procedure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1160302862%2FProperties%2F1428137388" anchor-label="AUTH_PROVIDER" id="-1160302862%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-u-t-h_-p-r-o-v-i-d-e-r.html"><span>AUTH_</span><wbr><span>PROVIDER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1160302862%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-u-t-h_-p-r-o-v-i-d-e-r.html">AUTH_PROVIDER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for an external authentication provider id; wire value follows <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2123470610%2FProperties%2F1428137388" anchor-label="AUTHORITY_LEVEL" id="2123470610%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-u-t-h-o-r-i-t-y_-l-e-v-e-l.html"><span>AUTHORITY_</span><wbr><span>LEVEL</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2123470610%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-u-t-h-o-r-i-t-y_-l-e-v-e-l.html">AUTHORITY_LEVEL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the hierarchical weight of the user; used for access control logic and prevention of privilege escalation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="488798943%2FProperties%2F1428137388" anchor-label="AVAILABLE_AUTH_PROVIDERS" id="488798943%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-v-a-i-l-a-b-l-e_-a-u-t-h_-p-r-o-v-i-d-e-r-s.html"><span>AVAILABLE_</span><wbr><span>AUTH_</span><wbr><span>PROVIDERS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="488798943%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-v-a-i-l-a-b-l-e_-a-u-t-h_-p-r-o-v-i-d-e-r-s.html">AVAILABLE_AUTH_PROVIDERS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for provider availability lists (primary and secondary); entries use <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a> on the wire (open and management auth settings).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1722260568%2FProperties%2F1428137388" anchor-label="AVATAR_FILE_ID" id="-1722260568%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-v-a-t-a-r_-f-i-l-e_-i-d.html"><span>AVATAR_</span><wbr><span>FILE_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1722260568%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-v-a-t-a-r_-f-i-l-e_-i-d.html">AVATAR_FILE_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the avatar file identifier in core/storage.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1804144400%2FProperties%2F1428137388" anchor-label="AVATAR_URLS" id="1804144400%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-v-a-t-a-r_-u-r-l-s.html"><span>AVATAR_</span><wbr><span>URLS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1804144400%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-v-a-t-a-r_-u-r-l-s.html">AVATAR_URLS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for structured avatar image URL variants.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-678814995%2FProperties%2F1428137388" anchor-label="BIRTHDATE" id="-678814995%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-i-r-t-h-d-a-t-e.html"><span><span>BIRTHDATE</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-678814995%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-i-r-t-h-d-a-t-e.html">BIRTHDATE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for user birthdate in Unix epoch milliseconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-691740093%2FProperties%2F1428137388" anchor-label="CONFIRMATION_CODE" id="-691740093%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-o-n-f-i-r-m-a-t-i-o-n_-c-o-d-e.html"><span>CONFIRMATION_</span><wbr><span>CODE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-691740093%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-c-o-n-f-i-r-m-a-t-i-o-n_-c-o-d-e.html">CONFIRMATION_CODE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for a one-time or confirmation code (OTP / email confirmation flows).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2143467279%2FProperties%2F1428137388" anchor-label="DELETED_SESSION_IDS" id="-2143467279%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-e-l-e-t-e-d_-s-e-s-s-i-o-n_-i-d-s.html"><span>DELETED_</span><wbr><span>SESSION_</span><wbr><span>IDS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2143467279%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-d-e-l-e-t-e-d_-s-e-s-s-i-o-n_-i-d-s.html">DELETED_SESSION_IDS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the list of deleted session ids.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="950051896%2FProperties%2F1428137388" anchor-label="DISPLAY_NAME" id="950051896%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-i-s-p-l-a-y_-n-a-m-e.html"><span>DISPLAY_</span><wbr><span>NAME</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="950051896%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-d-i-s-p-l-a-y_-n-a-m-e.html">DISPLAY_NAME</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the display name of an identifier or user profile.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2064092574%2FProperties%2F1428137388" anchor-label="EMAIL" id="2064092574%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-m-a-i-l.html"><span><span>EMAIL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2064092574%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-m-a-i-l.html">EMAIL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for an email address (registration, login, identifier flows).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1585544322%2FProperties%2F1428137388" anchor-label="EXPIRES_AT" id="1585544322%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-p-i-r-e-s_-a-t.html"><span>EXPIRES_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1585544322%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-p-i-r-e-s_-a-t.html">EXPIRES_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for access-token expiry as a millisecond epoch timestamp (session token payload and session list sort keys).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1706974200%2FProperties%2F1428137388" anchor-label="EXTERNAL_PROVIDER_EMAIL" id="1706974200%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r_-e-m-a-i-l.html"><span>EXTERNAL_</span><wbr><span>PROVIDER_</span><wbr><span>EMAIL</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1706974200%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r_-e-m-a-i-l.html">EXTERNAL_PROVIDER_EMAIL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the email address linked to an external authentication provider.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1226104891%2FProperties%2F1428137388" anchor-label="EXTERNAL_PROVIDER_TOKEN" id="1226104891%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r_-t-o-k-e-n.html"><span>EXTERNAL_</span><wbr><span>PROVIDER_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1226104891%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r_-t-o-k-e-n.html">EXTERNAL_PROVIDER_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for an opaque token from an external identity provider (link/login-by-provider requests).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1222249609%2FProperties%2F1428137388" anchor-label="IDENTIFIER" id="-1222249609%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-d-e-n-t-i-f-i-e-r.html"><span><span>IDENTIFIER</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1222249609%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-d-e-n-t-i-f-i-e-r.html">IDENTIFIER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the credential value or free-text identifier match (identifier payloads, session/identifier filters).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1424147822%2FProperties%2F1428137388" anchor-label="IDENTIFIER_AUTH_PROVIDER" id="1424147822%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-d-e-n-t-i-f-i-e-r_-a-u-t-h_-p-r-o-v-i-d-e-r.html"><span>IDENTIFIER_</span><wbr><span>AUTH_</span><wbr><span>PROVIDER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1424147822%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-d-e-n-t-i-f-i-e-r_-a-u-t-h_-p-r-o-v-i-d-e-r.html">IDENTIFIER_AUTH_PROVIDER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the provider of the session’s credential; wire value follows <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a> (session payloads).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="63589948%2FProperties%2F1428137388" anchor-label="IDENTIFIER_DISPLAY_NAME" id="63589948%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-d-e-n-t-i-f-i-e-r_-d-i-s-p-l-a-y_-n-a-m-e.html"><span>IDENTIFIER_</span><wbr><span>DISPLAY_</span><wbr><span>NAME</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="63589948%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-d-e-n-t-i-f-i-e-r_-d-i-s-p-l-a-y_-n-a-m-e.html">IDENTIFIER_DISPLAY_NAME</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the display name of the identifier associated with a session.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1183770295%2FProperties%2F1428137388" anchor-label="IDENTIFIER_ID" id="-1183770295%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-d-e-n-t-i-f-i-e-r_-i-d.html"><span>IDENTIFIER_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1183770295%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-d-e-n-t-i-f-i-e-r_-i-d.html">IDENTIFIER_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the credential record id tied to a session row.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1996336330%2FProperties%2F1428137388" anchor-label="IS_REGISTRATION_ENABLED" id="1996336330%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-r-e-g-i-s-t-r-a-t-i-o-n_-e-n-a-b-l-e-d.html"><span>IS_</span><wbr><span>REGISTRATION_</span><wbr><span>ENABLED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1996336330%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-r-e-g-i-s-t-r-a-t-i-o-n_-e-n-a-b-l-e-d.html">IS_REGISTRATION_ENABLED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the global flag indicating whether new user registrations are permitted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1607169268%2FProperties%2F1428137388" anchor-label="IS_TOTP_ENABLED" id="-1607169268%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-t-o-t-p_-e-n-a-b-l-e-d.html"><span>IS_</span><wbr><span>TOTP_</span><wbr><span>ENABLED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1607169268%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-t-o-t-p_-e-n-a-b-l-e-d.html">IS_TOTP_ENABLED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name indicating whether Time-based One-Time Password (TOTP) 2FA is enabled for the account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1857304399%2FProperties%2F1428137388" anchor-label="IS_USER_NICKNAME_CHANGE_ALLOWED" id="1857304399%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s_-u-s-e-r_-n-i-c-k-n-a-m-e_-c-h-a-n-g-e_-a-l-l-o-w-e-d.html"><span>IS_</span><wbr><span>USER_</span><wbr><span>NICKNAME_</span><wbr><span>CHANGE_</span><wbr><span>ALLOWED</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1857304399%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-s_-u-s-e-r_-n-i-c-k-n-a-m-e_-c-h-a-n-g-e_-a-l-l-o-w-e-d.html">IS_USER_NICKNAME_CHANGE_ALLOWED</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the flag indicating whether users are permitted to change their nickname.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-141590598%2FProperties%2F1428137388" anchor-label="LAST_ACCESSED_AT" id="-141590598%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-a-s-t_-a-c-c-e-s-s-e-d_-a-t.html"><span>LAST_</span><wbr><span>ACCESSED_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-141590598%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-l-a-s-t_-a-c-c-e-s-s-e-d_-a-t.html">LAST_ACCESSED_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for last access timestamp on a session (epoch milliseconds; payloads and sort keys).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1450587587%2FProperties%2F1428137388" anchor-label="LAST_ACTIVE_AT" id="-1450587587%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-a-s-t_-a-c-t-i-v-e_-a-t.html"><span>LAST_</span><wbr><span>ACTIVE_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1450587587%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-l-a-s-t_-a-c-t-i-v-e_-a-t.html">LAST_ACTIVE_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for last activity timestamp (epoch milliseconds; user listings and sort keys).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-784326552%2FProperties%2F1428137388" anchor-label="LAST_LOGIN_AT" id="-784326552%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-a-s-t_-l-o-g-i-n_-a-t.html"><span>LAST_</span><wbr><span>LOGIN_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-784326552%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-l-a-s-t_-l-o-g-i-n_-a-t.html">LAST_LOGIN_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for last login timestamp (epoch milliseconds; user listings and sort keys).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1844430245%2FProperties%2F1428137388" anchor-label="LAST_REAUTHENTICATED_AT" id="-1844430245%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-a-s-t_-r-e-a-u-t-h-e-n-t-i-c-a-t-e-d_-a-t.html"><span>LAST_</span><wbr><span>REAUTHENTICATED_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1844430245%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-l-a-s-t_-r-e-a-u-t-h-e-n-t-i-c-a-t-e-d_-a-t.html">LAST_REAUTHENTICATED_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the last step-up or re-authentication timestamp on a session, in epoch milliseconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="268813986%2FProperties%2F1428137388" anchor-label="MANAGEMENT_AUTH_SETTINGS" id="268813986%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-a-g-e-m-e-n-t_-a-u-t-h_-s-e-t-t-i-n-g-s.html"><span>MANAGEMENT_</span><wbr><span>AUTH_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268813986%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-n-a-g-e-m-e-n-t_-a-u-t-h_-s-e-t-t-i-n-g-s.html">MANAGEMENT_AUTH_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested management authentication settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1686191594%2FProperties%2F1428137388" anchor-label="MANAGEMENT_EMAIL_RESTRICTION_POLICY" id="-1686191594%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-a-g-e-m-e-n-t_-e-m-a-i-l_-r-e-s-t-r-i-c-t-i-o-n_-p-o-l-i-c-y.html"><span>MANAGEMENT_</span><wbr><span>EMAIL_</span><wbr><span>RESTRICTION_</span><wbr><span>POLICY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1686191594%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-n-a-g-e-m-e-n-t_-e-m-a-i-l_-r-e-s-t-r-i-c-t-i-o-n_-p-o-l-i-c-y.html">MANAGEMENT_EMAIL_RESTRICTION_POLICY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for management API email restriction policy object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="787023389%2FProperties%2F1428137388" anchor-label="MANAGEMENT_GLOBAL_SETTINGS" id="787023389%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-a-g-e-m-e-n-t_-g-l-o-b-a-l_-s-e-t-t-i-n-g-s.html"><span>MANAGEMENT_</span><wbr><span>GLOBAL_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="787023389%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-n-a-g-e-m-e-n-t_-g-l-o-b-a-l_-s-e-t-t-i-n-g-s.html">MANAGEMENT_GLOBAL_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested management global settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-266626374%2FProperties%2F1428137388" anchor-label="MANAGEMENT_SECURITY_SETTINGS" id="-266626374%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-a-g-e-m-e-n-t_-s-e-c-u-r-i-t-y_-s-e-t-t-i-n-g-s.html"><span>MANAGEMENT_</span><wbr><span>SECURITY_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-266626374%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-n-a-g-e-m-e-n-t_-s-e-c-u-r-i-t-y_-s-e-t-t-i-n-g-s.html">MANAGEMENT_SECURITY_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested management security settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1644187959%2FProperties%2F1428137388" anchor-label="MANAGEMENT_STORAGE_SETTINGS" id="1644187959%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-a-g-e-m-e-n-t_-s-t-o-r-a-g-e_-s-e-t-t-i-n-g-s.html"><span>MANAGEMENT_</span><wbr><span>STORAGE_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1644187959%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-n-a-g-e-m-e-n-t_-s-t-o-r-a-g-e_-s-e-t-t-i-n-g-s.html">MANAGEMENT_STORAGE_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested management storage settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-517438003%2FProperties%2F1428137388" anchor-label="MAX_ACTIVE_SESSIONS_FOR_MANAGEMENT_USER" id="-517438003%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-a-c-t-i-v-e_-s-e-s-s-i-o-n-s_-f-o-r_-m-a-n-a-g-e-m-e-n-t_-u-s-e-r.html"><span>MAX_</span><wbr><span>ACTIVE_</span><wbr><span>SESSIONS_</span><wbr><span>FOR_</span><wbr><span>MANAGEMENT_</span><wbr><span>USER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-517438003%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-a-c-t-i-v-e_-s-e-s-s-i-o-n-s_-f-o-r_-m-a-n-a-g-e-m-e-n-t_-u-s-e-r.html">MAX_ACTIVE_SESSIONS_FOR_MANAGEMENT_USER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum concurrent active sessions allowed per management user account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="367730388%2FProperties%2F1428137388" anchor-label="MAX_ACTIVE_SESSIONS_FOR_OPEN_USER" id="367730388%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-a-c-t-i-v-e_-s-e-s-s-i-o-n-s_-f-o-r_-o-p-e-n_-u-s-e-r.html"><span>MAX_</span><wbr><span>ACTIVE_</span><wbr><span>SESSIONS_</span><wbr><span>FOR_</span><wbr><span>OPEN_</span><wbr><span>USER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="367730388%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-a-c-t-i-v-e_-s-e-s-s-i-o-n-s_-f-o-r_-o-p-e-n_-u-s-e-r.html">MAX_ACTIVE_SESSIONS_FOR_OPEN_USER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum concurrent active sessions allowed per open user account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-60312882%2FProperties%2F1428137388" anchor-label="MAX_EMAIL_IDENTIFIERS" id="-60312882%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-e-m-a-i-l_-i-d-e-n-t-i-f-i-e-r-s.html"><span>MAX_</span><wbr><span>EMAIL_</span><wbr><span><span>IDENTIFIERS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-60312882%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-e-m-a-i-l_-i-d-e-n-t-i-f-i-e-r-s.html">MAX_EMAIL_IDENTIFIERS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum email identifiers allowed per account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1813672505%2FProperties%2F1428137388" anchor-label="MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER" id="-1813672505%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-i-d-e-n-t-i-f-i-e-r-s_-p-e-r_-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r.html"><span>MAX_</span><wbr><span>IDENTIFIERS_</span><wbr><span>PER_</span><wbr><span>EXTERNAL_</span><wbr><span>PROVIDER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1813672505%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-i-d-e-n-t-i-f-i-e-r-s_-p-e-r_-e-x-t-e-r-n-a-l_-p-r-o-v-i-d-e-r.html">MAX_IDENTIFIERS_PER_EXTERNAL_PROVIDER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum identifiers allowed per specific external provider.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="984301323%2FProperties%2F1428137388" anchor-label="MAX_PENDING_UPLOADS" id="984301323%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-p-e-n-d-i-n-g_-u-p-l-o-a-d-s.html"><span>MAX_</span><wbr><span>PENDING_</span><wbr><span>UPLOADS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="984301323%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-p-e-n-d-i-n-g_-u-p-l-o-a-d-s.html">MAX_PENDING_UPLOADS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for custom maximum pending uploads count.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1778000836%2FProperties%2F1428137388" anchor-label="MAX_PHONE_IDENTIFIERS" id="-1778000836%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-p-h-o-n-e_-i-d-e-n-t-i-f-i-e-r-s.html"><span>MAX_</span><wbr><span>PHONE_</span><wbr><span><span>IDENTIFIERS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1778000836%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-p-h-o-n-e_-i-d-e-n-t-i-f-i-e-r-s.html">MAX_PHONE_IDENTIFIERS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum phone identifiers allowed per account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1278784474%2FProperties%2F1428137388" anchor-label="MAX_TOTAL_IDENTIFIERS" id="-1278784474%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-t-o-t-a-l_-i-d-e-n-t-i-f-i-e-r-s.html"><span>MAX_</span><wbr><span>TOTAL_</span><wbr><span><span>IDENTIFIERS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1278784474%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-t-o-t-a-l_-i-d-e-n-t-i-f-i-e-r-s.html">MAX_TOTAL_IDENTIFIERS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the maximum total identifiers allowed per account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1056752566%2FProperties%2F1428137388" anchor-label="MAX_UPLOAD_SIZE_BYTES" id="-1056752566%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-u-p-l-o-a-d_-s-i-z-e_-b-y-t-e-s.html"><span>MAX_</span><wbr><span>UPLOAD_</span><wbr><span>SIZE_</span><wbr><span>BYTES</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1056752566%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-u-p-l-o-a-d_-s-i-z-e_-b-y-t-e-s.html">MAX_UPLOAD_SIZE_BYTES</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for custom maximum upload size in bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1975704058%2FProperties%2F1428137388" anchor-label="NEW_PASSWORD" id="-1975704058%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-e-w_-p-a-s-s-w-o-r-d.html"><span>NEW_</span><wbr><span>PASSWORD</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1975704058%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-n-e-w_-p-a-s-s-w-o-r-d.html">NEW_PASSWORD</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the new password when changing or resetting credentials.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="474021906%2FProperties%2F1428137388" anchor-label="NICKNAME" id="474021906%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-i-c-k-n-a-m-e.html"><span><span>NICKNAME</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="474021906%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-n-i-c-k-n-a-m-e.html">NICKNAME</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the user's unique nickname or handle.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="696862925%2FProperties%2F1428137388" anchor-label="OLD_PASSWORD" id="696862925%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-l-d_-p-a-s-s-w-o-r-d.html"><span>OLD_</span><wbr><span>PASSWORD</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="696862925%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-l-d_-p-a-s-s-w-o-r-d.html">OLD_PASSWORD</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the current password when changing credentials.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1677172987%2FProperties%2F1428137388" anchor-label="OPEN_AUTH_SETTINGS" id="1677172987%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-p-e-n_-a-u-t-h_-s-e-t-t-i-n-g-s.html"><span>OPEN_</span><wbr><span>AUTH_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1677172987%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-p-e-n_-a-u-t-h_-s-e-t-t-i-n-g-s.html">OPEN_AUTH_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested open authentication settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="176367133%2FProperties%2F1428137388" anchor-label="OPEN_EMAIL_RESTRICTION_POLICY" id="176367133%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-p-e-n_-e-m-a-i-l_-r-e-s-t-r-i-c-t-i-o-n_-p-o-l-i-c-y.html"><span>OPEN_</span><wbr><span>EMAIL_</span><wbr><span>RESTRICTION_</span><wbr><span>POLICY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="176367133%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-p-e-n_-e-m-a-i-l_-r-e-s-t-r-i-c-t-i-o-n_-p-o-l-i-c-y.html">OPEN_EMAIL_RESTRICTION_POLICY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for open API email restriction policy object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1305325110%2FProperties%2F1428137388" anchor-label="OPEN_GLOBAL_SETTINGS" id="1305325110%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-p-e-n_-g-l-o-b-a-l_-s-e-t-t-i-n-g-s.html"><span>OPEN_</span><wbr><span>GLOBAL_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1305325110%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-p-e-n_-g-l-o-b-a-l_-s-e-t-t-i-n-g-s.html">OPEN_GLOBAL_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested open global settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-394878829%2FProperties%2F1428137388" anchor-label="OPEN_SECURITY_SETTINGS" id="-394878829%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-p-e-n_-s-e-c-u-r-i-t-y_-s-e-t-t-i-n-g-s.html"><span>OPEN_</span><wbr><span>SECURITY_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-394878829%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-p-e-n_-s-e-c-u-r-i-t-y_-s-e-t-t-i-n-g-s.html">OPEN_SECURITY_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested open security settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="531672126%2FProperties%2F1428137388" anchor-label="OPEN_STORAGE_SETTINGS" id="531672126%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-p-e-n_-s-t-o-r-a-g-e_-s-e-t-t-i-n-g-s.html"><span>OPEN_</span><wbr><span>STORAGE_</span><wbr><span>SETTINGS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="531672126%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-p-e-n_-s-t-o-r-a-g-e_-s-e-t-t-i-n-g-s.html">OPEN_STORAGE_SETTINGS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested open storage settings object on user configuration responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-430323067%2FProperties%2F1428137388" anchor-label="PASSWORD" id="-430323067%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-a-s-s-w-o-r-d.html"><span><span>PASSWORD</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-430323067%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-a-s-s-w-o-r-d.html">PASSWORD</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for a password (login, registration, reset).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-345035542%2FProperties%2F1428137388" anchor-label="PERMISSION_CODES" id="-345035542%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-e-r-m-i-s-s-i-o-n_-c-o-d-e-s.html"><span>PERMISSION_</span><wbr><span>CODES</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-345035542%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-e-r-m-i-s-s-i-o-n_-c-o-d-e-s.html">PERMISSION_CODES</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the list of explicit permission codes represented as strings.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1201712422%2FProperties%2F1428137388" anchor-label="PHONE_NUMBER" id="1201712422%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-h-o-n-e_-n-u-m-b-e-r.html"><span>PHONE_</span><wbr><span>NUMBER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1201712422%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-h-o-n-e_-n-u-m-b-e-r.html">PHONE_NUMBER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for a phone number (login, identifier flows).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2088623432%2FProperties%2F1428137388" anchor-label="PRIMARY" id="-2088623432%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-r-i-m-a-r-y.html"><span><span>PRIMARY</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2088623432%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-p-r-i-m-a-r-y.html">PRIMARY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the list of primary (main) authentication methods under <a href="-a-v-a-i-l-a-b-l-e_-a-u-t-h_-p-r-o-v-i-d-e-r-s.html">AVAILABLE_AUTH_PROVIDERS</a>; values use <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1840417610%2FProperties%2F1428137388" anchor-label="QUOTA_BYTES" id="-1840417610%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-q-u-o-t-a_-b-y-t-e-s.html"><span>QUOTA_</span><wbr><span>BYTES</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1840417610%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-o-t-a_-b-y-t-e-s.html">QUOTA_BYTES</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for custom storage quota in bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1705508581%2FProperties%2F1428137388" anchor-label="REFRESH_TOKEN" id="1705508581%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-f-r-e-s-h_-t-o-k-e-n.html"><span>REFRESH_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1705508581%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-r-e-f-r-e-s-h_-t-o-k-e-n.html">REFRESH_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the refresh token issued for the session.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1933491708%2FProperties%2F1428137388" anchor-label="REFRESH_TOKEN_VALIDITY_SECONDS" id="-1933491708%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-f-r-e-s-h_-t-o-k-e-n_-v-a-l-i-d-i-t-y_-s-e-c-o-n-d-s.html"><span>REFRESH_</span><wbr><span>TOKEN_</span><wbr><span>VALIDITY_</span><wbr><span>SECONDS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1933491708%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-r-e-f-r-e-s-h_-t-o-k-e-n_-v-a-l-i-d-i-t-y_-s-e-c-o-n-d-s.html">REFRESH_TOKEN_VALIDITY_SECONDS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the validity window (in seconds) applied to <strong>newly issued</strong> refresh tokens.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-109923702%2FProperties%2F1428137388" anchor-label="ROLE" id="-109923702%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-o-l-e.html"><span><span>ROLE</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-109923702%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-r-o-l-e.html">ROLE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the account role; wire value follows the role type’s serial name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1371532441%2FProperties%2F1428137388" anchor-label="SCHEDULED_PERMANENT_DELETION_AT" id="1371532441%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-c-h-e-d-u-l-e-d_-p-e-r-m-a-n-e-n-t_-d-e-l-e-t-i-o-n_-a-t.html"><span>SCHEDULED_</span><wbr><span>PERMANENT_</span><wbr><span>DELETION_</span><wbr><span>AT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1371532441%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-c-h-e-d-u-l-e-d_-p-e-r-m-a-n-e-n-t_-d-e-l-e-t-i-o-n_-a-t.html">SCHEDULED_PERMANENT_DELETION_AT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for scheduled permanent-deletion timestamp (epoch milliseconds; user listings and sort keys).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1112271942%2FProperties%2F1428137388" anchor-label="SECONDARY" id="1112271942%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-c-o-n-d-a-r-y.html"><span><span>SECONDARY</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1112271942%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-e-c-o-n-d-a-r-y.html">SECONDARY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the list of secondary (alternative) authentication methods under <a href="-a-v-a-i-l-a-b-l-e_-a-u-t-h_-p-r-o-v-i-d-e-r-s.html">AVAILABLE_AUTH_PROVIDERS</a>; values use <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1767744764%2FProperties%2F1428137388" anchor-label="SESSION_ID" id="1767744764%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-s-s-i-o-n_-i-d.html"><span>SESSION_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1767744764%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-e-s-s-i-o-n_-i-d.html">SESSION_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the session id (in session token payloads and path parameters).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1128978378%2FProperties%2F1428137388" anchor-label="SESSION_TOKEN" id="1128978378%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-s-s-i-o-n_-t-o-k-e-n.html"><span>SESSION_</span><wbr><span>TOKEN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1128978378%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-e-s-s-i-o-n_-t-o-k-e-n.html">SESSION_TOKEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested session token object on authentication responses (<code class="lang-kotlin">access_token</code>, <code class="lang-kotlin">refresh_token</code>, expiry, <code class="lang-kotlin">token_type</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1889851928%2FProperties%2F1428137388" anchor-label="STORAGE_CONFIGURATION" id="-1889851928%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-o-r-a-g-e_-c-o-n-f-i-g-u-r-a-t-i-o-n.html"><span>STORAGE_</span><wbr><span><span>CONFIGURATION</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1889851928%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-o-r-a-g-e_-c-o-n-f-i-g-u-r-a-t-i-o-n.html">STORAGE_CONFIGURATION</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the user storage configuration object or property.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2121617990%2FProperties%2F1428137388" anchor-label="TEMPORARY_LOCKOUT_UNTIL" id="2121617990%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-e-m-p-o-r-a-r-y_-l-o-c-k-o-u-t_-u-n-t-i-l.html"><span>TEMPORARY_</span><wbr><span>LOCKOUT_</span><wbr><span>UNTIL</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121617990%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-e-m-p-o-r-a-r-y_-l-o-c-k-o-u-t_-u-n-t-i-l.html">TEMPORARY_LOCKOUT_UNTIL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for temporary lockout expiration timestamp (epoch milliseconds).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="728975904%2FProperties%2F1428137388" anchor-label="TOKEN_TYPE" id="728975904%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-o-k-e-n_-t-y-p-e.html"><span>TOKEN_</span><wbr><span>TYPE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="728975904%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-o-k-e-n_-t-y-p-e.html">TOKEN_TYPE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the token type of the issued access token (for example <code class="lang-kotlin">Bearer</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1082638123%2FProperties%2F1428137388" anchor-label="USER" id="-1082638123%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r.html"><span><span>USER</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1082638123%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r.html">USER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the nested user object on authentication responses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1664833100%2FProperties%2F1428137388" anchor-label="USER_AUTH_PROVIDER" id="1664833100%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-a-u-t-h_-p-r-o-v-i-d-e-r.html"><span>USER_</span><wbr><span>AUTH_</span><wbr><span>PROVIDER</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1664833100%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-a-u-t-h_-p-r-o-v-i-d-e-r.html">USER_AUTH_PROVIDER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the authentication provider dimension on identifiers or sessions; wire value follows <a href="../../io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider/-user-auth-provider/value.html">UserAuthProvider.value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2085048156%2FProperties%2F1428137388" anchor-label="USER_DISPLAY_NAME_MAX_LENGTH" id="2085048156%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-d-i-s-p-l-a-y_-n-a-m-e_-m-a-x_-l-e-n-g-t-h.html"><span>USER_</span><wbr><span>DISPLAY_</span><wbr><span>NAME_</span><wbr><span>MAX_</span><wbr><span>LENGTH</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2085048156%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-d-i-s-p-l-a-y_-n-a-m-e_-m-a-x_-l-e-n-g-t-h.html">USER_DISPLAY_NAME_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for maximum allowed user display name character length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2060982346%2FProperties%2F1428137388" anchor-label="USER_DISPLAY_NAME_MIN_LENGTH" id="2060982346%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-d-i-s-p-l-a-y_-n-a-m-e_-m-i-n_-l-e-n-g-t-h.html"><span>USER_</span><wbr><span>DISPLAY_</span><wbr><span>NAME_</span><wbr><span>MIN_</span><wbr><span>LENGTH</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2060982346%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-d-i-s-p-l-a-y_-n-a-m-e_-m-i-n_-l-e-n-g-t-h.html">USER_DISPLAY_NAME_MIN_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for minimum allowed user display name character length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="453666603%2FProperties%2F1428137388" anchor-label="USER_ID" id="453666603%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-i-d.html"><span>USER_</span><wbr><span>ID</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="453666603%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-i-d.html">USER_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the user id (path parameter name alignment, payloads, filters).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1777572798%2FProperties%2F1428137388" anchor-label="USER_NICKNAME_MAX_LENGTH" id="-1777572798%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-n-i-c-k-n-a-m-e_-m-a-x_-l-e-n-g-t-h.html"><span>USER_</span><wbr><span>NICKNAME_</span><wbr><span>MAX_</span><wbr><span>LENGTH</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1777572798%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-n-i-c-k-n-a-m-e_-m-a-x_-l-e-n-g-t-h.html">USER_NICKNAME_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for maximum allowed user nickname character length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1801638608%2FProperties%2F1428137388" anchor-label="USER_NICKNAME_MIN_LENGTH" id="-1801638608%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-n-i-c-k-n-a-m-e_-m-i-n_-l-e-n-g-t-h.html"><span>USER_</span><wbr><span>NICKNAME_</span><wbr><span>MIN_</span><wbr><span>LENGTH</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1801638608%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-n-i-c-k-n-a-m-e_-m-i-n_-l-e-n-g-t-h.html">USER_NICKNAME_MIN_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for minimum allowed user nickname character length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-371851792%2FProperties%2F1428137388" anchor-label="USER_ROLE" id="-371851792%2FProperties%2F1428137388" data-filterable-set=":feature:user/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":feature:user/commonMain" data-filterable-set=":feature:user/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-s-e-r_-r-o-l-e.html"><span>USER_</span><wbr><span>ROLE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-371851792%2FProperties%2F1428137388"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":feature:user/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-u-s-e-r_-r-o-l-e.html">USER_ROLE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JSON field name for the account role; wire value follows the role type’s serial name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
