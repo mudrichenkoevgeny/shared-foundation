@@ -156,7 +156,9 @@ private fun resolveDomainFieldValue(
     val isNullable = type.isMarkedNullable
     val typeName = classifier?.simpleName ?: ""
 
-    val nestedDomainMatch = domainToDtoPairs.firstOrNull { it.second == classifier }
+    val nestedDomainMatch = domainToDtoPairs.firstOrNull {
+        it.first == classifier || it.second == classifier
+    }
     val isBranded = config?.brandedTypes?.contains(classifier) == true ||
         typeName in (config?.brandedTypesNeedingHelpers ?: emptySet()) ||
         typeName.endsWith("Id")
@@ -164,11 +166,19 @@ private fun resolveDomainFieldValue(
     return when {
         nestedDomainMatch != null -> {
             val nestedDomainName = nestedDomainMatch.first.simpleName
-            if (isNullable) "$payloadRef ? to$nestedDomainName($payloadRef) : null" else "to$nestedDomainName($payloadRef)"
+            if (isNullable) {
+                "$payloadRef ? to$nestedDomainName($payloadRef) : null"
+            } else {
+                "to$nestedDomainName($payloadRef)"
+            }
         }
         isBranded -> {
             val brandName = classifier?.simpleName ?: ""
-            if (isNullable) "$payloadRef ? to${brandName}OrThrow($payloadRef) : null" else "to${brandName}OrThrow($payloadRef)"
+            if (isNullable) {
+                "$payloadRef ? to${brandName}OrThrow($payloadRef) : null"
+            } else {
+                "to${brandName}OrThrow($payloadRef)"
+            }
         }
         classifier == Set::class || classifier == List::class -> {
             resolveCollectionDomainFieldValue(payloadRef, type, domainToDtoPairs, config)
@@ -186,7 +196,9 @@ private fun resolveCollectionDomainFieldValue(
     val elemType = type.arguments.firstOrNull()?.type
     val elemClassifier = elemType?.classifier as? KClass<*>
     val elemTypeName = elemClassifier?.simpleName ?: ""
-    val elemNestedDomainMatch = domainToDtoPairs.firstOrNull { it.second == elemClassifier }
+    val elemNestedDomainMatch = domainToDtoPairs.firstOrNull {
+        it.first == elemClassifier || it.second == elemClassifier
+    }
     val elemIsBranded = config?.brandedTypes?.contains(elemClassifier) == true ||
         elemTypeName in (config?.brandedTypesNeedingHelpers ?: emptySet()) ||
         elemTypeName.endsWith("Id")
@@ -242,28 +254,50 @@ private fun resolvePayloadFieldValue(
     val classifier = type.classifier as? KClass<*>
     val isNullable = type.isMarkedNullable
 
-    val nestedPayloadMatch = domainToDtoPairs.firstOrNull { it.first == classifier }
+    val nestedPayloadMatch = domainToDtoPairs.firstOrNull {
+        it.first == classifier || it.second == classifier
+    }
     return when {
         nestedPayloadMatch != null -> {
             val nestedPayloadName = nestedPayloadMatch.second?.simpleName
             if (nestedPayloadName != null) {
-                if (isNullable) "$domainRef ? to$nestedPayloadName($domainRef) : null" else "to$nestedPayloadName($domainRef)"
+                if (isNullable) {
+                    "$domainRef ? to$nestedPayloadName($domainRef) : null"
+                } else {
+                    "to$nestedPayloadName($domainRef)"
+                }
             } else {
-                if (isNullable) "$domainRef ?? null" else domainRef
+                if (isNullable) {
+                    "$domainRef ?? null"
+                } else {
+                    domainRef
+                }
             }
         }
         classifier == Set::class || classifier == List::class -> {
             val elemType = type.arguments.firstOrNull()?.type
             val elemClassifier = elemType?.classifier as? KClass<*>
-            val elemNestedPayloadMatch = domainToDtoPairs.firstOrNull { it.first == elemClassifier }
+            val elemNestedPayloadMatch = domainToDtoPairs.firstOrNull {
+                it.first == elemClassifier || it.second == elemClassifier
+            }
             val nestedPayloadName = elemNestedPayloadMatch?.second?.simpleName
             if (nestedPayloadName != null) {
                 "Array.isArray($domainRef) ? $domainRef.map(to$nestedPayloadName) : []"
             } else {
-                if (isNullable) "$domainRef ?? null" else domainRef
+                if (isNullable) {
+                    "$domainRef ?? null"
+                } else {
+                    domainRef
+                }
             }
         }
-        else -> if (isNullable) "$domainRef ?? null" else domainRef
+        else -> {
+            if (isNullable) {
+                "$domainRef ?? null"
+            } else {
+                domainRef
+            }
+        }
     }
 }
 

@@ -224,7 +224,8 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./index.js"
+      "import": "./index.js",
+      "default": "./index.js"
     }
   }$repoFields,
   "dependencies": {

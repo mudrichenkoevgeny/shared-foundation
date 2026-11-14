@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash
 
-import kotlin.jvm.JvmInline
-
 /**
  * Securely hashed password string.
  *

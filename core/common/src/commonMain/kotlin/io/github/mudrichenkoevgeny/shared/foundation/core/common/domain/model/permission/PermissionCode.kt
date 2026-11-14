@@ -1,7 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission
 
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmInline
 
 /**
  * Strongly typed permission code used in access control checks and API contracts.

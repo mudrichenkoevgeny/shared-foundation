@@ -20,20 +20,32 @@ public class AgentSyncPlugin : Plugin<Project> {
             return
         }
 
-        val config = target.extensions.create("agentSync", AgentSyncConfig::class.java)
-        config.includeShared.convention(target.name == "shared-foundation")
+        val config = target.extensions.create(EXTENSION_NAME, AgentSyncConfig::class.java)
+        config.includeShared.convention(target.name == PROJECT_SHARED_FOUNDATION)
 
-        val syncTask = target.tasks.register("syncAgentRules", AgentSyncTask::class.java) { task ->
-            task.group = "documentation"
+        val syncTask = target.tasks.register(TASK_SYNC_AGENT_RULES, AgentSyncTask::class.java) { task ->
+            task.group = TASK_GROUP_DOCUMENTATION
             task.description = "Synchronizes shared AI agent rules into .agent/global/ directory"
-            task.outputDirectory.convention(target.layout.projectDirectory.dir(".agent/global"))
+            task.outputDirectory.convention(target.layout.projectDirectory.dir(DEFAULT_OUTPUT_DIR))
             task.includeShared.convention(config.includeShared)
         }
 
         target.tasks.matching {
-            it.name == "prepareKotlinBuildScriptModel" || it.name == "prepareKotlinIdeaImport"
+            it.name == TASK_PREPARE_BUILD_SCRIPT_MODEL || it.name == TASK_PREPARE_IDEA_IMPORT
         }.configureEach { task ->
             task.dependsOn(syncTask)
         }
+    }
+
+    private companion object {
+        private const val EXTENSION_NAME = "agentSync"
+        private const val PROJECT_SHARED_FOUNDATION = "shared-foundation"
+
+        private const val TASK_SYNC_AGENT_RULES = "syncAgentRules"
+        private const val TASK_GROUP_DOCUMENTATION = "documentation"
+        private const val DEFAULT_OUTPUT_DIR = ".agent/global"
+
+        private const val TASK_PREPARE_BUILD_SCRIPT_MODEL = "prepareKotlinBuildScriptModel"
+        private const val TASK_PREPARE_IDEA_IMPORT = "prepareKotlinIdeaImport"
     }
 }

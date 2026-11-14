@@ -1,22 +1,32 @@
 import com.vanniktech.maven.publish.GradlePlugin
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.SourcesJar
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
-val repoRootDir = checkNotNull(rootDir.parentFile?.parentFile) {
+fun loadPropertiesFile(file: File): Properties = Properties().apply {
+    check(file.isFile) { "Required properties file not found at: ${file.absolutePath}" }
+    file.inputStream().use { load(it) }
+}
+
+fun Properties.requireProperty(key: String): String =
+    checkNotNull(getProperty(key)?.takeIf { it.isNotBlank() }) {
+        "Missing required property '$key'"
+    }
+
+val repoRootDir: File = checkNotNull(rootDir.parentFile?.parentFile) {
     "Unable to resolve repository root directory from: ${rootDir.absolutePath}"
 }
 
-val rootProps = Properties().apply {
-    val rootPropsFile = repoRootDir.resolve("gradle.properties")
-    check(rootPropsFile.exists()) {
-        "Root gradle.properties not found at: ${rootPropsFile.absolutePath}"
-    }
-    rootPropsFile.inputStream().use { load(it) }
-}
+val rootProps = loadPropertiesFile(repoRootDir.resolve("gradle.properties"))
+val daemonProps = loadPropertiesFile(repoRootDir.resolve("gradle/gradle-daemon-jvm.properties"))
 
-group = checkNotNull(rootProps.getProperty("group")) { "Missing 'group' property in root gradle.properties" }
-version = checkNotNull(rootProps.getProperty("version")) { "Missing 'version' property in root gradle.properties" }
+group = rootProps.requireProperty("group")
+version = rootProps.requireProperty("version")
+
+val daemonJvmVersion = daemonProps.requireProperty("toolchainVersion").toInt()
+val targetJvmVersion = (rootProps.getProperty("targetJvmVersion")?.takeIf { it.isNotBlank() }
+    ?: daemonJvmVersion.toString()).toInt()
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -26,6 +36,15 @@ plugins {
 
 kotlin {
     explicitApi()
+    jvmToolchain(daemonJvmVersion)
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(targetJvmVersion.toString()))
+        allWarningsAsErrors.set(true)
+    }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(targetJvmVersion)
 }
 
 gradlePlugin {

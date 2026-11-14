@@ -23,14 +23,16 @@ public object AgentSyncUtils {
         targetSubdir: String
     ) {
         val root = target.rootProject
-        val pluginId = "io.github.mudrichenkoevgeny.shared-foundation-agent-sync"
 
-        if (!root.pluginManager.hasPlugin(pluginId)) {
-            root.pluginManager.apply(pluginId)
+        if (!root.pluginManager.hasPlugin(PLUGIN_ID_AGENT_SYNC)) {
+            root.pluginManager.apply(PLUGIN_ID_AGENT_SYNC)
         }
 
-        root.tasks.named("syncAgentRules", AgentSyncTask::class.java).configure { task ->
+        root.tasks.named(TASK_SYNC_AGENT_RULES, AgentSyncTask::class.java).configure { task ->
             task.addLayer(classLoader, resourcePath, targetSubdir)
         }
     }
+
+    private const val PLUGIN_ID_AGENT_SYNC = "io.github.mudrichenkoevgeny.shared-foundation-agent-sync"
+    private const val TASK_SYNC_AGENT_RULES = "syncAgentRules"
 }

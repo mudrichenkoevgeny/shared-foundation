@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token
 
-import kotlin.jvm.JvmInline
-
 /**
  * Opaque token string used to obtain a new [SessionToken] without re-authentication.
  *

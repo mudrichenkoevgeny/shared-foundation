@@ -4,6 +4,7 @@ import dev.detekt.gradle.Detekt
 import dev.detekt.gradle.extensions.DetektExtension
 import io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.quality.EditorConfigSyncTask
 import org.gradle.api.Project
+import java.io.File
 
 /**
  * Utility object for configuring Detekt rule dependencies, config extraction, and plugin version resolution across Gradle plugins.
@@ -30,7 +31,7 @@ public object QualityUtils {
         val isOwnerRepo = target.rootProject.name == expectedRootProjectName
 
         if (!isOwnerRepo) {
-            target.dependencies.add("detektPlugins", "$mavenCoordinates:$pluginVersion")
+            target.dependencies.add(CONFIGURATION_DETEKT_PLUGINS, "$mavenCoordinates:$pluginVersion")
             return
         }
 
@@ -38,14 +39,14 @@ public object QualityUtils {
             val rulesProject = target.rootProject.findProject(rulesProjectPath)
             if (rulesProject != null) {
                 target.dependencies.add(
-                    "detektPlugins",
-                    target.dependencies.project(mapOf("path" to rulesProjectPath))
+                    CONFIGURATION_DETEKT_PLUGINS,
+                    target.dependencies.project(mapOf(KEY_PATH to rulesProjectPath))
                 )
             }
         } else {
             target.tasks.withType(Detekt::class.java).configureEach { detektTask ->
-                detektTask.dependsOn("jar")
-                detektTask.pluginClasspath.from(target.tasks.named("jar"))
+                detektTask.dependsOn(TASK_JAR)
+                detektTask.pluginClasspath.from(target.tasks.named(TASK_JAR))
             }
         }
     }
@@ -68,7 +69,7 @@ public object QualityUtils {
         outputFileName: String
     ) {
         val extractTask = target.tasks.register(taskName) { task ->
-            val outputFile = target.layout.buildDirectory.file("generated/detekt/$outputFileName")
+            val outputFile = target.layout.buildDirectory.file("$DEFAULT_DETEKT_OUTPUT_DIR$outputFileName")
             task.outputs.file(outputFile)
             task.doLast {
                 val file = outputFile.get().asFile
@@ -84,7 +85,8 @@ public object QualityUtils {
         }
 
         val extractedFileProvider = extractTask.map { it.outputs.files.singleFile }
-        val localConfigFile = target.rootProject.file("config/detekt/detekt.yml")
+        val topLevelDir = resolveTopLevelRepositoryDir(target)
+        val localConfigFile = File(topLevelDir, DEFAULT_LOCAL_DETEKT_CONFIG_PATH)
 
         target.extensions.configure(DetektExtension::class.java) { detekt ->
             val existingConfigs = detekt.config.from.filterNot { it == localConfigFile }
@@ -102,6 +104,7 @@ public object QualityUtils {
 
     /**
      * Registers an editorconfig resource layer and ensures single root syncEditorConfig task exists.
+     * Skips registration if the project belongs to an included or nested sub-build inside a parent repository.
      *
      * @param target Target project.
      * @param classLoader ClassLoader containing editorconfig resource.
@@ -112,20 +115,23 @@ public object QualityUtils {
         classLoader: ClassLoader,
         resourcePath: String
     ) {
-        val root = target.rootProject
-        val syncTaskName = "syncEditorConfig"
+        if (isNestedBuild(target)) {
+            return
+        }
 
-        val syncTaskProvider = if (root.tasks.names.contains(syncTaskName)) {
-            root.tasks.named(syncTaskName, EditorConfigSyncTask::class.java)
+        val root = target.rootProject
+
+        val syncTaskProvider = if (root.tasks.names.contains(TASK_SYNC_EDITORCONFIG)) {
+            root.tasks.named(TASK_SYNC_EDITORCONFIG, EditorConfigSyncTask::class.java)
         } else {
-            val newTask = root.tasks.register(syncTaskName, EditorConfigSyncTask::class.java) { task ->
-                task.group = "quality"
+            val newTask = root.tasks.register(TASK_SYNC_EDITORCONFIG, EditorConfigSyncTask::class.java) { task ->
+                task.group = TASK_GROUP_QUALITY
                 task.description = "Synchronizes shared .editorconfig rules into project root directory"
-                task.outputFile.set(root.layout.projectDirectory.file(".editorconfig"))
+                task.outputFile.set(root.layout.projectDirectory.file(FILE_EDITORCONFIG))
             }
 
             root.tasks.matching {
-                (it.name == "prepareKotlinBuildScriptModel") || (it.name == "prepareKotlinIdeaImport")
+                (it.name == TASK_PREPARE_BUILD_SCRIPT_MODEL) || (it.name == TASK_PREPARE_IDEA_IMPORT)
             }.configureEach { task ->
                 task.dependsOn(newTask)
             }
@@ -138,7 +144,7 @@ public object QualityUtils {
         }
 
         target.tasks.matching {
-            it.name.contains("ktlint", ignoreCase = true)
+            it.name.contains(KTLINT_TASK_KEYWORD, ignoreCase = true)
         }.configureEach { task ->
             task.dependsOn(syncTaskProvider)
         }
@@ -173,4 +179,46 @@ public object QualityUtils {
         }
         return implementationVersion
     }
+
+    private fun isNestedBuild(target: Project): Boolean {
+        if (target.gradle.parent != null) {
+            return true
+        }
+        val rootDir = target.rootProject.projectDir
+        return resolveTopLevelRepositoryDir(target) != rootDir
+    }
+
+    private fun resolveTopLevelRepositoryDir(target: Project): File {
+        var currentDir = target.rootProject.projectDir
+        var topMostGradleDir = currentDir
+        var parentDir = currentDir.parentFile
+
+        while (parentDir != null) {
+            val hasSettingsKts = File(parentDir, FILE_SETTINGS_GRADLE_KTS).exists()
+            val hasSettingsGroovy = File(parentDir, FILE_SETTINGS_GRADLE).exists()
+            if (hasSettingsKts || hasSettingsGroovy) {
+                topMostGradleDir = parentDir
+            }
+            parentDir = parentDir.parentFile
+        }
+
+        return topMostGradleDir
+    }
+
+    private const val CONFIGURATION_DETEKT_PLUGINS = "detektPlugins"
+    private const val TASK_JAR = "jar"
+    private const val KEY_PATH = "path"
+
+    private const val DEFAULT_DETEKT_OUTPUT_DIR = "generated/detekt/"
+    private const val DEFAULT_LOCAL_DETEKT_CONFIG_PATH = "config/detekt/detekt.yml"
+
+    private const val TASK_SYNC_EDITORCONFIG = "syncEditorConfig"
+    private const val TASK_GROUP_QUALITY = "quality"
+    private const val FILE_EDITORCONFIG = ".editorconfig"
+    private const val FILE_SETTINGS_GRADLE_KTS = "settings.gradle.kts"
+    private const val FILE_SETTINGS_GRADLE = "settings.gradle"
+
+    private const val TASK_PREPARE_BUILD_SCRIPT_MODEL = "prepareKotlinBuildScriptModel"
+    private const val TASK_PREPARE_IDEA_IMPORT = "prepareKotlinIdeaImport"
+    private const val KTLINT_TASK_KEYWORD = "ktlint"
 }

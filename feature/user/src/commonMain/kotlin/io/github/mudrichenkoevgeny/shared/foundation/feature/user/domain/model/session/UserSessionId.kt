@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session
 
-import kotlin.jvm.JvmInline
 import kotlin.uuid.Uuid
 
 /**

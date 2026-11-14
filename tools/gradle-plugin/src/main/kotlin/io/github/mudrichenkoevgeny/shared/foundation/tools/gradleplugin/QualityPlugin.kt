@@ -22,44 +22,44 @@ public class QualityPlugin : Plugin<Project> {
         QualityUtils.registerEditorConfigLayer(
             target = target,
             classLoader = javaClass.classLoader,
-            resourcePath = "config/editorconfig/editorconfig-base.txt"
+            resourcePath = RESOURCE_EDITORCONFIG_BASE
         )
     }
 
     private fun Project.configureKtlint() {
-        pluginManager.apply("org.jlleitschuh.gradle.ktlint")
+        pluginManager.apply(PLUGIN_KTLINT)
 
-        val isTool = path.startsWith(":tools")
+        val isTool = path.startsWith(PATH_PREFIX_TOOLS)
         extensions.configure(KtlintExtension::class.java) { ktlint ->
             ktlint.android.set(true)
             ktlint.ignoreFailures.set(isTool)
             ktlint.filter { filter ->
                 filter.exclude { file ->
                     val absolutePath = file.file.absolutePath
-                    absolutePath.contains("build") || absolutePath.contains("generated")
+                    absolutePath.contains(PATH_DIR_BUILD) || absolutePath.contains(PATH_DIR_GENERATED)
                 }
             }
         }
 
         tasks.configureEach { task ->
-            if (task.name.contains("ktlint", ignoreCase = true) && task is SourceTask) {
+            if (task.name.contains(KTLINT_TASK_KEYWORD, ignoreCase = true) && task is SourceTask) {
                 task.exclude { file ->
                     val path = file.file.absolutePath
-                    path.contains("build") || path.contains("generated")
+                    path.contains(PATH_DIR_BUILD) || path.contains(PATH_DIR_GENERATED)
                 }
             }
         }
     }
 
     private fun Project.configureDetekt() {
-        pluginManager.apply("dev.detekt")
+        pluginManager.apply(PLUGIN_DETEKT)
 
         extensions.configure(DetektExtension::class.java) { detekt ->
             detekt.buildUponDefaultConfig.set(true)
             detekt.autoCorrect.set(true)
             detekt.allRules.set(false)
 
-            val srcDir = file("src")
+            val srcDir = file(SRC_DIR_NAME)
             if (srcDir.exists()) {
                 detekt.source.setFrom(files(srcDir))
             }
@@ -67,24 +67,47 @@ public class QualityPlugin : Plugin<Project> {
 
         QualityUtils.registerDetektConfigExtraction(
             target = this,
-            taskName = "extractDetektBaseConfig",
+            taskName = TASK_EXTRACT_DETEKT_BASE_CONFIG,
             classLoader = javaClass.classLoader,
-            resourcePath = "config/detekt/detekt-base.yml",
-            outputFileName = "detekt-base.yml"
+            resourcePath = RESOURCE_DETEKT_BASE,
+            outputFileName = FILE_DETEKT_BASE
         )
 
         val pluginVersion = QualityUtils.resolvePluginVersion(
             classLoader = javaClass.classLoader,
-            versionResourceName = "shared-foundation-plugin-version.txt",
+            versionResourceName = VERSION_RESOURCE_NAME,
             manifestPackage = javaClass.`package`
         )
 
         QualityUtils.applyDetektRulesDependency(
             target = this,
-            expectedRootProjectName = "shared-foundation",
-            rulesProjectPath = ":tools:detekt-rules",
-            mavenCoordinates = "io.github.mudrichenkoevgeny:shared-foundation-detekt-rules",
+            expectedRootProjectName = PROJECT_SHARED_FOUNDATION,
+            rulesProjectPath = RULES_PROJECT_PATH,
+            mavenCoordinates = RULES_MAVEN_COORDINATES,
             pluginVersion = pluginVersion
         )
+    }
+
+    private companion object {
+        private const val PLUGIN_KTLINT = "org.jlleitschuh.gradle.ktlint"
+        private const val PLUGIN_DETEKT = "dev.detekt"
+
+        private const val PATH_PREFIX_TOOLS = ":tools"
+        private const val PATH_DIR_BUILD = "build"
+        private const val PATH_DIR_GENERATED = "generated"
+        private const val SRC_DIR_NAME = "src"
+
+        private const val KTLINT_TASK_KEYWORD = "ktlint"
+
+        private const val TASK_EXTRACT_DETEKT_BASE_CONFIG = "extractDetektBaseConfig"
+        private const val FILE_DETEKT_BASE = "detekt-base.yml"
+        private const val RESOURCE_DETEKT_BASE = "config/detekt/detekt-base.yml"
+        private const val RESOURCE_EDITORCONFIG_BASE = "config/editorconfig/editorconfig-base.txt"
+
+        private const val VERSION_RESOURCE_NAME = "shared-foundation-plugin-version.txt"
+        private const val PROJECT_SHARED_FOUNDATION = "shared-foundation"
+
+        private const val RULES_PROJECT_PATH = ":tools:detekt-rules"
+        private const val RULES_MAVEN_COORDINATES = "io.github.mudrichenkoevgeny:shared-foundation-detekt-rules"
     }
 }

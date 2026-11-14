@@ -8,12 +8,12 @@ alwaysApply: true
 
 This document defines the structural standards for the `shared-foundation` library. All contributions must adhere to these patterns to ensure a consistent contract between server and client applications.
 
-## 1. Architectural Split: Core vs. Feature-API
+## 1. Architectural Split: Core vs. Feature
 
-To maintain a clean dependency graph, the library follows a strict separation:
+To maintain a clean dependency graph, the library follows a strict layered separation:
 
-- **Core Modules (`core/*`):** Contain the "meat" — domain models, `@Serializable` payloads (DTOs), mappers, and pure business logic (e.g., `PasswordPolicyValidator`). They focus on **what** data is being moved.
-- **Feature-API Modules (`feature/*-api`):** Contain the "wiring" — `const val` HTTP routes, `PermissionCode` constants, and audit taxonomy (`AuditActionType`). They focus on **how** and **where** data is accessed via HTTP.
+- **Core Modules (`core/*`):** Cross-cutting foundational primitives, base contracts, serialization configuration, audit, security policies, global settings, and storage contracts (`core/common`, `core/audit`, `core/security`, `core/settings`, `core/storage`). Core modules must remain decoupled from high-level business features.
+- **Feature Modules (`feature/*`):** Self-contained vertical domain contracts (e.g., `feature/user`), aggregating domain projections, `@Serializable` payloads (DTOs), mappers, policies, `const val` HTTP routes, navigation screens/params, `PermissionCode` constants, and domain-specific audit taxonomy (`AuditActionType`).
 
 ## 2. Entity Projection Tiers (Summary, Details, Private, Internal)
 
@@ -24,23 +24,23 @@ Domain models and API wire payloads follow a standardized **up to 4-tier** proje
 ### The 4 Projection Tiers:
 
 1. **`[Entity]Summary`** (Client & Server — Wire & Domain):
-    - **Scope:** Public or list-level condensed snippet for feeds, catalogs, cards, tables, and badges.
-    - **Payload:** `[Entity]SummaryPayload`.
-    - **Excludes:** Heavy lists, nested editable sub-models, unredacted sensitive fields, and diagnostic metadata.
+   - **Scope:** Public or list-level condensed snippet for feeds, catalogs, cards, tables, and badges.
+   - **Payload:** `[Entity]SummaryPayload`.
+   - **Excludes:** Heavy lists, nested editable sub-models, unredacted sensitive fields, and diagnostic metadata.
 
 2. **`[Entity]Details`** (Client & Server — Wire & Domain, **when applicable**):
-    - **Scope:** Expanded public/unprivileged representation for viewing a single entity when `Summary` is insufficient (e.g., extra public metadata or non-spoiler item views).
-    - **Payload:** `[Entity]DetailsPayload`.
-    - **Omission Rule:** Omit this tier whenever the public single-item view is identical to `Summary` or when detailed data is restricted strictly to the owner/admin (`Private`) or sequential session flows.
+   - **Scope:** Expanded public/unprivileged representation for viewing a single entity when `Summary` is insufficient (e.g., extra public metadata or non-spoiler item views).
+   - **Payload:** `[Entity]DetailsPayload`.
+   - **Omission Rule:** Omit this tier whenever the public single-item view is identical to `Summary` or when detailed data is restricted strictly to the owner/admin (`Private`) or sequential session flows.
 
 3. **`[Entity]Private`** (Client & Server — Wire & Domain):
-    - **Scope:** Privileged representation for resource owners (self-service, account settings, creator studio/editor with full localization maps and nested items) and administrators/moderators (management scope).
-    - **Payload:** `[Entity]PrivatePayload`.
-    - **Excludes:** Pure server-side/database internal fields (hashes, vector embeddings, internal DB timestamps).
+   - **Scope:** Privileged representation for resource owners (self-service, account settings, creator studio/editor with full localization maps and nested items) and administrators/moderators (management scope).
+   - **Payload:** `[Entity]PrivatePayload`.
+   - **Excludes:** Pure server-side/database internal fields (hashes, vector embeddings, internal DB timestamps).
 
 4. **`[Entity]Internal`** (Server/Database Usage — Domain ONLY):
-    - **Scope:** Complete, unredacted domain model and database row representation for backend business logic and persistence (includes `updatedAt`, password/token hashes, vector embeddings, and system flags).
-    - **STRICT PROHIBITION:** **NEVER** create an `[Entity]InternalPayload` DTO! Even if the `Internal` domain class resides in the shared module for domain mapping convenience, it must **NEVER** be serialized or exposed over HTTP/WebSocket API contracts.
+   - **Scope:** Complete, unredacted domain model and database row representation for backend business logic and persistence (includes `updatedAt`, password/token hashes, vector embeddings, and system flags).
+   - **STRICT PROHIBITION:** **NEVER** create an `[Entity]InternalPayload` DTO! Even if the `Internal` domain class resides in the shared module for domain mapping convenience, it must **NEVER** be serialized or exposed over HTTP/WebSocket API contracts.
 
 ### Shared Domain Logic & Mappers:
 - **Base Entity Interface (Optional):** When multiple projections of an entity share domain validation or helper methods (e.g., `isValid`, `getInfo`), extract a common base interface `[Entity]` (without a tier suffix) implemented by each projection to avoid duplicating logic across data classes.
@@ -61,13 +61,13 @@ Domain models and API wire payloads follow a standardized **up to 4-tier** proje
 Every route constant in `feature/*` and `core/*` network route objects must be documented using a strict KDoc hierarchy. This is the **primary source of truth** for backend, client, and UI developers.
 
 ### Required KDoc Structure:
-1. **HTTP Method:** `**HTTP method:** METHOD` (e.g., `GET`, `POST`).
+1. **HTTP Method:** `**HTTP method:** \`METHOD\`` (e.g., `GET`, `POST`).
 2. **Summary:** Concise description of the operation.
 3. **Request Contract:**
-    - **Path parameters:** Reference constants like `[UserApiPaths.USER_ID]`.
-    - **Pagination:** Link `[ListingParamNames]`. **Note:** `page` is 1-based.
-    - **Filters:** Link domain-specific query params (e.g., `[EntityFilterValues]`).
-    - **Request body:** Link the DTO.
+   - **Path parameters:** Reference constants like `[UserApiPaths.USER_ID]`.
+   - **Pagination:** Link `[ListingParamNames]`. **Note:** `page` is 1-based.
+   - **Filters:** Link domain-specific query params (e.g., `[EntityFilterValues]`).
+   - **Request body:** Link the DTO.
 4. **Response Contract:** Link the response DTO.
 5. **Access Control:**
    - **Authorization:** List **Allowed Roles** (OR) and **Required Permissions** (AND).

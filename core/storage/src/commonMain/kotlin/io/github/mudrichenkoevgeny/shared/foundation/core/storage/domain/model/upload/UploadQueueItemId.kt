@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload
 
-import kotlin.jvm.JvmInline
 import kotlin.uuid.Uuid
 
 /**

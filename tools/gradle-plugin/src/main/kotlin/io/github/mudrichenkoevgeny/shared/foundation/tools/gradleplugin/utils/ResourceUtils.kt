@@ -32,7 +32,7 @@ public object ResourceUtils {
         }
 
         when (resourceUrl.protocol) {
-            "file" -> {
+            PROTOCOL_FILE -> {
                 val sourceDir = File(resourceUrl.toURI())
                 if (sourceDir.canonicalFile == targetFolder.canonicalFile) {
                     return
@@ -53,7 +53,7 @@ public object ResourceUtils {
                 }
             }
 
-            "jar" -> {
+            PROTOCOL_JAR -> {
                 val connection = resourceUrl.openConnection()
                 connection.useCaches = false
                 val jarConnection = connection as? JarURLConnection ?: return
@@ -85,4 +85,7 @@ public object ResourceUtils {
             else -> logger.warn("Unsupported resource protocol '${resourceUrl.protocol}' for path: $resourcePath")
         }
     }
+
+    private const val PROTOCOL_FILE = "file"
+    private const val PROTOCOL_JAR = "jar"
 }

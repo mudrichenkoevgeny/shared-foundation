@@ -58,16 +58,16 @@ public abstract class AgentSyncTask : DefaultTask() {
     @TaskAction
     public fun sync() {
         val targetDir = outputDirectory.get().asFile
-        val commonDir = File(targetDir, "common")
-        val kotlinDir = File(targetDir, "kotlin")
-        val sharedDir = File(targetDir, "shared")
+        val commonDir = File(targetDir, SUBDIR_COMMON)
+        val kotlinDir = File(targetDir, SUBDIR_KOTLIN)
+        val sharedDir = File(targetDir, SUBDIR_SHARED)
 
         val classLoader = javaClass.classLoader
-        ResourceUtils.copyResourceFolder(classLoader, "agent-rules/common", commonDir, logger)
-        ResourceUtils.copyResourceFolder(classLoader, "agent-rules/kotlin", kotlinDir, logger)
+        ResourceUtils.copyResourceFolder(classLoader, RESOURCE_AGENT_RULES_COMMON, commonDir, logger)
+        ResourceUtils.copyResourceFolder(classLoader, RESOURCE_AGENT_RULES_KOTLIN, kotlinDir, logger)
 
         if (includeShared.get()) {
-            ResourceUtils.copyResourceFolder(classLoader, "agent-rules/shared", sharedDir, logger)
+            ResourceUtils.copyResourceFolder(classLoader, RESOURCE_AGENT_RULES_SHARED, sharedDir, logger)
         } else {
             sharedDir.deleteRecursively()
         }
@@ -83,4 +83,14 @@ public abstract class AgentSyncTask : DefaultTask() {
         val resourcePath: String,
         val targetSubdir: String
     )
+
+    private companion object {
+        private const val SUBDIR_COMMON = "common"
+        private const val SUBDIR_KOTLIN = "kotlin"
+        private const val SUBDIR_SHARED = "shared"
+
+        private const val RESOURCE_AGENT_RULES_COMMON = "agent-rules/common"
+        private const val RESOURCE_AGENT_RULES_KOTLIN = "agent-rules/kotlin"
+        private const val RESOURCE_AGENT_RULES_SHARED = "agent-rules/shared"
+    }
 }

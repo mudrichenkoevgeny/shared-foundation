@@ -44,16 +44,13 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
      */
     @TaskAction
     public fun sync() {
-        val marker = "# --- LOCAL OVERRIDES ---"
-        val defaultOverrideText = "# Add project-specific editorconfig rules below"
-
         val joinedLayers = layers.mapNotNull { layer ->
             val cleanPath = layer.resourcePath.removePrefix("/")
             val stream = layer.classLoader.getResourceAsStream(cleanPath)
                 ?: EditorConfigSyncTask::class.java.getResourceAsStream("/$cleanPath")
             checkNotNull(stream) { "EditorConfig layer resource not found: ${layer.resourcePath}" }
             val rawText = stream.bufferedReader().use { it.readText() }
-            val layerContent = rawText.substringBefore(marker).trim()
+            val layerContent = rawText.substringBefore(MARKER_LOCAL_OVERRIDES).trim()
             layerContent.ifBlank { null }
         }.joinToString("\n\n")
 
@@ -61,16 +58,16 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
 
         val preservedLocalOverrides = if (file.exists()) {
             val currentText = file.readText()
-            if (currentText.contains(marker)) {
-                val tail = currentText.substringAfter(marker).trim()
-                tail.ifBlank { defaultOverrideText }
+            if (currentText.contains(MARKER_LOCAL_OVERRIDES)) {
+                val tail = currentText.substringAfter(MARKER_LOCAL_OVERRIDES).trim()
+                tail.ifBlank { DEFAULT_OVERRIDE_TEXT }
             } else if (currentText.isNotBlank()) {
                 currentText.trim()
             } else {
-                defaultOverrideText
+                DEFAULT_OVERRIDE_TEXT
             }
         } else {
-            defaultOverrideText
+            DEFAULT_OVERRIDE_TEXT
         }
 
         val fullText = buildString {
@@ -78,7 +75,7 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
                 append(joinedLayers.trim())
                 append("\n\n")
             }
-            append(marker)
+            append(MARKER_LOCAL_OVERRIDES)
             append("\n")
             append(preservedLocalOverrides.trim())
             append("\n")
@@ -97,4 +94,9 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
         val classLoader: ClassLoader,
         val resourcePath: String
     )
+
+    private companion object {
+        private const val MARKER_LOCAL_OVERRIDES = "# --- LOCAL OVERRIDES ---"
+        private const val DEFAULT_OVERRIDE_TEXT = "# Add project-specific editorconfig rules below"
+    }
 }

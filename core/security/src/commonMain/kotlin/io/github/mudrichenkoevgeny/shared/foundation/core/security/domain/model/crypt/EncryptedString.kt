@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.crypt
 
-import kotlin.jvm.JvmInline
-
 /**
  * Represents a string that has been encrypted.
  *

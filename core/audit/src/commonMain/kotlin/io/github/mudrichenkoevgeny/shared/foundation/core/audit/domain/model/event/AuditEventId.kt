@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event
 
-import kotlin.jvm.JvmInline
 import kotlin.uuid.Uuid
 
 /**

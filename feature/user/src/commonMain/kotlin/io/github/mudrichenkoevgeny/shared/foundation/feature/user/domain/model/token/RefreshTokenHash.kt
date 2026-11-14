@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token
 
-import kotlin.jvm.JvmInline
-
 /**
  * Hash of a RefreshToken for secure storage and comparison.
  *

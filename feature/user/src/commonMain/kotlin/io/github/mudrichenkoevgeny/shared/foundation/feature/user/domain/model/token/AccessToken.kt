@@ -1,7 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token
 
-import kotlin.jvm.JvmInline
-
 /**
  * Opaque JWT or bearer token string issued for API access.
  *

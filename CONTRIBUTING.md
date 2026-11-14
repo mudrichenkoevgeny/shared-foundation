@@ -175,13 +175,13 @@ To test the generated package locally in any web project or library (pnpm worksp
      npm pack
      ```
 
-   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.14.tgz`) will be created.
+   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.16.tgz`) will be created.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.14.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.16.tgz'
    ```
    And run from the root directory:
    ```bash

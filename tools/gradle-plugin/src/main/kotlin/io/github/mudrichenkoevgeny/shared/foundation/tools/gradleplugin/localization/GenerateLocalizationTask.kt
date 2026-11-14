@@ -58,7 +58,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
     public fun generate() {
         val rootResources = resourcesDir.orNull?.asFile ?: return
         if (!rootResources.exists()) return
-        val localizationRoot = File(rootResources, "localization")
+        val localizationRoot = File(rootResources, LOCALIZATION_DIR_NAME)
         if (!localizationRoot.exists()) return
 
         val outBaseDir = outputDir.get().asFile
@@ -66,7 +66,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
         outBaseDir.mkdirs()
 
         val moduleDirs = localizationRoot.walkTopDown()
-            .filter { it.isDirectory && it.name == "en" }
+            .filter { it.isDirectory && it.name == DEFAULT_LOCALE_DIR_NAME }
             .map { it.parentFile }
             .distinct()
             .sortedBy { it.path }
@@ -94,8 +94,8 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
         val modulePrefix = moduleRelativePath.split('/').last().split('_')
             .joinToString("") { part -> part.replaceFirstChar { char -> char.uppercase() } }
 
-        val enDir = File(moduleDir, "en")
-        val jsonFiles = enDir.listFiles { file -> file.extension == "json" }?.sortedBy { it.name } ?: return
+        val enDir = File(moduleDir, DEFAULT_LOCALE_DIR_NAME)
+        val jsonFiles = enDir.listFiles { file -> file.extension == JSON_EXTENSION }?.sortedBy { it.name } ?: return
 
         val generatedClassNames = mutableListOf<String>()
 
@@ -129,8 +129,8 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
         modulePrefix: String,
         jsonFile: File
     ): String {
-        if (jsonFile.name == "email_templates.json") {
-            val className = "${modulePrefix}EmailTemplates"
+        if (jsonFile.name == EMAIL_TEMPLATES_FILE_NAME) {
+            val className = "$modulePrefix$EMAIL_TEMPLATES_SUFFIX"
             val classContent = generateEmailTemplatesClass(
                 packageName = packageName,
                 className = className,
@@ -145,7 +145,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
         val bundleName = jsonFile.nameWithoutExtension
         val className = bundleName.split('_').joinToString("") { part ->
             part.replaceFirstChar { char -> char.uppercase() }
-        } + "Strings"
+        } + STRINGS_SUFFIX
 
         val classContent = generateBundleClass(
             packageName = packageName,
@@ -167,7 +167,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
         moduleDir: File,
         generatedClassNames: List<String>
     ) {
-        val moduleFacadeName = "${modulePrefix}ModuleStrings"
+        val moduleFacadeName = "$modulePrefix$MODULE_STRINGS_SUFFIX"
         val facadeContent = generateModuleFacade(
             packageName = packageName,
             facadeName = moduleFacadeName,
@@ -183,7 +183,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
             moduleRelativePath = moduleRelativePath,
             moduleDir = moduleDir
         )
-        writeGeneratedFile(outBaseDir, packageName, "${modulePrefix}EmbeddedLocalizationResources", embeddedContent)
+        writeGeneratedFile(outBaseDir, packageName, "$modulePrefix$EMBEDDED_RESOURCES_SUFFIX", embeddedContent)
     }
 
     private fun writeGeneratedFile(
@@ -211,7 +211,7 @@ public abstract class GenerateLocalizationTask : DefaultTask() {
 
         val allBundles = collectAllBundles(moduleDir)
         val (whenBranches, privateFunctions) = buildEmbeddedBundleCode(allBundles)
-        val className = "${modulePrefix}EmbeddedLocalizationResources"
+        val className = "$modulePrefix$EMBEDDED_RESOURCES_SUFFIX"
 
         val classDeclaration = """internal object $className : LocalizationBundleProvider {
 
@@ -232,7 +232,7 @@ $privateFunctions}"""
         val allBundles = mutableListOf<BundleKey>()
         localeDirs.forEach { locDir ->
             val locale = locDir.name.lowercase()
-            locDir.listFiles { file -> file.extension == "json" }
+            locDir.listFiles { file -> file.extension == JSON_EXTENSION }
                 ?.sortedBy { it.name }
                 ?.forEach { jsonFile ->
                     allBundles.add(BundleKey(jsonFile.nameWithoutExtension, locale, jsonFile))
@@ -251,7 +251,7 @@ $privateFunctions}"""
             whenBranches.append("            \"${bundle.bundleName}/${bundle.locale}\" -> $fnName()\n")
 
             val jsonContent = bundle.file.readText()
-            val entries = if (bundle.bundleName == "email_templates") {
+            val entries = if (bundle.bundleName == EMAIL_TEMPLATES_BUNDLE_NAME) {
                 val parsedTemplates = parseEmailTemplatesJson(jsonContent)
                 val flattened = mutableMapOf<String, String>()
                 parsedTemplates.forEach { t ->
@@ -591,5 +591,17 @@ $members}"""
     private companion object {
         private const val COMMON_PACKAGE: String =
             "io.github.mudrichenkoevgeny.shared.foundation.core.common.localization"
+
+        private const val LOCALIZATION_DIR_NAME = "localization"
+        private const val DEFAULT_LOCALE_DIR_NAME = "en"
+        private const val JSON_EXTENSION = "json"
+
+        private const val EMAIL_TEMPLATES_FILE_NAME = "email_templates.json"
+        private const val EMAIL_TEMPLATES_BUNDLE_NAME = "email_templates"
+
+        private const val EMAIL_TEMPLATES_SUFFIX = "EmailTemplates"
+        private const val STRINGS_SUFFIX = "Strings"
+        private const val MODULE_STRINGS_SUFFIX = "ModuleStrings"
+        private const val EMBEDDED_RESOURCES_SUFFIX = "EmbeddedLocalizationResources"
     }
 }
