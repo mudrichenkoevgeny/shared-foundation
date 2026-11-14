@@ -17,6 +17,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.u
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.upload.UploadQueueItemStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.ExternalAuthProvider
+import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
@@ -160,6 +161,8 @@ private fun buildStringFieldTypeOverrides(): Map<String, KClass<*>> = mapOf(
     "accountStatus" to UserAccountStatus::class,
     "accountStatusOnRestore" to UserAccountStatus::class,
     "lockoutType" to AccountLockoutType::class,
+    "userAuthProvider" to UserAuthProvider::class,
+    "identifierAuthProvider" to UserAuthProvider::class,
     "actorType" to AuditActorType::class,
     "sensitivity" to AuditValueSensitivity::class,
     "valueSensitivity" to AuditValueSensitivity::class,

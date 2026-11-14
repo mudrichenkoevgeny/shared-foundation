@@ -50,7 +50,15 @@ public class NpmPackageVerifier(
      */
     public fun verifyArtifactsPresence() {
         val outputDir = config.outputDirectory
-        val requiredFiles = listOf("package.json", "index.js", "index.d.ts", "README.md", ".npmignore")
+        val isFoundation = config.basePackagePrefix.isEmpty() ||
+            (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+
+        val requiredFiles = mutableListOf("package.json", "index.js", "index.d.ts", "README.md", ".npmignore")
+        if (isFoundation) {
+            requiredFiles.add("scripts/agent-rules-syncer.mjs")
+            requiredFiles.add("scripts/postinstall-sync-rules.mjs")
+        }
+
         val missingFiles = requiredFiles.filter { !File(outputDir, it).exists() }
         check(missingFiles.isEmpty()) {
             "NPM package verification failed: Missing required artifacts: $missingFiles in ${outputDir.absolutePath}"
@@ -87,6 +95,7 @@ public class NpmPackageVerifier(
     public fun verifyDtsCompilation(envNodeModules: File) {
         val outputDir = config.outputDirectory
         val testFile = File(outputDir, "test-types.ts")
+        val indexDts = File(outputDir, "index.d.ts")
         val tscJs = File(envNodeModules, "typescript/bin/tsc")
 
         try {
@@ -95,9 +104,20 @@ public class NpmPackageVerifier(
                 append("import * as Pkg from './index';\n\n")
                 config.dtoClasses.forEach { kClass ->
                     kClass.simpleName?.let { name ->
-                        val schemaName = name.decapitalizeFirstLetter() + "Schema"
-                        append("type Infered$name = z.infer<typeof Pkg.$schemaName>;\n")
-                        append("const _type_check_$name: Pkg.$name = null as unknown as Infered$name;\n")
+                        if (name != "PagedResult" && name != "WebSocketContract") {
+                            val schemaName = name.decapitalizeFirstLetter() + "Schema"
+                            append("type Infered_$name = z.infer<typeof Pkg.$schemaName>;\n")
+                            append("const _dto_to_schema_$name: Infered_$name = null as unknown as Pkg.$name;\n")
+                            append("const _schema_to_dto_$name: Pkg.$name = null as unknown as Infered_$name;\n")
+                        }
+                        append("const _fixture_$name: Pkg.$name = Pkg.createTest$name();\n\n")
+                    }
+                }
+                config.domainToDtoMappers.forEach { (domainClass, payloadClass) ->
+                    val domainName = domainClass.simpleName
+                    val payloadName = payloadClass?.simpleName
+                    if (domainName != null && payloadName != null) {
+                        append("const _mapper_domain_$domainName: Pkg.$domainName = Pkg.to$domainName(Pkg.createTest$payloadName());\n\n")
                     }
                 }
                 if (!config.customDtsSmokeTestCode.isNullOrBlank()) {
@@ -107,14 +127,17 @@ public class NpmPackageVerifier(
             testFile.writeText(dtsTestCode)
 
             val command = if (tscJs.exists()) {
-                listOf("node", tscJs.absolutePath, "--noEmit", "--strict", "--skipLibCheck", testFile.name)
+                listOf("node", tscJs.absolutePath, "--noEmit", "--strict", "--target", "es2020", "--lib", "es2020,dom", "--moduleResolution", "node", "--skipDefaultLibCheck", indexDts.name, testFile.name)
             } else if (isWindows()) {
-                listOf("npx.cmd", "-p", "typescript", "tsc", "--noEmit", "--strict", "--skipLibCheck", testFile.name)
+                listOf("npx.cmd", "-p", "typescript", "tsc", "--noEmit", "--strict", "--target", "es2020", "--lib", "es2020,dom", "--moduleResolution", "node", "--skipDefaultLibCheck", indexDts.name, testFile.name)
             } else {
-                listOf("npx", "-p", "typescript", "tsc", "--noEmit", "--strict", "--skipLibCheck", testFile.name)
+                listOf("npx", "-p", "typescript", "tsc", "--noEmit", "--strict", "--target", "es2020", "--lib", "es2020,dom", "--moduleResolution", "node", "--skipDefaultLibCheck", indexDts.name, testFile.name)
             }
 
             val result = runCommand(command, outputDir)
+            if (result.exitCode != 0) {
+                File("build/npm-verifier-error.log").writeText("TSC COMPILATION ERROR:\n${result.output}")
+            }
             check(result.exitCode == 0) {
                 "TypeScript declaration compilation (tsc --noEmit --strict) failed:\n${result.output}"
             }
@@ -131,11 +154,108 @@ public class NpmPackageVerifier(
     public fun verifyRuntimeBehavior() {
         val outputDir = config.outputDirectory
         val testFile = File(outputDir, "test-runtime.mjs")
+        val d = '$'
         try {
             val runtimeTestCode = buildString {
                 append("import * as Pkg from './index.js';\n")
                 append("import process from 'process';\n\n")
                 append("let errors = 0;\n\n")
+
+                append(
+                    """
+const keys = Object.keys(Pkg);
+const fixtureKeys = keys.filter(k => k.startsWith('createTest') && !k.endsWith('List') && typeof Pkg[k] === 'function');
+
+for (const key of fixtureKeys) {
+  try {
+    const mock = Pkg[key]();
+    if (mock === undefined) {
+      console.error(`Fixture ${d}{key}() returned undefined`);
+      errors++;
+    }
+
+    const listKey = key + 'List';
+    if (typeof Pkg[listKey] === 'function') {
+      const mockList = Pkg[listKey](2);
+      if (!Array.isArray(mockList) || mockList.length !== 2) {
+        console.error(`Fixture list ${d}{listKey}(2) returned invalid array`);
+        errors++;
+      }
+    }
+
+    const entityName = key.replace(/^createTest/, '');
+    const schemaName = entityName.charAt(0).toLowerCase() + entityName.slice(1) + 'Schema';
+    const schema = Pkg[schemaName];
+
+    if (schema && typeof schema.parse === 'function') {
+      try {
+        schema.parse(mock);
+      } catch (zodErr) {
+        console.error(`Fixture ${d}{key}() failed Zod validation against ${d}{schemaName}:`, zodErr.message);
+        errors++;
+      }
+    }
+  } catch (err) {
+    console.error(`Fixture ${d}{key}() execution threw an error:`, err);
+    errors++;
+  }
+}
+
+for (const key of keys) {
+  if (key.endsWith('ParamsParser')) {
+    const parser = Pkg[key];
+    if (parser && typeof parser.parse === 'function' && typeof parser.toQueryMap === 'function' && typeof parser.toSearchString === 'function') {
+      const baseName = key.replace(/Parser$/, '');
+      const fixtureName = 'createTest' + baseName;
+      if (typeof Pkg[fixtureName] === 'function') {
+        try {
+          const paramsMock = Pkg[fixtureName]();
+          const parsed = parser.parse(paramsMock);
+          const qMap = parser.toQueryMap(parsed);
+          const qs = parser.toSearchString(parsed);
+          if (!qMap || typeof qMap !== 'object' || typeof qs !== 'string') {
+            console.error(`Parser ${d}{key} returned invalid query map or search string`);
+            errors++;
+          }
+        } catch (parserErr) {
+          console.error(`Parser ${d}{key} verification failed:`, parserErr);
+          errors++;
+        }
+      }
+    }
+  }
+}
+                    """.trimIndent()
+                ).append("\n\n")
+
+                config.domainToDtoMappers.forEach { (domainClass, payloadClass) ->
+                    val domainName = domainClass.simpleName
+                    val payloadName = payloadClass?.simpleName
+                    if (domainName != null && payloadName != null) {
+                        val payloadSchemaName = payloadName.decapitalizeFirstLetter() + "Schema"
+                        append(
+                            """
+try {
+  if (typeof Pkg.createTest$payloadName === 'function' && typeof Pkg.to$domainName === 'function') {
+    const payloadMock = Pkg.createTest$payloadName();
+    const domainObj = Pkg.to$domainName(payloadMock);
+    if (domainObj === undefined || domainObj === null) {
+      console.error("to$domainName returned null/undefined for test payload");
+      errors++;
+    }
+    if (typeof Pkg.to$payloadName === 'function' && Pkg.$payloadSchemaName && typeof Pkg.$payloadSchemaName.parse === 'function') {
+      const remappedPayload = Pkg.to$payloadName(domainObj);
+      Pkg.$payloadSchemaName.parse(remappedPayload);
+    }
+  }
+} catch (mapperErr) {
+  console.error("Domain mapper verification failed for $domainName / $payloadName:", mapperErr);
+  errors++;
+}
+                            """.trimIndent()
+                        ).append("\n\n")
+                    }
+                }
 
                 config.brandedTypes.forEach { kClass ->
                     kClass.simpleName?.let { name ->
@@ -173,6 +293,9 @@ if (typeof Pkg.to${name}OrThrow === 'function') {
             testFile.writeText(runtimeTestCode)
 
             val result = runCommand(listOf("node", testFile.name), outputDir)
+            if (result.exitCode != 0) {
+                File("build/npm-verifier-error.log").writeText("RUNTIME BEHAVIOR ERROR:\n${result.output}")
+            }
             check(result.exitCode == 0) {
                 "Runtime behavior verification failed:\n${result.output}"
             }

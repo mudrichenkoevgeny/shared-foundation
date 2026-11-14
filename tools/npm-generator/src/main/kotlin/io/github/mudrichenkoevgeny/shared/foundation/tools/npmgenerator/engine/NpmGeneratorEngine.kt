@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine
 
+import io.github.mudrichenkoevgeny.shared.foundation.generator.script.PostInstallScriptGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.KDocExtractor
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.formatAsJsDoc
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.localization.generateLocalizationCode
@@ -15,6 +16,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.testing.
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.util.decapitalizeFirstLetter
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.util.getEnumInfo
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.util.sortDtosTopologically
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.cleanJsContent as cleanJsContentUtil
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.verification.NpmPackageVerifier
 import kotlinx.serialization.SerialName
 import java.io.File
@@ -47,9 +49,13 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             collectFoundationImports()
         }
 
-        File(outputDir, "package.json").writeText(generatePackageJson())
+        File(outputDir, "package.json").writeText(generatePackageJson(isFoundation))
         File(outputDir, ".npmignore").writeText("*.tgz\n")
         File(outputDir, "README.md").writeText(generateNpmReadme(config))
+
+        if (isFoundation) {
+            PostInstallScriptGenerator.generateScriptAndSyncAgentRules(config.sourceCodeDirectory, outputDir)
+        }
 
         val (localizationJs, localizationDts) = generateLocalizationCode(config, config.outputDirectory, importedFoundationJs, importedFoundationDts)
 
@@ -67,7 +73,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
      * Cleans JavaScript content by stripping comments and string literal interiors.
      */
     public fun cleanJsContent(content: String): String =
-        io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.cleanJsContent(content)
+        cleanJsContentUtil(content)
 
     private fun collectFoundationImports() {
         if (config.permClasses.isNotEmpty()) {
@@ -187,7 +193,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
         }
     }
 
-    private fun generatePackageJson(): String {
+    private fun generatePackageJson(isFoundation: Boolean): String {
         val deps = buildMap {
             put("zod", config.zodVersion)
             putAll(config.peerDependencies)
@@ -212,6 +218,38 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             ""
         }
 
+        val filesBlock = if (isFoundation) {
+            """
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "scripts/",
+    ".agent/"
+  ],"""
+        } else {
+            """
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],"""
+        }
+
+        val scriptsBlock = if (isFoundation) {
+            """
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall-sync-rules.mjs"
+  },"""
+        } else {
+            ""
+        }
+
+        val scriptsExport = if (isFoundation) {
+            """,
+    "./scripts/*": "./scripts/*""""
+        } else {
+            ""
+        }
+
         return """
 {
   "name": "${config.packageName}",
@@ -220,13 +258,13 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
   "license": "Apache-2.0",
   "type": "module",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "index.d.ts",$filesBlock$scriptsBlock
   "exports": {
     ".": {
       "types": "./index.d.ts",
       "import": "./index.js",
       "default": "./index.js"
-    }
+    }$scriptsExport
   }$repoFields,
   "dependencies": {
     $depsJson

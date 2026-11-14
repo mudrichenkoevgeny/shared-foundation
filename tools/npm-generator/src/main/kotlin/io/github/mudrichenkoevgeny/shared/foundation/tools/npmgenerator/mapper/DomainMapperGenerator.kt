@@ -6,7 +6,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.N
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.util.decapitalizeFirstLetter
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.util.sortDomainToDtoTopologically
 import kotlinx.serialization.SerialName
-import java.io.File
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.full.declaredMemberProperties
@@ -341,70 +340,65 @@ const parseValueWithParser = (val, parser) => {
                 """
 export const toAuditEventMetadata = (payload, metadataKeyParser) => ({
   key: parseValueWithParser(payload?.key, metadataKeyParser),
-  value: payload?.value ?? "",
-  sensitivity: payload?.sensitivity
+  value: payload?.value ?? ""
 });
 
 export const toAuditEventMetadataPayload = (domain) => ({
-  key: domain?.key ?? "",
+  key: typeof domain?.key === 'object' ? (domain.key.value ?? "") : (domain?.key ?? ""),
   value: domain?.value ?? "",
-  sensitivity: domain?.sensitivity
+  value_sensitivity: typeof domain?.key === 'object' ? (domain.key.valueSensitivity?.value ?? "non_sensitive") : "non_sensitive"
 });
                 """.trimIndent()
             }
             "AuditEventSummary" -> {
                 """
 export const toAuditEventSummary = (payload, actionTypeParser, resourceTypeParser) => ({
-  eventId: payload?.event_id ? toAuditEventIdOrThrow(payload.event_id) : payload?.event_id,
-  createdAt: payload?.created_at,
-  actorId: payload?.actor_id ? toUserIdOrThrow(payload.actor_id) : null,
+  id: payload?.id ? toAuditEventIdOrThrow(payload.id) : payload?.id,
   actorType: payload?.actor_type,
-  actorUserRole: payload?.actor_user_role ?? null,
   action: parseValueWithParser(payload?.action, actionTypeParser),
-  resourceId: payload?.resource_id ?? null,
-  resourceType: parseValueWithParser(payload?.resource_type, resourceTypeParser),
-  status: payload?.status
+  resource: parseValueWithParser(payload?.resource, resourceTypeParser),
+  status: payload?.status,
+  createdAt: payload?.created_at
 });
 
 export const toAuditEventSummaryPayload = (domain) => ({
-  event_id: domain?.eventId ?? "",
-  created_at: domain?.createdAt ?? "",
-  actor_id: domain?.actorId ?? null,
-  actor_type: domain?.actorType,
-  actor_user_role: domain?.actorUserRole ?? null,
-  action: domain?.action,
-  resource_id: domain?.resourceId ?? null,
-  resource_type: domain?.resourceType,
-  status: domain?.status
+  id: typeof domain?.id === 'object' ? (domain.id.value ?? "") : (domain?.id ?? ""),
+  actor_type: typeof domain?.actorType === 'object' ? (domain.actorType.value ?? "user") : (domain?.actorType ?? "user"),
+  action: typeof domain?.action === 'object' ? (domain.action.value ?? "") : (domain?.action ?? ""),
+  resource: typeof domain?.resource === 'object' ? (domain.resource.value ?? "") : (domain?.resource ?? ""),
+  status: typeof domain?.status === 'object' ? (domain.status.value ?? "success") : (domain?.status ?? "success"),
+  created_at: domain?.createdAt ?? 0
 });
                 """.trimIndent()
             }
             "AuditEventPrivate" -> {
                 """
 export const toAuditEventPrivate = (payload, actionTypeParser, resourceTypeParser, metadataKeyParser) => ({
-  eventId: payload?.event_id ? toAuditEventIdOrThrow(payload.event_id) : payload?.event_id,
-  createdAt: payload?.created_at,
-  actorId: payload?.actor_id ? toUserIdOrThrow(payload.actor_id) : null,
+  id: payload?.id ? toAuditEventIdOrThrow(payload.id) : payload?.id,
+  actorId: payload?.actor_id ? toUserIdOrThrow(payload.actor_id) : (payload?.actor_id ?? null),
   actorType: payload?.actor_type,
   actorUserRole: payload?.actor_user_role ?? null,
   action: parseValueWithParser(payload?.action, actionTypeParser),
+  resource: parseValueWithParser(payload?.resource, resourceTypeParser),
   resourceId: payload?.resource_id ?? null,
-  resourceType: parseValueWithParser(payload?.resource_type, resourceTypeParser),
   status: payload?.status,
-  metadata: Array.isArray(payload?.metadata) ? payload.metadata.map(m => toAuditEventMetadata(m, metadataKeyParser)) : []
+  metadata: Array.isArray(payload?.metadata) ? payload.metadata.map(m => toAuditEventMetadata(m, metadataKeyParser)) : [],
+  message: payload?.message ?? null,
+  createdAt: payload?.created_at
 });
 
 export const toAuditEventPrivatePayload = (domain) => ({
-  event_id: domain?.eventId ?? "",
-  created_at: domain?.createdAt ?? "",
-  actor_id: domain?.actorId ?? null,
-  actor_type: domain?.actorType,
-  actor_user_role: domain?.actorUserRole ?? null,
-  action: domain?.action,
-  resource_id: domain?.resourceId ?? null,
-  resource_type: domain?.resourceType,
-  status: domain?.status,
-  metadata: Array.isArray(domain?.metadata) ? domain.metadata.map(toAuditEventMetadataPayload) : []
+  id: typeof domain?.id === 'object' ? (domain.id.value ?? "") : (domain?.id ?? ""),
+  actor_id: typeof domain?.actorId === 'object' ? (domain.actorId?.value ?? null) : (domain?.actorId ?? null),
+  actor_type: typeof domain?.actorType === 'object' ? (domain.actorType.value ?? "user") : (domain?.actorType ?? "user"),
+  actor_user_role: typeof domain?.actorUserRole === 'object' ? (domain.actorUserRole?.value ?? null) : (domain?.actorUserRole ?? null),
+  action: typeof domain?.action === 'object' ? (domain.action.value ?? "") : (domain?.action ?? ""),
+  resource: typeof domain?.resource === 'object' ? (domain.resource.value ?? "") : (domain?.resource ?? ""),
+  resource_id: typeof domain?.resourceId === 'object' ? (domain.resourceId?.value ?? null) : (domain?.resourceId ?? null),
+  status: typeof domain?.status === 'object' ? (domain.status.value ?? "success") : (domain?.status ?? "success"),
+  metadata: Array.isArray(domain?.metadata) ? domain.metadata.map(toAuditEventMetadataPayload) : [],
+  message: domain?.message ?? null,
+  created_at: domain?.createdAt ?? 0
 });
                 """.trimIndent()
             }

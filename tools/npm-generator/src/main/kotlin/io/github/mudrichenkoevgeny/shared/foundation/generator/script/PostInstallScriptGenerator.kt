@@ -18,40 +18,64 @@ public object PostInstallScriptGenerator {
         import fs from 'node:fs';
         import path from 'node:path';
 
+        function findProjectRoot(startDir) {
+          let current = path.resolve(startDir);
+          let fallbackPkgRoot = current;
+          while (true) {
+            if (!current.includes('node_modules')) {
+              if (fs.existsSync(path.join(current, 'pnpm-workspace.yaml')) || fs.existsSync(path.join(current, '.git'))) {
+                return current;
+              }
+              if (fs.existsSync(path.join(current, 'package.json'))) {
+                fallbackPkgRoot = current;
+              }
+            }
+            const parent = path.dirname(current);
+            if (parent === current) return fallbackPkgRoot;
+            current = parent;
+          }
+        }
+
         /**
-         * Universal module for synchronizing agent rules into INIT_CWD of consumer projects.
+         * Universal module for synchronizing agent rules into consumer projects.
          *
          * @param {Object} options
          * @param {string} options.sourceAgentDir - Absolute path to rules directory inside installed package
          * @param {string} options.relativeTargetSubdir - Relative target path in project
          * @param {string} options.packageName - Package name for logging
+         * @param {string} [options.targetRootDir] - Explicit project root directory (optional)
          */
-        export function syncAgentRules({ sourceAgentDir, relativeTargetSubdir, packageName }) {
-          const projectRoot = process.env.INIT_CWD || process.cwd();
-          const packageDir = path.resolve(sourceAgentDir, '../../');
+        export function syncAgentRules({ sourceAgentDir, relativeTargetSubdir, packageName, targetRootDir }) {
+          if (!sourceAgentDir || !fs.existsSync(sourceAgentDir)) return;
 
-          if (projectRoot && path.resolve(projectRoot) !== packageDir && fs.existsSync(sourceAgentDir)) {
-            const targetDir = path.join(projectRoot, relativeTargetSubdir);
+          const projectRoot = targetRootDir
+            ? path.resolve(targetRootDir)
+            : findProjectRoot(process.env.INIT_CWD || process.cwd());
+
+          if (!projectRoot || projectRoot.includes('node_modules')) return;
+
+          const resolvedSource = path.resolve(sourceAgentDir);
+          const targetDir = path.resolve(projectRoot, relativeTargetSubdir);
+
+          if (resolvedSource === targetDir) return;
+
+          let attempts = 0;
+          const maxAttempts = 3;
+          while (attempts < maxAttempts) {
             try {
+              fs.rmSync(targetDir, { recursive: true, force: true });
               fs.mkdirSync(targetDir, { recursive: true });
-            } catch (_) {}
-
-            let attempts = 0;
-            const maxAttempts = 3;
-            while (attempts < maxAttempts) {
-              try {
-                fs.cpSync(sourceAgentDir, targetDir, { recursive: true, force: true });
-                console.log(`✅ [${dollar}{packageName}] Agent rules synced -> ${dollar}{targetDir}`);
-                break;
-              } catch (err) {
-                attempts++;
-                if (attempts >= maxAttempts) {
-                  console.warn(`⚠️ [${dollar}{packageName}] Could not sync agent rules to ${dollar}{targetDir}: ${dollar}{err.message}`);
-                } else {
-                  try {
-                    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100);
-                  } catch (_) {}
-                }
+              fs.cpSync(resolvedSource, targetDir, { recursive: true, force: true });
+              console.log(`[${dollar}{packageName}] Agent rules synced -> ${dollar}{targetDir}`);
+              break;
+            } catch (err) {
+              attempts++;
+              if (attempts >= maxAttempts) {
+                console.warn(`[${dollar}{packageName}] Could not sync agent rules to ${dollar}{targetDir}: ${dollar}{err.message}`);
+              } else {
+                try {
+                  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100);
+                } catch (_) {}
               }
             }
           }
@@ -66,6 +90,7 @@ public object PostInstallScriptGenerator {
      */
     public fun generatePostInstallScriptText(): String =
         """
+        #!/usr/bin/env node
         import path from 'node:path';
         import { fileURLToPath } from 'node:url';
         import { syncAgentRules } from './agent-rules-syncer.mjs';
@@ -92,12 +117,20 @@ public object PostInstallScriptGenerator {
         File(scriptsDir, "agent-rules-syncer.mjs").writeText(generateAgentRulesSyncerScriptText())
         File(scriptsDir, "postinstall-sync-rules.mjs").writeText(generatePostInstallScriptText())
 
-        val agentOutputDir = File(outputDir, ".agent")
-        agentOutputDir.mkdirs()
+        val agentCommonOutputDir = File(outputDir, ".agent/common")
+        if (agentCommonOutputDir.exists()) {
+            agentCommonOutputDir.deleteRecursively()
+        }
+        agentCommonOutputDir.mkdirs()
 
-        val globalCommonDir = File(rootDir, ".agent/global/common")
+        var resolvedRootDir: File? = rootDir
+        while (resolvedRootDir != null && !File(resolvedRootDir, ".agent/global/common").exists()) {
+            resolvedRootDir = resolvedRootDir.parentFile
+        }
+
+        val globalCommonDir = File(resolvedRootDir ?: rootDir, ".agent/global/common")
         if (globalCommonDir.exists()) {
-            globalCommonDir.copyRecursively(File(agentOutputDir, "common"), overwrite = true)
+            globalCommonDir.copyRecursively(agentCommonOutputDir, overwrite = true)
         }
     }
 }
