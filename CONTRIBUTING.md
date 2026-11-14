@@ -54,10 +54,10 @@ To analyze a single module, use `projectHealth`:
 ./gradlew :<gradle-path>:projectHealth
 ```
 
-Example for `shared/foundation/core/common` (published artifact id `shared-foundation-core-common`):
+Example for `core/common` (published artifact id `shared-foundation-core-common`):
 
 ```bash
-./gradlew :shared:foundation:core:common:projectHealth
+./gradlew :core:common:projectHealth
 ```
 
 ### 2. Dependency insight
@@ -73,7 +73,7 @@ This repository is a **Kotlin Multiplatform (KMP)** library (targeting JVM, Andr
 Example for `core:common` and `org.jetbrains.kotlinx:kotlinx-serialization-json`:
 
 ```bash
-./gradlew :shared:foundation:core:common:dependencyInsight --dependency org.jetbrains.kotlinx:kotlinx-serialization-json --configuration jvmCompileClasspath
+./gradlew :core:common:dependencyInsight --dependency org.jetbrains.kotlinx:kotlinx-serialization-json --configuration jvmCompileClasspath
 ```
 
 Other targets (Android, iOS, Wasm) expose different configurations; list them with `./gradlew :<gradle-path>:dependencies` if you need a non-JVM variant.
@@ -87,7 +87,7 @@ To dump a full, searchable dependency tree for a module (JVM compile classpath):
 Example:
 
 ```bash
-./gradlew :shared:foundation:core:common:dependencies --configuration jvmCompileClasspath > build/reports/core-common-jvm-dependencies.txt
+./gradlew :core:common:dependencies --configuration jvmCompileClasspath > build/reports/core-common-jvm-dependencies.txt
 ```
 
 On Windows PowerShell you can use the same redirection; ensure `build/reports` exists or choose another path.
@@ -166,17 +166,22 @@ The output package will be generated at `build/npm-package/`.
 To test the generated package locally in any web project or library (pnpm workspace) without publishing to a remote registry:
 
 1. **Generate the `.tgz` tarball archive:**
-   Run `npm pack` from the project root specifying the output directory as the destination:
-   ```bash
-   npm pack ./build/npm-package --pack-destination ./build/npm-package
-   ```
-   The archive `mudrichenkoevgeny-shared-foundation-0.1.9.tgz` will be created inside `build/npm-package/`.
+   - **From the repository root (`shared-foundation/`):**
+     ```bash
+     npm pack ./build/npm-package
+     ```
+   - **Or if your terminal is inside `build/npm-package/`:**
+     ```bash
+     npm pack
+     ```
+
+   The archive file (e.g. `mudrichenkoevgeny-shared-foundation-0.1.16.tgz`) will be created.
 
 2. **Connect to your consumer pnpm workspace:**
    In your consumer project, update the catalog in `pnpm-workspace.yaml`:
    ```yaml
    catalog:
-     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/build/npm-package/mudrichenkoevgeny-shared-foundation-0.1.9.tgz'
+     '@mudrichenkoevgeny/shared-foundation': 'file:/path/to/shared-foundation/mudrichenkoevgeny-shared-foundation-0.1.16.tgz'
    ```
    And run from the root directory:
    ```bash
@@ -189,7 +194,12 @@ To test the generated package locally in any web project or library (pnpm worksp
    ```bash
    npm login
    ```
-2. Publish the generated package directly from the project root:
-   ```bash
-   npm publish ./build/npm-package --access public
-   ```
+2. Publish the generated package:
+   - **From the repository root:**
+     ```bash
+     npm publish ./build/npm-package --access public
+     ```
+   - **Or if your terminal is inside `build/npm-package/`:**
+     ```bash
+     npm publish --access public
+     ```

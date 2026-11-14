@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.binary.compatibility.validator)
     alias(libs.plugins.dokka)
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync")
+    alias(libs.plugins.shared.foundation.agent.sync)
 }
 
 apiValidation {
@@ -17,6 +17,8 @@ apiValidation {
     ignoredProjects += listOf(
         "bom",
         "npm-generator",
+        "npm-generator-runner",
+        "detekt-rules",
         "testing"
     )
 }
@@ -28,7 +30,6 @@ allprojects {
 
 subprojects {
     val isBom = project.name == "bom"
-    val isTool = project.path.startsWith(":tools")
     val isModule = project.projectDir.resolve("src").exists() || isBom
 
     if (!isModule) {
@@ -43,19 +44,12 @@ subprojects {
         pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-kotlin")
     }
 
-    afterEvaluate {
-        val explicitPublishFlag = (findProperty("publishToMaven") as? Boolean)
-            ?: (findProperty("publishToMaven")?.toString()?.toBoolean())
-        if (!isTool || explicitPublishFlag == true) {
-            pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
-        }
-    }
+    pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-publish")
 }
 
 tasks.register("generateNpmPackage") {
     group = "publishing"
     description = "Generates the @mudrichenkoevgeny/shared-foundation NPM package with TypeScript types," +
         " Zod schemas, and route constants."
-    dependsOn(":tools:npm-generator:run")
-    finalizedBy(":tools:npm-generator:auditNpmExports")
+    dependsOn(":tools:npm-generator-runner:generateNpmPackage")
 }

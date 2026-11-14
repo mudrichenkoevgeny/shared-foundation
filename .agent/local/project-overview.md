@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Project identity
 - **Type:** Shared contracts **library** of **wire payloads, REST/WS API routes, Zod schemas, permissions, and error codes** (same serialized JSON shapes, path strings, permissions, and machine-readable error **code** strings).
-- **Publishing:** Maven Central via `com.vanniktech.maven.publish` for Kotlin/JVM/Android/iOS/Wasm; npmjs.com (`@mudrichenkoevgeny/shared-foundation`) via `./gradlew generateNpmPackage` for Web/TypeScript. The NPM package exports constants, route maps, Zod schemas, fully-typed domain models and runtime mappers.
+- **Publishing:** Maven Central via `com.vanniktech.maven.publish` for Kotlin/JVM/Android/iOS/Wasm; npmjs.com (`@mudrichenkoevgeny/shared-foundation`) via `./gradlew generateNpmPackage` for Web/TypeScript. The NPM package exports constants, route maps, Zod schemas, fully-typed domain models, runtime mappers, and testing fixtures.
 - **Coordinates:** group `io.github.mudrichenkoevgeny`; artifact ids follow `shared-foundation-*`; npm package `@mudrichenkoevgeny/shared-foundation`.
 - **Consumers:** Not in this repo. Consumed by **[Backend Platform SDK](https://github.com/mudrichenkoevgeny/backend-platform-sdk)** (server), **[KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk)** (client), and **[Web Platform SDK](https://github.com/mudrichenkoevgeny/web-platform-sdk)** (web).
 
@@ -17,12 +17,12 @@ alwaysApply: true
 - **Targets:** JVM, Android Library, iOS, Wasm JS.
 - **Strictly No UI:** This repository contains only logic, types, and constants.
 
-## Modules Structure (`shared/foundation/`)
+## Modules Structure
 
 ### Core Modules (`core/`)
 Focus on domain logic, data models, navigation structures, and transport payloads.
 
-- **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `ClientInfo`, and `PagedResult`. Defines base `PermissionCode`, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), non-localized UI values (`UiValues`), base network routes (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), and root client/management navigation (`ClientMainNavigation`, `ManagementMainNavigation`).
+- **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `AppType`, `ClientInfo`, `ClientType`, and `PagedResult`. Defines base `PermissionCode`, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), non-localized UI values (`UiValues`), base network routes (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), and root client/management navigation (`ClientMainNavigation`, `ManagementMainNavigation`).
 - **`core/audit`:** Audit domain logic, HTTP routes, and navigation. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `ManagementAuditNavigation`, screen params & parsers (`*Params`), `AuditPermissionCode`, and `CommonAuditResourceType`.
 - **`core/security`:** Security primitives, HTTP routes, and navigation. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `ManagementSecurityNavigation`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
 - **`core/settings`:** Global system settings shapes, HTTP routes, and navigation. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `ManagementSettingsNavigation`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
@@ -31,26 +31,28 @@ Focus on domain logic, data models, navigation structures, and transport payload
 ### Feature Modules (`feature/`)
 Focus on feature-specific contracts, navigation, and workflows.
 
-- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), user navigation contracts (`BaseUserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core/security` for MFA/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
+- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, `ConfirmationKey`, `ConfirmationType`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), user navigation contracts (`BaseUserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
 
 ### Tooling Modules (`tools/`)
 Focus on build-time static analysis, agent sync plugins, and artifact generation.
 
 - **`tools/detekt-rules`:** Custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) enforcing architectural constraints across consumer applications ([module README](tools/detekt-rules/README.md)).
-- **`tools/gradle-plugin`:** Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`) providing build tasks, quality checks, compiler options, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
+- **`tools/gradle-plugin`:** Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`) providing build tasks, quality checks, compiler options, localization generation, multi-layer `.editorconfig` synchronization, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
 - **`tools/npm-generator`:** Executable JVM generator exporting TypeScript declarations (`index.d.ts`), Zod validation schemas, API routes, domain mappers, testing fixtures, and localization bundles into the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`) ([module README](tools/npm-generator/README.md)).
 
-### Utility
+### Testing & Utility Modules
+- **`testing`:** Published multiplatform testing infrastructure (`shared-foundation-testing`, recommended alias `shared-foundation-fixtures`) containing 1-file-per-class mirrored fixtures (`*Fixture.kt`), deterministic builders (`createTest*`), value class constants (`TEST_*`), screen param builders, collection/paged generators, and in-memory mocks (`LocalizedStringResolverMock`, `LocalizationBundleProviderMock`, `PasswordPolicyValidatorMock`) ([module README](testing/README.md)).
 - **`bom`:** Bill of Materials to align versions across all `shared-foundation-*` artifacts.
 
 ## Boundaries & Dependencies
 - **`core/common`** is the leaf: It must not depend on any other internal modules.
 - **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`; `core/security` and `core/settings` depend on `core/audit`.
 - **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, `core/settings`, and `core/storage`.
+- **`testing`** depends on `core/*` and `feature/*` modules to provide mirrored fixtures across the entire library. Production modules (`core/*`, `feature/*`) may depend on `project(":testing")` only inside `commonTest`/`jvmTest` source sets.
 - **No Frameworks:** No Ktor Server/Client engines or database drivers. Only "pure" Kotlin logic and serialization.
 
 ## Guidelines for AI
-- All rules and standards are located in the `.agent/` directory (`global/common`, `global/kotlin`, `local`).
+- All rules and standards are located in the `.agent/` directory (`global/common`, `global/kotlin`, `global/shared`, `local`).
 - Refer to `AGENTS.md` for the full index of available standards.
 - Always check the specific module's `README.md` for the latest component links and usage examples.
 

@@ -1,18 +1,32 @@
+import com.vanniktech.maven.publish.GradlePlugin
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.SourcesJar
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
-val rootProps = Properties().apply {
-    val rootPropsFile = rootDir.parentFile.parentFile.resolve("gradle.properties")
-    check(rootPropsFile.exists()) {
-        "Root gradle.properties not found at: ${rootPropsFile.absolutePath}"
-    }
-    rootPropsFile.inputStream().use { load(it) }
+fun loadPropertiesFile(file: File): Properties = Properties().apply {
+    check(file.isFile) { "Required properties file not found at: ${file.absolutePath}" }
+    file.inputStream().use { load(it) }
 }
 
-group = checkNotNull(rootProps.getProperty("group")) { "Missing 'group' property in root gradle.properties" }
-version = checkNotNull(rootProps.getProperty("version")) { "Missing 'version' property in root gradle.properties" }
+fun Properties.requireProperty(key: String): String =
+    checkNotNull(getProperty(key)?.takeIf { it.isNotBlank() }) {
+        "Missing required property '$key'"
+    }
 
-extra["publishToMaven"] = true
-extra["artifactId"] = "shared-foundation-gradle-plugin"
+val repoRootDir: File = checkNotNull(rootDir.parentFile?.parentFile) {
+    "Unable to resolve repository root directory from: ${rootDir.absolutePath}"
+}
+
+val rootProps = loadPropertiesFile(repoRootDir.resolve("gradle.properties"))
+val daemonProps = loadPropertiesFile(repoRootDir.resolve("gradle/gradle-daemon-jvm.properties"))
+
+group = rootProps.requireProperty("group")
+version = rootProps.requireProperty("version")
+
+val daemonJvmVersion = daemonProps.requireProperty("toolchainVersion").toInt()
+val targetJvmVersion = (rootProps.getProperty("targetJvmVersion")?.takeIf { it.isNotBlank() }
+    ?: daemonJvmVersion.toString()).toInt()
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -22,51 +36,109 @@ plugins {
 
 kotlin {
     explicitApi()
+    jvmToolchain(daemonJvmVersion)
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(targetJvmVersion.toString()))
+        allWarningsAsErrors.set(true)
+    }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(targetJvmVersion)
 }
 
 gradlePlugin {
     plugins {
         create("agentSync") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-agent-sync"
-            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.plugin.AgentSyncPlugin"
+            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.AgentSyncPlugin"
             displayName = "Shared Foundation Agent Sync Gradle Plugin"
             description = "Gradle plugin synchronizing AI agent rules from shared-foundation into consumer projects"
         }
         create("quality") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-quality"
-            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.plugin.QualityPlugin"
+            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.QualityPlugin"
             displayName = "Shared Foundation Quality Gradle Plugin"
             description = "Gradle plugin configuring Detekt with base detekt.yml and Ktlint"
         }
         create("kotlinConvention") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-kotlin"
-            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.plugin.KotlinConventionPlugin"
+            implementationClass =
+                "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.KotlinConventionPlugin"
             displayName = "Shared Foundation Kotlin Convention Gradle Plugin"
             description = "Gradle plugin configuring Kotlin JVM compiler options, explicitApi, and opt-ins"
         }
+        create("localization") {
+            id = "io.github.mudrichenkoevgeny.shared-foundation-localization"
+            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.LocalizationPlugin"
+            displayName = "Shared Foundation Localization Gradle Plugin"
+            description =
+                "Gradle plugin generating type-safe Kotlin localization accessors and embedded bundles from JSON resources"
+        }
         create("publishConvention") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-publish"
-            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.plugin.PublishConventionPlugin"
+            implementationClass =
+                "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.PublishConventionPlugin"
             displayName = "Shared Foundation Maven Publishing Convention Gradle Plugin"
             description = "Gradle plugin configuring Vanniktech Maven Publishing, Dokka, and POM metadata"
         }
     }
 }
 
-dependencies {
-    compileOnly(libs.kotlin.gradle.plugin)
-    compileOnly(libs.detekt.gradle.plugin)
-    compileOnly(libs.ktlint.gradle.plugin)
-    compileOnly(libs.maven.publish.gradle.plugin)
-    compileOnly(libs.dokka.gradle.plugin)
+mavenPublishing {
+    coordinates(
+        group.toString(),
+        "shared-foundation-gradle-plugin",
+        version.toString()
+    )
+
+    publishToMavenCentral()
+    signAllPublications()
+
+    configure(
+        GradlePlugin(
+            javadocJar = JavadocJar.Javadoc(),
+            sourcesJar = SourcesJar.Sources()
+        )
+    )
+
+    pom {
+        name.set("shared-foundation - gradle-plugin")
+        description.set("Gradle convention plugins for shared-foundation and consumer projects")
+        url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("mudrichenkoevgeny")
+                name.set("Evgeny Mudrichenko")
+                email.set("evgeny.mudrichenko@gmail.com")
+            }
+        }
+        scm {
+            connection.set("scm:git:git://github.com/mudrichenkoevgeny/shared-foundation.git")
+            developerConnection.set("scm:git:ssh://github.com/mudrichenkoevgeny/shared-foundation.git")
+            url.set("https://github.com/mudrichenkoevgeny/shared-foundation")
+        }
+    }
 }
 
-val repoRootDir = rootDir.parentFile.parentFile
+dependencies {
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.detekt.gradle.plugin)
+    implementation(libs.ktlint.gradle.plugin)
+    implementation(libs.maven.publish.gradle.plugin)
+    implementation(libs.dokka.gradle.plugin)
+}
 
 val generatePluginVersionResource = tasks.register("generatePluginVersionResource") {
     val currentVersion = project.version.toString()
     inputs.property("version", currentVersion)
-    val versionFile = layout.buildDirectory.file("generated/resources/plugin-version.txt")
+    val versionFile = layout.buildDirectory.file("generated/resources/shared-foundation-plugin-version.txt")
     outputs.file(versionFile)
     doLast {
         val file = versionFile.get().asFile
@@ -85,11 +157,5 @@ tasks.named<ProcessResources>("processResources") {
     }
     from(repoRootDir.resolve(".agent/global/shared")) {
         into("agent-rules/shared")
-    }
-    from(repoRootDir.resolve("tools/detekt-rules/src/main/resources/config/detekt/detekt-base.yml")) {
-        into("config/detekt")
-    }
-    from(repoRootDir.resolve(".editorconfig")) {
-        into("config/editorconfig")
     }
 }

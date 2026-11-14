@@ -13,6 +13,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
@@ -66,22 +67,12 @@ fun registerModules(
     modules: List<String>
 ) {
     modules.forEach { name ->
-        val gradlePath = ":${
-            group.replace(
-                ".",
-                ":"
-            )
-        }:$name"
-        val folderPath = group.replace(
-            ".",
-            "/"
-        ) + "/$name"
+        val gradlePath = ":$group:$name"
+        val folderPath = "$group/$name"
         include(gradlePath)
         project(gradlePath).projectDir = file(folderPath)
     }
 }
-
-val groupBase = "shared.foundation"
 
 val coreModules = listOf(
     "common",
@@ -91,7 +82,7 @@ val coreModules = listOf(
     "storage"
 )
 registerModules(
-    "$groupBase.core",
+    "core",
     coreModules
 )
 
@@ -99,20 +90,21 @@ val featureModules = listOf(
     "user"
 )
 registerModules(
-    "$groupBase.feature",
+    "feature",
     featureModules
 )
 
+val toolModules = listOf(
+    "npm-generator",
+    "npm-generator-runner",
+    "detekt-rules"
+)
 registerModules(
-    groupBase,
-    listOf(
-        "bom",
-        "testing"
-    )
+    "tools",
+    toolModules
 )
 
-include(":tools:npm-generator")
-project(":tools:npm-generator").projectDir = file("tools/npm-generator")
+include(":bom")
+include(":testing")
 
-include(":tools:detekt-rules")
-project(":tools:detekt-rules").projectDir = file("tools/detekt-rules")
+includeBuild("tools/gradle-plugin")
