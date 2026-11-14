@@ -342,6 +342,7 @@ io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.nic
 module:detekt-rules
 io.github.mudrichenkoevgeny.shared.foundation.tools.detektrules
 module:npm-generator
+io.github.mudrichenkoevgeny.shared.foundation.generator.script
 io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc
 io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine
 io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.localization
