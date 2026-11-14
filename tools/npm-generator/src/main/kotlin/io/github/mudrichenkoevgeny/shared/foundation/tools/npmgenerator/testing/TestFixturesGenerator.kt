@@ -29,48 +29,17 @@ public fun getDefaultMockValueJs(
     config: NpmGeneratorConfig? = null,
     importedFoundationJs: MutableSet<String>? = null
 ): String {
-    val classifier = type.classifier as? KClass<*>
-    if (classifier?.simpleName == "PatchField") {
-        val innerType = type.arguments.firstOrNull()?.type
-        if (innerType != null) {
-            return getDefaultMockValueJs(paramName, innerType, ownerClass, config, importedFoundationJs)
-        }
-    }
+    val actualType = resolvePatchFieldInnerType(type) ?: type
+    val classifier = actualType.classifier as? KClass<*>
 
     if (classifier != null && (classifier.java.isEnum || classifier in (config?.enumClasses ?: emptyList()))) {
         return getEnumDefaultMockValue(classifier, config)
     }
 
     if (config != null) {
-        val overrideClass = (if (ownerClass != null) config.stringFieldTypeOverrides["${ownerClass.simpleName}.$paramName"] else null)
-            ?: config.stringFieldTypeOverrides[paramName]
-
-        if (overrideClass != null) {
-            val isCollection = classifier == List::class || classifier == Set::class ||
-                classifier?.simpleName == "List" || classifier?.simpleName == "Set" || classifier?.simpleName == "Collection"
-
-            if (overrideClass.java.isEnum || overrideClass in config.enumClasses) {
-                val enumMock = getEnumDefaultMockValue(overrideClass, config)
-                return if (isCollection) "[$enumMock]" else enumMock
-            }
-
-            val isBrandedOverride = overrideClass in config.brandedTypes ||
-                overrideClass.simpleName in config.brandedTypesNeedingHelpers
-
-            if (isBrandedOverride) {
-                val isFoundation = config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
-                val overridePkg = overrideClass.java.name
-                val isLocalClass = overrideClass in config.brandedTypes || overrideClass in config.dtoClasses || overrideClass in config.enumClasses
-                val isFromFoundation = !isLocalClass && config.basePackagePrefix.isNotEmpty() && overridePkg.startsWith(config.basePackagePrefix)
-                val brandedMock = resolveBrandedMockValue(overrideClass.simpleName ?: "", isFoundation, isFromFoundation, config, importedFoundationJs)
-
-                return if (isCollection) "[$brandedMock]" else brandedMock
-            }
-        }
-
-        val configEnumMock = resolveConfigEnumMockValue(paramName, type, ownerClass, config)
-        if (configEnumMock != null) {
-            return configEnumMock
+        val overrideMock = resolveOverrideMockValue(paramName, actualType, ownerClass, config, importedFoundationJs)
+        if (overrideMock != null) {
+            return overrideMock
         }
     }
 
@@ -80,8 +49,73 @@ public fun getDefaultMockValueJs(
     return when {
         typeName == "String" -> getDefaultStringMockValue(paramName, ownerClassName, config, importedFoundationJs)
         typeName == "Int" || typeName == "Long" || typeName == "Number" -> getDefaultNumberMockValue(paramName, config)
-        else -> getDefaultTypeOrBrandedMockValue(type, typeName, config, importedFoundationJs)
+        else -> getDefaultTypeOrBrandedMockValue(actualType, typeName, config, importedFoundationJs)
     }
+}
+
+private fun resolvePatchFieldInnerType(type: KType): KType? {
+    val classifier = type.classifier as? KClass<*>
+    if (classifier?.simpleName == "PatchField") {
+        return type.arguments.firstOrNull()?.type
+    }
+    return null
+}
+
+private fun resolveOverrideMockValue(
+    paramName: String,
+    type: KType,
+    ownerClass: KClass<*>?,
+    config: NpmGeneratorConfig,
+    importedFoundationJs: MutableSet<String>?
+): String? {
+    val overrideClass = (if (ownerClass != null) config.stringFieldTypeOverrides["${ownerClass.simpleName}.$paramName"] else null)
+        ?: config.stringFieldTypeOverrides[paramName]
+
+    if (overrideClass != null) {
+        val classifier = type.classifier as? KClass<*>
+        val isCollection = classifier == List::class || classifier == Set::class ||
+            classifier?.simpleName == "List" || classifier?.simpleName == "Set" || classifier?.simpleName == "Collection"
+
+        val enumMock = resolveEnumOverrideMockValue(overrideClass, isCollection, config)
+        if (enumMock != null) return enumMock
+
+        val brandedMock = resolveBrandedOverrideMockValue(overrideClass, isCollection, config, importedFoundationJs)
+        if (brandedMock != null) return brandedMock
+    }
+
+    return resolveConfigEnumMockValue(paramName, type, ownerClass, config)
+}
+
+private fun resolveEnumOverrideMockValue(
+    overrideClass: KClass<*>,
+    isCollection: Boolean,
+    config: NpmGeneratorConfig
+): String? {
+    if (overrideClass.java.isEnum || overrideClass in config.enumClasses) {
+        val enumMock = getEnumDefaultMockValue(overrideClass, config)
+        return if (isCollection) "[$enumMock]" else enumMock
+    }
+    return null
+}
+
+private fun resolveBrandedOverrideMockValue(
+    overrideClass: KClass<*>,
+    isCollection: Boolean,
+    config: NpmGeneratorConfig,
+    importedFoundationJs: MutableSet<String>?
+): String? {
+    val isBrandedOverride = overrideClass in config.brandedTypes ||
+        overrideClass.simpleName in config.brandedTypesNeedingHelpers
+
+    if (!isBrandedOverride) return null
+
+    val isFoundation = config.basePackagePrefix.isEmpty() || (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
+    val overridePkg = overrideClass.java.name
+    val isLocalClass = overrideClass in config.brandedTypes || overrideClass in config.dtoClasses || overrideClass in config.enumClasses
+    val isFromFoundation = !isLocalClass && config.basePackagePrefix.isNotEmpty() && overridePkg.startsWith(config.basePackagePrefix)
+    val brandedMock = resolveBrandedMockValue(overrideClass.simpleName ?: "", isFoundation, isFromFoundation, config, importedFoundationJs)
+
+    return if (isCollection) "[$brandedMock]" else brandedMock
 }
 
 private fun resolveConfigEnumMockValue(
@@ -340,6 +374,70 @@ private fun collectAllFixtureNames(config: NpmGeneratorConfig?): List<String> {
     return names.distinct()
 }
 
+private fun isBrandedType(kClass: KClass<*>?, config: NpmGeneratorConfig?): Boolean {
+    if (kClass == null) return false
+    return config?.brandedTypes?.contains(kClass) == true ||
+        kClass.simpleName in (config?.brandedTypesNeedingHelpers ?: emptySet()) ||
+        (kClass.isValue && kClass.primaryConstructor?.parameters?.size == 1 && kClass.primaryConstructor?.parameters?.first()?.name == "value")
+}
+
+private fun buildDefaultPropsJs(
+    name: String,
+    kClass: KClass<*>?,
+    config: NpmGeneratorConfig?,
+    importedFoundationJs: MutableSet<String>?
+): String {
+    val props = if (kClass != null) extractClassProperties(kClass) else emptyList()
+    if (props.isEmpty() || kClass == null) {
+        return "    id: \"00000000-0000-0000-0000-000000000001\""
+    }
+
+    val isDtoClass = kClass in (config?.dtoClasses ?: emptyList()) ||
+        name.endsWith("Payload") ||
+        name.endsWith("Request") ||
+        name.endsWith("Params")
+
+    return props.joinToString(",\n    ") { (propName, propType) ->
+        val wireKey = if (isDtoClass) getWireKey(kClass, propName) else propName
+        val mockVal = getDefaultMockValueJs(propName, propType, kClass, config, importedFoundationJs)
+        "    $wireKey: $mockVal"
+    }
+}
+
+private fun generateSingleFixtureJs(
+    name: String,
+    kClass: KClass<*>?,
+    config: NpmGeneratorConfig?,
+    isFoundation: Boolean,
+    importedFoundationJs: MutableSet<String>?
+): String {
+    val createSingleName = "createTest$name"
+    val createListName = "createTest${name}List"
+
+    if (isBrandedType(kClass, config) && kClass != null) {
+        val simpleName = kClass.simpleName ?: ""
+        val defaultVal = resolveBrandedMockValue(simpleName, isFoundation, false, config, importedFoundationJs)
+        return """
+export const $createSingleName = (overrides = {}) =>
+  (typeof overrides === 'string' ? overrides : (typeof overrides === 'function' ? overrides(0) : $defaultVal));
+
+export const $createListName = (count = 2, overrides = {}) =>
+  createTestList(count, (index) => $createSingleName(typeof overrides === 'function' ? overrides(index) : overrides));
+        """.trimIndent()
+    }
+
+    val defaultProps = buildDefaultPropsJs(name, kClass, config, importedFoundationJs)
+    return """
+export const $createSingleName = (overrides = {}) => ({
+$defaultProps,
+  ...(typeof overrides === 'function' ? overrides(0) : overrides)
+});
+
+export const $createListName = (count = 2, overrides = {}) =>
+  createTestList(count, (index) => $createSingleName(typeof overrides === 'function' ? overrides(index) : (index === 0 ? overrides : { ...overrides })));
+    """.trimIndent()
+}
+
 /**
  * Generates JavaScript test fixture factory functions.
  */
@@ -373,48 +471,7 @@ export const createTestList = (count = 2, factory) =>
     val testClassesMap = allTargetClasses.associateBy { it.simpleName ?: "" }
 
     val generateFunctionCode = namesToGenerate.joinToString("\n\n") { name ->
-        val createSingleName = "createTest$name"
-        val createListName = "createTest${name}List"
-        val kClass = testClassesMap[name]
-        val isBranded = kClass != null && (
-            config?.brandedTypes?.contains(kClass) == true ||
-            kClass.simpleName in (config?.brandedTypesNeedingHelpers ?: emptySet()) ||
-            (kClass.isValue && kClass.primaryConstructor?.parameters?.size == 1 && kClass.primaryConstructor?.parameters?.first()?.name == "value")
-        )
-
-        if (isBranded) {
-            val simpleName = kClass.simpleName ?: ""
-            val defaultVal = resolveBrandedMockValue(simpleName, isFoundation, false, config, importedFoundationJs)
-            """
-export const $createSingleName = (overrides = {}) =>
-  (typeof overrides === 'string' ? overrides : (typeof overrides === 'function' ? overrides(0) : $defaultVal));
-
-export const $createListName = (count = 2, overrides = {}) =>
-  createTestList(count, (index) => $createSingleName(typeof overrides === 'function' ? overrides(index) : overrides));
-            """.trimIndent()
-        } else {
-            val props = if (kClass != null) extractClassProperties(kClass) else emptyList()
-
-            val defaultProps = if (props.isNotEmpty() && kClass != null) {
-                props.joinToString(",\n    ") { (propName, propType) ->
-                    val wireKey = if (kClass in (config?.dtoClasses ?: emptyList()) || name.endsWith("Payload") || name.endsWith("Request") || name.endsWith("Params")) getWireKey(kClass, propName) else propName
-                    val mockVal = getDefaultMockValueJs(propName, propType, kClass, config, importedFoundationJs)
-                    "    $wireKey: $mockVal"
-                }
-            } else {
-                "    id: \"00000000-0000-0000-0000-000000000001\""
-            }
-
-            """
-export const $createSingleName = (overrides = {}) => ({
-$defaultProps,
-  ...(typeof overrides === 'function' ? overrides(0) : overrides)
-});
-
-export const $createListName = (count = 2, overrides = {}) =>
-  createTestList(count, (index) => $createSingleName(typeof overrides === 'function' ? overrides(index) : (index === 0 ? overrides : { ...overrides })));
-            """.trimIndent()
-        }
+        generateSingleFixtureJs(name, testClassesMap[name], config, isFoundation, importedFoundationJs)
     }
 
     return createTestListHelperJs + generateFunctionCode

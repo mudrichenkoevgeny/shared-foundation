@@ -325,6 +325,8 @@ if (typeof Pkg.to${name}OrThrow === 'function') {
 
                 val jsExports = importedFoundationJs.joinToString("\n") { symbol ->
                     when {
+                        symbol == "toQuerySearchString" -> "export const toQuerySearchString = (x) => '';"
+                        symbol == "toQueryMap" || symbol.startsWith("toQueryMap") || symbol.startsWith("serialize") -> "export const $symbol = (x) => ({});"
                         symbol.endsWith("Schema") -> "export const $symbol = z.unknown();"
                         symbol.startsWith("to") -> "export const $symbol = (x) => x;"
                         symbol.startsWith("createTest") -> "export const $symbol = (count, factory) => (typeof count === 'number' ? Array.from({ length: count }, (_, i) => (typeof factory === 'function' ? factory(i) : factory)) : {});"
