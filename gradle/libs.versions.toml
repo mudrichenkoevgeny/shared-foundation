@@ -2,8 +2,6 @@
 # @keep
 jvmToolchain = "25"
 # @keep
-targetJvm = "21"
-# @keep
 android-compileSdk = "37"
 # @keep
 android-minSdk = "24"

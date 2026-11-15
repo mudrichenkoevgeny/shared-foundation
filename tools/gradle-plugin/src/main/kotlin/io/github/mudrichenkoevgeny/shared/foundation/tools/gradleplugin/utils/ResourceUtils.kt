@@ -3,11 +3,28 @@ package io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.utils
 import org.gradle.api.logging.Logger
 import java.io.File
 import java.net.JarURLConnection
+import java.net.URL
 
 /**
  * Utility object for copying resource folders from plugin JARs or file system into target directories.
  */
 public object ResourceUtils {
+    /**
+     * Resolves a resource directory URL from the given [classLoader].
+     *
+     * @param classLoader The ClassLoader to inspect.
+     * @param resourcePath Relative resource path to resolve.
+     * @return Resolved [URL] or `null` if not found.
+     */
+    public fun resolveResourceUrl(
+        classLoader: ClassLoader,
+        resourcePath: String
+    ): URL? {
+        val normalizedPath = resourcePath.removePrefix("/").trimEnd('/')
+        return classLoader.getResource(normalizedPath)
+            ?: classLoader.getResource("$normalizedPath/")
+    }
+
     /**
      * Copies a resource directory from the class loader into a target file directory.
      *
@@ -22,14 +39,30 @@ public object ResourceUtils {
         targetFolder: File,
         logger: Logger
     ) {
-        val normalizedPath = resourcePath.removePrefix("/").trimEnd('/')
-        val resourceUrl = classLoader.getResource(normalizedPath)
-            ?: classLoader.getResource("$normalizedPath/")
+        val resourceUrl = resolveResourceUrl(classLoader, resourcePath)
+        copyResourceFolder(resourceUrl, resourcePath, targetFolder, logger)
+    }
 
+    /**
+     * Copies a pre-resolved resource directory [URL] into a target file directory.
+     *
+     * @param resourceUrl Resolved URL of the resource folder.
+     * @param resourcePath Original relative resource path (used for JAR entry prefix and logging).
+     * @param targetFolder Destination folder on the file system.
+     * @param logger Gradle Logger instance for logging warnings.
+     */
+    public fun copyResourceFolder(
+        resourceUrl: URL?,
+        resourcePath: String,
+        targetFolder: File,
+        logger: Logger
+    ) {
         if (resourceUrl == null) {
             logger.warn("Resource folder not found: $resourcePath")
             return
         }
+
+        val normalizedPath = resourcePath.removePrefix("/").trimEnd('/')
 
         when (resourceUrl.protocol) {
             PROTOCOL_FILE -> {
@@ -82,7 +115,7 @@ public object ResourceUtils {
                 }
             }
 
-            else -> logger.warn("Unsupported resource protocol '${resourceUrl.protocol}' for path: $resourcePath")
+            else -> logger.warn("Unsupported resource protocol '${resourceUrl.protocol}' for path:$resourcePath")
         }
     }
 

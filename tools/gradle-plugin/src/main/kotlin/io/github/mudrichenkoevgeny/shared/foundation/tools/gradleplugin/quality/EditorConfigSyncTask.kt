@@ -35,7 +35,13 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
         resourcePath: String
     ) {
         if (layers.none { it.resourcePath == resourcePath }) {
-            layers.add(Layer(classLoader, resourcePath))
+            val cleanPath = resourcePath.removePrefix("/")
+            val stream = classLoader.getResourceAsStream(cleanPath)
+                ?: EditorConfigSyncTask::class.java.getResourceAsStream("/$cleanPath")
+            checkNotNull(stream) { "EditorConfig layer resource not found: $resourcePath" }
+            val rawText = stream.bufferedReader().use { it.readText() }
+            val layerContent = rawText.substringBefore(MARKER_LOCAL_OVERRIDES).trim()
+            layers.add(Layer(resourcePath = resourcePath, content = layerContent))
         }
     }
 
@@ -45,13 +51,7 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
     @TaskAction
     public fun sync() {
         val joinedLayers = layers.mapNotNull { layer ->
-            val cleanPath = layer.resourcePath.removePrefix("/")
-            val stream = layer.classLoader.getResourceAsStream(cleanPath)
-                ?: EditorConfigSyncTask::class.java.getResourceAsStream("/$cleanPath")
-            checkNotNull(stream) { "EditorConfig layer resource not found: ${layer.resourcePath}" }
-            val rawText = stream.bufferedReader().use { it.readText() }
-            val layerContent = rawText.substringBefore(MARKER_LOCAL_OVERRIDES).trim()
-            layerContent.ifBlank { null }
+            layer.content.ifBlank { null }
         }.joinToString("\n\n")
 
         val file = outputFile.get().asFile
@@ -91,8 +91,8 @@ public abstract class EditorConfigSyncTask : DefaultTask() {
     }
 
     private data class Layer(
-        val classLoader: ClassLoader,
-        val resourcePath: String
+        val resourcePath: String,
+        val content: String
     )
 
     private companion object {

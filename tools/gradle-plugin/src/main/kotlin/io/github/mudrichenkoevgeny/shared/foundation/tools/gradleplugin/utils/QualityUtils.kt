@@ -68,19 +68,20 @@ public object QualityUtils {
         resourcePath: String,
         outputFileName: String
     ) {
+        val cleanPath = resourcePath.removePrefix("/")
+        val configBytes = (classLoader.getResourceAsStream(cleanPath)
+            ?: QualityUtils::class.java.getResourceAsStream("/$cleanPath"))
+            ?.use { it.readBytes() }
+            ?: error("Detekt config resource not found: $resourcePath")
+
         val extractTask = target.tasks.register(taskName) { task ->
             val outputFile = target.layout.buildDirectory.file("$DEFAULT_DETEKT_OUTPUT_DIR$outputFileName")
+            task.inputs.property(TASK_PROPERTY_CONTENT_HASH, configBytes.contentHashCode())
             task.outputs.file(outputFile)
             task.doLast {
                 val file = outputFile.get().asFile
                 file.parentFile.mkdirs()
-                val cleanPath = resourcePath.removePrefix("/")
-                val stream = classLoader.getResourceAsStream(cleanPath)
-                    ?: QualityUtils::class.java.getResourceAsStream("/$cleanPath")
-                checkNotNull(stream) { "Detekt config resource not found: $resourcePath" }
-                stream.use { input ->
-                    file.outputStream().use { output -> input.copyTo(output) }
-                }
+                file.writeBytes(configBytes)
             }
         }
 
@@ -212,6 +213,7 @@ public object QualityUtils {
     private const val DEFAULT_DETEKT_OUTPUT_DIR = "generated/detekt/"
     private const val DEFAULT_LOCAL_DETEKT_CONFIG_PATH = "config/detekt/detekt.yml"
 
+    private const val TASK_PROPERTY_CONTENT_HASH = "contentHash"
     private const val TASK_SYNC_EDITORCONFIG = "syncEditorConfig"
     private const val TASK_GROUP_QUALITY = "quality"
     private const val FILE_EDITORCONFIG = ".editorconfig"
