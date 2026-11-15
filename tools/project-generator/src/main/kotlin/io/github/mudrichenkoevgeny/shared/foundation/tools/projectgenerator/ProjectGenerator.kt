@@ -94,7 +94,11 @@ internal class ProjectGenerator(private val config: ProjectGeneratorConfig) {
         }
     }
 
-    private fun processPaths(sourceRoot: Path, targetDir: File, replacements: Map<String, String>) {
+    private fun processPaths(
+        sourceRoot: Path,
+        targetDir: File,
+        replacements: Map<String, String>
+    ) {
         Files.walk(sourceRoot).use { stream ->
             stream.filter { Files.isRegularFile(it) }.forEach { path ->
                 val relPath = sourceRoot.relativize(path).toString().replace("\\", "/")
@@ -123,7 +127,8 @@ internal class ProjectGenerator(private val config: ProjectGeneratorConfig) {
         private const val AGENT_GLOBAL_DIR = ".agent/global"
         private const val GIT_DIR = ".git"
 
-        private val CONFLICTING_ENTRIES = listOf("settings.gradle.kts", "build.gradle.kts", "core", "feature", "testing", "gradlew")
+        private val CONFLICTING_ENTRIES =
+            listOf("settings.gradle.kts", "build.gradle.kts", "core", "feature", "testing", "gradlew")
         private val FOUNDATION_FILES_TO_COPY = listOf(
             "gradlew",
             "gradlew.bat",

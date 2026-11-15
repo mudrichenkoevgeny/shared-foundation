@@ -43,7 +43,8 @@ public class PublishConventionPlugin : Plugin<Project> {
             target.pluginManager.apply(PLUGIN_DOKKA)
 
             if (target != target.rootProject
-                && target.rootProject.configurations.findByName(DEPENDENCY_CONFIGURATION_DOKKA) != null) {
+                && target.rootProject.configurations.findByName(DEPENDENCY_CONFIGURATION_DOKKA) != null
+            ) {
                 target.rootProject.dependencies
                     .add(DEPENDENCY_CONFIGURATION_DOKKA, target)
             }

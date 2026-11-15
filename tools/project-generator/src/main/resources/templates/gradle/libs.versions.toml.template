@@ -1,8 +1,6 @@
 [versions]
 # @keep
 jvmToolchain = "{{TOOLCHAIN_JVM}}"
-# @keep
-targetJvm = "{{TARGET_JVM}}"
 
 # Plugins & Core
 sharedFoundation = "{{SF_VERSION}}"

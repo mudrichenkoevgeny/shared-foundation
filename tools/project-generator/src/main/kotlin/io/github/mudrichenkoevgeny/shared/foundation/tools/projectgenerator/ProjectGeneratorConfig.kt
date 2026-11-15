@@ -17,7 +17,6 @@ internal data class ProjectGeneratorConfig(
     val skipGit: Boolean,
     val foundationRootDir: File,
     val kotlinVersion: String,
-    val targetJvm: String,
     val toolchainJvm: String,
     val detektVersion: String,
     val ktlintVersion: String,
@@ -33,7 +32,6 @@ internal data class ProjectGeneratorConfig(
         private const val PROP_SHARED_FOUNDATION_VERSION = "sharedFoundationVersion"
         private const val PROP_FOUNDATION_ROOT_DIR = "foundationRootDir"
         private const val PROP_KOTLIN_VERSION = "kotlinVersion"
-        private const val PROP_TARGET_JVM = "targetJvm"
         private const val PROP_TOOLCHAIN_JVM = "toolchainJvm"
         private const val PROP_DETEKT_VERSION = "detektVersion"
         private const val PROP_KTLINT_VERSION = "ktlintVersion"
@@ -60,8 +58,6 @@ internal data class ProjectGeneratorConfig(
 
             val kotlinVersion = System.getProperty(PROP_KOTLIN_VERSION)
                 ?: error("System property '$PROP_KOTLIN_VERSION' is missing.")
-            val targetJvm = System.getProperty(PROP_TARGET_JVM)
-                ?: error("System property '$PROP_TARGET_JVM' is missing.")
             val toolchainJvm = System.getProperty(PROP_TOOLCHAIN_JVM)
                 ?: error("System property '$PROP_TOOLCHAIN_JVM' is missing.")
             val detektVersion = System.getProperty(PROP_DETEKT_VERSION)
@@ -83,7 +79,11 @@ internal data class ProjectGeneratorConfig(
             val sanitizedGroup = rawGroup.split(".").joinToString(".") { part ->
                 part.replace(Regex(NON_ALPHANUMERIC_REGEX), "").lowercase()
             }
-            val packageName = if (sanitizedGroup.endsWith(SHARED_SUFFIX)) sanitizedGroup else "$sanitizedGroup$SHARED_SUFFIX"
+            val packageName = if (sanitizedGroup.endsWith(SHARED_SUFFIX)) {
+                sanitizedGroup
+            } else {
+                "$sanitizedGroup$SHARED_SUFFIX"
+            }
             val packageDirPath = packageName.replace('.', '/')
             val npmPackageName = "$rawNpmScope$NPM_SHARED_SUFFIX"
 
@@ -112,7 +112,6 @@ internal data class ProjectGeneratorConfig(
                 skipGit = skipGit,
                 foundationRootDir = foundationRootDir,
                 kotlinVersion = kotlinVersion,
-                targetJvm = targetJvm,
                 toolchainJvm = toolchainJvm,
                 detektVersion = detektVersion,
                 ktlintVersion = ktlintVersion,

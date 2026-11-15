@@ -15,7 +15,6 @@ fun JavaExec.configureVersionProperties() {
     systemProperty("foundationRootDir", project.rootProject.projectDir.absolutePath)
 
     systemProperty("kotlinVersion", rootProject.libs.versions.kotlin.get())
-    systemProperty("targetJvm", rootProject.libs.versions.targetJvm.get())
     systemProperty("toolchainJvm", rootProject.libs.versions.jvmToolchain.get())
     systemProperty("detektVersion", rootProject.libs.versions.detekt.get())
     systemProperty("ktlintVersion", rootProject.libs.versions.ktlint.get())

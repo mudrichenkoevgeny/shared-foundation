@@ -33,7 +33,6 @@ internal object TemplateReplacer {
             TOKEN_NPM_PACKAGE_NAME to config.npmPackageName,
             TOKEN_SF_VERSION to config.sfVersion,
             TOKEN_KOTLIN_VERSION to config.kotlinVersion,
-            TOKEN_TARGET_JVM to config.targetJvm,
             TOKEN_TOOLCHAIN_JVM to config.toolchainJvm,
             TOKEN_DETEKT_VERSION to config.detektVersion,
             TOKEN_KTLINT_VERSION to config.ktlintVersion,
@@ -42,7 +41,10 @@ internal object TemplateReplacer {
         )
     }
 
-    fun replaceAll(content: String, replacements: Map<String, String>): String {
+    fun replaceAll(
+        content: String,
+        replacements: Map<String, String>
+    ): String {
         var result = content
         for ((key, value) in replacements) {
             result = result.replace(key, value)
