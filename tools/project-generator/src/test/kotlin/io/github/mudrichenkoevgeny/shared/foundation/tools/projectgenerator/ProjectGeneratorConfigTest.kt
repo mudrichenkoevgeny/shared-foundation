@@ -10,7 +10,7 @@ public class ProjectGeneratorConfigTest {
         System.setProperty("projectName", "sample")
         System.setProperty("groupId", "")
         System.setProperty("foundationRootDir", System.getProperty("user.dir"))
-        System.setProperty("sharedFoundationVersion", "0.1.17")
+        System.setProperty("sharedFoundationVersion", "0.1.18")
         System.setProperty("kotlinVersion", "2.4.21")
         System.setProperty("toolchainJvm", "25")
         System.setProperty("detektVersion", "2.0.0-alpha.6")
