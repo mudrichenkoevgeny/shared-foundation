@@ -22,7 +22,7 @@ The project skeleton generator is implemented as an internal (non-published) JVM
 Scaffold a new downstream contracts repository:
 
 ```bash
-./gradlew initProject -Pname=sample -Pgroup=com.sample -PnpmScope=@sample -PlinkLocal=true
+./gradlew initProject -Pname=sample -PlinkLocal=true
 ```
 
 ### Command Parameter Matrix
