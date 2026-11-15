@@ -9,6 +9,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 import org.gradle.work.DisableCachingByDefault
 import java.io.File
+import java.net.URL
 
 /**
  * Task extracting global agent rules from plugin resources or local repository into .agent/global/.
@@ -48,7 +49,8 @@ public abstract class AgentSyncTask : DefaultTask() {
         targetSubdir: String
     ) {
         if (extraLayers.none { it.targetSubdir == targetSubdir }) {
-            extraLayers.add(Layer(classLoader, resourcePath, targetSubdir))
+            val resourceUrl = ResourceUtils.resolveResourceUrl(classLoader, resourcePath)
+            extraLayers.add(Layer(resourceUrl, resourcePath, targetSubdir))
         }
     }
 
@@ -74,12 +76,12 @@ public abstract class AgentSyncTask : DefaultTask() {
 
         extraLayers.forEach { layer ->
             val layerDir = File(targetDir, layer.targetSubdir)
-            ResourceUtils.copyResourceFolder(layer.classLoader, layer.resourcePath, layerDir, logger)
+            ResourceUtils.copyResourceFolder(layer.resourceUrl, layer.resourcePath, layerDir, logger)
         }
     }
 
     private data class Layer(
-        val classLoader: ClassLoader,
+        val resourceUrl: URL?,
         val resourcePath: String,
         val targetSubdir: String
     )
