@@ -20,6 +20,8 @@ This document defines repository-specific workflow requirements for AI-assisted 
   This task automatically builds the NPM package, runs `auditNpmExports` parity checks, and executes `verifyConsumerNpmPackage` (Node.js syntax, declaration integrity, and `npm pack` tarball verification).
 - **Gradle Convention Plugins Verification:** When modifying `tools/gradle-plugin` or Detekt base configurations, publish plugins to local Maven for verification:
   `./gradlew publishToMavenLocal`
+- **Project Skeleton Generator Verification:** When modifying `tools/project-generator` or resource templates in `src/main/resources/templates/`, verify E2E scaffolding by running:
+  `./gradlew verifyProjectGenerator`
 
 ## 3. Module Responsibility Mapping
 
@@ -35,6 +37,7 @@ Place code in the correct module based on its functional role:
 - **`tools/detekt-rules`:** Custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`).
 - **`tools/gradle-plugin`:** Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`).
 - **`tools/npm-generator`:** Executable JVM module triggered via `./gradlew generateNpmPackage`. Generates the `@mudrichenkoevgeny/shared-foundation` NPM package (`build/npm-package/`).
+- **`tools/project-generator`:** Internal JVM module triggered via `./gradlew initProject` / `./gradlew scaffoldProject`. Scaffolds clean, compilable downstream KMP contract repositories on disk configured with `shared-foundation` plugins, version catalog, BOM, `core/common`, `testing`, `tools/npm-generator-runner`, and AI agent rules ([module README](tools/project-generator/README.md)).
 
 ---
 *Refer to `AGENTS.md` for the full list of project standards.*

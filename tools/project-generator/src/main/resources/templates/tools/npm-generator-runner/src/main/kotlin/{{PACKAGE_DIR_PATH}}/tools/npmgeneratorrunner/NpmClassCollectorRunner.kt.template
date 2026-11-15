@@ -1,0 +1,17 @@
+package {{PACKAGE_NAME}}.tools.npmgeneratorrunner
+
+import kotlin.reflect.KClass
+
+internal val dtoClasses: List<KClass<*>> = emptyList()
+
+internal val domainClasses: List<KClass<*>> = emptyList()
+
+internal val enumClasses: List<KClass<*>> = emptyList()
+
+internal val errorClasses: List<KClass<*>> = emptyList()
+
+internal val permClasses: List<KClass<*>> = emptyList()
+
+internal val routeClasses: List<KClass<*>> = emptyList()
+
+internal val domainToDtoClasses: List<Pair<KClass<*>, KClass<*>?>> = emptyList()

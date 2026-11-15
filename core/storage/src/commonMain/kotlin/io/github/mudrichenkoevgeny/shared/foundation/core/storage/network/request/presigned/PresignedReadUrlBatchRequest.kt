@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 /**
  * Request payload for batch generating temporary presigned S3 GET URLs.
- * Used internally by other services (e.g. Quiz Service) to fetch access links for multiple files simultaneously.
+ * Used internally by other services to fetch access links for multiple files simultaneously.
  *
  * @property fileIds List of internal file identifier strings (hex-dash UUIDs) to request access to.
  */

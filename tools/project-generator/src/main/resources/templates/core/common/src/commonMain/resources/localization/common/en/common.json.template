@@ -1,0 +1,6 @@
+{
+  "common": {
+    "app_name": "{{PROJECT_TITLE}} Shared",
+    "welcome": "Welcome to {{PROJECT_TITLE}}"
+  }
+}

@@ -1,0 +1,10 @@
+# Project Identity & Versioning
+group={{GROUP_ID}}
+version=0.1.0
+
+# Gradle Build Configuration
+org.gradle.daemon=true
+org.gradle.parallel=true
+org.gradle.caching=true
+org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError
+kotlin.daemon.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=512m

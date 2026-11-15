@@ -1,0 +1,9 @@
+# {{PROJECT_REPO_NAME}}
+
+Shared contracts library for {{PROJECT_TITLE}} (JVM, Android, Web).
+
+## Building & Verification
+```bash
+./gradlew check
+./gradlew generateNpmPackage
+```

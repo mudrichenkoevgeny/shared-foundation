@@ -1,0 +1,60 @@
+package {{PACKAGE_NAME}}.tools.npmgeneratorrunner
+
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorEngine
+import java.io.File
+import java.io.IOException
+
+private const val PROP_USER_DIR = "user.dir"
+private const val PROP_PACKAGE_VERSION = "PACKAGE_VERSION"
+private const val PROP_ZOD_VERSION = "ZOD_VERSION"
+private const val PROP_TYPESCRIPT_VERSION = "TYPESCRIPT_VERSION"
+
+private const val SETTINGS_FILE = "settings.gradle.kts"
+private const val REL_PATH_OUTPUT_DIR = "build/npm-package"
+private const val REL_PATH_ERROR_LOG = "build/generator-error.log"
+
+internal fun main() {
+    var rootDir = File(System.getProperty(PROP_USER_DIR)).canonicalFile
+    while (rootDir.parentFile != null && !File(rootDir, SETTINGS_FILE).exists()) {
+        rootDir = rootDir.parentFile
+    }
+    val outputDir = File(rootDir, REL_PATH_OUTPUT_DIR)
+    outputDir.mkdirs()
+
+    val packageVersion = System.getProperty(PROP_PACKAGE_VERSION)?.takeIf { it.isNotBlank() && it != "unspecified" }
+        ?: error("System property '$PROP_PACKAGE_VERSION' is missing.")
+    val zodVersion = System.getProperty(PROP_ZOD_VERSION)?.takeIf { it.isNotBlank() }
+        ?: error("System property '$PROP_ZOD_VERSION' is missing.")
+    val tsVersion = System.getProperty(PROP_TYPESCRIPT_VERSION)?.takeIf { it.isNotBlank() }
+        ?: error("System property '$PROP_TYPESCRIPT_VERSION' is missing.")
+
+    val config = buildNpmConfig(
+        rootDir = rootDir,
+        outputDir = outputDir,
+        packageVersion = packageVersion,
+        zodVersion = zodVersion,
+        typescriptVersion = tsVersion
+    )
+
+    try {
+        NpmGeneratorEngine(config).generate()
+        println("Successfully generated NPM package in ${outputDir.absolutePath}")
+    } catch (e: IllegalStateException) {
+        logAndRethrow(rootDir, e)
+    } catch (e: IllegalArgumentException) {
+        logAndRethrow(rootDir, e)
+    } catch (e: IOException) {
+        logAndRethrow(rootDir, e)
+    }
+}
+
+private fun logAndRethrow(
+    rootDir: File,
+    e: Throwable
+): Nothing {
+    File(rootDir, REL_PATH_ERROR_LOG).apply {
+        parentFile.mkdirs()
+        writeText(e.stackTraceToString())
+    }
+    throw e
+}

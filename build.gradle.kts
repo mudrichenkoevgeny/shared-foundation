@@ -18,6 +18,7 @@ apiValidation {
         "bom",
         "npm-generator",
         "npm-generator-runner",
+        "project-generator",
         "detekt-rules",
         "testing"
     )
@@ -53,3 +54,22 @@ tasks.register("generateNpmPackage") {
         " Zod schemas, and route constants."
     dependsOn(":tools:npm-generator-runner:generateNpmPackage")
 }
+
+tasks.register("initProject") {
+    group = "scaffolding"
+    description = "Scaffolds a new downstream contract repository."
+    dependsOn(":tools:project-generator:initProject")
+}
+
+tasks.register("scaffoldProject") {
+    group = "scaffolding"
+    description = "Alias for initProject."
+    dependsOn(tasks.named("initProject"))
+}
+
+tasks.register("verifyProjectGenerator") {
+    group = "verification"
+    description = "E2E verification of project skeleton scaffolding."
+    dependsOn(":tools:project-generator:verifyProjectGenerator")
+}
+

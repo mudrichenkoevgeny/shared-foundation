@@ -1,0 +1,47 @@
+pluginManagement {
+    repositories {
+{{MAVEN_LOCAL_REPOS}}        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+    repositories {
+{{MAVEN_LOCAL_REPOS}}        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "{{PROJECT_REPO_NAME}}"
+
+fun registerModules(
+    group: String,
+    modules: List<String>
+) {
+    modules.forEach { name ->
+        val gradlePath = ":$group:$name"
+        val folderPath = "$group/$name"
+        include(gradlePath)
+        project(gradlePath).projectDir = file(folderPath)
+    }
+}
+
+registerModules(
+    "core",
+    listOf("common")
+)
+
+registerModules(
+    "tools",
+    listOf("npm-generator-runner")
+)
+
+include(":bom")
+include(":testing")

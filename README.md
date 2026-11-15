@@ -59,6 +59,16 @@ For TypeScript and React applications, install the generated Zod schemas, routes
 pnpm add @mudrichenkoevgeny/shared-foundation
 ```
 
+## Project Skeleton Generator
+
+Scaffold a new, production-ready downstream Kotlin Multiplatform contracts repository on disk:
+
+```bash
+./gradlew initProject -Pname=sample -Pgroup=com.sample -PnpmScope=@sample
+```
+
+This creates `sample-shared` configured with `shared-foundation` Gradle convention plugins, version catalog, BOM, `core/common`, `testing`, `tools/npm-generator-runner`, and AI agent rules.
+
 ## Modules
 
 Published artifacts (versions aligned via the BOM):
@@ -73,6 +83,7 @@ Published artifacts (versions aligned via the BOM):
 - **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) for enforcing shared library architectural standards across consumer applications ([module README](tools/detekt-rules/README.md)).
 - **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`) for auto-configuring quality checks, compiler options, publishing, localization generation, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
 - **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
+- **tools-project-generator** — internal JVM generator triggered via `./gradlew initProject` for scaffolding clean downstream contract repositories (`<name>-shared`) on disk ([module README](tools/project-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
 ## Testing Fixtures & Mocks

@@ -1,0 +1,9 @@
+# {{PROJECT_REPO_NAME}} — Project Standards
+
+This repository defines shared multiplatform contracts for {{PROJECT_TITLE}}, extending `shared-foundation`.
+
+## Core Principles
+- **Upstream Foundation:** Consumes `shared-foundation` for audit, security, settings, user, and storage contracts.
+- **Entity Projections:** Follows up to 4-tier projection taxonomy (`Summary`, `Details`, `Private`, `Internal`).
+- **No Inline Comments & No Trailing Commas:** Keep code self-documenting without trailing commas.
+- **Strict Null Safety:** Non-null assertions (`!!`) are strictly prohibited in production code.

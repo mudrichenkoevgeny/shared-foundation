@@ -1,0 +1,44 @@
+[versions]
+# @keep
+jvmToolchain = "{{TOOLCHAIN_JVM}}"
+# @keep
+targetJvm = "{{TARGET_JVM}}"
+
+# Plugins & Core
+sharedFoundation = "{{SF_VERSION}}"
+kotlin = "{{KOTLIN_VERSION}}"
+androidGradlePlugin = "9.5.1"
+
+# Npm Package
+npmZod = "^3.24.2"
+npmTypescript = "^5.5.0"
+
+# Kotlin
+kotlinx-serialization = "{{SERIALIZATION_VERSION}}"
+
+# Code Analysis
+ktlint = "{{KTLINT_VERSION}}"
+detekt = "{{DETEKT_VERSION}}"
+
+[libraries]
+shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "sharedFoundation" }
+shared-foundation-common = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-common" }
+shared-foundation-testing = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-testing" }
+shared-foundation-npm-generator = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-npm-generator", version.ref = "sharedFoundation" }
+
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+[plugins]
+shared-foundation-agent-sync = { id = "io.github.mudrichenkoevgeny.shared-foundation-agent-sync", version.ref = "sharedFoundation" }
+shared-foundation-localization = { id = "io.github.mudrichenkoevgeny.shared-foundation-localization", version.ref = "sharedFoundation" }
+shared-foundation-kotlin = { id = "io.github.mudrichenkoevgeny.shared-foundation-kotlin", version.ref = "sharedFoundation" }
+shared-foundation-quality = { id = "io.github.mudrichenkoevgeny.shared-foundation-quality", version.ref = "sharedFoundation" }
+
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

@@ -1,0 +1,35 @@
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+    application
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(platform(libs.shared.foundation.bom))
+    implementation(libs.shared.foundation.npm.generator)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlin.reflect)
+
+    testImplementation(libs.kotlin.test)
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass.set("{{PACKAGE_NAME}}.tools.npmgeneratorrunner.NpmGeneratorRunnerKt")
+}
+
+tasks.named<JavaExec>("run") {
+    systemProperty("PACKAGE_VERSION", rootProject.version.toString())
+    systemProperty("ZOD_VERSION", libs.versions.npmZod.get())
+    systemProperty("TYPESCRIPT_VERSION", libs.versions.npmTypescript.get())
+}
+
+tasks.register("generateNpmPackage") {
+    group = "publishing"
+    description = "Generates NPM package artifact for {{PROJECT_REPO_NAME}}."
+    dependsOn(tasks.named("run"))
+}

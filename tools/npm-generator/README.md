@@ -1,6 +1,6 @@
 # tools/npm-generator (`shared-foundation-npm-generator`)
 
-Pure, domain-agnostic JVM code generation framework and reusable engine for building TypeScript / JavaScript NPM package artifacts (**`@mudrichenkoevgeny/shared-foundation`** and downstream SDK packages such as **`@hivepick/shared`**).
+Pure, domain-agnostic JVM code generation framework and reusable engine for building TypeScript / JavaScript NPM package artifacts (**`@mudrichenkoevgeny/shared-foundation`** and downstream SDK packages such as **`@sample/shared`**).
 
 Published to Maven Central as **`io.github.mudrichenkoevgeny:shared-foundation-npm-generator:<version>`**.
 
@@ -71,11 +71,11 @@ Every invocation of `NpmGeneratorEngine(config).generate()` automatically execut
 
 ---
 
-## How Downstream Libraries (e.g. `hivepick-shared`) Use This Generator
+## How Downstream Libraries (e.g. `sample-shared`) Use This Generator
 
-Downstream KMP projects (such as `hivepick-shared` or `@hivepick/shared`) consume `shared-foundation-npm-generator` as a Gradle dependency.
+Downstream KMP projects (such as `sample-shared` or `@sample/shared`) consume `shared-foundation-npm-generator` as a Gradle dependency.
 
-### Integration Guide for `hivepick-shared`:
+### Integration Guide for `sample-shared`:
 
 #### Step 1: Add Dependency in `build.gradle.kts`
 In the downstream tool/generator subproject `tools/npm-generator/build.gradle.kts`:
@@ -86,15 +86,15 @@ dependencies {
     implementation("io.github.mudrichenkoevgeny:shared-foundation-npm-generator:<version>")
 
     // Depend on downstream domain/network modules
-    implementation(project(":shared:hivepick:feature:quiz"))
+    implementation(project(":shared:sample:feature:resource"))
 }
 ```
 
 #### Step 2: Create Downstream Generator Main Entry Point
-In downstream project `tools/npm-generator/src/main/kotlin/com/hivepick/shared/generator/HivepickNpmGenerator.kt`:
+In downstream project `tools/npm-generator/src/main/kotlin/com/sample/shared/generator/SampleNpmGenerator.kt`:
 
 ```kotlin
-package com.hivepick.shared.generator
+package com.sample.shared.generator
 
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorEngine
@@ -106,53 +106,53 @@ fun main() {
     val outputDir = File(rootDir, "build/npm-package")
 
     val config = NpmGeneratorConfig(
-        packageName = "@hivepick/shared",
+        packageName = "@sample/shared",
         packageVersion = "1.0.0",
-        packageDescription = "Hivepick Shared TypeScript SDK - Zod schemas and API contracts",
+        packageDescription = "Sample Shared TypeScript SDK - Zod schemas and API contracts",
         peerDependencies = mapOf(
-            "@mudrichenkoevgeny/shared-foundation" to "^0.0.71"
+            "@mudrichenkoevgeny/shared-foundation" to "^0.1.16"
         ),
         outputDirectory = outputDir,
-        sourceCodeDirectory = File(rootDir, "shared/hivepick"),
-        localizationJsonDirectory = File(rootDir, "shared/hivepick/resources/localization"),
-        testingSourceDirectory = File(rootDir, "shared/hivepick/testing/src/commonMain/kotlin"),
+        sourceCodeDirectory = File(rootDir, "shared/sample"),
+        localizationJsonDirectory = File(rootDir, "shared/sample/resources/localization"),
+        testingSourceDirectory = File(rootDir, "shared/sample/testing/src/commonMain/kotlin"),
 
-        // Specify Hivepick-specific DTOs, Enums, Mappers, Routes, and Contracts
+        // Specify Sample-specific DTOs, Enums, Mappers, Routes, and Contracts
         dtoClasses = listOf(
-            QuizSummaryPayload::class,
-            QuizDetailPayload::class,
-            CreateQuizRequest::class
+            ResourceSummaryPayload::class,
+            ResourceDetailPayload::class,
+            CreateResourceRequest::class
         ),
         enumClasses = listOf(
-            QuizStatus::class,
-            QuestionType::class
+            ResourceStatus::class,
+            ResourceType::class
         ),
         domainToDtoMappers = listOf(
-            QuizSummary::class to QuizSummaryPayload::class,
-            QuizDetail::class to QuizDetailPayload::class
+            ResourceSummary::class to ResourceSummaryPayload::class,
+            ResourceDetail::class to ResourceDetailPayload::class
         ),
         routeObjects = listOf(
-            QuizRoutes::class
+            ResourceRoutes::class
         ),
 
         // Map DTO fields to Foundation branded types
         stringFieldTypeOverrides = mapOf(
-            "authorId" to UserId::class
+            "ownerId" to UserId::class
         ),
 
         // Downstream cross-package import settings
-        basePackagePrefix = "com.hivepick.shared",
+        basePackagePrefix = "com.sample.shared",
         foundationImportPackage = "@mudrichenkoevgeny/shared-foundation",
         autoImportSymbols = setOf("UserId", "toUserIdOrThrow", "toQueryMap", "createTestList"),
 
         // Optional custom smoke test code
         customDtsSmokeTestCode = """
-            const assertQuiz: Pkg.QuizSummaryPayload = Pkg.quizSummaryPayloadSchema.parse({});
+            const assertResource: Pkg.ResourceSummaryPayload = Pkg.resourceSummaryPayloadSchema.parse({});
         """.trimIndent(),
         customRuntimeSmokeTestCode = """
-            if (Pkg.createTestQuizSummaryPayload) {
-              const quiz = Pkg.createTestQuizSummaryPayload();
-              if (!quiz) errors++;
+            if (Pkg.createTestResourceSummaryPayload) {
+              const resource = Pkg.createTestResourceSummaryPayload();
+              if (!resource) errors++;
             }
         """.trimIndent()
     )
@@ -161,14 +161,14 @@ fun main() {
     val engine = NpmGeneratorEngine(config)
     engine.generate()
 
-    println("Successfully generated @hivepick/shared in ${outputDir.absolutePath}")
+    println("Successfully generated @sample/shared in ${outputDir.absolutePath}")
 }
 ```
 
 #### Step 3: What Happens During Downstream Generation?
-1. **Zero Duplication**: `NpmGeneratorEngine` generates `@hivepick/shared` containing only Hivepick DTOs, Enums, Routes, and Mappers.
+1. **Zero Duplication**: `NpmGeneratorEngine` generates `@sample/shared` containing only Sample DTOs, Enums, Routes, and Mappers.
 2. **Auto-Import Foundation Types**: Any reference to `UserId`, `FileId`, `PermissionCode`, `pagedResultSchema`, `toQueryMap`, `formatLocalizedString`, or `createTestList` automatically generates cross-package import statements:
    - In `index.js`: `import { userIdSchema, toUserIdOrThrow, pagedResultSchema } from '@mudrichenkoevgeny/shared-foundation';`
    - In `index.d.ts`: `import type { UserId, PagedResult } from '@mudrichenkoevgeny/shared-foundation';`
-3. **Custom Localization**: Automatically generates `HivepickSharedLocalization` and `hivepickSharedLocalization` singleton, importing `formatLocalizedString` from foundation.
+3. **Custom Localization**: Automatically generates `SampleSharedLocalization` and `sampleSharedLocalization` singleton, importing `formatLocalizedString` from foundation.
 4. **Automatic Verification**: `NpmPackageVerifier` verifies artifacts, syntax, `npm pack --dry-run`, `tsc --noEmit --strict`, and Node.js runtime behavior before finishing.

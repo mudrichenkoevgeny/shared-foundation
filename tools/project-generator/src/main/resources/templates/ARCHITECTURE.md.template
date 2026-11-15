@@ -1,0 +1,10 @@
+# {{PROJECT_REPO_NAME}} Architecture
+
+## Overview
+`{{PROJECT_REPO_NAME}}` provides shared Kotlin Multiplatform DTOs, route contracts, error codes, permissions, and TypeScript bindings (`{{NPM_PACKAGE_NAME}}`) for the {{PROJECT_TITLE}} ecosystem.
+
+## Module Structure
+- `core/common`: Foundational models, navigation routes, error codes, permissions, and localization.
+- `testing`: Contract testing fixtures.
+- `tools/npm-generator-runner`: NPM package generator runner.
+- `bom`: Bill of Materials.

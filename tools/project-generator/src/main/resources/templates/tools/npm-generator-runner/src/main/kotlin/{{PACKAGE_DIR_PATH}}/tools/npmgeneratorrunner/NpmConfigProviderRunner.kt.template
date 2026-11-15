@@ -1,0 +1,37 @@
+package {{PACKAGE_NAME}}.tools.npmgeneratorrunner
+
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
+import java.io.File
+
+internal fun buildNpmConfig(
+    rootDir: File,
+    outputDir: File,
+    packageVersion: String,
+    zodVersion: String,
+    typescriptVersion: String,
+    repositoryUrl: String = ""
+): NpmGeneratorConfig {
+    return NpmGeneratorConfig(
+        packageName = "{{NPM_PACKAGE_NAME}}",
+        packageVersion = packageVersion,
+        packageDescription = "{{PROJECT_TITLE}} Shared Contracts",
+        repositoryUrl = repositoryUrl,
+        peerDependencies = mapOf(
+            "@mudrichenkoevgeny/shared-foundation" to "^{{SF_VERSION}}"
+        ),
+        outputDirectory = outputDir,
+        sourceCodeDirectory = rootDir,
+        localizationJsonDirectory = rootDir,
+        dtoClasses = dtoClasses,
+        enumClasses = enumClasses,
+        errorClasses = errorClasses,
+        permClasses = permClasses,
+        routeObjects = routeClasses,
+        domainToDtoMappers = domainToDtoClasses,
+        testFixtures = dtoClasses + domainClasses,
+        basePackagePrefix = "{{PACKAGE_NAME}}",
+        foundationImportPackage = "@mudrichenkoevgeny/shared-foundation",
+        zodVersion = zodVersion,
+        typescriptVersion = typescriptVersion
+    )
+}

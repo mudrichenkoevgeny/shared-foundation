@@ -1,0 +1,43 @@
+plugins {
+    alias(libs.plugins.shared.foundation.agent.sync)
+    alias(libs.plugins.shared.foundation.localization) apply false
+    alias(libs.plugins.shared.foundation.kotlin) apply false
+    alias(libs.plugins.shared.foundation.quality) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.ktlint) apply false
+}
+
+allprojects {
+    group = rootProject.group
+    version = rootProject.version
+}
+
+subprojects {
+    val isBom = project.name == "bom"
+    val isModule = project.projectDir.resolve("src").exists() || isBom
+
+    if (!isModule) {
+        return@subprojects
+    }
+
+    pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-quality")
+
+    if (isBom) {
+        pluginManager.apply("java-platform")
+    } else {
+        pluginManager.apply("io.github.mudrichenkoevgeny.shared-foundation-kotlin")
+    }
+
+    if (!path.startsWith(":tools")) {
+        pluginManager.apply("maven-publish")
+    }
+}
+
+tasks.register("generateNpmPackage") {
+    group = "publishing"
+    description = "Generates the {{NPM_PACKAGE_NAME}} NPM package with TypeScript types, Zod schemas, and route constants."
+    dependsOn(":tools:npm-generator-runner:generateNpmPackage")
+}

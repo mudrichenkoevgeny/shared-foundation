@@ -27,7 +27,11 @@ public class PublishConventionPlugin : Plugin<Project> {
         val explicitPublishFlag = (target.findProperty(PROP_PUBLISH_TO_MAVEN) as? Boolean)
             ?: (target.findProperty(PROP_PUBLISH_TO_MAVEN)?.toString()?.toBoolean())
         val isTool = target.path.startsWith(PATH_PREFIX_TOOLS)
-        val shouldPublish = !isTool || explicitPublishFlag == true
+        val shouldPublish = if (explicitPublishFlag != null) {
+            explicitPublishFlag
+        } else {
+            !isTool
+        }
 
         if (!shouldPublish) return
 
@@ -38,8 +42,10 @@ public class PublishConventionPlugin : Plugin<Project> {
         if (!isBom) {
             target.pluginManager.apply(PLUGIN_DOKKA)
 
-            if (target != target.rootProject) {
-                target.rootProject.dependencies.add(DEPENDENCY_CONFIGURATION_DOKKA, target)
+            if (target != target.rootProject
+                && target.rootProject.configurations.findByName(DEPENDENCY_CONFIGURATION_DOKKA) != null) {
+                target.rootProject.dependencies
+                    .add(DEPENDENCY_CONFIGURATION_DOKKA, target)
             }
 
             target.pluginManager.withPlugin(PLUGIN_KOTLIN_MULTIPLATFORM) {
@@ -69,7 +75,9 @@ public class PublishConventionPlugin : Plugin<Project> {
 
         target.extensions.configure(MavenPublishBaseExtension::class.java) { mavenPublish ->
             val customArtifactId = target.findProperty(PROP_ARTIFACT_ID) as? String
-            val projectPathName = target.path.removePrefix(":").replace(":", "-").replace(".", "-")
+            val projectPathName = target.path.removePrefix(":")
+                .replace(":", "-")
+                .replace(".", "-")
             val rootProjectName = target.rootProject.name
 
             val newArtifactId = customArtifactId ?: when {

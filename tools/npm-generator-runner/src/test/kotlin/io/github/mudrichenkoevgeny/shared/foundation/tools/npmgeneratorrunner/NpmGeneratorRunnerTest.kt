@@ -179,13 +179,13 @@ class NpmGeneratorRunnerTest {
 
     @Test
     fun testDownstreamPackageFoundationIsolation() {
-        val tempDir = createTempTestDir("npm-test-hivepick")
+        val tempDir = createTempTestDir("npm-test-sample")
         try {
             val rootDir = resolveRootDir()
             val config = NpmGeneratorConfig(
-                packageName = "@hivepick/shared",
+                packageName = "@sample/shared",
                 packageVersion = "1.0.0",
-                packageDescription = "Hivepick Shared SDK",
+                packageDescription = "Sample Shared SDK",
                 outputDirectory = tempDir,
                 sourceCodeDirectory = rootDir,
                 zodVersion = "^3.24.2",
@@ -224,9 +224,9 @@ class NpmGeneratorRunnerTest {
         try {
             val rootDir = resolveRootDir()
             val config = NpmGeneratorConfig(
-                packageName = "@hivepick/shared",
+                packageName = "@sample/shared",
                 packageVersion = "1.0.0",
-                packageDescription = "Hivepick Shared SDK",
+                packageDescription = "Sample Shared SDK",
                 outputDirectory = tempDir,
                 sourceCodeDirectory = rootDir,
                 zodVersion = "^3.24.2",
@@ -262,9 +262,9 @@ class NpmGeneratorRunnerTest {
         val rootDir = resolveRootDir()
         val locDir = File(rootDir, "core/common/src/commonMain/resources/localization")
         val config = NpmGeneratorConfig(
-            packageName = "@hivepick/shared",
+            packageName = "@sample/shared",
             packageVersion = "1.0.0",
-            packageDescription = "Hivepick Shared SDK",
+            packageDescription = "Sample Shared SDK",
             outputDirectory = File("build/temp-test"),
             sourceCodeDirectory = rootDir,
             zodVersion = "^3.24.2",
@@ -276,16 +276,16 @@ class NpmGeneratorRunnerTest {
 
         val (jsCode, dtsCode) = generateLocalizationCode(config)
         assertTrue(
-            jsCode.contains("HivepickSharedLocalization"),
-            "JS should contain custom localization class HivepickSharedLocalization, got: $jsCode"
+            jsCode.contains("SampleSharedLocalization"),
+            "JS should contain custom localization class SampleSharedLocalization, got: $jsCode"
         )
         assertTrue(
-            dtsCode.contains("HivepickSharedLocalization"),
-            "DTS should contain custom localization class HivepickSharedLocalization"
+            dtsCode.contains("SampleSharedLocalization"),
+            "DTS should contain custom localization class SampleSharedLocalization"
         )
         assertTrue(
-            jsCode.contains("hivepickSharedLocalization"),
-            "JS should contain custom singleton hivepickSharedLocalization"
+            jsCode.contains("sampleSharedLocalization"),
+            "JS should contain custom singleton sampleSharedLocalization"
         )
     }
 
