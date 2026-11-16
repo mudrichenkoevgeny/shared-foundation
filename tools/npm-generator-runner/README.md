@@ -48,7 +48,7 @@ It collects all wire DTOs, domain mappers, REST API routes, navigation screen pa
 
 Running `./gradlew generateNpmPackage` produces:
 
-- `package.json`: NPM package descriptor (`name: "@mudrichenkoevgeny/shared-foundation"`, `"type": "module"`, `"zod": "^3.24.2"`).
+- `package.json`: NPM package descriptor (`name: "@mudrichenkoevgeny/shared-foundation"`, `"type": "module"`, `"zod": "<version>"`).
 - `index.d.ts`: Full TypeScript type declarations, interfaces, branded types (`UserId`, `PermissionCode`, etc.), JSDoc hover comments, route types, and test fixture types.
 - `index.js`: JavaScript runtime exports containing Zod schemas (`*Schema`), parameter parsers/serializers (`toQueryMap`), runtime mappers (`toUserSummary`), validators (`passwordPolicyValidator`, `storageUploadValidator`), test fixtures (`createTestUserSummary`), and localization facade (`SharedLocalization`).
 - `README.md` & `.npmignore`.

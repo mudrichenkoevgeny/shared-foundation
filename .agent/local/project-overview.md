@@ -12,7 +12,7 @@ alwaysApply: true
 - **Consumers:** Not in this repo. Consumed by **[Backend Platform SDK](https://github.com/mudrichenkoevgeny/backend-platform-sdk)** (server), **[KMP Platform SDK](https://github.com/mudrichenkoevgeny/kmp-platform-sdk)** (client), and **[Web Platform SDK](https://github.com/mudrichenkoevgeny/web-platform-sdk)** (web).
 
 ## Tech stack
-- **Kotlin** 2.x, **kotlinx.serialization** (`kotlinx-serialization-json`).
+- **Kotlin**, **kotlinx.serialization** (`kotlinx-serialization-json`).
 - **JSON configuration:** `FoundationJson` in `core/common` (standardized `snake_case`, `ignoreUnknownKeys`, `encodeDefaults`).
 - **Targets:** JVM, Android Library, iOS, Wasm JS.
 - **Strictly No UI:** This repository contains only logic, types, and constants.

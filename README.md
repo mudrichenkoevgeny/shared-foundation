@@ -8,7 +8,7 @@ A shared contracts library providing REST/WS API contracts, JSON DTOs, Zod schem
 ## Supported Targets
 
 - **JVM** (Server / Desktop)
-- **Android** (API 24+)
+- **Android**
 - **iOS** (`iosArm64`, `iosSimulatorArm64`)
 - **WasmJS / Node.js** (Browser & Web via npm)
 

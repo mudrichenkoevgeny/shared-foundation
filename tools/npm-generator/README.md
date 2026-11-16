@@ -14,7 +14,7 @@ The generator core is completely generic, pure, and decoupled from domain-specif
 
 - **`NpmGeneratorEngine`**: Drives package creation, topological schema sorting, cross-package foundation import resolution, TypeScript `.d.ts` declaration generation, and native output verification via `NpmPackageVerifier`.
 - **`NpmGeneratorConfig`**: Configuration data class defining package metadata, target output directory, Kotlin source directories, localization/testing directories, class targets (`dtoClasses`, `enumClasses`, `brandedTypes`, `errorClasses`, `permClasses`, `routeObjects`, `contractClasses`, `domainToDtoMappers`, `testFixtures`), and custom configuration hooks:
-  - `zodVersion`: Configurable Zod version string (defaults to `"^3.24.2"`).
+  - `zodVersion`: Configurable Zod version string.
   - `customDtsSmokeTestCode`: Custom TypeScript smoke test code evaluated during `tsc` verification.
   - `customRuntimeSmokeTestCode`: Custom JavaScript smoke test code evaluated during Node.js V8 ESM runtime verification.
   - `customEnumExtractor`: Lambda hook for custom enum wire value extraction.
@@ -32,7 +32,7 @@ The generator core is completely generic, pure, and decoupled from domain-specif
 
 Running `NpmGeneratorEngine(config).generate()` produces the following files in `outputDirectory`:
 
-1. **`package.json`**: NPM package descriptor with `"type": "module"`, package metadata (`packageName`, `packageVersion`), and Zod dependency (`"zod": "^3.24.2"`).
+1. **`package.json`**: NPM package descriptor with `"type": "module"`, package metadata (`packageName`, `packageVersion`), and Zod dependency (`"zod": "<version>"`).
 2. **`index.d.ts`**: TypeScript declaration file exporting:
    - **TypeScript Interfaces & Types**: Typed models for DTOs (`UserSummaryPayload`), Domain Models (`UserSummary`), Navigation Screen Parameters (`ManagementUserListParams`), UI Component Configurations (`StorageFileUploadUiConfig`), and base types (`Instant`, `PagedResult<T>`).
    - **JSDoc Documentation**: Rich JSDoc hover comments (`/** ... */`) extracted from KDocs for all classes, properties, routes, and mappers.
@@ -62,7 +62,7 @@ Every invocation of `NpmGeneratorEngine(config).generate()` automatically execut
 3. **`npm pack --dry-run` Check**: Verifies archive layout in `outputDirectory`.
 4. **TypeScript Strict Declaration Compilation**:
    - Generates temporary `test-types.ts` validating all DTO schemas and `config.customDtsSmokeTestCode`.
-   - Uses an isolated verifier cache in `build/npm-verifier-env` containing exact Zod v3 (`^3.24.2`) and TypeScript (`^5.5.0`) dependencies linked via directory junction (`mklink /J` on Windows, symlink on Unix).
+   - Uses an isolated verifier cache in `build/npm-verifier-env` containing configured Zod and TypeScript dependencies linked via directory junction (`mklink /J` on Windows, symlink on Unix).
    - Executes `tsc --noEmit --strict --skipLibCheck test-types.ts`.
 5. **Runtime Behavior Verification**:
    - Generates temporary `test-runtime.mjs` executing `index.js` in Node.js ESM mode.
@@ -107,10 +107,10 @@ fun main() {
 
     val config = NpmGeneratorConfig(
         packageName = "@sample/shared",
-        packageVersion = "1.0.0",
+        packageVersion = "<version>",
         packageDescription = "Sample Shared TypeScript SDK - Zod schemas and API contracts",
         peerDependencies = mapOf(
-            "@mudrichenkoevgeny/shared-foundation" to "^0.1.19"
+            "@mudrichenkoevgeny/shared-foundation" to "<version>"
         ),
         outputDirectory = outputDir,
         sourceCodeDirectory = File(rootDir, "shared/sample"),
