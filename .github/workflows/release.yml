@@ -8,7 +8,7 @@ on:
 jobs:
   publish-maven-central:
     name: Publish Maven Central (GPG Signed)
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
@@ -78,3 +78,18 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/dokka/html
+
+  create-github-release:
+    name: Create GitHub Release
+    needs: [ publish-maven-central, publish-npm, publish-docs ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Release with Auto-Generated Notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "${{ github.ref_name }}" --generate-notes

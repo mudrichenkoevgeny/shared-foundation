@@ -25,3 +25,17 @@ jobs:
 
       - name: Generate & Verify NPM Package
         run: ./gradlew generateNpmPackage
+
+  gitleaks:
+    name: Security / Gitleaks Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
