@@ -43,12 +43,12 @@ configure<KotlinMultiplatformExtension> {
             }
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        jvmMain.dependencies {
+            api(libs.konsist)
         }
 
-        jvmTest.dependencies {
-            implementation(libs.konsist)
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

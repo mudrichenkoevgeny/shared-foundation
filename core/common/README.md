@@ -6,7 +6,7 @@ Cross-cutting **shared contracts** for backend and client: **kotlinx.serializati
 
 - **Serialization:** [FoundationJson] — shared `Json` configuration (`ignoreUnknownKeys`, `encodeDefaults`, etc.) for encoding/decoding DTOs in this library and dependent modules.
 - **API errors (wire):** [ApiErrorResponse] with snake_case JSON keys via [CommonApiFields]; machine-readable **codes** and **args** keys in [CommonErrorCodes] and [CommonErrorArgs].
-- **HTTP naming & routes:** [CommonApiFields] (JSON field names), [CommonHttpHeaders] (e.g. trace, client type, device, API version headers), [ManagementRoutes] for platform-wide management paths, [BaseManagementRoutes] (`/management`, `/management/self`), and [BaseSettingsRoutes] (`/settings`).
+- **HTTP naming & routes:** [CommonApiFields] (JSON field names), [CommonHttpHeaders] (e.g. trace, client type, device, API version headers), and [CommonNetworkRoutes] for base network route path segments (`/management`, `/management/self`, `/settings`).
 - **WebSocket — paths and envelopes:** [WebSocketContract] (realtime path string); [SocketFrame] (id, type, optional `JsonElement` payload, metadata, timestamp); [WebSocketInitializePayload] for client metadata on connect.
 - **WebSocket — event and close strings:** [CommonWebSocketEventTypes] (e.g. PING, INITIALIZE), [CommonWebSocketCloseReasons].
 - **Domain — App & Client:** [AppType] serializable enum (`CLIENT` / `MANAGEMENT`), [ClientType] serializable enum, [ClientInfo], and [ClientDeviceInfo] to describe connecting applications.
@@ -72,7 +72,7 @@ Use the pre-built `localizationResources` or `SharedFoundationLocalization` from
 
 ## Usage
 
-- Add a dependency on the published artifact `shared-foundation-core-common` (or align versions via [shared-foundation-bom](../../bom) / your version catalog — see repository [README.md](../../../../README.md)).
+- Add a dependency on the published artifact `shared-foundation-core-common` (or align versions via [shared-foundation-bom](../../bom) / your version catalog — see repository [README.md](../../README.md)).
 - Use [FoundationJson] (or the same settings) when serializing types from this module so wire format stays consistent.
 - Compare API error `code` values to [CommonErrorCodes] (and feature-specific `*ErrorCodes` in other modules); populate `args` using keys from [CommonErrorArgs] where applicable.
 - Use [CommonApiFields] / [CommonHttpHeaders] in client and server code so JSON keys and header names stay aligned.
@@ -84,9 +84,7 @@ Use the pre-built `localizationResources` or `SharedFoundationLocalization` from
 [CommonErrorArgs]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/error/naming/CommonErrorArgs.kt
 [CommonApiFields]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonApiFields.kt
 [CommonHttpHeaders]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/CommonHttpHeaders.kt
-[ManagementRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/management/ManagementRoutes.kt
-[BaseManagementRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/base/management/BaseManagementRoutes.kt
-[BaseSettingsRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/base/settings/BaseSettingsRoutes.kt
+[CommonNetworkRoutes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/route/CommonNetworkRoutes.kt
 [WebSocketContract]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/contract/WebSocketContract.kt
 [SocketFrame]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/SocketFrame.kt
 [WebSocketInitializePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/common/network/model/websocket/WebSocketInitializePayload.kt

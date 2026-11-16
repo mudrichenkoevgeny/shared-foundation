@@ -1,0 +1,12 @@
+package {{PACKAGE_NAME}}.testing.architecture
+
+import io.github.mudrichenkoevgeny.shared.foundation.testing.architecture.FoundationArchitectureAssertions
+import kotlin.test.Test
+
+class ArchitectureTest {
+
+    @Test
+    fun `run all shared foundation and consumer architecture rules`() {
+        FoundationArchitectureAssertions.assertAllConsumerRules()
+    }
+}

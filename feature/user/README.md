@@ -57,7 +57,6 @@ The module provides DTOs and Request models for every domain entity to ensure ty
 ### Real-Time Communication
 Typed WebSocket contracts for live updates:
 - **Events:** [UserWebSocketEventTypes] for state changes.
-- **Protocol:** [UserNetworkFoundationConstants] for socket configuration.
 - **Reliability:** Defined [UserWebSocketCloseReasons] for robust error handling.
 
 ## Error Handling & Audit
@@ -264,7 +263,7 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [UserRoleDefaultAuthorityLevel]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/authoritylevel/UserRoleDefaultAuthorityLevel.kt
 [ConfirmationKey]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/confirmation/ConfirmationKey.kt
 [ConfirmationType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/confirmation/ConfirmationType.kt
-[AccountLockoutType]: ../core/security/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
+[AccountLockoutType]: ../../core/security/src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/security/domain/model/accountlockout/AccountLockoutType.kt
 [UserIdentifierSummary]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierSummary.kt
 [UserIdentifierPrivate]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierPrivate.kt
 [UserIdentifierInternal]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/model/identifier/UserIdentifierInternal.kt
@@ -336,7 +335,6 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 
 [UserWebSocketEventTypes]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserWebSocketEventTypes.kt
 [UserWebSocketCloseReasons]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserWebSocketCloseReasons.kt
-[UserNetworkFoundationConstants]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/network/contract/UserNetworkFoundationConstants.kt
 
 [UserAuditActionType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/action/UserAuditActionType.kt
 [UserAuditResourceType]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/resource/UserAuditResourceType.kt
@@ -344,7 +342,7 @@ Feature navigation routes use [UserNavigationRoutes] (`BASE_AUTH_ROUTE = "/auth"
 [UserAuditMetadataDeniedReasonValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/domain/audit/metadata/UserAuditMetadataDeniedReasonValues.kt
 
 [LoginByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/email/LoginByEmailParams.kt
-[LoginByPhoneParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/phone/LoginByPhoneParams.kt
+[LoginByPhoneParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/login/phone/LoginByPhoneParams.kt
 [LoginByTotpParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/login/totp/LoginByTotpParams.kt
 [ClientRegistrationByEmailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/client/auth/registration/email/ClientRegistrationByEmailParams.kt
 [ResetPasswordParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/feature/user/navigation/screen/base/auth/resetpassword/ResetPasswordParams.kt

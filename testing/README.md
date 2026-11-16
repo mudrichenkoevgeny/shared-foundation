@@ -86,6 +86,34 @@ const userPayload = createTestUserPrivatePayload({
 
 ---
 
+## Architecture Validation (`FoundationArchitectureAssertions`)
+
+The `:testing` module also exposes `FoundationArchitectureAssertions` in `jvmMain`, allowing downstream consumer applications to easily run the same rigorous architecture rules enforced on `shared-foundation` within their own repositories (using [Konsist](https://docs.konsist.lemonappdev.com/)).
+
+### What it validates:
+- **No `InternalPayload` Models:** Enforces that server-side internal entities never leak as network DTOs.
+- **Top-Level Filter & Sort Classes:** Requires `*FilterValues` and `*SortBy` domain classes to be declared as top-level models.
+- **Strict API KDoc Documentation:** Asserts that all public API route constants inside `*Routes.kt` have KDoc sections documenting `HTTP method:`, `Request body:`, `Response body:`, `UI Presentation:`, and `Audit logging:`.
+- **Snake-Case Localization JSON Keys:** Recursively parses all `.json` files inside `localization/` directories and guarantees keys strictly use `snake_case`.
+
+### Usage in downstream `jvmTest`:
+
+```kotlin
+import io.github.mudrichenkoevgeny.shared.foundation.testing.architecture.FoundationArchitectureAssertions
+import kotlin.test.Test
+
+class ArchitectureTest {
+    @Test
+    fun `run all shared foundation architecture rules`() {
+        FoundationArchitectureAssertions.assertAllConsumerRules(
+            localizationExcludedFiles = setOf("email_templates.json")
+        )
+    }
+}
+```
+
+---
+
 ## Usage Examples
 
 ### 1. Creating Domain Models & Payloads

@@ -55,7 +55,7 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 [AuditEventPrivatePayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventPrivatePayload.kt
 [AuditEventMetadataPayload]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/model/event/AuditEventMetadataPayload.kt
 [AuditApiPaths]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/network/contract/AuditApiPaths.kt
-[AuditEventFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditFilterValues.kt
+[AuditEventFilterValues]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventFilterValues.kt
 [AuditEventSortBy]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/domain/model/listing/AuditEventSortBy.kt
 [AuditEventSummaryMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventSummaryMapper.kt
 [AuditEventPrivateMapper]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/mapper/audit/AuditEventPrivateMapper.kt
@@ -69,5 +69,5 @@ HTTP **URL constants** ([ManagementAuditRoutes]) and **feature permission codes*
 [ManagementAuditNavigation]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/route/management/ManagementAuditNavigation.kt
 [ManagementAuditEventListParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams.kt
 [ManagementAuditEventDetailParams]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams.kt
-[ManagementAuditEventListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParamsParser.kt
-[ManagementAuditEventDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParamsParser.kt
+[ManagementAuditEventListParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/list/ManagementAuditEventListParams.kt
+[ManagementAuditEventDetailParamsParser]: src/commonMain/kotlin/io/github/mudrichenkoevgeny/shared/foundation/core/audit/navigation/screen/management/audit/detail/ManagementAuditEventDetailParams.kt

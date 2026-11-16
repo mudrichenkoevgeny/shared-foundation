@@ -21,11 +21,11 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.18"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.19"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
-    
+
     // For unit, integration, and UI preview tests:
     testImplementation("io.github.mudrichenkoevgeny:shared-foundation-testing")
 
@@ -43,11 +43,11 @@ Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply sh
 ```kotlin
 // build.gradle.kts (Consumer Projects)
 plugins {
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.18"
-    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.18"
-    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.18"
-    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.18"
-    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "0.1.18"
+    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.19"
+    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.19"
+    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.19"
+    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.19"
+    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "0.1.19"
 }
 ```
 
@@ -86,11 +86,13 @@ Published artifacts (versions aligned via the BOM):
 - **tools-project-generator** — internal JVM generator triggered via `./gradlew initProject` for scaffolding clean downstream contract repositories (`<name>-shared`) on disk ([module README](tools/project-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
-## Testing Fixtures & Mocks
+## Testing Fixtures, Mocks & Architecture Assertions
 
 The library provides ready-to-use test data builders (`createTest*`), deterministic constants, value class factories, screen parameter fixtures, and in-memory mocks.
 
 You can include `:testing` in your `testImplementation` / `commonTest.dependencies` (or import from `@mudrichenkoevgeny/shared-foundation` in npm) to use these pre-built fixtures in unit and integration tests instead of writing custom mocks.
+
+For JVM test suites (`jvmTest`), the module also provides **`FoundationArchitectureAssertions`** — a reusable Konsist-based validation object that downstream repositories can call to enforce architectural rules (e.g. strict DTO boundaries, API route KDoc structures, and `snake_case` JSON localization keys).
 
 > **Note on Gradle Version Catalog (`libs.versions.toml`)**: When defining an alias for the testing module, it is recommended to use the suffix `-fixtures` (e.g. `shared-foundation-fixtures = { ... name = "shared-foundation-testing" }`) instead of `-testing` to prevent naming conflicts with the built-in Gradle `Project.testing` extension in JVM modules. See the [testing README](testing/README.md) for details.
 

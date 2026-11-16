@@ -110,7 +110,7 @@ fun main() {
         packageVersion = "1.0.0",
         packageDescription = "Sample Shared TypeScript SDK - Zod schemas and API contracts",
         peerDependencies = mapOf(
-            "@mudrichenkoevgeny/shared-foundation" to "^0.1.18"
+            "@mudrichenkoevgeny/shared-foundation" to "^0.1.19"
         ),
         outputDirectory = outputDir,
         sourceCodeDirectory = File(rootDir, "shared/sample"),

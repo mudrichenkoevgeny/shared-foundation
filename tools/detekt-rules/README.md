@@ -42,7 +42,7 @@ Add the custom rules artifact to your project's Detekt dependencies:
 // build.gradle.kts
 dependencies {
     detektPlugins("io.github.mudrichenkoevgeny:shared-foundation-detekt-rules:<version>")
-    
+
     // Or for local repository builds:
     // detektPlugins(project(":tools:detekt-rules"))
 }
