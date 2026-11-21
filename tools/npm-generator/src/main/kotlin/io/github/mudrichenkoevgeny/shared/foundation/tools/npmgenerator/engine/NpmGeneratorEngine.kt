@@ -49,13 +49,17 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             collectFoundationImports()
         }
 
-        File(outputDir, "package.json").writeText(generatePackageJson(isFoundation))
+        File(outputDir, "package.json").writeText(generatePackageJson())
         File(outputDir, ".npmignore").writeText("*.tgz\n")
         File(outputDir, "README.md").writeText(generateNpmReadme(config))
 
-        if (isFoundation) {
-            PostInstallScriptGenerator.generateScriptAndSyncAgentRules(config.sourceCodeDirectory, outputDir)
-        }
+        PostInstallScriptGenerator.generateScriptAndSyncAgentRules(
+            rootDir = config.sourceCodeDirectory,
+            outputDir = outputDir,
+            packageName = config.packageName,
+            excludedDirectoryNames = config.excludedAgentRuleDirectories,
+            includedDirectoryNames = config.includedAgentRuleDirectories
+        )
 
         val (localizationJs, localizationDts) = generateLocalizationCode(config, config.outputDirectory, importedFoundationJs, importedFoundationDts)
 
@@ -193,7 +197,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
         }
     }
 
-    private fun generatePackageJson(isFoundation: Boolean): String {
+    private fun generatePackageJson(): String {
         val deps = buildMap {
             put("zod", config.zodVersion)
             putAll(config.peerDependencies)
@@ -218,37 +222,21 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             ""
         }
 
-        val filesBlock = if (isFoundation) {
-            """
+        val filesBlock = """
   "files": [
     "index.js",
     "index.d.ts",
     "scripts/",
     ".agent/"
   ],"""
-        } else {
-            """
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],"""
-        }
 
-        val scriptsBlock = if (isFoundation) {
-            """
+        val scriptsBlock = """
   "scripts": {
     "postinstall": "node ./scripts/postinstall-sync-rules.mjs"
   },"""
-        } else {
-            ""
-        }
 
-        val scriptsExport = if (isFoundation) {
-            """,
+        val scriptsExport = """,
     "./scripts/*": "./scripts/*""""
-        } else {
-            ""
-        }
 
         return """
 {

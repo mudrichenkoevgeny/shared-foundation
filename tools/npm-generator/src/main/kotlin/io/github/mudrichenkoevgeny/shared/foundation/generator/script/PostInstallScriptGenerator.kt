@@ -7,6 +7,11 @@ import java.io.File
  */
 public object PostInstallScriptGenerator {
 
+    private const val DEFAULT_FOUNDATION_PACKAGE_NAME = "Shared Foundation"
+
+    private const val SUBDIR_KOTLIN = "kotlin"
+    private const val SUBDIR_SHARED = "shared"
+
     /**
      * Generates the reusable JS module code for syncing agent rules.
      *
@@ -86,51 +91,101 @@ public object PostInstallScriptGenerator {
     /**
      * Generates the JS code for the postinstall entrypoint script.
      *
+     * @param packageName Package name for logging (defaults to "Shared Foundation").
      * @return The complete JS code for `postinstall-sync-rules.mjs`.
      */
-    public fun generatePostInstallScriptText(): String =
-        """
+    public fun generatePostInstallScriptText(packageName: String = DEFAULT_FOUNDATION_PACKAGE_NAME): String {
+        val dollar = '$'
+        return """
         #!/usr/bin/env node
+        import fs from 'node:fs';
         import path from 'node:path';
         import { fileURLToPath } from 'node:url';
         import { syncAgentRules } from './agent-rules-syncer.mjs';
 
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const agentOutputDir = path.join(__dirname, '../.agent');
 
-        syncAgentRules({
-          sourceAgentDir: path.join(__dirname, '../.agent/common'),
-          relativeTargetSubdir: '.agent/global/common',
-          packageName: 'Shared Foundation'
-        });
+        if (fs.existsSync(agentOutputDir)) {
+          const entries = fs.readdirSync(agentOutputDir, { withFileTypes: true });
+          for (const entry of entries) {
+            if (entry.isDirectory()) {
+              syncAgentRules({
+                sourceAgentDir: path.join(agentOutputDir, entry.name),
+                relativeTargetSubdir: `.agent/global/${dollar}{entry.name}`,
+                packageName: '$packageName'
+              });
+            }
+          }
+        }
         """.trimIndent()
+    }
 
     /**
      * Copies agent rules from the repository root into the NPM package build output directory
      * and writes the postinstall scripts.
      *
-     * @param rootDir The root directory of the shared-foundation project.
+     * @param rootDir The root directory of the project.
      * @param outputDir The build output directory for the NPM package.
+     * @param packageName The package name for logging in postinstall script.
+     * @param excludedDirectoryNames Set of rule directory names to exclude.
+     * @param includedDirectoryNames Optional set of rule directory names to include.
      */
-    public fun generateScriptAndSyncAgentRules(rootDir: File, outputDir: File) {
+    public fun generateScriptAndSyncAgentRules(
+        rootDir: File,
+        outputDir: File,
+        packageName: String = DEFAULT_FOUNDATION_PACKAGE_NAME,
+        excludedDirectoryNames: Set<String> = setOf(SUBDIR_KOTLIN, SUBDIR_SHARED),
+        includedDirectoryNames: Set<String>? = null
+    ) {
         val scriptsDir = File(outputDir, "scripts")
         scriptsDir.mkdirs()
         File(scriptsDir, "agent-rules-syncer.mjs").writeText(generateAgentRulesSyncerScriptText())
-        File(scriptsDir, "postinstall-sync-rules.mjs").writeText(generatePostInstallScriptText())
+        File(scriptsDir, "postinstall-sync-rules.mjs").writeText(generatePostInstallScriptText(packageName))
 
-        val agentCommonOutputDir = File(outputDir, ".agent/common")
-        if (agentCommonOutputDir.exists()) {
-            agentCommonOutputDir.deleteRecursively()
+        val agentOutputDir = File(outputDir, ".agent")
+        if (agentOutputDir.exists()) {
+            agentOutputDir.deleteRecursively()
         }
-        agentCommonOutputDir.mkdirs()
+        agentOutputDir.mkdirs()
 
-        var resolvedRootDir: File? = rootDir
-        while (resolvedRootDir != null && !File(resolvedRootDir, ".agent/global/common").exists()) {
-            resolvedRootDir = resolvedRootDir.parentFile
+        val globalAgentDir = File(rootDir, ".agent/global")
+        if (globalAgentDir.exists()) {
+            val subdirs = globalAgentDir.listFiles { file -> file.isDirectory }
+            if (subdirs != null) {
+                for (subdir in subdirs) {
+                    val name = subdir.name
+                    val isIncluded = includedDirectoryNames == null || name in includedDirectoryNames
+                    val isExcluded = name in excludedDirectoryNames
+
+                    if (isIncluded && !isExcluded) {
+                        val targetSubdir = File(agentOutputDir, name)
+                        copyDirectoryFilteringExclusions(subdir, targetSubdir, excludedDirectoryNames)
+                    }
+                }
+            }
         }
+    }
 
-        val globalCommonDir = File(resolvedRootDir ?: rootDir, ".agent/global/common")
-        if (globalCommonDir.exists()) {
-            globalCommonDir.copyRecursively(agentCommonOutputDir, overwrite = true)
+    private fun copyDirectoryFilteringExclusions(
+        source: File,
+        target: File,
+        excludedDirectoryNames: Set<String>
+    ) {
+        if (!source.exists() || !source.isDirectory) return
+        target.mkdirs()
+
+        val files = source.listFiles() ?: return
+        for (file in files) {
+            val destFile = File(target, file.name)
+            if (file.isDirectory) {
+                if (file.name in excludedDirectoryNames) {
+                    continue
+                }
+                copyDirectoryFilteringExclusions(file, destFile, excludedDirectoryNames)
+            } else {
+                file.copyTo(destFile, overwrite = true)
+            }
         }
     }
 }

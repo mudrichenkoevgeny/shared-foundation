@@ -52,6 +52,8 @@ public data class NpmGeneratorConfig(
     public val customMatchersAndParsersDts: String? = null,
     public val excludedTestFixtures: Set<String> = emptySet(),
     public val preferredEnumDefaultNames: List<String> = listOf("DEFAULT", "NONE"),
+    public val excludedAgentRuleDirectories: Set<String> = setOf("kotlin", "shared"),
+    public val includedAgentRuleDirectories: Set<String>? = null,
     public val customDtsSmokeTestCode: String? = null,
     public val customRuntimeSmokeTestCode: String? = null,
     public val repositoryUrl: String = "",
