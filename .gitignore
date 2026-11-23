@@ -34,3 +34,7 @@ local.properties
 # Node / NPM (generated artifacts belong in build/npm-package/)
 node_modules/
 *.tgz
+
+# Code Review Cache & Payload
+.code-review/state.json
+.code-review/payload.md

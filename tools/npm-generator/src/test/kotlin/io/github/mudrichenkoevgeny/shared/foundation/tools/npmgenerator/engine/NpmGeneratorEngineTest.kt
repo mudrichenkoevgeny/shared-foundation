@@ -138,6 +138,26 @@ class NpmGeneratorEngineTest {
             val indexDts = File(outDir, "index.d.ts").readText()
             assertTrue(indexDts.contains("export type Instant = number;"))
             assertTrue(indexDts.contains("export interface PagedResult<T>"))
+
+            val customArtifactFile = File(outDir, "custom/artifact.txt")
+            val configWithHooks = config.copy(
+                extraFiles = listOf("custom/"),
+                extraScripts = mapOf("custom" to "node ./custom/artifact.txt"),
+                extraExportsJson = """"./custom": "./custom/artifact.txt"""",
+                onGenerateAdditionalArtifacts = { dir ->
+                    val customDir = File(dir, "custom")
+                    customDir.mkdirs()
+                    File(customDir, "artifact.txt").writeText("custom content")
+                }
+            )
+            val engineWithHooks = NpmGeneratorEngine(configWithHooks)
+            engineWithHooks.generate()
+
+            val pkgJsonWithHooks = File(outDir, "package.json").readText()
+            assertTrue(pkgJsonWithHooks.contains("\"custom/\""))
+            assertTrue(pkgJsonWithHooks.contains("\"custom\": \"node ./custom/artifact.txt\""))
+            assertTrue(pkgJsonWithHooks.contains("\"./custom\": \"./custom/artifact.txt\""))
+            assertTrue(customArtifactFile.exists())
             assertTrue(indexDts.contains("export interface SampleDomain"))
             assertTrue(indexDts.contains("export declare const SamplePermissions"))
 

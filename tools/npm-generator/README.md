@@ -23,6 +23,10 @@ The generator core is completely generic, pure, and decoupled from domain-specif
   - `enumEnhancers`: Extra wire value pairs for existing enums.
   - `idMockMappings`, `ownerIdMockMappings`, `stringMockMappings`, `numberMockMappings`, `brandedTypeMockValues`: Configurable mock generators for test fixtures.
   - `localizationRootClassName`, `localizationManagerName`, `byteSizeUnitModulePath`, `byteSizeUnitBundleName`: Custom localization facade naming and byte unit bundle configuration.
+  - `extraFiles`: List of additional file/directory relative paths included in generated `package.json` `"files"`.
+  - `extraScripts`: Map of additional npm scripts included in generated `package.json` `"scripts"`.
+  - `extraExportsJson`: Additional subpath exports JSON string snippet appended to generated `package.json` `"exports"`.
+  - `onGenerateAdditionalArtifacts`: Lambda hook `(outputDirectory: File) -> Unit` invoked during `generate()` to produce additional custom package artifacts (e.g. design tokens, postinstall scripts, agent rules).
 - **`NpmPackageVerifier`**: Cross-platform verifier executed automatically at the end of `engine.generate()`.
 - **`KDocExtractor`**: Extracts KDoc comment blocks (`/** ... */`) from Kotlin source code and converts them into rich TypeScript JSDoc hover comments.
 

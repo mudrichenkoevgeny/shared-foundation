@@ -75,6 +75,12 @@ gradlePlugin {
             description =
                 "Gradle plugin generating type-safe Kotlin localization accessors and embedded bundles from JSON resources"
         }
+        create("designTokens") {
+            id = "io.github.mudrichenkoevgeny.shared-foundation-design-tokens"
+            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.DesignTokensPlugin"
+            displayName = "Shared Foundation Design Tokens Gradle Plugin"
+            description = "Gradle plugin generating Compose Design Tokens and extracting design font assets"
+        }
         create("publishConvention") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-publish"
             implementationClass =
@@ -128,11 +134,19 @@ mavenPublishing {
 }
 
 dependencies {
+    compileOnly(project(":design-tokens"))
+    testImplementation(project(":design-tokens"))
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.detekt.gradle.plugin)
     implementation(libs.ktlint.gradle.plugin)
     implementation(libs.maven.publish.gradle.plugin)
     implementation(libs.dokka.gradle.plugin)
+}
+
+tasks.named<Jar>("jar") {
+    from(project(":design-tokens").sourceSets["main"].output)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 val generatePluginVersionResource = tasks.register("generatePluginVersionResource") {

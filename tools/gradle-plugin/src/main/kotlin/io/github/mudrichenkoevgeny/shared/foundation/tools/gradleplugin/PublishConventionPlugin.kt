@@ -109,7 +109,7 @@ public class PublishConventionPlugin : Plugin<Project> {
             } else if (target.pluginManager.hasPlugin(PLUGIN_JAVA_GRADLE_PLUGIN)) {
                 mavenPublish.configure(
                     GradlePlugin(
-                        javadocJar = JavadocJar.Javadoc(),
+                        javadocJar = JavadocJar.Empty(),
                         sourcesJar = SourcesJar.Sources()
                     )
                 )
@@ -118,7 +118,7 @@ public class PublishConventionPlugin : Plugin<Project> {
                     mavenPublish.configure(KotlinMultiplatform(javadocJar = JavadocJar.Empty()))
                 }
                 target.plugins.withId(PLUGIN_KOTLIN_JVM) {
-                    mavenPublish.configure(KotlinJvm(javadocJar = JavadocJar.Javadoc()))
+                    mavenPublish.configure(KotlinJvm(javadocJar = JavadocJar.Empty()))
                 }
             }
 

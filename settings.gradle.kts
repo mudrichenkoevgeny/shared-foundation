@@ -98,7 +98,8 @@ val toolModules = listOf(
     "npm-generator",
     "npm-generator-runner",
     "detekt-rules",
-    "project-generator"
+    "project-generator",
+    "design-tokens"
 )
 registerModules(
     "tools",

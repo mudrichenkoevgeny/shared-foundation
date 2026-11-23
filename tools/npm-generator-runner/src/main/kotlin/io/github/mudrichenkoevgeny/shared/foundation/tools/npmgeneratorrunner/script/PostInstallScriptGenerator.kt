@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.generator.script
+package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgeneratorrunner.script
 
 import java.io.File
 
@@ -23,7 +23,9 @@ public object PostInstallScriptGenerator {
           let fallbackPkgRoot = current;
           while (true) {
             if (!current.includes('node_modules')) {
-              if (fs.existsSync(path.join(current, 'pnpm-workspace.yaml')) || fs.existsSync(path.join(current, '.git'))) {
+              const hasWorkspace = fs.existsSync(path.join(current, 'pnpm-workspace.yaml'));
+              const hasGit = fs.existsSync(path.join(current, '.git'));
+              if (hasWorkspace || hasGit) {
                 return current;
               }
               if (fs.existsSync(path.join(current, 'package.json'))) {
@@ -71,7 +73,8 @@ public object PostInstallScriptGenerator {
             } catch (err) {
               attempts++;
               if (attempts >= maxAttempts) {
-                console.warn(`[${dollar}{packageName}] Could not sync agent rules to ${dollar}{targetDir}: ${dollar}{err.message}`);
+                const warnMsg = `[${dollar}{packageName}] Could not sync rules: ${dollar}{err.message}`;
+                console.warn(warnMsg);
               } else {
                 try {
                   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100);

@@ -40,6 +40,12 @@ Published Maven artifact: **`shared-foundation-gradle-plugin`**.
    - **Configuration Extension (`sharedLocalization`):** Configures `basePackageName` (defaults to `"io.github.mudrichenkoevgeny.shared.foundation"`), `resourcesDir` (defaults to `src/commonMain/resources`), and `outputDir` (defaults to `build/generated/sources/localization/kotlin/commonMain`).
    - **Multiplatform Wiring:** Automatically registers `outputDir` into Kotlin Multiplatform `commonMain` sourceSet and wires task dependencies into Kotlin compilation tasks and IDE import (`prepareKotlinIdeaImport`).
 
+6. **`io.github.mudrichenkoevgeny.shared-foundation-design-tokens`** (`DesignTokensPlugin`):
+   - **Tasks:** `generateDesignTokens` (`GenerateDesignTokensTask`), `extractDesignFonts` (`ExtractDesignFontsTask`).
+   - **Description:** Automatically generates Compose Design Tokens Kotlin class (`PlatformDesignTokens.kt`) from embedded JSON token specs and extracts TTF design font assets to Compose Multiplatform resources.
+   - **Configuration Extension (`sharedDesignTokens`):** Configures `packageName` (defaults to `"io.github.mudrichenkoevgeny.kmp.core.common.ui.theme.tokens"`), `outputDir` (defaults to `build/generated/sources/designTokens/kotlin/commonMain`), and `fontsOutputDir` (defaults to `src/commonMain/composeResources/font`).
+   - **Multiplatform Wiring:** Automatically registers `outputDir` into Kotlin Multiplatform `commonMain` sourceSet and wires task dependencies into Kotlin compilation tasks, Compose Multiplatform resource tasks (`ComposeResources`, `NonXmlValueResources`, `ResourceAccessors`), and IDE import (`prepareKotlinIdeaImport`).
+
 ## Quality & Synchronization Utilities
 
 - **`AgentSyncUtils`**:

@@ -27,8 +27,12 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.t
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.DesignTokensFontExtractor
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.DesignTokensParser
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.WebTokensGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmTypeResolver
+import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgeneratorrunner.script.PostInstallScriptGenerator
 import java.io.File
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
@@ -126,8 +130,46 @@ internal fun buildFoundationNpmConfig(
         customDtsSmokeTestCode = buildCustomDtsSmokeTestCode(),
         customRuntimeSmokeTestCode = buildCustomRuntimeSmokeTestCode(),
         zodVersion = zodVersion,
-        typescriptVersion = typescriptVersion
+        typescriptVersion = typescriptVersion,
+        extraFiles = listOf("dist/", "scripts/", ".agent/"),
+        extraScripts = mapOf("postinstall" to "node ./scripts/postinstall-sync-rules.mjs"),
+        extraExportsJson = """
+            "./tokens.css": "./dist/design-tokens/tokens.css",
+            "./tokens": {
+              "import": "./dist/design-tokens/tokens.js",
+              "types": "./dist/design-tokens/tokens.d.ts"
+            },
+            "./fonts/*": "./dist/design-tokens/fonts/*",
+            "./scripts/*": "./scripts/*"
+        """.trimIndent(),
+        onGenerateAdditionalArtifacts = { outputDir ->
+            generateFoundationAdditionalArtifacts(rootDir, outputDir)
+        }
     )
+}
+
+private fun generateFoundationAdditionalArtifacts(
+    rootDir: File,
+    outputDir: File
+) {
+    PostInstallScriptGenerator.generateScriptAndSyncAgentRules(rootDir, outputDir)
+
+    val distDir = File(outputDir, "dist/design-tokens")
+    distDir.mkdirs()
+
+    val parser = DesignTokensParser.loadFromClasspath()
+
+    val cssContent = WebTokensGenerator.generateCss(parser)
+    File(distDir, "tokens.css").writeText(cssContent)
+
+    val jsContent = WebTokensGenerator.generateJs(parser)
+    File(distDir, "tokens.js").writeText(jsContent)
+
+    val dtsContent = WebTokensGenerator.generateDts(parser)
+    File(distDir, "tokens.d.ts").writeText(dtsContent)
+
+    val fontsDir = File(distDir, "fonts")
+    DesignTokensFontExtractor.extractWoff2Fonts(fontsDir)
 }
 
 private fun buildBrandedTypesList(): List<KClass<*>> = listOf(

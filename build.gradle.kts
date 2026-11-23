@@ -20,6 +20,7 @@ apiValidation {
         "npm-generator-runner",
         "project-generator",
         "detekt-rules",
+        "design-tokens",
         "testing"
     )
 }

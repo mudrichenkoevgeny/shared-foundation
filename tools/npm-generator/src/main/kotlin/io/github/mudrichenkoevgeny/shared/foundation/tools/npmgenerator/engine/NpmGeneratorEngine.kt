@@ -1,6 +1,5 @@
 package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine
 
-import io.github.mudrichenkoevgeny.shared.foundation.generator.script.PostInstallScriptGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.KDocExtractor
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.formatAsJsDoc
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.localization.generateLocalizationCode
@@ -49,13 +48,11 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             collectFoundationImports()
         }
 
-        File(outputDir, "package.json").writeText(generatePackageJson(isFoundation))
+        File(outputDir, "package.json").writeText(generatePackageJson())
         File(outputDir, ".npmignore").writeText("*.tgz\n")
         File(outputDir, "README.md").writeText(generateNpmReadme(config))
 
-        if (isFoundation) {
-            PostInstallScriptGenerator.generateScriptAndSyncAgentRules(config.sourceCodeDirectory, outputDir)
-        }
+        config.onGenerateAdditionalArtifacts?.invoke(outputDir)
 
         val (localizationJs, localizationDts) = generateLocalizationCode(config, config.outputDirectory, importedFoundationJs, importedFoundationDts)
 
@@ -193,7 +190,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
         }
     }
 
-    private fun generatePackageJson(isFoundation: Boolean): String {
+    private fun generatePackageJson(): String {
         val deps = buildMap {
             put("zod", config.zodVersion)
             putAll(config.peerDependencies)
@@ -218,34 +215,25 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             ""
         }
 
-        val filesBlock = if (isFoundation) {
-            """
+        val filesList = listOf("index.js", "index.d.ts") + config.extraFiles
+        val filesJson = filesList.joinToString(",\n    ") { "\"$it\"" }
+        val filesBlock = """
   "files": [
-    "index.js",
-    "index.d.ts",
-    "scripts/",
-    ".agent/"
+    $filesJson
   ],"""
-        } else {
-            """
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],"""
-        }
 
-        val scriptsBlock = if (isFoundation) {
+        val scriptsBlock = if (config.extraScripts.isNotEmpty()) {
+            val scriptsJson = config.extraScripts.entries.joinToString(",\n    ") { (k, v) -> "\"$k\": \"$v\"" }
             """
   "scripts": {
-    "postinstall": "node ./scripts/postinstall-sync-rules.mjs"
+    $scriptsJson
   },"""
         } else {
             ""
         }
 
-        val scriptsExport = if (isFoundation) {
-            """,
-    "./scripts/*": "./scripts/*""""
+        val extraExports = if (config.extraExportsJson.isNotBlank()) {
+            ",\n" + config.extraExportsJson.trim().trimStart(',')
         } else {
             ""
         }
@@ -264,7 +252,7 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
       "types": "./index.d.ts",
       "import": "./index.js",
       "default": "./index.js"
-    }$scriptsExport
+    }$extraExports
   }$repoFields,
   "dependencies": {
     $depsJson

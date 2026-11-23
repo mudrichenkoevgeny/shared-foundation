@@ -1,0 +1,25 @@
+{
+  "name": "@mudrichenkoevgeny/code-review",
+  "version": "0.1.21",
+  "description": "Universal cross-platform CLI for iterative code review packing and prompt management",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "code-review": "./bin/code-review.mjs"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test/code-review.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mudrichenkoevgeny/shared-foundation.git"
+  },
+  "homepage": "https://github.com/mudrichenkoevgeny/shared-foundation#readme",
+  "bugs": {
+    "url": "https://github.com/mudrichenkoevgeny/shared-foundation/issues"
+  }
+}

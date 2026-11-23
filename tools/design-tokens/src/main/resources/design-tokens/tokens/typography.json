@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "typography": {
+    "fontFamily": {
+      "primary": { "$value": "PT Sans", "$type": "fontFamily" }
+    },
+    "fontWeight": {
+      "regular": { "$value": 400, "$type": "fontWeight" },
+      "bold": { "$value": 700, "$type": "fontWeight" }
+    },
+    "fontStyle": {
+      "normal": { "$value": "normal", "$type": "fontStyle" },
+      "italic": { "$value": "italic", "$type": "fontStyle" }
+    },
+    "fontSize": {
+      "small": { "$value": 12, "$type": "dimension", "unit": "px" },
+      "caption": { "$value": 14, "$type": "dimension", "unit": "px" },
+      "body": { "$value": 16, "$type": "dimension", "unit": "px" },
+      "title": { "$value": 24, "$type": "dimension", "unit": "px" },
+      "display": { "$value": 32, "$type": "dimension", "unit": "px" }
+    },
+    "lineHeight": {
+      "small": { "$value": 16, "$type": "dimension", "unit": "px" },
+      "caption": { "$value": 20, "$type": "dimension", "unit": "px" },
+      "body": { "$value": 24, "$type": "dimension", "unit": "px" },
+      "title": { "$value": 32, "$type": "dimension", "unit": "px" },
+      "display": { "$value": 40, "$type": "dimension", "unit": "px" }
+    }
+  }
+}

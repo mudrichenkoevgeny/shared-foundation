@@ -58,5 +58,9 @@ public data class NpmGeneratorConfig(
     public val homepageUrl: String = "",
     public val bugsUrl: String = "",
     public val zodVersion: String,
-    public val typescriptVersion: String
+    public val typescriptVersion: String,
+    public val extraFiles: List<String> = emptyList(),
+    public val extraScripts: Map<String, String> = emptyMap(),
+    public val extraExportsJson: String = "",
+    public val onGenerateAdditionalArtifacts: ((outputDirectory: File) -> Unit)? = null
 )

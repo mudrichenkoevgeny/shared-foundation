@@ -50,14 +50,7 @@ public class NpmPackageVerifier(
      */
     public fun verifyArtifactsPresence() {
         val outputDir = config.outputDirectory
-        val isFoundation = config.basePackagePrefix.isEmpty() ||
-            (config.foundationImportPackage.isNotEmpty() && config.packageName == config.foundationImportPackage)
-
-        val requiredFiles = mutableListOf("package.json", "index.js", "index.d.ts", "README.md", ".npmignore")
-        if (isFoundation) {
-            requiredFiles.add("scripts/agent-rules-syncer.mjs")
-            requiredFiles.add("scripts/postinstall-sync-rules.mjs")
-        }
+        val requiredFiles = listOf("package.json", "index.js", "index.d.ts", "README.md", ".npmignore")
 
         val missingFiles = requiredFiles.filter { !File(outputDir, it).exists() }
         check(missingFiles.isEmpty()) {
