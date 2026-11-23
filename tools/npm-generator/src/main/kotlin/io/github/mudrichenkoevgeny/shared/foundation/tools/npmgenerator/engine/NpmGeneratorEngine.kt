@@ -1,5 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine
 
+import io.github.mudrichenkoevgeny.shared.foundation.generator.script.PostInstallScriptGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.KDocExtractor
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.doc.formatAsJsDoc
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.localization.generateLocalizationCode
@@ -51,6 +52,14 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
         File(outputDir, "package.json").writeText(generatePackageJson())
         File(outputDir, ".npmignore").writeText("*.tgz\n")
         File(outputDir, "README.md").writeText(generateNpmReadme(config))
+
+        PostInstallScriptGenerator.generateScriptAndSyncAgentRules(
+            rootDir = config.sourceCodeDirectory,
+            outputDir = outputDir,
+            packageName = config.packageName,
+            excludedDirectoryNames = config.excludedAgentRuleDirectories,
+            includedDirectoryNames = config.includedAgentRuleDirectories
+        )
 
         config.onGenerateAdditionalArtifacts?.invoke(outputDir)
 
@@ -215,22 +224,22 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
             ""
         }
 
-        val filesList = listOf("index.js", "index.d.ts") + config.extraFiles
+        val filesList = (listOf("index.js", "index.d.ts", "scripts/", ".agent/") + config.extraFiles).distinct()
         val filesJson = filesList.joinToString(",\n    ") { "\"$it\"" }
         val filesBlock = """
   "files": [
     $filesJson
   ],"""
 
-        val scriptsBlock = if (config.extraScripts.isNotEmpty()) {
-            val scriptsJson = config.extraScripts.entries.joinToString(",\n    ") { (k, v) -> "\"$k\": \"$v\"" }
-            """
+        val scriptsMap = buildMap {
+            put("postinstall", "node ./scripts/postinstall-sync-rules.mjs")
+            putAll(config.extraScripts)
+        }
+        val scriptsJson = scriptsMap.entries.joinToString(",\n    ") { (k, v) -> "\"$k\": \"$v\"" }
+        val scriptsBlock = """
   "scripts": {
     $scriptsJson
   },"""
-        } else {
-            ""
-        }
 
         val extraExports = if (config.extraExportsJson.isNotBlank()) {
             ",\n" + config.extraExportsJson.trim().trimStart(',')
@@ -252,7 +261,8 @@ public class NpmGeneratorEngine(private val config: NpmGeneratorConfig) {
       "types": "./index.d.ts",
       "import": "./index.js",
       "default": "./index.js"
-    }$extraExports
+    },
+    "./scripts/*": "./scripts/*"$extraExports
   }$repoFields,
   "dependencies": {
     $depsJson

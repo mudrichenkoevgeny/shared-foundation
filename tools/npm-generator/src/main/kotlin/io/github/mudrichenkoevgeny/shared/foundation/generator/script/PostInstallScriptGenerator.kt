@@ -1,4 +1,4 @@
-package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgeneratorrunner.script
+package io.github.mudrichenkoevgeny.shared.foundation.generator.script
 
 import java.io.File
 
@@ -89,51 +89,119 @@ public object PostInstallScriptGenerator {
     /**
      * Generates the JS code for the postinstall entrypoint script.
      *
+     * @param packageName Package name for logging (defaults to `"Shared Foundation"`).
+     * @param relativeTargetSubdir Relative target directory path (defaults to `".agent/global/common"`).
      * @return The complete JS code for `postinstall-sync-rules.mjs`.
      */
-    public fun generatePostInstallScriptText(): String =
+    @Suppress("UNUSED_PARAMETER")
+    public fun generatePostInstallScriptText(
+        packageName: String = "Shared Foundation",
+        relativeTargetSubdir: String = ".agent/global/common"
+    ): String =
         """
         #!/usr/bin/env node
+        import fs from 'node:fs';
         import path from 'node:path';
         import { fileURLToPath } from 'node:url';
         import { syncAgentRules } from './agent-rules-syncer.mjs';
 
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const agentDir = path.join(__dirname, '../.agent');
 
-        syncAgentRules({
-          sourceAgentDir: path.join(__dirname, '../.agent/common'),
-          relativeTargetSubdir: '.agent/global/common',
-          packageName: 'Shared Foundation'
-        });
+        if (fs.existsSync(agentDir)) {
+          const entries = fs.readdirSync(agentDir, { withFileTypes: true });
+          for (const entry of entries) {
+            if (entry.isDirectory()) {
+              syncAgentRules({
+                sourceAgentDir: path.join(agentDir, entry.name),
+                relativeTargetSubdir: path.join('.agent/global', entry.name),
+                packageName: '$packageName'
+              });
+            }
+          }
+        }
         """.trimIndent()
 
     /**
-     * Copies agent rules from the repository root into the NPM package build output directory
-     * and writes the postinstall scripts.
+     * Copies agent rules from repository root into output directory and generates postinstall scripts.
      *
-     * @param rootDir The root directory of the shared-foundation project.
+     * @param rootDir The root directory of the project.
      * @param outputDir The build output directory for the NPM package.
+     * @param packageName Package display name for logging.
+     * @param relativeTargetSubdir Relative target path in consumer projects.
+     * @param excludedDirectoryNames Directory names to exclude when copying rules.
+     * @param includedDirectoryNames Subdirectory names to explicitly include when copying rules.
      */
-    public fun generateScriptAndSyncAgentRules(rootDir: File, outputDir: File) {
+    public fun generateScriptAndSyncAgentRules(
+        rootDir: File,
+        outputDir: File,
+        packageName: String = "Shared Foundation",
+        relativeTargetSubdir: String = ".agent/global/common",
+        excludedDirectoryNames: Set<String> = setOf("kotlin", "shared"),
+        includedDirectoryNames: Set<String> = emptySet()
+    ) {
         val scriptsDir = File(outputDir, "scripts")
         scriptsDir.mkdirs()
         File(scriptsDir, "agent-rules-syncer.mjs").writeText(generateAgentRulesSyncerScriptText())
-        File(scriptsDir, "postinstall-sync-rules.mjs").writeText(generatePostInstallScriptText())
+        File(scriptsDir, "postinstall-sync-rules.mjs").writeText(
+            generatePostInstallScriptText(packageName, relativeTargetSubdir)
+        )
 
-        val agentCommonOutputDir = File(outputDir, ".agent/common")
-        if (agentCommonOutputDir.exists()) {
-            agentCommonOutputDir.deleteRecursively()
+        val agentOutputDir = File(outputDir, ".agent")
+        if (agentOutputDir.exists()) {
+            agentOutputDir.deleteRecursively()
         }
-        agentCommonOutputDir.mkdirs()
+        agentOutputDir.mkdirs()
 
+        val sourceDir = resolveAgentSourceDirectory(rootDir)
+        if (sourceDir.exists()) {
+            copyAgentSubDirectories(sourceDir, agentOutputDir, excludedDirectoryNames, includedDirectoryNames)
+        }
+    }
+
+    private fun resolveAgentSourceDirectory(rootDir: File): File {
         var resolvedRootDir: File? = rootDir
-        while (resolvedRootDir != null && !File(resolvedRootDir, ".agent/global/common").exists()) {
+        while (resolvedRootDir != null && !File(resolvedRootDir, ".agent/global").exists()) {
             resolvedRootDir = resolvedRootDir.parentFile
         }
+        val globalDir = File(resolvedRootDir ?: rootDir, ".agent/global")
+        return if (globalDir.exists()) globalDir else File(rootDir, ".agent")
+    }
 
-        val globalCommonDir = File(resolvedRootDir ?: rootDir, ".agent/global/common")
-        if (globalCommonDir.exists()) {
-            globalCommonDir.copyRecursively(agentCommonOutputDir, overwrite = true)
+    private fun copyAgentSubDirectories(
+        sourceDir: File,
+        agentOutputDir: File,
+        excludedDirectoryNames: Set<String>,
+        includedDirectoryNames: Set<String>
+    ) {
+        val topDirs = sourceDir.listFiles()?.filter { it.isDirectory } ?: return
+        topDirs.forEach { topDir ->
+            val topName = topDir.name
+            val isTopExcluded = topName in excludedDirectoryNames
+            val isTopIncluded = includedDirectoryNames.isEmpty() || topName in includedDirectoryNames
+            if (!isTopExcluded && isTopIncluded) {
+                val targetTopDir = File(agentOutputDir, topName)
+                copySubDirFilteringExcluded(topDir, targetTopDir, excludedDirectoryNames)
+            }
+        }
+    }
+
+    private fun copySubDirFilteringExcluded(
+        sourceDir: File,
+        targetDir: File,
+        excludedDirectoryNames: Set<String>
+    ) {
+        sourceDir.listFiles()?.forEach { child ->
+            val childName = child.name
+            if (child.isDirectory) {
+                if (childName !in excludedDirectoryNames) {
+                    val childTarget = File(targetDir, childName)
+                    copySubDirFilteringExcluded(child, childTarget, excludedDirectoryNames)
+                }
+            } else {
+                targetDir.mkdirs()
+                child.copyTo(File(targetDir, childName), overwrite = true)
+            }
         }
     }
 }

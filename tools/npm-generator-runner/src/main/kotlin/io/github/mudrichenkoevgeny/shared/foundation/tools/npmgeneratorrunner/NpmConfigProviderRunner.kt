@@ -32,7 +32,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.DesignTo
 import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.WebTokensGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmTypeResolver
-import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgeneratorrunner.script.PostInstallScriptGenerator
 import java.io.File
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
@@ -131,29 +130,22 @@ internal fun buildFoundationNpmConfig(
         customRuntimeSmokeTestCode = buildCustomRuntimeSmokeTestCode(),
         zodVersion = zodVersion,
         typescriptVersion = typescriptVersion,
-        extraFiles = listOf("dist/", "scripts/", ".agent/"),
-        extraScripts = mapOf("postinstall" to "node ./scripts/postinstall-sync-rules.mjs"),
+        extraFiles = listOf("dist/"),
         extraExportsJson = """
             "./tokens.css": "./dist/design-tokens/tokens.css",
             "./tokens": {
               "import": "./dist/design-tokens/tokens.js",
               "types": "./dist/design-tokens/tokens.d.ts"
             },
-            "./fonts/*": "./dist/design-tokens/fonts/*",
-            "./scripts/*": "./scripts/*"
+            "./fonts/*": "./dist/design-tokens/fonts/*"
         """.trimIndent(),
         onGenerateAdditionalArtifacts = { outputDir ->
-            generateFoundationAdditionalArtifacts(rootDir, outputDir)
+            generateFoundationAdditionalArtifacts(outputDir)
         }
     )
 }
 
-private fun generateFoundationAdditionalArtifacts(
-    rootDir: File,
-    outputDir: File
-) {
-    PostInstallScriptGenerator.generateScriptAndSyncAgentRules(rootDir, outputDir)
-
+private fun generateFoundationAdditionalArtifacts(outputDir: File) {
     val distDir = File(outputDir, "dist/design-tokens")
     distDir.mkdirs()
 
