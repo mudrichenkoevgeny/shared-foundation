@@ -21,7 +21,7 @@ Use the BOM and add only the modules you need:
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:0.1.21"))
+    implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:<version>"))
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
@@ -38,16 +38,16 @@ With a version catalog: declare BOM and module aliases in `gradle/libs.versions.
 
 ### Gradle Convention Plugins
 
-Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply shared convention plugins to automatically configure Ktlint, Detekt with custom rules, compiler options, publishing, and AI agent rules synchronization:
+Consumer projects (`backend-platform-sdk`, `kmp-platform-sdk`) can also apply shared convention plugins to automatically configure Ktlint, Detekt with custom rules, compiler options, publishing, and agent rules synchronization:
 
 ```kotlin
 // build.gradle.kts (Consumer Projects)
 plugins {
-    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "0.1.21"
-    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "0.1.21"
-    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "0.1.21"
-    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "0.1.21"
-    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "0.1.21"
+    id("io.github.mudrichenkoevgeny.shared-foundation-agent-sync") version "<version>"
+    id("io.github.mudrichenkoevgeny.shared-foundation-quality") version "<version>"
+    id("io.github.mudrichenkoevgeny.shared-foundation-kotlin") version "<version>"
+    id("io.github.mudrichenkoevgeny.shared-foundation-publish") version "<version>"
+    id("io.github.mudrichenkoevgeny.shared-foundation-localization") version "<version>"
 }
 ```
 
@@ -67,7 +67,7 @@ Scaffold a new, production-ready downstream Kotlin Multiplatform contracts repos
 ./gradlew initProject -Pname=sample -Pgroup=com.sample -PnpmScope=@sample
 ```
 
-This creates `sample-shared` configured with `shared-foundation` Gradle convention plugins, version catalog, BOM, `core/common`, `testing`, `tools/npm-generator-runner`, and AI agent rules.
+This creates `sample-shared` configured with `shared-foundation` Gradle convention plugins, version catalog, BOM, `core/common`, `testing`, `tools/npm-generator-runner`, and agent rules.
 
 ## Modules
 
@@ -80,10 +80,10 @@ Published artifacts (versions aligned via the BOM):
 - **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](core/audit/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](feature/user/README.md)).
 - **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](testing/README.md)).
-- **tools-design-tokens** — pure Kotlin design token parser and code generators (`DesignTokensParser`, `ComposeTokensGenerator`, `WebTokensGenerator`, `PenpotTokensGenerator`, `DesignTokensFontExtractor`) supporting multi-target generation for Jetpack Compose, Web (CSS/TS), and Penpot ([module README](tools/design-tokens/README.md)).
+- **tools-design-system** — pure Kotlin design token parser, icon extractors, and code generators (`DesignTokensParser`, `ComposeTokensGenerator`, `WebTokensGenerator`, `PenpotTokensGenerator`, `DesignTokensFontExtractor`, `DesignSystemIconExtractor`) supporting multi-target generation for Jetpack Compose, Web (CSS/TS), and Penpot ([module README](tools/design-system/README.md)).
 - **tools-detekt-rules** — custom Detekt static analysis rules (`NoFullyQualifiedName`, `NoInlineComment`, `PreferValueOverName`, `ProhibitNonSafeAssertion`, `ProhibitPrintln`) for enforcing shared library architectural standards across consumer applications ([module README](tools/detekt-rules/README.md)).
-- **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`, `shared-foundation-design-tokens`) for auto-configuring quality checks, compiler options, publishing, localization generation, design token generation, and AI agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
-- **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, design token subpath exports (`/tokens.css`, `/tokens`, `/fonts/*`), and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
+- **tools-gradle-plugin** — Gradle Convention Plugins (`shared-foundation-agent-sync`, `shared-foundation-quality`, `shared-foundation-kotlin`, `shared-foundation-publish`, `shared-foundation-localization`, `shared-foundation-design-system`) for auto-configuring quality checks, compiler options, publishing, localization generation, design token generation, and agent rule synchronization across consumer applications ([module README](tools/gradle-plugin/README.md)).
+- **tools-npm-generator** — executable JVM generator generating TypeScript declarations, Zod schemas, routes, domain mappers, testing constants/fixtures, and localization classes into `@mudrichenkoevgeny/shared-foundation` ([module README](tools/npm-generator/README.md)).
 - **tools-project-generator** — internal JVM generator triggered via `./gradlew initProject` for scaffolding clean downstream contract repositories (`<name>-shared`) on disk ([module README](tools/project-generator/README.md)).
 - **bom** — dependency constraints for the modules above.
 
@@ -99,11 +99,15 @@ For JVM test suites (`jvmTest`), the module also provides **`FoundationArchitect
 
 ## Documentation & Architecture
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, navigation, and localization architecture.
-- **[core/common README](core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
-- **[testing README](testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and mocks.
+- **[ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, navigation, and localization architecture.
+- **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and operational rules for contributors and agents.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Build instructions, dependency health checks (`./gradlew projectHealth`), and Maven Central publishing guidelines.
-- **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and constraints for contributors and AI coding assistants.
+- **[core/common README](core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
+- **[testing README](testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and architecture assertions (`FoundationArchitectureAssertions`).
+- **[tools/code-review README](tools/code-review/README.md)** — Universal cross-platform CLI tool (`@mudrichenkoevgeny/code-review`) for code review packing and prompt management.
+- **[tools/design-system README](tools/design-system/README.md)** — Pure Kotlin design token parser, icon extractors, and code generators for Compose Multiplatform, Web (CSS/TS), and Penpot.
+- **[tools/gradle-plugin README](tools/gradle-plugin/README.md)** — Convention plugins (`agent-sync`, `quality`, `publish`, `localization`, `design-system`) and Detekt quality checks.
+- **[tools/npm-generator README](tools/npm-generator/README.md)** — TypeScript/Zod contract generator engine, declaration verification, and npm package build pipeline.
 
 ## Samples & Usage
 

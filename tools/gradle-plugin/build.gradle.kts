@@ -53,7 +53,7 @@ gradlePlugin {
             id = "io.github.mudrichenkoevgeny.shared-foundation-agent-sync"
             implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.AgentSyncPlugin"
             displayName = "Shared Foundation Agent Sync Gradle Plugin"
-            description = "Gradle plugin synchronizing AI agent rules from shared-foundation into consumer projects"
+            description = "Gradle plugin synchronizing agent rules from shared-foundation into consumer projects"
         }
         create("quality") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-quality"
@@ -75,11 +75,12 @@ gradlePlugin {
             description =
                 "Gradle plugin generating type-safe Kotlin localization accessors and embedded bundles from JSON resources"
         }
-        create("designTokens") {
-            id = "io.github.mudrichenkoevgeny.shared-foundation-design-tokens"
-            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.DesignTokensPlugin"
-            displayName = "Shared Foundation Design Tokens Gradle Plugin"
-            description = "Gradle plugin generating Compose Design Tokens and extracting design font assets"
+        create("designSystem") {
+            id = "io.github.mudrichenkoevgeny.shared-foundation-design-system"
+            implementationClass = "io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.DesignSystemPlugin"
+            displayName = "Shared Foundation Design System Gradle Plugin"
+            description =
+                "Gradle plugin generating Compose Design Tokens, extracting fonts, and extracting Vector Drawable icons"
         }
         create("publishConvention") {
             id = "io.github.mudrichenkoevgeny.shared-foundation-publish"
@@ -134,8 +135,8 @@ mavenPublishing {
 }
 
 dependencies {
-    compileOnly(project(":design-tokens"))
-    testImplementation(project(":design-tokens"))
+    compileOnly(project(":design-system"))
+    testImplementation(project(":design-system"))
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.detekt.gradle.plugin)
@@ -145,7 +146,7 @@ dependencies {
 }
 
 tasks.named<Jar>("jar") {
-    from(project(":design-tokens").sourceSets["main"].output)
+    from(project(":design-system").sourceSets["main"].output)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

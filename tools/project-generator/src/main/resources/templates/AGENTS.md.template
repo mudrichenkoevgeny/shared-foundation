@@ -7,3 +7,10 @@ This repository defines shared multiplatform contracts for {{PROJECT_TITLE}}, ex
 - **Entity Projections:** Follows up to 4-tier projection taxonomy (`Summary`, `Details`, `Private`, `Internal`).
 - **No Inline Comments & No Trailing Commas:** Keep code self-documenting without trailing commas.
 - **Strict Null Safety:** Non-null assertions (`!!`) are strictly prohibited in production code.
+
+## Code Review Workflow
+Interactive code review with `@mudrichenkoevgeny/code-review`:
+- Initial Setup: `pnpm dlx @mudrichenkoevgeny/code-review init`
+- Load Prompt: `pnpm dlx @mudrichenkoevgeny/code-review prompt`
+- Pack Changes: `pnpm dlx @mudrichenkoevgeny/code-review pack`
+- Update Rules Prompt: `pnpm dlx @mudrichenkoevgeny/code-review update-prompt`

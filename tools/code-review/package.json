@@ -1,6 +1,6 @@
 {
   "name": "@mudrichenkoevgeny/code-review",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "description": "Universal cross-platform CLI for iterative code review packing and prompt management",
   "license": "Apache-2.0",
   "type": "module",

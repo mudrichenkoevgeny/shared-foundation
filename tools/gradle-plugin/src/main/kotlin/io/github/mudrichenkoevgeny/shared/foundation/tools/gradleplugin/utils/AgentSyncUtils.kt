@@ -4,7 +4,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.tools.gradleplugin.agent.Ag
 import org.gradle.api.Project
 
 /**
- * Utility object for registering extra AI agent rule layers across Gradle plugins.
+ * Utility object for registering extra agent rule layers across Gradle plugins.
  */
 public object AgentSyncUtils {
 

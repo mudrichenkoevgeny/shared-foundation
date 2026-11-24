@@ -5,6 +5,7 @@ import dev.detekt.api.Entity
 import dev.detekt.api.Finding
 import dev.detekt.api.Rule
 import dev.detekt.api.RuleName
+import org.jetbrains.kotlin.psi.KtBinaryExpression
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 
 /**
@@ -43,7 +44,11 @@ public class PreferValueOverNameRule(
         }
 
         if (selectorText == "name") {
-            val isReflectionCall = receiverText in setOf(
+            val parent = expression.parent
+            if (parent is KtBinaryExpression && parent.left == expression) return
+
+            val lastSegment = receiverText.substringAfterLast('.')
+            val isReflectionCall = lastSegment in setOf(
                 "it",
                 "method",
                 "field",
@@ -56,17 +61,17 @@ public class PreferValueOverNameRule(
                 "aliasMatch",
                 "exact"
             ) ||
-                receiverText.endsWith("Method") ||
-                receiverText.endsWith("Field") ||
-                receiverText.endsWith("Param") ||
-                receiverText.endsWith("Parameter") ||
-                receiverText.endsWith("Class") ||
-                receiverText.endsWith("Match")
+                lastSegment.endsWith("Method") ||
+                lastSegment.endsWith("Field") ||
+                lastSegment.endsWith("Param") ||
+                lastSegment.endsWith("Parameter") ||
+                lastSegment.endsWith("Class") ||
+                lastSegment.endsWith("Match")
 
             if (isReflectionCall) return
 
             val isEnumCall = enumEntryPattern.matches(receiverText) ||
-                (receiverText.contains('.') && enumPropertyPattern.containsMatchIn(receiverText))
+                (receiverText.contains('.') && enumPropertyPattern.containsMatchIn(lastSegment))
             if (isEnumCall) {
                 report(
                     Finding(

@@ -1,6 +1,6 @@
 # Code Review Workflow Guide
 
-Universal cross-platform code review workflow for AI agent code generation.
+Universal cross-platform code review workflow for agent code generation.
 
 ## Directory Structure
 
@@ -55,26 +55,26 @@ Note: In headless or SSH environments where clipboard access is unavailable, pay
 ## Iterative Review Workflow
 
 ### Step 1: Initialize Reviewer Chat
-Run `code-review prompt`. Paste clipboard (or attach `.code-review/payload.md`) into a fresh Reviewer AI chat window.
+Run `code-review prompt`. Paste clipboard (or attach `.code-review/payload.md`) into a fresh Reviewer agent chat window.
 Wait for the handshake response: `Ready to review.`.
 
 ### Step 2: Pack Changes After Coding Agent Finishes
-After Coding AI agent completes code modifications, run `code-review pack`.
-Paste clipboard (or attach `.code-review/payload.md`) into the Reviewer AI chat.
+After Coding agent completes code modifications, run `code-review pack`.
+Paste clipboard (or attach `.code-review/payload.md`) into the Reviewer agent chat.
 
 ### Step 3: Handle Review Verdict
 - **Passed Files:** Run `git add <file>` to stage verified clean files. Staged files are automatically excluded from subsequent `code-review pack` runs.
-- **Failed Files:** Copy English fix prompt (`text` code block) from Reviewer AI response into Coding AI agent chat.
-- **Re-pack:** After Coding AI finishes fixes, run `code-review pack` again. Only newly modified unstaged files are packed.
+- **Failed Files:** Copy English fix prompt (`text` code block) from Reviewer agent response into Coding agent chat.
+- **Re-pack:** After Coding agent finishes fixes, run `code-review pack` again. Only newly modified unstaged files are packed.
 
 ### Step 4: Finalize
-Repeat Step 3 until Reviewer AI responds with `No issues found.`.
+Repeat Step 3 until Reviewer agent responds with `No issues found.`.
 
 ## Keeping `REVIEW_PROMPT.md` in Sync
 
 Whenever project standards, architecture, or `.agent/**/*.md` rules change:
 1. Run `code-review update-prompt`.
-2. Paste clipboard (or attach `.code-review/payload.md`) into an AI chat.
+2. Paste clipboard (or attach `.code-review/payload.md`) into an agent chat.
 3. Save generated Markdown response to `.code-review/REVIEW_PROMPT.md`.
 
 ## Cache & Exclusions

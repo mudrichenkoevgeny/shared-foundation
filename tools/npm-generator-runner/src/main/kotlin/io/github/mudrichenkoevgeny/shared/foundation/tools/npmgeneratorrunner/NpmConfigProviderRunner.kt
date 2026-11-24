@@ -27,9 +27,10 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.t
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.totp.TotpStep
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.auth.unlock.UnlockMethod
-import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.DesignTokensFontExtractor
-import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.DesignTokensParser
-import io.github.mudrichenkoevgeny.shared.foundation.tools.designtokens.WebTokensGenerator
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designsystem.DesignTokensFontExtractor
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designsystem.DesignTokensParser
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designsystem.DesignSystemIconExtractor
+import io.github.mudrichenkoevgeny.shared.foundation.tools.designsystem.WebTokensGenerator
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmTypeResolver
 import java.io.File
@@ -132,12 +133,13 @@ internal fun buildFoundationNpmConfig(
         typescriptVersion = typescriptVersion,
         extraFiles = listOf("dist/"),
         extraExportsJson = """
-            "./tokens.css": "./dist/design-tokens/tokens.css",
+            "./tokens.css": "./dist/design-system/tokens.css",
             "./tokens": {
-              "import": "./dist/design-tokens/tokens.js",
-              "types": "./dist/design-tokens/tokens.d.ts"
+              "import": "./dist/design-system/tokens.js",
+              "types": "./dist/design-system/tokens.d.ts"
             },
-            "./fonts/*": "./dist/design-tokens/fonts/*"
+            "./fonts/*": "./dist/design-system/fonts/*",
+            "./icons/*": "./dist/design-system/icons/*"
         """.trimIndent(),
         onGenerateAdditionalArtifacts = { outputDir ->
             generateFoundationAdditionalArtifacts(outputDir)
@@ -146,7 +148,7 @@ internal fun buildFoundationNpmConfig(
 }
 
 private fun generateFoundationAdditionalArtifacts(outputDir: File) {
-    val distDir = File(outputDir, "dist/design-tokens")
+    val distDir = File(outputDir, "dist/design-system")
     distDir.mkdirs()
 
     val parser = DesignTokensParser.loadFromClasspath()
@@ -162,6 +164,9 @@ private fun generateFoundationAdditionalArtifacts(outputDir: File) {
 
     val fontsDir = File(distDir, "fonts")
     DesignTokensFontExtractor.extractWoff2Fonts(fontsDir)
+
+    val iconsDir = File(distDir, "icons")
+    DesignSystemIconExtractor.extractSvgIconsForWeb(iconsDir)
 }
 
 private fun buildBrandedTypesList(): List<KClass<*>> = listOf(

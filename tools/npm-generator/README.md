@@ -62,8 +62,8 @@ Running `NpmGeneratorEngine(config).generate()` produces the following files in 
 Every invocation of `NpmGeneratorEngine(config).generate()` automatically executes `NpmPackageVerifier`:
 
 1. **Artifacts Presence Check**: Verifies existence of `package.json`, `index.js`, `index.d.ts`, `README.md`, `.npmignore`.
-2. **JS Syntax Verification**: Runs `node --check index.js` using Node.js V8.
-3. **`npm pack --dry-run` Check**: Verifies archive layout in `outputDirectory`.
+2. **JS Syntax Verification**: Runs V8 Node.js syntax check on `index.js`.
+3. **Archive Layout Check**: Verifies `npm pack` archive layout in `outputDirectory`.
 4. **TypeScript Strict Declaration Compilation**:
    - Generates temporary `test-types.ts` validating all DTO schemas and `config.customDtsSmokeTestCode`.
    - Uses an isolated verifier cache in `build/npm-verifier-env` containing configured Zod and TypeScript dependencies linked via directory junction (`mklink /J` on Windows, symlink on Unix).
@@ -175,4 +175,4 @@ fun main() {
    - In `index.js`: `import { userIdSchema, toUserIdOrThrow, pagedResultSchema } from '@mudrichenkoevgeny/shared-foundation';`
    - In `index.d.ts`: `import type { UserId, PagedResult } from '@mudrichenkoevgeny/shared-foundation';`
 3. **Custom Localization**: Automatically generates `SampleSharedLocalization` and `sampleSharedLocalization` singleton, importing `formatLocalizedString` from foundation.
-4. **Automatic Verification**: `NpmPackageVerifier` verifies artifacts, syntax, `npm pack --dry-run`, `tsc --noEmit --strict`, and Node.js runtime behavior before finishing.
+4. **Automatic Verification**: `NpmPackageVerifier` verifies artifacts, syntax, archive layout, `tsc --noEmit --strict`, and Node.js runtime behavior before finishing.

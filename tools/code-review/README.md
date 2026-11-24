@@ -1,6 +1,6 @@
 # @mudrichenkoevgeny/code-review
 
-**Universal Cross-Platform Code Review CLI** for AI agent code generation.
+**Universal Cross-Platform Code Review CLI** for agent code generation.
 
 A zero-dependency Node.js CLI tool that packs git changes into reviewer-friendly Markdown prompts, maintains hash-based review state, and generates custom repository prompt checklists.
 

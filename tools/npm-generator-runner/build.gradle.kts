@@ -12,7 +12,7 @@ dependencies {
     implementation(project(":core:settings"))
     implementation(project(":core:storage"))
     implementation(project(":feature:user"))
-    implementation(project(":tools:design-tokens"))
+    implementation(project(":tools:design-system"))
     implementation(project(":tools:npm-generator"))
 
     implementation(libs.kotlinx.serialization.json)

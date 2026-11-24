@@ -20,7 +20,7 @@ apiValidation {
         "npm-generator-runner",
         "project-generator",
         "detekt-rules",
-        "design-tokens",
+        "design-system",
         "testing"
     )
 }
@@ -72,5 +72,33 @@ tasks.register("verifyProjectGenerator") {
     group = "verification"
     description = "E2E verification of project skeleton scaffolding."
     dependsOn(":tools:project-generator:verifyProjectGenerator")
+}
+
+val verifyRepositoryVersions = tasks.register("verifyRepositoryVersions") {
+    group = "verification"
+    description = "Verifies that tool package manifests stay synchronized with root project version."
+
+    val expectedVersion = rootProject.version.toString()
+    val rootDirectory = rootDir
+    val toolManifests = listOf(file("tools/code-review/package.json"))
+
+    doLast {
+        val versionRegex = Regex(""""version"\s*:\s*"([^"]+)"""")
+        toolManifests.forEach { manifest ->
+            val relPath = manifest.relativeTo(rootDirectory).path
+            if (!manifest.exists()) throw GradleException("Manifest not found: $relPath")
+
+            val actual = versionRegex.find(manifest.readText())?.groupValues?.get(1)
+                ?: throw GradleException("Could not parse 'version' from $relPath")
+
+            if (actual != expectedVersion) {
+                throw GradleException("Version mismatch in $relPath: found '$actual', expected '$expectedVersion'.")
+            }
+        }
+    }
+}
+
+tasks.named("check") {
+    dependsOn(verifyRepositoryVersions)
 }
 

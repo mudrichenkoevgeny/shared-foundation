@@ -46,7 +46,7 @@ It collects all wire DTOs, domain mappers, REST API routes, navigation screen pa
 
 ## Output Package Structure (`build/npm-package/`)
 
-Running `./gradlew generateNpmPackage` produces:
+Running package generation produces:
 
 - `package.json`: NPM package descriptor (`name: "@mudrichenkoevgeny/shared-foundation"`, `"type": "module"`, `"zod": "<version>"`).
 - `index.d.ts`: Full TypeScript type declarations, interfaces, branded types (`UserId`, `PermissionCode`, etc.), JSDoc hover comments, route types, and test fixture types.

@@ -1,6 +1,6 @@
 # tools/gradle-plugin
 
-**Gradle Convention Plugins for shared-foundation** providing build tasks, quality checks, compiler conventions, publishing setup, multi-layer `.editorconfig` synchronization, and AI agent rules synchronization across Kotlin/JVM/KMP consumer applications (such as `backend-platform-sdk` and `kmp-platform-sdk`).
+**Gradle Convention Plugins for shared-foundation** providing build tasks, quality checks, compiler conventions, publishing setup, multi-layer `.editorconfig` synchronization, and agent rules synchronization across Kotlin/JVM/KMP consumer applications (such as `backend-platform-sdk` and `kmp-platform-sdk`).
 
 Published Maven artifact: **`shared-foundation-gradle-plugin`**.
 
@@ -8,8 +8,8 @@ Published Maven artifact: **`shared-foundation-gradle-plugin`**.
 
 1. **`io.github.mudrichenkoevgeny.shared-foundation-agent-sync`** (`AgentSyncPlugin`):
    - **Task:** `syncAgentRules`.
-   - **Description:** Extracts shared global AI agent rules (`common/`, `kotlin/`, and optionally `shared/`) directly from plugin resources into `.agent/global/`.
-   - **Multi-Layer Agent Rules Registration:** Supports registering additional AI agent rule layers from downstream SDK convention plugins via `AgentSyncUtils.registerAgentRulesLayer(...)` into dedicated target subdirectories under `.agent/global/`.
+   - **Description:** Extracts shared global agent rules (`common/`, `kotlin/`, and optionally `shared/`) directly from plugin resources into `.agent/global/`.
+   - **Multi-Layer Agent Rules Registration:** Supports registering additional agent rule layers from downstream SDK convention plugins via `AgentSyncUtils.registerAgentRulesLayer(...)` into dedicated target subdirectories under `.agent/global/`.
    - **IDE Integration:** Automatically hooks into IDE import (`prepareKotlinBuildScriptModel` and `prepareKotlinIdeaImport`).
 
 2. **`io.github.mudrichenkoevgeny.shared-foundation-quality`** (`QualityPlugin`):
@@ -40,16 +40,16 @@ Published Maven artifact: **`shared-foundation-gradle-plugin`**.
    - **Configuration Extension (`sharedLocalization`):** Configures `basePackageName` (defaults to `"io.github.mudrichenkoevgeny.shared.foundation"`), `resourcesDir` (defaults to `src/commonMain/resources`), and `outputDir` (defaults to `build/generated/sources/localization/kotlin/commonMain`).
    - **Multiplatform Wiring:** Automatically registers `outputDir` into Kotlin Multiplatform `commonMain` sourceSet and wires task dependencies into Kotlin compilation tasks and IDE import (`prepareKotlinIdeaImport`).
 
-6. **`io.github.mudrichenkoevgeny.shared-foundation-design-tokens`** (`DesignTokensPlugin`):
-   - **Tasks:** `generateDesignTokens` (`GenerateDesignTokensTask`), `extractDesignFonts` (`ExtractDesignFontsTask`).
-   - **Description:** Automatically generates Compose Design Tokens Kotlin class (`PlatformDesignTokens.kt`) from embedded JSON token specs and extracts TTF design font assets to Compose Multiplatform resources.
-   - **Configuration Extension (`sharedDesignTokens`):** Configures `packageName` (defaults to `"io.github.mudrichenkoevgeny.kmp.core.common.ui.theme.tokens"`), `outputDir` (defaults to `build/generated/sources/designTokens/kotlin/commonMain`), and `fontsOutputDir` (defaults to `src/commonMain/composeResources/font`).
+6. **`io.github.mudrichenkoevgeny.shared-foundation-design-system`** (`DesignSystemPlugin`):
+   - **Tasks:** `generateDesignTokens` (`GenerateDesignTokensTask`), `extractDesignFonts` (`ExtractDesignFontsTask`), `extractDesignIcons` (`ExtractDesignIconsTask`).
+   - **Description:** Automatically generates Compose Design Tokens Kotlin class (`PlatformDesignTokens.kt`) from embedded JSON token specs, extracts TTF design font assets, and extracts Vector Drawable XML icons to Compose Multiplatform resources.
+   - **Configuration Extension (`sharedDesignSystem`):** Configures `packageName` (defaults to `"io.github.mudrichenkoevgeny.kmp.core.common.ui.theme.tokens"`), `outputDir` (defaults to `build/generated/sources/designTokens/kotlin/commonMain`), `fontsOutputDir` (defaults to `src/commonMain/composeResources/font`), `generateTokens` (defaults to `true`), `extractFonts` (defaults to `true`), `iconModules` (defaults to empty list), and `iconsOutputDir` (defaults to `src/commonMain/composeResources/drawable`).
    - **Multiplatform Wiring:** Automatically registers `outputDir` into Kotlin Multiplatform `commonMain` sourceSet and wires task dependencies into Kotlin compilation tasks, Compose Multiplatform resource tasks (`ComposeResources`, `NonXmlValueResources`, `ResourceAccessors`), and IDE import (`prepareKotlinIdeaImport`).
 
 ## Quality & Synchronization Utilities
 
 - **`AgentSyncUtils`**:
-  - `registerAgentRulesLayer(target, classLoader, resourcePath, targetSubdir)` — ensures `AgentSyncPlugin` is applied to root project and registers extra AI agent rule resource layers targeting subdirectories under `.agent/global/`.
+  - `registerAgentRulesLayer(target, classLoader, resourcePath, targetSubdir)` — ensures `AgentSyncPlugin` is applied to root project and registers extra agent rule resource layers targeting subdirectories under `.agent/global/`.
 - **`QualityUtils`**:
   - `registerEditorConfigLayer(target, classLoader, resourcePath)` — registers or appends resource layers to the root `syncEditorConfig` task.
   - `registerDetektConfigExtraction(target, taskName, classLoader, resourcePath, outputFileName)` — extracts YAML configs and prepends local `$rootDir/config/detekt/detekt.yml` to `detekt.config`.

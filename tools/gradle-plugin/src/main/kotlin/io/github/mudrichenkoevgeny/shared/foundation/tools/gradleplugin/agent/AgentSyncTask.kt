@@ -55,7 +55,7 @@ public abstract class AgentSyncTask : DefaultTask() {
     }
 
     /**
-     * Synchronizes global AI agent rules into the configured output directory.
+     * Synchronizes global agent rules into the configured output directory.
      */
     @TaskAction
     public fun sync() {

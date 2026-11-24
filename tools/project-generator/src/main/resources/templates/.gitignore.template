@@ -6,3 +6,5 @@ node_modules/
 .DS_Store
 local.properties
 *.tgz
+.code-review/state.json
+.code-review/payload.md

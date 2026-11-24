@@ -6,7 +6,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
- * Gradle plugin for synchronizing shared AI agent rules into consumer projects.
+ * Gradle plugin for synchronizing shared agent rules into consumer projects.
  */
 public class AgentSyncPlugin : Plugin<Project> {
     /**
@@ -25,7 +25,7 @@ public class AgentSyncPlugin : Plugin<Project> {
 
         val syncTask = target.tasks.register(TASK_SYNC_AGENT_RULES, AgentSyncTask::class.java) { task ->
             task.group = TASK_GROUP_DOCUMENTATION
-            task.description = "Synchronizes shared AI agent rules into .agent/global/ directory"
+            task.description = "Synchronizes shared agent rules into .agent/global/ directory"
             task.outputDirectory.convention(target.layout.projectDirectory.dir(DEFAULT_OUTPUT_DIR))
             task.includeShared.convention(config.includeShared)
         }

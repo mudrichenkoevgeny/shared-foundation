@@ -1,0 +1,20 @@
+# Build outputs & caches
+**/build/
+**/.gradle/
+**/.kotlin/
+**/.konan/
+**/node_modules/
+
+# Local configuration & secrets
+local.properties
+.env
+.env.*
+!.env.example
+
+# Binary & font assets
+gradle/wrapper/gradle-wrapper.jar
+**/*.woff2
+
+# Code review artifacts
+.code-review/payload.md
+.code-review/state.json

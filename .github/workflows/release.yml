@@ -37,7 +37,7 @@ jobs:
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
   publish-npm:
-    name: Publish NPM Package (@mudrichenkoevgeny/shared-foundation)
+    name: Publish NPM Packages
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -55,8 +55,11 @@ jobs:
       - name: Generate NPM Package
         run: ./gradlew generateNpmPackage
 
-      - name: Publish to npmjs.com
+      - name: Publish @mudrichenkoevgeny/shared-foundation to npmjs.com
         run: npm publish ./build/npm-package --access public --provenance
+
+      - name: Publish @mudrichenkoevgeny/code-review to npmjs.com
+        run: npm publish ./tools/code-review --access public --provenance
 
   publish-docs:
     name: Publish Dokka API Reference to GitHub Pages

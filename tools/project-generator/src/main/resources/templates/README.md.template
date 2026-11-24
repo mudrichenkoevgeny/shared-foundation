@@ -2,8 +2,20 @@
 
 Shared contracts library for {{PROJECT_TITLE}} (JVM, Android, Web).
 
+## Documentation & Architecture
+- **[ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** — High-level architecture overview and module structure.
+- **[AGENTS.md](AGENTS.md)** — Project coding standards and architectural boundaries.
+
 ## Building & Verification
 ```bash
 ./gradlew check
 ./gradlew generateNpmPackage
+```
+
+## Code Review CLI
+```bash
+pnpm dlx @mudrichenkoevgeny/code-review init
+pnpm dlx @mudrichenkoevgeny/code-review prompt
+pnpm dlx @mudrichenkoevgeny/code-review pack
+pnpm dlx @mudrichenkoevgeny/code-review update-prompt
 ```

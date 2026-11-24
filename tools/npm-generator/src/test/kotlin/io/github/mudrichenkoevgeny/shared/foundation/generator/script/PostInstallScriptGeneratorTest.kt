@@ -5,7 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-public class PostInstallScriptGeneratorTest {
+class PostInstallScriptGeneratorTest {
 
     @Test
     fun testFilteringOfKotlinAndSharedSubdirectoriesInDomainRules() {

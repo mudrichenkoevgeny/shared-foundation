@@ -21,5 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "shared-foundation-gradle-plugin"
 
-include(":design-tokens")
-project(":design-tokens").projectDir = file("../../tools/design-tokens")
+include(":design-system")
+project(":design-system").projectDir = file("../../tools/design-system")
