@@ -33,10 +33,7 @@ fun registerModules(
     }
 }
 
-registerModules(
-    "core",
-    listOf("common")
-)
+include(":core")
 
 registerModules(
     "tools",

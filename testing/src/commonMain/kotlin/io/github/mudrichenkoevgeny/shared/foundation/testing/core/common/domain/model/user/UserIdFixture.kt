@@ -1,0 +1,18 @@
+package io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user
+
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
+
+/** Default deterministic user ID string for unit tests. */
+public const val TEST_USER_ID: String = "00000000-0000-4000-8000-000000000001"
+
+/** Secondary deterministic user ID string for multi-user unit tests. */
+public const val TEST_USER_ID_2: String = "00000000-0000-4000-8000-000000000002"
+
+/**
+ * Creates a test [UserId] instance for unit testing.
+ *
+ * @param value String representation of the UUID (defaults to [TEST_USER_ID]).
+ */
+public fun createTestUserId(value: String = TEST_USER_ID): UserId = value.toUserIdOrThrow()

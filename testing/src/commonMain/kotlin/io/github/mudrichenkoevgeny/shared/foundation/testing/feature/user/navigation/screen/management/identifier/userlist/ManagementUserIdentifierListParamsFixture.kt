@@ -5,7 +5,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.li
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.identifier.userlist.ManagementUserIdentifierListParams
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [ManagementUserIdentifierListParams] navigation params instance.

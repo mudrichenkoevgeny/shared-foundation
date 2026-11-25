@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName

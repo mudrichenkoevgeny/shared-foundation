@@ -11,6 +11,9 @@ import java.nio.file.Paths
  */
 public object DesignSystemIconExtractor {
 
+    private const val SCHEME_JAR: String = "jar"
+    private const val SCHEME_FILE: String = "file"
+
     /**
      * List of supported module names containing icon assets.
      */
@@ -22,7 +25,10 @@ public object DesignSystemIconExtractor {
      * @param iconModules List of module names (e.g. `listOf("core-common", "core-storage")`).
      * @param targetDir Destination directory for Compose Resources (e.g. `src/commonMain/composeResources/drawable`).
      */
-    public fun extractDrawableIcons(iconModules: List<String>, targetDir: File) {
+    public fun extractDrawableIcons(
+        iconModules: List<String>,
+        targetDir: File
+    ) {
         targetDir.mkdirs()
         iconModules.forEach { moduleName ->
             val resourceDirPath = "design-system/icons/$moduleName/drawable"
@@ -44,7 +50,10 @@ public object DesignSystemIconExtractor {
         }
     }
 
-    private fun copyResourcesFromClasspath(resourceDirPath: String, targetDir: File) {
+    private fun copyResourcesFromClasspath(
+        resourceDirPath: String,
+        targetDir: File
+    ) {
         val classLoader = DesignSystemIconExtractor::class.java.classLoader
         val cleanPath = resourceDirPath.trimStart('/')
         val resourceUrl = classLoader.getResource(cleanPath)
@@ -69,46 +78,49 @@ public object DesignSystemIconExtractor {
         }
     }
 
-    private fun discoverResourceEntries(cleanPath: String, uri: URI): List<String> {
-        return when (uri.scheme) {
-            "jar" -> {
-                val fs = try {
-                    FileSystems.getFileSystem(uri)
+    private fun discoverResourceEntries(
+        cleanPath: String,
+        uri: URI
+    ): List<String> = when (uri.scheme) {
+        SCHEME_JAR -> {
+            val fs = try {
+                FileSystems.getFileSystem(uri)
+            } catch (_: Exception) {
+                try {
+                    FileSystems.newFileSystem(uri, emptyMap<String, Any>())
                 } catch (_: Exception) {
-                    try {
-                        FileSystems.newFileSystem(uri, emptyMap<String, Any>())
-                    } catch (_: Exception) {
-                        FileSystems.getFileSystem(uri)
-                    }
-                }
-                val pathInFs = fs.getPath(if (cleanPath.startsWith("/")) cleanPath else "/$cleanPath")
-                Files.walk(pathInFs, 1).use { stream ->
-                    stream.filter { Files.isRegularFile(it) }
-                        .map { it.fileName.toString() }
-                        .filter { !it.startsWith(".") }
-                        .toList()
+                    FileSystems.getFileSystem(uri)
                 }
             }
-            "file" -> {
-                val dirPath = Paths.get(uri)
-                check(Files.exists(dirPath) && Files.isDirectory(dirPath)) {
-                    "Icon directory on disk does not exist or is not a directory: $dirPath"
-                }
-                Files.list(dirPath).use { stream ->
-                    stream.filter { Files.isRegularFile(it) }
-                        .map { it.fileName.toString() }
-                        .filter { !it.startsWith(".") }
-                        .toList()
-                }
+            val pathInFs = fs.getPath(if (cleanPath.startsWith("/")) cleanPath else "/$cleanPath")
+            Files.walk(pathInFs, 1).use { stream ->
+                stream.filter { Files.isRegularFile(it) }
+                    .map { it.fileName.toString() }
+                    .filter { !it.startsWith(".") }
+                    .toList()
             }
-            else -> {
-                val dirPath = Paths.get(uri)
-                Files.list(dirPath).use { stream ->
-                    stream.filter { Files.isRegularFile(it) }
-                        .map { it.fileName.toString() }
-                        .filter { !it.startsWith(".") }
-                        .toList()
-                }
+        }
+
+        SCHEME_FILE -> {
+            val dirPath = Paths.get(uri)
+            check(Files.exists(dirPath) && Files.isDirectory(dirPath)) {
+                "Icon directory on disk does not exist or is not a directory: $dirPath"
+            }
+            Files.list(dirPath).use { stream ->
+                stream.filter { Files.isRegularFile(it) }
+                    .map { it.fileName.toString() }
+                    .filter { !it.startsWith(".") }
+                    .toList()
+            }
+        }
+
+        else -> {
+            val dirPath = Paths.get(uri)
+            Files.list(dirPath).use { stream ->
+                stream.filter { Files.isRegularFile(it) }
+                    .map { it.fileName.toString() }
+                    .filter { !it.startsWith(".") }
+                    .toList()
             }
         }
     }

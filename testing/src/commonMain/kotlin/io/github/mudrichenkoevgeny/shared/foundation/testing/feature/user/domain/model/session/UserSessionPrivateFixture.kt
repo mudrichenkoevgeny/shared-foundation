@@ -1,21 +1,22 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP_ADDRESS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client.createTestClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.createTestUserIdentifierId
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
 /**

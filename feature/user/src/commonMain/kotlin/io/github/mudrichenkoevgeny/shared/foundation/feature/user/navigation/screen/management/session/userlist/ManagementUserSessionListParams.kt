@@ -4,6 +4,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
@@ -14,9 +17,6 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.pars
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import kotlinx.serialization.Serializable
 

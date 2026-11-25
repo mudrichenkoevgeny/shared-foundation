@@ -1,14 +1,14 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.token
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.AccessToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserAuthSpec
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.createTestUserIdentifierId
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.createTestUserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserSessionId
 import kotlin.time.Instant
 
 /**

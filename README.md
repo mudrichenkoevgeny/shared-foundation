@@ -22,8 +22,7 @@ Use the BOM and add only the modules you need:
 // build.gradle.kts
 dependencies {
     implementation(platform("io.github.mudrichenkoevgeny:shared-foundation-bom:<version>"))
-    implementation("io.github.mudrichenkoevgeny:shared-foundation-core-common")
-    implementation("io.github.mudrichenkoevgeny:shared-foundation-core-security")
+    implementation("io.github.mudrichenkoevgeny:shared-foundation-core")
     implementation("io.github.mudrichenkoevgeny:shared-foundation-feature-user")
 
     // For unit, integration, and UI preview tests:
@@ -67,17 +66,13 @@ Scaffold a new, production-ready downstream Kotlin Multiplatform contracts repos
 ./gradlew initProject -Pname=sample -Pgroup=com.sample -PnpmScope=@sample
 ```
 
-This creates `sample-shared` configured with `shared-foundation` Gradle convention plugins, version catalog, BOM, `core/common`, `testing`, `tools/npm-generator-runner`, and agent rules.
+This creates `sample-shared` configured with `shared-foundation` Gradle convention plugins, version catalog, BOM, `core`, `testing`, `tools/npm-generator-runner`, and agent rules.
 
 ## Modules
 
 Published artifacts (versions aligned via the BOM):
 
-- **core-common** — shared errors, network contracts (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation (`ClientMainNavigation`, `ManagementMainNavigation`), parameter parsers, and core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`, `CommonModuleStrings`) ([module README](core/common/README.md)).
-- **core-security** — Open/Management password policies, MFA logic, security settings, account lockout policies, HTTP routes, permission codes, mappers, navigation (`ManagementSecurityNavigation`), and security localization (`SecurityModuleStrings`) ([module README](core/security/README.md)).
-- **core-settings** — Open/Management global settings, client app version requirements, HTTP routes, permission codes, mappers, and settings navigation (`ManagementSettingsNavigation`) ([module README](core/settings/README.md)).
-- **core-storage** — Direct-to-S3 presigned upload contracts, FileId, StorageCategory, StorageFileStatus, StorageFileVisibility, entity projections, storage settings, HTTP routes, permission codes, mappers, and storage navigation (`OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`) ([module README](core/storage/README.md)).
-- **core-audit** — audit events, filters, sort keys, payloads, management HTTP routes, permission codes, mappers, and audit navigation (`ManagementAuditNavigation`) ([module README](core/audit/README.md)).
+- **core** — consolidated core module including common shared errors, network contracts (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), WebSocket envelopes, common DTOs, navigation contracts, root navigation, parameter parsers, core localization infrastructure, security policies, MFA, global settings, S3 presigned storage contracts, entity projections, and audit events ([module README](core/README.md)).
 - **feature-user** — comprehensive HTTP contracts for authentication, MFA, session management, user identifiers, open/management user configurations, self-service account unlocking, navigation screen routes, screen parameters, parameter parsers, and user localization (`UserModuleStrings`) ([module README](feature/user/README.md)).
 - **testing** — standardized test data builders (`createTest*`), screen parameter fixtures, deterministic constants, value class factories, and in-memory mocks for unit, integration, and UI preview tests ([module README](testing/README.md)).
 - **tools-design-system** — pure Kotlin design token parser, icon extractors, and code generators (`DesignTokensParser`, `ComposeTokensGenerator`, `WebTokensGenerator`, `PenpotTokensGenerator`, `DesignTokensFontExtractor`, `DesignSystemIconExtractor`) supporting multi-target generation for Jetpack Compose, Web (CSS/TS), and Penpot ([module README](tools/design-system/README.md)).
@@ -102,12 +97,16 @@ For JVM test suites (`jvmTest`), the module also provides **`FoundationArchitect
 - **[ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** — Architectural diagrams in Mermaid covering module dependencies, surface separation (`Open` vs `Management`), WebSocket wire contract, error handling taxonomy, navigation, and localization architecture.
 - **[AGENTS.md](AGENTS.md)** — Project coding standards, architectural boundaries, KDoc requirements, and operational rules for contributors and agents.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Build instructions, dependency health checks (`./gradlew projectHealth`), and Maven Central publishing guidelines.
-- **[core/common README](core/common/README.md)** — Core localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`) and platform integration examples (Ktor/JVM, Android, iOS, Web).
+- **[core README](core/README.md)** — Consolidated core contracts, localization infrastructure (`LocalizedStringResolver`, `LocalizationFormatter`), and platform integration examples.
+- **[feature/user README](feature/user/README.md)** — IAM subsystem documentation, network contracts, routing hierarchy, and component index.
 - **[testing README](testing/README.md)** — Testing module documentation, mock factories, screen parameter fixtures, value class factories, and architecture assertions (`FoundationArchitectureAssertions`).
 - **[tools/code-review README](tools/code-review/README.md)** — Universal cross-platform CLI tool (`@mudrichenkoevgeny/code-review`) for code review packing and prompt management.
 - **[tools/design-system README](tools/design-system/README.md)** — Pure Kotlin design token parser, icon extractors, and code generators for Compose Multiplatform, Web (CSS/TS), and Penpot.
+- **[tools/detekt-rules README](tools/detekt-rules/README.md)** — Custom Detekt static analysis rules for enforcing shared library architectural standards.
 - **[tools/gradle-plugin README](tools/gradle-plugin/README.md)** — Convention plugins (`agent-sync`, `quality`, `publish`, `localization`, `design-system`) and Detekt quality checks.
 - **[tools/npm-generator README](tools/npm-generator/README.md)** — TypeScript/Zod contract generator engine, declaration verification, and npm package build pipeline.
+- **[tools/npm-generator-runner README](tools/npm-generator-runner/README.md)** — Executable runner for NPM package generation and export auditing.
+- **[tools/project-generator README](tools/project-generator/README.md)** — Internal generator for scaffolding downstream contract repositories.
 
 ## Samples & Usage
 

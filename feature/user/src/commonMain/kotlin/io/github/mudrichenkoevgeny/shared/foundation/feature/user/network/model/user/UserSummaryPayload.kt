@@ -1,10 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName

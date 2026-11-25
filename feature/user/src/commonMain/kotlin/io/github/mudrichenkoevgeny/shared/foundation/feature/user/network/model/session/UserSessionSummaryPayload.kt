@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 import kotlinx.serialization.SerialName

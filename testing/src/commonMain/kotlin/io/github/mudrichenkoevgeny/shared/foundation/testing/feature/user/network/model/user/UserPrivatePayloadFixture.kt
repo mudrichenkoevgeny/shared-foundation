@@ -1,15 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [UserPrivatePayload] wire object for unit testing mapper logic.

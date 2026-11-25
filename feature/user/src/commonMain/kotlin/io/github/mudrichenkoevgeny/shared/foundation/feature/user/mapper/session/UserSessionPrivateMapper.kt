@@ -1,13 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdentifierIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
 import kotlin.time.Instant
 

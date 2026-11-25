@@ -1,19 +1,19 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.client.ClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionPrivatePayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_IP_ADDRESS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_USER_AGENT
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_IDENTIFIER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_SESSION_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.network.model.client.createTestClientDeviceInfoPayload
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.TEST_SESSION_ID
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [UserSessionPrivatePayload] wire object for unit testing mapper logic.

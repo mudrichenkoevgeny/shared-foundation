@@ -2,11 +2,11 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.sc
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -1,10 +1,10 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.detail
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.params.NavigationScreenParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.NavigationScreenParamsParser
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.navigation.parser.normalizeQueryParams
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrNull
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import kotlinx.serialization.Serializable
 

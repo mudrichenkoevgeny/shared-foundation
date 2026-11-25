@@ -9,7 +9,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":core:common"))
+                api(project(":core"))
                 api(project.dependencies.platform(libs.shared.foundation.bom))
                 api(libs.shared.foundation.testing)
                 api(libs.kotlinx.serialization.json)

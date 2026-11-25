@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.auth.create
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.auth.create.CreateByEmailRequest
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL

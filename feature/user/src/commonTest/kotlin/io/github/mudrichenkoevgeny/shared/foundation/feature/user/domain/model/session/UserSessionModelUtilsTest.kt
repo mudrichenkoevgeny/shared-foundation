@@ -2,8 +2,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceId
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientDeviceInfo
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

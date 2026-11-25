@@ -1,11 +1,13 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.domain.model.file
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.StorageFilePrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.visibility.StorageFileVisibility
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
 /**
@@ -13,7 +15,7 @@ import kotlin.time.Instant
  */
 public fun createTestStorageFilePrivate(
     id: FileId = createTestFileId(),
-    ownerUserId: String? = "usr_000000000001",
+    ownerUserId: UserId? = createTestUserId(),
     fileName: String = "test_image.png",
     fileSizeBytes: Long = 1048576L,
     mimeType: String = "image/png",

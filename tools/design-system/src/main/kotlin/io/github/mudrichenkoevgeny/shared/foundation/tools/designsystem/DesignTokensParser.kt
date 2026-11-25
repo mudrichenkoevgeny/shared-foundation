@@ -54,23 +54,23 @@ public class DesignTokensParser(
         element: JsonElement,
         currentPath: String = "",
         visitedPaths: Set<String> = emptySet()
-    ): String {
-        return when (element) {
-            is JsonObject -> {
-                val valueElem = element["\$value"] ?: element
-                if (valueElem is JsonObject || valueElem is JsonArray) {
-                    resolveValue(valueElem, currentPath, visitedPaths)
-                } else if (valueElem is JsonPrimitive) {
-                    resolvePrimitiveString(valueElem.content, currentPath, visitedPaths)
-                } else {
-                    element.toString()
-                }
+    ): String = when (element) {
+        is JsonObject -> {
+            val valueElem = element["\$value"] ?: element
+            if (valueElem is JsonObject || valueElem is JsonArray) {
+                resolveValue(valueElem, currentPath, visitedPaths)
+            } else if (valueElem is JsonPrimitive) {
+                resolvePrimitiveString(valueElem.content, currentPath, visitedPaths)
+            } else {
+                element.toString()
             }
-            is JsonPrimitive -> {
-                resolvePrimitiveString(element.content, currentPath, visitedPaths)
-            }
-            else -> element.toString()
         }
+
+        is JsonPrimitive -> {
+            resolvePrimitiveString(element.content, currentPath, visitedPaths)
+        }
+
+        else -> element.toString()
     }
 
     private fun resolvePrimitiveString(
@@ -165,7 +165,10 @@ public class DesignTokensParser(
             return JsonObject(map)
         }
 
-        private fun mergeDeep(target: JsonObject, source: JsonObject): JsonObject {
+        private fun mergeDeep(
+            target: JsonObject,
+            source: JsonObject
+        ): JsonObject {
             val resultMap = target.toMutableMap()
             for ((key, sourceValue) in source) {
                 val targetValue = resultMap[key]

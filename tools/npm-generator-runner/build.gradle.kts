@@ -6,11 +6,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(project(":core:audit"))
-    implementation(project(":core:security"))
-    implementation(project(":core:settings"))
-    implementation(project(":core:storage"))
+    implementation(project(":core"))
     implementation(project(":feature:user"))
     implementation(project(":tools:design-system"))
     implementation(project(":tools:npm-generator"))

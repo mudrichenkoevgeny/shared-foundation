@@ -1,7 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "elevation": {
-    "header": { "$value": 2, "$type": "dimension", "unit": "dp" },
-    "shadow": { "$value": 4, "$type": "dimension", "unit": "dp" }
+    "header": {
+      "$value": 2,
+      "$type": "dimension",
+      "unit": "dp"
+    },
+    "shadow": {
+      "$value": 4,
+      "$type": "dimension",
+      "unit": "dp"
+    }
   }
 }

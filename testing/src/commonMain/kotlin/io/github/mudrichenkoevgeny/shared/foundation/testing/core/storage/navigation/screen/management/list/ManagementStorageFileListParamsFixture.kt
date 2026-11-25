@@ -2,6 +2,7 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.core.storage.navig
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.category.StorageCategory
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.listing.StorageFileSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.status.StorageFileStatus
@@ -43,7 +44,7 @@ public fun createTestManagementStorageFileListParams(
     sortBy: StorageFileSortBy = StorageFileSortBy.DEFAULT,
     sortOrder: SortOrder = SortOrder.DEFAULT,
     fileIds: List<String> = emptyList(),
-    ownerUserIds: List<String> = emptyList(),
+    ownerUserIds: List<UserId> = emptyList(),
     isOwnerUserIdSet: Boolean? = null,
     fileName: String? = null,
     fileSizeBytesFrom: Long? = null,

@@ -1,14 +1,15 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.passwordhash.PasswordHash
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierInternal
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.security.domain.model.passwordhash.createTestPasswordHash
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 import kotlin.time.Instant
 
 /**

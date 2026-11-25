@@ -1,7 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.DeletedSessions
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserSessionId
 
 /**
  * Creates a test [DeletedSessions] domain instance.

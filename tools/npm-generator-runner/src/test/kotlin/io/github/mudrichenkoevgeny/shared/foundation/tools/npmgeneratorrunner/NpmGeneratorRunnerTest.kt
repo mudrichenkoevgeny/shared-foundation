@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.tools.npmgeneratorrunner
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.tools.npmgenerator.engine.NpmGeneratorConfig
@@ -260,7 +260,7 @@ class NpmGeneratorRunnerTest {
     @Test
     fun testCustomLocalizationNaming() {
         val rootDir = resolveRootDir()
-        val locDir = File(rootDir, "core/common/src/commonMain/resources/localization")
+        val locDir = File(rootDir, "core/src/commonMain/resources/localization")
         val config = NpmGeneratorConfig(
             packageName = "@sample/shared",
             packageVersion = "1.0.0",

@@ -1,23 +1,23 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.management.self.user.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.actor.AuditActorType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditEventPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.CommonAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
-import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.PagedResult
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.error.naming.SecurityErrorCodes
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserIdentifierSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.route.management.ManagementSelfUserNavigation
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiPaths
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPrivatePayload

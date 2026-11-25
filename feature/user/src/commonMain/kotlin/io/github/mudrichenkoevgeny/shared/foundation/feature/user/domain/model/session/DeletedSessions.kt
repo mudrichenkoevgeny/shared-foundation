@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
+
 /**
  * Domain representation of a bulk session deletion result.
  *

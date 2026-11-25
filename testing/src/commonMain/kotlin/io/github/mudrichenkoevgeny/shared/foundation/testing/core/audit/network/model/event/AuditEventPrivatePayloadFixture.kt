@@ -9,8 +9,8 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.a
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event.TEST_AUDIT_EVENT_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [AuditEventPrivatePayload] wire object for unit testing mapper logic.

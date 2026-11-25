@@ -1,13 +1,14 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserId
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.createTestUserIdentifierId
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.createTestUserId
 
 /**
  * Creates a test [UserIdentifierSummary] instance with default mock properties for unit testing.

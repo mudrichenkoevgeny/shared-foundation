@@ -62,7 +62,10 @@ public object WebTokensGenerator {
         return "export declare const PlatformDesignTokens: {\n$dtsType\n};\n"
     }
 
-    private fun generateFontFaceCss(parser: DesignTokensParser, fontsBasePath: String): String {
+    private fun generateFontFaceCss(
+        parser: DesignTokensParser,
+        fontsBasePath: String
+    ): String {
         val fontFamily = parser.resolveTokenValueByPath("typography.fontFamily.primary") ?: "sans-serif"
         val woff2Files = DesignTokensFontExtractor.listWoff2Fonts()
         val cleanBase = fontsBasePath.trimEnd('/')
@@ -152,7 +155,10 @@ $darkColorVars
 }"""
     }
 
-    private fun generateCssColorVars(parser: DesignTokensParser, basePath: String): String {
+    private fun generateCssColorVars(
+        parser: DesignTokensParser,
+        basePath: String
+    ): String {
         val node = parser.lookupToken(basePath) as? JsonObject
             ?: error("Missing color object at $basePath")
 
@@ -210,14 +216,20 @@ $darkColorVars
         )
     }
 
-    private fun resolveTokenMap(parser: DesignTokensParser, path: String): Map<String, String> {
+    private fun resolveTokenMap(
+        parser: DesignTokensParser,
+        path: String
+    ): Map<String, String> {
         val node = parser.lookupToken(path) as? JsonObject ?: return emptyMap()
         return node.keys.sorted().associateWith { key ->
             resolveValue(parser, "$path.$key")
         }
     }
 
-    private fun resolveTokenMapTyped(parser: DesignTokensParser, path: String): Map<String, Any> {
+    private fun resolveTokenMapTyped(
+        parser: DesignTokensParser,
+        path: String
+    ): Map<String, Any> {
         val node = parser.lookupToken(path) as? JsonObject ?: return emptyMap()
         return node.keys.sorted().associateWith { key ->
             val valStr = resolveValue(parser, "$path.$key")
@@ -225,7 +237,10 @@ $darkColorVars
         }
     }
 
-    private fun resolveNestedTokenMapTyped(parser: DesignTokensParser, path: String): Map<String, Map<String, Any>> {
+    private fun resolveNestedTokenMapTyped(
+        parser: DesignTokensParser,
+        path: String
+    ): Map<String, Map<String, Any>> {
         val node = parser.lookupToken(path) as? JsonObject ?: return emptyMap()
         return node.keys.sorted().associateWith { subKey ->
             resolveTokenMapTyped(parser, "$path.$subKey")
@@ -233,7 +248,10 @@ $darkColorVars
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun renderJsObject(map: Map<String, Any>, indentLevel: Int): String {
+    private fun renderJsObject(
+        map: Map<String, Any>,
+        indentLevel: Int
+    ): String {
         val indent = "  ".repeat(indentLevel)
         val entries = map.entries.joinToString(",\n") { (k, v) ->
             val valStr = when (v) {
@@ -247,7 +265,10 @@ $darkColorVars
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun renderDtsType(map: Map<String, Any>, indentLevel: Int): String {
+    private fun renderDtsType(
+        map: Map<String, Any>,
+        indentLevel: Int
+    ): String {
         val indent = "  ".repeat(indentLevel)
         val entries = map.entries.joinToString("\n") { (k, v) ->
             val typeStr = when (v) {
@@ -260,11 +281,17 @@ $darkColorVars
         return entries
     }
 
-    private fun resolveValue(parser: DesignTokensParser, path: String): String =
+    private fun resolveValue(
+        parser: DesignTokensParser,
+        path: String
+    ): String =
         parser.resolveTokenValueByPath(path)
             ?: error("Missing required design token: $path")
 
-    private fun resolveCssVarName(group: String, key: String): String {
+    private fun resolveCssVarName(
+        group: String,
+        key: String
+    ): String {
         val shortAlias = when (key) {
             "extraSmall" -> "xs"
             "small" -> "sm"

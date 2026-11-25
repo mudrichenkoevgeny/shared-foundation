@@ -3,10 +3,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.event.AuditValueSensitivity
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditMetadataKey
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserIdentifierId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserSessionId
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionId
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

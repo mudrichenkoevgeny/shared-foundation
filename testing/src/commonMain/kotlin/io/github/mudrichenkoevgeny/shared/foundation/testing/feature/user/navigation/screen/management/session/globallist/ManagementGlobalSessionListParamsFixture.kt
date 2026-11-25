@@ -3,9 +3,9 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navig
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.session.globallist.ManagementGlobalSessionListParams
 
 /**

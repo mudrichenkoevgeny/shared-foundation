@@ -1,12 +1,12 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.network.model.file.FileUrlsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [UserSummaryPayload] wire object for unit testing mapper logic.

@@ -61,7 +61,10 @@ $darkProperties
     }"""
     }
 
-    private fun generateColorProperties(parser: DesignTokensParser, basePath: String): String {
+    private fun generateColorProperties(
+        parser: DesignTokensParser,
+        basePath: String
+    ): String {
         val node = parser.lookupToken(basePath) as? JsonObject
             ?: error("Missing required color token object at $basePath")
 

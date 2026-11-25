@@ -1,11 +1,11 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfo
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.mapper.client.toClientDeviceInfoPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.UserSessionSummaryPayload
 import kotlin.time.Instant
 

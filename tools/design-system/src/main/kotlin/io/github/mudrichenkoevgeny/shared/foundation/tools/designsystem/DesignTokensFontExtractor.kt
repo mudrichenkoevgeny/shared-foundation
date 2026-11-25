@@ -70,7 +70,10 @@ public object DesignTokensFontExtractor {
         }
     }
 
-    private fun extractResource(resourcePath: String, targetFile: File) {
+    private fun extractResource(
+        resourcePath: String,
+        targetFile: File
+    ) {
         val stream = DesignTokensFontExtractor::class.java.getResourceAsStream(resourcePath)
             ?: error("Font resource not found at $resourcePath")
 

@@ -74,17 +74,7 @@ fun registerModules(
     }
 }
 
-val coreModules = listOf(
-    "common",
-    "security",
-    "settings",
-    "audit",
-    "storage"
-)
-registerModules(
-    "core",
-    coreModules
-)
+include(":core")
 
 val featureModules = listOf(
     "user"

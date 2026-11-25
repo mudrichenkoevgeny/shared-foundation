@@ -179,7 +179,10 @@ public object PenpotTokensGenerator {
         return JsonObject(resultMap)
     }
 
-    private fun formatJsonTwoSpaces(element: JsonElement, indentLevel: Int = 0): String {
+    private fun formatJsonTwoSpaces(
+        element: JsonElement,
+        indentLevel: Int = 0
+    ): String {
         val indent = "  ".repeat(indentLevel)
         val nextIndent = "  ".repeat(indentLevel + 1)
         return when (element) {
@@ -190,6 +193,7 @@ public object PenpotTokensGenerator {
                 }
                 "{\n$entries\n$indent}"
             }
+
             is JsonArray -> {
                 if (element.isEmpty()) return "[]"
                 val items = element.joinToString(",\n") { item ->
@@ -197,6 +201,7 @@ public object PenpotTokensGenerator {
                 }
                 "[\n$items\n$indent]"
             }
+
             is JsonPrimitive -> {
                 if (element.isString) {
                     "\"${escapeJsonString(element.content)}\""

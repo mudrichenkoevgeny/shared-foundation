@@ -1,11 +1,12 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission.PermissionCode
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileId
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.model.file.FileUrls
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserPrivatePayload
 import kotlin.time.Instant
 

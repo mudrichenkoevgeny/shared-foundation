@@ -2,10 +2,10 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navig
 
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.model.accountlockout.AccountLockoutType
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.management.user.globallist.ManagementUserListParams
 
 /**

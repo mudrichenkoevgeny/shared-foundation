@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.token
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdentifierIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.AccessToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.RefreshToken
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token.SessionToken

@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.model.patch.PatchField
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserStorageConfigurationPayload
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.request.user.ManagementUpdateUserRequest
 

@@ -1,5 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserId
+
 /**
  * Resolves the best available human-readable display name for [UserSummary].
  *

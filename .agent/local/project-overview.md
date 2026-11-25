@@ -13,25 +13,26 @@ alwaysApply: true
 
 ## Tech stack
 - **Kotlin**, **kotlinx.serialization** (`kotlinx-serialization-json`).
-- **JSON configuration:** `FoundationJson` in `core/common` (standardized `snake_case`, `ignoreUnknownKeys`, `encodeDefaults`).
+- **JSON configuration:** `FoundationJson` in `core` (standardized `snake_case`, `ignoreUnknownKeys`, `encodeDefaults`).
 - **Targets:** JVM, Android Library, iOS, Wasm JS.
 - **Strictly No UI:** This repository contains only logic, types, and constants.
 
 ## Modules Structure
 
-### Core Modules (`core/`)
+### Core Module (`core/`)
 Focus on domain logic, data models, navigation structures, and transport payloads.
 
-- **`core/common`:** The foundation. Contains `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `AppType`, `ClientInfo`, `ClientType`, and `PagedResult`. Defines base `PermissionCode`, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), non-localized UI values (`UiValues`), base network routes (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), and root client/management navigation (`ClientMainNavigation`, `ManagementMainNavigation`).
-- **`core/audit`:** Audit domain logic, HTTP routes, and navigation. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `ManagementAuditNavigation`, screen params & parsers (`*Params`), `AuditPermissionCode`, and `CommonAuditResourceType`.
-- **`core/security`:** Security primitives, HTTP routes, and navigation. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `ManagementSecurityNavigation`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
-- **`core/settings`:** Global system settings shapes, HTTP routes, and navigation. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `ManagementSettingsNavigation`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
-- **`core/storage`:** Direct-to-S3 presigned upload contracts, HTTP routes, and navigation. `OpenStorageRoutes`, `ManagementStorageRoutes`, `OpenStorageSettingsRoutes`, `ManagementStorageSettingsRoutes`, `OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`, `StoragePermissionCode`, `FileId`, `StorageCategory`, `StorageFileStatus`, `StorageFileVisibility`, projections (`StorageFileSummary`, `StorageFilePrivate`, `StorageFileInternal`), storage settings (`ManagementStorageSettings`, `OpenStorageSettings`), `StorageErrorCodes`, `StorageErrorArgs`, screen params & parsers (`*Params`), navigation paths (`StorageNavigationPaths`), and UI component configurations (`*UiConfig`).
+- **`core`:** Consolidates all foundational contracts, wire types, domain models, REST/WebSocket routes, permissions, error codes, navigation screen parameters, and serialization helpers.
+  - **`core.common`:** Foundation, `ApiErrorResponse`, `FoundationJson`, `SocketFrame` (WebSocket envelopes), `AppType`, `ClientInfo`, `ClientType`, `PagedResult`, and core user primitives (`UserId`, `UserSessionId`, `UserIdentifierId`, `UserRole`, `UserAccountStatus`). Defines base `PermissionCode`, base navigation interfaces (`NavigationRoute`, `ParameterizedNavigationRoute`, `RedirectNavigationRoute`), common navigation routes (`CommonNavigationRoutes`), parameter normalizers (`QueryParamNormalizer`, `PhoneParamNormalizer`), parameter parsers (`NavigationScreenParamsParser`), non-localized UI values (`UiValues`), base network routes (`CommonNetworkRoutes`, `BaseSettingsNetworkRoutes`), and root client/management navigation (`ClientMainNavigation`, `ManagementMainNavigation`).
+  - **`core.audit`:** Audit domain logic, HTTP routes, and navigation. `AuditEvent`, `AuditActorType`, `AuditValueSensitivity` (PII redaction policies), mappers, `ManagementAuditRoutes`, `ManagementAuditNavigation`, screen params & parsers (`*Params`), `AuditPermissionCode`, and `CommonAuditResourceType`.
+  - **`core.security`:** Security primitives, HTTP routes, and navigation. `OpenSecuritySettingsRoutes`, `ManagementSecuritySettingsRoutes`, `ManagementSecurityNavigation`, `SecurityPermissionCode`, MFA/TOTP lifecycle (`TotpSetup`, `VerifyTotp`), `ManagementPasswordPolicy` with `PasswordPolicyValidator`, `AccountLockoutPolicy`, `AccountLockoutType`, `IpRestrictionPolicy`, and cryptographic value objects (`EncryptedString`, `PasswordHash`).
+  - **`core.settings`:** Global system settings shapes, HTTP routes, and navigation. `OpenGlobalSettingsRoutes`, `ManagementGlobalSettingsRoutes`, `ManagementSettingsNavigation`, `SettingsPermissionCode`, `OpenGlobalSettings` and `ManagementGlobalSettings` domain models, client app version constraints, and `SettingsWebSocketEventTypes`.
+  - **`core.storage`:** Direct-to-S3 presigned upload contracts, HTTP routes, and navigation. `OpenStorageRoutes`, `ManagementStorageRoutes`, `OpenStorageSettingsRoutes`, `ManagementStorageSettingsRoutes`, `OpenStorageNavigation`, `ManagementStorageNavigation`, `ManagementStorageSettingsNavigation`, `StoragePermissionCode`, `FileId`, `StorageCategory`, `StorageFileStatus`, `StorageFileVisibility`, projections (`StorageFileSummary`, `StorageFilePrivate`, `StorageFileInternal`), storage settings (`ManagementStorageSettings`, `OpenStorageSettings`), `StorageErrorCodes`, `StorageErrorArgs`, screen params & parsers (`*Params`), navigation paths (`StorageNavigationPaths`), and UI component configurations (`*UiConfig`).
 
 ### Feature Modules (`feature/`)
 Focus on feature-specific contracts, navigation, and workflows.
 
-- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, `ConfirmationKey`, `ConfirmationType`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), user navigation contracts (`BaseUserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core/security` for TOTP/Lockout flows and `core/audit` for user-specific audit taxonomy (`UserAuditActionType`).
+- **`feature/user`:** Comprehensive feature module for Auth, Sessions, Identifiers, and Configuration. Includes `EmailRestrictionPolicy`, `ConfirmationKey`, `ConfirmationType`, Self-Service Account Unlock routes (`OpenUnlockRoutes`, `SelfManagementUnlockRoutes`), separate session limits (`maxActiveSessionsForOpenUser` / `maxActiveSessionsForManagementUser`), user navigation contracts (`BaseUserNavigationRoutes`, `UserNavigationPaths`), navigation screen routes (`ClientAuthNavigation`, `ClientUserNavigation`, `ManagementAuthNavigation`, `ManagementAuthSettingsNavigation`, `ManagementSelfUserNavigation`, `ManagementUsersNavigation`), screen params/parsers, structured route packages (`network.route.open.*`, `network.route.management.self.user.*`, `network.route.management.users.*`), and aggregates `core` for security/audit/storage flows (`UserAuditActionType`).
 
 ### Tooling Modules (`tools/`)
 Focus on build-time static analysis, agent sync plugins, and artifact generation.
@@ -48,10 +49,9 @@ Focus on build-time static analysis, agent sync plugins, and artifact generation
 - **`bom`:** Bill of Materials to align versions across all `shared-foundation-*` artifacts.
 
 ## Boundaries & Dependencies
-- **`core/common`** is the leaf: It must not depend on any other internal modules.
-- **Core-to-Core:** `core/audit` and `core/security` depend on `core/common`; `core/security` and `core/settings` depend on `core/audit`.
-- **`feature/user`** is a high-level aggregator: It depends on `core/common`, `core/audit`, `core/security`, `core/settings`, and `core/storage`.
-- **`testing`** depends on `core/*` and `feature/*` modules to provide mirrored fixtures across the entire library. Production modules (`core/*`, `feature/*`) may depend on `project(":testing")` only inside `commonTest`/`jvmTest` source sets.
+- **`core`** is the leaf: It depends only on external dependencies like `kotlinx-serialization`.
+- **`feature/user`** is a high-level aggregator: It depends on `:core`.
+- **`testing`** depends on `:core` and `:feature:user` modules to provide mirrored fixtures across the entire library. Production modules may depend on `project(":testing")` only inside `commonTest`/`jvmTest` source sets.
 - **No Frameworks:** No Ktor Server/Client engines or database drivers. Only "pure" Kotlin logic and serialization.
 
 ## Guidelines for Agents

@@ -4,9 +4,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.a
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierSummaryPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_EMAIL
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_IDENTIFIER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [UserIdentifierSummaryPayload] wire object for unit testing mapper logic.

@@ -6,6 +6,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.sta
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.management.audit.list.ManagementAuditEventListParams
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingDefaultValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.SortOrder
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 
 /**
  * Creates a test [ManagementAuditEventListParams] navigation params instance.
@@ -38,7 +39,7 @@ public fun createTestManagementAuditEventListParams(
     actorIds: List<String> = emptyList(),
     actorTypes: List<AuditActorType> = emptyList(),
     excludeActorTypes: List<AuditActorType> = emptyList(),
-    actorUserRoles: List<String> = emptyList(),
+    actorUserRoles: List<UserRole> = emptyList(),
     actions: List<String> = emptyList(),
     excludeActions: List<String> = emptyList(),
     resources: List<String> = emptyList(),

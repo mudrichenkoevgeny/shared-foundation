@@ -1,5 +1,3 @@
-import java.io.File
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }

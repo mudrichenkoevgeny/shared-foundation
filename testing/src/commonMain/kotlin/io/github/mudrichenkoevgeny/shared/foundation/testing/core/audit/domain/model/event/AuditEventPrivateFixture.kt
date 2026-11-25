@@ -8,12 +8,13 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.eve
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.metadata.AuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.resource.AuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.status.AuditStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action.UserAuditActionType
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata.createTestAuditEventMetadata
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.createTestList
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.generateTestUuidString
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
 import kotlin.time.Instant
 
 /**
@@ -35,7 +36,7 @@ public fun createTestAuditEventPrivate(
     id: AuditEventId = createTestAuditEventId(),
     actorId: String? = TEST_USER_ID,
     actorType: AuditActorType = AuditActorType.USER,
-    actorUserRole: String? = "USER",
+    actorUserRole: UserRole? = UserRole.USER,
     action: AuditActionType = UserAuditActionType.LOGIN_BY_EMAIL,
     resource: AuditResourceType = CommonAuditResourceType.AUDIT_EVENT,
     resourceId: String? = TEST_USER_ID,

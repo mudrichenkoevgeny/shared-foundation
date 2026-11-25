@@ -31,11 +31,7 @@ configure<KotlinMultiplatformExtension> {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":core:common"))
-                api(project(":core:audit"))
-                api(project(":core:security"))
-                api(project(":core:settings"))
-                api(project(":core:storage"))
+                api(project(":core"))
                 api(project(":feature:user"))
 
                 api(libs.kotlinx.serialization.json)

@@ -156,7 +156,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.m
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata.UserAuditMetadataKey
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource.UserAuditResourceType
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.authoritylevel.UserRoleDefaultAuthorityLevel
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.data.AuthData
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.AvailableAuthProviders
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings.ManagementAuthSettings
@@ -178,7 +178,7 @@ import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.l
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSessionSortBy
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing.UserSortBy
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.DeletedSessions
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionInternal
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate

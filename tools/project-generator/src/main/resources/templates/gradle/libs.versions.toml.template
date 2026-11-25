@@ -20,7 +20,7 @@ detekt = "{{DETEKT_VERSION}}"
 
 [libraries]
 shared-foundation-bom = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-bom", version.ref = "sharedFoundation" }
-shared-foundation-common = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core-common" }
+shared-foundation-core = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-core" }
 shared-foundation-testing = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-testing" }
 shared-foundation-npm-generator = { group = "io.github.mudrichenkoevgeny", name = "shared-foundation-npm-generator", version.ref = "sharedFoundation" }
 

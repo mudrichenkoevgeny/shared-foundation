@@ -13,6 +13,8 @@ plugins {
 }
 
 apiValidation {
+    // Disabled until binary-compatibility-validator supports
+    // Java 25 bytecode (class file major version 69)
     validationDisabled = true
     ignoredProjects += listOf(
         "bom",

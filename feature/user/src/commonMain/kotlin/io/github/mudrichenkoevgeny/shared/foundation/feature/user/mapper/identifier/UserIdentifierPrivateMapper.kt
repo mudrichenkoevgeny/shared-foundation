@@ -1,9 +1,9 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.identifier
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrThrow
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdentifierIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.UserIdentifierPrivate
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier.toUserIdentifierIdOrThrow
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.identifier.UserIdentifierPrivatePayload
 import kotlin.time.Instant
 

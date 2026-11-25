@@ -1,11 +1,11 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.user
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserAccountStatus
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrls
 import io.github.mudrichenkoevgeny.shared.foundation.core.storage.mapper.file.toFileUrlsPayload
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus.UserAccountStatus
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.UserSummary
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.user.toUserIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.user.UserSummaryPayload
 
 /**

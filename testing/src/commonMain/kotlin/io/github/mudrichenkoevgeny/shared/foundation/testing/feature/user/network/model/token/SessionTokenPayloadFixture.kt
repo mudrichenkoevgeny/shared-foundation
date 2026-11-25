@@ -3,8 +3,8 @@ package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.netwo
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserAuthSpec
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.token.SessionTokenPayload
 import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.TEST_TIME_MILLIS
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.session.TEST_SESSION_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_IDENTIFIER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_SESSION_ID
 
 public fun createTestSessionTokenPayload(
     accessToken: String = "test_access_token",

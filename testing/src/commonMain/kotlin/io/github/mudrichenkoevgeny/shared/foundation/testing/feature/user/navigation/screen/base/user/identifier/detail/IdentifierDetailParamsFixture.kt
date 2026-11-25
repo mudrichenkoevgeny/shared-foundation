@@ -1,8 +1,8 @@
 package io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.navigation.screen.base.user.identifier.detail
 
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.navigation.screen.base.user.identifier.detail.IdentifierDetailParams
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.identifier.TEST_IDENTIFIER_ID
-import io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.domain.model.user.TEST_USER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_IDENTIFIER_ID
+import io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user.TEST_USER_ID
 
 /**
  * Creates a test [IdentifierDetailParams] navigation params instance.

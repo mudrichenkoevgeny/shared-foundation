@@ -4,9 +4,9 @@ import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.cl
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client.ClientType
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.CommonFilterValues
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing.ListingParamNames
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.core.common.network.contract.CommonApiFields
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider.UserAuthProvider
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.UserSessionPrivate
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.contract.UserApiFields
 

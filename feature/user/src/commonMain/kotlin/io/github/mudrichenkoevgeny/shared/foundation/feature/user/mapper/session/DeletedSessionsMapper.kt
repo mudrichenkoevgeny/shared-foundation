@@ -1,7 +1,7 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.mapper.session
 
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.DeletedSessions
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session.toUserSessionIdOrThrow
 import io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.model.session.DeletedSessionsPayload
 
 /**

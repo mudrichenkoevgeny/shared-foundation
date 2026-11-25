@@ -1,6 +1,6 @@
 package io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.authoritylevel
 
-import io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role.UserRole
+import io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user.UserRole
 
 /**
  * Default authority levels assigned by [UserRole].

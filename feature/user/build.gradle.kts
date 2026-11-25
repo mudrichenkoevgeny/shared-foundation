@@ -33,11 +33,7 @@ configure<KotlinMultiplatformExtension> {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":core:common"))
-                api(project(":core:audit"))
-                api(project(":core:security"))
-                api(project(":core:settings"))
-                api(project(":core:storage"))
+                api(project(":core"))
 
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.serialization.core) // Transitive for kotlinx-serialization
@@ -45,14 +41,11 @@ configure<KotlinMultiplatformExtension> {
         }
 
         jvmMain.dependencies {
-            api(project(":core:common")) // Transitive for core.common
-            api(project(":core:security")) // Transitive for core.security
-            api(project(":core:settings")) // Transitive for core.settings
-            api(project(":core:storage")) // Transitive for core.storage
-            api(project(":core:audit")) // Transitive for core.audit
+            api(project(":core")) // Transitive for core
         }
 
         commonTest.dependencies {
+            implementation(project(":testing"))
             implementation(libs.kotlin.test)
         }
     }
