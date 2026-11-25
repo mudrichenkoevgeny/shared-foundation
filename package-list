@@ -1,7 +1,7 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 
-module:audit
+module:core
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.contract
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.audit.resource
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.domain.model.action
@@ -19,12 +19,12 @@ io.github.mudrichenkoevgeny.shared.foundation.core.audit.navigation.screen.manag
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.contract
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.model.event
 io.github.mudrichenkoevgeny.shared.foundation.core.audit.network.route.management
-module:common
 io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.apptype
 io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.client
 io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.listing
 io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.permission
 io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.theme
+io.github.mudrichenkoevgeny.shared.foundation.core.common.domain.model.user
 io.github.mudrichenkoevgeny.shared.foundation.core.common.error.client.naming
 io.github.mudrichenkoevgeny.shared.foundation.core.common.error.model
 io.github.mudrichenkoevgeny.shared.foundation.core.common.error.naming
@@ -46,7 +46,6 @@ io.github.mudrichenkoevgeny.shared.foundation.core.common.network.route
 io.github.mudrichenkoevgeny.shared.foundation.core.common.serialization
 io.github.mudrichenkoevgeny.shared.foundation.core.common.ui
 io.github.mudrichenkoevgeny.shared.foundation.core.common.validation
-module:security
 io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.action
 io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.metadata
 io.github.mudrichenkoevgeny.shared.foundation.core.security.domain.audit.resource
@@ -87,7 +86,6 @@ io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route
 io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.management.security.settings
 io.github.mudrichenkoevgeny.shared.foundation.core.security.network.route.open.security.settings
 io.github.mudrichenkoevgeny.shared.foundation.core.security.passwordpolicy.validator
-module:settings
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.action
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.audit.resource
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.domain.model.globalsettings
@@ -100,7 +98,6 @@ io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.model.global
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.management.globalsettings
 io.github.mudrichenkoevgeny.shared.foundation.core.settings.network.route.open.globalsettings
-module:storage
 io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.action
 io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.metadata
 io.github.mudrichenkoevgeny.shared.foundation.core.storage.domain.audit.resource
@@ -143,7 +140,6 @@ io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.action
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.metadata
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.audit.resource
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.authoritylevel
-io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.accountstatus
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.data
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.auth.settings
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.authprovider
@@ -153,7 +149,6 @@ io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.email
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.emailrestriction
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.identifier
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.listing
-io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.role
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.session
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.storage
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.domain.model.token
@@ -243,6 +238,7 @@ io.github.mudrichenkoevgeny.shared.foundation.feature.user.network.route.open.us
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.displayname
 io.github.mudrichenkoevgeny.shared.foundation.feature.user.validator.nickname
 module:testing
+io.github.mudrichenkoevgeny.shared.foundation.testing.architecture
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.action
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.event
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.audit.domain.model.metadata
@@ -254,6 +250,7 @@ io.github.mudrichenkoevgeny.shared.foundation.testing.core.common
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.client
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.listing
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.permission
+io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.domain.model.user
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.error.model
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.localization
 io.github.mudrichenkoevgeny.shared.foundation.testing.core.common.navigation.params
@@ -339,6 +336,8 @@ io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.reque
 io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.network.request.user
 io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.displayname
 io.github.mudrichenkoevgeny.shared.foundation.testing.feature.user.validator.nickname
+module:design-system
+io.github.mudrichenkoevgeny.shared.foundation.tools.designsystem
 module:detekt-rules
 io.github.mudrichenkoevgeny.shared.foundation.tools.detektrules
 module:npm-generator
